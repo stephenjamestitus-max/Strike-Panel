@@ -2350,7 +2350,9 @@ function updateUnitUI(){
   if(btn)btn.textContent=imp?'Imperial (lbs/ft)':'Metric (kg/cm)';
   document.querySelectorAll('[data-wlbl]').forEach(el=>el.textContent=imp?'lbs':'kg');
   document.querySelectorAll('[data-hlbl]').forEach(el=>el.textContent=imp?'ft/in':'cm');
-  ['athWeightLbl','athTargetWeightLbl','fdCurWeightLbl','fdTargetWeightLbl','bioWeightLbl','pgWeightLbl'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=`Weight (${imp?'lbs':'kg'})`;});
+  ['athWeightLbl','fdCurWeightLbl','bioWeightLbl','pgWeightLbl'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=`Weight (${imp?'lbs':'kg'})`;});
+  const twEl=document.getElementById('athTargetWeightLbl');if(twEl)twEl.textContent=`Target Weight (${imp?'lbs':'kg'})`;
+  const fdTwEl=document.getElementById('fdTargetWeightLbl');if(fdTwEl)fdTwEl.textContent=`Target Weight (${imp?'lbs':'kg'})`;
   ['athHeightLbl','bioHeightLbl','pgHeightLbl'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=`Height (${imp?'ft/in':'cm'})`;});
   const pmap={athWeight:imp?'e.g. 165':'75.0',athTargetWeight:imp?'e.g. 154':'70.0',athHeight:imp?"5'11\"":"178",bioWeight:imp?'165':'75.5',bioHeight:imp?"5'10\"":"178",pgWeight:imp?'165':'75.0',pgHeight:imp?"5'10\"":"178",fdCurWeight:imp?'e.g. 181':'e.g. 82.5',fdTargetWeight:imp?'e.g. 170':'e.g. 77.0'};
   Object.entries(pmap).forEach(([id,ph])=>{const el=document.getElementById(id);if(el)el.placeholder=ph;});
