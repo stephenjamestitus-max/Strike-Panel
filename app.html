@@ -190,11 +190,13 @@ body::after{
 /* ── PWA INSTALL BANNER ── */
 .pwa-banner{
   position:fixed;bottom:0;left:0;right:0;z-index:500;
+  padding-bottom:env(safe-area-inset-bottom, 16px);
   background:linear-gradient(135deg,rgba(19,22,31,0.98),rgba(24,28,40,0.99));
   border-top:1px solid rgba(0,212,240,0.2);
   padding:14px 20px;display:flex;align-items:center;gap:14px;
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  transform:translateY(100%);transition:transform .3s var(--ease);
+  bottom:auto;top:0;border-top:none;border-bottom:1px solid rgba(0,212,240,0.2);
+  transform:translateY(-100%);transition:transform .3s var(--ease);
 }
 .pwa-banner.show{transform:translateY(0)}
 .pwa-banner-icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,rgba(0,212,240,0.2),rgba(0,212,240,0.1));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;border:1px solid rgba(0,212,240,0.3)}
@@ -269,7 +271,7 @@ body::after{
   .readiness-grid{grid-template-columns:repeat(2,1fr)}
   .r-score{font-size:30px}
   .modal{padding:20px 16px}
-  .tab{padding:11px 14px;font-size:10px;letter-spacing:1.2px}
+  .tab{padding:9px 10px;font-size:9px;letter-spacing:0.8px}
   .ri-label{min-width:90px;font-size:11px}
   .pwa-banner{padding:12px 14px}
 }
@@ -958,6 +960,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='sp-orb' cx='38%25' cy='32%25' r='62%25'%3E%3Cstop offset='0%25' stop-color='%231e2540'/%3E%3Cstop offset='55%25' stop-color='%230f1220'/%3E%3Cstop offset='100%25' stop-color='%230b0d14'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='45' cy='45' r='43' fill='url(%23sp-orb)' stroke='%2300D4F0' stroke-width='1.2' stroke-opacity='0.4'/%3E%3Ccircle cx='45' cy='45' r='29' fill='none' stroke='%2300D4F0' stroke-width='0.9' stroke-opacity='0.2'/%3E%3Cline x1='45' y1='2' x2='45' y2='27' stroke='%2300D4F0' stroke-width='2.4' stroke-linecap='round'/%3E%3Cline x1='45' y1='63' x2='45' y2='88' stroke='%2300D4F0' stroke-width='2.4' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='27' y2='45' stroke='%2300D4F0' stroke-width='2.4' stroke-linecap='round'/%3E%3Cline x1='63' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='10' fill='%2300D4F0'/%3E%3Ctext x='45' y='49' font-family='Arial Black,sans-serif' font-weight='700' font-size='8' fill='%230b0d14' text-anchor='middle'%3ESP%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='sp-orb' cx='38%25' cy='32%25' r='62%25'%3E%3Cstop offset='0%25' stop-color='%231e2540'/%3E%3Cstop offset='55%25' stop-color='%230f1220'/%3E%3Cstop offset='100%25' stop-color='%230b0d14'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='45' cy='45' r='43' fill='url(%23sp-orb)' stroke='%2300D4F0' stroke-width='1.2' stroke-opacity='0.4'/%3E%3Ccircle cx='45' cy='45' r='29' fill='none' stroke='%2300D4F0' stroke-width='0.9' stroke-opacity='0.2'/%3E%3Cline x1='45' y1='2' x2='45' y2='27' stroke='%2300D4F0' stroke-width='2.4' stroke-linecap='round'/%3E%3Cline x1='45' y1='63' x2='45' y2='88' stroke='%2300D4F0' stroke-width='2.4' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='27' y2='45' stroke='%2300D4F0' stroke-width='2.4' stroke-linecap='round'/%3E%3Cline x1='63' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='10' fill='%2300D4F0'/%3E%3Ctext x='45' y='49' font-family='Arial Black,sans-serif' font-weight='700' font-size='8' fill='%230b0d14' text-anchor='middle'%3ESP%3C/text%3E%3C/svg%3E">
 </head>
 <body>
 
@@ -1108,7 +1112,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     <button class="tab" data-tab="fightdates">🥊 Fight Dates</button>
     <button class="tab" data-tab="athletes">Members</button>
     <button class="tab" data-tab="workouts">Workouts</button>
-    <button class="tab" data-tab="checkins">Check-Ins</button>
     <button class="tab" data-tab="nutrition">Food AI</button>
     <button class="tab" data-tab="biometrics">Body Stats</button>
     <button class="tab" data-tab="progress">Progress</button>
@@ -1367,6 +1370,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     </div>
     <div class="card" style="margin-bottom:12px">
       <div class="field"><div class="flabel">Any notes for the coach? (optional)</div><textarea class="fta" id="ciPageNotes" rows="3" placeholder="Pain details, how training felt, anything relevant..."></textarea></div>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06)">
+        <div style="font-family:var(--fc);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:10px">📱 Wearable Data (optional)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div class="field"><div class="flabel">Sleep Hours</div><input class="finput" id="ciPageSleepHrs" type="number" placeholder="e.g. 7.5" step="0.5" min="0" max="24"></div>
+          <div class="field"><div class="flabel">Resting HR (bpm)</div><input class="finput" id="ciPageRHR" type="number" placeholder="e.g. 52" min="30" max="120"></div>
+          <div class="field"><div class="flabel">HRV (ms)</div><input class="finput" id="ciPageHRV" type="number" placeholder="e.g. 68" min="1" max="300"></div>
+          <div class="field"><div class="flabel">Steps</div><input class="finput" id="ciPageSteps" type="number" placeholder="e.g. 8500"></div>
+        </div>
+      </div>
     </div>
     <!-- Live score preview -->
     <div style="background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r-sm);padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:16px">
@@ -1515,53 +1527,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 </section>
 
 <!-- ═══ CHECK-INS ═══ -->
-<section class="section" id="checkins">
-  <div class="sh">
-    <div class="sh-left"><div class="sh-bar"></div><div><div class="sh-title">WEEKLY CHECK-INS</div><div class="sh-desc">Quick weekly vibe check — how is everyone feeling?</div></div></div>
-    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-      <select class="fsel" id="ciAthlete" style="width:auto;padding:7px 28px 7px 11px" onchange="ciPopWeeks();ciLoad()"><option value="">Select Athlete...</option></select>
-      <select class="fsel" id="ciWeek" style="width:auto;padding:7px 28px 7px 11px" onchange="ciLoad()">
-        <option value="1">Week 1</option><option value="2">Week 2</option><option value="3">Week 3</option><option value="4">Week 4</option>
-        <option value="5">Week 5</option><option value="6">Week 6</option><option value="7">Week 7</option><option value="8">Week 8</option>
-      </select>
-      <button class="btn btn-primary btn-sm" onclick="ciSave()">Save</button>
-      <span class="saved-flash" id="ciFlash">Saved ✓</span>
-    </div>
-  </div>
-  <div class="g2">
-    <div class="card">
-      <div class="card-title" style="margin-bottom:14px"><span class="ctdot"></span>Wellbeing Ratings</div>
-      <div id="ciRatings"><div style="color:var(--muted2);font-size:12px;text-align:center;padding:16px">Select an athlete and week above</div></div>
-    </div>
-    <div>
-      <div class="card" style="margin-bottom:12px">
-        <div class="card-title" style="margin-bottom:12px"><span class="ctdot"></span>Standard Questions</div>
-        <ol style="list-style:none;display:flex;flex-direction:column;gap:7px">
-          <li style="font-size:13px;color:var(--muted);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.035)"><strong style="color:var(--text)">Energy levels this week?</strong> (1–10)</li>
-          <li style="font-size:13px;color:var(--muted);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.035)"><strong style="color:var(--text)">Sleep quality & avg hours?</strong></li>
-          <li style="font-size:13px;color:var(--muted);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.035)"><strong style="color:var(--text)">Muscle soreness / fatigue?</strong> (1–10)</li>
-          <li style="font-size:13px;color:var(--muted);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.035)"><strong style="color:var(--text)">Any new pain or injury?</strong></li>
-          <li style="font-size:13px;color:var(--muted);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.035)"><strong style="color:var(--text)">Motivation & focus?</strong> (1–10)</li>
-          <li style="font-size:13px;color:var(--muted);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.035)"><strong style="color:var(--text)">Hitting nutrition targets?</strong></li>
-          <li style="font-size:13px;color:var(--muted);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.035)"><strong style="color:var(--text)">What felt best this week?</strong></li>
-          <li style="font-size:13px;color:var(--muted);padding:6px 0"><strong style="color:var(--text)">What needs most work next week?</strong></li>
-        </ol>
-        <button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="copyQs(this)">📋 Copy Questions</button>
-      </div>
-      <div class="card">
-        <div class="card-title" style="margin-bottom:10px"><span class="ctdot"></span>Coach Notes — <span id="ciWeekLbl" style="color:var(--muted);font-weight:400">Week 1</span></div>
-        <textarea class="fta" id="ciNotes" rows="5" placeholder="Observations, flags, adjustments for next week..." oninput="ciNoteCh(this.value)"></textarea>
-      </div>
-    </div>
-  </div>
-  <div class="div" style="margin-top:18px"><span>Phase 2</span></div>
-  <div class="g3">
-    <div class="p2card" onclick="p2(event,'Trend Graphs')"><div class="p2card-info"><span class="p2card-icon">📈</span><div><div class="p2card-name">Wellbeing Trends</div><div class="p2card-desc">Visual graphs across all 8 weeks</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
-    <div class="p2card" onclick="p2(event,'Auto-Alert System')"><div class="p2card-info"><span class="p2card-icon">🔔</span><div><div class="p2card-name">Auto-Alert System</div><div class="p2card-desc">Flag low scores and injuries automatically</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
-    <div class="p2card" onclick="p2(event,'Check-In Report PDF')"><div class="p2card-info"><span class="p2card-icon">📤</span><div><div class="p2card-name">Weekly Report PDF</div><div class="p2card-desc">Export a full check-in summary</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
-  </div>
-</section>
-
 <!-- ═══ NUTRITION AI ═══ -->
 <section class="section" id="nutrition">
   <div class="sh">
@@ -1646,7 +1611,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
           <div class="field"><div class="flabel">HRV (ms)</div><input class="finput" id="wearHRV" type="number" placeholder="e.g. 68" min="1" max="300"></div>
           <div class="field"><div class="flabel">Steps</div><input class="finput" id="wearSteps" type="number" placeholder="e.g. 8500"></div>
           <div class="field"><div class="flabel">Active Calories (kcal)</div><input class="finput" id="wearActiveCal" type="number" placeholder="e.g. 620"></div>
-          <div class="field"><div class="flabel">Distance (km)</div><input class="finput" id="wearDist" type="number" placeholder="e.g. 5.2" step="0.1"></div>
+          <div class="field"><div class="flabel" id="wearDistLbl">Distance (km)</div><input class="finput" id="wearDist" type="number" placeholder="e.g. 5.2" step="0.1"></div>
           <div class="field"><div class="flabel">Sleep Duration (hrs)</div><input class="finput" id="wearSleep" type="number" placeholder="e.g. 7.5" step="0.5" min="0" max="24"></div>
         </div>
         <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center">
@@ -1915,7 +1880,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
       <div style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:10px">Setup — takes 5 minutes</div>
       <div class="sb-step"><span class="sb-step-num">1</span><span>Go to <a href="https://supabase.com" target="_blank" style="color:var(--accent);text-decoration:underline">supabase.com</a> → New Project (free tier is plenty).</span></div>
       <div class="sb-step"><span class="sb-step-num">2</span><span>In the SQL Editor, run the <strong style="color:var(--text)">schema below</strong> (copy → paste → Run).</span></div>
-      <div class="sb-step"><span class="sb-step-num">3</span><span>Go to <strong style="color:var(--text)">Project Settings → API</strong>. Copy your <strong style="color:var(--text)">Project URL</strong> and <strong style="color:var(--text)">anon public key</strong>.</span></div>
+      <div class="sb-step"><span class="sb-step-num">3</span><span>Go to <strong style="color:var(--text)">Project Settings → API</strong>. Copy your <strong style="color:var(--text)">Project URL</strong> and <strong style="color:var(--text)">anon public key</strong>. Make sure it's the <strong style="color:var(--amber)">anon/public</strong> key — NOT the service_role key.</span></div>
       <div class="sb-step"><span class="sb-step-num">4</span><span>Paste both below and hit <strong style="color:var(--text)">Save &amp; Connect</strong>. Done — all data syncs silently in the background.</span></div>
     </div>
 
@@ -2192,6 +2157,9 @@ create policy "allow_all" on sp_sync
     <button class="modal-close" onclick="closeModal('aiNutModal')">✕</button>
     <div class="modal-title">🥗 Food AI</div>
     <div class="modal-sub">Tell us what you ate — we'll break down your protein, carbs, fats and calories 👇</div>
+    <div class="field"><div class="flabel">Which athlete? (optional)</div>
+      <select class="fsel" id="aiNutAthlete"><option value="">General / No athlete</option></select>
+    </div>
     <div class="field"><div class="flabel">What did you eat? (the more detail the better)</div>
       <textarea class="fta" id="aiNutInput" rows="4" placeholder="e.g. 2 scrambled eggs with cheese, 2 slices brown bread, 1 banana, black coffee&#10;Or: 200g chicken breast grilled, 150g brown rice, broccoli, olive oil drizzle"></textarea>
     </div>
@@ -2225,6 +2193,7 @@ create policy "allow_all" on sp_sync
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
       <button class="btn btn-primary" onclick="pdfExport()" id="pdfPrintBtn" style="display:none">⬇️ Download PDF</button>
+      <button class="btn btn-ghost" onclick="pdfShare()" id="pdfShareBtn" style="display:none">📤 Share</button>
       <button class="btn btn-ghost" onclick="closeModal('pdfModal')">Close</button>
     </div>
   </div>
@@ -2360,6 +2329,7 @@ function updateUnitUI(){
   ['athWeightLbl','fdCurWeightLbl','bioWeightLbl','pgWeightLbl'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=`Weight (${imp?'lbs':'kg'})`;});
   const twEl=document.getElementById('athTargetWeightLbl');if(twEl)twEl.textContent=`Target Weight (${imp?'lbs':'kg'})`;
   const fdTwEl=document.getElementById('fdTargetWeightLbl');if(fdTwEl)fdTwEl.textContent=`Target Weight (${imp?'lbs':'kg'})`;
+const wdEl=document.getElementById('wearDistLbl');if(wdEl)wdEl.textContent=`Distance (${imp?'miles':'km'})`;
   ['athHeightLbl','bioHeightLbl','pgHeightLbl'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=`Height (${imp?'ft/in':'cm'})`;});
   const pmap={athWeight:imp?'e.g. 165':'75.0',athTargetWeight:imp?'e.g. 154':'70.0',athHeight:imp?"5'11\"":"178",bioWeight:imp?'165':'75.5',bioHeight:imp?"5'10\"":"178",pgWeight:imp?'165':'75.0',pgHeight:imp?"5'10\"":"178",fdCurWeight:imp?'e.g. 181':'e.g. 82.5',fdTargetWeight:imp?'e.g. 170':'e.g. 77.0'};
   Object.entries(pmap).forEach(([id,ph])=>{const el=document.getElementById(id);if(el)el.placeholder=ph;});
@@ -2564,7 +2534,7 @@ function dbRefresh(){
 let _athEd=null;
 function athShowForm(){
   const realCount=S.athletes.filter(a=>!a.id.startsWith('demo_')).length;
-  if(realCount>=10){alert('Maximum of 10 athletes reached. Delete a profile first to add another.');return;}
+  if(realCount>=20){alert('Maximum of 20 athletes reached. Delete a profile first to add another.');return;}
   _athEd=null;document.getElementById('athFormLbl').textContent='Add Athlete';
   ['athName','athAge','athSport','athRecord','athWeight','athTargetWeight','athHeight','athGoals','athInjuries','athNotes'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
   ['athSex','athFitness','athGoalType','athDuration'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
@@ -2590,7 +2560,7 @@ function athSave(){
   if(idx>=0)S.athletes[idx]=rec;else{
     // Enforce 4-profile limit for new additions
     const realCount=S.athletes.filter(a=>!a.id.startsWith('demo_')).length;
-    if(realCount>=10){setMsg('athMsg','Maximum of 10 athletes reached. Remove one to add another.',false);return;}
+    if(realCount>=20){setMsg('athMsg','Maximum of 20 athletes reached. Remove one to add another.',false);return;}
     // First real save — strip demo data
     const hadOnlyDemo=S.athletes.length>0&&S.athletes.every(a=>a.id.startsWith('demo_'));
     if(hadOnlyDemo){
@@ -2941,6 +2911,8 @@ function openAINutrition(){
   document.getElementById('aiNSaveBtn').style.display='none';
   _aiNLastData=null;
   openModal('aiNutModal');
+const nutAthSel = document.getElementById('aiNutAthlete');
+  if(nutAthSel){ nutAthSel.innerHTML='<option value="">General / No athlete</option>'+S.athletes.map(a=>`<option value="${a.id}">${escH(a.name)}</option>`).join(''); }
 }
 async function runAINutrition(){
   if(!CONFIG.GEMINI_API_KEY){
@@ -3008,10 +2980,14 @@ function saveNutEntry(){
     const el = document.getElementById('aiNResp');
     if(el) { el.innerHTML += '<div style="color:var(--amber);font-size:12px;margin-top:8px">⚠ Macros could not be parsed — entry saved with 0 values. You can delete and retry.</div>'; }
   }
+  const athSel = document.getElementById('aiNutAthlete');
+  const athId = athSel?.value || '';
+  const athName = athId ? (S.athletes.find(a=>a.id===athId)?.name||'') : '';
   const entry={
     id:uid(),date:new Date().toISOString().slice(0,10),
     meal:document.getElementById('aiNutMeal').value,
     description:desc,
+    athId, athName,
     cals:_aiNLastData?.calories||0,protein:_aiNLastData?.protein||0,
     carbs:_aiNLastData?.carbs||0,fats:_aiNLastData?.fats||0
   };
@@ -3307,6 +3283,12 @@ function pgSelect(idx){
 function pgRenderDetail(idx){
   const c=S.progress.clients[idx];if(!c)return;
   const panel=document.getElementById('pgDetail');panel.style.display='block';
+
+  // ── Match to athlete ──
+  const ath=S.athletes.find(a=>a.name===c.name);
+  const athId=ath?ath.id:null;
+
+  // ── Performance scores (existing bar chart) ──
   const rawScores=c.scores&&c.scores.length?c.scores:[c.week1,c.week2,c.week3,c.week4,c.week5,c.week6,c.week7,c.week8];
   const scores=rawScores.map((v,i)=>({w:'W'+(i+1),v:v}));
   const valid=scores.filter(s=>s.v!=null&&s.v!==''&&!isNaN(s.v));
@@ -3318,21 +3300,148 @@ function pgRenderDetail(idx){
     return`<div class="perf-col"><div class="perf-val">${hasVal?s.v:'—'}</div><div style="flex:1;display:flex;align-items:flex-end;width:100%"><div class="perf-bar${isLast?' active-bar':''}" style="height:${pct}%;${isLast?'background:linear-gradient(180deg,var(--amber),rgba(245,158,11,.3));box-shadow:0 0 7px rgba(245,158,11,.2);':''} "></div></div><div class="perf-lbl">${s.w}</div></div>`;
   }).join('');
   const tr=pgTrend(c);
+
+  // ── Weight data ──
+  const startW=c.weight?parseFloat(c.weight):null;
+  const bioW=athId&&S.biometrics[athId]?.weight?parseFloat(S.biometrics[athId].weight):null;
+  const currentW=bioW||startW;
+  const targetW=athId&&ath?.targetWeight?parseFloat(ath.targetWeight):null;
+  const direction=targetW&&startW?(targetW<startW?'loss':'gain'):null;
+
+  // ── Weight sparkline from biometrics history ──
+  // Build points: start entry + any readiness entries that have weight + current bio
+  const riAll=riGetAll().filter(r=>r.athId===athId).sort((a,b)=>a.ts-b.ts);
+  let wPts=[];
+  if(startW)wPts.push({label:'Start',w:startW});
+  riAll.filter(r=>r.weight).forEach(r=>wPts.push({label:r.date,w:parseFloat(r.weight)}));
+  if(bioW&&(!wPts.length||bioW!==wPts[wPts.length-1].w))wPts.push({label:'Now',w:bioW});
+  wPts=wPts.filter((p,i)=>i===0||p.w!==wPts[i-1].w);
+
+  // ── Readiness trend (last 8 check-ins) ──
+  const riRecent=riAll.slice(-8);
+  const avgRI=riRecent.length?Math.round(riRecent.reduce((s,r)=>s+r.score,0)/riRecent.length):null;
+  const riFirst=riRecent.length>=2?riRecent[0].score:null;
+  const riLast=riRecent.length>=2?riRecent[riRecent.length-1].score:null;
+  const riTrend=riFirst!==null&&riLast!==null?(riLast>riFirst?'↑ Improving':'↓ Declining'):'—';
+  const riColor=riFirst!==null&&riLast!==null?(riLast>=riFirst?'var(--green)':'var(--red)'):'var(--muted2)';
+
+  // ── Session count (last 4 weeks) ──
+  const fourWeeksAgo=Date.now()-28*24*60*60*1000;
+  const recentSessions=S.sessions.filter(s=>s.athId===athId&&new Date(s.date).getTime()>fourWeeksAgo);
+  const totalSessions=S.sessions.filter(s=>s.athId===athId);
+  const sessColor=recentSessions.length>=8?'var(--green)':recentSessions.length>=4?'var(--amber)':'var(--red)';
+
+  // ── Weight sparkline SVG ──
+  let sparkline='';
+  if(wPts.length>=2){
+    const W=300,H=64,pad=10;
+    const wVals=wPts.map(p=>p.w);
+    const allW=targetW?[...wVals,targetW]:wVals;
+    const minW=Math.min(...allW)-0.5,maxW=Math.max(...allW)+0.5;
+    const range=maxW-minW||1;
+    const px=i=>pad+(i/(wPts.length-1))*(W-pad*2);
+    const py=w=>H-pad-((w-minW)/range)*(H-pad*2);
+    const pts=wPts.map((p,i)=>`${px(i).toFixed(1)},${py(p.w).toFixed(1)}`).join(' ');
+    const onTrack=direction==='loss'?(currentW<=startW):(direction==='gain'?(currentW>=startW):true);
+    const lineColor=direction?(onTrack?'#22c55e':'#ef4444'):'#00D4F0';
+    const targetY=targetW?py(targetW):null;
+    sparkline=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="overflow:visible">
+      ${targetY!==null?`
+        <line x1="${pad}" y1="${targetY.toFixed(1)}" x2="${W-pad}" y2="${targetY.toFixed(1)}" stroke="rgba(245,158,11,0.5)" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <text x="${W-pad}" y="${(targetY-3).toFixed(1)}" font-size="8" fill="rgba(245,158,11,0.8)" text-anchor="end" font-family="sans-serif">Target ${targetW}${isImperial()?'lbs':'kg'}</text>`:''}
+      <polyline points="${pts}" fill="none" stroke="${lineColor}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      ${wPts.map((p,i)=>`
+        <circle cx="${px(i).toFixed(1)}" cy="${py(p.w).toFixed(1)}" r="${i===wPts.length-1?4:2.5}" fill="${i===wPts.length-1?lineColor:'rgba(255,255,255,0.3)'}"/>
+        <text x="${px(i).toFixed(1)}" y="${(py(p.w)+(i%2===0?-6:14)).toFixed(1)}" font-size="8" fill="${i===wPts.length-1?lineColor:'rgba(255,255,255,0.35)'}" text-anchor="middle" font-family="sans-serif">${p.w}${isImperial()?'lbs':'kg'}</text>`).join('')}
+    </svg>`;
+  }
+
+  // ── Goal progress bar ──
+  let goalBar='';
+  if(startW&&targetW&&currentW){
+    const total=Math.abs(targetW-startW);
+    const done=Math.abs(currentW-startW);
+    const pct=Math.min(100,total>0?Math.round((done/total)*100):0);
+    const onTrack=direction==='loss'?(currentW<=startW):(currentW>=startW);
+    const kgLeft=Math.abs(currentW-targetW).toFixed(1);
+    goalBar=`<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06)">
+      <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:5px">
+        <span style="color:var(--muted2)">${direction==='loss'?'Cutting':'Bulking'}: ${startW} → ${targetW}${isImperial()?'lbs':'kg'}</span>
+        <span style="color:${onTrack?'var(--green)':'var(--red)'}">${onTrack?'✅ On track':'⚠️ Off track'} · ${kgLeft}${isImperial()?'lbs':'kg'} to go</span>
+      </div>
+      <div style="height:7px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden">
+        <div style="height:100%;width:${pct}%;background:${onTrack?'linear-gradient(90deg,var(--green),#4ade80)':'linear-gradient(90deg,var(--red),#f87171)'};border-radius:4px;transition:width .5s ease"></div>
+      </div>
+      <div style="font-size:10px;color:var(--muted2);margin-top:4px;text-align:right">${pct}% complete</div>
+    </div>`;
+  }
+
+  // ── Readiness sparkline (mini dots) ──
+  let riSparkline='';
+  if(riRecent.length>=2){
+    const W=300,H=36,pad=8;
+    const sc=riRecent.map(r=>r.score);
+    const minS=Math.min(...sc)-5,maxS=Math.max(...sc)+5;
+    const range=maxS-minS||1;
+    const px=i=>pad+(i/(riRecent.length-1))*(W-pad*2);
+    const py=s=>H-pad-((s-minS)/range)*(H-pad*2);
+    const pts=riRecent.map((r,i)=>`${px(i).toFixed(1)},${py(r.score).toFixed(1)}`).join(' ');
+    const lc=riLast>=riFirst?'#22c55e':'#ef4444';
+    riSparkline=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="margin:6px 0 2px">
+      <polyline points="${pts}" fill="none" stroke="${lc}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+      ${riRecent.map((r,i)=>`<circle cx="${px(i).toFixed(1)}" cy="${py(r.score).toFixed(1)}" r="2.5" fill="${i===riRecent.length-1?lc:'rgba(255,255,255,0.2)'}"/>`).join('')}
+    </svg>`;
+  }
+
   panel.innerHTML=`<div class="card" style="animation:fadeUp .22s ease">
+
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px">
       <div style="font-family:var(--fh);font-size:20px;letter-spacing:2px">${c.name.toUpperCase()}</div>
       <button class="btn btn-ghost btn-sm" onclick="_pgSel=null;document.getElementById('pgDetail').style.display='none';pgRender()">✕ Close</button>
     </div>
+
+    <!-- 3 key stats -->
     <div class="g4" style="margin-bottom:14px">
-      <div class="metric-box"><div class="metric-val" style="color:var(--accent)">${c.weight||'—'}</div><div class="metric-lbl">Weight kg</div></div>
-      <div class="metric-box"><div class="metric-val" style="color:var(--accent)">${c.height||'—'}</div><div class="metric-lbl">Height cm</div></div>
+      <div class="metric-box"><div class="metric-val" style="color:var(--accent)">${currentW||'—'}${currentW?'<span style="font-size:12px;color:var(--muted2)">'+(isImperial()?'lbs':'kg')+'</span>':''}</div><div class="metric-lbl">Current Weight</div></div>
       <div class="metric-box"><div class="metric-val" style="color:var(--accent)">${c.bmi||'—'}</div><div class="metric-lbl">BMI</div></div>
-      <div class="metric-box"><div class="metric-val" style="color:${tr.color||'var(--text)'}">${tr.label}</div><div class="metric-lbl">Trend</div></div>
+      <div class="metric-box"><div class="metric-val" style="color:${riColor}">${avgRI!==null?avgRI+'/100':'—'}</div><div class="metric-lbl">Avg Readiness</div></div>
+      <div class="metric-box"><div class="metric-val" style="color:${sessColor}">${recentSessions.length}<span style="font-size:12px;color:var(--muted2)"> /4wk</span></div><div class="metric-lbl">Sessions</div></div>
     </div>
+
+    <!-- Weight trend -->
+    ${wPts.length>=2?`<div class="card" style="background:rgba(0,0,0,.2);padding:14px;margin-bottom:12px">
+      <div style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:8px">⚖️ Weight Trend</div>
+      ${sparkline}
+      ${goalBar}
+    </div>`:`<div class="card" style="background:rgba(0,0,0,.15);padding:12px;margin-bottom:12px;text-align:center;font-size:12px;color:var(--muted2)">No weight history yet — save biometrics to build the trend</div>`}
+
+    <!-- Readiness trend -->
+    ${riRecent.length>=2?`<div class="card" style="background:rgba(0,0,0,.2);padding:14px;margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <div style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2)">⚡ Readiness (last ${riRecent.length} check-ins)</div>
+        <span style="font-size:11px;color:${riColor};font-weight:600">${riTrend}</span>
+      </div>
+      ${riSparkline}
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted2);margin-top:2px"><span>Earliest: ${riFirst}</span><span>Latest: ${riLast}</span></div>
+    </div>`:''}
+
+    <!-- Sessions summary -->
+    <div class="card" style="background:rgba(0,0,0,.2);padding:14px;margin-bottom:12px">
+      <div style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:10px">🥊 Training Volume</div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <div><div style="font-family:var(--fh);font-size:28px;color:${sessColor}">${recentSessions.length}</div><div style="font-size:11px;color:var(--muted2)">sessions last 4 weeks</div></div>
+        <div><div style="font-family:var(--fh);font-size:28px;color:var(--accent)">${totalSessions.length}</div><div style="font-size:11px;color:var(--muted2)">total sessions logged</div></div>
+        ${recentSessions.length>0?`<div style="flex:1;min-width:120px"><div style="font-size:11px;color:var(--muted2);margin-bottom:4px">Recent</div>${recentSessions.slice(0,3).map(s=>`<div style="font-size:11px;color:var(--muted);padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.04)">${s.title||s.goalType||'Session'} <span style="color:var(--muted2)">${s.date}</span></div>`).join('')}</div>`:''}
+      </div>
+    </div>
+
+    <!-- Performance scores -->
     <div class="card" style="background:rgba(0,0,0,.2);padding:14px">
-      <div style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:10px">Performance Chart</div>
+      <div style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:10px">📊 Weekly Performance Scores</div>
       <div class="perf-chart">${bars}</div>
+      <div style="font-size:11px;color:var(--muted2);margin-top:8px">Score trend: <span style="color:${tr.color||'var(--muted)'}">${tr.label}</span></div>
     </div>
+
   </div>`;
 }
 function pgUpdStats(){
@@ -4183,6 +4292,11 @@ function renderReadinessCard(ath) {
     <span class="r-verdict">${v.label}</span>
     ${trend ? `<div class="r-trend" style="margin-top:5px">${trend} vs last</div>` : ''}
     ${streakHtml}
+    ${(ri && (ri.hrv || ri.rhr || ri.sleepHrs)) ? `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.06)">
+      ${ri.hrv ? `<span style="font-size:10px;color:var(--muted2)">📶 HRV <strong style="color:var(--text)">${ri.hrv}ms</strong></span>` : ''}
+      ${ri.rhr ? `<span style="font-size:10px;color:var(--muted2)">❤️ <strong style="color:var(--text)">${ri.rhr}bpm</strong></span>` : ''}
+      ${ri.sleepHrs ? `<span style="font-size:10px;color:var(--muted2)">😴 <strong style="color:var(--text)">${ri.sleepHrs}h</strong></span>` : ''}
+    </div>` : ''}
   </div>`;
 }
 
@@ -4703,11 +4817,15 @@ function ciPageSubmit() {
   const nutrition  = parseInt(document.getElementById('ciPageNutrition')?.value || 7);
   const pain       = parseInt(document.getElementById('ciPagePain')?.value || 0);
   const notes      = document.getElementById('ciPageNotes')?.value || '';
+  const sleepHrs   = document.getElementById('ciPageSleepHrs')?.value || '';
+  const rhr        = document.getElementById('ciPageRHR')?.value || '';
+  const hrv        = document.getElementById('ciPageHRV')?.value || '';
+  const steps      = document.getElementById('ciPageSteps')?.value || '';
   const score      = calcReadiness(sleep, energy, soreness, motivation, nutrition, pain);
   const today      = new Date().toISOString().slice(0, 10);
 
   const all = riGetAll();
-  all.push({ id: uid(), athId, athName, date: today, sleep, energy, soreness, motivation, nutrition, pain, notes, score, ts: Date.now() });
+  all.push({ id: uid(), athId, athName, date: today, sleep, energy, soreness, motivation, nutrition, pain, notes, sleepHrs, rhr, hrv, steps, score, ts: Date.now() });
   riSaveAll(all);
   tlAdd({ type: 'checkin', athName, text: `Readiness score: ${score}/100 — ${readinessVerdict(score).label}` });
 
@@ -4923,6 +5041,7 @@ function pdfExport() {
     const athSel = document.getElementById('pdfAthlete');
     const athName = athSel?.options[athSel.selectedIndex]?.text || 'Athlete';
     pdf.save(`StrikePanel_${athName.replace(/\s+/g,'_')}_Report.pdf`);
+document.getElementById('pdfShareBtn').style.display='inline-flex';
 
     // Restore
     content.style.maxHeight = prevMaxH;
@@ -5309,6 +5428,7 @@ const SB_SYNC_KEYS = [
   { id: 'readiness', lsKey: RI_KEY },
   { id: 'timeline',  lsKey: TL_KEY },
   { id: 'fightdates',lsKey: FD_KEY },
+  { id: 'wearable',  lsKey: 'sp_wearable_v1' },
 ];
 
 let _sbUrl = '';
@@ -5634,9 +5754,27 @@ function wearRender(athId){
       ${e.hrv?`<span>📶 HRV ${e.hrv}ms</span>`:''}
       ${e.steps?`<span>👟 ${Number(e.steps).toLocaleString()} steps</span>`:''}
       ${e.cal?`<span>🔥 ${e.cal} kcal</span>`:''}
-      ${e.dist?`<span>📍 ${e.dist}km</span>`:''}
+      ${e.dist?`<span>📍 ${e.dist}${isImperial()?'mi':'km'}</span>`:''}
       ${e.sleep?`<span>😴 ${e.sleep}h sleep</span>`:''}
     </div>`).join('');
+}
+function pdfShare(){
+  const content=document.getElementById('pdfContent');
+  if(!content)return;
+  const athSel=document.getElementById('pdfAthlete');
+  const athName=athSel?.options[athSel.selectedIndex]?.text||'Athlete';
+  html2canvas(content,{scale:2,useCORS:true,backgroundColor:'#0b1120',logging:false}).then(canvas=>{
+    canvas.toBlob(blob=>{
+      const file=new File([blob],`StrikePanel_${athName.replace(/\s+/g,'_')}_Report.png`,{type:'image/png'});
+      if(navigator.canShare&&navigator.canShare({files:[file]})){
+        navigator.share({title:`${athName} — StrikePanel Report`,files:[file]});
+      } else {
+        // fallback — open image in new tab so they can save manually
+        const url=URL.createObjectURL(blob);
+        window.open(url,'_blank');
+      }
+    },'image/png');
+  });
 }
 </script>
 </body>
