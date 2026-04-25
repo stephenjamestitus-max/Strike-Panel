@@ -5097,7 +5097,13 @@ const LG_HASH_STORE_KEY = 'sp_license_hashes_v1';
 
 async function lgBuildHashes() {
   const cached = localStorage.getItem(LG_HASH_STORE_KEY);
-  if (cached) return JSON.parse(cached);
+  if (cached) {
+    // Always rebuild if master key might not be in cache
+    const parsed = JSON.parse(cached);
+    const masterHash = await sha256(MASTER_KEY.trim().toUpperCase());
+    if (!parsed.includes(masterHash)) localStorage.removeItem(LG_HASH_STORE_KEY);
+    else return parsed;
+  }
   // Build hash list from VALID_LICENSE_KEYS + master key
   const all = [...VALID_LICENSE_KEYS.map(k => k.trim().toUpperCase()), MASTER_KEY.trim().toUpperCase()];
   const hashes = await Promise.all(all.map(k => sha256(k)));
