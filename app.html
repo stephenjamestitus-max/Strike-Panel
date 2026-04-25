@@ -956,6 +956,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 }
 .demo-overlay.show{opacity:1;pointer-events:all}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -1634,20 +1636,26 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
           <div class="metric-box"><div class="metric-val" style="color:var(--red)">—</div><div class="metric-lbl">Fats (g)</div></div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-title" style="margin-bottom:10px"><span class="ctdot"></span>Basic Guidelines</div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.75">
-          <p id="nutProteinGuide"><strong style="color:var(--text)">Protein:</strong> 1.6–2.2g per kg bodyweight for muscle retention/gain</p>
-          <p><strong style="color:var(--text)">Carbs:</strong> Main fuel source — prioritise around training</p>
-          <p id="nutFatGuide"><strong style="color:var(--text)">Fats:</strong> 0.5–1g per kg bodyweight minimum for hormones</p>
-          <p id="nutHydGuide"><strong style="color:var(--text)">Hydration:</strong> 35–40ml per kg/day. More on training days</p>
-        </div>
-        <div class="callout" style="margin-top:12px"><strong>Editable tips:</strong></div>
-        <textarea class="fta" id="nutTips" rows="4" placeholder="Personalised nutrition notes for your athletes..." oninput="nutFieldCh(this.value)" style="margin-top:8px"></textarea>
-      </div>
     </div>
   </div>
-
+<div class="card" style="margin-top:10px">
+        <div class="card-title" style="margin-bottom:10px"><span class="ctdot"></span>Wearable Data <span style="font-size:10px;color:var(--muted2);font-family:var(--fb);font-weight:400;letter-spacing:0;text-transform:none;margin-left:6px">Apple Health · WHOOP · Garmin</span></div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Log data from your wearable manually. Syncs to the selected athlete's profile.</div>
+        <div class="fg2" style="gap:10px">
+          <div class="field"><div class="flabel">Resting Heart Rate (bpm)</div><input class="finput" id="wearRHR" type="number" placeholder="e.g. 52" min="30" max="120"></div>
+          <div class="field"><div class="flabel">HRV (ms)</div><input class="finput" id="wearHRV" type="number" placeholder="e.g. 68" min="1" max="300"></div>
+          <div class="field"><div class="flabel">Steps</div><input class="finput" id="wearSteps" type="number" placeholder="e.g. 8500"></div>
+          <div class="field"><div class="flabel">Active Calories (kcal)</div><input class="finput" id="wearActiveCal" type="number" placeholder="e.g. 620"></div>
+          <div class="field"><div class="flabel">Distance (km)</div><input class="finput" id="wearDist" type="number" placeholder="e.g. 5.2" step="0.1"></div>
+          <div class="field"><div class="flabel">Sleep Duration (hrs)</div><input class="finput" id="wearSleep" type="number" placeholder="e.g. 7.5" step="0.5" min="0" max="24"></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center">
+          <input class="finput" id="wearDate" type="date" style="max-width:180px">
+          <button class="btn btn-primary btn-sm" onclick="wearSave()">💾 Save Entry</button>
+          <span id="wearFlash" style="font-size:12px;color:var(--green);display:none">Saved ✓</span>
+        </div>
+        <div id="wearLog" style="margin-top:14px"></div>
+      </div>
   <div class="div"><span>Phase 2</span></div>
   <div class="g3">
     <div class="p2card" onclick="p2(event,'7-Day Meal Plan Builder')"><div class="p2card-info"><span class="p2card-icon">🥗</span><div><div class="p2card-name">7-Day Meal Planner</div><div class="p2card-desc">Full meal plan with shopping list</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
@@ -2216,7 +2224,7 @@ create policy "allow_all" on sp_sync
       <div class="pdf-report-wrap" id="pdfContent" style="background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r);padding:20px;margin-bottom:14px;max-height:400px;overflow-y:auto"></div>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
-      <button class="btn btn-primary" onclick="pdfPrint()" id="pdfPrintBtn" style="display:none">🖨 Print / Save PDF</button>
+      <button class="btn btn-primary" onclick="pdfExport()" id="pdfPrintBtn" style="display:none">⬇️ Download PDF</button>
       <button class="btn btn-ghost" onclick="closeModal('pdfModal')">Close</button>
     </div>
   </div>
@@ -2355,9 +2363,6 @@ function updateUnitUI(){
   ['athHeightLbl','bioHeightLbl','pgHeightLbl'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=`Height (${imp?'ft/in':'cm'})`;});
   const pmap={athWeight:imp?'e.g. 165':'75.0',athTargetWeight:imp?'e.g. 154':'70.0',athHeight:imp?"5'11\"":"178",bioWeight:imp?'165':'75.5',bioHeight:imp?"5'10\"":"178",pgWeight:imp?'165':'75.0',pgHeight:imp?"5'10\"":"178",fdCurWeight:imp?'e.g. 181':'e.g. 82.5',fdTargetWeight:imp?'e.g. 170':'e.g. 77.0'};
   Object.entries(pmap).forEach(([id,ph])=>{const el=document.getElementById(id);if(el)el.placeholder=ph;});
-  const pg=document.getElementById('nutProteinGuide');if(pg)pg.innerHTML=imp?'0.7–1g per lb bodyweight':'1.6–2.2g per kg bodyweight';
-  const fg=document.getElementById('nutFatGuide');if(fg)fg.innerHTML=imp?'0.25–0.45g per lb bodyweight minimum':'0.5–1g per kg bodyweight minimum';
-  const hg=document.getElementById('nutHydGuide');if(hg)hg.innerHTML=imp?'0.5 fl oz per lb/day. More on training days':'35–40ml per kg/day. More on training days';
   const wlbl=document.getElementById('bioWaterLbl');if(wlbl)wlbl.textContent=imp?'Water (fl oz/day)':'Water (L/day)';
   const prlbl=document.getElementById('bioProteinLbl');if(prlbl)prlbl.textContent=imp?'g/day at 0.9g/lb':'g/day at 2g/kg';
 }
@@ -3013,7 +3018,7 @@ function saveNutEntry(){
   S.nutrition.log.unshift(entry);saveState();nutRenderLog();closeModal('aiNutModal');
   switchTab('nutrition');
 }
-function nutFieldCh(val){S.nutrition.tips=val;saveState();}
+
 
 // ── NUTRITION TAB SWITCH ──────────────────────────────────────────────
 function nutSwitchTab(mode) {
@@ -3112,6 +3117,7 @@ function bioLoad(){
   const lastSaved=document.getElementById('bioLastSaved');
   if(lastSaved)lastSaved.textContent=b.date?'Last saved: '+b.date:'';
   bioCalc();
+  wearRender(id);
 }
 function bioCalc(){
   const w=parseFloat(document.getElementById('bioWeight')?.value)||0;
@@ -3658,7 +3664,7 @@ function apiKeyLoad() {
 function rehydrate(){
   athRender();sessRender();
   ciPopAthletes();ciLoad();
-  nutRenderLog();nutFieldLoad();
+  nutRenderLog();
   bioPopAthletes();
   pgPopulateAthletes();
   pgRender();
@@ -3673,7 +3679,6 @@ function rehydrate(){
   dbRefresh();
   updateUnitUI();
 }
-function nutFieldLoad(){const e=document.getElementById('nutTips');if(e)e.value=S.nutrition.tips||'';}
 
 
 // ── BOOT ──────────────────────────────────────────────────────────────
@@ -4870,14 +4875,66 @@ function pdfPreview() {
   if (btn) btn.style.display = 'inline-flex';
 }
 
-function pdfPrint() {
-  // Apply print styles temporarily
-  const section = document.querySelector('.section.active');
-  if (section) section.classList.add('print-active');
-  window.print();
-  if (section) section.classList.remove('print-active');
-}
+function pdfExport() {
+  const content = document.getElementById('pdfContent');
+  if (!content) return;
+  const btn = document.getElementById('pdfPrintBtn');
+  if (btn) { btn.textContent = '⏳ Generating...'; btn.disabled = true; }
 
+  // Temporarily expand the preview so html2canvas captures everything
+  const prevMaxH = content.style.maxHeight;
+  const prevOverflow = content.style.overflow;
+  content.style.maxHeight = 'none';
+  content.style.overflow = 'visible';
+
+  html2canvas(content, {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: '#0b1120',
+    logging: false
+  }).then(canvas => {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    const pageW = pdf.internal.pageSize.getWidth();
+    const pageH = pdf.internal.pageSize.getHeight();
+    const margin = 10;
+    const imgW = pageW - margin * 2;
+    const imgH = (canvas.height * imgW) / canvas.width;
+    const imgData = canvas.toDataURL('image/png');
+
+    let yPos = margin;
+    let remainH = imgH;
+    let srcY = 0;
+
+    while (remainH > 0) {
+      const sliceH = Math.min(remainH, pageH - margin * 2);
+      const sliceCanvas = document.createElement('canvas');
+      sliceCanvas.width = canvas.width;
+      sliceCanvas.height = (sliceH / imgH) * canvas.height;
+      const ctx = sliceCanvas.getContext('2d');
+      ctx.drawImage(canvas, 0, srcY * canvas.height / imgH, canvas.width, sliceCanvas.height, 0, 0, canvas.width, sliceCanvas.height);
+      pdf.addImage(sliceCanvas.toDataURL('image/png'), 'PNG', margin, yPos, imgW, sliceH);
+      remainH -= sliceH;
+      srcY += sliceH;
+      if (remainH > 0) { pdf.addPage(); yPos = margin; }
+    }
+
+    // Get athlete name for filename
+    const athSel = document.getElementById('pdfAthlete');
+    const athName = athSel?.options[athSel.selectedIndex]?.text || 'Athlete';
+    pdf.save(`StrikePanel_${athName.replace(/\s+/g,'_')}_Report.pdf`);
+
+    // Restore
+    content.style.maxHeight = prevMaxH;
+    content.style.overflow = prevOverflow;
+    if (btn) { btn.textContent = '⬇️ Download PDF'; btn.disabled = false; }
+  }).catch(() => {
+    content.style.maxHeight = prevMaxH;
+    content.style.overflow = prevOverflow;
+    if (btn) { btn.textContent = '⬇️ Download PDF'; btn.disabled = false; }
+    alert('PDF generation failed. Try again.');
+  });
+}
 // ══════════════════════════════════════════════════════════════════════
 // LICENSE GATE — Gumroad key validation (offline, client-side)
 //
@@ -5543,7 +5600,44 @@ saveState = function() {
     sbSetStatus('Could not reach Supabase. Working offline.', 'var(--amber)');
   }
 })();
-
+// ── WEARABLE DATA ─────────────────────────────────────────────────────
+function wearSave(){
+  const athId=document.getElementById('bioAthlete')?.value;
+  if(!athId){alert('Select an athlete first (use the selector above).');return;}
+  const entry={
+    date: document.getElementById('wearDate')?.value || new Date().toISOString().slice(0,10),
+    rhr:  document.getElementById('wearRHR')?.value  || '',
+    hrv:  document.getElementById('wearHRV')?.value  || '',
+    steps:document.getElementById('wearSteps')?.value|| '',
+    cal:  document.getElementById('wearActiveCal')?.value||'',
+    dist: document.getElementById('wearDist')?.value || '',
+    sleep:document.getElementById('wearSleep')?.value|| ''
+  };
+  if(!S.wearable) S.wearable={};
+  if(!S.wearable[athId]) S.wearable[athId]=[];
+  // Replace if same date
+  const idx=S.wearable[athId].findIndex(e=>e.date===entry.date);
+  if(idx>-1) S.wearable[athId][idx]=entry; else S.wearable[athId].unshift(entry);
+  saveState();
+  const fl=document.getElementById('wearFlash');if(fl){fl.style.display='inline';setTimeout(()=>fl.style.display='none',2000);}
+  wearRender(athId);
+}
+function wearRender(athId){
+  const el=document.getElementById('wearLog');if(!el)return;
+  const entries=(S.wearable&&S.wearable[athId])||[];
+  if(!entries.length){el.innerHTML='<div style="font-size:12px;color:var(--muted2)">No wearable entries yet.</div>';return;}
+  el.innerHTML=`<div style="font-size:10px;font-family:var(--fc);letter-spacing:2px;color:var(--muted2);text-transform:uppercase;margin-bottom:8px">Recent Entries</div>`+
+  entries.slice(0,7).map(e=>`
+    <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04)">
+      <span style="color:var(--text);font-weight:600;min-width:90px">${e.date}</span>
+      ${e.rhr?`<span>❤️ ${e.rhr} bpm</span>`:''}
+      ${e.hrv?`<span>📶 HRV ${e.hrv}ms</span>`:''}
+      ${e.steps?`<span>👟 ${Number(e.steps).toLocaleString()} steps</span>`:''}
+      ${e.cal?`<span>🔥 ${e.cal} kcal</span>`:''}
+      ${e.dist?`<span>📍 ${e.dist}km</span>`:''}
+      ${e.sleep?`<span>😴 ${e.sleep}h sleep</span>`:''}
+    </div>`).join('');
+}
 </script>
 </body>
 </html>
