@@ -5096,18 +5096,9 @@ async function sha256(str) {
 const LG_HASH_STORE_KEY = 'sp_license_hashes_v1';
 
 async function lgBuildHashes() {
-  const cached = localStorage.getItem(LG_HASH_STORE_KEY);
-  if (cached) {
-    // Always rebuild if master key might not be in cache
-    const parsed = JSON.parse(cached);
-    const masterHash = await sha256(MASTER_KEY.trim().toUpperCase());
-    if (!parsed.includes(masterHash)) localStorage.removeItem(LG_HASH_STORE_KEY);
-    else return parsed;
-  }
-  // Build hash list from VALID_LICENSE_KEYS + master key
+  // Always recompute — never use cache so master key changes take effect immediately
   const all = [...VALID_LICENSE_KEYS.map(k => k.trim().toUpperCase()), MASTER_KEY.trim().toUpperCase()];
   const hashes = await Promise.all(all.map(k => sha256(k)));
-  // Don't cache the hashes in localStorage — recompute each time
   return hashes;
 }
 
@@ -5205,11 +5196,15 @@ async function lgCheck() {
       // Key was revoked — clear and re-lock
       localStorage.removeItem('cp_license_hash');
       localStorage.removeItem('cp_license_activated');
-      lgSetMsg('Your license is no longer valid. Please contact support.', false);
+      // Hash mismatch — could be master key change, just re-show gate cleanly
+    localStorage.removeItem('cp_license_hash');
+    localStorage.removeItem('cp_license_activated');
+    localStorage.removeItem(LG_HASH_STORE_KEY);
     }
   } catch (err) {
-    // If crypto fails (very old browser), fall back to unlocking if a hash exists
-    lgUnlock();
+    // If crypto fails for any reason, fall back to unlocking if a hash exists
+    console.warn('[LG] hash check failed, falling back:', err.message);
+    if (localStorage.getItem('cp_license_hash')) lgUnlock();
   }
 }
 
