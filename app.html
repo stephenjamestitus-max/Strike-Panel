@@ -2535,7 +2535,7 @@ let _athEd=null;
 function athShowForm(){
   const realCount=S.athletes.filter(a=>!a.id.startsWith('demo_')).length;
   if(realCount>=20){alert('Maximum of 20 athletes reached. Delete a profile first to add another.');return;}
-  _athEd=null;document.getElementById('athFormLbl').textContent='Add Athlete';
+  _athEd=null;const _afl=document.getElementById('athFormLbl');if(_afl)_afl.textContent='Add Athlete';
   ['athName','athAge','athSport','athRecord','athWeight','athTargetWeight','athHeight','athGoals','athInjuries','athNotes'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
   ['athSex','athFitness','athGoalType','athDuration'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
   document.getElementById('athStart').value='';
@@ -2579,7 +2579,7 @@ function athSave(){
 }
 function athEdit(id){
   const a=S.athletes.find(x=>x.id===id);if(!a)return;
-  _athEd=id;document.getElementById('athFormLbl').textContent='Edit — '+a.name;
+  _athEd=id;const _afl2=document.getElementById('athFormLbl');if(_afl2)_afl2.textContent='Edit — '+a.name;
   const set=(elId,v)=>{const e=document.getElementById(elId);if(e)e.value=v||'';};
   set('athName',a.name);set('athAge',a.age);set('athSex',a.sex);set('athSport',a.sport);
   set('athFitness',a.fitness);set('athGoalType',a.goalType);set('athWeight',a.weight);
@@ -2597,6 +2597,7 @@ function athDel(id){
 }
 function athRender(){
   const wrap=document.getElementById('athList');
+  if(!wrap)return;
   if(!S.athletes.length){wrap.innerHTML='<div class="wlog-empty" style="margin-top:14px">Nobody here yet — hit "+ Add to Crew" to get started 💪</div>';return;}
   wrap.innerHTML=S.athletes.map(a=>{
     const bmi=a.weight&&a.height?(parseFloat(a.weight)/Math.pow(parseFloat(a.height)/100,2)).toFixed(1):'';
@@ -2639,10 +2640,10 @@ function athRender(){
 function openAIWorkout(){
   // Populate athlete dropdown
   const sel=document.getElementById('aiWAthlete');
-  sel.innerHTML='<option value="">— No specific athlete —</option>'+S.athletes.map(a=>`<option value="${a.id}">${a.name}</option>`).join('');
-  document.getElementById('aiWResp').style.display='none';
-  document.getElementById('aiWResp').textContent='';
-  document.getElementById('aiWSaveBtn').style.display='none';
+  if(sel)sel.innerHTML='<option value="">— No specific athlete —</option>'+S.athletes.map(a=>`<option value="${a.id}">${a.name}</option>`).join('');
+  const _aiwr=document.getElementById('aiWResp');
+  if(_aiwr){_aiwr.style.display='none';_aiwr.textContent='';}
+  const _aiwsb=document.getElementById('aiWSaveBtn');if(_aiwsb)_aiwsb.style.display='none';
   document.getElementById('aiWThink').classList.remove('show');
   _aiWLastResp='';
   const banner=document.getElementById('aiWKeyBanner');
@@ -2662,9 +2663,8 @@ function openAIForAthlete(athId){
 async function runAIWorkout(){
   if(!CONFIG.GEMINI_API_KEY){
     const el=document.getElementById('aiWResp');
-    el.innerHTML='<div style="color:var(--amber);font-size:13px;padding:4px 0">⚠ No API key set. Go to <strong>Settings → AI Setup</strong> and add your free Gemini key to use this feature.</div>';
-    el.style.display='block';
-    document.getElementById('aiWSaveBtn').style.display='none';
+    if(el){el.innerHTML='<div style="color:var(--amber);font-size:13px;padding:4px 0">⚠ No API key set. Go to <strong>Settings → AI Setup</strong> and add your free Gemini key to use this feature.</div>';el.style.display='block';}
+    const _awsb=document.getElementById('aiWSaveBtn');if(_awsb)_awsb.style.display='none';
     return;
   }
   const muscles=document.getElementById('aiWMuscles').value.trim();
@@ -2713,9 +2713,8 @@ Be specific with weights (e.g. "60-70% 1RM" or "RPE 7"). No filler text.`;
     _aiWLastResp=resp;
     document.getElementById('aiWThink').classList.remove('show');
     const el=document.getElementById('aiWResp');
-    el.innerHTML=formatAIResp(resp);
-    el.style.display='block';
-    document.getElementById('aiWSaveBtn').style.display='inline-flex';
+    if(el){el.innerHTML=formatAIResp(resp);el.style.display='block';}
+    const _awsb2=document.getElementById('aiWSaveBtn');if(_awsb2)_awsb2.style.display='inline-flex';
   } catch(err){
     document.getElementById('aiWThink').classList.remove('show');
     const el=document.getElementById('aiWResp');
@@ -2791,6 +2790,7 @@ function sessRenderExercises(sid){
 }
 function sessRender(){
   const wrap=document.getElementById('sessLog');
+  if(!wrap)return;
   if(!S.sessions.length){wrap.innerHTML='<div class="wlog-empty">No sessions yet. Generate one with AI or click "+ Log Session".</div>';return;}
   wrap.innerHTML=S.sessions.map(s=>{
     const ath=S.athletes.find(a=>a.id===s.athId);
@@ -2869,8 +2869,8 @@ function ciPopAthletes(){
 function ciKey(){const ai=document.getElementById('ciAthlete')?.value||'';const wk=document.getElementById('ciWeek')?.value||'1';return ai?`${ai}_w${wk}`:null;}
 function ciLoad(){
   const key=ciKey();const saved=key?(S.checkins[key]||{}):{};
-  document.getElementById('ciWeekLbl').textContent='Week '+(document.getElementById('ciWeek')?.value||'1');
-  document.getElementById('ciRatings').innerHTML=key?CI_CATS.map(r=>{
+  const _ciwl=document.getElementById('ciWeekLbl');if(_ciwl)_ciwl.textContent='Week '+(document.getElementById('ciWeek')?.value||'1');
+  const _ciRat=document.getElementById('ciRatings');if(_ciRat)_ciRat.innerHTML=key?CI_CATS.map(r=>{
     const val=saved['r_'+r]??5;
     return`<div style="margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
@@ -2917,9 +2917,8 @@ const nutAthSel = document.getElementById('aiNutAthlete');
 async function runAINutrition(){
   if(!CONFIG.GEMINI_API_KEY){
     const el=document.getElementById('aiNResp');
-    el.innerHTML='<div style="color:var(--amber);font-size:13px;padding:4px 0">⚠ No API key set. Go to <strong>Settings → AI Setup</strong> and add your free Gemini key to use this feature.</div>';
-    el.style.display='block';
-    document.getElementById('aiNSaveBtn').style.display='none';
+    if(el){el.innerHTML='<div style="color:var(--amber);font-size:13px;padding:4px 0">⚠ No API key set. Go to <strong>Settings → AI Setup</strong> and add your free Gemini key to use this feature.</div>';el.style.display='block';}
+    const _ansb=document.getElementById('aiNSaveBtn');if(_ansb)_ansb.style.display='none';
     return;
   }
   const food=document.getElementById('aiNutInput').value.trim();
@@ -2957,6 +2956,7 @@ Fill the JSON with the real numbers. Be realistic, use common serving sizes.`;
     if(jsonMatch){try{_aiNLastData=JSON.parse(jsonMatch[1].trim());}catch(e){_aiNLastData=null;}}
     const displayText=resp.replace(/<json>[\s\S]*?<\/json>/,'').trim();
     const el=document.getElementById('aiNResp');
+    if(!el)return;
     el.innerHTML=formatAIResp(displayText);
     if(_aiNLastData){
       el.innerHTML+=`<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px">
@@ -2970,7 +2970,7 @@ Fill the JSON with the real numbers. Be realistic, use common serving sizes.`;
     document.getElementById('aiNSaveBtn').style.display='inline-flex';
   } catch(err){
     document.getElementById('aiNThink').classList.remove('show');
-    const el=document.getElementById('aiNResp');el.textContent='Error: '+err.message;el.style.display='block';
+    const el=document.getElementById('aiNResp');if(el){el.textContent='Error: '+err.message;el.style.display='block';}
   }
 }
 function saveNutEntry(){
@@ -3038,6 +3038,7 @@ function saveManualNutEntry() {
 }
 function nutRenderLog(){
   const wrap=document.getElementById('nutLog');
+  if(!wrap)return;
   if(!S.nutrition.log.length){wrap.innerHTML='<div style="color:var(--muted2);font-size:12px;text-align:center;padding:16px">No meals logged yet. Click "AI Analyse" above.</div>';nutUpdateTotals();return;}
   wrap.innerHTML=S.nutrition.log.map(e=>`
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--border2);flex-wrap:wrap">
@@ -3226,7 +3227,7 @@ function pgRenderFormWeeks(tW = 8, existingScores = []){
 function pgClear(){
     ['pgName','pgWeight','pgHeight'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
     document.querySelectorAll('.pgWInput').forEach(e=>e.value='');
-    document.getElementById('pgDynamicWeeks').innerHTML = '';
+    const _pgdw=document.getElementById('pgDynamicWeeks');if(_pgdw)_pgdw.innerHTML = '';
     pgMsg('');
 }
 
@@ -3532,7 +3533,7 @@ function tSettingCh(){
   saveState();tSyncUI();tPips();if(tS.phase==='idle'||tS.phase==='done')tResetDisp();
 }
 function tSyncUI(){const s=S.timer;const wu=s.warmupTime||0;const tot=wu+s.rounds*s.roundTime+Math.max(0,s.rounds-1)*s.restTime;const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};set('tSumTotal',tFmt(tot));set('tSumWork',tFmt(s.rounds*s.roundTime));}
-function tPips(){document.getElementById('tPips').innerHTML=Array.from({length:S.timer.rounds},(_,i)=>`<div class="pip" id="pip_${i}"></div>`).join('');}
+function tPips(){const _tp=document.getElementById('tPips');if(_tp)_tp.innerHTML=Array.from({length:S.timer.rounds},(_,i)=>`<div class="pip" id="pip_${i}"></div>`).join('');}
 function tUpdPips(){for(let i=0;i<S.timer.rounds;i++){const p=document.getElementById('pip_'+i);if(!p)continue;p.className='pip';if(i<tS.cur-1)p.classList.add('done');else if(i===tS.cur-1)p.classList.add(tS.phase==='rest'?'rest':'cur');}}
 function tSetRing(frac,phase){const f=document.getElementById('ringFill');f.style.strokeDashoffset=TCIRC*(1-Math.max(0,Math.min(1,frac)));f.className='ring-fill '+{round:'rf-round',rest:'rf-rest',done:'rf-done'}[phase];}
 function tSetArena(m){const a=document.getElementById('timerArena');a.classList.remove('s-round','s-rest','s-done');if(m)a.classList.add('s-'+m);}
@@ -3541,37 +3542,39 @@ function tResetDisp(){
   const wu=S.timer.warmupTime||0;
   tS.left=wu>0?wu:S.timer.roundTime;
   tSetArena('');tSetRing(1,'round');
-  document.getElementById('tDigits').textContent=tFmt(tS.left);
-  document.getElementById('tSub').textContent=wu>0?'Warm Up — get ready':'Round 1 of '+S.timer.rounds;
-  document.getElementById('tStateLbl').textContent=wu>0?'WARM UP':'READY';
-  document.getElementById('tDoneBanner').classList.remove('show');
-  document.getElementById('tSumRound').textContent='R—';
-  document.getElementById('tSumPhase').textContent='—';
-  document.getElementById('tSessProg').style.width='0%';
+  const _tset=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  _tset('tDigits',tFmt(tS.left));
+  _tset('tSub',wu>0?'Warm Up — get ready':'Round 1 of '+S.timer.rounds);
+  _tset('tStateLbl',wu>0?'WARM UP':'READY');
+  const _tdb=document.getElementById('tDoneBanner');if(_tdb)_tdb.classList.remove('show');
+  _tset('tSumRound','R—');
+  _tset('tSumPhase','—');
+  const _tsp=document.getElementById('tSessProg');if(_tsp)_tsp.style.width='0%';
   tUpdPips();
 }
 function tUpdDisp(){
   const s=S.timer;
-  document.getElementById('tDigits').textContent=tFmt(tS.left);
+  const _tset=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  _tset('tDigits',tFmt(tS.left));
   const wu=s.warmupTime||0;
   const tp=tS.phase==='round'?s.roundTime:tS.phase==='warmup'?wu:s.restTime;
   tSetRing(tp>0?tS.left/tp:0,tS.phase==='warmup'?'rest':tS.phase);
   if(tS.phase==='warmup'){
-    document.getElementById('tSub').textContent='Warm Up — Round 1 starts next';
-    document.getElementById('tStateLbl').textContent='WARM UP';
+    _tset('tSub','Warm Up — Round 1 starts next');
+    _tset('tStateLbl','WARM UP');
   } else {
-    document.getElementById('tSub').textContent=tS.phase==='round'?`Round ${tS.cur} of ${s.rounds}`:tS.phase==='rest'?`Rest — Round ${tS.cur+1} next`:'Session Complete';
-    document.getElementById('tStateLbl').textContent={round:'FIGHT',rest:'REST',done:'DONE',idle:'READY'}[tS.phase]||'READY';
+    _tset('tSub',tS.phase==='round'?`Round ${tS.cur} of ${s.rounds}`:tS.phase==='rest'?`Rest — Round ${tS.cur+1} next`:'Session Complete');
+    _tset('tStateLbl',{round:'FIGHT',rest:'REST',done:'DONE',idle:'READY'}[tS.phase]||'READY');
   }
-  document.getElementById('tSumRound').textContent=tS.phase==='idle'||tS.phase==='warmup'?'R—':'R'+tS.cur;
-  document.getElementById('tSumPhase').textContent=tS.phase==='idle'?'—':tS.phase==='warmup'?'WARM UP':tS.phase.toUpperCase();
+  _tset('tSumRound',tS.phase==='idle'||tS.phase==='warmup'?'R—':'R'+tS.cur);
+  _tset('tSumPhase',tS.phase==='idle'?'—':tS.phase==='warmup'?'WARM UP':tS.phase.toUpperCase());
   const tot=wu+s.rounds*s.roundTime+Math.max(0,s.rounds-1)*s.restTime;
   let el=0;
   if(tS.phase==='warmup')el=wu-tS.left;
   else if(tS.phase==='round')el=wu+(tS.cur-1)*(s.roundTime+s.restTime)+(s.roundTime-tS.left);
   else if(tS.phase==='rest')el=wu+tS.cur*s.roundTime+(tS.cur-1)*s.restTime+(s.restTime-tS.left);
   else if(tS.phase==='done')el=tot;
-  document.getElementById('tSessProg').style.width=(tot>0?Math.min(100,(el/tot)*100):0)+'%';
+  const _tsp=document.getElementById('tSessProg');if(_tsp)_tsp.style.width=(tot>0?Math.min(100,(el/tot)*100):0)+'%';
   tUpdPips();
 }
 function timerToggle(){
@@ -3612,13 +3615,16 @@ function tAdvance(){
 function tEnd(){
   const s=S.timer;tS.running=false;tS.phase='done';clearInterval(tS.interval);tS.interval=null;tS.left=0;
   tSetArena('done');tSetRing(1,'done');
-  document.getElementById('tDigits').textContent='0:00';document.getElementById('tStateLbl').textContent='DONE';
-  document.getElementById('tDoneBanner').classList.add('show');document.getElementById('tSessProg').style.width='100%';
-  document.getElementById('tPlayBtn').classList.remove('paused');
-  document.getElementById('tPlayIco').style.display='';document.getElementById('tPauseIco').style.display='none';
+  const _tset=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  _tset('tDigits','0:00');_tset('tStateLbl','DONE');
+  const _tdb=document.getElementById('tDoneBanner');if(_tdb)_tdb.classList.add('show');
+  const _tsp=document.getElementById('tSessProg');if(_tsp)_tsp.style.width='100%';
+  const _tpb=document.getElementById('tPlayBtn');if(_tpb)_tpb.classList.remove('paused');
+  const _tpi=document.getElementById('tPlayIco');if(_tpi)_tpi.style.display='';
+  const _tpai=document.getElementById('tPauseIco');if(_tpai)_tpai.style.display='none';
   tBell(3);tFlash('rgba(34,197,94,.1)');
   for(let i=0;i<s.rounds;i++){const p=document.getElementById('pip_'+i);if(p)p.className='pip done';}
-  document.getElementById('tSumRound').textContent='R'+s.rounds;document.getElementById('tSumPhase').textContent='DONE';
+  _tset('tSumRound','R'+s.rounds);_tset('tSumPhase','DONE');
 }
 function timerReset(){tS.running=false;clearInterval(tS.interval);tS.interval=null;document.getElementById('tPlayBtn').classList.remove('paused');document.getElementById('tPlayIco').style.display='';document.getElementById('tPauseIco').style.display='none';tResetDisp();tPips();}
 function timerSkip(){if(!tS.running&&tS.phase==='idle')return;clearInterval(tS.interval);tS.interval=null;tS.left=0;tAdvance();if(tS.running&&tS.phase!=='done')tS.interval=setInterval(tTick,1000);}
@@ -5075,44 +5081,16 @@ document.getElementById('pdfShareBtn').style.display='inline-flex';
 // Add each customer's Gumroad license key here after purchase.
 // Format: 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
 // Keys are case-insensitive — the app normalises to uppercase on entry.
+// ── LICENSE GATE — Simple & Reliable ─────────────────────────────────
+// Add customer Gumroad keys to this list after purchase.
+// Master key always works for the owner.
 var VALID_LICENSE_KEYS = [
   // ↓ ADD CUSTOMER KEYS BELOW THIS LINE ↓
   // 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
   // ↑ ADD CUSTOMER KEYS ABOVE THIS LINE ↑
 ];
-
-// Your personal master key — change this to something unique and private
 var MASTER_KEY = 'SP-MASTER-2024-STRIKEPANEL-OWNER';
-// ── KEY VALIDATION ────────────────────────────────────────────────────
-// Hashes a string using SHA-256 (async, returns hex string)
-async function sha256(str) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-}
 
-// Pre-computed SHA-256 hashes of valid keys (generated at runtime on first save)
-// This means the raw keys aren't directly visible in memory at runtime
-var LG_HASH_STORE_KEY = 'sp_license_hashes_v1';
-
-async function lgBuildHashes() {
-  // Always recompute — never use cache so master key changes take effect immediately
-  const keys = (typeof VALID_LICENSE_KEYS !== 'undefined' && Array.isArray(VALID_LICENSE_KEYS)) ? VALID_LICENSE_KEYS : [];
-  const master = (typeof MASTER_KEY !== 'undefined') ? MASTER_KEY : '';
-  const all = [...keys.map(k => k.trim().toUpperCase()), master.trim().toUpperCase()];
-  const hashes = await Promise.all(all.map(k => sha256(k)));
-  return hashes;
-}
-}
-
-async function lgIsValidKey(inputKey) {
-  const normalised = inputKey.trim().toUpperCase();
-  if (!normalised) return false;
-  const inputHash = await sha256(normalised);
-  const validHashes = await lgBuildHashes();
-  return validHashes.includes(inputHash);
-}
-
-// ── UI HELPERS ────────────────────────────────────────────────────────
 function lgSetMsg(txt, ok) {
   const el = document.getElementById('lgMsg');
   if (!el) return;
@@ -5125,92 +5103,46 @@ function lgUnlock() {
   if (gate) gate.classList.add('hidden');
 }
 
-// ── ACTIVATE ─────────────────────────────────────────────────────────
-async function lgActivate() {
+function lgIsValidKey(key) {
+  const k = key.trim().toUpperCase();
+  if (k === MASTER_KEY.trim().toUpperCase()) return true;
+  return VALID_LICENSE_KEYS.some(v => v.trim().toUpperCase() === k);
+}
+
+function lgActivate() {
   const input = document.getElementById('lgKeyInput');
   const btn   = document.querySelector('#licenseGate .btn-primary');
   const key   = (input?.value || '').trim();
 
   if (!key) { lgSetMsg('Paste your license key first.', false); return; }
 
-  lgSetMsg('Verifying…', null);
-  if (btn) { btn.textContent = '⏳ Verifying…'; btn.disabled = true; }
-
-  try {
-    const valid = await lgIsValidKey(key);
-    if (valid) {
-      // Store the activated key hash (not the raw key) in localStorage
-      const hash = await sha256(key.toUpperCase());
-      localStorage.setItem('cp_license_hash', hash);
-      localStorage.setItem('cp_license_activated', new Date().toISOString());
-      lgSetMsg('✓ Activated! Welcome to StrikePanel™', true);
-      if (btn) { btn.textContent = '✓ Activated!'; }
-      setTimeout(() => {
-        lgUnlock();
-        // Show onboarding if first time
-        if (!localStorage.getItem('cp_onboarded')) {
-          setTimeout(() => openModal('onboardModal'), 400);
-        }
-      }, 900);
-    } else {
-      lgSetMsg('Invalid key — check the key in your Gumroad email and try again.', false);
-      if (btn) { btn.textContent = '🔓 Activate License'; btn.disabled = false; }
-      // Shake the input
-      input?.classList.add('err');
-      setTimeout(() => input?.classList.remove('err'), 600);
-    }
-  } catch (err) {
-    lgSetMsg('Verification error — please try again.', false);
-    if (btn) { btn.textContent = '🔑 Activate License'; btn.disabled = false; }
-  }
-}
-
-// ── BOOT CHECK ────────────────────────────────────────────────────────
-// On every load, verify the stored hash still matches a valid key.
-// This means if you revoke a key (by removing it from VALID_LICENSE_KEYS),
-// the customer will be locked out next time the app loads.
-async function lgCheck() {
-  // BYPASS 1: Athlete check-in link — ?checkin=1
-  // Athletes don't have a license key — show app in check-in-only mode.
-  if (window.location.search.includes('checkin=1')) {
-    lgUnlock();
-    return;
-  }
-
-  // BYPASS 2: Demo mode — ?demo=1
-  // Anyone clicking "Try Demo" from the landing page gets in without a key.
-  if (window.location.search.includes('demo=1')) {
-    lgUnlock();
-    return;
-  }
-
-  const storedHash = localStorage.getItem('cp_license_hash');
-  if (!storedHash) {
-    // No key stored — show the gate
-    return;
-  }
-  // Check stored hash still appears in the valid list
-  try {
-    const validHashes = await lgBuildHashes();
-    if (validHashes.includes(storedHash)) {
+  const valid = lgIsValidKey(key);
+  if (valid) {
+    localStorage.setItem('cp_license_key', key.toUpperCase());
+    localStorage.setItem('cp_license_activated', new Date().toISOString());
+    lgSetMsg('✓ Activated! Welcome to StrikePanel™', true);
+    if (btn) { btn.textContent = '✓ Activated!'; btn.disabled = true; }
+    setTimeout(() => {
       lgUnlock();
-    } else {
-      // Key was revoked — clear and re-lock
-      localStorage.removeItem('cp_license_hash');
-      localStorage.removeItem('cp_license_activated');
-      // Hash mismatch — could be master key change, just re-show gate cleanly
-    localStorage.removeItem('cp_license_hash');
-    localStorage.removeItem('cp_license_activated');
-    localStorage.removeItem(LG_HASH_STORE_KEY);
-    }
-  } catch (err) {
-    // If crypto fails for any reason, fall back to unlocking if a hash exists
-    console.warn('[LG] hash check failed, falling back:', err.message);
-    if (localStorage.getItem('cp_license_hash')) lgUnlock();
+      if (!localStorage.getItem('cp_onboarded')) {
+        setTimeout(() => openModal('onboardModal'), 400);
+      }
+    }, 900);
+  } else {
+    lgSetMsg('Invalid key — check the key in your Gumroad email and try again.', false);
+    if (btn) { btn.textContent = '🔓 Activate License'; btn.disabled = false; }
+    input?.classList.add('err');
+    setTimeout(() => input?.classList.remove('err'), 600);
   }
 }
 
-// Run check on load
+function lgCheck() {
+  if (window.location.search.includes('checkin=1')) { lgUnlock(); return; }
+  if (window.location.search.includes('demo=1')) { lgUnlock(); return; }
+  const saved = localStorage.getItem('cp_license_key');
+  if (saved && lgIsValidKey(saved)) { lgUnlock(); }
+}
+
 lgCheck();
 
 // ══════════════════════════════════════════════════════════════════════
