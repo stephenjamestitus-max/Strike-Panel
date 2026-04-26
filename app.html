@@ -2361,13 +2361,13 @@ function p2(e,name){
   // Show email capture modal
   const el = document.getElementById('p2ModalFeature');
   if(el) el.textContent = 'Unlock: ' + name;
-  document.getElementById('p2EmailMsg').textContent = '';
+  const msgEl=document.getElementById('p2EmailMsg');if(msgEl)msgEl.textContent='';
   const inp = document.getElementById('p2EmailInput');
   if(inp) inp.value = '';
   openModal('p2EmailModal');
   // Also show quick toast
   const t=document.getElementById('p2ToastEl');
-  document.getElementById('p2TMsg').textContent=`Phase 2 feature: "${name}"`;
+  const tMsg=document.getElementById('p2TMsg');if(tMsg)tMsg.textContent=`Phase 2 feature: "${name}"`;
   t.classList.add('show');clearTimeout(_p2t);_p2t=setTimeout(()=>t.classList.remove('show'),3000);
 }
 function p2EmailSubmit(){
@@ -5092,7 +5092,7 @@ async function sha256(str) {
 
 // Pre-computed SHA-256 hashes of valid keys (generated at runtime on first save)
 // This means the raw keys aren't directly visible in memory at runtime
-const LG_HASH_STORE_KEY = 'sp_license_hashes_v1';
+var LG_HASH_STORE_KEY = 'sp_license_hashes_v1';
 
 async function lgBuildHashes() {
   // Always recompute — never use cache so master key changes take effect immediately
