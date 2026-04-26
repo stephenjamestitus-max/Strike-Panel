@@ -5075,15 +5075,14 @@ document.getElementById('pdfShareBtn').style.display='inline-flex';
 // Add each customer's Gumroad license key here after purchase.
 // Format: 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
 // Keys are case-insensitive — the app normalises to uppercase on entry.
-const VALID_LICENSE_KEYS = [
+var VALID_LICENSE_KEYS = [
   // ↓ ADD CUSTOMER KEYS BELOW THIS LINE ↓
   // 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
   // ↑ ADD CUSTOMER KEYS ABOVE THIS LINE ↑
 ];
 
 // Your personal master key — change this to something unique and private
-const MASTER_KEY = 'SP-MASTER-2024-STRIKEPANEL-OWNER';
-
+var MASTER_KEY = 'SP-MASTER-2024-STRIKEPANEL-OWNER';
 // ── KEY VALIDATION ────────────────────────────────────────────────────
 // Hashes a string using SHA-256 (async, returns hex string)
 async function sha256(str) {
