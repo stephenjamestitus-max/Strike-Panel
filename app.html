@@ -5102,6 +5102,7 @@ async function lgBuildHashes() {
   const hashes = await Promise.all(all.map(k => sha256(k)));
   return hashes;
 }
+}
 
 async function lgIsValidKey(inputKey) {
   const normalised = inputKey.trim().toUpperCase();
