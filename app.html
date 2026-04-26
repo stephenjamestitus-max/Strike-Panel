@@ -5096,7 +5096,9 @@ const LG_HASH_STORE_KEY = 'sp_license_hashes_v1';
 
 async function lgBuildHashes() {
   // Always recompute — never use cache so master key changes take effect immediately
-  const all = [...VALID_LICENSE_KEYS.map(k => k.trim().toUpperCase()), MASTER_KEY.trim().toUpperCase()];
+  const keys = (typeof VALID_LICENSE_KEYS !== 'undefined' && Array.isArray(VALID_LICENSE_KEYS)) ? VALID_LICENSE_KEYS : [];
+  const master = (typeof MASTER_KEY !== 'undefined') ? MASTER_KEY : '';
+  const all = [...keys.map(k => k.trim().toUpperCase()), master.trim().toUpperCase()];
   const hashes = await Promise.all(all.map(k => sha256(k)));
   return hashes;
 }
@@ -5157,7 +5159,7 @@ async function lgActivate() {
       setTimeout(() => input?.classList.remove('err'), 600);
     }
   } catch (err) {
-    lgSetMsg('Error: ' + err.message, false);
+    lgSetMsg('Verification error — please try again.', false);
     if (btn) { btn.textContent = '🔑 Activate License'; btn.disabled = false; }
   }
 }
