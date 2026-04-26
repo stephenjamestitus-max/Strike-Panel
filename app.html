@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
-<title>StrikePanel™ — Fight Camp Intelligence</title>
+<title>StrikePanel™ — Training Intelligence</title>
 <meta name="description" content="Daily readiness intelligence for combat sports coaches. Know who to push and who to protect — every morning."/>
 <meta name="theme-color" content="#0b0d14"/>
 <meta name="mobile-web-app-capable" content="yes"/>
@@ -1001,7 +1001,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;margin-top:8px;font-size:13px" onclick="lgActivate()">🔓 Activate License</button>
     <div class="lg-msg" id="lgMsg"></div>
     <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);font-size:11px;color:var(--muted2);line-height:1.7">
-      Don't have a license? <a href="https://strikepanel.gumroad.com" target="_blank" style="color:var(--accent);text-decoration:underline">Get StrikePanel — $99 →</a>
+      Don't have a license? <a href="https://strikepanel.gumroad.com" target="_blank" style="color:var(--accent);text-decoration:underline">Get StrikePanel — $149 →</a>
     </div>
   </div>
 </div>
@@ -1015,7 +1015,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   <div class="demo-mode-text">
     You're exploring StrikePanel™ with sample data. Nothing you do here is saved permanently.
   </div>
-  <a href="https://strikepanel.gumroad.com" target="_blank" class="demo-buy-btn">🥊 Buy to unlock — $99</a>
+  <a href="https://strikepanel.gumroad.com" target="_blank" class="demo-buy-btn">🥊 Buy to unlock — $149</a>
   <button class="demo-exit-btn" onclick="demoExit()" title="Exit demo">✕ Exit</button>
 </div>
 
@@ -1027,28 +1027,50 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px">
     You're exploring with demo data. To save your own athletes, sessions and check-ins — grab your license.
   </div>
-  <a href="https://strikepanel.gumroad.com" target="_blank" class="demo-buy-btn" style="width:100%;justify-content:center;padding:13px;font-size:12px">🥊 Get StrikePanel — $99</a>
+  <a href="https://strikepanel.gumroad.com" target="_blank" class="demo-buy-btn" style="width:100%;justify-content:center;padding:13px;font-size:12px">🥊 Get StrikePanel — $149</a>
   <div style="font-size:11px;color:var(--muted2);margin-top:10px">One-time fee · No subscription · Instant download</div>
   <button class="btn btn-ghost btn-sm" style="margin-top:10px;width:100%;justify-content:center" onclick="demoCloseBlock()">Keep exploring demo</button>
 </div>
 
 <div class="modal-bg" id="onboardModal">
   <div class="modal" style="max-width:460px;text-align:center">
-    <div style="font-family:var(--fh);font-size:26px;letter-spacing:3px;margin-bottom:6px">WELCOME TO STRIKEPANEL™</div>
-    <div style="font-size:12.5px;color:var(--muted);margin-bottom:16px;line-height:1.7">Fight camp intelligence for combat sports coaches.<br>Everything in one place — no fluff.</div>
-    <div style="background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.2);border-radius:var(--r-sm);padding:11px 14px;margin-bottom:14px;text-align:left">
-      <div style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:4px">🎯 Demo Data Loaded</div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.6">3 demo athletes — Marcus, Priya &amp; Tyler — are pre-loaded so you can explore every feature right now. Replace them from the <strong style="color:var(--text)">Members</strong> tab when ready.</div>
+
+    <!-- STEP 1: Mode selection -->
+    <div id="obStep1">
+      <div style="font-family:var(--fh);font-size:26px;letter-spacing:3px;margin-bottom:6px">WELCOME TO STRIKEPANEL™</div>
+      <div style="font-size:12.5px;color:var(--muted);margin-bottom:24px;line-height:1.7">What are you using this for?</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px">
+        <div onclick="obSetMode('combat')" style="cursor:pointer;background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.2);border-radius:var(--r);padding:24px 16px;transition:all .18s var(--ease)" onmouseover="this.style.background='rgba(0,212,240,0.12)'" onmouseout="this.style.background='rgba(0,212,240,0.06)'">
+          <div style="font-size:36px;margin-bottom:10px">🥊</div>
+          <div style="font-family:var(--fh);font-size:16px;letter-spacing:2px;margin-bottom:6px">COMBAT SPORTS</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6">Boxing, MMA, Kickboxing, Wrestling, BJJ</div>
+        </div>
+        <div onclick="obSetMode('gym')" style="cursor:pointer;background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.2);border-radius:var(--r);padding:24px 16px;transition:all .18s var(--ease)" onmouseover="this.style.background='rgba(0,212,240,0.12)'" onmouseout="this.style.background='rgba(0,212,240,0.06)'">
+          <div style="font-size:36px;margin-bottom:10px">🏋️</div>
+          <div style="font-family:var(--fh);font-size:16px;letter-spacing:2px;margin-bottom:6px">GYM & FITNESS</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6">Strength, conditioning, personal training</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--muted2);margin-top:10px">You can change this anytime in Settings</div>
     </div>
-    <div style="text-align:left;background:rgba(0,0,0,0.2);border:1px solid var(--border2);border-radius:var(--r-sm);padding:14px 16px;margin-bottom:16px">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px"><span style="font-size:15px">⚡</span><div><div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--accent)">MORNING BRIEF</div><div style="font-size:12px;color:var(--muted)">Daily readiness scores — who to push, who to protect.</div></div></div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px"><span style="font-size:15px">🥊</span><div><div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--accent)">FIGHT DATES</div><div style="font-size:12px;color:var(--muted)">Countdown clocks, weight cut plans, deficit targets per week.</div></div></div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px"><span style="font-size:15px">📲</span><div><div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--accent)">ATHLETE CHECK-INS</div><div style="font-size:12px;color:var(--muted)">Share a link — athletes submit their own daily readiness.</div></div></div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px"><span style="font-size:15px">✦</span><div><div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--accent)">AI WORKOUT + FOOD AI</div><div style="font-size:12px;color:var(--muted)">Generate sessions &amp; analyse meals. Free Gemini key in Settings.</div></div></div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px"><span style="font-size:15px">⏱</span><div><div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--accent)">BOXING TIMER + BIOMETRICS</div><div style="font-size:12px;color:var(--muted)">Professional interval timer. BMI, TDEE &amp; macros auto-calculated.</div></div></div>
-      <div style="display:flex;align-items:center;gap:10px"><span style="font-size:15px">📄</span><div><div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--accent)">ATHLETE PDF REPORTS</div><div style="font-size:12px;color:var(--muted)">Print-ready reports with readiness history and fight prep data.</div></div></div>
+
+    <!-- STEP 2: Features overview (shown after mode picked) -->
+    <div id="obStep2" style="display:none">
+      <div style="font-family:var(--fh);font-size:26px;letter-spacing:3px;margin-bottom:6px">YOU'RE ALL SET</div>
+      <div style="font-size:12.5px;color:var(--muted);margin-bottom:16px;line-height:1.7">Here's what's waiting for you.</div>
+      <div style="background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.2);border-radius:var(--r-sm);padding:11px 14px;margin-bottom:14px;text-align:left">
+        <div style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:4px">🎯 Demo Data Loaded</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6">3 demo athletes are pre-loaded so you can explore every feature. Replace them from the <strong style="color:var(--text)">Members</strong> tab when ready.</div>
+      </div>
+      <div style="text-align:left;background:rgba(0,0,0,0.2);border:1px solid var(--border2);border-radius:var(--r-sm);padding:14px 16px;margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px"><span style="font-size:15px">⚡</span><div><div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--accent)">MORNING BRIEF</div><div style="font-size:12px;color:var(--muted)">Daily readiness scores — who to push, who to protect.</div></div></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px"><span style="font-size:15px">📲</span><div><div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--accent)">ATHLETE CHECK-INS</div><div style="font-size:12px;color:var(--muted)">Share a link — athletes submit their own daily readiness.</div></div></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px"><span style="font-size:15px">✦</span><div><div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--accent)">AI WORKOUT GENERATOR</div><div style="font-size:12px;color:var(--muted)">Generate sessions instantly. Free Gemini key in Settings.</div></div></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="font-size:15px">⏱</span><div><div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--accent)">TIMER + BIOMETRICS</div><div style="font-size:12px;color:var(--muted)">Interval timer. BMI, TDEE & macros auto-calculated.</div></div></div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;font-size:13px" onclick="obDone()">🚀 Let's Go — Explore the App</button>
     </div>
-    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;font-size:13px" onclick="obDone()">🚀 Let's Go — Explore the App</button>
+
   </div>
 </div>
 
@@ -1088,7 +1110,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 </svg></div>
       <div>
         <div class="wordmark">Strike<span>Panel</span>™</div>
-        <div style="font-family:var(--fc);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:2px" id="heroSub">Fight Camp Intelligence</div>
+        <div style="font-family:var(--fc);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:2px" id="heroSub">Training Intelligence</div>
       </div>
     </div>
     <div class="hero-right">
@@ -1111,7 +1133,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     <button class="tab" data-tab="fightdates">🥊 Fight Dates</button>
     <button class="tab" data-tab="athletes">Members</button>
     <button class="tab" data-tab="workouts">Workouts</button>
-    <button class="tab" data-tab="nutrition">Food AI</button>
     <button class="tab" data-tab="biometrics">Body Stats</button>
     <button class="tab" data-tab="progress">Progress</button>
     <button class="tab" data-tab="timer">⏱ Timer</button>
@@ -1153,6 +1174,16 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   <div class="brief-section" id="dbFightStrip" style="display:none">
     <div class="brief-section-title">Upcoming Fights</div>
     <div id="dbFightCards" style="display:flex;gap:10px;flex-wrap:wrap"></div>
+  </div>
+
+  <!-- Missing check-in alert -->
+  <div id="dbMissingAlert" style="display:none;margin-bottom:12px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:var(--r-sm);padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <span style="font-size:18px">📋</span>
+    <div style="flex:1;min-width:180px">
+      <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--amber);margin-bottom:2px">MISSING CHECK-INS TODAY</div>
+      <div style="font-size:12px;color:var(--muted)" id="dbMissingNames">—</div>
+    </div>
+    <button class="btn btn-ghost btn-sm" onclick="openReadinessModal('')">Log Now →</button>
   </div>
 
   <!-- Readiness Grid -->
@@ -1369,6 +1400,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     <div class="card" style="margin-bottom:12px">
       <div class="field"><div class="flabel">Any notes for the coach? (optional)</div><textarea class="fta" id="ciPageNotes" rows="3" placeholder="Pain details, how training felt, anything relevant..."></textarea></div>
       <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06)">
+        <div style="font-family:var(--fc);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:10px">🍽 Nutrition Today (optional)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div class="field"><div class="flabel">Calories (kcal)</div><input class="finput" id="ciPageCals" type="number" placeholder="e.g. 2400" min="0" max="9999"></div>
+          <div class="field"><div class="flabel">Protein (g)</div><input class="finput" id="ciPageProtein" type="number" placeholder="e.g. 180" min="0" max="999"></div>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06)">
         <div style="font-family:var(--fc);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:10px">📱 Wearable Data (optional)</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
           <div class="field"><div class="flabel">Sleep Hours</div><input class="finput" id="ciPageSleepHrs" type="number" placeholder="e.g. 7.5" step="0.5" min="0" max="24"></div>
@@ -1398,6 +1436,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     <p id="ciPageDoneMsg">Your coach has been updated. See you at training.</p>
     <div style="margin-top:20px;padding:14px 16px;background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.18);border-radius:var(--r-sm);font-family:var(--fh);font-size:28px;color:var(--accent)" id="ciPageDoneScore"></div>
     <button class="btn btn-ghost" style="margin-top:16px" onclick="closeAthleteCheckin()">← Back to App</button>
+    <div style="margin-top:24px;font-size:11px;color:var(--muted2);letter-spacing:1px">Powered by <a href="https://strikepanel-app.vercel.app" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:700">StrikePanel™</a></div>
   </div>
 </div>
 
@@ -1445,7 +1484,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
         <select class="fsel" id="athDuration"><option value="">Select...</option><option value="2">2 Weeks</option><option value="4">4 Weeks</option><option value="6">6 Weeks</option><option value="8">8 Weeks</option><option value="12">12 Weeks</option><option value="16">16 Weeks</option></select>
       </div>
       <div class="field"><div class="flabel">Start Date</div><input class="finput" id="athStart" type="date"></div>
-      <div class="field"><div class="flabel">Record (optional)</div><input class="finput" id="athRecord" type="text" placeholder="e.g. 8-2-0 — leave blank if not competing"></div>
+      <div class="field" id="athRecordField"><div class="flabel">Record (optional)</div><input class="finput" id="athRecord" type="text" placeholder="e.g. 8-2-0 — leave blank if not competing"></div>
     </div>
     <div class="fgrid2" style="margin-bottom:10px">
       <div class="field"><div class="flabel">Goals & Notes</div><textarea class="fta" id="athGoals" rows="3" placeholder="What do they want? e.g. lose 5kg, build arms, run faster..."></textarea></div>
@@ -1463,9 +1502,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 
   <div class="div" style="margin-top:18px"><span>Phase 2</span></div>
   <div class="g3">
-    <div class="p2card" onclick="p2(event,'Multi-Roster Management')"><div class="p2card-info"><span class="p2card-icon">👥</span><div><div class="p2card-name">Multiple Groups</div><div class="p2card-desc">Run separate groups — e.g. boxing class + gym crew</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
-    <div class="p2card" onclick="p2(event,'Athlete Invitation Link')"><div class="p2card-info"><span class="p2card-icon">🔗</span><div><div class="p2card-name">Invite Your Crew</div><div class="p2card-desc">Let friends add themselves with a link</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
-    <div class="p2card" onclick="p2(event,'Athlete PDF Profile')"><div class="p2card-info"><span class="p2card-icon">📄</span><div><div class="p2card-name">PDF Profile Card</div><div class="p2card-desc">Download a clean profile card for anyone</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
+    <div class="p2card" onclick="p2(event,'Multi-Roster Management')"><div class="p2card-info"><span class="p2card-icon">👥</span><div><div class="p2card-name">Multiple Groups</div><div class="p2card-desc">Manage your boxing squad AND gym crew from one app</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
+    <div class="p2card" onclick="p2(event,'Athlete Invitation Link')"><div class="p2card-info"><span class="p2card-icon">🔗</span><div><div class="p2card-name">Invite Your Crew</div><div class="p2card-desc">Athletes join themselves — no manual adding</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
+    <div class="p2card" onclick="p2(event,'Athlete PDF Profile')"><div class="p2card-info"><span class="p2card-icon">📄</span><div><div class="p2card-name">PDF Profile Card</div><div class="p2card-desc">One-tap PDF profile to share with promoters or gyms</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
   </div>
 </section>
 
@@ -1490,7 +1529,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   </div>
 
   <!-- Combat Session Types -->
-  <div class="card" style="margin-bottom:14px">
+  <div class="card" style="margin-bottom:14px" id="combatQuickLog">
     <div class="card-title" style="margin-bottom:12px"><span class="ctdot"></span>Quick Log — Combat Session</div>
     <div class="stype-grid" id="stypeGrid">
       <div class="stype-btn sel" onclick="selStype(this,'sparring')" data-type="sparring"><div class="stype-icon">🥊</div><div class="stype-name">Sparring</div></div>
@@ -1514,13 +1553,37 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     </div>
   </div>
 
+  <!-- Gym Quick Log (shown in gym mode) -->
+  <div class="card" style="margin-bottom:14px;display:none" id="gymQuickLog">
+    <div class="card-title" style="margin-bottom:12px"><span class="ctdot"></span>Quick Log — Workout</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+      <div class="field"><div class="flabel">Athlete</div><select class="fsel" id="gymLogAthlete"><option value="">Select...</option></select></div>
+      <div class="field"><div class="flabel">Session Type</div>
+        <select class="fsel" id="gymLogType">
+          <option value="strength">🏋️ Strength</option>
+          <option value="conditioning">🏃 Conditioning</option>
+          <option value="cardio">❤️ Cardio</option>
+          <option value="hiit">⚡ HIIT</option>
+          <option value="mobility">🧘 Mobility / Stretch</option>
+          <option value="class">👥 Group Class</option>
+          <option value="other">📋 Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="field" style="margin-bottom:10px"><div class="flabel">What did they do?</div><input class="finput" id="gymLogNotes" type="text" placeholder="e.g. Bench 80kg 4×8, Squat 100kg 3×5, finished with 20min bike"></div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-primary btn-sm" onclick="gymLog()">⚡ Log Session</button>
+      <span class="saved-flash" id="gymLogFlash">Logged ✓</span>
+    </div>
+  </div>
+
   <div id="sessLog"></div>
 
   <div class="div" style="margin-top:18px"><span>Phase 2</span></div>
   <div class="g3">
-    <div class="p2card" onclick="p2(event,'Session Templates')"><div class="p2card-info"><span class="p2card-icon">📋</span><div><div class="p2card-name">Session Templates</div><div class="p2card-desc">Save and reuse your favourite workouts</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
-    <div class="p2card" onclick="p2(event,'Periodisation Planner')"><div class="p2card-info"><span class="p2card-icon">📅</span><div><div class="p2card-name">Periodisation Planner</div><div class="p2card-desc">Auto-structured mesocycles with load progression</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
-    <div class="p2card" onclick="p2(event,'Workout PDF Export')"><div class="p2card-info"><span class="p2card-icon">📤</span><div><div class="p2card-name">Session Sheet PDF</div><div class="p2card-desc">Print a clean workout sheet for your athlete</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
+    <div class="p2card" onclick="p2(event,'Session Templates')"><div class="p2card-info"><span class="p2card-icon">📋</span><div><div class="p2card-name">Session Templates</div><div class="p2card-desc">Stop rebuilding the same sessions — one click to reuse</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
+    <div class="p2card" onclick="p2(event,'Periodisation Planner')"><div class="p2card-info"><span class="p2card-icon">📅</span><div><div class="p2card-name">Periodisation Planner</div><div class="p2card-desc">See exactly when to peak your athlete, built automatically</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
+    <div class="p2card" onclick="p2(event,'Workout PDF Export')"><div class="p2card-info"><span class="p2card-icon">📤</span><div><div class="p2card-name">Session Sheet PDF</div><div class="p2card-desc">Hand your athlete a printed session plan — professional</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
   </div>
 </section>
 
@@ -1621,9 +1684,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
       </div>
   <div class="div"><span>Phase 2</span></div>
   <div class="g3">
-    <div class="p2card" onclick="p2(event,'7-Day Meal Plan Builder')"><div class="p2card-info"><span class="p2card-icon">🥗</span><div><div class="p2card-name">7-Day Meal Planner</div><div class="p2card-desc">Full meal plan with shopping list</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
-    <div class="p2card" onclick="p2(event,'Weight Cut Calculator')"><div class="p2card-info"><span class="p2card-icon">⚖️</span><div><div class="p2card-name">Weight Management Tool</div><div class="p2card-desc">Safe cut/bulk projections</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
-    <div class="p2card" onclick="p2(event,'Macro Tracker')"><div class="p2card-info"><span class="p2card-icon">📊</span><div><div class="p2card-name">Daily Macro Tracker</div><div class="p2card-desc">Log every meal, track against targets</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
+    <div class="p2card" onclick="p2(event,'7-Day Meal Plan Builder')"><div class="p2card-info"><span class="p2card-icon">🥗</span><div><div class="p2card-name">7-Day Meal Planner</div><div class="p2card-desc">AI builds a full fight-camp meal plan with a shopping list</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
+    <div class="p2card" onclick="p2(event,'Weight Cut Calculator')"><div class="p2card-info"><span class="p2card-icon">⚖️</span><div><div class="p2card-name">Weight Management Tool</div><div class="p2card-desc">Know the exact day your athlete will hit weight — safely</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
+    <div class="p2card" onclick="p2(event,'Macro Tracker')"><div class="p2card-info"><span class="p2card-icon">📊</span><div><div class="p2card-name">Daily Macro Tracker</div><div class="p2card-desc">Athletes log meals, you see if they're hitting their macros</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
   </div>
 </section>
 
@@ -1726,6 +1789,18 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     </div>
   </div>
 
+  <!-- Squad Readiness Trend Chart -->
+  <div class="card" style="margin-bottom:14px" id="pgReadinessChart">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div class="card-title"><span class="ctdot"></span>Squad Readiness — Last 14 Days</div>
+      <div id="pgChartLegend" style="display:flex;gap:10px;flex-wrap:wrap"></div>
+    </div>
+    <div id="pgChartWrap" style="width:100%;overflow-x:auto">
+      <div id="pgChartEmpty" style="text-align:center;padding:32px;color:var(--muted2);font-size:12px">Log check-ins to see the readiness trend chart here.</div>
+      <svg id="pgChartSvg" style="display:none;width:100%;min-width:300px" viewBox="0 0 600 180" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+  </div>
+
   <!-- Toolbar -->
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px">
     <div style="display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border2);border-radius:24px;padding:6px 12px;flex:1;min-width:140px;max-width:260px">
@@ -1753,9 +1828,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 
   <div class="div" style="margin-top:20px"><span>Phase 2</span></div>
   <div class="g3">
-    <div class="p2card" onclick="p2(event,'Performance Charts')"><div class="p2card-info"><span class="p2card-icon">📊</span><div><div class="p2card-name">Performance Charts</div><div class="p2card-desc">Visual trend lines and progression graphs</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
-    <div class="p2card" onclick="p2(event,'Athlete Comparison')"><div class="p2card-info"><span class="p2card-icon">⚡</span><div><div class="p2card-name">Head-to-Head Compare</div><div class="p2card-desc">Compare any two athletes side by side</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
-    <div class="p2card" onclick="p2(event,'Progress Report PDF')"><div class="p2card-info"><span class="p2card-icon">📤</span><div><div class="p2card-name">Progress Report PDF</div><div class="p2card-desc">Full season report with charts</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
+    <div class="p2card" style="cursor:default;opacity:0.5"><div class="p2card-info"><span class="p2card-icon">📊</span><div><div class="p2card-name">Performance Charts</div><div class="p2card-desc">See exactly when your athlete peaked — spot it before they do</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
+    <div class="p2card" onclick="p2(event,'Athlete Comparison')"><div class="p2card-info"><span class="p2card-icon">⚡</span><div><div class="p2card-name">Head-to-Head Compare</div><div class="p2card-desc">Who's improving faster? Compare any two athletes instantly</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
+    <div class="p2card" onclick="p2(event,'Progress Report PDF')"><div class="p2card-info"><span class="p2card-icon">📤</span><div><div class="p2card-name">Progress Report PDF</div><div class="p2card-desc">A full season in one PDF — perfect for athlete reviews</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
   </div>
 </section>
 
@@ -1939,16 +2014,29 @@ create policy "allow_all" on sp_sync
   </div>
 
   <div class="card" style="margin-bottom:16px">
-    <div class="card-title" style="margin-bottom:14px"><span class="ctdot"></span>Data Management</div>
-    <div class="scp-btns">
-      <div class="scp-btn" onclick="scpExport()"><div class="scp-ico ex">📦</div><div class="scp-name">Export All</div><div class="scp-hint">Full JSON backup</div></div>
-      <label class="scp-btn" style="cursor:pointer"><div class="scp-ico im">📥</div><div class="scp-name">Import</div><div class="scp-hint">Restore from backup</div><input type="file" id="scpImportF" accept=".json" style="display:none" onchange="scpImport(event)"></label>
-      <div class="scp-btn danger" onclick="scpShowReset()"><div class="scp-ico rs">🗑</div><div class="scp-name">Reset All</div><div class="scp-hint">Wipe all data</div></div>
+    <div class="card-title" style="margin-bottom:6px"><span class="ctdot"></span>Data Management</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:14px">Export your data as CSV — opens directly in Google Sheets or Excel. Use JSON backup to move between devices.</div>
+
+    <div style="font-family:var(--fc);font-size:9px;letter-spacing:2px;color:var(--muted2);margin-bottom:8px">EXPORT TO SHEETS / EXCEL</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+      <div class="scp-btn" onclick="exportCSV('athletes')" style="cursor:pointer"><div class="scp-ico ex">👥</div><div class="scp-name">Members</div><div class="scp-hint">CSV — all athletes</div></div>
+      <div class="scp-btn" onclick="exportCSV('checkins')" style="cursor:pointer"><div class="scp-ico ex">📋</div><div class="scp-name">Check-ins</div><div class="scp-hint">CSV — readiness log</div></div>
+      <div class="scp-btn" onclick="exportCSV('sessions')" style="cursor:pointer"><div class="scp-ico ex">🏋️</div><div class="scp-name">Sessions</div><div class="scp-hint">CSV — all workouts</div></div>
+      <div class="scp-btn" onclick="exportCSV('biometrics')" style="cursor:pointer"><div class="scp-ico ex">📊</div><div class="scp-name">Biometrics</div><div class="scp-hint">CSV — body stats</div></div>
     </div>
+
+    <div style="font-family:var(--fc);font-size:9px;letter-spacing:2px;color:var(--muted2);margin-bottom:8px">BACKUP & RESTORE</div>
+    <div class="scp-btns" style="margin-bottom:14px">
+      <div class="scp-btn" onclick="scpExport()" style="cursor:pointer"><div class="scp-ico ex">📦</div><div class="scp-name">Full Backup</div><div class="scp-hint">JSON — all data</div></div>
+      <label class="scp-btn" style="cursor:pointer"><div class="scp-ico im">📥</div><div class="scp-name">Restore</div><div class="scp-hint">From JSON backup</div><input type="file" id="scpImportF" accept=".json" style="display:none" onchange="scpImport(event)"></label>
+      <div class="scp-btn danger" onclick="scpShowReset()" style="cursor:pointer"><div class="scp-ico rs">🗑</div><div class="scp-name">Reset All</div><div class="scp-hint">Wipe all data</div></div>
+    </div>
+
     <div class="scp-meta">
       <div class="scp-mc"><div class="scp-mlbl">Storage Used</div><div class="scp-mval" id="scpStor">—</div><div class="scp-meter"><div class="scp-mfill" id="scpMFill" style="width:0%"></div></div><div style="font-family:var(--fc);font-size:10px;color:var(--muted2);margin-top:3px">of ~5 MB</div></div>
       <div class="scp-mc"><div class="scp-mlbl">Last Export</div><div style="font-family:var(--fc);font-size:11px;color:var(--muted2);margin-top:4px" id="scpLastEx">Never</div></div>
     </div>
+
     <div class="reset-confirm" id="resetConfirm">
       <p><strong>Permanently delete all data?</strong> Athletes, sessions, check-ins, progress, nutrition, settings — everything. Export a backup first.</p>
       <div class="flash-btns">
@@ -1960,29 +2048,21 @@ create policy "allow_all" on sp_sync
 
   <div class="st-grid">
     <div class="card">
-      <div class="card-title" style="margin-bottom:14px"><span class="ctdot"></span>White-Label Branding</div>
-      <div class="field"><div class="flabel">App Name</div><input class="finput" id="wlName" type="text" placeholder="StrikePanel™" maxlength="32" oninput="wlPrev()"></div>
-      <div class="field"><div class="flabel">Tagline</div><input class="finput" id="wlTagline" type="text" placeholder="Fight Camp Intelligence" maxlength="54" oninput="wlPrev()"></div>
-      <div class="field">
-        <div class="flabel">Accent Colour</div>
-        <div class="color-row">
-          <input type="color" class="cswatch" id="wlColor" value="#00E5FF" oninput="wlColorLive(this.value)">
-          <div class="cdots">
-            <div class="cdot sel" style="background:#00E5FF" onclick="wlSetColor('#00E5FF',this)"></div>
-            <div class="cdot" style="background:#22c55e" onclick="wlSetColor('#22c55e',this)"></div>
-            <div class="cdot" style="background:#f59e0b" onclick="wlSetColor('#f59e0b',this)"></div>
-            <div class="cdot" style="background:#8b5cf6" onclick="wlSetColor('#8b5cf6',this)"></div>
-            <div class="cdot" style="background:#ef4444" onclick="wlSetColor('#ef4444',this)"></div>
-            <div class="cdot" style="background:#ec4899" onclick="wlSetColor('#ec4899',this)"></div>
-            <div class="cdot" style="background:#ffffff" onclick="wlSetColor('#ffffff',this)"></div>
-          </div>
-        </div>
+      <div class="card-title" style="margin-bottom:14px"><span class="ctdot"></span>White-Label Branding <span class="p2tag" style="margin-left:8px;vertical-align:middle">🔒 Studio Edition</span></div>
+      <div style="background:rgba(0,212,240,0.04);border:1px solid rgba(0,212,240,0.15);border-radius:var(--r-sm);padding:16px;text-align:center">
+        <div style="font-size:28px;margin-bottom:10px">🏷️</div>
+        <div style="font-family:var(--fh);font-size:15px;letter-spacing:2px;margin-bottom:8px">PUT YOUR GYM'S NAME ON IT</div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.7;margin-bottom:14px">Replace StrikePanel™ with your gym name, set your own colours, and hand athletes a fully branded experience. Perfect for PT studios and gym chains.</div>
+        <a href="https://strikepanel-app.vercel.app" target="_blank" class="btn btn-primary btn-sm" style="text-decoration:none;justify-content:center">→ Upgrade to Studio Edition</a>
       </div>
-      <div class="wl-preview"><div class="wlpi" id="wlPrevIco"><svg viewBox="0 0 90 90" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="wl-orb" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="55%" stop-color="#0f1220"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs><circle cx="45" cy="45" r="43" fill="url(#wl-orb)" stroke="#00D4F0" stroke-width="1.2" stroke-opacity="0.4"/><path d="M 18 22 A 32 32 0 0 1 62 12" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="6" stroke-linecap="round"/><circle cx="45" cy="45" r="29" fill="none" stroke="#00D4F0" stroke-width="0.9" stroke-opacity="0.2"/><line x1="45" y1="2" x2="45" y2="27" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><line x1="45" y1="63" x2="45" y2="88" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><line x1="2" y1="45" x2="27" y2="45" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><line x1="63" y1="45" x2="88" y2="45" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><line x1="15" y1="15" x2="21" y2="21" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.5"/><line x1="75" y1="75" x2="69" y2="69" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.5"/><line x1="75" y1="15" x2="69" y2="21" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.5"/><line x1="15" y1="75" x2="21" y2="69" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.5"/><circle cx="45" cy="45" r="10" fill="#00D4F0"/><circle cx="41" cy="41" r="3.5" fill="white" fill-opacity="0.22"/><text x="45" y="49" font-family="'Oswald','Bebas Neue','Arial Black',sans-serif" font-weight="700" font-size="8" fill="#0b0d14" text-anchor="middle" letter-spacing="0.5">SP</text></svg></div><div><div class="wlpn" id="wlPrevN">StrikePanel™</div><div class="wlps" id="wlPrevS">Fight Camp Intelligence</div></div></div>
-      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
-        <button class="btn btn-primary btn-sm" onclick="wlSave()">Apply</button>
-        <span class="saved-flash" id="wlFlash">Applied ✓</span>
-        <button class="btn btn-ghost btn-sm" onclick="wlReset()">Reset</button>
+    </div>
+
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-title" style="margin-bottom:12px"><span class="ctdot"></span>App Mode</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.7">Switch between Combat Sports and Gym & Fitness mode. Changes which features are visible.</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button id="modeBtnCombat" class="btn btn-ghost" onclick="setMode('combat')" style="min-width:160px">🥊 Combat Sports</button>
+        <button id="modeBtnGym" class="btn btn-ghost" onclick="setMode('gym')" style="min-width:160px">🏋️ Gym & Fitness</button>
       </div>
     </div>
 
@@ -2236,6 +2316,7 @@ function mkS() {
     timer: { warmupTime:180, roundTime:180, restTime:60, rounds:3, warnAt:10 },
     branding: { name:'', tagline:'', accent:'#00E5FF' },
     units: 'metric',
+    mode: 'combat',
     meta: { lastExport:null, version:'11' }
   };
 }
@@ -2340,7 +2421,7 @@ function switchTab(id){
   if(id==='fightdates'){fdRender();fdPopAthletes();}
   if(id==='checkins')ciPopAthletes();
   if(id==='biometrics')bioPopAthletes();
-  if(id==='progress')pgPopulateAthletes();
+  if(id==='progress'){pgPopulateAthletes();pgRenderChart();}
 }
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>switchTab(t.dataset.tab)));
 
@@ -2441,6 +2522,19 @@ function dbRefresh(){
     set('dbAvgScore',scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):'—');
   }
 
+  // Missing check-in alert banner
+  const missingAlert = document.getElementById('dbMissingAlert');
+  const missingNames = document.getElementById('dbMissingNames');
+  if (missingAlert && missingNames) {
+    const missing = S.athletes.filter(a => !riLatest(a.id));
+    if (missing.length && S.athletes.length) {
+      missingAlert.style.display = 'flex';
+      missingNames.textContent = missing.map(a => a.name).join(', ') + (missing.length === 1 ? ' hasn\'t checked in today.' : ' haven\'t checked in today.');
+    } else {
+      missingAlert.style.display = 'none';
+    }
+  }
+
   // Readiness grid on dashboard
   const rgEl = document.getElementById('dbReadinessGrid');
   if (rgEl) {
@@ -2533,6 +2627,23 @@ function athShowForm(){
   document.getElementById('athFormCard').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 function athHideForm(){document.getElementById('athFormCard').style.display='none';_athEd=null;}
+function stripDemoData() {
+  const hasDemo = S.athletes.some(a => a.id.startsWith('demo_'));
+  if (!hasDemo) return;
+  S.athletes   = S.athletes.filter(a => !a.id.startsWith('demo_'));
+  S.sessions   = S.sessions.filter(s => !s.id.startsWith('demo_'));
+  S.nutrition.log = S.nutrition.log.filter(e => !e.id?.startsWith('demo_'));
+  S.progress.clients = S.progress.clients.filter(p => !p.id?.startsWith('demo_'));
+  Object.keys(S.checkins).forEach(k  => { if (k.startsWith('demo_'))  delete S.checkins[k]; });
+  Object.keys(S.biometrics).forEach(k => { if (k.startsWith('demo_')) delete S.biometrics[k]; });
+  const cleanRI = riGetAll().filter(r => !r.id?.startsWith('demo_'));
+  riSaveAll(cleanRI);
+  const cleanTL = tlGet().filter(t => !t.id?.startsWith('demo_'));
+  tlSave(cleanTL);
+  const cleanFD = fdGetAll().filter(f => !f.id?.startsWith('demo_'));
+  fdSaveAll(cleanFD);
+}
+
 function athSave(){
   const name=(document.getElementById('athName')?.value||'').trim();
   if(!name){const e=document.getElementById('athName');if(e){e.classList.add('err');setTimeout(()=>e.classList.remove('err'),600);}setMsg('athMsg','Name required',false);return;}
@@ -2551,16 +2662,8 @@ function athSave(){
     // Enforce 4-profile limit for new additions
     const realCount=S.athletes.filter(a=>!a.id.startsWith('demo_')).length;
     if(realCount>=20){setMsg('athMsg','Maximum of 20 athletes reached. Remove one to add another.',false);return;}
-    // First real save — strip demo data
-    const hadOnlyDemo=S.athletes.length>0&&S.athletes.every(a=>a.id.startsWith('demo_'));
-    if(hadOnlyDemo){
-      S.athletes=[];
-      S.sessions=S.sessions.filter(s=>!s.id.startsWith('demo_'));
-      S.nutrition.log=S.nutrition.log.filter(e=>!e.id?.startsWith('demo_'));
-      S.progress.clients=S.progress.clients.filter(p=>!p.id?.startsWith('demo_'));
-      Object.keys(S.checkins).forEach(k=>{if(k.startsWith('demo_'))delete S.checkins[k];});
-      Object.keys(S.biometrics).forEach(k=>{if(k.startsWith('demo_'))delete S.biometrics[k];});
-    }
+    // First real save — strip all demo data
+    stripDemoData();
     S.athletes.push(rec);
   }
   saveState();showFlash('athFlash');athRender();ciPopAthletes();bioPopAthletes();pgPopulateAthletes();dbRefresh();stypePopAthletes();fdPopAthletes();
@@ -3449,7 +3552,117 @@ function pgUpdStats(){
   set('pgStatAvgW',wts.length?(wts.reduce((a,b)=>a+b,0)/wts.length).toFixed(1):'—');
   set('pgStatBest',scores.length?Math.max(...scores):'—');
 }
+function pgRenderChart() {
+  const svg    = document.getElementById('pgChartSvg');
+  const empty  = document.getElementById('pgChartEmpty');
+  const legend = document.getElementById('pgChartLegend');
+  if (!svg || !empty || !legend) return;
+
+  const W = 600, H = 180, padL = 36, padR = 16, padT = 16, padB = 28;
+  const chartW = W - padL - padR;
+  const chartH = H - padT - padB;
+
+  // Build date range — last 14 days
+  const days = [];
+  for (let i = 13; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate() - i);
+    days.push(d.toISOString().slice(0, 10));
+  }
+
+  // Get readiness per athlete per day
+  const allRI = riGetAll();
+  const athletes = S.athletes.slice(0, 6); // max 6 lines for readability
+  const athleteData = athletes.map(a => ({
+    name: a.name,
+    scores: days.map(d => {
+      const entry = allRI.filter(r => r.athId === a.id && r.date === d);
+      return entry.length ? entry[entry.length - 1].score : null;
+    })
+  })).filter(a => a.scores.some(s => s !== null));
+
+  if (!athleteData.length) {
+    svg.style.display = 'none';
+    empty.style.display = 'block';
+    legend.innerHTML = '';
+    return;
+  }
+
+  svg.style.display = 'block';
+  empty.style.display = 'none';
+
+  const colors = ['#00D4F0','#22c55e','#f59e0b','#a78bfa','#ef4444','#ec4899'];
+
+  // Y axis: 0–100
+  const yScale = s => padT + chartH - (s / 100) * chartH;
+  const xScale = i => padL + (i / (days.length - 1)) * chartW;
+
+  // Grid lines
+  let gridLines = '';
+  [0, 25, 50, 75, 100].forEach(v => {
+    const y = yScale(v).toFixed(1);
+    gridLines += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`;
+    gridLines += `<text x="${padL - 4}" y="${(parseFloat(y) + 3).toFixed(1)}" font-size="8" fill="rgba(255,255,255,0.25)" text-anchor="end" font-family="sans-serif">${v}</text>`;
+  });
+
+  // Coloured zones
+  const zones = `
+    <rect x="${padL}" y="${padT}" width="${chartW}" height="${(chartH * 0.35).toFixed(1)}" fill="rgba(239,68,68,0.04)"/>
+    <rect x="${padL}" y="${padT + chartH * 0.35}" width="${chartW}" height="${(chartH * 0.30).toFixed(1)}" fill="rgba(245,158,11,0.04)"/>
+    <rect x="${padL}" y="${padT + chartH * 0.65}" width="${chartW}" height="${(chartH * 0.35).toFixed(1)}" fill="rgba(34,197,94,0.04)"/>`;
+
+  // X axis labels — show every 2nd day
+  let xLabels = '';
+  days.forEach((d, i) => {
+    if (i % 2 === 0 || i === days.length - 1) {
+      const x = xScale(i).toFixed(1);
+      const label = d.slice(5); // MM-DD
+      xLabels += `<text x="${x}" y="${H - 6}" font-size="8" fill="rgba(255,255,255,0.25)" text-anchor="middle" font-family="sans-serif">${label}</text>`;
+    }
+  });
+
+  // Lines + dots per athlete
+  let lines = '';
+  athleteData.forEach((a, ai) => {
+    const col = colors[ai % colors.length];
+    // Build connected segments (skip nulls)
+    let pts = [];
+    let pathD = '';
+    a.scores.forEach((s, i) => {
+      if (s !== null) {
+        const x = xScale(i), y = yScale(s);
+        pts.push({ x, y, i, s });
+      }
+    });
+    // Draw line segments between consecutive non-null points
+    for (let p = 0; p < pts.length - 1; p++) {
+      pathD += `M${pts[p].x.toFixed(1)},${pts[p].y.toFixed(1)} L${pts[p+1].x.toFixed(1)},${pts[p+1].y.toFixed(1)} `;
+    }
+    if (pathD) lines += `<path d="${pathD}" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>`;
+    // Dots
+    pts.forEach(({ x, y, s }) => {
+      lines += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3" fill="${col}" opacity="0.9"/>`;
+    });
+    // Last known score label
+    const last = pts[pts.length - 1];
+    if (last) {
+      lines += `<text x="${(last.x + 5).toFixed(1)}" y="${(last.y + 3).toFixed(1)}" font-size="9" fill="${col}" font-family="sans-serif" font-weight="700">${last.s}</text>`;
+    }
+  });
+
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.innerHTML = zones + gridLines + xLabels + lines;
+
+  // Legend
+  legend.innerHTML = athleteData.map((a, ai) =>
+    `<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)">
+      <div style="width:12px;height:3px;border-radius:2px;background:${colors[ai % colors.length]}"></div>
+      ${escH(a.name)}
+    </div>`
+  ).join('');
+}
+
 function pgRender(){
+  pgRenderChart();
   const q=(document.getElementById('pgSearch')?.value||'').toLowerCase();
   const sort=document.getElementById('pgSort')?.value||'name';
   let rows=S.progress.clients.filter(c=>c.name.toLowerCase().includes(q));
@@ -3635,7 +3848,7 @@ function selTMode(el,mode){document.querySelectorAll('.tmode').forEach(c=>{if(!c
 // ── SETTINGS ──────────────────────────────────────────────────────────
 function wlPrev(){
   const n=document.getElementById('wlName')?.value.trim()||'StrikePanel™';
-  const t=document.getElementById('wlTagline')?.value.trim()||'Fight Camp Intelligence';
+  const t=document.getElementById('wlTagline')?.value.trim()||'Training Intelligence';
   const e1=document.getElementById('wlPrevN'),e2=document.getElementById('wlPrevS');
   if(e1)e1.textContent=n;if(e2)e2.textContent=t;
 }
@@ -3654,7 +3867,7 @@ function wlSave(){
   saveState();wlApplyDOM();showFlash('wlFlash');
 }
 function wlApplyDOM(){
-  const n=S.branding.name||'StrikePanel™';const t=S.branding.tagline||'Fight Camp Intelligence';
+  const n=S.branding.name||'StrikePanel™';const t=S.branding.tagline||'Training Intelligence';
   const wm=document.querySelector('.wordmark');if(wm){const ws=n.split(' ');wm.innerHTML=ws.length>1?ws.slice(0,-1).join(' ')+' <span>'+ws[ws.length-1]+'</span>':'<span>'+n+'</span>';}
   const sub=document.getElementById('heroSub');if(sub)sub.textContent=t;
   document.title=n+' — Dashboard';
@@ -3680,6 +3893,43 @@ function scpImport(e){
 function scpShowReset(){document.getElementById('resetConfirm').classList.add('show');}
 function scpHideReset(){document.getElementById('resetConfirm').classList.remove('show');}
 function scpDoReset(){S=mkS();saveState();scpHideReset();rehydrate();}
+
+function exportCSV(type) {
+  let rows = [], filename = '';
+  const dl = (rows, name) => {
+    const csv = rows.map(r => r.map(c => '"' + String(c ?? '').replace(/"/g,'""') + '"').join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url  = URL.createObjectURL(blob);
+    Object.assign(document.createElement('a'), { href: url, download: name }).click();
+    URL.revokeObjectURL(url);
+    S.meta.lastExport = new Date().toISOString(); saveState(); scpMeter();
+  };
+  if (type === 'athletes') {
+    rows = [['Name','Age','Sex','Sport','Weight (kg)','Target Weight','Height (cm)','Goals','Injuries','Notes','Record','Start Date']];
+    S.athletes.forEach(a => rows.push([a.name,a.age,a.sex,a.sport,a.weight,a.targetWeight,a.height,a.goals,a.injuries,a.notes,a.record,a.start]));
+    dl(rows, 'StrikePanel_Members_' + new Date().toISOString().slice(0,10) + '.csv');
+  } else if (type === 'checkins') {
+    rows = [['Date','Athlete','Readiness Score','Sleep Quality','Energy','Soreness','Motivation','Nutrition','Pain','Sleep Hours','RHR','HRV','Steps','Calories','Protein (g)','Notes']];
+    riGetAll().sort((a,b)=>b.ts-a.ts).forEach(r => rows.push([r.date,r.athName,r.score,r.sleep,r.energy,r.soreness,r.motivation,r.nutrition,r.pain,r.sleepHrs,r.rhr,r.hrv,r.steps,r.cals,r.protein,r.notes]));
+    dl(rows, 'StrikePanel_Checkins_' + new Date().toISOString().slice(0,10) + '.csv');
+  } else if (type === 'sessions') {
+    rows = [['Date','Athlete','Session Title','Type','Notes','Exercises']];
+    S.sessions.forEach(s => {
+      const ath = S.athletes.find(a => a.id === s.athId);
+      const exStr = (s.exercises||[]).map(e=>`${e.name} ${e.sets}x${e.reps}`).join(' | ');
+      rows.push([s.date, ath?.name||s.athId, s.title, s.goalType||s.sessionType, s.notes, exStr]);
+    });
+    dl(rows, 'StrikePanel_Sessions_' + new Date().toISOString().slice(0,10) + '.csv');
+  } else if (type === 'biometrics') {
+    rows = [['Athlete','Weight (kg)','Height (cm)','Age','Sex','Activity Level','Body Fat %','BMI','TDEE','Date']];
+    Object.entries(S.biometrics).forEach(([athId, b]) => {
+      const ath = S.athletes.find(a => a.id === athId);
+      const bmi = b.weight && b.height ? (b.weight / Math.pow(b.height/100, 2)).toFixed(1) : '';
+      rows.push([ath?.name||athId, b.weight, b.height, b.age, b.sex, b.activity, b.bodyFat, bmi, b.tdee||'', b.date]);
+    });
+    dl(rows, 'StrikePanel_Biometrics_' + new Date().toISOString().slice(0,10) + '.csv');
+  }
+}
 
 // ── PRINT / PDF ────────────────────────────────────────────────────────
 function printDashboard(){window.print();}
@@ -3892,6 +4142,7 @@ setTimeout(() => {
   dbRefresh();
   initShareLink();
   stypePopAthletes();
+  applyMode();
   // If demo mode, push PWA banner up so it doesn't overlap demo bar
   if (DEMO_MODE) {
     const pwaBanner = document.getElementById('pwaBanner');
@@ -4055,7 +4306,7 @@ async function w3fTest() {
 // Note: switchTab() already calls w3fLoad() and p2RenderLeads() for the settings tab — no duplicate listener needed.
 document.addEventListener('keydown',e=>{
   if(e.altKey&&e.code?.startsWith('Digit')){
-    const tabs=['dashboard','brief','fightdates','athletes','workouts','checkins','nutrition','biometrics','progress','timer','settings'];
+    const tabs=['dashboard','brief','fightdates','athletes','workouts','checkins','biometrics','progress','timer','settings'];
     const n=parseInt(e.code.replace('Digit',''))-1;
     if(tabs[n]){e.preventDefault();switchTab(tabs[n]);}
   }
@@ -4067,9 +4318,52 @@ document.addEventListener('keydown',e=>{
 });
 
 // ── ONBOARDING ────────────────────────────────────────────────────────
+function setMode(mode) {
+  S.mode = mode;
+  saveState();
+  applyMode();
+}
+
+function obSetMode(mode) {
+  S.mode = mode;
+  saveState();
+  applyMode();
+  document.getElementById('obStep1').style.display = 'none';
+  document.getElementById('obStep2').style.display = 'block';
+}
+
 function obDone(){
+  if (!S.mode) { S.mode = 'combat'; saveState(); applyMode(); } // fallback
   closeModal('onboardModal');
   localStorage.setItem('cp_onboarded','1');
+}
+
+function applyMode() {
+  const isGym = S.mode === 'gym';
+
+  // Fight Dates tab
+  const fdTab = document.querySelector('[data-tab="fightdates"]');
+  if (fdTab) fdTab.style.display = isGym ? 'none' : '';
+
+  // Fight Dates section
+  const fdSec = document.getElementById('fightdates');
+  if (fdSec) fdSec.style.display = isGym ? 'none' : '';
+
+  // Combat vs Gym quick-log card
+  const combatCard = document.getElementById('combatQuickLog');
+  const gymCard    = document.getElementById('gymQuickLog');
+  if (combatCard) combatCard.style.display = isGym ? 'none' : '';
+  if (gymCard)    gymCard.style.display    = isGym ? ''     : 'none';
+
+  // Record field on athlete form
+  const recField = document.getElementById('athRecordField');
+  if (recField) recField.style.display = isGym ? 'none' : '';
+
+  // Settings mode toggle buttons — highlight active
+  const modeCombat = document.getElementById('modeBtnCombat');
+  const modeGym    = document.getElementById('modeBtnGym');
+  if (modeCombat) { modeCombat.style.borderColor = !isGym ? 'var(--accent)' : ''; modeCombat.style.color = !isGym ? 'var(--accent)' : ''; }
+  if (modeGym)    { modeGym.style.borderColor    =  isGym ? 'var(--accent)' : ''; modeGym.style.color    =  isGym ? 'var(--accent)' : ''; }
 }
 // Show onboarding on first visit — only if already licensed (gate handles it otherwise)
 if(!localStorage.getItem('cp_onboarded') && localStorage.getItem('cp_license_hash')){
@@ -4270,6 +4564,22 @@ function renderReadinessCard(ath) {
     return `<div style="margin-top:5px;font-size:10px;padding:3px 7px;border-radius:5px;background:rgba(255,255,255,0.04);color:${c}">${icon} ${streak.streak} days ${streak.label.toLowerCase()}</div>`;
   })() : '';
 
+  // Consecutive check-in streak (consistency counter)
+  const ciStreak = (() => {
+    if (!all.length) return 0;
+    const today = new Date().toISOString().slice(0,10);
+    let count = 0;
+    let d = new Date();
+    const logged = new Set(all.map(r => r.date));
+    while (true) {
+      const ds = d.toISOString().slice(0,10);
+      if (logged.has(ds)) { count++; d.setDate(d.getDate()-1); }
+      else break;
+    }
+    return count;
+  })();
+  const ciStreakHtml = ciStreak >= 2 ? `<div style="margin-top:4px;font-size:10px;color:var(--accent)">🔥 ${ciStreak} day check-in streak</div>` : '';
+
   if (score === null) {
     return `<div class="r-card" onclick="openReadinessModal('${ath.id}')">
       <div class="r-card-name">${escH(ath.name)} <span style="font-size:16px">+</span></div>
@@ -4289,6 +4599,7 @@ function renderReadinessCard(ath) {
     <span class="r-verdict">${v.label}</span>
     ${trend ? `<div class="r-trend" style="margin-top:5px">${trend} vs last</div>` : ''}
     ${streakHtml}
+    ${ciStreakHtml}
     ${(ri && (ri.hrv || ri.rhr || ri.sleepHrs)) ? `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.06)">
       ${ri.hrv ? `<span style="font-size:10px;color:var(--muted2)">📶 HRV <strong style="color:var(--text)">${ri.hrv}ms</strong></span>` : ''}
       ${ri.rhr ? `<span style="font-size:10px;color:var(--muted2)">❤️ <strong style="color:var(--text)">${ri.rhr}bpm</strong></span>` : ''}
@@ -4473,7 +4784,7 @@ function setEl(id, html) {
   const manifest = {
     name: 'StrikePanel™',
     short_name: 'StrikePanel',
-    description: 'Fight Camp Intelligence — daily readiness for combat sports coaches',
+    description: 'Training Intelligence — daily readiness for combat sports coaches',
     start_url: window.location.href,
     display: 'standalone',
     background_color: '#0b0d14',
@@ -4662,7 +4973,19 @@ function fdRender() {
           <div style="font-size:13px;color:var(--text);margin-top:2px">${escH(f.opponent ? 'vs ' + f.opponent : 'Opponent TBD')}${f.weightClass ? ' · ' + escH(f.weightClass) : ''}</div>
           <div style="font-size:11.5px;color:var(--muted);margin-top:2px">${escH(f.event || 'Event TBD')} · ${fmtDate(f.date)}</div>
         </div>
-        <button class="btn btn-ghost btn-sm" style="flex-shrink:0" onclick="fdDelete('${f.id}')">🗑</button>
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+          ${(f.curWeight && f.targetWeight && !isPast) ? (() => {
+            const cut = f.curWeight - f.targetWeight;
+            const wks = Math.max(1, Math.ceil(fdDaysUntil(f.date) / 7));
+            const kpw = cut / wks;
+            const [bg, col, lbl] = kpw <= 0 ? ['rgba(34,197,94,0.15)', 'var(--green)', '✅ ON WEIGHT']
+              : kpw <= 0.75 ? ['rgba(34,197,94,0.1)', 'var(--green)', '🟢 ON TRACK']
+              : kpw <= 1.2  ? ['rgba(245,158,11,0.12)', 'var(--amber)', '🟡 MONITOR']
+              : ['rgba(239,68,68,0.15)', 'var(--red)', '🔴 HIGH RISK'];
+            return `<div style="padding:5px 10px;border-radius:8px;background:${bg};color:${col};font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:1.5px;white-space:nowrap">${lbl}</div>`;
+          })() : ''}
+          <button class="btn btn-ghost btn-sm" onclick="fdDelete('${f.id}')">🗑</button>
+        </div>
       </div>
       <div class="fight-countdown ${cls}">${isPast ? 'PAST' : days === 0 ? 'FIGHT DAY' : days + ''}</div>
       <div class="fight-label">${isPast ? 'fight was ' + Math.abs(days) + ' days ago' : days === 0 ? '🥊 TODAY!' : 'days until fight'}</div>
@@ -4818,11 +5141,14 @@ function ciPageSubmit() {
   const rhr        = document.getElementById('ciPageRHR')?.value || '';
   const hrv        = document.getElementById('ciPageHRV')?.value || '';
   const steps      = document.getElementById('ciPageSteps')?.value || '';
+  const cals       = document.getElementById('ciPageCals')?.value || '';
+  const protein    = document.getElementById('ciPageProtein')?.value || '';
   const score      = calcReadiness(sleep, energy, soreness, motivation, nutrition, pain);
   const today      = new Date().toISOString().slice(0, 10);
 
   const all = riGetAll();
-  all.push({ id: uid(), athId, athName, date: today, sleep, energy, soreness, motivation, nutrition, pain, notes, sleepHrs, rhr, hrv, steps, score, ts: Date.now() });
+  stripDemoData();
+  all.push({ id: uid(), athId, athName, date: today, sleep, energy, soreness, motivation, nutrition, pain, notes, sleepHrs, rhr, hrv, steps, cals, protein, score, ts: Date.now() });
   riSaveAll(all);
   tlAdd({ type: 'checkin', athName, text: `Readiness score: ${score}/100 — ${readinessVerdict(score).label}` });
 
@@ -4838,24 +5164,43 @@ function ciPageSubmit() {
 
 // Share link
 function getShareLink() {
-  return window.location.href.split('?')[0] + '?checkin=1';
+  const href = window.location.href;
+  // If running as srcdoc, blob, or file — use the deployed URL
+  if (!href.startsWith('http')) {
+    return 'https://strikepanel-app.vercel.app/app.html?checkin=1';
+  }
+  return href.split('?')[0] + '?checkin=1';
 }
 function copyShareLink() {
   const link = getShareLink();
-  navigator.clipboard?.writeText(link).catch(() => {});
   const el = document.getElementById('shareableLinkBox');
   if (el) el.textContent = link;
+  // Try clipboard API first, fall back to execCommand
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(link).catch(() => fallbackCopy(link));
+  } else {
+    fallbackCopy(link);
+  }
   showFlash('shareLinkFlash');
+}
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+  document.body.appendChild(ta);
+  ta.focus(); ta.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(ta);
 }
 function initShareLink() {
   const el = document.getElementById('shareableLinkBox');
   if (el) el.textContent = getShareLink();
   // Auto-open check-in page if ?checkin=1 in URL
   if (window.location.search.includes('checkin=1')) {
-    setTimeout(() => openAthleteCheckin(), 400);'
+    setTimeout(() => openAthleteCheckin(), 400);
+  }
   const slb = document.getElementById('shareableLinkBox');
   if (slb) slb.textContent = getShareLink();
-  }
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -4869,9 +5214,29 @@ function selStype(el, type) {
 }
 function stypePopAthletes() {
   const sel = document.getElementById('stypeAthlete');
-  if (!sel) return;
-  sel.innerHTML = '<option value="">Select Athlete...</option>';
-  S.athletes.forEach(a => { const o = document.createElement('option'); o.value = a.id; o.textContent = a.name; sel.appendChild(o); });
+  const gymSel = document.getElementById('gymLogAthlete');
+  const opts = '<option value="">Select Athlete...</option>' + S.athletes.map(a => `<option value="${a.id}">${escH(a.name)}</option>`).join('');
+  if (sel) sel.innerHTML = opts;
+  if (gymSel) gymSel.innerHTML = opts;
+}
+function gymLog() {
+  const athId  = document.getElementById('gymLogAthlete')?.value;
+  const type   = document.getElementById('gymLogType')?.value || 'strength';
+  const notes  = document.getElementById('gymLogNotes')?.value || '';
+  const typeLabels = { strength:'Strength', conditioning:'Conditioning', cardio:'Cardio', hiit:'HIIT', mobility:'Mobility', class:'Group Class', other:'Session' };
+  const typeName = typeLabels[type] || 'Session';
+  const ath = athId ? S.athletes.find(a => a.id === athId) : null;
+  const athName = ath ? ath.name : '';
+  const sess = {
+    id: uid(), athId: athId || '', date: new Date().toISOString().slice(0,10),
+    title: typeName, goalType: type, notes, aiRoutine: '', exercises: [], aiGenerated: false, open: false, sessionType: type
+  };
+  stripDemoData();
+  S.sessions.unshift(sess); saveState(); sessRender();
+  tlAdd({ type: 'workout', athName, text: `Session logged: ${typeName}${notes ? ' — ' + notes.slice(0,60) : ''}` });
+  showFlash('gymLogFlash');
+  document.getElementById('gymLogNotes').value = '';
+  dbRefresh();
 }
 function stypeLog() {
   const athId  = document.getElementById('stypeAthlete')?.value;
@@ -4982,7 +5347,7 @@ function pdfPreview() {
     </div>` : ''}
 
     <div style="margin-top:20px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);font-size:10px;color:var(--muted2);display:flex;justify-content:space-between">
-      <span>Generated by StrikePanel™ — Fight Camp Intelligence</span>
+      <span>Generated by StrikePanel™ — Training Intelligence</span>
       <span>${nowStr}</span>
     </div>`;
 
@@ -5272,7 +5637,7 @@ function demoShowWelcome() {
         🚀 Start Exploring
       </button>
       <div style="margin-top:12px">
-        <a href="https://strikepanel.gumroad.com" target="_blank" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00D4F0;text-decoration:none;">🥊 Buy StrikePanel — $99 →</a>
+        <a href="https://strikepanel.gumroad.com" target="_blank" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00D4F0;text-decoration:none;">🥊 Buy StrikePanel — $149 →</a>
       </div>
     </div>`;
   document.body.appendChild(el);
