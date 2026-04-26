@@ -5158,8 +5158,8 @@ async function lgActivate() {
       setTimeout(() => input?.classList.remove('err'), 600);
     }
   } catch (err) {
-    lgSetMsg('Verification error — please try again.', false);
-    if (btn) { btn.textContent = '🔓 Activate License'; btn.disabled = false; }
+    lgSetMsg('Error: ' + err.message, false);
+    if (btn) { btn.textContent = '🔑 Activate License'; btn.disabled = false; }
   }
 }
 
