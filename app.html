@@ -1158,7 +1158,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     <div class="brief-sub" id="dbBriefSub">Add your athletes and log their first check-in — your morning brief will be ready tomorrow.</div>
     <div class="brief-actions">
       <button class="btn btn-primary btn-sm" onclick="switchTab('brief')">⚡ Full Brief</button>
-      <button class="btn btn-ghost btn-sm" onclick="switchTab('checkins')">+ Log Check-In</button>
+      <button class="btn btn-ghost btn-sm" onclick="openReadinessModal('')">+ Log Check-In</button>
     </div>
   </div>
 
@@ -1541,7 +1541,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
       <div class="stype-btn" onclick="selStype(this,'strength')" data-type="strength"><div class="stype-icon">🏋️</div><div class="stype-name">Strength</div></div>
       <div class="stype-btn" onclick="selStype(this,'shadowboxing')" data-type="shadowboxing"><div class="stype-icon">👤</div><div class="stype-name">Shadow</div></div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">
+    <div class="fgrid3" style="margin-bottom:10px">
       <div class="field"><div class="flabel">Athlete</div><select class="fsel" id="stypeAthlete"><option value="">Select...</option></select></div>
       <div class="field"><div class="flabel">Rounds</div><input class="finput" id="stypeRounds" type="number" min="1" max="20" placeholder="e.g. 6"></div>
       <div class="field"><div class="flabel">Round Length</div><select class="fsel" id="stypeRoundLen"><option value="2:00">2 min</option><option value="3:00" selected>3 min</option><option value="4:00">4 min</option><option value="5:00">5 min</option></select></div>
@@ -1584,109 +1584,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     <div class="p2card" onclick="p2(event,'Session Templates')"><div class="p2card-info"><span class="p2card-icon">📋</span><div><div class="p2card-name">Session Templates</div><div class="p2card-desc">Stop rebuilding the same sessions — one click to reuse</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
     <div class="p2card" onclick="p2(event,'Periodisation Planner')"><div class="p2card-info"><span class="p2card-icon">📅</span><div><div class="p2card-name">Periodisation Planner</div><div class="p2card-desc">See exactly when to peak your athlete, built automatically</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
     <div class="p2card" onclick="p2(event,'Workout PDF Export')"><div class="p2card-info"><span class="p2card-icon">📤</span><div><div class="p2card-name">Session Sheet PDF</div><div class="p2card-desc">Hand your athlete a printed session plan — professional</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
-  </div>
-</section>
-
-<!-- ═══ CHECK-INS ═══ -->
-<!-- ═══ NUTRITION AI ═══ -->
-<section class="section" id="nutrition">
-  <div class="sh">
-    <div class="sh-left"><div class="sh-bar"></div><div><div class="sh-title">FOOD AI</div><div class="sh-desc">Log meals with AI analysis or enter macros manually</div></div></div>
-  </div>
-
-  <!-- Entry mode toggle -->
-  <div style="display:flex;gap:8px;margin-bottom:16px;background:var(--card);border:1px solid var(--border2);border-radius:24px;padding:5px;width:fit-content">
-    <button id="nutTabAI" class="btn btn-primary btn-sm" style="border-radius:20px" onclick="nutSwitchTab('ai')">✦ AI Analyse</button>
-    <button id="nutTabManual" class="btn btn-ghost btn-sm" style="border-radius:20px" onclick="nutSwitchTab('manual')">✏ Manual Entry</button>
-  </div>
-
-  <!-- AI entry -->
-  <div id="nutAIPane">
-    <div class="ai-bar" onclick="openAINutrition()">
-      <div class="ai-icon">🥗</div>
-      <div class="ai-bar-text">
-        <div class="ai-bar-title">AI Meal Analyser</div>
-        <div class="ai-bar-sub">Tell the AI what you ate — get a full macros breakdown: protein, carbs, fats, calories</div>
-      </div>
-      <button class="btn btn-ai btn-sm" style="pointer-events:none">Analyse</button>
-    </div>
-  </div>
-
-  <!-- Manual entry -->
-  <div id="nutManualPane" style="display:none">
-    <div class="card" style="margin-bottom:16px">
-      <div class="card-title" style="margin-bottom:14px"><span class="ctdot"></span>Manual Meal Entry</div>
-      <div class="fgrid2" style="margin-bottom:10px">
-        <div class="field">
-          <div class="flabel">Meal Description</div>
-          <input class="finput" id="manNutDesc" type="text" placeholder="e.g. Grilled chicken, rice, broccoli">
-        </div>
-        <div class="field">
-          <div class="flabel">Meal Type</div>
-          <select class="fsel" id="manNutMeal">
-            <option value="meal">General Meal</option>
-            <option value="breakfast">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="dinner">Dinner</option>
-            <option value="pre-workout snack">Pre-Workout Snack</option>
-            <option value="post-workout meal">Post-Workout Meal</option>
-          </select>
-        </div>
-        <div class="field"><div class="flabel">Calories (kcal)</div><input class="finput" id="manNutCals" type="number" placeholder="450" min="0"></div>
-        <div class="field"><div class="flabel">Protein (g)</div><input class="finput" id="manNutProtein" type="number" placeholder="35" min="0" step="0.1"></div>
-        <div class="field"><div class="flabel">Carbs (g)</div><input class="finput" id="manNutCarbs" type="number" placeholder="42" min="0" step="0.1"></div>
-        <div class="field"><div class="flabel">Fats (g)</div><input class="finput" id="manNutFats" type="number" placeholder="12" min="0" step="0.1"></div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-        <button class="btn btn-primary" onclick="saveManualNutEntry()">+ Add to Log</button>
-        <span class="saved-flash" id="manNutFlash">Added ✓</span>
-        <div id="manNutMsg" style="font-size:12px;color:var(--red)"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Log + totals always visible below both panes -->
-
-  <div class="g2" style="margin-bottom:16px">
-    <div class="card">
-      <div class="card-title" style="margin-bottom:12px"><span class="ctdot"></span>Nutrition Log</div>
-      <div id="nutLog"><div style="color:var(--muted2);font-size:12px;text-align:center;padding:16px">No meals logged yet. Use AI Analyse or Manual Entry above.</div></div>
-    </div>
-    <div>
-      <div class="card" style="margin-bottom:12px">
-        <div class="card-title" style="margin-bottom:12px"><span class="ctdot"></span>Today's Totals</div>
-        <div class="metric-grid" id="nutTotals">
-          <div class="metric-box"><div class="metric-val" style="color:var(--accent)">—</div><div class="metric-lbl">Calories</div></div>
-          <div class="metric-box"><div class="metric-val" style="color:var(--green)">—</div><div class="metric-lbl">Protein (g)</div></div>
-          <div class="metric-box"><div class="metric-val" style="color:var(--amber)">—</div><div class="metric-lbl">Carbs (g)</div></div>
-          <div class="metric-box"><div class="metric-val" style="color:var(--red)">—</div><div class="metric-lbl">Fats (g)</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-<div class="card" style="margin-top:10px">
-        <div class="card-title" style="margin-bottom:10px"><span class="ctdot"></span>Wearable Data <span style="font-size:10px;color:var(--muted2);font-family:var(--fb);font-weight:400;letter-spacing:0;text-transform:none;margin-left:6px">Apple Health · WHOOP · Garmin</span></div>
-        <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Log data from your wearable manually. Syncs to the selected athlete's profile.</div>
-        <div class="fg2" style="gap:10px">
-          <div class="field"><div class="flabel">Resting Heart Rate (bpm)</div><input class="finput" id="wearRHR" type="number" placeholder="e.g. 52" min="30" max="120"></div>
-          <div class="field"><div class="flabel">HRV (ms)</div><input class="finput" id="wearHRV" type="number" placeholder="e.g. 68" min="1" max="300"></div>
-          <div class="field"><div class="flabel">Steps</div><input class="finput" id="wearSteps" type="number" placeholder="e.g. 8500"></div>
-          <div class="field"><div class="flabel">Active Calories (kcal)</div><input class="finput" id="wearActiveCal" type="number" placeholder="e.g. 620"></div>
-          <div class="field"><div class="flabel" id="wearDistLbl">Distance (km)</div><input class="finput" id="wearDist" type="number" placeholder="e.g. 5.2" step="0.1"></div>
-          <div class="field"><div class="flabel">Sleep Duration (hrs)</div><input class="finput" id="wearSleep" type="number" placeholder="e.g. 7.5" step="0.5" min="0" max="24"></div>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center">
-          <input class="finput" id="wearDate" type="date" style="max-width:180px">
-          <button class="btn btn-primary btn-sm" onclick="wearSave()">💾 Save Entry</button>
-          <span id="wearFlash" style="font-size:12px;color:var(--green);display:none">Saved ✓</span>
-        </div>
-        <div id="wearLog" style="margin-top:14px"></div>
-      </div>
-  <div class="div"><span>Phase 2</span></div>
-  <div class="g3">
-    <div class="p2card" onclick="p2(event,'7-Day Meal Plan Builder')"><div class="p2card-info"><span class="p2card-icon">🥗</span><div><div class="p2card-name">7-Day Meal Planner</div><div class="p2card-desc">AI builds a full fight-camp meal plan with a shopping list</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
-    <div class="p2card" onclick="p2(event,'Weight Cut Calculator')"><div class="p2card-info"><span class="p2card-icon">⚖️</span><div><div class="p2card-name">Weight Management Tool</div><div class="p2card-desc">Know the exact day your athlete will hit weight — safely</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
-    <div class="p2card" onclick="p2(event,'Macro Tracker')"><div class="p2card-info"><span class="p2card-icon">📊</span><div><div class="p2card-name">Daily Macro Tracker</div><div class="p2card-desc">Athletes log meals, you see if they're hitting their macros</div></div></div><span class="p2tag">🔒 Phase 2</span></div>
   </div>
 </section>
 
@@ -1750,6 +1647,25 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
       <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:var(--r-xs);padding:10px;text-align:center"><div style="font-family:var(--fh);font-size:16px;color:var(--amber)">25.0–29.9</div><div style="font-family:var(--fc);font-size:10px;color:var(--amber);letter-spacing:1px;margin-top:3px">Overweight</div></div>
       <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:var(--r-xs);padding:10px;text-align:center"><div style="font-family:var(--fh);font-size:16px;color:var(--red)">≥ 30.0</div><div style="font-family:var(--fc);font-size:10px;color:var(--red);letter-spacing:1px;margin-top:3px">Obese</div></div>
     </div>
+  </div>
+
+  <!-- WEARABLE DATA CARD -->
+  <div class="card" style="margin-top:14px">
+    <div class="card-header" style="margin-bottom:14px">
+      <div class="card-title"><span class="ctdot"></span>📱 Wearable / Tracker Data</div>
+      <span class="saved-flash" id="wearFlash">Saved ✓</span>
+    </div>
+    <div class="fgrid2" style="margin-bottom:10px">
+      <div class="field"><div class="flabel">Date</div><input class="finput" id="wearDate" type="date"></div>
+      <div class="field"><div class="flabel">Sleep Hours</div><input class="finput" id="wearSleep" type="number" placeholder="e.g. 7.5" step="0.5" min="0" max="24"></div>
+      <div class="field"><div class="flabel">Resting HR (bpm)</div><input class="finput" id="wearRHR" type="number" placeholder="e.g. 52" min="30" max="120"></div>
+      <div class="field"><div class="flabel">HRV (ms)</div><input class="finput" id="wearHRV" type="number" placeholder="e.g. 68" min="1" max="300"></div>
+      <div class="field"><div class="flabel">Steps</div><input class="finput" id="wearSteps" type="number" placeholder="e.g. 8500"></div>
+      <div class="field"><div class="flabel">Active Calories</div><input class="finput" id="wearActiveCal" type="number" placeholder="e.g. 620"></div>
+      <div class="field"><div class="flabel" id="wearDistLbl">Distance (km)</div><input class="finput" id="wearDist" type="number" placeholder="e.g. 5.2" step="0.1"></div>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="wearSave()">Save Entry</button>
+    <div id="wearLog" style="margin-top:14px"></div>
   </div>
 </section>
 
@@ -1908,7 +1824,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
       <div class="card-title" style="color:#a78bfa"><span class="ctdot" style="background:#a78bfa;box-shadow:0 0 5px #a78bfa"></span>AI Setup — Gemini API Key</div>
     </div>
     <div style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.7">
-      To use the <strong style="color:#a78bfa">AI Workout Generator</strong> and <strong style="color:#a78bfa">Food AI</strong>, you need a free Gemini API key. Follow these steps:
+      To use the <strong style="color:#a78bfa">AI Workout Generator</strong> you need a free Gemini API key. Follow these steps:
     </div>
     <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
       <div style="display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--muted)">
@@ -2222,29 +2138,6 @@ create policy "allow_all" on sp_sync
   </div>
 </div>
 
-<div class="modal-bg" id="aiNutModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('aiNutModal')">✕</button>
-    <div class="modal-title">🥗 Food AI</div>
-    <div class="modal-sub">Tell us what you ate — we'll break down your protein, carbs, fats and calories 👇</div>
-    <div class="field"><div class="flabel">Which athlete? (optional)</div>
-      <select class="fsel" id="aiNutAthlete"><option value="">General / No athlete</option></select>
-    </div>
-    <div class="field"><div class="flabel">What did you eat? (the more detail the better)</div>
-      <textarea class="fta" id="aiNutInput" rows="4" placeholder="e.g. 2 scrambled eggs with cheese, 2 slices brown bread, 1 banana, black coffee&#10;Or: 200g chicken breast grilled, 150g brown rice, broccoli, olive oil drizzle"></textarea>
-    </div>
-    <div class="field"><div class="flabel">When was this?</div>
-      <select class="fsel" id="aiNutMeal"><option value="meal">General Meal</option><option value="breakfast">Breakfast</option><option value="lunch">Lunch</option><option value="dinner">Dinner</option><option value="pre-workout snack">Pre-Workout Snack</option><option value="post-workout meal">Post-Workout Meal</option></select>
-    </div>
-    <button class="btn btn-ai" style="width:100%;justify-content:center;margin-top:4px" onclick="runAINutrition()">✦ Analyse My Meal</button>
-    <div class="api-nudge" id="aiNKeyNudge">⚠ No Gemini API key set. <a onclick="closeModal('aiNutModal');switchTab('settings')">Add it in Settings</a> — it's free at aistudio.google.com</div>
-    <div class="ai-thinking" id="aiNThink"><div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div><span style="font-family:var(--fc);font-size:11px;color:#a78bfa;letter-spacing:1.5px;text-transform:uppercase;margin-left:8px">Analysing your meal...</span></div>
-    <div class="ai-response" id="aiNResp"></div>
-    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
-      <button class="btn btn-primary btn-sm" id="aiNSaveBtn" style="display:none" onclick="saveNutEntry()">✓ Add to Log</button>
-      <button class="btn btn-ghost btn-sm" onclick="closeModal('aiNutModal')">Close</button>
-    </div>
-  </div>
 </div>
 
 <!-- PDF REPORT MODAL -->
@@ -2310,7 +2203,7 @@ function mkS() {
     athletes: [],     // { id,name,age,sex,sport,fitness,goalType,weight,targetWeight,height,duration,start,record,goals,injuries,notes }
     sessions: [],     // { id,athId,date,title,goalType,notes,aiRoutine,exercises:[{name,sets,reps,weight,notes}],aiGenerated,open }
     checkins: {},     // "athId_wN": { r_Energy,r_Sleep,r_Fatigue,r_Motivation,r_Nutrition,notes }
-    nutrition: { tips:'', log:[] }, // log: [{date,meal,description,cals,protein,carbs,fats}]
+    nutrition: { log:[] },
     biometrics: {},   // athId: { weight,height,age,sex,activity,bodyFat,date }
     progress: { clients:[] }, // [{name,weight,height,bmi,week1..8}]
     timer: { warmupTime:180, roundTime:180, restTime:60, rounds:3, warnAt:10 },
@@ -2346,46 +2239,11 @@ function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2
 
 // ── UNIT SYSTEM ───────────────────────────────────────────────────────
 function isImperial(){return S.units==='imperial';}
-function wUnit(){return isImperial()?'lbs':'kg';}
-function hUnit(){return isImperial()?'ft/in':'cm';}
 function wDisp(kg,dec){
   if(kg===''||kg==null||isNaN(parseFloat(kg)))return'—';
   const d=dec!=null?dec:1;
   if(isImperial())return parseFloat((parseFloat(kg)*2.20462).toFixed(d))+' lbs';
   return parseFloat(parseFloat(kg).toFixed(d))+' kg';
-}
-function wDispVal(kg){
-  if(kg===''||kg==null)return'';
-  if(isImperial())return(parseFloat(kg)*2.20462).toFixed(1);
-  return String(kg);
-}
-function wInputToKg(val){
-  if(val===''||val==null)return'';
-  if(isImperial())return(parseFloat(val)/2.20462).toFixed(2);
-  return String(val);
-}
-function hDisp(cm){
-  if(!cm)return'—';
-  if(isImperial()){const t=parseFloat(cm)/2.54;const ft=Math.floor(t/12);const i=Math.round(t%12);return `${ft}'${i}"`;}
-  return Math.round(parseFloat(cm))+' cm';
-}
-function hDispVal(cm){
-  if(!cm)return'';
-  if(isImperial()){const t=parseFloat(cm)/2.54;const ft=Math.floor(t/12);const i=Math.round(t%12);return `${ft}'${i}"` ;}
-  return String(cm);
-}
-function hInputToCm(val){
-  if(!val)return'';
-  const s=String(val).trim();
-  const m=s.match(/^(\d+)['\s]+(\d*)/);
-  if(m)return Math.round((parseInt(m[1])*12+(parseInt(m[2])||0))*2.54).toString();
-  if(isImperial()){const n=parseFloat(s);if(!isNaN(n))return Math.round(n*2.54).toString();}
-  return s;
-}
-function waterTarget(kg){
-  const l=(parseFloat(kg)*37.5)/1000;
-  if(isImperial())return(l*33.814).toFixed(0)+' fl oz';
-  return l.toFixed(1)+' L';
 }
 function toggleUnits(){
   S.units=isImperial()?'metric':'imperial';
@@ -2419,7 +2277,7 @@ function switchTab(id){
   if(id==='dashboard')dbRefresh();
   if(id==='brief'){briefRefresh();riPopAthletes();}
   if(id==='fightdates'){fdRender();fdPopAthletes();}
-  if(id==='checkins')ciPopAthletes();
+  
   if(id==='biometrics')bioPopAthletes();
   if(id==='progress'){pgPopulateAthletes();pgRenderChart();}
 }
@@ -2489,7 +2347,6 @@ function p2EmailSubmit(){
   }
 }
 function showFlash(id){const e=document.getElementById(id);if(!e)return;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2200);}
-function showSaved(id){showFlash(id);}
 function setMsg(id,txt,ok=true){
   const e=document.getElementById(id);if(!e)return;
   e.textContent=txt;e.style.color=ok?'var(--green)':'var(--red)';
@@ -2499,9 +2356,6 @@ function tFlash(c){const e=document.getElementById('flashOl');e.style.background
 function openModal(id){document.getElementById(id).classList.add('show');}
 function closeModal(id){document.getElementById(id).classList.remove('show');}
 function copyBlock(el,txt){navigator.clipboard.writeText(txt).then(()=>{const o=el.textContent;el.textContent='✓ Copied!';setTimeout(()=>el.textContent=o,1700);}).catch(()=>{});}
-function copyQs(btn){
-  copyBlock(btn,'1. Energy levels this week? (1–10)\n2. Sleep quality & avg hours?\n3. Muscle soreness/fatigue? (1–10)\n4. Any new pain or injury?\n5. Motivation & focus? (1–10)\n6. Hitting nutrition targets?\n7. What felt best this week?\n8. What needs most work next week?');
-}
 
 // ── DASHBOARD ────────────────────────────────────────────────────────
 function dbRefresh(){
@@ -2632,7 +2486,6 @@ function stripDemoData() {
   if (!hasDemo) return;
   S.athletes   = S.athletes.filter(a => !a.id.startsWith('demo_'));
   S.sessions   = S.sessions.filter(s => !s.id.startsWith('demo_'));
-  S.nutrition.log = S.nutrition.log.filter(e => !e.id?.startsWith('demo_'));
   S.progress.clients = S.progress.clients.filter(p => !p.id?.startsWith('demo_'));
   Object.keys(S.checkins).forEach(k  => { if (k.startsWith('demo_'))  delete S.checkins[k]; });
   Object.keys(S.biometrics).forEach(k => { if (k.startsWith('demo_')) delete S.biometrics[k]; });
@@ -2666,7 +2519,7 @@ function athSave(){
     stripDemoData();
     S.athletes.push(rec);
   }
-  saveState();showFlash('athFlash');athRender();ciPopAthletes();bioPopAthletes();pgPopulateAthletes();dbRefresh();stypePopAthletes();fdPopAthletes();
+  saveState();showFlash('athFlash');athRender();bioPopAthletes();pgPopulateAthletes();dbRefresh();stypePopAthletes();fdPopAthletes();
   setMsg('athMsg',(idx>=0?'Updated':'Added')+' ✓',true);
   if(idx<0)athHideForm();
 }
@@ -2686,7 +2539,7 @@ function athDel(id){
   const a=S.athletes.find(x=>x.id===id);
   if(!confirm(`Remove "${a?.name}"?`))return;
   S.athletes=S.athletes.filter(x=>x.id!==id);
-  saveState();athRender();ciPopAthletes();bioPopAthletes();pgPopulateAthletes();dbRefresh();
+  saveState();athRender();bioPopAthletes();pgPopulateAthletes();dbRefresh();
 }
 function athRender(){
   const wrap=document.getElementById('athList');
@@ -2946,228 +2799,6 @@ function sessSave(id,btn){
 
 // ── CHECK-INS ─────────────────────────────────────────────────────────
 const CI_CATS=['Energy','Sleep','Fatigue','Motivation','Nutrition'];
-function ciPopWeeks(){
-  const athId=document.getElementById('ciAthlete')?.value;
-  const ath=S.athletes.find(a=>a.id===athId);
-  const weeks=ath&&ath.duration?parseInt(ath.duration):8;
-  const sel=document.getElementById('ciWeek');
-  if(!sel)return;
-  const cur=sel.value||'1';
-  sel.innerHTML=Array.from({length:weeks},(_,i)=>`<option value="${i+1}"${i+1===parseInt(cur)?' selected':''}>Week ${i+1}</option>`).join('');
-}
-function ciPopAthletes(){
-  const sel=document.getElementById('ciAthlete');if(!sel)return;
-  const cur=sel.value;
-  sel.innerHTML='<option value="">Select Athlete...</option>'+S.athletes.map(a=>`<option value="${a.id}" ${a.id===cur?'selected':''}>${a.name}</option>`).join('');
-  if(!S.athletes.length)sel.innerHTML='<option value="">Add athletes first</option>';
-}
-function ciKey(){const ai=document.getElementById('ciAthlete')?.value||'';const wk=document.getElementById('ciWeek')?.value||'1';return ai?`${ai}_w${wk}`:null;}
-function ciLoad(){
-  const key=ciKey();const saved=key?(S.checkins[key]||{}):{};
-  const _ciwl=document.getElementById('ciWeekLbl');if(_ciwl)_ciwl.textContent='Week '+(document.getElementById('ciWeek')?.value||'1');
-  const _ciRat=document.getElementById('ciRatings');if(_ciRat)_ciRat.innerHTML=key?CI_CATS.map(r=>{
-    const val=saved['r_'+r]??5;
-    return`<div style="margin-bottom:12px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2)">${r}</span>
-        <span style="font-family:var(--fh);font-size:18px;color:var(--accent)" id="ciV_${r}">${val}</span>
-      </div>
-      <input type="range" min="1" max="10" value="${val}" style="width:100%;accent-color:var(--accent);cursor:pointer" oninput="ciSlide('${r}',this.value)">
-    </div>`;
-  }).join(''):'<div style="color:var(--muted2);font-size:12px;text-align:center;padding:16px">Select an athlete and week above</div>';
-  const notes=document.getElementById('ciNotes');if(notes)notes.value=saved.notes||'';
-}
-function ciSlide(cat,val){
-  const key=ciKey();if(!key)return;
-  if(!S.checkins[key])S.checkins[key]={};
-  S.checkins[key]['r_'+cat]=parseInt(val);
-  const d=document.getElementById('ciV_'+cat);if(d)d.textContent=val;
-  saveState();
-}
-function ciNoteCh(val){const key=ciKey();if(!key)return;if(!S.checkins[key])S.checkins[key]={};S.checkins[key].notes=val;saveState();}
-function ciSave(){
-  const key=ciKey();if(!key){alert('Select an athlete first.');return;}
-  const ratings={};
-  CI_CATS.forEach(r=>{
-    // Read value from state (set live by ciSlide) or fall back to current slider DOM value
-    const saved=S.checkins[key]?.['r_'+r];
-    if(saved!==undefined){ratings['r_'+r]=saved;}
-    else{const e=document.querySelector(`#ciRatings input[type="range"]`+`[oninput*="'${r}'"]`);ratings['r_'+r]=e?parseInt(e.value):5;}
-  });
-  S.checkins[key]={...S.checkins[key],...ratings,notes:document.getElementById('ciNotes')?.value||''};
-  saveState();showFlash('ciFlash');dbRefresh();
-}
-
-// ── NUTRITION AI ──────────────────────────────────────────────────────
-function openAINutrition(){
-  document.getElementById('aiNutInput').value='';
-  document.getElementById('aiNResp').style.display='none';
-  document.getElementById('aiNThink').classList.remove('show');
-  document.getElementById('aiNSaveBtn').style.display='none';
-  _aiNLastData=null;
-  openModal('aiNutModal');
-const nutAthSel = document.getElementById('aiNutAthlete');
-  if(nutAthSel){ nutAthSel.innerHTML='<option value="">General / No athlete</option>'+S.athletes.map(a=>`<option value="${a.id}">${escH(a.name)}</option>`).join(''); }
-}
-async function runAINutrition(){
-  if(!CONFIG.GEMINI_API_KEY){
-    const el=document.getElementById('aiNResp');
-    if(el){el.innerHTML='<div style="color:var(--amber);font-size:13px;padding:4px 0">⚠ No API key set. Go to <strong>Settings → AI Setup</strong> and add your free Gemini key to use this feature.</div>';el.style.display='block';}
-    const _ansb=document.getElementById('aiNSaveBtn');if(_ansb)_ansb.style.display='none';
-    return;
-  }
-  const food=document.getElementById('aiNutInput').value.trim();
-  if(!food){document.getElementById('aiNutInput').classList.add('err');setTimeout(()=>document.getElementById('aiNutInput').classList.remove('err'),600);return;}
-  const mealType=document.getElementById('aiNutMeal').value;
-  const prompt=`Analyse this meal and return macros. Be direct — no intro, no preamble, no "As a nutritionist..." opener.
-
-Meal type: ${mealType}
-Food: "${food}"
-
-Return in exactly this format, nothing before it:
-
-**Calories:** X kcal
-**Protein:** Xg
-**Carbs:** Xg
-**Fats:** Xg
-**Assessment:** One sentence max — is this good for the meal type/goal?
-
-Then immediately output this JSON block (required, do not skip):
-<json>
-{"calories": 0, "protein": 0, "carbs": 0, "fats": 0, "assessment": ""}
-</json>
-
-Fill the JSON with the real numbers. Be realistic, use common serving sizes.`;
-
-  document.getElementById('aiNThink').classList.add('show');
-  document.getElementById('aiNResp').style.display='none';
-  document.getElementById('aiNSaveBtn').style.display='none';
-
-  try {
-    const resp=await callGemini(prompt);
-    document.getElementById('aiNThink').classList.remove('show');
-    // Parse JSON block
-    const jsonMatch=resp.match(/<json>([\s\S]*?)<\/json>/);
-    if(jsonMatch){try{_aiNLastData=JSON.parse(jsonMatch[1].trim());}catch(e){_aiNLastData=null;}}
-    const displayText=resp.replace(/<json>[\s\S]*?<\/json>/,'').trim();
-    const el=document.getElementById('aiNResp');
-    if(!el)return;
-    el.innerHTML=formatAIResp(displayText);
-    if(_aiNLastData){
-      el.innerHTML+=`<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px">
-        <div style="background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.15);border-radius:8px;padding:10px;text-align:center"><div style="font-family:var(--fh);font-size:22px;color:var(--accent)">${_aiNLastData.calories||'?'}</div><div style="font-family:var(--fc);font-size:9px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase;margin-top:2px">kcal</div></div>
-        <div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);border-radius:8px;padding:10px;text-align:center"><div style="font-family:var(--fh);font-size:22px;color:var(--green)">${_aiNLastData.protein||'?'}g</div><div style="font-family:var(--fc);font-size:9px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase;margin-top:2px">protein</div></div>
-        <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.15);border-radius:8px;padding:10px;text-align:center"><div style="font-family:var(--fh);font-size:22px;color:var(--amber)">${_aiNLastData.carbs||'?'}g</div><div style="font-family:var(--fc);font-size:9px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase;margin-top:2px">carbs</div></div>
-        <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.15);border-radius:8px;padding:10px;text-align:center"><div style="font-family:var(--fh);font-size:22px;color:var(--red)">${_aiNLastData.fats||'?'}g</div><div style="font-family:var(--fc);font-size:9px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase;margin-top:2px">fats</div></div>
-      </div>`;
-    }
-    el.style.display='block';
-    document.getElementById('aiNSaveBtn').style.display='inline-flex';
-  } catch(err){
-    document.getElementById('aiNThink').classList.remove('show');
-    const el=document.getElementById('aiNResp');el.textContent='Error: '+err.message;el.style.display='block';
-  }
-}
-function saveNutEntry(){
-  const desc = document.getElementById('aiNutInput')?.value || '';
-  if(!desc) return;
-  if(!_aiNLastData) {
-    const el = document.getElementById('aiNResp');
-    if(el) { el.innerHTML += '<div style="color:var(--amber);font-size:12px;margin-top:8px">⚠ Macros could not be parsed — entry saved with 0 values. You can delete and retry.</div>'; }
-  }
-  const athSel = document.getElementById('aiNutAthlete');
-  const athId = athSel?.value || '';
-  const athName = athId ? (S.athletes.find(a=>a.id===athId)?.name||'') : '';
-  const entry={
-    id:uid(),date:new Date().toISOString().slice(0,10),
-    meal:document.getElementById('aiNutMeal').value,
-    description:desc,
-    athId, athName,
-    cals:_aiNLastData?.calories||0,protein:_aiNLastData?.protein||0,
-    carbs:_aiNLastData?.carbs||0,fats:_aiNLastData?.fats||0
-  };
-  S.nutrition.log.unshift(entry);saveState();nutRenderLog();closeModal('aiNutModal');
-  switchTab('nutrition');
-}
-
-
-// ── NUTRITION TAB SWITCH ──────────────────────────────────────────────
-function nutSwitchTab(mode) {
-  const isAI = mode === 'ai';
-  document.getElementById('nutAIPane').style.display = isAI ? 'block' : 'none';
-  document.getElementById('nutManualPane').style.display = isAI ? 'none' : 'block';
-  document.getElementById('nutTabAI').className = isAI ? 'btn btn-primary btn-sm' : 'btn btn-ghost btn-sm';
-  document.getElementById('nutTabAI').style.borderRadius = '20px';
-  document.getElementById('nutTabManual').className = isAI ? 'btn btn-ghost btn-sm' : 'btn btn-primary btn-sm';
-  document.getElementById('nutTabManual').style.borderRadius = '20px';
-}
-
-// ── MANUAL NUTRITION ENTRY ────────────────────────────────────────────
-function saveManualNutEntry() {
-  const desc = (document.getElementById('manNutDesc')?.value || '').trim();
-  if (!desc) {
-    const e = document.getElementById('manNutDesc');
-    if(e){e.classList.add('err');setTimeout(()=>e.classList.remove('err'),600);}
-    setMsg('manNutMsg','Please enter a meal description',false);
-    return;
-  }
-  const entry = {
-    id: uid(),
-    date: new Date().toISOString().slice(0,10),
-    meal: document.getElementById('manNutMeal')?.value || 'meal',
-    description: desc,
-    cals: parseFloat(document.getElementById('manNutCals')?.value) || 0,
-    protein: parseFloat(document.getElementById('manNutProtein')?.value) || 0,
-    carbs: parseFloat(document.getElementById('manNutCarbs')?.value) || 0,
-    fats: parseFloat(document.getElementById('manNutFats')?.value) || 0,
-  };
-  S.nutrition.log.unshift(entry);
-  saveState();
-  nutRenderLog();
-  showFlash('manNutFlash');
-  setMsg('manNutMsg','',true);
-  // Clear fields
-  ['manNutDesc','manNutCals','manNutProtein','manNutCarbs','manNutFats'].forEach(id=>{
-    const e=document.getElementById(id);if(e)e.value='';
-  });
-}
-function nutRenderLog(){
-  const wrap=document.getElementById('nutLog');
-  if(!wrap)return;
-  if(!S.nutrition.log.length){wrap.innerHTML='<div style="color:var(--muted2);font-size:12px;text-align:center;padding:16px">No meals logged yet. Click "AI Analyse" above.</div>';nutUpdateTotals();return;}
-  wrap.innerHTML=S.nutrition.log.map(e=>`
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--border2);flex-wrap:wrap">
-      <div style="flex:1;min-width:0">
-        <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:3px">
-          <span style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1px;color:var(--text)">${e.meal}</span>
-          <span style="font-family:var(--fc);font-size:9px;color:var(--muted2)">${e.date}</span>
-        </div>
-        <div style="font-size:12.5px;color:var(--muted);margin-bottom:5px">${escH(e.description)}</div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <span style="font-size:12px"><strong style="color:var(--accent)">${e.cals}</strong> <span style="color:var(--muted2)">kcal</span></span>
-          <span style="font-size:12px"><strong style="color:var(--green)">${e.protein}g</strong> <span style="color:var(--muted2)">protein</span></span>
-          <span style="font-size:12px"><strong style="color:var(--amber)">${e.carbs}g</strong> <span style="color:var(--muted2)">carbs</span></span>
-          <span style="font-size:12px"><strong style="color:var(--red)">${e.fats}g</strong> <span style="color:var(--muted2)">fats</span></span>
-        </div>
-      </div>
-      <button class="tbtn del" onclick="nutDelEntry('${e.id}')">🗑</button>
-    </div>`).join('');
-  nutUpdateTotals();
-}
-function nutDelEntry(id){S.nutrition.log=S.nutrition.log.filter(x=>x.id!==id);saveState();nutRenderLog();}
-function nutUpdateTotals(){
-  const today=new Date().toISOString().slice(0,10);
-  const todayLog=S.nutrition.log.filter(e=>e.date===today);
-  const tot={cals:0,protein:0,carbs:0,fats:0};
-  todayLog.forEach(e=>{tot.cals+=e.cals||0;tot.protein+=e.protein||0;tot.carbs+=e.carbs||0;tot.fats+=e.fats||0;});
-  const wrap=document.getElementById('nutTotals');if(!wrap)return;
-  wrap.innerHTML=`
-    <div class="metric-box"><div class="metric-val" style="color:var(--accent)">${todayLog.length?Math.round(tot.cals):'—'}</div><div class="metric-lbl">Calories</div><div class="metric-sub">today</div></div>
-    <div class="metric-box"><div class="metric-val" style="color:var(--green)">${todayLog.length?Math.round(tot.protein)+'g':'—'}</div><div class="metric-lbl">Protein</div><div class="metric-sub">today</div></div>
-    <div class="metric-box"><div class="metric-val" style="color:var(--amber)">${todayLog.length?Math.round(tot.carbs)+'g':'—'}</div><div class="metric-lbl">Carbs</div><div class="metric-sub">today</div></div>
-    <div class="metric-box"><div class="metric-val" style="color:var(--red)">${todayLog.length?Math.round(tot.fats)+'g':'—'}</div><div class="metric-lbl">Fats</div><div class="metric-sub">today</div></div>`;
-}
-
 // ── BIOMETRICS ────────────────────────────────────────────────────────
 function bioPopAthletes(){
   const sel=document.getElementById('bioAthlete');if(!sel)return;
@@ -3710,24 +3341,9 @@ function pgRender(){
   pgUpdStats();
   if(_pgSel!==null)pgRenderDetail(_pgSel);
 }
-function progExport(){
-  const blob=new Blob([JSON.stringify(S.progress.clients,null,2)],{type:'application/json'});
-  const url=URL.createObjectURL(blob);
-  Object.assign(document.createElement('a'),{href:url,download:'StrikePanel_Progress.json'}).click();
-  URL.revokeObjectURL(url);
-}
-function progImport(e){
-  const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(!Array.isArray(d))throw 0;S.progress.clients=d.map(c=>({...c,bmi:pgBMI(c.weight,c.height)}));saveState();pgRender();dbRefresh();}catch(_){alert('Invalid file');}};
-  r.readAsText(f);e.target.value='';
-}
-
-// ── TIMER ─────────────────────────────────────────────────────────────
 const TCIRC=2*Math.PI*110;
 let tS={running:false,phase:'idle',cur:0,left:0,interval:null,soundOn:true,ctx:null};
 function tFmt(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
-function tSettings(){return S.timer;}
 function tSettingCh(){
   if(tS.running)return;
   S.timer.warmupTime=parseInt(document.getElementById('tsWarmup').value)||0;
@@ -3932,8 +3548,6 @@ function exportCSV(type) {
 }
 
 // ── PRINT / PDF ────────────────────────────────────────────────────────
-function printDashboard(){window.print();}
-function printProgress(){switchTab('progress');setTimeout(()=>window.print(),200);}
 
 // ═══════════════════════════════════════════════════════════════════════
 // ⚙ CONFIG
@@ -3981,14 +3595,6 @@ async function callGemini(prompt) {
 }
 
 
-function loadScript(src) {
-  return new Promise((res, rej) => {
-    if (document.querySelector(`script[src="${src}"]`)) { res(); return; }
-    const s = document.createElement('script');
-    s.src = src; s.onload = res; s.onerror = rej;
-    document.head.appendChild(s);
-  });
-}
 
 function formatAIResp(text){
   if(!text) return '';
@@ -4020,8 +3626,6 @@ function apiKeyLoad() {
 // ── REHYDRATE ─────────────────────────────────────────────────────────
 function rehydrate(){
   athRender();sessRender();
-  ciPopAthletes();ciLoad();
-  nutRenderLog();
   bioPopAthletes();
   pgPopulateAthletes();
   pgRender();
@@ -4065,11 +3669,6 @@ apiKeyLoad();
     { id: 'demo_p2', athId: 'demo_002', name: 'Priya Sharma', weight: '59', height: '165', bmi: '21.7', scores: [68, 71, 74, 78, 81, 83, null, null] },
     { id: 'demo_p3', athId: 'demo_003', name: 'Tyler Novak', weight: '84', height: '183', bmi: '25.1', scores: [80, 82, 79, 83, 86, 88, 90, null] }
   ];
-  const demoNutrition = [
-    { id: 'demo_dn1', date: new Date().toISOString().slice(0,10), meal: 'breakfast', description: 'Scrambled eggs (3), brown toast x2, black coffee, banana', cals: 480, protein: 28, carbs: 52, fats: 14 },
-    { id: 'demo_dn2', date: new Date().toISOString().slice(0,10), meal: 'lunch', description: 'Chicken breast 200g, brown rice 150g, broccoli, olive oil', cals: 620, protein: 52, carbs: 58, fats: 16 },
-    { id: 'demo_dn3', date: new Date().toISOString().slice(0,10), meal: 'pre-workout snack', description: 'Greek yoghurt, mixed berries, handful almonds', cals: 290, protein: 18, carbs: 24, fats: 11 }
-  ];
   const demoBiometrics = {
     'demo_001': { weight: '78', height: '181', age: '24', sex: 'male', activity: '1.725', bodyFat: '10', date: new Date().toISOString().slice(0,10) },
     'demo_002': { weight: '59', height: '165', age: '21', sex: 'female', activity: '1.725', bodyFat: '17', date: new Date().toISOString().slice(0,10) },
@@ -4078,7 +3677,6 @@ apiKeyLoad();
   S.athletes = demoAthletes;
   S.sessions = demoSessions;
   S.checkins = demoCheckins;
-  S.nutrition.log = demoNutrition;
   S.progress.clients = demoProgress;
   S.biometrics = demoBiometrics;
   saveState();
@@ -4126,11 +3724,6 @@ apiKeyLoad();
 
 rehydrate();
 // One-time migration: fix old demo nutrition entries that had non-prefixed IDs
-if(!localStorage.getItem('cp_demo_nut_fixed')){
-  const hasDemo = S.nutrition.log.some(e=>e.id&&e.id.startsWith('demo_'));
-  if(hasDemo) { S.nutrition.log=S.nutrition.log.filter(e=>e.id&&e.id.startsWith('demo_')); saveState(); }
-  localStorage.setItem('cp_demo_nut_fixed','1');
-}
 // One-time migration: fix old demo progress entries that had no ID
 if(!localStorage.getItem('cp_demo_prog_fixed')){
   const hasDemo = S.progress.clients.some(p=>p.id&&p.id.startsWith('demo_'));
@@ -4371,13 +3964,6 @@ if(!localStorage.getItem('cp_onboarded') && localStorage.getItem('cp_license_has
 }
 
 // ── API KEY NUDGE ─────────────────────────────────────────────────────
-function checkApiNudge(nudgeId){
-  const key=CONFIG.GEMINI_API_KEY;
-  const missing=!key;
-  const el=document.getElementById(nudgeId);
-  if(el)el.classList.toggle('show',missing);
-  return missing;
-}
 
 
 // ══════════════════════════════════════════════════════════════════
@@ -5564,10 +5150,6 @@ function injectDemoDataNow() {
     { id: 'demo_s2', athId: 'demo_002', date: '2026-04-08', title: 'Strength & Conditioning', goalType: 'Athletic Performance', notes: 'Deadlift PB — 100kg for 3.', aiGenerated: false, open: false, exercises: [{name:'Deadlift',sets:'5',reps:'3',weight:'100',notes:'PB!'},{name:'Box Jumps',sets:'4',reps:'8',weight:'',notes:''}] },
     { id: 'demo_s3', athId: 'demo_003', date: '2026-04-07', title: 'Cardio Cut Session', goalType: 'Shredding / Fat Loss', notes: 'Weight at 84.2 — on track.', aiGenerated: false, open: false, exercises: [{name:'Bike Intervals',sets:'1',reps:'20min',weight:'',notes:''}] }
   ];
-  S.nutrition.log = [
-    { id: 'demo_dn1', date: new Date().toISOString().slice(0,10), meal: 'breakfast', description: 'Scrambled eggs (3), brown toast x2, black coffee, banana', cals: 480, protein: 28, carbs: 52, fats: 14 },
-    { id: 'demo_dn2', date: new Date().toISOString().slice(0,10), meal: 'lunch', description: 'Chicken breast 200g, brown rice 150g, broccoli, olive oil', cals: 620, protein: 52, carbs: 58, fats: 16 }
-  ];
   S.progress.clients = [
     { id: 'demo_p1', athId: 'demo_001', name: 'Marcus Okafor', weight: '78', height: '181', bmi: '23.8', scores: [72,75,78,80,82,85,87,null] },
     { id: 'demo_p2', athId: 'demo_002', name: 'Priya Sharma', weight: '59', height: '165', bmi: '21.7', scores: [68,71,74,78,81,83,null,null] },
@@ -5693,10 +5275,7 @@ function demoLateWrap() {
   if (typeof stypeLog !== 'undefined') window.stypeLog = _demoWrap(stypeLog);
   if (typeof pgSubmit !== 'undefined') window.pgSubmit = _demoWrap(pgSubmit);
   if (typeof bioSave  !== 'undefined') window.bioSave  = _demoWrap(bioSave);
-  if (typeof ciSave   !== 'undefined') window.ciSave   = _demoWrap(ciSave);
-  if (typeof saveManualNutEntry !== 'undefined') window.saveManualNutEntry = _demoWrap(saveManualNutEntry);
   if (typeof saveAIWorkout !== 'undefined') window.saveAIWorkout = _demoWrap(saveAIWorkout);
-  if (typeof saveNutEntry  !== 'undefined') window.saveNutEntry  = _demoWrap(saveNutEntry);
 }
 // ══════════════════════════════════════════════════════════════════════
 // Architecture:
