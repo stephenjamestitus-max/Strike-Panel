@@ -5836,7 +5836,7 @@ async function sbFetch(path, method, body) {
     const txt = await res.text().catch(() => '');
     throw new Error(`Supabase ${res.status}: ${txt.slice(0, 120)}`);
   }
-  if (!method || method === 'GET') return res.json();
+  if (method === 'GET') return res.json();
   return null;
 }
 
@@ -6257,7 +6257,7 @@ function sbStopPolling() { clearInterval(_sbPollTimer); _sbPollTimer = null; }
 
   // ── Athlete device: temporary creds from share URL ────────────────────
   // Pull athlete roster so they get a proper name dropdown, then clear creds.
-  if (isCheckinPage && sbParam && !sbGetCreds()) {
+  if (isCheckinPage && sbParam) {
     try {
       const decoded = atob(sbParam);
       const sepIdx  = decoded.indexOf('::');
@@ -6279,7 +6279,7 @@ function sbStopPolling() { clearInterval(_sbPollTimer); _sbPollTimer = null; }
               }
             }
           } catch(e) { console.warn('[SB athlete pull]', e); }
-          _sbUrl = ''; _sbKey = ''; // clear — device stays disconnected
+          sbGetCreds(); // Restore phone's own saved creds (sbGetCreds sets _sbUrl/_sbKey from localStorage)
           setTimeout(openAthleteCheckin, 80);
         }
       }
