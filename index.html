@@ -1568,86 +1568,6 @@ create policy "allow_all" on sp_sync
   <div id="fdList" class="fight-grid"></div>
 </section>
 
-<!-- ═══ ATHLETE SELF CHECK-IN PAGE (fullscreen overlay) ═══ -->
-<div class="checkin-page" id="athleteCheckinPage">
-  <div class="checkin-hero">
-    <div style="font-size:32px;margin-bottom:8px">🥊</div>
-    <div class="checkin-hero-title">DAILY CHECK-IN</div>
-    <div class="checkin-hero-sub" id="ciPageSub">How are you feeling today?</div>
-  </div>
-  <div class="checkin-form" id="checkinFormWrap">
-    <div class="card" style="margin-bottom:12px">
-      <div class="field">
-        <div class="flabel">Your Name *</div>
-        <!-- Shown when coach's athlete list is available -->
-        <select class="fsel" id="ciPageAthlete" style="display:none"><option value="">Select your name...</option></select>
-        <!-- Shown when no athletes found (athlete opened on their own device) -->
-        <input class="finput" id="ciPageAthleteText" type="text" placeholder="Type your name…" style="display:none">
-        <div id="ciPageNameNote" style="font-size:11px;color:var(--muted2);margin-top:5px;display:none">
-          📋 Your coach will see this name in their Morning Brief.
-        </div>
-      </div>
-    </div>
-    <div class="card" style="margin-bottom:12px">
-      <div class="card-title" style="margin-bottom:14px"><span class="ctdot"></span>How are you feeling?</div>
-      <div class="ri-row"><div class="ri-label">😴 Sleep Quality</div><input class="ri-slider" type="range" min="1" max="10" value="7" id="ciPageSleep" oninput="riUpdate('ciPageSleep','ciPageSleepVal')"><div class="ri-val" id="ciPageSleepVal">7</div></div>
-      <div class="ri-row"><div class="ri-label">⚡ Energy Level</div><input class="ri-slider" type="range" min="1" max="10" value="7" id="ciPageEnergy" oninput="riUpdate('ciPageEnergy','ciPageEnergyVal')"><div class="ri-val" id="ciPageEnergyVal">7</div></div>
-      <div class="ri-row"><div class="ri-label">💪 Soreness</div><input class="ri-slider" type="range" min="1" max="10" value="3" id="ciPageSoreness" oninput="riUpdate('ciPageSoreness','ciPageSorenessVal')"><div class="ri-val" id="ciPageSorenessVal">3</div></div>
-      <div class="ri-row"><div class="ri-label">🧠 Motivation</div><input class="ri-slider" type="range" min="1" max="10" value="7" id="ciPageMotivation" oninput="riUpdate('ciPageMotivation','ciPageMotivationVal')"><div class="ri-val" id="ciPageMotivationVal">7</div></div>
-      <div class="ri-row"><div class="ri-label">🥗 Nutrition</div><input class="ri-slider" type="range" min="1" max="10" value="7" id="ciPageNutrition" oninput="riUpdate('ciPageNutrition','ciPageNutritionVal')"><div class="ri-val" id="ciPageNutritionVal">7</div></div>
-      <div class="ri-row"><div class="ri-label">🩺 Pain/Injury</div><input class="ri-slider" type="range" min="0" max="10" value="0" id="ciPagePain" oninput="riUpdate('ciPagePain','ciPagePainVal')"><div class="ri-val" id="ciPagePainVal">0</div></div>
-    </div>
-    <div class="card" style="margin-bottom:12px">
-      <div class="field"><div class="flabel">Any notes for the coach? (optional)</div><textarea class="fta" id="ciPageNotes" rows="3" placeholder="Pain details, how training felt, anything relevant..."></textarea></div>
-      <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06)">
-        <div style="font-family:var(--fc);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:10px">🍽 Nutrition Today (optional)</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div class="field"><div class="flabel">Calories (kcal)</div><input class="finput" id="ciPageCals" type="number" placeholder="e.g. 2400" min="0" max="9999"></div>
-          <div class="field"><div class="flabel">Protein (g)</div><input class="finput" id="ciPageProtein" type="number" placeholder="e.g. 180" min="0" max="999"></div>
-        </div>
-      </div>
-      <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06)">
-        <div style="font-family:var(--fc);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:10px">📱 Wearable Data (optional)</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div class="field"><div class="flabel">Sleep Hours</div><input class="finput" id="ciPageSleepHrs" type="number" placeholder="e.g. 7.5" step="0.5" min="0" max="24"></div>
-          <div class="field"><div class="flabel">Resting HR (bpm)</div><input class="finput" id="ciPageRHR" type="number" placeholder="e.g. 52" min="30" max="120"></div>
-          <div class="field"><div class="flabel">HRV (ms)</div><input class="finput" id="ciPageHRV" type="number" placeholder="e.g. 68" min="1" max="300"></div>
-          <div class="field"><div class="flabel">Steps</div><input class="finput" id="ciPageSteps" type="number" placeholder="e.g. 8500"></div>
-        </div>
-      </div>
-    </div>
-    <!-- Live score preview -->
-    <div style="background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r-sm);padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:16px">
-      <div>
-        <div style="font-family:var(--fc);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:2px">Your Readiness</div>
-        <div style="font-family:var(--fh);font-size:36px;line-height:1" id="ciPagePreviewScore">70</div>
-      </div>
-      <div style="flex:1">
-        <div style="font-family:var(--fh);font-size:16px;letter-spacing:1px" id="ciPagePreviewVerdict">READY TO TRAIN</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:3px" id="ciPagePreviewMsg">Good to go. Normal session today.</div>
-      </div>
-    </div>
-    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;font-size:14px" onclick="ciPageSubmit()">✓ Submit Check-In</button>
-    <button class="btn btn-ghost btn-sm" style="width:100%;justify-content:center;margin-top:8px" onclick="closeAthleteCheckin()">← Back to App</button>
-  </div>
-  <div class="checkin-submitted" id="ciPageDone">
-    <div class="big-icon">✅</div>
-    <h2>CHECK-IN COMPLETE</h2>
-    <p id="ciPageDoneMsg">Your check-in has been recorded.</p>
-    <div style="margin-top:16px;padding:14px 16px;background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.18);border-radius:var(--r-sm);font-family:var(--fh);font-size:28px;color:var(--accent)" id="ciPageDoneScore"></div>
-    <!-- Send to coach section — shown only on shared link mode -->
-    <div id="ciSendSection" style="display:none;margin-top:20px;text-align:left">
-      <div style="font-family:var(--fc);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:10px">📤 Send to your coach</div>
-      <div style="font-size:12.5px;color:var(--muted);margin-bottom:14px;line-height:1.6">Tap below to send your check-in to your coach. They'll import it with one tap.</div>
-      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-bottom:10px" onclick="ciSendWhatsApp()">💬 Send via WhatsApp</button>
-      <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-bottom:10px" onclick="ciCopyImportLink()">🔗 Copy Import Link</button>
-      <div id="ciCopiedMsg" style="display:none;font-size:11px;color:var(--green);text-align:center;margin-top:4px">✓ Copied! Paste it to your coach.</div>
-    </div>
-    <button class="btn btn-ghost btn-sm" style="margin-top:16px;width:100%;justify-content:center" onclick="window.location.search.includes('checkin=1') ? window.close() : closeAthleteCheckin()">← Close</button>
-    <div style="margin-top:20px;font-size:11px;color:var(--muted2);letter-spacing:1px">Powered by <a href="https://strikepanel.gumroad.com" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:700">StrikePanel™</a></div>
-  </div>
-</div>
-
 <!-- ═══ IMPORT CHECK-IN BANNER ═══ -->
 <div id="ciImportBanner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#0b2a1a,#0b1120);border-bottom:1px solid rgba(34,197,94,0.4);padding:14px 20px;display:none;align-items:center;gap:14px;flex-wrap:wrap">
   <div style="font-size:22px">📥</div>
@@ -2326,6 +2246,86 @@ create policy "allow_all" on sp_sync
 
 </main>
 
+<!-- ═══ ATHLETE SELF CHECK-IN PAGE (fullscreen overlay) ═══ -->
+<!-- Kept outside <main> so hiding .wrap doesn't hide this fixed overlay -->
+<div class="checkin-page" id="athleteCheckinPage">
+  <div class="checkin-hero">
+    <div style="font-size:32px;margin-bottom:8px">🥊</div>
+    <div class="checkin-hero-title">DAILY CHECK-IN</div>
+    <div class="checkin-hero-sub" id="ciPageSub">How are you feeling today?</div>
+  </div>
+  <div class="checkin-form" id="checkinFormWrap">
+    <div class="card" style="margin-bottom:12px">
+      <div class="field">
+        <div class="flabel">Your Name *</div>
+        <!-- Shown when coach's athlete list is available -->
+        <select class="fsel" id="ciPageAthlete" style="display:none"><option value="">Select your name...</option></select>
+        <!-- Shown when no athletes found (athlete opened on their own device) -->
+        <input class="finput" id="ciPageAthleteText" type="text" placeholder="Type your name…" style="display:none">
+        <div id="ciPageNameNote" style="font-size:11px;color:var(--muted2);margin-top:5px;display:none">
+          📋 Your coach will see this name in their Morning Brief.
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="card-title" style="margin-bottom:14px"><span class="ctdot"></span>How are you feeling?</div>
+      <div class="ri-row"><div class="ri-label">😴 Sleep Quality</div><input class="ri-slider" type="range" min="1" max="10" value="7" id="ciPageSleep" oninput="riUpdate('ciPageSleep','ciPageSleepVal')"><div class="ri-val" id="ciPageSleepVal">7</div></div>
+      <div class="ri-row"><div class="ri-label">⚡ Energy Level</div><input class="ri-slider" type="range" min="1" max="10" value="7" id="ciPageEnergy" oninput="riUpdate('ciPageEnergy','ciPageEnergyVal')"><div class="ri-val" id="ciPageEnergyVal">7</div></div>
+      <div class="ri-row"><div class="ri-label">💪 Soreness</div><input class="ri-slider" type="range" min="1" max="10" value="3" id="ciPageSoreness" oninput="riUpdate('ciPageSoreness','ciPageSorenessVal')"><div class="ri-val" id="ciPageSorenessVal">3</div></div>
+      <div class="ri-row"><div class="ri-label">🧠 Motivation</div><input class="ri-slider" type="range" min="1" max="10" value="7" id="ciPageMotivation" oninput="riUpdate('ciPageMotivation','ciPageMotivationVal')"><div class="ri-val" id="ciPageMotivationVal">7</div></div>
+      <div class="ri-row"><div class="ri-label">🥗 Nutrition</div><input class="ri-slider" type="range" min="1" max="10" value="7" id="ciPageNutrition" oninput="riUpdate('ciPageNutrition','ciPageNutritionVal')"><div class="ri-val" id="ciPageNutritionVal">7</div></div>
+      <div class="ri-row"><div class="ri-label">🩺 Pain/Injury</div><input class="ri-slider" type="range" min="0" max="10" value="0" id="ciPagePain" oninput="riUpdate('ciPagePain','ciPagePainVal')"><div class="ri-val" id="ciPagePainVal">0</div></div>
+    </div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="field"><div class="flabel">Any notes for the coach? (optional)</div><textarea class="fta" id="ciPageNotes" rows="3" placeholder="Pain details, how training felt, anything relevant..."></textarea></div>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06)">
+        <div style="font-family:var(--fc);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:10px">🍽 Nutrition Today (optional)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div class="field"><div class="flabel">Calories (kcal)</div><input class="finput" id="ciPageCals" type="number" placeholder="e.g. 2400" min="0" max="9999"></div>
+          <div class="field"><div class="flabel">Protein (g)</div><input class="finput" id="ciPageProtein" type="number" placeholder="e.g. 180" min="0" max="999"></div>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06)">
+        <div style="font-family:var(--fc);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:10px">📱 Wearable Data (optional)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div class="field"><div class="flabel">Sleep Hours</div><input class="finput" id="ciPageSleepHrs" type="number" placeholder="e.g. 7.5" step="0.5" min="0" max="24"></div>
+          <div class="field"><div class="flabel">Resting HR (bpm)</div><input class="finput" id="ciPageRHR" type="number" placeholder="e.g. 52" min="30" max="120"></div>
+          <div class="field"><div class="flabel">HRV (ms)</div><input class="finput" id="ciPageHRV" type="number" placeholder="e.g. 68" min="1" max="300"></div>
+          <div class="field"><div class="flabel">Steps</div><input class="finput" id="ciPageSteps" type="number" placeholder="e.g. 8500"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Live score preview -->
+    <div style="background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r-sm);padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:16px">
+      <div>
+        <div style="font-family:var(--fc);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:2px">Your Readiness</div>
+        <div style="font-family:var(--fh);font-size:36px;line-height:1" id="ciPagePreviewScore">70</div>
+      </div>
+      <div style="flex:1">
+        <div style="font-family:var(--fh);font-size:16px;letter-spacing:1px" id="ciPagePreviewVerdict">READY TO TRAIN</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:3px" id="ciPagePreviewMsg">Good to go. Normal session today.</div>
+      </div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;font-size:14px" onclick="ciPageSubmit()">✓ Submit Check-In</button>
+    <button class="btn btn-ghost btn-sm" style="width:100%;justify-content:center;margin-top:8px" onclick="closeAthleteCheckin()">← Back to App</button>
+  </div>
+  <div class="checkin-submitted" id="ciPageDone">
+    <div class="big-icon">✅</div>
+    <h2>CHECK-IN COMPLETE</h2>
+    <p id="ciPageDoneMsg">Your check-in has been recorded.</p>
+    <div style="margin-top:16px;padding:14px 16px;background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.18);border-radius:var(--r-sm);font-family:var(--fh);font-size:28px;color:var(--accent)" id="ciPageDoneScore"></div>
+    <!-- Send to coach section — shown only on shared link mode -->
+    <div id="ciSendSection" style="display:none;margin-top:20px;text-align:left">
+      <div style="font-family:var(--fc);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:10px">📤 Send to your coach</div>
+      <div style="font-size:12.5px;color:var(--muted);margin-bottom:14px;line-height:1.6">Tap below to send your check-in to your coach. They'll import it with one tap.</div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-bottom:10px" onclick="ciSendWhatsApp()">💬 Send via WhatsApp</button>
+      <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-bottom:10px" onclick="ciCopyImportLink()">🔗 Copy Import Link</button>
+      <div id="ciCopiedMsg" style="display:none;font-size:11px;color:var(--green);text-align:center;margin-top:4px">✓ Copied! Paste it to your coach.</div>
+    </div>
+    <button class="btn btn-ghost btn-sm" style="margin-top:16px;width:100%;justify-content:center" onclick="window.location.search.includes('checkin=1') ? window.close() : closeAthleteCheckin()">← Close</button>
+    <div style="margin-top:20px;font-size:11px;color:var(--muted2);letter-spacing:1px">Powered by <a href="https://strikepanel.gumroad.com" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:700">StrikePanel™</a></div>
+  </div>
+</div>
 
 
 <!-- AI MODALS -->
