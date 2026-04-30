@@ -1427,6 +1427,7 @@ create policy "allow_all" on sp_sync
           <div class="field" style="margin-bottom:0">
             <div class="flabel">Supabase Project URL</div>
             <input class="finput" id="wizUrlInput" type="url" placeholder="https://xxxx.supabase.co" style="font-size:13px">
+            <div style="font-size:11px;color:var(--muted2);margin-top:4px">Just the base URL — stop at <strong style="color:var(--muted)">.supabase.co</strong>, nothing after it.</div>
           </div>
           <div class="field" style="margin-bottom:0">
             <div class="flabel">Anon / Public Key</div>
@@ -4206,6 +4207,7 @@ function riGetAll() {
 }
 function riSaveAll(arr) {
   localStorage.setItem(RI_KEY, JSON.stringify(arr));
+  if (!DEMO_MODE && typeof sbSchedulePush === 'function') sbSchedulePush();
 }
 
 // Calculate readiness score 0-100 from inputs
@@ -4320,7 +4322,7 @@ function riStreak(athId) {
 // ── TIMELINE ENGINE ───────────────────────────────────────────────
 const TL_KEY = 'sp_timeline_v1';
 function tlGet() { try { return JSON.parse(localStorage.getItem(TL_KEY) || '[]'); } catch { return []; } }
-function tlSave(arr) { localStorage.setItem(TL_KEY, JSON.stringify(arr.slice(0, 80))); } // keep last 80
+function tlSave(arr) { localStorage.setItem(TL_KEY, JSON.stringify(arr.slice(0, 80))); if (!DEMO_MODE && typeof sbSchedulePush === 'function') sbSchedulePush(); } // keep last 80
 
 function tlAdd(item) {
   const all = tlGet();
@@ -4670,7 +4672,7 @@ function pwaDismiss() {
 // ══════════════════════════════════════════════════════════════════
 const FD_KEY = 'sp_fightdates_v1';
 function fdGetAll() { try { return JSON.parse(localStorage.getItem(FD_KEY) || '[]'); } catch { return []; } }
-function fdSaveAll(arr) { localStorage.setItem(FD_KEY, JSON.stringify(arr)); }
+function fdSaveAll(arr) { localStorage.setItem(FD_KEY, JSON.stringify(arr)); if (!DEMO_MODE && typeof sbSchedulePush === 'function') sbSchedulePush(); }
 
 function fdPopAthletes() {
   ['fdAthlete'].forEach(id => {
@@ -4963,30 +4965,35 @@ function ciPageSubmit() {
   _lastCiEntry = { id: uid(), athId, athName, date: today, sleep, energy, soreness, motivation, nutrition, pain, notes, sleepHrs, rhr, hrv, steps, cals, protein, score, ts: Date.now() };
 
   const isSharedLink = window.location.search.includes('checkin=1');
+  const hasSbCreds   = sbGetCreds(); // true if Supabase is connected on this device
 
-  if (!isSharedLink) {
-    // Coach's own device — save directly to localStorage
+  if (!isSharedLink || hasSbCreds) {
+    // Coach's own device, OR athlete opened the link on a device with Supabase connected
+    // → save directly to local state and push to Supabase
     stripDemoData();
     const all = riGetAll();
     all.push(_lastCiEntry);
     riSaveAll(all);
     tlAdd({ type: 'checkin', athName, text: `Readiness score: ${score}/100 — ${readinessVerdict(score).label}` });
     dbRefresh(); briefRefresh();
+    // Push to Supabase so coach's laptop sees it immediately on next pull/refresh
+    if (hasSbCreds) sbSchedulePush();
   }
 
   // Show done screen
   const form = document.getElementById('checkinFormWrap'); if (form) form.style.display = 'none';
   const done = document.getElementById('ciPageDone');       if (done) done.style.display = 'block';
   const doneMsg = document.getElementById('ciPageDoneMsg');
-  if (doneMsg) doneMsg.textContent = isSharedLink
+  if (doneMsg) doneMsg.textContent = (isSharedLink && !hasSbCreds)
     ? `Done, ${athName}! Send the link below to your coach — they\'ll import it with one tap.`
-    : `${athName}, your check-in has been recorded. See you at training.`;
+    : `${athName}, your check-in has been recorded and synced. See you at training.`;
   const doneScore = document.getElementById('ciPageDoneScore');
   if (doneScore) doneScore.textContent = `${score}/100 — ${readinessVerdict(score).label}`;
 
   // Show send section only on shared link
+  // Only show the manual import/WhatsApp section if there's no Supabase — otherwise sync handled it
   const sendSection = document.getElementById('ciSendSection');
-  if (sendSection) sendSection.style.display = isSharedLink ? 'block' : 'none';
+  if (sendSection) sendSection.style.display = (isSharedLink && !hasSbCreds) ? 'block' : 'none';
 }
 
 // Build the import link the coach taps to pull in the athlete's data
@@ -5130,7 +5137,8 @@ function initShareLink() {
     document.querySelectorAll('.hero, .tab-bar, .wrap').forEach(el => { el.style.display = 'none'; });
     const _ciGate = document.getElementById('licenseGate'); if (_ciGate) _ciGate.style.display = 'none';
     const _ciPwa  = document.getElementById('pwaBanner');   if (_ciPwa)  _ciPwa.style.display  = 'none';
-    setTimeout(() => openAthleteCheckin(), 200);
+    // Open immediately — sbBoot will re-open with fresh athlete data once pull completes
+    openAthleteCheckin();
   }
   const slb = document.getElementById('shareableLinkBox');
   if (slb) slb.textContent = getShareLink();
@@ -5657,7 +5665,7 @@ let _sbSyncing = false;
 
 // ── Credential management ─────────────────────────────────────────────
 function sbGetCreds() {
-  _sbUrl = localStorage.getItem(SB_URL_KEY) || '';
+  _sbUrl = (localStorage.getItem(SB_URL_KEY) || '').replace(/\/rest\/v1\/?.*$/, '').replace(/\/$/, '');
   _sbKey = localStorage.getItem(SB_KEY_KEY) || '';
   return _sbUrl && _sbKey;
 }
@@ -5759,43 +5767,43 @@ async function sbPull() {
 
     let merged = false;
     for (const row of rows) {
+      if (!row.value || row.value === 'null') continue;
       const localVal = localStorage.getItem(row.key);
-      const localTs  = parseInt(localStorage.getItem(SB_TS_KEY) || '0');
-      const remoteTs = new Date(row.updated_at).getTime();
 
-      // Always pull if never synced (localTs===0), or if remote is newer
-      if ((localTs === 0 || remoteTs > localTs) && row.value && row.value !== 'null') {
-        // Special handling for the main state key — deep merge
-        if (row.key === CP_KEY) {
-          try {
-            const remote = JSON.parse(row.value);
-            const local  = localVal ? JSON.parse(localVal) : mkS();
-            // Per-array merge: keep whichever has more items (richer dataset)
-            const merged_state = deepMerge(local, remote);
-            // Arrays: prefer the longer one (most data wins)
-            for (const k of ['athletes','sessions']) {
-              if (Array.isArray(remote[k]) && Array.isArray(local[k])) {
-                merged_state[k] = remote[k].length >= local[k].length ? remote[k] : local[k];
-              }
+      // Always merge remote into local — merge logic below protects against data loss
+      if (row.key === CP_KEY) {
+        try {
+          const remote = JSON.parse(row.value);
+          const local  = localVal ? JSON.parse(localVal) : mkS();
+          const merged_state = deepMerge(local, remote);
+          // For arrays, always keep whichever has more items (most data wins)
+          for (const k of ['athletes','sessions']) {
+            if (Array.isArray(remote[k]) && Array.isArray(local[k])) {
+              merged_state[k] = remote[k].length >= local[k].length ? remote[k] : local[k];
             }
-            localStorage.setItem(row.key, JSON.stringify(merged_state));
-          } catch { localStorage.setItem(row.key, row.value); }
-        } else {
-          // For other keys (readiness, timeline, fightdates): prefer longer array
-          try {
-            const remArr = JSON.parse(row.value);
-            const locArr = localVal ? JSON.parse(localVal) : [];
-            if (Array.isArray(remArr) && Array.isArray(locArr)) {
-              localStorage.setItem(row.key, JSON.stringify(
-                remArr.length >= locArr.length ? remArr : locArr
-              ));
-            } else {
-              localStorage.setItem(row.key, row.value);
-            }
-          } catch { localStorage.setItem(row.key, row.value); }
-        }
-        merged = true;
+          }
+          localStorage.setItem(row.key, JSON.stringify(merged_state));
+        } catch { localStorage.setItem(row.key, row.value); }
+      } else {
+        // For readiness, timeline, fightdates, wearable: merge arrays, keep all unique entries
+        try {
+          const remArr = JSON.parse(row.value);
+          const locArr = localVal ? JSON.parse(localVal) : [];
+          if (Array.isArray(remArr) && Array.isArray(locArr)) {
+            // Merge by id — union of both arrays, remote wins on conflict
+            const map = new Map();
+            locArr.forEach(e => e && e.id && map.set(e.id, e));
+            remArr.forEach(e => e && e.id && map.set(e.id, e)); // remote overwrites local on same id
+            const union = Array.from(map.values());
+            localStorage.setItem(row.key, JSON.stringify(
+              union.length >= locArr.length ? union : locArr
+            ));
+          } else {
+            localStorage.setItem(row.key, row.value);
+          }
+        } catch { localStorage.setItem(row.key, row.value); }
       }
+      merged = true;
     }
     return merged;
   } catch (err) {
@@ -5845,14 +5853,16 @@ async function sbTestConnection(url, key) {
 
 // ── Settings UI: Save & Connect ───────────────────────────────────────
 async function sbSaveAndConnect() {
-  const url = (document.getElementById('sbUrlInput')?.value || '').trim();
+  let url = (document.getElementById('sbUrlInput')?.value || '').trim();
   const key = (document.getElementById('sbKeyInput')?.value || '').trim();
+  // Auto-clean — strip any path the user accidentally included
+  url = url.replace(/\/rest\/v1\/?.*$/, '').replace(/\/$/, '');
   if (!url || !key) {
     sbSetStatus('Paste your Project URL and anon key first.', 'var(--red)');
     return;
   }
   if (!url.includes('supabase.co') && !url.includes('supabase.in') && !url.startsWith('http')) {
-    sbSetStatus('URL should look like: https://xxxx.supabase.co', 'var(--red)');
+    sbSetStatus('URL should look like: https://xxxx.supabase.co (nothing after .co)', 'var(--red)');
     return;
   }
 
@@ -5900,7 +5910,17 @@ function sbDisconnect() {
 // ── Settings UI: Manual sync ──────────────────────────────────────────
 async function sbSyncNow() {
   sbSetStatus('Syncing…', 'var(--accent)');
-  await sbPush();
+  sbSetIndicator('syncing', '☁ Syncing…');
+  try {
+    const pulled = await sbPull();
+    if (pulled) { loadState(); rehydrate(); }
+    await sbPush();
+    sbSetStatus('✓ Synced — ' + new Date().toLocaleTimeString(), 'var(--green)');
+    sbSetIndicator('synced', '☁ Cloud');
+  } catch (err) {
+    sbSetStatus('✗ Sync failed: ' + err.message.slice(0, 60), 'var(--red)');
+    sbSetIndicator('error', '⚠ Error');
+  }
 }
 
 // ── Copy schema ───────────────────────────────────────────────────────
@@ -5988,17 +6008,21 @@ function wizCopySchema(btn) {
 
 // Test connection and save
 async function wizConnect() {
-  const url = (document.getElementById('wizUrlInput')?.value || '').trim();
+  // Auto-clean the URL — strip any path the user accidentally included
+  let url = (document.getElementById('wizUrlInput')?.value || '').trim();
   const key = (document.getElementById('wizKeyInput')?.value || '').trim();
   const msgEl = document.getElementById('wizConnMsg');
   const btn   = document.getElementById('wizConnectBtn');
+
+  // Strip common accidental suffixes (/rest/v1, /rest/v1/, trailing slash, etc.)
+  url = url.replace(/\/rest\/v1\/?.*$/, '').replace(/\/$/, '');
 
   if (!url || !key) {
     if (msgEl) { msgEl.style.display = 'block'; msgEl.style.background = 'rgba(239,68,68,0.08)'; msgEl.style.border = '1px solid rgba(239,68,68,0.2)'; msgEl.style.color = 'var(--red)'; msgEl.textContent = '⚠ Please paste both your Project URL and anon key.'; }
     return;
   }
   if (!url.startsWith('https://') || !url.includes('supabase')) {
-    if (msgEl) { msgEl.style.display = 'block'; msgEl.style.background = 'rgba(239,68,68,0.08)'; msgEl.style.border = '1px solid rgba(239,68,68,0.2)'; msgEl.style.color = 'var(--red)'; msgEl.textContent = '⚠ URL doesn\'t look right — should start with https:// and contain supabase.co'; }
+    if (msgEl) { msgEl.style.display = 'block'; msgEl.style.background = 'rgba(239,68,68,0.08)'; msgEl.style.border = '1px solid rgba(239,68,68,0.2)'; msgEl.style.color = 'var(--red)'; msgEl.textContent = '⚠ URL doesn\'t look right — it should be just https://xxxx.supabase.co with nothing after it.'; }
     return;
   }
 
@@ -6006,7 +6030,7 @@ async function wizConnect() {
   if (msgEl) { msgEl.style.display = 'block'; msgEl.style.background = 'rgba(0,212,240,0.05)'; msgEl.style.border = '1px solid rgba(0,212,240,0.15)'; msgEl.style.color = 'var(--muted)'; msgEl.textContent = 'Testing connection to your Supabase project…'; }
 
   try {
-    const testUrl = `${url.replace(/\/$/, '')}/rest/v1/sp_sync?select=id&limit=1`;
+    const testUrl = `${url}/rest/v1/sp_sync?select=id&limit=1`;
     const resp = await fetch(testUrl, {
       headers: { 'apikey': key, 'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json', 'Accept': 'application/json' }
     });
@@ -6097,18 +6121,32 @@ saveState = function() {
   sbShowButtons(true);
   sbSetIndicator('syncing', '☁ Connecting…');
 
+  // Cancel any push that rehydrate() may have scheduled — we pull first
+  clearTimeout(_sbPushTimer);
+  _sbPushTimer = null;
+
   // Pull latest from Supabase on boot
   try {
     const pulled = await sbPull();
     if (pulled) {
       loadState();
-      setTimeout(rehydrate, 100);
+      // After loading pulled data, update the local timestamp so future pulls
+      // correctly detect when remote is newer than what we just pulled
+      localStorage.setItem(SB_TS_KEY, Date.now().toString());
+      setTimeout(() => {
+        rehydrate();
+        // If this is the athlete check-in URL, re-open the form now that we have
+        // fresh data — the initial openAthleteCheckin() fired before the pull finished
+        if (window.location.search.includes('checkin=1')) {
+          openAthleteCheckin();
+        }
+      }, 100);
     }
     const lastSync = localStorage.getItem(SB_TS_KEY);
     const timeStr = lastSync ? new Date(parseInt(lastSync)).toLocaleTimeString() : 'never';
     sbSetIndicator('synced', '☁ Cloud');
     sbSetStatus('Last sync: ' + timeStr, 'var(--muted2)');
-    // Only push if nothing was pulled (avoid overwriting remote with stale data)
+    // Only push if nothing was pulled (avoid overwriting remote with fresh data from another device)
     if (!pulled) setTimeout(sbPush, 2000);
   } catch (err) {
     console.warn('[SB boot]', err.message);
