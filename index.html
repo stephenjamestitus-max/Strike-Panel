@@ -7,6 +7,18 @@
 <meta name="description" content="Daily readiness intelligence for combat sports coaches. Know who to push and who to protect — every morning."/>
 <meta name="robots" content="noindex,nofollow"/>
 <meta name="theme-color" content="#0b0d14"/>
+<!-- Open Graph — WhatsApp / iMessage link preview -->
+<meta property="og:type"        content="website"/>
+<meta property="og:title"       content="Daily Check-In — StrikePanel™"/>
+<meta property="og:description" content="Your coach wants your daily readiness check-in. Takes 30 seconds."/>
+<meta property="og:image"       content="https://strikepanel-app.vercel.app/og.svg" id="metaOgImage"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height"content="630"/>
+<meta property="og:url"         content="https://strikepanel-app.vercel.app/" id="metaOgUrl"/>
+<meta name="twitter:card"       content="summary_large_image"/>
+<meta name="twitter:title"      content="Daily Check-In — StrikePanel™"/>
+<meta name="twitter:description"content="Your coach wants your daily readiness check-in. Takes 30 seconds."/>
+<meta name="twitter:image"      content="https://strikepanel-app.vercel.app/og.svg"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -16,6 +28,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Oswald:wght@700&display=swap" rel="stylesheet">
+<script>
+  // Update OG tags to use the actual deployment origin (helps iMessage / native share)
+  (function(){
+    var o=document.getElementById('metaOgImage');
+    var u=document.getElementById('metaOgUrl');
+    if(o)o.content=location.origin+'/og.svg';
+    if(u)u.content=location.origin+'/';
+  })();
+</script>
 
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -5231,17 +5252,37 @@ function getShareLink() {
   }
   return `${base}?${params.toString()}`;
 }
-function copyShareLink() {
-  const link = getShareLink();
-  const el = document.getElementById('shareableLinkBox');
-  if (el) el.textContent = link;
-  // Try clipboard API first, fall back to execCommand
+async function shortenUrl(url) {
+  try {
+    const res = await fetch('https://tinyurl.com/api-create.php?url=' + encodeURIComponent(url));
+    if (res.ok) {
+      const short = (await res.text()).trim();
+      if (short.startsWith('https://tinyurl.com/')) return short;
+    }
+  } catch(e) {}
+  return url; // fallback to full link if shortening fails
+}
+
+async function copyShareLink() {
+  const boxes = [
+    document.getElementById('shareableLinkBox'),
+    document.getElementById('shareableLinkBox2'),
+  ].filter(Boolean);
+
+  boxes.forEach(el => { el.textContent = '⏳ Shortening link…'; });
+
+  const long  = getShareLink();
+  const link  = await shortenUrl(long);
+
+  boxes.forEach(el => { el.textContent = link; });
+
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(link).catch(() => fallbackCopy(link));
   } else {
     fallbackCopy(link);
   }
   showFlash('shareLinkFlash');
+  showFlash('shareLinkFlash2');
 }
 function fallbackCopy(text) {
   const ta = document.createElement('textarea');
@@ -5254,7 +5295,7 @@ function fallbackCopy(text) {
 }
 function initShareLink() {
   const el = document.getElementById('shareableLinkBox');
-  if (el) el.textContent = getShareLink();
+  if (el) el.textContent = '📋 Click to copy check-in link';
   // Auto-open check-in page if ?checkin=1 in URL — hide all app chrome for athlete
   // Check for incoming athlete import link
   ciImportInit();
@@ -5267,7 +5308,7 @@ function initShareLink() {
     openAthleteCheckin();
   }
   const slb = document.getElementById('shareableLinkBox');
-  if (slb) slb.textContent = getShareLink();
+  if (slb && !window.location.search.includes('checkin=1')) slb.textContent = '📋 Click to copy check-in link';
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -6066,9 +6107,9 @@ function ciShareRender() {
   if (connected) {
     locked.style.display   = 'none';
     unlocked.style.display = 'block';
-    // Make sure shareableLinkBox gets populated
+    // Show clean prompt — actual short link is generated on click
     const box = document.getElementById('shareableLinkBox');
-    if (box) box.textContent = getShareLink();
+    if (box && box.textContent.trim() === '') box.textContent = '📋 Click to copy check-in link';
   } else {
     locked.style.display   = 'block';
     unlocked.style.display = 'none';

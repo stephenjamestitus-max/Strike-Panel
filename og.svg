@@ -1,0 +1,42 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="20%" r="80%">
+      <stop offset="0%" stop-color="#0f1525"/>
+      <stop offset="100%" stop-color="#080a10"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00D4F0" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#00D4F0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Subtle glow behind logo -->
+  <ellipse cx="600" cy="260" rx="320" ry="220" fill="url(#glow)"/>
+  <!-- Top accent bar -->
+  <rect width="1200" height="3" fill="#00D4F0" opacity="0.7"/>
+
+  <!-- Logo ring -->
+  <circle cx="600" cy="210" r="72" fill="none" stroke="#00D4F0" stroke-width="2" opacity="0.3"/>
+  <circle cx="600" cy="210" r="52" fill="#00D4F0"/>
+  <!-- SP text in logo -->
+  <text x="600" y="222" font-family="Arial Black, Impact, sans-serif" font-size="26" font-weight="900" fill="#080a10" text-anchor="middle" letter-spacing="1">SP</text>
+
+  <!-- Brand name -->
+  <text x="600" y="346" font-family="Arial Black, Impact, sans-serif" font-size="72" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="7">STRIKEPANEL</text>
+  <!-- TM -->
+  <text x="978" y="310" font-family="Arial, sans-serif" font-size="22" fill="#ffffff" opacity="0.6">™</text>
+
+  <!-- Divider line -->
+  <line x1="480" y1="372" x2="720" y2="372" stroke="#00D4F0" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Subtitle -->
+  <text x="600" y="418" font-family="Arial, sans-serif" font-size="26" fill="#00D4F0" text-anchor="middle" letter-spacing="6" font-weight="600">DAILY CHECK-IN</text>
+
+  <!-- Description -->
+  <text x="600" y="480" font-family="Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle" letter-spacing="0.5">Your coach is waiting — takes 30 seconds.</text>
+
+  <!-- Bottom accent bar -->
+  <rect y="627" width="1200" height="3" fill="#00D4F0" opacity="0.4"/>
+</svg>
