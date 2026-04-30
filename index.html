@@ -2271,7 +2271,10 @@ create policy "allow_all" on sp_sync
 <!-- Kept outside <main> so hiding .wrap doesn't hide this fixed overlay -->
 <div class="checkin-page" id="athleteCheckinPage">
   <div class="checkin-hero">
-    <div style="font-size:32px;margin-bottom:8px">🥊</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px">
+      <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" style="width:40px;height:40px;flex-shrink:0"><defs><radialGradient id="ci-orb" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="55%" stop-color="#0f1220"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs><circle cx="45" cy="45" r="43" fill="url(#ci-orb)" stroke="#00D4F0" stroke-width="1.5" stroke-opacity="0.6"/><circle cx="45" cy="45" r="29" fill="none" stroke="#00D4F0" stroke-width="1" stroke-opacity="0.25"/><line x1="45" y1="2" x2="45" y2="27" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><line x1="45" y1="63" x2="45" y2="88" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><line x1="2" y1="45" x2="27" y2="45" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><line x1="63" y1="45" x2="88" y2="45" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><circle cx="45" cy="45" r="10" fill="#00D4F0"/><text x="45" y="49" font-family="Arial Black,sans-serif" font-weight="700" font-size="8" fill="#0b0d14" text-anchor="middle">SP</text></svg>
+      <span style="font-family:var(--fh);font-size:18px;letter-spacing:3px;color:var(--text)">STRIKEPANEL™</span>
+    </div>
     <div class="checkin-hero-title">DAILY CHECK-IN</div>
     <div class="checkin-hero-sub" id="ciPageSub">How are you feeling today?</div>
   </div>
@@ -2582,6 +2585,7 @@ function p2EmailSubmit(){
       headers:{'Content-Type':'application/json','Accept':'application/json'},
       body: JSON.stringify({
         access_key: CONFIG.W3F_ACCESS_KEY,
+        to_email: 'corepanelv1@gmail.com',
         subject: 'StrikePanel™ — Phase 2 Interest: ' + feature,
         from_name: 'StrikePanel™',
         email, feature,
