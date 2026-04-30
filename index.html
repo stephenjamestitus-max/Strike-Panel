@@ -5106,7 +5106,7 @@ function ciImportLink() {
   if (!_lastCiEntry) return '';
   const base = window.location.href.startsWith('http')
     ? window.location.href.split('?')[0]
-    : 'https://strikepanel-app.vercel.app/app.html';
+    : 'https://strikepanel.vercel.app/';
   const p = new URLSearchParams({
     import: '1',
     d: btoa(JSON.stringify(_lastCiEntry))
@@ -5207,7 +5207,7 @@ function getShareLink() {
   const href = window.location.href;
   const base = href.startsWith('http')
     ? href.split('?')[0]
-    : 'https://strikepanel-app.vercel.app/app.html';
+    : 'https://strikepanel.vercel.app/';
   const params = new URLSearchParams({ checkin: '1' });
   // Embed Supabase creds so athlete devices can push check-ins directly
   sbGetCreds();
@@ -5245,11 +5245,16 @@ function initShareLink() {
   ciImportInit();
 
   if (window.location.search.includes('checkin=1')) {
-    document.querySelectorAll('.hero, .tab-bar, .wrap').forEach(el => { el.style.display = 'none'; });
+    document.querySelectorAll('.hero, .tab-wrap, .tab-bar, .wrap').forEach(el => { el.style.display = 'none'; });
     const _ciGate = document.getElementById('licenseGate'); if (_ciGate) _ciGate.style.display = 'none';
     const _ciPwa  = document.getElementById('pwaBanner');   if (_ciPwa)  _ciPwa.style.display  = 'none';
-    // Open immediately — sbBoot will re-open with fresh athlete data once pull completes
-    openAthleteCheckin();
+    // Show the page with a loading state — sbBoot will call openAthleteCheckin() once athletes are ready
+    const _ciPage = document.getElementById('athleteCheckinPage');
+    if (_ciPage) _ciPage.classList.add('active');
+    const _ciFormWrap = document.getElementById('checkinFormWrap');
+    if (_ciFormWrap) _ciFormWrap.style.display = 'none';
+    const _ciHero = document.querySelector('.checkin-hero');
+    if (_ciHero) _ciHero.insertAdjacentHTML('afterend', '<div id="ciLoadingMsg" style="text-align:center;padding:40px 0;color:var(--accent);font-family:var(--fh);font-size:13px;letter-spacing:2px">LOADING…</div>');
   }
   const slb = document.getElementById('shareableLinkBox');
   if (slb) slb.textContent = getShareLink();
@@ -6279,16 +6284,43 @@ function sbStopPolling() { clearInterval(_sbPollTimer); _sbPollTimer = null; }
               }
             }
           } catch(e) { console.warn('[SB athlete pull]', e); }
-          sbGetCreds(); // Restore phone's own saved creds (sbGetCreds sets _sbUrl/_sbKey from localStorage)
+          sbGetCreds(); // Restore phone's own saved creds
+          const _ciLoadMsg = document.getElementById('ciLoadingMsg');
+          if (_ciLoadMsg) _ciLoadMsg.remove();
           setTimeout(openAthleteCheckin, 80);
+        } else {
+          // Empty URL/key — open form in free-text mode
+          const _ciLoadMsg = document.getElementById('ciLoadingMsg');
+          if (_ciLoadMsg) _ciLoadMsg.remove();
+          openAthleteCheckin();
         }
+      } else {
+        // Malformed sb param — open form anyway
+        const _ciLoadMsg = document.getElementById('ciLoadingMsg');
+        if (_ciLoadMsg) _ciLoadMsg.remove();
+        openAthleteCheckin();
       }
-    } catch(e) { console.warn('[SB checkin boot]', e); }
+    } catch(e) {
+      console.warn('[SB checkin boot]', e);
+      // Decode failed — still show the form, never leave athlete on a blank page
+      const _ciLoadMsg = document.getElementById('ciLoadingMsg');
+      if (_ciLoadMsg) _ciLoadMsg.remove();
+      openAthleteCheckin();
+    }
     sbSetIndicator('off', '');
     return;
   }
 
-  if (!sbGetCreds()) { sbSetIndicator('off', ''); return; }
+  if (!sbGetCreds()) {
+    sbSetIndicator('off', '');
+    // Fallback: if checkin page has no sb param and no creds, still show the form (free-text name mode)
+    if (isCheckinPage) {
+      const _ciLoadMsg = document.getElementById('ciLoadingMsg');
+      if (_ciLoadMsg) _ciLoadMsg.remove();
+      openAthleteCheckin();
+    }
+    return;
+  }
 
   // ── Coach device: normal boot ─────────────────────────────────────────
   const urlEl = document.getElementById('sbUrlInput');
