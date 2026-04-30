@@ -2322,7 +2322,7 @@ create policy "allow_all" on sp_sync
       <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-bottom:10px" onclick="ciCopyImportLink()">🔗 Copy Import Link</button>
       <div id="ciCopiedMsg" style="display:none;font-size:11px;color:var(--green);text-align:center;margin-top:4px">✓ Copied! Paste it to your coach.</div>
     </div>
-    <button class="btn btn-ghost btn-sm" style="margin-top:16px;width:100%;justify-content:center" onclick="window.location.search.includes('checkin=1') ? window.close() : closeAthleteCheckin()">← Close</button>
+    <button class="btn btn-ghost btn-sm" style="margin-top:16px;width:100%;justify-content:center" onclick="ciCloseOrReset()">← Close</button>
     <div style="margin-top:20px;font-size:11px;color:var(--muted2);letter-spacing:1px">Powered by <a href="https://strikepanel.gumroad.com" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:700">StrikePanel™</a></div>
   </div>
 </div>
@@ -4917,6 +4917,21 @@ function closeAthleteCheckin() {
   const page = document.getElementById('athleteCheckinPage');
   if (page) page.classList.remove('active');
   document.body.style.overflow = '';
+}
+
+function ciCloseOrReset() {
+  if (window.location.search.includes('checkin=1')) {
+    // On shared link: strip URL params so the page becomes a blank slate
+    // rather than calling window.close() which navigates to history (e.g. claude.ai)
+    window.history.replaceState({}, '', window.location.pathname);
+    const page = document.getElementById('athleteCheckinPage');
+    if (page) page.classList.remove('active');
+    document.body.style.overflow = '';
+    // Show a minimal thank-you state instead of the full app UI
+    document.body.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;background:#0b0d14;color:#e2e8f0;font-family:sans-serif;text-align:center;padding:24px"><div style="font-size:48px;margin-bottom:16px">✅</div><div style="font-size:22px;font-weight:700;letter-spacing:2px;color:#00D4F0;margin-bottom:8px">CHECK-IN COMPLETE</div><div style="font-size:14px;color:#94a3b8">You\'re done — see you at training.</div></div>';
+  } else {
+    closeAthleteCheckin();
+  }
 }
 
 function ciPageUpdatePreview() {
