@@ -5836,7 +5836,7 @@ async function sbFetch(path, method, body) {
     const txt = await res.text().catch(() => '');
     throw new Error(`Supabase ${res.status}: ${txt.slice(0, 120)}`);
   }
-  if (method === 'GET') return res.json();
+  if (!method || method === 'GET') return res.json();
   return null;
 }
 
