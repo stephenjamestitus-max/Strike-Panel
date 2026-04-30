@@ -1291,7 +1291,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
         <span style="width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);display:inline-block"></span>
         <span style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green)">Cloud Sync Active — Data Backed Up &amp; Synced</span>
       </div>
-      <div style="font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:10px">Send athletes this link. They fill it in on their phone in 30 seconds — their score comes back to you via WhatsApp or import link, then appears in your Morning Brief.</div>
+      <div style="font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:10px">Send athletes this link. They fill it in on their phone in 30 seconds — their score syncs <strong style="color:var(--green)">directly to your dashboard</strong> via cloud. No WhatsApp needed. Appears in your Morning Brief automatically.</div>
       <div class="share-link-box" id="shareableLinkBox" onclick="copyShareLink()">Click to copy check-in link...</div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button class="btn btn-primary btn-sm" onclick="copyShareLink()">📋 Copy Link</button>
@@ -1318,8 +1318,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 <div class="modal-bg" id="ciSetupModal">
   <div class="modal" style="max-width:600px">
     <button class="modal-close" onclick="closeModal('ciSetupModal')">✕</button>
-    <div class="modal-title" style="color:var(--accent)">☁️ Set Up Cloud Sync</div>
-    <div class="modal-sub">Back up your coaching data. Access it on any device. 5 minutes, free forever.</div>
+    <div class="modal-title" style="color:var(--accent)">☁️ Cloud Sync Setup Wizard</div>
+    <div class="modal-sub">Back up your coaching data. Sync across all your devices. Enable real-time athlete check-ins. <strong style="color:var(--text)">Free forever — takes 5 minutes.</strong></div>
 
     <!-- Step indicator -->
     <div style="display:flex;align-items:center;gap:0;margin-bottom:24px;border:1px solid rgba(255,255,255,0.06);border-radius:var(--r-sm);overflow:hidden">
@@ -1453,9 +1453,16 @@ create policy "allow_all" on sp_sync
         <div style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:6px">Your Check-In Link</div>
         <div style="font-family:var(--fm);font-size:12px;color:var(--accent);word-break:break-all" id="wizFinalLink">—</div>
       </div>
+      <div style="background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.15);border-radius:var(--r-sm);padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--muted);line-height:1.65;text-align:left">
+        <div style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:5px">What happens now</div>
+        <div>📲 <strong style="color:var(--text)">Athletes</strong> open the link on their phone, fill in sliders (30 sec), tap Submit — their score appears in your Morning Brief automatically.</div>
+        <div style="margin-top:4px">💻 <strong style="color:var(--text)">Your other devices</strong> — just open this app and enter the same URL and anon key in Settings → Cloud Sync. Data syncs instantly.</div>
+        <div style="margin-top:4px">🔄 <strong style="color:var(--text)">Background sync</strong> runs every 30 seconds — no refresh needed.</div>
+      </div>
       <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-        <button class="btn btn-primary" onclick="wizCopyFinalLink(this)">📋 Copy Link</button>
-        <button class="btn btn-ghost" onclick="closeModal('ciSetupModal')">← Back to App</button>
+        <button class="btn btn-primary" onclick="wizCopyFinalLink(this)">📋 Copy Athlete Link</button>
+        <button class="btn btn-ghost btn-sm" onclick="closeModal('ciSetupModal');switchTab('settings')" style="font-size:11px">⚙️ Go to Settings</button>
+        <button class="btn btn-ghost btn-sm" onclick="closeModal('ciSetupModal')">← Back to App</button>
       </div>
     </div>
 
@@ -2077,13 +2084,28 @@ create policy "allow_all" on sp_sync
       </div>
     </div>
 
-    <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.05);border-radius:var(--r-xs);padding:14px 16px;margin-bottom:16px">
-      <div style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:10px">Setup — takes 5 minutes</div>
-      <div class="sb-step"><span class="sb-step-num">1</span><span>Go to <a href="https://supabase.com" target="_blank" style="color:var(--accent);text-decoration:underline">supabase.com</a> → New Project. Set a database password when prompted (save it, but you won't need it again). Wait for the green <strong style="color:var(--green)">Project is ready</strong> status before continuing.</span></div>
-      <div class="sb-step"><span class="sb-step-num">2</span><span>In the SQL Editor, run the <strong style="color:var(--text)">schema below</strong> (copy → paste → Run). You should see <strong style="color:var(--green)">Success. No rows returned</strong> — that's correct. <strong style="color:var(--text)">No other toggles needed</strong> — RLS is configured automatically by the SQL.</span></div>
-      <div class="sb-step"><span class="sb-step-num">3</span><span>Go to <strong style="color:var(--text)">Project Settings → API keys</strong>. Copy your <strong style="color:var(--text)">Project URL</strong> and <strong style="color:var(--text)">anon public key</strong>. Make sure it's the <strong style="color:var(--amber)">anon/public</strong> key — NOT the service_role key.</span></div>
-      <div class="sb-step"><span class="sb-step-num">4</span><span>Paste both below and hit <strong style="color:var(--text)">Save &amp; Connect</strong>. Done — all data syncs silently in the background.</span></div>
+    <!-- Wizard CTA -->
+    <div style="background:linear-gradient(135deg,rgba(0,212,240,0.07),rgba(139,92,246,0.05));border:1px solid rgba(0,212,240,0.2);border-radius:var(--r-sm);padding:16px 18px;margin-bottom:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <div style="font-size:28px;flex-shrink:0">🪄</div>
+      <div style="flex:1;min-width:180px">
+        <div style="font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:3px">New here? Use the Setup Wizard</div>
+        <div style="font-size:12px;color:var(--muted)">Step-by-step guide — takes 5 minutes, free forever. Walks you through creating your Supabase project, running the schema, and connecting.</div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="wizOpenFromSettings()" style="white-space:nowrap;flex-shrink:0">🪄 Open Wizard</button>
     </div>
+
+    <!-- Already have a project? Collapse to show manual steps -->
+    <details style="margin-bottom:14px">
+      <summary style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);cursor:pointer;padding:8px 0;list-style:none;display:flex;align-items:center;gap:6px">
+        <span>▸</span><span>Already have a Supabase project? Skip to manual setup</span>
+      </summary>
+      <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.05);border-radius:var(--r-xs);padding:14px 16px;margin-top:8px">
+        <div class="sb-step"><span class="sb-step-num">1</span><span>Go to <a href="https://supabase.com" target="_blank" style="color:var(--accent);text-decoration:underline">supabase.com</a> → New Project. Wait for the green <strong style="color:var(--green)">Project is ready</strong> status.</span></div>
+        <div class="sb-step"><span class="sb-step-num">2</span><span>In the SQL Editor, run the schema below (copy → paste → Run). You should see <strong style="color:var(--green)">Success. No rows returned</strong>.</span></div>
+        <div class="sb-step"><span class="sb-step-num">3</span><span>Go to <strong style="color:var(--text)">Project Settings → API keys</strong>. Copy your <strong style="color:var(--text)">Project URL</strong> and <strong style="color:var(--amber)">anon/public key</strong> (not service_role).</span></div>
+        <div class="sb-step"><span class="sb-step-num">4</span><span>Paste both in the fields below and hit <strong style="color:var(--text)">Save &amp; Connect</strong>.</span></div>
+      </div>
+    </details>
 
     <!-- SQL Schema snippet -->
     <div style="margin-bottom:16px">
@@ -2125,6 +2147,9 @@ create policy "allow_all" on sp_sync
       <button class="btn btn-ghost btn-sm" id="sbDisconnectBtn" onclick="sbDisconnect()" style="display:none;color:var(--red);border-color:rgba(239,68,68,0.2)">✕ Disconnect</button>
       <span class="saved-flash" id="sbFlash">Saved ✓</span>
       <span id="sbStatusMsg" style="font-size:12px;color:var(--muted2)"></span>
+    </div>
+    <div style="margin-top:8px">
+      <button onclick="wizOpenFromSettings()" style="background:none;border:none;color:var(--accent);font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;padding:0;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px">🪄 Need help? Open the step-by-step setup wizard →</button>
     </div>
 
     <div style="font-size:11px;color:var(--muted2);margin-top:10px;line-height:1.6">
@@ -4207,7 +4232,6 @@ function riGetAll() {
 }
 function riSaveAll(arr) {
   localStorage.setItem(RI_KEY, JSON.stringify(arr));
-  if (!DEMO_MODE && typeof sbSchedulePush === 'function') sbSchedulePush();
 }
 
 // Calculate readiness score 0-100 from inputs
@@ -4322,7 +4346,7 @@ function riStreak(athId) {
 // ── TIMELINE ENGINE ───────────────────────────────────────────────
 const TL_KEY = 'sp_timeline_v1';
 function tlGet() { try { return JSON.parse(localStorage.getItem(TL_KEY) || '[]'); } catch { return []; } }
-function tlSave(arr) { localStorage.setItem(TL_KEY, JSON.stringify(arr.slice(0, 80))); if (!DEMO_MODE && typeof sbSchedulePush === 'function') sbSchedulePush(); } // keep last 80
+function tlSave(arr) { localStorage.setItem(TL_KEY, JSON.stringify(arr.slice(0, 80))); } // keep last 80
 
 function tlAdd(item) {
   const all = tlGet();
@@ -4672,7 +4696,7 @@ function pwaDismiss() {
 // ══════════════════════════════════════════════════════════════════
 const FD_KEY = 'sp_fightdates_v1';
 function fdGetAll() { try { return JSON.parse(localStorage.getItem(FD_KEY) || '[]'); } catch { return []; } }
-function fdSaveAll(arr) { localStorage.setItem(FD_KEY, JSON.stringify(arr)); if (!DEMO_MODE && typeof sbSchedulePush === 'function') sbSchedulePush(); }
+function fdSaveAll(arr) { localStorage.setItem(FD_KEY, JSON.stringify(arr)); }
 
 function fdPopAthletes() {
   ['fdAthlete'].forEach(id => {
@@ -4925,6 +4949,75 @@ window.riUpdate = function(sliderId, valId) {
 // Stores last submitted check-in data for import link generation
 let _lastCiEntry = null;
 
+// ── Direct Supabase push from athlete device (no local creds needed) ──────────
+// Athlete opens the check-in share link on their phone. The link contains
+// base64-encoded Supabase URL+key so this device can push directly.
+async function ciDirectPush(entry) {
+  const params = new URLSearchParams(window.location.search);
+  const sbParam = params.get('sb');
+  if (!sbParam) return false;
+  try {
+    const decoded  = atob(sbParam);
+    const sepIdx   = decoded.indexOf('::');
+    if (sepIdx < 0) return false;
+    const sbUrl    = decoded.slice(0, sepIdx).replace(/\/$/,'');
+    const sbKey    = decoded.slice(sepIdx + 2);
+    if (!sbUrl || !sbKey) return false;
+
+    const hdrs = {
+      'Content-Type':  'application/json',
+      'apikey':        sbKey,
+      'Authorization': 'Bearer ' + sbKey,
+    };
+
+    // 1. Fetch current readiness array
+    const getRes = await fetch(`${sbUrl}/rest/v1/sp_sync?id=eq.readiness&select=value`, { headers: hdrs });
+    let existing = [];
+    if (getRes.ok) {
+      const rows = await getRes.json();
+      if (Array.isArray(rows) && rows.length && rows[0].value) {
+        try { existing = JSON.parse(rows[0].value); } catch {}
+      }
+    }
+    if (!Array.isArray(existing)) existing = [];
+    if (!existing.find(e => e && e.id === entry.id)) existing.unshift(entry);
+
+    // 2. Push merged readiness back
+    const pushRes = await fetch(`${sbUrl}/rest/v1/sp_sync?on_conflict=id`, {
+      method:  'POST',
+      headers: { ...hdrs, 'Prefer': 'resolution=merge-duplicates,return=minimal' },
+      body:    JSON.stringify([{
+        id: 'readiness', key: 'sp_readiness_v1',
+        value: JSON.stringify(existing),
+        updated_at: new Date().toISOString(),
+      }]),
+    });
+
+    // 3. Append to timeline in Supabase
+    try {
+      const tlGet  = await fetch(`${sbUrl}/rest/v1/sp_sync?id=eq.timeline&select=value`, { headers: hdrs });
+      let tl = [];
+      if (tlGet.ok) {
+        const tlRows = await tlGet.json();
+        if (Array.isArray(tlRows) && tlRows.length && tlRows[0].value) {
+          try { tl = JSON.parse(tlRows[0].value); } catch {}
+        }
+      }
+      if (!Array.isArray(tl)) tl = [];
+      tl.unshift({ id: uid(), ts: Date.now(), type: 'checkin', athName: entry.athName,
+        text: `Readiness score: ${entry.score}/100 — ${readinessVerdict(entry.score).label}` });
+      await fetch(`${sbUrl}/rest/v1/sp_sync?on_conflict=id`, {
+        method: 'POST',
+        headers: { ...hdrs, 'Prefer': 'resolution=merge-duplicates,return=minimal' },
+        body: JSON.stringify([{ id: 'timeline', key: 'sp_timeline_v1',
+          value: JSON.stringify(tl.slice(0, 200)), updated_at: new Date().toISOString() }]),
+      });
+    } catch(tlErr) { console.warn('[ci tl push]', tlErr); }
+
+    return pushRes.ok;
+  } catch(err) { console.warn('[ciDirectPush]', err); return false; }
+}
+
 function ciPageSubmit() {
   // Resolve name
   const sel      = document.getElementById('ciPageAthlete');
@@ -4964,36 +5057,48 @@ function ciPageSubmit() {
   // Store entry for import link
   _lastCiEntry = { id: uid(), athId, athName, date: today, sleep, energy, soreness, motivation, nutrition, pain, notes, sleepHrs, rhr, hrv, steps, cals, protein, score, ts: Date.now() };
 
-  const isSharedLink = window.location.search.includes('checkin=1');
-  const hasSbCreds   = sbGetCreds(); // true if Supabase is connected on this device
+  const isSharedLink  = window.location.search.includes('checkin=1');
+  const hasSbCreds    = sbGetCreds();
+  const sbParam       = new URLSearchParams(window.location.search).get('sb');
+  const canDirectPush = isSharedLink && !hasSbCreds && !!sbParam;
 
   if (!isSharedLink || hasSbCreds) {
-    // Coach's own device, OR athlete opened the link on a device with Supabase connected
-    // → save directly to local state and push to Supabase
+    // Coach's device, or athlete device that already has Supabase creds locally
     stripDemoData();
     const all = riGetAll();
     all.push(_lastCiEntry);
     riSaveAll(all);
     tlAdd({ type: 'checkin', athName, text: `Readiness score: ${score}/100 — ${readinessVerdict(score).label}` });
     dbRefresh(); briefRefresh();
-    // Push to Supabase so coach's laptop sees it immediately on next pull/refresh
     if (hasSbCreds) sbSchedulePush();
+  } else if (canDirectPush) {
+    // Athlete's own phone — Supabase creds embedded in share URL.
+    // Push check-in directly to Supabase so coach sees it instantly.
+    ciDirectPush(_lastCiEntry).then(ok => {
+      const msg = document.getElementById('ciPageDoneMsg');
+      if (msg) msg.textContent = ok
+        ? `${athName}, your check-in has been synced to your coach. ✓ See you at training.`
+        : `Done, ${athName}! Send the link below to your coach — they'll import it with one tap.`;
+      const ss = document.getElementById('ciSendSection');
+      if (ss) ss.style.display = ok ? 'none' : 'block';
+    });
   }
 
   // Show done screen
   const form = document.getElementById('checkinFormWrap'); if (form) form.style.display = 'none';
   const done = document.getElementById('ciPageDone');       if (done) done.style.display = 'block';
   const doneMsg = document.getElementById('ciPageDoneMsg');
-  if (doneMsg) doneMsg.textContent = (isSharedLink && !hasSbCreds)
-    ? `Done, ${athName}! Send the link below to your coach — they\'ll import it with one tap.`
-    : `${athName}, your check-in has been recorded and synced. See you at training.`;
+  if (doneMsg) doneMsg.textContent = canDirectPush
+    ? `Syncing check-in… See you at training, ${athName}!`
+    : (isSharedLink && !hasSbCreds)
+      ? `Done, ${athName}! Send the link below to your coach.`
+      : `${athName}, your check-in has been recorded and synced. See you at training.`;
   const doneScore = document.getElementById('ciPageDoneScore');
   if (doneScore) doneScore.textContent = `${score}/100 — ${readinessVerdict(score).label}`;
 
-  // Show send section only on shared link
-  // Only show the manual import/WhatsApp section if there's no Supabase — otherwise sync handled it
+  // Show WhatsApp fallback only when there's truly no Supabase path
   const sendSection = document.getElementById('ciSendSection');
-  if (sendSection) sendSection.style.display = (isSharedLink && !hasSbCreds) ? 'block' : 'none';
+  if (sendSection) sendSection.style.display = (isSharedLink && !hasSbCreds && !sbParam) ? 'block' : 'none';
 }
 
 // Build the import link the coach taps to pull in the athlete's data
@@ -5103,7 +5208,13 @@ function getShareLink() {
   const base = href.startsWith('http')
     ? href.split('?')[0]
     : 'https://strikepanel-app.vercel.app/app.html';
-  return `${base}?checkin=1`;
+  const params = new URLSearchParams({ checkin: '1' });
+  // Embed Supabase creds so athlete devices can push check-ins directly
+  sbGetCreds();
+  if (_sbUrl && _sbKey) {
+    try { params.set('sb', btoa(_sbUrl + '::' + _sbKey)); } catch(e) {}
+  }
+  return `${base}?${params.toString()}`;
 }
 function copyShareLink() {
   const link = getShareLink();
@@ -5885,6 +5996,7 @@ async function sbSaveAndConnect() {
 
     sbSetStatus('✓ Synced — ' + new Date().toLocaleTimeString(), 'var(--green)');
     ciShareRender(); // update share card state
+    sbStartPolling(); // 30s background poll
   } catch (err) {
     sbSetStatus('✗ ' + err.message, 'var(--red)');
     sbSetIndicator('error', '⚠ Error');
@@ -5899,6 +6011,7 @@ function sbDisconnect() {
   sbClearCreds();
   sbShowButtons(false);
   sbSetIndicator('off', '');
+  sbStopPolling();
   sbSetStatus('Disconnected. Data is local-only again.', 'var(--muted2)');
   ciShareRender(); // reset share card to locked state
   const urlEl = document.getElementById('sbUrlInput');
@@ -5910,17 +6023,7 @@ function sbDisconnect() {
 // ── Settings UI: Manual sync ──────────────────────────────────────────
 async function sbSyncNow() {
   sbSetStatus('Syncing…', 'var(--accent)');
-  sbSetIndicator('syncing', '☁ Syncing…');
-  try {
-    const pulled = await sbPull();
-    if (pulled) { loadState(); rehydrate(); }
-    await sbPush();
-    sbSetStatus('✓ Synced — ' + new Date().toLocaleTimeString(), 'var(--green)');
-    sbSetIndicator('synced', '☁ Cloud');
-  } catch (err) {
-    sbSetStatus('✗ Sync failed: ' + err.message.slice(0, 60), 'var(--red)');
-    sbSetIndicator('error', '⚠ Error');
-  }
+  await sbPush();
 }
 
 // ── Copy schema ───────────────────────────────────────────────────────
@@ -5982,6 +6085,12 @@ function wizGoTo(step) {
       ind.style.color = 'var(--muted2)';
     }
   });
+
+  // Clear error/status message when navigating away from step 4
+  const connMsg = document.getElementById('wizConnMsg');
+  if (connMsg) connMsg.style.display = 'none';
+  const connBtn = document.getElementById('wizConnectBtn');
+  if (connBtn) { connBtn.textContent = '⚡ Test & Connect'; connBtn.disabled = false; }
 
   // Pre-fill step 4 fields from existing saved creds
   if (step === 4 && sbGetCreds()) {
@@ -6054,9 +6163,18 @@ async function wizConnect() {
     } else if (isSuccess) {
       // body is an Array — connection confirmed, table accessible
       sbSetCreds(url, key);
-      sbSetIndicator('synced', '☁ Cloud');
+      sbSetIndicator('syncing', '☁ Syncing…');
       sbShowButtons(true);
-      sbSchedulePush();
+
+      // Pull any existing remote data first, then push local state
+      try {
+        const pulled = await sbPull();
+        if (pulled) { loadState(); setTimeout(() => { if (typeof rehydrate === 'function') rehydrate(); }, 80); }
+        await sbPush();
+      } catch(syncErr) { console.warn('[wiz sync]', syncErr); }
+
+      sbSetIndicator('synced', '☁ Cloud');
+      sbStartPolling(); // start 30s background poll
 
       // Show success step
       [1,2,3,4].forEach(s => { const el = document.getElementById('wizStep' + s); if (el) el.style.display = 'none'; });
@@ -6071,10 +6189,10 @@ async function wizConnect() {
       // Update share card in brief
       ciShareRender();
 
-      // Also sync settings panel inputs
+      // Sync settings panel inputs so they reflect connected state immediately
       const urlEl2 = document.getElementById('sbUrlInput'); if (urlEl2) urlEl2.value = url;
       const keyEl2 = document.getElementById('sbKeyInput'); if (keyEl2) keyEl2.value = key;
-      sbSetStatus('Connected via setup wizard.', 'var(--green)');
+      sbSetStatus('✓ Connected via setup wizard. Syncing…', 'var(--green)');
 
     } else {
       if (msgEl) { msgEl.style.display = 'block'; msgEl.style.background = 'rgba(239,68,68,0.08)'; msgEl.style.border = '1px solid rgba(239,68,68,0.2)'; msgEl.style.color = 'var(--red)'; msgEl.textContent = `✗ Connection failed (status ${resp.status}) — double-check your Project URL and anon key.`; }
@@ -6084,6 +6202,18 @@ async function wizConnect() {
     if (msgEl) { msgEl.style.display = 'block'; msgEl.style.background = 'rgba(239,68,68,0.08)'; msgEl.style.border = '1px solid rgba(239,68,68,0.2)'; msgEl.style.color = 'var(--red)'; msgEl.textContent = '✗ Could not reach Supabase — check the Project URL is correct and you have internet.'; }
     if (btn) { btn.textContent = '⚡ Test & Connect'; btn.disabled = false; }
   }
+}
+
+// Open wizard from Settings — resets to step 1 with a settings-context note
+function wizOpenFromSettings() {
+  // Reset wizard to step 1
+  wizGoTo(1);
+  // If already connected, jump straight to step 4 (re-configure)
+  if (sbGetCreds()) wizGoTo(4);
+  openModal('ciSetupModal');
+  // Scroll modal to top
+  const modal = document.querySelector('#ciSetupModal .modal');
+  if (modal) modal.scrollTop = 0;
 }
 
 // Copy the final share link on wizard success screen
@@ -6103,51 +6233,85 @@ saveState = function() {
   if (!DEMO_MODE) sbSchedulePush();
 };
 
+// ── Polling: auto-pull every 30s so coach dashboard stays live ──────────
+let _sbPollTimer = null;
+function sbStartPolling() {
+  if (_sbPollTimer) return;
+  _sbPollTimer = setInterval(async () => {
+    if (!sbGetCreds()) { clearInterval(_sbPollTimer); _sbPollTimer = null; return; }
+    try {
+      const pulled = await sbPull();
+      if (pulled) { loadState(); setTimeout(() => { if (typeof rehydrate === 'function') rehydrate(); }, 80); }
+    } catch(e) {}
+  }, 30000);
+}
+function sbStopPolling() { clearInterval(_sbPollTimer); _sbPollTimer = null; }
+
 // ── Boot: load credentials, populate fields, pull if connected ────────
 (async function sbBoot() {
-  // Always render the share card state on boot (connected or not)
   setTimeout(ciShareRender, 150);
 
-  if (!sbGetCreds()) {
+  const isCheckinPage = window.location.search.includes('checkin=1');
+  const urlParams     = new URLSearchParams(window.location.search);
+  const sbParam       = urlParams.get('sb');
+
+  // ── Athlete device: temporary creds from share URL ────────────────────
+  // Pull athlete roster so they get a proper name dropdown, then clear creds.
+  if (isCheckinPage && sbParam && !sbGetCreds()) {
+    try {
+      const decoded = atob(sbParam);
+      const sepIdx  = decoded.indexOf('::');
+      if (sepIdx > 0) {
+        const tmpUrl = decoded.slice(0, sepIdx).replace(/\/$/, '');
+        const tmpKey = decoded.slice(sepIdx + 2);
+        if (tmpUrl && tmpKey) {
+          _sbUrl = tmpUrl; _sbKey = tmpKey; // in-memory only
+          try {
+            const rows = await sbFetch('sp_sync?select=id,key,value');
+            if (Array.isArray(rows)) {
+              for (const row of rows) {
+                if (row.key === CP_KEY && row.value && row.value !== 'null') {
+                  try {
+                    const remote = JSON.parse(row.value);
+                    if (Array.isArray(remote.athletes) && remote.athletes.length) S.athletes = remote.athletes;
+                  } catch {}
+                }
+              }
+            }
+          } catch(e) { console.warn('[SB athlete pull]', e); }
+          _sbUrl = ''; _sbKey = ''; // clear — device stays disconnected
+          setTimeout(openAthleteCheckin, 80);
+        }
+      }
+    } catch(e) { console.warn('[SB checkin boot]', e); }
     sbSetIndicator('off', '');
     return;
   }
 
-  // Populate settings fields
+  if (!sbGetCreds()) { sbSetIndicator('off', ''); return; }
+
+  // ── Coach device: normal boot ─────────────────────────────────────────
   const urlEl = document.getElementById('sbUrlInput');
   const keyEl = document.getElementById('sbKeyInput');
   if (urlEl) urlEl.value = _sbUrl;
   if (keyEl) keyEl.value = _sbKey;
   sbShowButtons(true);
   sbSetIndicator('syncing', '☁ Connecting…');
+  clearTimeout(_sbPushTimer); _sbPushTimer = null;
 
-  // Cancel any push that rehydrate() may have scheduled — we pull first
-  clearTimeout(_sbPushTimer);
-  _sbPushTimer = null;
-
-  // Pull latest from Supabase on boot
   try {
     const pulled = await sbPull();
     if (pulled) {
       loadState();
-      // After loading pulled data, update the local timestamp so future pulls
-      // correctly detect when remote is newer than what we just pulled
       localStorage.setItem(SB_TS_KEY, Date.now().toString());
-      setTimeout(() => {
-        rehydrate();
-        // If this is the athlete check-in URL, re-open the form now that we have
-        // fresh data — the initial openAthleteCheckin() fired before the pull finished
-        if (window.location.search.includes('checkin=1')) {
-          openAthleteCheckin();
-        }
-      }, 100);
+      setTimeout(() => { rehydrate(); if (isCheckinPage) openAthleteCheckin(); }, 100);
     }
     const lastSync = localStorage.getItem(SB_TS_KEY);
-    const timeStr = lastSync ? new Date(parseInt(lastSync)).toLocaleTimeString() : 'never';
+    const timeStr  = lastSync ? new Date(parseInt(lastSync)).toLocaleTimeString() : 'never';
     sbSetIndicator('synced', '☁ Cloud');
     sbSetStatus('Last sync: ' + timeStr, 'var(--muted2)');
-    // Only push if nothing was pulled (avoid overwriting remote with fresh data from another device)
     if (!pulled) setTimeout(sbPush, 2000);
+    sbStartPolling(); // 30s background poll keeps coach dashboard live
   } catch (err) {
     console.warn('[SB boot]', err.message);
     sbSetIndicator('error', '☁ Offline');
