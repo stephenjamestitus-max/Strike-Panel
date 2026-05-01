@@ -2431,15 +2431,19 @@ create policy "allow_all" on sp_sync
     <button class="modal-close" onclick="closeModal('p2EmailModal')">✕</button>
     <div style="font-size:42px;margin-bottom:10px">🔓</div>
     <div class="modal-title" id="p2ModalFeature">Unlock This Feature</div>
-    <div class="modal-sub">This is a <strong style="color:var(--amber)">Phase 2</strong> feature. Drop your email and we'll let you know the moment Phase 2 launches — plus you'll get early access.</div>
+    <div class="modal-sub">This is a <strong style="color:var(--amber)">Phase 2</strong> feature. Drop your email and we'll notify you the moment it launches — plus early access pricing.</div>
     <div class="field" style="text-align:left">
       <div class="flabel">Your Email</div>
       <input class="finput" id="p2EmailInput" type="email" placeholder="coach@yourgym.com" style="margin-bottom:0">
     </div>
-    <div id="p2EmailMsg" style="font-size:12px;min-height:16px;margin:6px 0;color:var(--green)"></div>
-    <button class="btn btn-amber" style="width:100%;justify-content:center;padding:11px;margin-top:4px" onclick="p2EmailSubmit()">🚀 Notify Me at Launch</button>
+    <label style="display:flex;align-items:center;gap:9px;margin-top:12px;text-align:left;cursor:pointer;font-size:13px;color:var(--muted)">
+      <input type="checkbox" id="p2WhitelabelChk" style="width:16px;height:16px;accent-color:var(--accent);cursor:pointer;flex-shrink:0">
+      <span>Also interested in <strong style="color:var(--accent)">Studio Edition</strong> — white-label for your gym?</span>
+    </label>
+    <div id="p2EmailMsg" style="font-size:12px;min-height:16px;margin:8px 0 4px;color:var(--green)"></div>
+    <button class="btn btn-amber" style="width:100%;justify-content:center;padding:11px;margin-top:4px" onclick="p2EmailSubmit()">🚀 Reserve My Spot</button>
     <div style="margin-top:10px"><button class="btn btn-ghost btn-sm" onclick="closeModal('p2EmailModal')">Maybe later</button></div>
-    <div style="font-size:11px;color:var(--muted2);margin-top:10px">No spam. One email when it's ready. That's it.</div>
+    <div style="font-size:11px;color:var(--muted2);margin-top:10px">No spam. One email when it's ready.</div>
   </div>
 </div>
 
@@ -2557,6 +2561,8 @@ function p2(e,name){
   const msgEl=document.getElementById('p2EmailMsg');if(msgEl)msgEl.textContent='';
   const inp = document.getElementById('p2EmailInput');
   if(inp) inp.value = '';
+  const chk = document.getElementById('p2WhitelabelChk');
+  if(chk) chk.checked = false;
   openModal('p2EmailModal');
   // Also show quick toast
   const t=document.getElementById('p2ToastEl');
@@ -2567,17 +2573,20 @@ function p2EmailSubmit(){
   const email = (document.getElementById('p2EmailInput')?.value||'').trim();
   const msg = document.getElementById('p2EmailMsg');
   const btn = document.querySelector('#p2EmailModal .btn-amber');
+  const wlChecked = document.getElementById('p2WhitelabelChk')?.checked || false;
   if(!email||!email.includes('@')||!email.includes('.')){if(!msg)return;
     msg.textContent='Please enter a valid email address';msg.style.color='var(--red)';return;
   }
+  const feature = document.getElementById('p2ModalFeature')?.textContent?.replace('Unlock: ','') || 'General';
+  const whitelabel = wlChecked ? 'Yes — interested in Studio Edition' : 'No';
   // Store interest locally always
   const interests = JSON.parse(localStorage.getItem('cp_p2_interest')||'[]');
-  const feature = document.getElementById('p2ModalFeature')?.textContent?.replace('Unlock: ','') || 'General';
-  const entry = {email, feature, date: new Date().toISOString()};
-  // Prevent duplicates for same email+feature
+  const entry = {email, feature, whitelabel, date: new Date().toISOString()};
   const already = interests.find(i=>i.email===email&&i.feature===feature);
   if(!already) { interests.push(entry); localStorage.setItem('cp_p2_interest', JSON.stringify(interests)); }
-  // Send via Web3Forms if access key is configured
+  const subject = wlChecked
+    ? '⭐ StrikePanel™ — Studio Edition Enquiry + Phase 2: ' + feature
+    : 'StrikePanel™ — Phase 2 Interest: ' + feature;
   if(CONFIG.W3F_ENABLED) {
     if(btn){btn.textContent='Sending...';btn.disabled=true;}
     fetch('https://api.web3forms.com/submit', {
@@ -2586,24 +2595,24 @@ function p2EmailSubmit(){
       body: JSON.stringify({
         access_key: CONFIG.W3F_ACCESS_KEY,
         to_email: 'corepanelv1@gmail.com',
-        subject: 'StrikePanel™ — Phase 2 Interest: ' + feature,
+        subject,
         from_name: 'StrikePanel™',
-        email, feature,
+        email, feature, whitelabel,
         date: new Date().toLocaleString()
       })
     }).then(r=>r.json()).then(data=>{
       if(data.success){
-        msg.textContent = '✓ You\'re on the list! We\'ll email you at launch.';
+        msg.textContent = wlChecked ? '✓ Enquiry sent! We\'ll be in touch about Studio Edition.' : '✓ You\'re on the list! We\'ll email you at launch.';
         msg.style.color = 'var(--green)';
-        if(btn){btn.textContent='🚀 Notify Me at Launch';btn.disabled=false;}
-        setTimeout(()=>closeModal('p2EmailModal'), 2000);
+        if(btn){btn.textContent='🚀 Reserve My Spot';btn.disabled=false;}
+        setTimeout(()=>closeModal('p2EmailModal'), 2200);
       } else { throw new Error(data.message||'Failed'); }
     }).catch(err=>{
       console.warn('[Web3Forms]',err);
-      msg.textContent = '✓ Saved locally! (notification failed — check access key)';
+      msg.textContent = '✓ Got it! We\'ll be in touch.';
       msg.style.color = 'var(--amber)';
-      if(btn){btn.textContent='🚀 Notify Me at Launch';btn.disabled=false;}
-      setTimeout(()=>closeModal('p2EmailModal'), 2500);
+      if(btn){btn.textContent='🚀 Reserve My Spot';btn.disabled=false;}
+      setTimeout(()=>closeModal('p2EmailModal'), 2200);
     });
   } else {
     msg.textContent = already ? '✓ Already on the list! We\'ll be in touch.' : '✓ You\'re on the list! We\'ll email you at launch.';
