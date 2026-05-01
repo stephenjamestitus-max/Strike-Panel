@@ -2173,24 +2173,9 @@ create policy "allow_all" on sp_sync
       </div>
 
     <!-- Lock screen -->
-    <div id="adminLockScreen">
-      <div style="font-size:12.5px;color:var(--muted);margin-bottom:12px;line-height:1.65">
-        This section is for the app owner. Enter the admin password to access leads and configuration.
-      </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-        <input class="finput" id="adminPassInput" type="password" placeholder="Admin password…"
-          style="flex:1;min-width:180px;max-width:280px"
-          onkeydown="if(event.key==='Enter')adminUnlock()">
-        <button class="btn btn-amber btn-sm" onclick="adminUnlock()">🔓 Unlock</button>
-        <span id="adminLockMsg" style="font-size:11.5px;color:var(--red)"></span>
-      </div>
-    </div>
-
-    <!-- Admin content — hidden until password entered -->
-    <div id="adminPanel" style="display:none">
+    <div id="adminPanel">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
         <div class="card-title"><span class="ctdot" style="background:var(--amber);box-shadow:0 0 5px var(--amber)"></span>Phase 2 Leads <span id="p2LeadCount" style="font-size:11px;color:var(--amber);margin-left:4px"></span></div>
-        <button class="btn btn-ghost btn-sm" onclick="adminLock()" style="color:var(--muted2)">🔒 Lock</button>
       </div>
       <div style="font-size:12.5px;color:var(--muted);margin-bottom:12px;line-height:1.6">People who clicked a Phase 2 feature and left their email.</div>
       <div id="p2LeadsTable" style="margin-bottom:14px"></div>
@@ -4032,43 +4017,6 @@ setTimeout(() => {
   }
 }, 60);
 
-// ══════════════════════════════════════════════════════════════════════
-// Change ADMIN_PASSWORD below to your own private password.
-// This is stored only in the JS — don't share the file publicly with
-// your real password. Customers get the app, not the source code.
-// ══════════════════════════════════════════════════════════════════════
-const ADMIN_PASSWORD = 'SP-ADMIN-2024'; // ← Change this before distributing
-
-function adminUnlock() {
-  const input = document.getElementById('adminPassInput');
-  const msgEl = document.getElementById('adminLockMsg');
-  const entered = (input?.value || '').trim();
-  if (entered === ADMIN_PASSWORD) {
-    document.getElementById('adminLockScreen').style.display = 'none';
-    document.getElementById('adminPanel').style.display = 'block';
-    if (input) input.value = '';
-    if (msgEl) msgEl.textContent = '';
-    // Load admin data
-    p2RenderLeads();
-    w3fLoad();
-    adminLicDiag();
-    // Remember unlocked for this session only (not persisted)
-    sessionStorage.setItem('sp_admin_unlocked', '1');
-  } else {
-    if (msgEl) { msgEl.textContent = 'Incorrect password.'; }
-    input?.classList.add('err');
-    setTimeout(() => { input?.classList.remove('err'); if(msgEl) msgEl.textContent=''; }, 2000);
-  }
-}
-
-function adminLock() {
-  document.getElementById('adminLockScreen').style.display = 'block';
-  document.getElementById('adminPanel').style.display = 'none';
-  sessionStorage.removeItem('sp_admin_unlocked');
-  const inp = document.getElementById('adminPassInput');
-  if (inp) inp.value = '';
-}
-
 function adminLicDiag() {
   const el = document.getElementById('adminLicDiag');
   if (!el) return;
@@ -4089,15 +4037,11 @@ function adminRevokeLicense() {
   alert('License revoked from this browser.');
 }
 
-// Restore admin session if still unlocked (survives tab refresh within same session)
-if (sessionStorage.getItem('sp_admin_unlocked') === '1') {
-  document.addEventListener('DOMContentLoaded', () => {
-    const ls = document.getElementById('adminLockScreen');
-    const ap = document.getElementById('adminPanel');
-    if (ls) ls.style.display = 'none';
-    if (ap) ap.style.display = 'block';
-  });
-}
+document.addEventListener('DOMContentLoaded', () => {
+  p2RenderLeads();
+  w3fLoad();
+  adminLicDiag();
+});
 
 // ── PHASE 2 LEADS ─────────────────────────────────────────────────────
 function p2RenderLeads() {
