@@ -11,14 +11,14 @@
 <meta property="og:type"        content="website"/>
 <meta property="og:title"       content="Daily Check-In — StrikePanel™"/>
 <meta property="og:description" content="Your coach wants your daily readiness check-in. Takes 30 seconds."/>
-<meta property="og:image"       content="https://strikepanel-app.vercel.app/og.png" id="metaOgImage"/>
+<meta property="og:image"       content="https://strikepanel.vercel.app/og.png" id="metaOgImage"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height"content="630"/>
-<meta property="og:url"         content="https://strikepanel-app.vercel.app/" id="metaOgUrl"/>
+<meta property="og:url"         content="https://strikepanel.vercel.app/" id="metaOgUrl"/>
 <meta name="twitter:card"       content="summary_large_image"/>
 <meta name="twitter:title"      content="Daily Check-In — StrikePanel™"/>
 <meta name="twitter:description"content="Your coach wants your daily readiness check-in. Takes 30 seconds."/>
-<meta name="twitter:image"      content="https://strikepanel-app.vercel.app/og.png"/>
+<meta name="twitter:image"      content="https://strikepanel.vercel.app/og.png"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -2271,7 +2271,10 @@ create policy "allow_all" on sp_sync
 <!-- Kept outside <main> so hiding .wrap doesn't hide this fixed overlay -->
 <div class="checkin-page" id="athleteCheckinPage">
   <div class="checkin-hero">
-    <div style="font-size:32px;margin-bottom:8px">🥊</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px">
+      <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" style="width:40px;height:40px;flex-shrink:0"><defs><radialGradient id="ci-orb" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="55%" stop-color="#0f1220"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs><circle cx="45" cy="45" r="43" fill="url(#ci-orb)" stroke="#00D4F0" stroke-width="1.5" stroke-opacity="0.6"/><circle cx="45" cy="45" r="29" fill="none" stroke="#00D4F0" stroke-width="1" stroke-opacity="0.25"/><line x1="45" y1="2" x2="45" y2="27" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><line x1="45" y1="63" x2="45" y2="88" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><line x1="2" y1="45" x2="27" y2="45" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><line x1="63" y1="45" x2="88" y2="45" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><circle cx="45" cy="45" r="10" fill="#00D4F0"/><text x="45" y="49" font-family="Arial Black,sans-serif" font-weight="700" font-size="8" fill="#0b0d14" text-anchor="middle">SP</text></svg>
+      <span style="font-family:var(--fh);font-size:18px;letter-spacing:3px;color:var(--text)">STRIKEPANEL™</span>
+    </div>
     <div class="checkin-hero-title">DAILY CHECK-IN</div>
     <div class="checkin-hero-sub" id="ciPageSub">How are you feeling today?</div>
   </div>
@@ -2428,15 +2431,19 @@ create policy "allow_all" on sp_sync
     <button class="modal-close" onclick="closeModal('p2EmailModal')">✕</button>
     <div style="font-size:42px;margin-bottom:10px">🔓</div>
     <div class="modal-title" id="p2ModalFeature">Unlock This Feature</div>
-    <div class="modal-sub">This is a <strong style="color:var(--amber)">Phase 2</strong> feature. Drop your email and we'll let you know the moment Phase 2 launches — plus you'll get early access.</div>
+    <div class="modal-sub">This is a <strong style="color:var(--amber)">Phase 2</strong> feature. Drop your email and we'll notify you the moment it launches — plus early access pricing.</div>
     <div class="field" style="text-align:left">
       <div class="flabel">Your Email</div>
       <input class="finput" id="p2EmailInput" type="email" placeholder="coach@yourgym.com" style="margin-bottom:0">
     </div>
-    <div id="p2EmailMsg" style="font-size:12px;min-height:16px;margin:6px 0;color:var(--green)"></div>
-    <button class="btn btn-amber" style="width:100%;justify-content:center;padding:11px;margin-top:4px" onclick="p2EmailSubmit()">🚀 Notify Me at Launch</button>
+    <label style="display:flex;align-items:center;gap:9px;margin-top:12px;text-align:left;cursor:pointer;font-size:13px;color:var(--muted)">
+      <input type="checkbox" id="p2WhitelabelChk" style="width:16px;height:16px;accent-color:var(--accent);cursor:pointer;flex-shrink:0">
+      <span>Also interested in <strong style="color:var(--accent)">Studio Edition</strong> — white-label for your gym?</span>
+    </label>
+    <div id="p2EmailMsg" style="font-size:12px;min-height:16px;margin:8px 0 4px;color:var(--green)"></div>
+    <button class="btn btn-amber" style="width:100%;justify-content:center;padding:11px;margin-top:4px" onclick="p2EmailSubmit()">🚀 Reserve My Spot</button>
     <div style="margin-top:10px"><button class="btn btn-ghost btn-sm" onclick="closeModal('p2EmailModal')">Maybe later</button></div>
-    <div style="font-size:11px;color:var(--muted2);margin-top:10px">No spam. One email when it's ready. That's it.</div>
+    <div style="font-size:11px;color:var(--muted2);margin-top:10px">No spam. One email when it's ready.</div>
   </div>
 </div>
 
@@ -2554,6 +2561,8 @@ function p2(e,name){
   const msgEl=document.getElementById('p2EmailMsg');if(msgEl)msgEl.textContent='';
   const inp = document.getElementById('p2EmailInput');
   if(inp) inp.value = '';
+  const chk = document.getElementById('p2WhitelabelChk');
+  if(chk) chk.checked = false;
   openModal('p2EmailModal');
   // Also show quick toast
   const t=document.getElementById('p2ToastEl');
@@ -2564,17 +2573,20 @@ function p2EmailSubmit(){
   const email = (document.getElementById('p2EmailInput')?.value||'').trim();
   const msg = document.getElementById('p2EmailMsg');
   const btn = document.querySelector('#p2EmailModal .btn-amber');
+  const wlChecked = document.getElementById('p2WhitelabelChk')?.checked || false;
   if(!email||!email.includes('@')||!email.includes('.')){if(!msg)return;
     msg.textContent='Please enter a valid email address';msg.style.color='var(--red)';return;
   }
+  const feature = document.getElementById('p2ModalFeature')?.textContent?.replace('Unlock: ','') || 'General';
+  const whitelabel = wlChecked ? 'Yes — interested in Studio Edition' : 'No';
   // Store interest locally always
   const interests = JSON.parse(localStorage.getItem('cp_p2_interest')||'[]');
-  const feature = document.getElementById('p2ModalFeature')?.textContent?.replace('Unlock: ','') || 'General';
-  const entry = {email, feature, date: new Date().toISOString()};
-  // Prevent duplicates for same email+feature
+  const entry = {email, feature, whitelabel, date: new Date().toISOString()};
   const already = interests.find(i=>i.email===email&&i.feature===feature);
   if(!already) { interests.push(entry); localStorage.setItem('cp_p2_interest', JSON.stringify(interests)); }
-  // Send via Web3Forms if access key is configured
+  const subject = wlChecked
+    ? '⭐ StrikePanel™ — Studio Edition Enquiry + Phase 2: ' + feature
+    : 'StrikePanel™ — Phase 2 Interest: ' + feature;
   if(CONFIG.W3F_ENABLED) {
     if(btn){btn.textContent='Sending...';btn.disabled=true;}
     fetch('https://api.web3forms.com/submit', {
@@ -2582,24 +2594,25 @@ function p2EmailSubmit(){
       headers:{'Content-Type':'application/json','Accept':'application/json'},
       body: JSON.stringify({
         access_key: CONFIG.W3F_ACCESS_KEY,
-        subject: 'StrikePanel™ — Phase 2 Interest: ' + feature,
+        to_email: 'corepanelv1@gmail.com',
+        subject,
         from_name: 'StrikePanel™',
-        email, feature,
+        email, feature, whitelabel,
         date: new Date().toLocaleString()
       })
     }).then(r=>r.json()).then(data=>{
       if(data.success){
-        msg.textContent = '✓ You\'re on the list! We\'ll email you at launch.';
+        msg.textContent = wlChecked ? '✓ Enquiry sent! We\'ll be in touch about Studio Edition.' : '✓ You\'re on the list! We\'ll email you at launch.';
         msg.style.color = 'var(--green)';
-        if(btn){btn.textContent='🚀 Notify Me at Launch';btn.disabled=false;}
-        setTimeout(()=>closeModal('p2EmailModal'), 2000);
+        if(btn){btn.textContent='🚀 Reserve My Spot';btn.disabled=false;}
+        setTimeout(()=>closeModal('p2EmailModal'), 2200);
       } else { throw new Error(data.message||'Failed'); }
     }).catch(err=>{
       console.warn('[Web3Forms]',err);
-      msg.textContent = '✓ Saved locally! (notification failed — check access key)';
+      msg.textContent = '✓ Got it! We\'ll be in touch.';
       msg.style.color = 'var(--amber)';
-      if(btn){btn.textContent='🚀 Notify Me at Launch';btn.disabled=false;}
-      setTimeout(()=>closeModal('p2EmailModal'), 2500);
+      if(btn){btn.textContent='🚀 Reserve My Spot';btn.disabled=false;}
+      setTimeout(()=>closeModal('p2EmailModal'), 2200);
     });
   } else {
     msg.textContent = already ? '✓ Already on the list! We\'ll be in touch.' : '✓ You\'re on the list! We\'ll email you at launch.';
@@ -3830,7 +3843,7 @@ function exportCSV(type) {
 // ═══════════════════════════════════════════════════════════════════════
 const CONFIG = {
   get GEMINI_API_KEY() { return localStorage.getItem('cp_gemini_key') || ''; },
-  get W3F_ACCESS_KEY() { return localStorage.getItem('cp_w3f_key')||''; },
+  get W3F_ACCESS_KEY() { return localStorage.getItem('cp_w3f_key')||'f1a464fe-fe1c-4405-a301-153c87c444d0'; },
   get W3F_ENABLED() { return !!this.W3F_ACCESS_KEY; },
 };
 // ═══════════════════════════════════════════════════════════════════════
