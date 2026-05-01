@@ -2172,8 +2172,8 @@ create policy "allow_all" on sp_sync
   </div>
       </div>
 
-    <!-- Lock screen -->
-    <div id="adminPanel">
+    <!-- Owner-only panel: only rendered when ?admin=1 is in the URL -->
+    <div id="adminPanel" style="display:none">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
         <div class="card-title"><span class="ctdot" style="background:var(--amber);box-shadow:0 0 5px var(--amber)"></span>Phase 2 Leads <span id="p2LeadCount" style="font-size:11px;color:var(--amber);margin-left:4px"></span></div>
       </div>
@@ -4038,9 +4038,13 @@ function adminRevokeLicense() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  p2RenderLeads();
-  w3fLoad();
-  adminLicDiag();
+  if (new URLSearchParams(window.location.search).get('admin') === '1') {
+    const ap = document.getElementById('adminPanel');
+    if (ap) ap.style.display = 'block';
+    p2RenderLeads();
+    w3fLoad();
+    adminLicDiag();
+  }
 });
 
 // ── PHASE 2 LEADS ─────────────────────────────────────────────────────
