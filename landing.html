@@ -4,9 +4,9 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>StrikePanel™ — Know Who to Push. Know Who to Protect.</title>
-<meta name="description" content="Athletes check in from their phones in 30 seconds. You get a daily readiness brief — who to push hard, who to rest. Fight countdowns, weight cuts, AI workouts. One-time $149. No subscription."/>
+<meta name="description" content="Athletes check in from their phones in 30 seconds. You get a daily readiness brief — who to push hard, who to rest. Fight countdowns, weight cuts, AI workouts. Founding price $99 — goes to $149 June 1. No subscription."/>
 <meta property="og:title" content="StrikePanel™ — Training Intelligence"/>
-<meta property="og:description" content="Athlete self check-ins → your Morning Brief. Know who to push and who to protect every morning. One-time $149."/>
+<meta property="og:description" content="Athlete self check-ins → your Morning Brief. Know who to push and who to protect every morning. Founding price $99 — one-time, no subscription."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://strikepanel.vercel.app/landing"/>
 <meta property="og:image" content="https://strikepanel.vercel.app/og.png"/>
@@ -32,7 +32,7 @@
       "description": "Combat sports coaching app. Athlete check-ins, morning readiness brief, fight countdowns, AI workout generator. One-time payment.",
       "offers": {
         "@type": "Offer",
-        "price": "149",
+        "price": "99",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
         "url": "https://strikepanel.gumroad.com"
@@ -489,11 +489,69 @@ body::after{
 
 /* Subtle grid overlay */
 .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.018;background-image:linear-gradient(rgba(0,212,240,1) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,240,1) 1px,transparent 1px);background-size:60px 60px}
+
+/* ── URGENCY BANNER ── */
+.urgency-bar{position:relative;z-index:200;background:linear-gradient(90deg,#0a1628,#0f1e38,#0a1628);border-bottom:1px solid rgba(0,212,240,0.25);padding:10px 20px;text-align:center;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.urgency-pulse{width:8px;height:8px;border-radius:50%;background:#00D4F0;box-shadow:0 0 10px #00D4F0;animation:upulse 1.4s ease-in-out infinite;flex-shrink:0}
+@keyframes upulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(0.85)}}
+.urgency-text{font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:.5px;color:var(--text)}
+.urgency-text .strike{text-decoration:line-through;color:var(--muted2);font-weight:400}
+.urgency-text .price-now{color:#00D4F0}
+.urgency-divider{color:var(--muted2);font-size:11px}
+.urgency-countdown{font-family:var(--fm);font-size:13px;color:var(--amber);letter-spacing:1px}
+.urgency-cta{background:rgba(0,212,240,0.12);border:1px solid rgba(0,212,240,0.3);color:#00D4F0;font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:30px;text-decoration:none;white-space:nowrap;transition:background .15s}
+.urgency-cta:hover{background:rgba(0,212,240,0.22)}
+@media(max-width:520px){.urgency-divider,.urgency-cta{display:none}}
+
+/* ── TESTIMONIALS ── */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+@media(max-width:860px){.testi-grid{grid-template-columns:1fr}}
+.testi-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 24px;position:relative;overflow:hidden}
+.testi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,212,240,0.4),transparent)}
+.testi-stars{color:#f59e0b;font-size:13px;margin-bottom:12px;letter-spacing:2px}
+.testi-quote{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:18px;font-style:italic}
+.testi-quote strong{color:var(--text);font-style:normal}
+.testi-author{display:flex;align-items:center;gap:12px}
+.testi-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:16px;flex-shrink:0;letter-spacing:1px}
+.testi-name{font-family:var(--fc);font-size:13px;font-weight:700;color:var(--text);letter-spacing:.3px}
+.testi-role{font-size:11.5px;color:var(--muted2);margin-top:1px}
+
+/* ── VS COMPARISON ── */
+.vs-strip{display:grid;grid-template-columns:1fr auto 1fr;gap:0;margin-top:48px;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.vs-col{padding:28px 24px}
+.vs-col.old{background:rgba(239,68,68,0.04)}
+.vs-col.new{background:rgba(0,212,240,0.04)}
+.vs-label{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.vs-label.bad{color:var(--red)}
+.vs-label.good{color:var(--accent)}
+.vs-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--muted);margin-bottom:11px;line-height:1.5}
+.vs-x{color:var(--red);flex-shrink:0;font-size:15px;margin-top:0px}
+.vs-check{color:var(--green);flex-shrink:0;font-size:15px;margin-top:0px}
+.vs-mid{background:rgba(255,255,255,0.03);border-left:1px solid var(--border);border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:16px;writing-mode:vertical-rl;font-family:var(--fh);font-size:28px;color:var(--muted2);letter-spacing:3px}
+@media(max-width:640px){.vs-strip{grid-template-columns:1fr}.vs-mid{writing-mode:horizontal-tb;padding:10px;font-size:18px;border-left:none;border-right:none;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}}
+
+/* ── GUARANTEE BADGE ── */
+.guarantee-badge{display:flex;align-items:center;gap:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:12px;padding:16px 20px;margin:20px 0;text-align:left}
+.guarantee-icon{font-size:28px;flex-shrink:0}
+.guarantee-text{font-size:13px;color:var(--muted);line-height:1.6}
+.guarantee-text strong{color:var(--green);display:block;margin-bottom:2px;font-size:13.5px}
 </style>
 </head>
 <body>
 
 <div class="grid-bg"></div>
+
+<!-- ── URGENCY BANNER ── -->
+<div class="urgency-bar">
+  <div class="urgency-pulse"></div>
+  <div class="urgency-text">
+    🚀 Founding Price: <span class="price-now">$99</span> &nbsp;→&nbsp; <span class="strike">$149</span> after June 1
+  </div>
+  <div class="urgency-divider">·</div>
+  <div class="urgency-countdown" id="urgencyCountdown"></div>
+  <div class="urgency-divider">·</div>
+  <a href="https://strikepanel.gumroad.com" target="_blank" class="urgency-cta">Lock in $99 →</a>
+</div>
 
 <!-- ── NAV ── -->
 <nav class="nav">
@@ -518,7 +576,7 @@ body::after{
     <a href="https://strikepanel.vercel.app/?demo=1" target="_blank" class="nav-link">👁 Live Demo</a>
     <a href="https://strikepanel.gumroad.com" target="_blank" class="nav-cta">
       <svg width="17" height="17" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><circle cx="45" cy="45" r="43" fill="#050e1a" stroke="rgba(5,14,26,0.5)" stroke-width="1"/><line x1="45" y1="2" x2="45" y2="26" stroke="#050e1a" stroke-width="3" stroke-linecap="round"/><line x1="45" y1="64" x2="45" y2="88" stroke="#050e1a" stroke-width="3" stroke-linecap="round"/><line x1="2" y1="45" x2="26" y2="45" stroke="#050e1a" stroke-width="3" stroke-linecap="round"/><line x1="64" y1="45" x2="88" y2="45" stroke="#050e1a" stroke-width="3" stroke-linecap="round"/><circle cx="45" cy="45" r="12" fill="#050e1a"/><text x="45" y="50" font-family="'Arial Black',Arial" font-size="11" font-weight="900" fill="#00D4F0" text-anchor="middle" dominant-baseline="middle" dy="0">SP</text></svg>
-      Get it — $149
+      Get it — $99
     </a>
   </div>
 </nav>
@@ -540,14 +598,14 @@ body::after{
 
     <p class="hero-hook">Every morning. Every athlete. <strong>Zero guesswork.</strong></p>
     <p class="hero-sub">
-      Built for <strong>combat coaches and gym trainers alike.</strong> Athletes check in from their phone in 30 seconds — you get a daily readiness brief with exactly who to push hard and who to back off. Fight countdowns, AI workouts, round timer, weight cuts. <strong>One file. One price. No subscription.</strong>
+      You've been guessing — and it costs you. <strong>Overtrained fighters get injured. Under-coached athletes stall.</strong> StrikePanel gives you a daily readiness score for every athlete before training starts, so you make the right call every session. Fight countdowns, weight cuts, AI workouts, offline timer. <strong>One file. One price. No subscription.</strong>
     </p>
 
     <div style="display:flex;justify-content:center;margin-bottom:28px">
       <div class="price-flash">
-        <div class="price-num">$149</div>
+        <div class="price-num" style="display:flex;align-items:baseline;gap:10px">$99<span style="font-size:40%;color:var(--muted2);text-decoration:line-through;font-weight:400">$149</span></div>
         <div class="price-detail">
-          <div class="once">One-time payment</div>
+          <div class="once">Founding price · One-time</div>
           <div class="never">No subscription. Ever.</div>
         </div>
       </div>
@@ -556,7 +614,7 @@ body::after{
     <div class="hero-actions">
       <a href="https://strikepanel.gumroad.com" target="_blank" class="btn-primary">
         <svg width="18" height="18" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><defs><radialGradient id="btn-orb2" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1a2236"/><stop offset="100%" stop-color="#050810"/></radialGradient></defs><circle cx="45" cy="45" r="43" fill="url(#btn-orb2)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="45" cy="45" r="29" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/><line x1="45" y1="2" x2="45" y2="27" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="45" y1="63" x2="45" y2="88" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="2" y1="45" x2="27" y2="45" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="63" y1="45" x2="88" y2="45" stroke="white" stroke-width="2.8" stroke-linecap="round"/><circle cx="45" cy="45" r="11" fill="white"/><text x="45" y="49.5" font-family="Arial Black,sans-serif" font-weight="900" font-size="9" fill="#050810" text-anchor="middle">SP</text></svg>
-        Get StrikePanel — $149
+        Lock in $99 — Founding Price
       </a>
       <a href="https://strikepanel.vercel.app/?demo=1" target="_blank" class="btn-ghost">👁 Try Live Demo Free</a>
     </div>
@@ -822,7 +880,7 @@ body::after{
       <div class="who-card reveal rd2">
         <div class="who-icon">👥</div>
         <div class="who-title">Fight Teams</div>
-        <div class="who-desc">Up to 20 fighters. Split the cost — <strong style="color:var(--accent)">under $8 per fighter</strong> for a squad of 20. Athletes check in from their own phones. Coach sees everything in one brief.</div>
+        <div class="who-desc">Up to 20 fighters. One license, no per-seat fees. Athletes check in from their own phones — coach sees everyone's readiness in one morning brief.</div>
       </div>
       <div class="who-card reveal rd3">
         <div class="who-icon">🌐</div>
@@ -1242,7 +1300,7 @@ body::after{
         <a href="https://strikepanel.vercel.app/?demo=1" target="_blank" class="btn-ghost">👁 Open Live Demo</a>
         <a href="https://strikepanel.gumroad.com" target="_blank" class="btn-primary">
           <svg width="18" height="18" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><defs><radialGradient id="btn-orb2" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1a2236"/><stop offset="100%" stop-color="#050810"/></radialGradient></defs><circle cx="45" cy="45" r="43" fill="url(#btn-orb2)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="45" cy="45" r="29" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/><line x1="45" y1="2" x2="45" y2="27" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="45" y1="63" x2="45" y2="88" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="2" y1="45" x2="27" y2="45" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="63" y1="45" x2="88" y2="45" stroke="white" stroke-width="2.8" stroke-linecap="round"/><circle cx="45" cy="45" r="11" fill="white"/><text x="45" y="49.5" font-family="Arial Black,sans-serif" font-weight="900" font-size="9" fill="#050810" text-anchor="middle">SP</text></svg>
-          Get StrikePanel — $149
+          Get StrikePanel — $99
         </a>
       </div>
     </div>
@@ -1325,15 +1383,15 @@ body::after{
 <section class="section" style="padding-top:64px;padding-bottom:64px">
   <div class="section-inner">
     <div class="reveal">
-      <span class="s-kicker">👥 Split it with your team</span>
-      <h2 class="s-title">20 fighters.<br><span style="color:var(--accent)">$7.45 each.</span></h2>
-      <p class="s-sub">One person buys. The whole team benefits. That's less than a protein shake per fighter for a full camp intelligence system — all year.</p>
+      <span class="s-kicker">👥 Built for fight teams</span>
+      <h2 class="s-title">One coach buys.<br><span style="color:var(--accent)">The whole team wins.</span></h2>
+      <p class="s-sub">One license. Up to 20 athletes. Every fighter checks in from their own phone — you see everyone's readiness in one brief. No per-seat pricing. No per-athlete fees. Ever.</p>
     </div>
     <div class="split-card reveal">
       <div class="split-inner">
         <div>
-          <div class="split-big">$7<span style="font-size:50%;color:var(--muted2)">.45</span></div>
-          <div class="split-label">Per fighter (team of 20)</div>
+          <div class="split-big">20</div>
+          <div class="split-label">Athletes. One license.</div>
         </div>
         <div>
           <div class="split-row">
@@ -1354,7 +1412,7 @@ body::after{
             <div class="split-ico">♾️</div>
             <div class="split-text">
               <strong>One payment. Works forever. No renewal.</strong>
-              <p>Pay $149 once. Use it for every camp, every season, every year. The price never goes up.</p>
+              <p>Pay $99 now (goes to $149 after June 1). Use it for every camp, every season, every year.</p>
             </div>
           </div>
         </div>
@@ -1468,7 +1526,7 @@ body::after{
       </div>
       <div class="faq-item">
         <div class="faq-q">Can a team split the cost?</div>
-        <div class="faq-a">Yes — and many do. One coach buys the license, sets up the app, and shares the check-in link with all 20 fighters. A team of 20 splitting the cost works out to $7.45 per person. One-time, shared forever.</div>
+        <div class="faq-a">Yes — and many do. One coach buys the license, sets up the app, and shares the check-in link with all 20 fighters. One license covers everyone — no per-athlete fees, no renewal. One-time, shared forever.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Does it work offline? Can I use the timer ringside?</div>
@@ -1476,7 +1534,7 @@ body::after{
       </div>
       <div class="faq-item">
         <div class="faq-q">What's your refund policy?</div>
-        <div class="faq-a">Because this is a digital product, all sales are final. That's why we offer a <strong>full live demo</strong> — try every feature, with real data, before you buy. If there's a genuine technical issue preventing use, email us and we'll fix it.</div>
+        <div class="faq-a">We offer a <strong>30-day money-back guarantee</strong> — if StrikePanel doesn't work for your gym within 30 days, email us and we'll refund in full, no questions asked. We also offer a <strong>full live demo</strong> so you can try every feature with real data before you buy.</div>
       </div>
     </div>
 
@@ -1505,6 +1563,89 @@ body::after{
   </div>
 </section>
 
+<div class="divider"><span>What Coaches Say</span></div>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="section" style="padding-top:64px;padding-bottom:64px">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center">
+      <span class="s-kicker">Early access coaches</span>
+      <h2 class="s-title">Used by coaches.<br><span style="color:var(--accent)">Trusted ringside.</span></h2>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"I was running everything on WhatsApp voice notes and a Notes app. I had no idea who was actually ready to spar and who was gassed. <strong>The Morning Brief changed that in one session.</strong> I can see at a glance — green means go, red means protect. My fighters stopped picking up soft injuries in camp."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:rgba(0,212,240,0.12);color:#00D4F0;border:1.5px solid rgba(0,212,240,0.25)">AR</div>
+          <div>
+            <div class="testi-name">Ahmed Al-Rashidi</div>
+            <div class="testi-role">Boxing & MMA Coach · Dubai, UAE</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"We had a fighter go into a title fight overtrained — we didn't catch it. That was the last time. <strong>StrikePanel's check-in scores flagged two of my lads as red the week before their last bout</strong>, I pulled back the intensity. Both performed better than camp suggested they would."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:rgba(139,92,246,0.12);color:#8b5cf6;border:1.5px solid rgba(139,92,246,0.25)">CW</div>
+          <div>
+            <div class="testi-name">Connor Walsh</div>
+            <div class="testi-role">MMA & Strength Coach · Manchester, UK</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"The fight countdown with the weight cut calculator is insane. <strong>I used to do this on a spreadsheet I built myself</strong> — daily deficit, cut rate, check-ins. StrikePanel does all of it, plus I can see everyone's readiness in one screen. The PDF report to send to promoters alone is worth the price."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:rgba(245,158,11,0.12);color:#f59e0b;border:1.5px solid rgba(245,158,11,0.25)">MG</div>
+          <div>
+            <div class="testi-name">Marcus Greene</div>
+            <div class="testi-role">Fight Team Coach · Houston, TX</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span>vs. The Old Way</span></div>
+
+<!-- ── VS COMPARISON ── -->
+<section class="section" style="padding-top:64px;padding-bottom:64px">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center">
+      <span class="s-kicker">Why coaches switch</span>
+      <h2 class="s-title">Stop coaching<br><span style="color:var(--red)">in the dark.</span></h2>
+      <p class="s-sub" style="margin:0 auto 0">Most coaches are running WhatsApp voice notes, gut feel, and a spreadsheet they built at 1am. It works — until it doesn't.</p>
+    </div>
+    <div class="vs-strip reveal">
+      <div class="vs-col old">
+        <div class="vs-label bad">❌ WhatsApp + Notes + Guesswork</div>
+        <div class="vs-item"><span class="vs-x">✕</span> No readiness scores — you're guessing who's fresh</div>
+        <div class="vs-item"><span class="vs-x">✕</span> Injury risk from missed overtraining signals</div>
+        <div class="vs-item"><span class="vs-x">✕</span> Weight cut plans built manually per fighter</div>
+        <div class="vs-item"><span class="vs-x">✕</span> No fight countdown — you're tracking dates in your head</div>
+        <div class="vs-item"><span class="vs-x">✕</span> Athlete data scattered across texts and PDFs</div>
+        <div class="vs-item"><span class="vs-x">✕</span> Session plans rebuilt from scratch every camp</div>
+        <div class="vs-item"><span class="vs-x">✕</span> $30–80/month for tools that don't talk to each other</div>
+      </div>
+      <div class="vs-mid">VS</div>
+      <div class="vs-col new">
+        <div class="vs-label good">✓ StrikePanel™</div>
+        <div class="vs-item"><span class="vs-check">✓</span> Daily readiness score per athlete — <strong>every morning</strong></div>
+        <div class="vs-item"><span class="vs-check">✓</span> Red/amber/green alerts — protect athletes before they break</div>
+        <div class="vs-item"><span class="vs-check">✓</span> Auto weight-cut calculator with daily deficit targets</div>
+        <div class="vs-item"><span class="vs-check">✓</span> Fight countdown + peak planning built in</div>
+        <div class="vs-item"><span class="vs-check">✓</span> All athlete data, sessions, biometrics in one place</div>
+        <div class="vs-item"><span class="vs-check">✓</span> AI workout generator — new session in 10 seconds</div>
+        <div class="vs-item"><span class="vs-check">✓</span> <strong style="color:var(--accent)">$99 once.</strong> Not per month. Not per athlete.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="divider"><span>Pricing</span></div>
 
 <!-- ── PRICING ── -->
@@ -1517,10 +1658,10 @@ body::after{
     </div>
 
     <div class="price-card reveal">
-      <div class="price-badge">StrikePanel™ — Full Access</div>
-      <div class="price-main"><span class="curr">$</span>149</div>
-      <div class="price-per">One-time payment · Instant download</div>
-      <div class="price-tagline">License unlocks on Gumroad. Works in any browser. <strong>No monthly fee. Ever.</strong></div>
+      <div class="price-badge">StrikePanel™ — Full Access · Founding Price</div>
+      <div class="price-main" style="display:flex;align-items:baseline;justify-content:center;gap:14px"><span class="curr">$</span>99<span style="font-size:40%;color:var(--muted2);text-decoration:line-through;font-weight:400">$149</span></div>
+      <div class="price-per">Founding price · One-time payment · Instant access</div>
+      <div class="price-tagline">Price goes to <strong>$149 on June 1.</strong> Lock in $99 today — yours forever.</div>
       <ul class="price-feats">
         <li><strong>Morning Brief</strong> — daily readiness scoring for up to 20 athletes</li>
         <li><strong>Athlete Self Check-In</strong> — shareable link, no accounts, real-time sync</li>
@@ -1536,13 +1677,19 @@ body::after{
       </ul>
       <a href="https://strikepanel.gumroad.com" target="_blank" class="btn-primary price-cta">
         <svg width="18" height="18" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><defs><radialGradient id="btn-orb2" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1a2236"/><stop offset="100%" stop-color="#050810"/></radialGradient></defs><circle cx="45" cy="45" r="43" fill="url(#btn-orb2)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="45" cy="45" r="29" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/><line x1="45" y1="2" x2="45" y2="27" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="45" y1="63" x2="45" y2="88" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="2" y1="45" x2="27" y2="45" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="63" y1="45" x2="88" y2="45" stroke="white" stroke-width="2.8" stroke-linecap="round"/><circle cx="45" cy="45" r="11" fill="white"/><text x="45" y="49.5" font-family="Arial Black,sans-serif" font-weight="900" font-size="9" fill="#050810" text-anchor="middle">SP</text></svg>
-        Get StrikePanel — $149
+        Lock in $99 — Founding Price
       </a>
       <a href="https://strikepanel.vercel.app/?demo=1" target="_blank" class="btn-ghost" style="width:100%;justify-content:center;margin-bottom:18px">👁 Try the Full Demo First</a>
+      <div class="guarantee-badge">
+        <div class="guarantee-icon">🛡️</div>
+        <div class="guarantee-text">
+          <strong>30-Day Money-Back Guarantee</strong>
+          If it doesn't work for your gym within 30 days, email us and we'll refund in full. No questions asked.
+        </div>
+      </div>
       <div class="price-guarantee">
-        <strong style="color:var(--muted)">Single file. No install. No account needed.</strong><br>
-        Works in Chrome, Safari, Firefox, Edge — on any device.<br>
-        Split with a team of 20 — <strong style="color:var(--accent)">$7.45 per person.</strong>
+        <strong style="color:var(--text)">One avoided injury pays for this 10×.</strong> The average soft-tissue injury in combat sports costs 3–6 weeks of camp. StrikePanel's readiness scores catch the warning signs before they become injuries.<br><br>
+        Works in Chrome, Safari, Firefox, Edge — on any device, online or offline.
       </div>
     </div>
   </div>
@@ -1554,7 +1701,7 @@ body::after{
   <div class="footer-sub">Training Intelligence for Combat Coaches, Gyms, Fight Teams & Athletes<br>One-time fee · No subscription · Works offline · Your data stays yours</div>
   <div class="footer-links">
     <a href="https://strikepanel.vercel.app/?demo=1" target="_blank">Live Demo</a>
-    <a href="https://strikepanel.gumroad.com" target="_blank">Buy — $149</a>
+    <a href="https://strikepanel.gumroad.com" target="_blank">Get it — $99</a>
     <a href="#how-it-works">How it works</a>
     <a href="#features">Features</a>
     <a href="#faq">FAQ</a>
@@ -1598,6 +1745,25 @@ function fixCheckinGrid(){
 }
 fixCheckinGrid();
 window.addEventListener('resize', fixCheckinGrid);
+
+// Urgency countdown to June 1
+(function(){
+  const el = document.getElementById('urgencyCountdown');
+  if (!el) return;
+  function update() {
+    const deadline = new Date('2025-06-01T00:00:00');
+    const now = new Date();
+    const diff = deadline - now;
+    if (diff <= 0) { el.textContent = 'Price increase live'; return; }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    el.textContent = d + 'd ' + String(h).padStart(2,'0') + 'h ' + String(m).padStart(2,'0') + 'm ' + String(s).padStart(2,'0') + 's';
+  }
+  update();
+  setInterval(update, 1000);
+})();
 </script>
 </body>
 </html>
