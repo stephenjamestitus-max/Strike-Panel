@@ -1753,7 +1753,7 @@ window.addEventListener('resize', fixCheckinGrid);
   const el = document.getElementById('urgencyCountdown');
   if (!el) return;
   function update() {
-    const deadline = new Date('2025-06-01T00:00:00');
+    const deadline = new Date('2026-06-01T00:00:00');
     const now = new Date();
     const diff = deadline - now;
     if (diff <= 0) { el.textContent = 'Price increase live'; return; }
