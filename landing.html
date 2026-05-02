@@ -3,256 +3,187 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>StrikePanel™ — Know Who to Push. Know Who to Protect.</title>
-<meta name="description" content="Athletes check in from their phones in 30 seconds. You get a daily readiness brief — who to push hard, who to rest. Fight countdowns, weight cuts, AI workouts. Founding price $99 — goes to $149 June 1. No subscription."/>
+<title>StrikePanel™ — Training Intelligence for Coaches, Teams & Athletes</title>
+<meta name="description" content="Daily readiness scores, fight countdowns, AI workouts, boxing timer & weight cut tracking — one app, one-time fee. No subscription. Works offline. Built for combat coaches, gym trainers, fight teams, 75 Hard, and self-coached athletes."/>
 <meta property="og:title" content="StrikePanel™ — Training Intelligence"/>
-<meta property="og:description" content="Athlete self check-ins → your Morning Brief. Know who to push and who to protect every morning. Founding price $99 — one-time, no subscription."/>
+<meta property="og:description" content="Know who to push and who to protect — every morning. One-time $149. No subscription ever."/>
 <meta property="og:type" content="website"/>
-<meta property="og:url" content="https://strikepanel.vercel.app/landing"/>
-<meta property="og:image" content="https://strikepanel.vercel.app/og.png"/>
-<meta property="og:image:width" content="1200"/>
-<meta property="og:image:height" content="630"/>
+<meta property="og:url" content="https://strikepanel.gumroad.com"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="StrikePanel™ — Training Intelligence"/>
-<meta name="twitter:description" content="Athlete check-ins → your Morning Brief. Daily readiness scores. Fight countdowns. AI workouts. $149 once."/>
-<meta name="twitter:image" content="https://strikepanel.vercel.app/og.png"/>
+<meta name="twitter:description" content="Daily readiness scores · Fight countdowns · AI Workouts · Boxing Timer. One fee, no subscription."/>
 <meta name="theme-color" content="#080b14"/>
 <meta name="robots" content="index,follow"/>
-<meta name="google-site-verification" content="google071b7a6103a2cac2"/>
-<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
-<link rel="canonical" href="https://strikepanel.vercel.app/landing"/>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "SoftwareApplication",
-      "name": "StrikePanel™",
-      "applicationCategory": "SportsApplication",
-      "operatingSystem": "Web, iOS, Android",
-      "url": "https://strikepanel.vercel.app",
-      "description": "Combat sports coaching app. Athlete check-ins, morning readiness brief, fight countdowns, AI workout generator. One-time payment.",
-      "offers": {
-        "@type": "Offer",
-        "price": "99",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock",
-        "url": "https://strikepanel.gumroad.com"
-      },
-      "screenshot": "https://strikepanel.vercel.app/og.png"
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How do athlete check-ins actually work?",
-          "acceptedAnswer": { "@type": "Answer", "text": "From your Morning Brief tab, copy your unique share link and send it to athletes via WhatsApp. They open it on their phone — no download, no account — slide through 6 readiness questions in 30 seconds, and submit. Their score syncs instantly to your Morning Brief." }
-        },
-        {
-          "@type": "Question",
-          "name": "Do I need technical skills to use this?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. Open the app in any browser — it works immediately. The AI feature needs a free Google Gemini key (2 min, no card). Cloud sync via Supabase is optional — a step-by-step wizard is built in if you want it." }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I use this on multiple devices?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Connect a free Supabase project in Settings (5-minute setup). All your data syncs across every device — phone, tablet, desktop." }
-        },
-        {
-          "@type": "Question",
-          "name": "Is this really a one-time payment — no hidden fees?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. $149 once, yours forever. No monthly plan, no premium tier, no surprise charges. Supabase free tier is more than enough for any coach. The AI runs on Google Gemini's free tier — no card needed." }
-        },
-        {
-          "@type": "Question",
-          "name": "Does it work offline? Can I use the timer ringside?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Install it as a PWA from your phone's browser — it caches everything locally. The boxing timer, morning brief, athlete profiles and workouts all work with zero internet. Perfect ringside." }
-        },
-        {
-          "@type": "Question",
-          "name": "What is your refund policy?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Because this is a digital product, all sales are final. That's why we offer a full live demo — try every feature, with real data, before you buy. If there is a genuine technical issue preventing use, email us and we will fix it." }
-        }
-      ]
-    }
-  ]
-}
-</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='45' cy='45' r='43' fill='%230b0d14' stroke='%2300D4F0' stroke-width='1.5' stroke-opacity='0.6'/%3E%3Cline x1='45' y1='2' x2='45' y2='26' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='45' y1='64' x2='45' y2='88' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='26' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='64' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='12' fill='%2300D4F0'/%3E%3C/svg%3E"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+ 
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#080b14;--bg2:#0c1020;--surface:#0f1320;--card:#151b2b;--card2:#1a2030;
+  --bg:#080b14;--bg2:#0c1020;--surface:#101420;--card:#161c2c;--card2:#1a2030;
   --accent:#00D4F0;--accent-dim:rgba(0,212,240,0.10);--accent-glow:rgba(0,212,240,0.28);
   --green:#10b981;--green-dim:rgba(16,185,129,0.10);
   --amber:#f59e0b;--amber-dim:rgba(245,158,11,0.10);
   --red:#ef4444;--red-dim:rgba(239,68,68,0.10);
   --purple:#8b5cf6;
-  --text:#eef0f8;--muted:#7a85a0;--muted2:#3a4558;--muted3:#252d42;
-  --border:rgba(0,212,240,0.12);--border2:rgba(255,255,255,0.055);
+  --text:#eef0f8;--muted:#7a85a0;--muted2:#3d4560;
+  --border:rgba(0,212,240,0.12);--border2:rgba(255,255,255,0.06);
   --r:14px;--r-sm:10px;--r-pill:999px;
   --fh:'Bebas Neue',sans-serif;
   --fc:'Barlow Condensed',sans-serif;
   --fb:'Barlow',sans-serif;
   --fm:'DM Mono',monospace;
-  --ease:cubic-bezier(0.23,1,0.32,1);
 }
-
+ 
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:15px;line-height:1.65;overflow-x:hidden}
-::selection{background:rgba(0,212,240,0.2);color:var(--text)}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--muted2);border-radius:99px}
-
-/* ── AMBIENT ── */
+ 
+/* Ambient */
 body::before{
   content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 80% 55% at 5% -5%,rgba(0,212,240,0.07) 0%,transparent 55%),
-    radial-gradient(ellipse 55% 40% at 95% 105%,rgba(139,92,246,0.06) 0%,transparent 55%),
-    radial-gradient(ellipse 40% 30% at 50% 50%,rgba(239,68,68,0.02) 0%,transparent 55%);
+    radial-gradient(ellipse 80% 60% at 5% -10%,rgba(0,212,240,0.07) 0%,transparent 55%),
+    radial-gradient(ellipse 60% 40% at 95% 110%,rgba(139,92,246,0.06) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 35% at 50% 50%,rgba(239,68,68,0.025) 0%,transparent 55%);
 }
 body::after{
   content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-  background-size:200px;opacity:0.45;
+  background-size:200px;opacity:0.5;
 }
-
+ 
+::selection{background:rgba(0,212,240,0.2);color:var(--text)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--muted2);border-radius:99px}
+ 
 /* ── NAV ── */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:12px;
-  background:rgba(8,11,20,0.9);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  border-bottom:1px solid rgba(255,255,255,0.045);
+  padding:14px 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:rgba(8,11,20,0.88);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(255,255,255,0.05);
 }
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav-logo{width:32px;height:32px;filter:drop-shadow(0 0 8px rgba(0,212,240,0.5))}
-.nav-name{font-family:var(--fh);font-size:20px;letter-spacing:2px;color:var(--text)}
+.nav-logo{width:34px;height:34px;filter:drop-shadow(0 0 8px rgba(0,212,240,0.5))}
+.nav-name{font-family:var(--fh);font-size:21px;letter-spacing:2px;color:var(--text)}
 .nav-name span{color:var(--accent)}
 .nav-badge{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:rgba(0,212,240,0.07);color:var(--accent);border:1px solid rgba(0,212,240,0.18)}
 .nav-right{display:flex;align-items:center;gap:10px}
-.nav-link{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:8px 14px;border-radius:30px;border:1px solid rgba(255,255,255,0.07);text-decoration:none;transition:all .18s}
-.nav-link:hover{color:var(--accent);border-color:rgba(0,212,240,0.25)}
+.nav-demo{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:8px 16px;border-radius:30px;border:1px solid rgba(255,255,255,0.09);text-decoration:none;transition:all .2s}
+.nav-demo:hover{color:var(--accent);border-color:rgba(0,212,240,0.3)}
 .nav-cta{
-  background:linear-gradient(135deg,var(--accent),#009ab0);
+  background:linear-gradient(135deg,var(--accent),#00a8c4);
   color:#050810;font-family:var(--fc);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
   padding:9px 20px;border-radius:30px;border:none;cursor:pointer;text-decoration:none;
-  box-shadow:0 0 18px rgba(0,212,240,0.28);display:inline-flex;align-items:center;gap:6px;transition:all .2s;
+  box-shadow:0 0 18px rgba(0,212,240,0.3);display:inline-flex;align-items:center;gap:6px;transition:all .2s;
 }
-.nav-cta:hover{box-shadow:0 0 32px rgba(0,212,240,0.55);transform:translateY(-1px)}
-
+.nav-cta:hover{box-shadow:0 0 30px rgba(0,212,240,0.55);transform:translateY(-1px)}
+ 
 /* ── HERO ── */
 .hero{
   min-height:100vh;display:flex;align-items:center;justify-content:center;
-  padding:130px 24px 80px;text-align:center;position:relative;z-index:1;
+  padding:120px 24px 80px;text-align:center;position:relative;z-index:1;
 }
-.hero-inner{max-width:900px}
+.hero-inner{max-width:860px}
+ 
 .hero-kicker{
   font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;
-  color:var(--accent);margin-bottom:26px;display:inline-flex;align-items:center;gap:8px;
-  padding:6px 18px;border-radius:30px;background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.2);
+  color:var(--accent);margin-bottom:22px;display:inline-flex;align-items:center;gap:8px;
+  padding:6px 18px;border-radius:30px;background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.22);
 }
-.kdot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:kdot 2.2s ease-in-out infinite}
-@keyframes kdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.65)}}
-
+.kicker-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:kdot 2s ease-in-out infinite}
+@keyframes kdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+ 
 .hero-title{
-  font-family:var(--fh);font-size:clamp(54px,9.5vw,118px);
-  letter-spacing:3px;line-height:0.88;margin-bottom:8px;
+  font-family:var(--fh);font-size:clamp(58px,10vw,116px);
+  letter-spacing:4px;line-height:0.9;margin-bottom:10px;
 }
 .hero-title .line{display:block}
-.hero-title .cyan{color:var(--accent);text-shadow:0 0 60px rgba(0,212,240,0.25)}
-.hero-title .dim{color:rgba(238,240,248,0.22)}
-.hero-title .red{color:var(--red);text-shadow:0 0 40px rgba(239,68,68,0.2)}
-
+.hero-title .cyan{color:var(--accent);text-shadow:0 0 50px rgba(0,212,240,0.3)}
+.hero-title .dim{color:var(--muted2)}
+ 
 .hero-hook{
-  font-family:var(--fc);font-size:clamp(15px,2.2vw,20px);font-weight:600;
-  letter-spacing:2px;text-transform:uppercase;color:var(--muted);
-  margin:28px auto 18px;line-height:1.5;max-width:640px;
+  font-family:var(--fc);font-size:clamp(16px,2.5vw,22px);font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--text);
+  margin:24px auto 16px;line-height:1.4;max-width:640px;
 }
-.hero-hook strong{color:var(--text)}
-
 .hero-sub{
-  font-size:clamp(14px,1.7vw,16px);color:var(--muted);line-height:1.85;
-  max-width:560px;margin:0 auto 32px;
+  font-size:clamp(14px,1.8vw,16px);color:var(--muted);line-height:1.8;
+  max-width:580px;margin:0 auto 36px;
 }
 .hero-sub strong{color:var(--text)}
-
-/* Price pill */
-.price-flash{
-  display:inline-flex;align-items:center;gap:12px;
-  border:1px solid rgba(255,255,255,0.08);border-radius:14px;
-  padding:12px 22px;background:rgba(0,0,0,0.25);margin-bottom:28px;
-  backdrop-filter:blur(8px);
-}
-.price-num{font-family:var(--fh);font-size:44px;letter-spacing:2px;line-height:1}
-.price-detail{text-align:left}
-.price-detail .once{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green)}
-.price-detail .never{font-family:var(--fc);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-top:2px}
-
-.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
+ 
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
 .btn-primary{
-  background:linear-gradient(135deg,var(--accent),#009ab0);
+  background:linear-gradient(135deg,var(--accent),#00a8c4);
   color:#050810;font-family:var(--fc);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
   padding:15px 34px;border-radius:30px;border:none;cursor:pointer;text-decoration:none;
-  box-shadow:0 0 28px rgba(0,212,240,0.38),0 4px 20px rgba(0,0,0,0.3);
-  display:inline-flex;align-items:center;gap:8px;transition:all .22s var(--ease);
+  box-shadow:0 0 28px rgba(0,212,240,0.4),0 4px 20px rgba(0,0,0,0.3);
+  display:inline-flex;align-items:center;gap:8px;transition:all .22s;
 }
-.btn-primary:hover{box-shadow:0 0 48px rgba(0,212,240,0.65),0 6px 28px rgba(0,0,0,0.4);transform:translateY(-2px)}
+.btn-primary:hover{box-shadow:0 0 44px rgba(0,212,240,0.65),0 6px 28px rgba(0,0,0,0.4);transform:translateY(-2px)}
 .btn-ghost{
-  background:rgba(255,255,255,0.03);color:var(--muted);font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  background:rgba(255,255,255,0.035);color:var(--muted);font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
   padding:15px 28px;border-radius:30px;border:1px solid rgba(255,255,255,0.09);cursor:pointer;text-decoration:none;
   display:inline-flex;align-items:center;gap:8px;transition:all .2s;
 }
 .btn-ghost:hover{border-color:rgba(0,212,240,0.3);color:var(--accent);background:rgba(0,212,240,0.04)}
-
-/* For pills */
-.for-pills{display:flex;gap:7px;justify-content:center;flex-wrap:wrap}
+.btn-demo-hero{
+  background:rgba(0,212,240,0.06);color:var(--accent);font-family:var(--fc);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  padding:15px 28px;border-radius:30px;border:1.5px solid rgba(0,212,240,0.3);cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;transition:all .2s;
+}
+.btn-demo-hero:hover{background:rgba(0,212,240,0.13);border-color:rgba(0,212,240,0.6);box-shadow:0 0 24px rgba(0,212,240,0.2);transform:translateY(-2px)}
+ 
+/* Price flash */
+.price-flash{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(255,255,255,0.07);border-radius:12px;
+  padding:12px 20px;background:rgba(0,0,0,0.2);margin-bottom:24px;
+}
+.price-num{font-family:var(--fh);font-size:42px;letter-spacing:2px;color:var(--text);line-height:1}
+.price-detail{text-align:left}
+.price-detail .once{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green)}
+.price-detail .never{font-family:var(--fc);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-top:2px}
+ 
+/* Audience pills */
+.for-pills{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:6px}
 .for-pill{
   font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1.5px;
   padding:5px 12px;border-radius:20px;
-  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);color:var(--muted);
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:var(--muted);
+  transition:all .18s;cursor:default;
 }
-
-/* ── SECTION SKELETON ── */
-.section{padding:100px 24px;position:relative;z-index:1}
-.section-inner{max-width:1100px;margin:0 auto}
-.s-kicker{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:block}
-.s-title{font-family:var(--fh);font-size:clamp(32px,5vw,62px);letter-spacing:3px;line-height:1.02;margin-bottom:16px}
-.s-sub{font-size:15px;color:var(--muted);max-width:560px;line-height:1.8}
-
-/* Divider */
-.divider{display:flex;align-items:center;gap:12px;margin:0 24px;position:relative;z-index:1}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.04)}
-.divider span{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted2)}
-
-/* ── MORNING BRIEF MOCKUP ── */
+ 
+/* ── MORNING BRIEF HERO MOCKUP ── */
 .brief-mockup-wrap{
-  margin:60px auto 0;max-width:880px;
-  background:linear-gradient(135deg,rgba(0,212,240,0.055),rgba(139,92,246,0.035));
-  border:1px solid rgba(0,212,240,0.16);border-radius:20px;
+  margin:60px auto 0;max-width:860px;
+  background:linear-gradient(135deg,rgba(0,212,240,0.06),rgba(139,92,246,0.04));
+  border:1px solid rgba(0,212,240,0.18);border-radius:20px;
   padding:28px;position:relative;overflow:hidden;
 }
-.brief-mockup-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),rgba(139,92,246,0.7),transparent)}
+.brief-mockup-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),rgba(139,92,246,0.8),transparent)}
 .brief-date-lbl{font-family:var(--fc);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted2);margin-bottom:6px}
-.brief-headline{font-family:var(--fh);font-size:clamp(20px,3.5vw,36px);letter-spacing:2px;line-height:1.05;margin-bottom:8px}
+.brief-headline{font-family:var(--fh);font-size:clamp(22px,3.5vw,38px);letter-spacing:2px;line-height:1.05;margin-bottom:8px}
 .brief-headline .red{color:var(--red)}
 .brief-headline .green{color:var(--green)}
 .brief-sub-text{font-size:13px;color:var(--muted);margin-bottom:20px}
 .r-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
 @media(max-width:560px){.r-grid{grid-template-columns:1fr 1fr}}
-.r-card{border-radius:11px;padding:14px;border:1px solid}
-.r-card.g{background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.2)}
-.r-card.c{background:rgba(0,212,240,0.06);border-color:rgba(0,212,240,0.18)}
-.r-card.r{background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.2)}
+.r-card{border-radius:11px;padding:14px;border:1px solid;overflow:hidden}
+.r-card.g{background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.22)}
+.r-card.c{background:rgba(0,212,240,0.06);border-color:rgba(0,212,240,0.2)}
+.r-card.r{background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.22)}
 .r-n{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .r-s{font-family:var(--fh);font-size:38px;letter-spacing:1px;line-height:1;margin-bottom:5px}
-.r-card.g .r-s{color:var(--green)}.r-card.c .r-s{color:var(--accent)}.r-card.r .r-s{color:var(--red)}
+.r-card.g .r-s{color:var(--green)}
+.r-card.c .r-s{color:var(--accent)}
+.r-card.r .r-s{color:var(--red)}
 .r-b{height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin-bottom:7px;overflow:hidden}
 .r-bf{height:100%;border-radius:2px}
 .r-card.g .r-bf{background:linear-gradient(90deg,var(--green),#34d399);width:95%}
@@ -265,113 +196,75 @@ body::after{
 .r-t{font-family:var(--fm);font-size:10px;color:var(--muted2);margin-top:5px}
 .alert-row{display:flex;gap:8px;flex-direction:column}
 .alrt{display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:10px;border:1px solid}
-.alrt.r{background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.18)}
-.alrt.g{background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.18)}
+.alrt.r{background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.2)}
+.alrt.g{background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.2)}
 .alrt-ico{font-size:18px;flex-shrink:0}
 .alrt-text strong{font-size:13px;color:var(--text)}
 .alrt-text p{font-size:12px;color:var(--muted);margin-top:2px}
-
-/* ── HOW IT WORKS (check-in flow) ── */
-.flow-wrap{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
-  border:1px solid rgba(255,255,255,0.055);border-radius:18px;overflow:hidden;
-  margin-top:56px;
-}
-@media(max-width:740px){.flow-wrap{grid-template-columns:1fr}}
-.flow-step{
-  padding:32px 28px;position:relative;
-  border-right:1px solid rgba(255,255,255,0.055);
-  transition:background .2s;
-}
-.flow-step:last-child{border-right:none}
-@media(max-width:740px){.flow-step{border-right:none;border-bottom:1px solid rgba(255,255,255,0.055)}.flow-step:last-child{border-bottom:none}}
-.flow-step:hover{background:rgba(0,212,240,0.025)}
-.flow-num{
-  font-family:var(--fh);font-size:72px;letter-spacing:2px;line-height:1;
-  color:rgba(0,212,240,0.08);position:absolute;top:16px;right:20px;
-  pointer-events:none;user-select:none;
-}
-.flow-icon{font-size:28px;margin-bottom:14px;display:block}
-.flow-title{font-family:var(--fc);font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text);margin-bottom:8px}
-.flow-desc{font-size:13px;color:var(--muted);line-height:1.75}
-.flow-tag{margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.18);padding:3px 9px;border-radius:20px}
-.flow-tag-cyan{color:var(--accent);background:rgba(0,212,240,0.08);border-color:rgba(0,212,240,0.18)}
-
-/* ── PHONE MOCKUP (check-in) ── */
-.checkin-demo{
-  max-width:340px;margin:0 auto;
-  background:linear-gradient(160deg,rgba(20,26,42,0.98),rgba(13,16,26,0.99));
-  border:1px solid rgba(0,212,240,0.22);border-radius:28px;padding:24px 20px;
-  box-shadow:0 32px 80px rgba(0,0,0,0.7),0 0 0 1px rgba(0,212,240,0.06),0 0 60px rgba(0,212,240,0.06);
-  position:relative;overflow:hidden;
-}
-.checkin-demo::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),rgba(139,92,246,0.6),transparent)}
-.cd-header{text-align:center;margin-bottom:18px}
-.cd-title{font-family:var(--fh);font-size:22px;letter-spacing:2px;margin-bottom:4px}
-.cd-sub{font-size:11px;color:var(--muted2);font-family:var(--fc);letter-spacing:1px}
-.cd-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
-.cd-row:last-of-type{border-bottom:none}
-.cd-label{font-size:12px;color:var(--muted);min-width:110px;flex-shrink:0}
-.cd-slider{flex:1;height:3px;background:rgba(255,255,255,0.07);border-radius:2px;position:relative}
-.cd-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),#67e8f9)}
-.cd-val{font-family:var(--fh);font-size:18px;color:var(--accent);min-width:22px;text-align:right}
-.cd-score-wrap{margin-top:16px;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:12px}
-.cd-score{font-family:var(--fh);font-size:40px;letter-spacing:2px;color:var(--green);line-height:1}
-.cd-verdict{font-family:var(--fh);font-size:14px;letter-spacing:1px;color:var(--green)}
-.cd-vmsg{font-size:11px;color:var(--muted);margin-top:2px}
-.cd-btn{width:100%;margin-top:14px;padding:12px;background:linear-gradient(135deg,var(--accent),#009ab0);border:none;border-radius:24px;font-family:var(--fc);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#050810;cursor:pointer;box-shadow:0 0 20px rgba(0,212,240,0.3)}
-.cd-footer{text-align:center;margin-top:10px;font-size:10px;color:var(--muted2);font-family:var(--fc);letter-spacing:1px}
-
-/* ── FEATURE GRID ── */
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:52px}
-.feat-card{
-  background:linear-gradient(135deg,rgba(18,22,36,0.96),rgba(13,16,26,0.98));
-  border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:26px;
-  position:relative;overflow:hidden;
-  transition:border-color .25s,transform .22s var(--ease),box-shadow .25s;
-}
-.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,240,0.1),transparent);opacity:0;transition:opacity .25s}
-.feat-card:hover{border-color:rgba(0,212,240,0.2);transform:translateY(-3px);box-shadow:0 20px 56px rgba(0,0,0,0.5)}
-.feat-card:hover::before{opacity:1}
-.feat-icon{font-size:26px;margin-bottom:13px;display:block}
-.feat-title{font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);margin-bottom:8px}
-.feat-desc{font-size:13px;color:var(--muted);line-height:1.75}
-.feat-pill{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:2px 9px;border-radius:10px;background:rgba(0,212,240,0.07);color:var(--accent);border:1px solid rgba(0,212,240,0.15);display:inline-block;margin-top:12px}
-.feat-pill.green{background:rgba(16,185,129,0.08);color:var(--green);border-color:rgba(16,185,129,0.18)}
-.feat-pill.amber{background:rgba(245,158,11,0.08);color:var(--amber);border-color:rgba(245,158,11,0.18)}
-.feat-pill.purple{background:rgba(139,92,246,0.08);color:#a78bfa;border-color:rgba(139,92,246,0.18)}
-
-/* USP bar */
-.usp-bar{
-  display:flex;gap:0;border:1px solid rgba(255,255,255,0.055);
-  border-radius:16px;overflow:hidden;margin-top:52px;
-}
-.usp{flex:1;padding:22px 16px;text-align:center;border-right:1px solid rgba(255,255,255,0.055)}
-.usp:last-child{border-right:none}
-.usp-val{font-family:var(--fh);font-size:32px;letter-spacing:2px;color:var(--accent);line-height:1;margin-bottom:4px}
-.usp-lbl{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted2)}
-@media(max-width:600px){.usp-bar{flex-direction:column}.usp{border-right:none;border-bottom:1px solid rgba(255,255,255,0.055)}.usp:last-child{border-bottom:none}}
-
-/* ── WHO IT'S FOR ── */
-.who-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:48px}
+ 
+/* ── SECTION SKELETON ── */
+.section{padding:96px 24px;position:relative;z-index:1}
+.section-inner{max-width:1100px;margin:0 auto}
+.s-kicker{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.s-title{font-family:var(--fh);font-size:clamp(34px,5.5vw,62px);letter-spacing:3px;line-height:1.02;margin-bottom:16px}
+.s-sub{font-size:15px;color:var(--muted);max-width:560px;line-height:1.8}
+ 
+/* Divider */
+.divider{display:flex;align-items:center;gap:12px;margin:0 24px;position:relative;z-index:1}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.04)}
+.divider span{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted2)}
+ 
+/* ── WHO IT'S FOR SECTION ── */
+.who-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:48px}
 .who-card{
-  background:rgba(14,18,30,0.8);border:1px solid rgba(255,255,255,0.05);
+  background:rgba(16,20,36,0.8);border:1px solid rgba(255,255,255,0.055);
   border-radius:14px;padding:22px;
-  transition:border-color .2s,transform .2s var(--ease);position:relative;overflow:hidden;
+  transition:border-color .2s,transform .2s;position:relative;overflow:hidden;
 }
-.who-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,240,0.1),transparent);opacity:0;transition:opacity .2s}
+.who-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,240,0.12),transparent);opacity:0;transition:opacity .2s}
 .who-card:hover{border-color:rgba(0,212,240,0.2);transform:translateY(-2px)}
 .who-card:hover::before{opacity:1}
 .who-icon{font-size:26px;margin-bottom:12px}
 .who-title{font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text);margin-bottom:6px}
 .who-desc{font-size:12.5px;color:var(--muted);line-height:1.65}
-
-/* ── FIGHT CARDS ── */
+ 
+/* ── FEATURE CARDS ── */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:52px}
+.feat-card{
+  background:linear-gradient(135deg,rgba(20,24,38,0.96),rgba(14,18,28,0.98));
+  border:1px solid rgba(255,255,255,0.055);border-radius:16px;padding:26px;
+  position:relative;overflow:hidden;
+  transition:border-color .25s,transform .22s,box-shadow .25s;
+}
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,240,0.1),transparent);opacity:0;transition:opacity .25s}
+.feat-card:hover{border-color:rgba(0,212,240,0.2);transform:translateY(-3px);box-shadow:0 18px 50px rgba(0,0,0,0.5)}
+.feat-card:hover::before{opacity:1}
+.feat-icon{font-size:26px;margin-bottom:13px;display:block}
+.feat-title{font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);margin-bottom:7px}
+.feat-desc{font-size:13px;color:var(--muted);line-height:1.72}
+.feat-pill{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:2px 9px;border-radius:10px;background:rgba(0,212,240,0.07);color:var(--accent);border:1px solid rgba(0,212,240,0.15);display:inline-block;margin-top:11px}
+ 
+/* ── USP BAR ── */
+.usp-bar{
+  display:flex;gap:0;border:1px solid rgba(255,255,255,0.06);
+  border-radius:16px;overflow:hidden;margin:52px 0 0;
+}
+.usp{flex:1;padding:20px 16px;text-align:center;border-right:1px solid rgba(255,255,255,0.06)}
+.usp:last-child{border-right:none}
+.usp-val{font-family:var(--fh);font-size:30px;letter-spacing:2px;color:var(--accent);line-height:1;margin-bottom:4px}
+.usp-lbl{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted2)}
+@media(max-width:600px){
+  .usp-bar{flex-direction:column}
+  .usp{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
+  .usp:last-child{border-bottom:none}
+}
+ 
+/* ── FIGHT COUNTDOWN ── */
 .fight-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:48px}
 @media(max-width:640px){.fight-grid{grid-template-columns:1fr}}
 .fight-card{
-  background:linear-gradient(135deg,rgba(239,68,68,0.065),rgba(139,92,246,0.03));
-  border:1px solid rgba(239,68,68,0.18);border-radius:16px;padding:22px;
+  background:linear-gradient(135deg,rgba(239,68,68,0.07),rgba(139,92,246,0.04));
+  border:1px solid rgba(239,68,68,0.2);border-radius:16px;padding:22px;
   position:relative;overflow:hidden;
 }
 .fight-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent)}
@@ -384,57 +277,51 @@ body::after{
 .wc-lbl{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:6px}
 .wc-bar{height:5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;margin-bottom:5px}
 .wc-fill{height:100%;border-radius:3px}
-.wc-fill.amber{background:linear-gradient(90deg,var(--amber),#fbbf24);width:60%}
-.wc-fill.red{background:linear-gradient(90deg,var(--red),#f87171);width:88%}
+.wc-fill.amber{background:linear-gradient(90deg,var(--amber),#fbbf24);width:62%}
+.wc-fill.red{background:linear-gradient(90deg,var(--red),#f87171);width:87%}
 .wc-stat{font-size:11.5px;color:var(--muted)}
 .wc-stat strong{color:var(--amber)}
-
+ 
 /* ── AI SECTION ── */
 .ai-card{
-  background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(79,70,229,0.04));
-  border:1px solid rgba(124,58,237,0.2);border-radius:20px;padding:30px;
+  background:linear-gradient(135deg,rgba(124,58,237,0.09),rgba(79,70,229,0.05));
+  border:1px solid rgba(124,58,237,0.22);border-radius:20px;padding:30px;
   position:relative;overflow:hidden;margin-top:48px;
 }
-.ai-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(167,139,250,0.35),transparent)}
+.ai-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(167,139,250,0.4),transparent)}
 .ai-badge{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#a78bfa;margin-bottom:10px;display:flex;align-items:center;gap:7px}
 .ai-dot{width:7px;height:7px;border-radius:50%;background:#a78bfa;animation:aidot 1.4s ease-in-out infinite}
 @keyframes aidot{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
-.ai-title{font-family:var(--fh);font-size:clamp(18px,2.8vw,28px);letter-spacing:2px;margin-bottom:6px}
-.ai-sub{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:18px;max-width:540px}
+.ai-title{font-family:var(--fh);font-size:clamp(20px,3vw,30px);letter-spacing:2px;margin-bottom:6px}
+.ai-sub{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:18px;max-width:560px}
 .ai-resp{font-size:13px;color:var(--text);line-height:1.8;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:14px 16px}
 .ai-resp h4{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#a78bfa;margin:10px 0 5px}
 .ai-resp h4:first-child{margin-top:0}
 .ai-note{font-size:11.5px;color:var(--muted2);margin-top:12px}
-
+ 
 /* ── TEAM SPLIT ── */
 .split-card{
-  background:linear-gradient(135deg,rgba(0,212,240,0.055),rgba(16,185,129,0.035));
-  border:1px solid rgba(0,212,240,0.18);border-radius:20px;
+  background:linear-gradient(135deg,rgba(0,212,240,0.06),rgba(16,185,129,0.04));
+  border:1px solid rgba(0,212,240,0.2);border-radius:20px;
   padding:32px;margin-top:48px;position:relative;overflow:hidden;
 }
 .split-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),var(--green),transparent)}
-.split-inner{display:grid;grid-template-columns:auto 1fr;gap:44px;align-items:center}
-@media(max-width:640px){.split-inner{grid-template-columns:1fr;gap:20px}}
-.split-big{font-family:var(--fh);font-size:clamp(60px,9vw,100px);letter-spacing:3px;color:var(--accent);line-height:1}
-.split-label{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-top:2px}
+.split-big{font-family:var(--fh);font-size:clamp(60px,10vw,100px);letter-spacing:3px;color:var(--accent);line-height:1}
+.split-label{font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-top:2px;margin-bottom:16px}
 .split-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
 .split-ico{font-size:16px;flex-shrink:0;margin-top:2px}
 .split-text strong{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text)}
 .split-text p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:2px}
-
-/* ── SUPABASE ── */
-.supa-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-@media(max-width:860px){.supa-grid{grid-template-columns:1fr;gap:32px}}
-
+ 
 /* ── PRICING ── */
 .price-card{
   max-width:480px;margin:52px auto 0;
-  background:linear-gradient(160deg,rgba(18,22,36,0.99),rgba(13,16,24,1));
+  background:linear-gradient(160deg,rgba(20,24,38,0.98),rgba(14,18,26,0.99));
   border:1px solid rgba(0,212,240,0.22);border-radius:24px;padding:44px 36px;
   position:relative;overflow:hidden;text-align:center;
-  box-shadow:0 28px 80px rgba(0,0,0,0.65),0 0 0 1px rgba(0,212,240,0.04),0 0 80px rgba(0,212,240,0.04);
+  box-shadow:0 28px 80px rgba(0,0,0,0.65),0 0 0 1px rgba(0,212,240,0.04);
 }
-.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),rgba(139,92,246,0.55),transparent)}
+.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),rgba(139,92,246,0.6),transparent)}
 .price-badge{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:5px 14px;border-radius:20px;background:rgba(0,212,240,0.08);color:var(--accent);border:1px solid rgba(0,212,240,0.2);display:inline-block;margin-bottom:22px}
 .price-main{font-family:var(--fh);font-size:90px;letter-spacing:2px;line-height:1;color:var(--text);margin-bottom:4px}
 .price-main .curr{font-size:40px;vertical-align:top;padding-top:16px;color:var(--accent)}
@@ -445,122 +332,86 @@ body::after{
 .price-feats li{font-size:13.5px;color:var(--muted);display:flex;align-items:flex-start;gap:9px;line-height:1.5}
 .price-feats li::before{content:'✓';color:var(--green);font-weight:700;font-size:14px;flex-shrink:0;margin-top:1px}
 .price-feats li strong{color:var(--text)}
-.price-cta{width:100%;padding:16px;font-size:14px;margin-bottom:14px;justify-content:center}
-.price-guarantee{font-size:11.5px;color:var(--muted2);line-height:1.7}
-
+.price-cta{width:100%;padding:15px;font-size:14px;margin-bottom:14px}
+.price-guarantee{font-size:11.5px;color:var(--muted2);line-height:1.6}
+.price-guarantee strong{color:var(--muted)}
+ 
 /* ── FAQ ── */
-.faq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:0;margin-top:44px;border:1px solid rgba(255,255,255,0.05);border-radius:16px;overflow:hidden}
-.faq-item{padding:22px 26px;border-bottom:1px solid rgba(255,255,255,0.05);transition:background .18s}
+.faq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:0;margin-top:44px;border:1px solid rgba(255,255,255,0.055);border-radius:16px;overflow:hidden}
+.faq-item{padding:22px 26px;border-bottom:1px solid rgba(255,255,255,0.055);transition:background .18s}
 .faq-item:last-child{border-bottom:none}
-.faq-item:nth-child(odd){border-right:1px solid rgba(255,255,255,0.05)}
-.faq-item:hover{background:rgba(0,212,240,0.022)}
+.faq-item:nth-child(odd){border-right:1px solid rgba(255,255,255,0.055)}
+.faq-item:hover{background:rgba(0,212,240,0.025)}
 .faq-q{font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:.5px;color:var(--text);margin-bottom:8px;line-height:1.4}
 .faq-a{font-size:13px;color:var(--muted);line-height:1.75}
 .faq-a strong{color:var(--text)}
-@media(max-width:820px){.faq-grid{grid-template-columns:1fr}.faq-item:nth-child(odd){border-right:none}}
-
-/* Trust row */
-.trust-row{display:flex;gap:0;border:1px solid rgba(255,255,255,0.05);border-radius:16px;overflow:hidden;flex-wrap:wrap}
-.trust-item{flex:1;min-width:155px;padding:20px 18px;display:flex;align-items:flex-start;gap:12px;border-right:1px solid rgba(255,255,255,0.05)}
+@media(max-width:820px){
+  .faq-grid{grid-template-columns:1fr}
+  .faq-item:nth-child(odd){border-right:none}
+}
+ 
+/* ── TRUST ROW ── */
+.trust-row{display:flex;gap:0;border:1px solid rgba(255,255,255,0.055);border-radius:16px;overflow:hidden;flex-wrap:wrap}
+.trust-item{flex:1;min-width:160px;padding:20px 18px;display:flex;align-items:flex-start;gap:12px;border-right:1px solid rgba(255,255,255,0.055)}
 .trust-item:last-child{border-right:none}
-.trust-icon{font-size:21px;flex-shrink:0;margin-top:2px}
+.trust-icon{font-size:22px;flex-shrink:0;margin-top:2px}
 .trust-text{font-size:12.5px;color:var(--muted);line-height:1.6}
-.trust-text strong{color:var(--text);display:block;margin-bottom:2px;font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
-@media(max-width:700px){.trust-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.05);min-width:100%}.trust-item:last-child{border-bottom:none}}
-
-/* Footer */
-.footer{padding:44px 32px;border-top:1px solid rgba(255,255,255,0.04);text-align:center;position:relative;z-index:1}
+.trust-text strong{color:var(--text);display:block;margin-bottom:2px;font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+@media(max-width:700px){
+  .trust-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.055);min-width:100%}
+  .trust-item:last-child{border-bottom:none}
+}
+ 
+/* ── FOOTER ── */
+.footer{padding:40px 32px;border-top:1px solid rgba(255,255,255,0.04);text-align:center;position:relative;z-index:1}
 .footer-brand{font-family:var(--fh);font-size:20px;letter-spacing:2px;margin-bottom:6px}
 .footer-brand span{color:var(--accent)}
-.footer-sub{font-size:12px;color:var(--muted2);line-height:1.8}
-.footer-links{display:flex;gap:20px;justify-content:center;margin-top:12px;flex-wrap:wrap}
-.footer-links a{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);text-decoration:none;transition:color .18s}
-.footer-links a:hover{color:var(--accent)}
-
-/* Reveal animations */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s var(--ease)}
+.footer-sub{font-size:12px;color:var(--muted2)}
+ 
+/* ── REVEAL ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.rd1{transition-delay:.07s}.rd2{transition-delay:.14s}.rd3{transition-delay:.21s}.rd4{transition-delay:.28s}
-
-@media(max-width:700px){.checkin-demo-grid{grid-template-columns:1fr!important}.dual-grid{grid-template-columns:1fr!important}}
-
-/* Responsive */
-@media(max-width:768px){.nav{padding:12px 18px}.nav-badge{display:none}.feat-grid{grid-template-columns:1fr}.who-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.hero{padding:110px 16px 60px}.section{padding:70px 16px}.hero-actions{flex-direction:column;align-items:center}.hero-actions a{width:100%;justify-content:center;max-width:320px}.who-grid{grid-template-columns:1fr}.price-card{padding:28px 20px}.price-main{font-size:72px}.nav-link{display:none}}
-@media(hover:none){.btn-primary,.btn-ghost,.nav-cta{min-height:48px}.feat-card:hover,.who-card:hover{transform:none}}
-
-/* Subtle grid overlay */
-.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.018;background-image:linear-gradient(rgba(0,212,240,1) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,240,1) 1px,transparent 1px);background-size:60px 60px}
-
-/* ── URGENCY BANNER ── */
-.urgency-bar{position:relative;z-index:200;background:linear-gradient(90deg,#0a1628,#0f1e38,#0a1628);border-bottom:1px solid rgba(0,212,240,0.25);padding:10px 20px;text-align:center;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
-.urgency-pulse{width:8px;height:8px;border-radius:50%;background:#00D4F0;box-shadow:0 0 10px #00D4F0;animation:upulse 1.4s ease-in-out infinite;flex-shrink:0}
-@keyframes upulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(0.85)}}
-.urgency-text{font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:.5px;color:var(--text)}
-.urgency-text .strike{text-decoration:line-through;color:var(--muted2);font-weight:400}
-.urgency-text .price-now{color:#00D4F0}
-.urgency-divider{color:var(--muted2);font-size:11px}
-.urgency-countdown{font-family:var(--fm);font-size:13px;color:var(--amber);letter-spacing:1px}
-.urgency-cta{background:rgba(0,212,240,0.12);border:1px solid rgba(0,212,240,0.3);color:#00D4F0;font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:30px;text-decoration:none;white-space:nowrap;transition:background .15s}
-.urgency-cta:hover{background:rgba(0,212,240,0.22)}
-@media(max-width:520px){.urgency-divider,.urgency-cta{display:none}}
-
-/* ── TESTIMONIALS ── */
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
-@media(max-width:860px){.testi-grid{grid-template-columns:1fr}}
-.testi-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 24px;position:relative;overflow:hidden}
-.testi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,212,240,0.4),transparent)}
-.testi-stars{color:#f59e0b;font-size:13px;margin-bottom:12px;letter-spacing:2px}
-.testi-quote{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:18px;font-style:italic}
-.testi-quote strong{color:var(--text);font-style:normal}
-.testi-author{display:flex;align-items:center;gap:12px}
-.testi-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:16px;flex-shrink:0;letter-spacing:1px}
-.testi-name{font-family:var(--fc);font-size:13px;font-weight:700;color:var(--text);letter-spacing:.3px}
-.testi-role{font-size:11.5px;color:var(--muted2);margin-top:1px}
-
-/* ── VS COMPARISON ── */
-.vs-strip{display:grid;grid-template-columns:1fr auto 1fr;gap:0;margin-top:48px;border:1px solid var(--border);border-radius:16px;overflow:hidden}
-.vs-col{padding:28px 24px}
-.vs-col.old{background:rgba(239,68,68,0.04)}
-.vs-col.new{background:rgba(0,212,240,0.04)}
-.vs-label{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.vs-label.bad{color:var(--red)}
-.vs-label.good{color:var(--accent)}
-.vs-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--muted);margin-bottom:11px;line-height:1.5}
-.vs-x{color:var(--red);flex-shrink:0;font-size:15px;margin-top:0px}
-.vs-check{color:var(--green);flex-shrink:0;font-size:15px;margin-top:0px}
-.vs-mid{background:rgba(255,255,255,0.03);border-left:1px solid var(--border);border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:16px;writing-mode:vertical-rl;font-family:var(--fh);font-size:28px;color:var(--muted2);letter-spacing:3px}
-@media(max-width:640px){.vs-strip{grid-template-columns:1fr}.vs-mid{writing-mode:horizontal-tb;padding:10px;font-size:18px;border-left:none;border-right:none;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}}
-
-/* ── GUARANTEE BADGE ── */
-.guarantee-badge{display:flex;align-items:center;gap:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:12px;padding:16px 20px;margin:20px 0;text-align:left}
-.guarantee-icon{font-size:28px;flex-shrink:0}
-.guarantee-text{font-size:13px;color:var(--muted);line-height:1.6}
-.guarantee-text strong{color:var(--green);display:block;margin-bottom:2px;font-size:13.5px}
+.rd1{transition-delay:.08s}.rd2{transition-delay:.16s}.rd3{transition-delay:.24s}.rd4{transition-delay:.32s}
+ 
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .nav{padding:12px 18px}
+  .nav-badge{display:none}
+  .feat-grid{grid-template-columns:1fr}
+  .who-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+  .hero{padding:100px 16px 60px}
+  .section{padding:64px 16px}
+  .hero-actions{flex-direction:column;align-items:center}
+  .hero-actions a{width:100%;justify-content:center;max-width:320px}
+  .who-grid{grid-template-columns:1fr}
+  .price-card{padding:28px 20px}
+  .price-main{font-size:72px}
+  .nav-demo{display:none}
+}
+@media(hover:none){
+  .btn-primary,.btn-ghost,.btn-demo-hero,.nav-cta{min-height:48px}
+  .feat-card:hover,.who-card:hover{transform:none}
+}
+ 
+/* ── SUPABASE GRID ── */
+.supa-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media(max-width:860px){.supa-grid{grid-template-columns:1fr;gap:32px}}
+ 
+/* ── SPLIT CARD INNER ── */
+.split-inner{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center}
+@media(max-width:640px){.split-inner{grid-template-columns:1fr;gap:20px}}
 </style>
 </head>
 <body>
-
-<div class="grid-bg"></div>
-
-<!-- ── URGENCY BANNER ── -->
-<div class="urgency-bar">
-  <div class="urgency-pulse"></div>
-  <div class="urgency-text">
-    🚀 Founding Price: <span class="price-now">$99</span> &nbsp;→&nbsp; <span class="strike">$149</span> after June 1
-  </div>
-  <div class="urgency-divider">·</div>
-  <div class="urgency-countdown" id="urgencyCountdown"></div>
-  <div class="urgency-divider">·</div>
-  <a href="https://strikepanel.gumroad.com" target="_blank" class="urgency-cta">Lock in $99 →</a>
-</div>
-
+ 
 <!-- ── NAV ── -->
 <nav class="nav">
   <a href="#" class="nav-brand">
     <svg class="nav-logo" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
-      <defs><radialGradient id="ng" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="55%" stop-color="#0f1220"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs>
-      <circle cx="45" cy="45" r="43" fill="url(#ng)" stroke="#00D4F0" stroke-width="1.5" stroke-opacity="0.6"/>
+      <defs><radialGradient id="no" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="55%" stop-color="#0f1220"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs>
+      <circle cx="45" cy="45" r="43" fill="url(#no)" stroke="#00D4F0" stroke-width="1.5" stroke-opacity="0.6"/>
       <circle cx="45" cy="45" r="29" fill="none" stroke="#00D4F0" stroke-width="0.9" stroke-opacity="0.2"/>
       <line x1="45" y1="2" x2="45" y2="26" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
       <line x1="45" y1="64" x2="45" y2="88" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
@@ -573,70 +424,63 @@ body::after{
     <span class="nav-badge">Training Intelligence</span>
   </a>
   <div class="nav-right">
-    <a href="#how-it-works" class="nav-link" id="navHow" style="display:none">How it works</a>
-    <a href="#faq" class="nav-link" id="navFaq" style="display:none">FAQ</a>
-    <a href="https://strikepanel.vercel.app/?demo=1" target="_blank" class="nav-link">👁 Live Demo</a>
-    <a href="https://strikepanel.gumroad.com" target="_blank" class="nav-cta">
-      <svg width="17" height="17" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><circle cx="45" cy="45" r="43" fill="#050e1a" stroke="rgba(5,14,26,0.5)" stroke-width="1"/><line x1="45" y1="2" x2="45" y2="26" stroke="#050e1a" stroke-width="3" stroke-linecap="round"/><line x1="45" y1="64" x2="45" y2="88" stroke="#050e1a" stroke-width="3" stroke-linecap="round"/><line x1="2" y1="45" x2="26" y2="45" stroke="#050e1a" stroke-width="3" stroke-linecap="round"/><line x1="64" y1="45" x2="88" y2="45" stroke="#050e1a" stroke-width="3" stroke-linecap="round"/><circle cx="45" cy="45" r="12" fill="#050e1a"/><text x="45" y="50" font-family="'Arial Black',Arial" font-size="11" font-weight="900" fill="#00D4F0" text-anchor="middle" dominant-baseline="middle" dy="0">SP</text></svg>
-      Get it — $99
-    </a>
+    <a href="#faq" class="nav-demo" style="display:none" id="navFaq">FAQ</a>
+    <a href="strikepanel-demo.html" target="_blank" class="nav-demo">👁 Live Demo</a>
+    <a href="https://strikepanel.gumroad.com" target="_blank" class="nav-cta">🥊 Get it — $149</a>
   </div>
 </nav>
-
+ 
 <!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-kicker">
-      <span class="kdot"></span>
-      Combat Sports · Gym &amp; Fitness · Fight Teams · Solo Athletes
+      <span class="kicker-dot"></span>
+      Training Intelligence · Combat · Fitness · Teams · Athletes
     </div>
-
+ 
     <h1 class="hero-title">
       <span class="line dim">KNOW WHO</span>
       <span class="line cyan">TO PUSH.</span>
       <span class="line dim">KNOW WHO</span>
-      <span class="line red">TO PROTECT.</span>
+      <span class="line" style="color:var(--red)">TO PROTECT.</span>
     </h1>
-
-    <p class="hero-hook">Every morning. Every athlete. <strong>Zero guesswork.</strong></p>
+ 
+    <p class="hero-hook">Every morning. Every athlete. Zero guesswork.</p>
     <p class="hero-sub">
-      You've been guessing — and it costs you. <strong>Overtrained fighters get injured. Under-coached athletes stall.</strong> StrikePanel gives you a daily readiness score for every athlete before training starts, so you make the right call every session. Fight countdowns, weight cuts, AI workouts, offline timer. <strong>One file. One price. No subscription.</strong>
+      StrikePanel™ is a <strong>one-file app</strong> that gives coaches, fight teams, gym groups and self-coached athletes
+      a <strong>daily readiness brief</strong> — so you train smarter, peak on fight day, and never over-train again.
     </p>
-
+ 
     <div style="display:flex;justify-content:center;margin-bottom:28px">
       <div class="price-flash">
-        <div class="price-num" style="display:flex;align-items:baseline;gap:10px">$99<span style="font-size:40%;color:var(--muted2);text-decoration:line-through;font-weight:400">$149</span></div>
+        <div class="price-num">$149</div>
         <div class="price-detail">
-          <div class="once">Founding price · One-time</div>
+          <div class="once">One-time payment</div>
           <div class="never">No subscription. Ever.</div>
         </div>
       </div>
     </div>
-
+ 
     <div class="hero-actions">
-      <a href="https://strikepanel.gumroad.com" target="_blank" class="btn-primary">
-        <svg width="18" height="18" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><defs><radialGradient id="btn-orb2" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1a2236"/><stop offset="100%" stop-color="#050810"/></radialGradient></defs><circle cx="45" cy="45" r="43" fill="url(#btn-orb2)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="45" cy="45" r="29" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/><line x1="45" y1="2" x2="45" y2="27" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="45" y1="63" x2="45" y2="88" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="2" y1="45" x2="27" y2="45" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="63" y1="45" x2="88" y2="45" stroke="white" stroke-width="2.8" stroke-linecap="round"/><circle cx="45" cy="45" r="11" fill="white"/><text x="45" y="49.5" font-family="Arial Black,sans-serif" font-weight="900" font-size="9" fill="#050810" text-anchor="middle">SP</text></svg>
-        Lock in $99 — Founding Price
-      </a>
-      <a href="https://strikepanel.vercel.app/?demo=1" target="_blank" class="btn-ghost">👁 Try Live Demo Free</a>
+      <a href="https://strikepanel.gumroad.com" target="_blank" class="btn-primary">🥊 Get StrikePanel — $149</a>
+      <a href="strikepanel-demo.html" target="_blank" class="btn-demo-hero">👁 Try Live Demo</a>
     </div>
-
+ 
     <div class="for-pills">
       <span class="for-pill">🥊 Boxing Coaches</span>
       <span class="for-pill">🤼 MMA Gyms</span>
       <span class="for-pill">🎯 Kickboxing Trainers</span>
-      <span class="for-pill">🏋️ Gym &amp; PT Coaches</span>
       <span class="for-pill">👥 Fight Teams</span>
+      <span class="for-pill">🏋️ Gym Coaches</span>
       <span class="for-pill">🔥 75 Hard Groups</span>
       <span class="for-pill">💪 Solo Athletes</span>
-      <span class="for-pill">💻 Online Coaches</span>
     </div>
-
+ 
     <!-- Morning Brief Mockup -->
     <div class="brief-mockup-wrap">
       <div class="brief-date-lbl" id="briefDate">Tuesday, 28 April 2026 · Fight Camp Week 6</div>
       <div class="brief-headline"><span class="red">1</span> NEEDS REST · <span class="green">2</span> READY TO PUSH</div>
-      <div class="brief-sub-text">Squad avg 68/100 · Tyler flagged — reduce load. Priya is peaking — don't hold back.</div>
+      <div class="brief-sub-text">Squad avg 68/100 · Marcus flagged — reduce sparring load today.</div>
       <div class="r-grid">
         <div class="r-card g">
           <div class="r-n">Priya Sharma 🔥</div>
@@ -665,667 +509,212 @@ body::after{
           <div class="alrt-ico">🛑</div>
           <div class="alrt-text">
             <strong>Tyler Novak — REST TODAY (38/100)</strong>
-            <p>Knee pain reported + high fatigue. Active recovery only. Do not run hard training.</p>
+            <p>Knee pain reported. Do not run hard training. Active recovery or full rest only.</p>
           </div>
         </div>
         <div class="alrt g">
           <div class="alrt-ico">✅</div>
           <div class="alrt-text">
-            <strong>Priya Sharma is peaking — push her hard</strong>
-            <p>Elite scores across all metrics. 95/100. High-intensity session. Don't hold back today.</p>
+            <strong>Priya Sharma is primed — push her hard today</strong>
+            <p>Elite scores across all metrics. High-intensity session. Don't hold back.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+ 
+<div class="divider"><span>See it in action</span></div>
 
-<div class="divider"><span>How it works</span></div>
-
-<!-- ── HOW IT WORKS ── -->
-<section class="section" style="padding-top:64px;padding-bottom:80px" id="how-it-works">
+<!-- ── SCREENSHOTS ── -->
+<section class="section" style="padding-top:64px;padding-bottom:64px" id="screenshots">
   <div class="section-inner">
-    <div class="reveal" style="max-width:640px">
-      <span class="s-kicker">📲 The check-in flow — StrikePanel's core USP</span>
-      <h2 class="s-title">Athletes check in.<br><span style="color:var(--accent)">You get the brief.</span></h2>
-      <p class="s-sub">No more guessing. No more "how are you feeling?" before sessions. The data comes to you — automatically, every morning.</p>
+    <div class="reveal" style="text-align:center;margin-bottom:48px">
+      <div class="s-kicker">Real app. Real data.</div>
+      <h2 class="s-title">Every view. One app.</h2>
+      <p class="s-sub">Morning Brief, Fight Dates, Workouts, Progress — everything your athletes need you to know, before you step on the floor.</p>
     </div>
 
-    <div class="flow-wrap reveal" style="margin-top:52px">
-      <div class="flow-step">
-        <div class="flow-num">1</div>
-        <span class="flow-icon">📤</span>
-        <div class="flow-title">Coach shares a link</div>
-        <div class="flow-desc">From your Morning Brief tab, copy your unique check-in link. Send it once to your athletes via WhatsApp, iMessage or Telegram. That's it — they save it and use it every day.</div>
-        <span class="flow-tag">30 seconds to set up</span>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">2</div>
-        <span class="flow-icon">📱</span>
-        <div class="flow-title">Athlete fills in 6 sliders</div>
-        <div class="flow-desc">They open the link on their own phone — no download, no account, no login. Sleep, energy, soreness, motivation, nutrition, pain. Done in under 30 seconds. Score calculated instantly.</div>
-        <span class="flow-tag flow-tag-cyan">No app install needed</span>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">3</div>
-        <span class="flow-icon">⚡</span>
-        <div class="flow-title">Your brief updates instantly</div>
-        <div class="flow-desc">Each check-in syncs straight to your Morning Brief via Supabase cloud. Before your session starts, you already know who to push, who to protect, and who to send home.</div>
-        <span class="flow-tag">Real-time · No refresh</span>
-      </div>
+    <!-- Laptop screenshot -->
+    <div class="reveal" style="text-align:center;margin-bottom:48px">
+      <img src="/media/screen-laptop.png" alt="StrikePanel Morning Brief on desktop"
+           style="max-width:100%;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.6)">
+      <p style="margin-top:12px;font-size:13px;color:var(--muted)">Morning Brief — squad readiness at a glance</p>
     </div>
 
-    <!-- Check-in phone mockup + coach side by side -->
-    <div class="checkin-demo-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:60px" class="reveal">
-      <div>
-        <div class="checkin-demo">
-          <div class="cd-header">
-            <div style="font-size:24px;margin-bottom:6px">🥊</div>
-            <div class="cd-title">DAILY CHECK-IN</div>
-            <div class="cd-sub">How are you feeling today?</div>
-          </div>
-          <div class="cd-row">
-            <div class="cd-label">😴 Sleep Quality</div>
-            <div class="cd-slider"><div class="cd-fill" style="width:80%"></div></div>
-            <div class="cd-val">8</div>
-          </div>
-          <div class="cd-row">
-            <div class="cd-label">⚡ Energy</div>
-            <div class="cd-slider"><div class="cd-fill" style="width:90%"></div></div>
-            <div class="cd-val">9</div>
-          </div>
-          <div class="cd-row">
-            <div class="cd-label">💪 Soreness</div>
-            <div class="cd-slider"><div class="cd-fill" style="width:20%;background:linear-gradient(90deg,var(--green),#34d399)"></div></div>
-            <div class="cd-val" style="color:var(--green)">2</div>
-          </div>
-          <div class="cd-row">
-            <div class="cd-label">🧠 Motivation</div>
-            <div class="cd-slider"><div class="cd-fill" style="width:100%"></div></div>
-            <div class="cd-val">10</div>
-          </div>
-          <div class="cd-row">
-            <div class="cd-label">🥗 Nutrition</div>
-            <div class="cd-slider"><div class="cd-fill" style="width:90%"></div></div>
-            <div class="cd-val">9</div>
-          </div>
-          <div class="cd-row">
-            <div class="cd-label">🩺 Pain</div>
-            <div class="cd-slider"><div class="cd-fill" style="width:0%;background:linear-gradient(90deg,var(--red),#f87171)"></div></div>
-            <div class="cd-val" style="color:var(--muted2)">0</div>
-          </div>
-          <div class="cd-score-wrap">
-            <div class="cd-score">95</div>
-            <div>
-              <div class="cd-verdict">🔥 PUSH HARD</div>
-              <div class="cd-vmsg">Elite day. Don't hold back.</div>
-            </div>
-          </div>
-          <button class="cd-btn">✓ Submit Check-In</button>
-          <div class="cd-footer">Powered by StrikePanel™ · No account needed</div>
-        </div>
+    <!-- Phone + laptop side by side -->
+    <div class="reveal" style="display:flex;gap:40px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:48px">
+      <div style="text-align:center;flex:0 0 auto">
+        <img src="/media/screen-mobile.png" alt="StrikePanel Fight Dates on mobile"
+             style="max-height:480px;border-radius:12px;box-shadow:0 16px 60px rgba(0,0,0,0.6)">
+        <p style="margin-top:12px;font-size:13px;color:var(--muted)">Fight Dates &amp; weight cut plan</p>
       </div>
-      <div>
-        <div style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px">What the coach sees</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:14px">
-            <div style="font-family:var(--fh);font-size:36px;color:var(--green);line-height:1;min-width:52px">95</div>
-            <div>
-              <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)">Priya Sharma</div>
-              <div style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-top:2px">🔥 Push Hard</div>
-              <div style="font-size:11px;color:var(--muted);margin-top:3px">Submitted 08:14 · ↑ +9 vs yesterday</div>
-            </div>
+      <div style="flex:1;min-width:280px;max-width:560px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div style="background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:20px">
+            <div style="font-family:var(--fc);font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:8px">MORNING BRIEF</div>
+            <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">Daily readiness</div>
+            <div style="font-size:12px;color:var(--muted)">Who to push. Who to rest. Every morning before training.</div>
           </div>
-          <div style="background:rgba(0,212,240,0.05);border:1px solid rgba(0,212,240,0.16);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:14px">
-            <div style="font-family:var(--fh);font-size:36px;color:var(--accent);line-height:1;min-width:52px">72</div>
-            <div>
-              <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)">Marcus Okafor</div>
-              <div style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-top:2px">✅ Train Normal</div>
-              <div style="font-size:11px;color:var(--muted);margin-top:3px">Submitted 08:31 · ↑ +4 vs yesterday</div>
-            </div>
+          <div style="background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:20px">
+            <div style="font-family:var(--fc);font-size:10px;letter-spacing:2px;color:var(--red);margin-bottom:8px">FIGHT DATES</div>
+            <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">Fight camp planning</div>
+            <div style="font-size:12px;color:var(--muted)">Countdowns, weight cut calculators, weekly phase planning.</div>
           </div>
-          <div style="background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.18);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:14px">
-            <div style="font-family:var(--fh);font-size:36px;color:var(--red);line-height:1;min-width:52px">38</div>
-            <div>
-              <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)">Tyler Novak</div>
-              <div style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-top:2px">🛑 Rest Today</div>
-              <div style="font-size:11px;color:var(--muted);margin-top:3px">Knee pain · ↓ −17 · Do not train hard</div>
-            </div>
+          <div style="background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:20px">
+            <div style="font-family:var(--fc);font-size:10px;letter-spacing:2px;color:var(--green);margin-bottom:8px">WORKOUTS</div>
+            <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">AI session builder</div>
+            <div style="font-size:12px;color:var(--muted)">Generate full training sessions in seconds. Log everything.</div>
           </div>
-          <div style="padding:14px 16px;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.06);border-radius:12px;font-size:12px;color:var(--muted);line-height:1.7">
-            <span style="color:var(--accent);font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Squad avg today</span><br>
-            <span style="font-family:var(--fh);font-size:28px;color:var(--text)">68</span><span style="color:var(--muted2)">/100</span><br>
-            3 athletes checked in · 1 flagged for rest
+          <div style="background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:20px">
+            <div style="font-family:var(--fc);font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:8px">PROGRESS</div>
+            <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">Squad analytics</div>
+            <div style="font-size:12px;color:var(--muted)">14-day readiness chart, leaderboard, export athlete reports.</div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><span>Two Worlds. One App.</span></div>
-
-<!-- ── DUAL MARKET ── -->
-<section class="section" style="padding-top:64px;padding-bottom:64px">
-  <div class="section-inner">
-    <div class="reveal" style="text-align:center;max-width:640px;margin:0 auto 52px">
-      <span class="s-kicker" style="display:inline-block">Built for combat. Expanded for everyone.</span>
-      <h2 class="s-title">Combat sports coach<br><span style="color:var(--accent)">or gym trainer?</span><br><span style="color:var(--muted)" style="font-size:70%">Both.</span></h2>
-      <p class="s-sub" style="margin:0 auto">Switch between Combat Sports mode and Gym & Fitness mode in Settings. Same powerful readiness engine — just tailored to how you train.</p>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="reveal dual-grid">
-
-      <!-- Combat Mode -->
-      <div style="background:linear-gradient(135deg,rgba(239,68,68,0.07),rgba(139,92,246,0.04));border:1px solid rgba(239,68,68,0.2);border-radius:20px;padding:30px;position:relative;overflow:hidden">
-        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),rgba(139,92,246,0.6),transparent)"></div>
-        <div style="font-size:32px;margin-bottom:14px">🥊</div>
-        <div style="font-family:var(--fh);font-size:28px;letter-spacing:2px;margin-bottom:6px">Combat Sports<br><span style="color:var(--red)">Mode</span></div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:20px">Boxing, MMA, Kickboxing, Muay Thai, BJJ, Wrestling. Built for coaches running fight camps, managing weight cuts, and getting fighters to peak on the right day.</div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)"><span style="color:var(--red);font-weight:700;flex-shrink:0">✓</span>Daily readiness scoring per fighter</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)"><span style="color:var(--red);font-weight:700;flex-shrink:0">✓</span>Fight date countdown + auto weight cut plan</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)"><span style="color:var(--red);font-weight:700;flex-shrink:0">✓</span>Combat session logger (sparring, pads, bag, drilling)</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)"><span style="color:var(--red);font-weight:700;flex-shrink:0">✓</span>AI workouts adapted to combat athletes</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)"><span style="color:var(--red);font-weight:700;flex-shrink:0">✓</span>Boxing round timer — use ringside, offline</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)"><span style="color:var(--red);font-weight:700;flex-shrink:0">✓</span>Athlete self check-in via WhatsApp link</div>
-        </div>
-        <div style="margin-top:20px;font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:20px;padding:4px 12px;display:inline-block">🥊 Combat Sports Mode</div>
-      </div>
-
-      <!-- Gym Mode -->
-      <div style="background:linear-gradient(135deg,rgba(16,185,129,0.07),rgba(0,212,240,0.04));border:1px solid rgba(16,185,129,0.2);border-radius:20px;padding:30px;position:relative;overflow:hidden">
-        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),var(--accent),transparent)"></div>
-        <div style="font-size:32px;margin-bottom:14px">🏋️</div>
-        <div style="font-family:var(--fh);font-size:28px;letter-spacing:2px;margin-bottom:6px">Gym &amp; Fitness<br><span style="color:var(--green)">Mode</span></div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:20px">Personal trainers, gym coaches, PT studios, 75 Hard groups and self-coached athletes. Everything you need to track clients, log sessions and push performance.</div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span>Daily readiness scores for up to 20 clients</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span>AI workout generator — goal, equipment, duration</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span>Biometrics — BMI, BMR, TDEE, lean mass, protein</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span>8-week progress tracking + trend detection</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span>Food AI — macro breakdown from plain English</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span>Client self check-in — share link, no app needed</div>
-        </div>
-        <div style="margin-top:20px;font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green);background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:20px;padding:4px 12px;display:inline-block">🏋️ Gym &amp; Fitness Mode</div>
-      </div>
-
-    </div>
-
-    <div class="reveal" style="text-align:center;margin-top:28px;font-size:13px;color:var(--muted2);font-family:var(--fc);letter-spacing:1px;text-transform:uppercase">
-      Switch modes anytime in Settings · Same license · Same price · Everything included
     </div>
   </div>
 </section>
 
 <div class="divider"><span>Who it's for</span></div>
-
+ 
 <!-- ── WHO IT'S FOR ── -->
 <section class="section" style="padding-top:64px;padding-bottom:64px">
   <div class="section-inner">
     <div class="reveal">
-      <span class="s-kicker">Built for everyone who trains seriously</span>
+      <div class="s-kicker">Built for everyone who trains seriously</div>
       <h2 class="s-title">One app.<br>Every athlete.</h2>
-      <p class="s-sub">StrikePanel works for combat coaches, gym trainers, fight teams, 75 Hard groups, and self-coached athletes. Two modes — Combat Sports and Gym & Fitness — switch in Settings.</p>
+      <p class="s-sub">StrikePanel isn't just for combat coaches. Whether you run a gym, fight as a team, or train solo — it adapts to how you train.</p>
     </div>
     <div class="who-grid">
-      <div class="who-card reveal">
+      <div class="who-card reveal rd1">
         <div class="who-icon">🥊</div>
         <div class="who-title">Combat Sports Coaches</div>
-        <div class="who-desc">Boxing, MMA, Kickboxing, Muay Thai. Know your squad's readiness before you step on the floor. Fight countdowns, weight cuts, camp planning — all in one morning brief.</div>
-      </div>
-      <div class="who-card reveal rd1">
-        <div class="who-icon">🏋️</div>
-        <div class="who-title">Gym & Fitness Coaches</div>
-        <div class="who-desc">Track up to 20 clients, log sessions, generate AI workouts, biometrics and progress. Switch to Gym mode in Settings for a non-combat layout.</div>
+        <div class="who-desc">Boxing, MMA, Kickboxing, Muay Thai. Know your squad's readiness before you step on the floor. Fight countdowns, weight cuts, camp planning — all in one brief.</div>
       </div>
       <div class="who-card reveal rd2">
-        <div class="who-icon">👥</div>
-        <div class="who-title">Fight Teams</div>
-        <div class="who-desc">Up to 20 fighters. One license, no per-seat fees. Athletes check in from their own phones — coach sees everyone's readiness in one morning brief.</div>
+        <div class="who-icon">🏋️</div>
+        <div class="who-title">Gym & Fitness Coaches</div>
+        <div class="who-desc">Track up to 10 clients, log sessions, generate AI workouts, and monitor biometrics. Switch between Combat and Gym mode in Settings.</div>
       </div>
       <div class="who-card reveal rd3">
-        <div class="who-icon">🌐</div>
-        <div class="who-title">Remote & Online Coaches</div>
-        <div class="who-desc">Athletes submit daily readiness from any phone, anywhere in the world. Scores sync to your Morning Brief in real time. No timezone issues, no spreadsheets.</div>
-      </div>
-      <div class="who-card reveal">
         <div class="who-icon">🔥</div>
         <div class="who-title">75 Hard & Challenge Groups</div>
-        <div class="who-desc">Run your own 75-day challenge. Daily check-ins, accountability scores, 8-week progress tracking. One person buys — the whole group benefits.</div>
+        <div class="who-desc">Run your own 75-day challenge group. Daily check-ins, accountability scores, 8-week progress tracking. One person buys — the whole group benefits.</div>
       </div>
-      <div class="who-card reveal rd1">
+      <div class="who-card reveal rd4">
         <div class="who-icon">💪</div>
         <div class="who-title">Self-Coached Athletes</div>
-        <div class="who-desc">Track your own readiness, body stats, nutrition and sessions. AI workouts generated in seconds. You are the coach — treat yourself like one.</div>
+        <div class="who-desc">Track your own readiness, body stats, nutrition, sessions and progress. No coach needed — you are the coach. AI workouts generated in seconds.</div>
+      </div>
+      <div class="who-card reveal rd1">
+        <div class="who-icon">👥</div>
+        <div class="who-title">Fight Teams</div>
+        <div class="who-desc">Up to 10 fighters. Split the cost — <strong style="color:var(--accent)">$14.90 per fighter</strong>. Athletes check in from their own phones, coach sees everything in one brief.</div>
+      </div>
+      <div class="who-card reveal rd2">
+        <div class="who-icon">🎓</div>
+        <div class="who-title">Online & Remote Coaches</div>
+        <div class="who-desc">Athletes submit daily readiness via a shared link from any phone — no download, no account. Scores sync to your Morning Brief instantly.</div>
       </div>
     </div>
-
+ 
+    <!-- USP bar -->
     <div class="usp-bar reveal" style="margin-top:48px">
-      <div class="usp"><div class="usp-val">20</div><div class="usp-lbl">Athletes per install</div></div>
-      <div class="usp"><div class="usp-val">30s</div><div class="usp-lbl">Athlete check-in time</div></div>
+      <div class="usp"><div class="usp-val">10</div><div class="usp-lbl">Athletes per app</div></div>
       <div class="usp"><div class="usp-val">100%</div><div class="usp-lbl">Offline capable</div></div>
-      <div class="usp"><div class="usp-val">$0</div><div class="usp-lbl">Monthly cost forever</div></div>
+      <div class="usp"><div class="usp-val">∞</div><div class="usp-lbl">No subscription</div></div>
+      <div class="usp"><div class="usp-val">$14.90</div><div class="usp-lbl">Per athlete (team of 10)</div></div>
     </div>
   </div>
 </section>
-
+ 
 <div class="divider"><span>Features</span></div>
-
+ 
 <!-- ── FEATURES ── -->
 <section class="section" style="padding-top:64px" id="features">
   <div class="section-inner">
     <div class="reveal">
-      <span class="s-kicker">Everything in one file. No accounts. No cloud required.</span>
+      <div class="s-kicker">Everything in one file. No accounts. No cloud required.</div>
       <h2 class="s-title">Nine tools.<br><span style="color:var(--accent)">One price.</span></h2>
-      <p class="s-sub">Every feature ships inside a single HTML file. Works offline. Installs as a PWA on any phone or desktop. No backend, no login, no monthly bill.</p>
+      <p class="s-sub">Every feature ships inside a single HTML file. Works offline. Installs as an app on any phone or desktop. No backend, no login, no monthly bill.</p>
     </div>
     <div class="feat-grid">
       <div class="feat-card reveal">
         <span class="feat-icon">⚡</span>
         <div class="feat-title">Morning Brief & Readiness Engine</div>
-        <div class="feat-desc">Daily 0–100 readiness scores per athlete — calculated from sleep, energy, soreness, motivation, nutrition and pain. Your brief tells you who to push, who to protect, who to flag. Updated automatically when athletes check in.</div>
-        <span class="feat-pill">Core USP</span>
+        <div class="feat-desc">Every athlete gets a 0–100 readiness score based on sleep, energy, soreness, motivation, nutrition and pain — logged daily via a 30-second check-in. Your brief tells you exactly who to push and who to protect.</div>
+        <span class="feat-pill">Readiness Score Engine</span>
       </div>
       <div class="feat-card reveal rd1">
         <span class="feat-icon">📲</span>
         <div class="feat-title">Athlete Self Check-In</div>
-        <div class="feat-desc">Share a link. Athletes open it on any phone in 30 seconds — no download, no account. Scores push straight to your Morning Brief via cloud sync. The single feature that saves coaches the most time every day.</div>
-        <span class="feat-pill green">No install · No account</span>
+        <div class="feat-desc">Share a link with your athletes. They submit from any phone in under 30 seconds — no app download, no account needed. Scores flow straight into your Morning Brief. Optional cloud sync keeps everything live across devices.</div>
+        <span class="feat-pill">Share Link · Cloud Sync</span>
       </div>
       <div class="feat-card reveal rd2">
         <span class="feat-icon">🥊</span>
         <div class="feat-title">Fight Date Countdown & Weight Cut</div>
-        <div class="feat-desc">Add an upcoming fight with current and target weight — StrikePanel auto-generates a week-by-week cut plan. Safe deficit targets, kg per week, calorie deficits, camp phase labels. Colour-coded urgency as fight day closes in.</div>
-        <span class="feat-pill amber">Weight Cut Calculator</span>
+        <div class="feat-desc">Add any upcoming fight and StrikePanel auto-generates a week-by-week weight cut plan — safe deficit targets, kg per week, calorie deficits and camp phase labels. Colour-coded urgency as fight day approaches.</div>
+        <span class="feat-pill">Weight Cut Calculator</span>
       </div>
       <div class="feat-card reveal">
         <span class="feat-icon">✦</span>
         <div class="feat-title">AI Workout Generator</div>
-        <div class="feat-desc">Goal, muscle groups, equipment, duration — get a fully coached session with sets, reps, rest and coaching cues in seconds. The AI reads each athlete's readiness score before generating — low score gets a recovery session automatically.</div>
-        <span class="feat-pill purple">Gemini AI · Free Key</span>
+        <div class="feat-desc">Tell the AI the goal, muscle groups, equipment and duration — get a complete coached session with sets, reps, rest periods and coaching cues in seconds. Powered by Google Gemini (free key — no card required).</div>
+        <span class="feat-pill">Gemini AI · Free Key</span>
       </div>
       <div class="feat-card reveal rd1">
         <span class="feat-icon">⏱</span>
         <div class="feat-title">Boxing Round Timer</div>
-        <div class="feat-desc">Professional interval timer with warm-up, configurable rounds, rest periods and audio warning bell. Visual ring and round pip tracker. Works 100% offline — install as a PWA and use ringside with no internet.</div>
-        <span class="feat-pill">Offline · PWA</span>
+        <div class="feat-desc">Professional interval timer with configurable warm-up, rounds, rest periods and warning bell. Visual round progress ring, pip tracker and audio cues. Works fully offline — install as a PWA and use ringside, no internet.</div>
+        <span class="feat-pill">Offline · PWA Installable</span>
       </div>
       <div class="feat-card reveal rd2">
         <span class="feat-icon">🥗</span>
         <div class="feat-title">Food AI & Macro Tracker</div>
-        <div class="feat-desc">Describe what you ate — the AI breaks it down into calories, protein, carbs and fats. Running daily log with totals vs targets. Perfect for fight camp weight cuts, bulking phases and performance nutrition.</div>
-        <span class="feat-pill purple">AI Nutrition</span>
+        <div class="feat-desc">Describe what you ate in plain English — the AI breaks down calories, protein, carbs and fats instantly. Running daily nutrition log with totals and targets. Works for weight cuts, bulks and maintenance phases.</div>
+        <span class="feat-pill">AI Nutrition Analysis</span>
       </div>
       <div class="feat-card reveal">
         <span class="feat-icon">📊</span>
         <div class="feat-title">Biometrics & Progress Tracking</div>
-        <div class="feat-desc">BMI, BMR, TDEE, lean mass, fat mass, protein targets and hydration — all auto-calculated per athlete. 8-week performance score tracking. Wearable data logging: HRV, resting HR, steps, sleep hours.</div>
+        <div class="feat-desc">BMI, BMR, TDEE, lean mass, fat mass, protein targets and hydration — all auto-calculated per athlete. 8-week performance score tracking with trend detection. Wearable data logging (HRV, RHR, steps, sleep).</div>
         <span class="feat-pill">Biometrics Engine</span>
       </div>
       <div class="feat-card reveal rd1">
         <span class="feat-icon">📄</span>
         <div class="feat-title">Athlete PDF Reports</div>
-        <div class="feat-desc">One-click professional report per athlete — readiness history, fight dates, session log, biometrics and goals. Share to WhatsApp, email or print. Everything a promoter, physio or parent needs at a glance.</div>
-        <span class="feat-pill">PDF · Share</span>
+        <div class="feat-desc">Generate a professional report for any athlete — readiness history, fight dates, session log, biometrics and goals. Share to WhatsApp, email or print. One click, print-ready.</div>
+        <span class="feat-pill">PDF · Share to WhatsApp</span>
       </div>
       <div class="feat-card reveal rd2">
         <span class="feat-icon">☁️</span>
         <div class="feat-title">Offline-First · Optional Cloud Sync</div>
-        <div class="feat-desc">All data lives locally — no internet ever required. Connect your own free Supabase project to sync across devices, share with a co-coach, and receive athlete check-ins in real time. Your data never touches our servers.</div>
-        <span class="feat-pill green">Local-First · BYOC</span>
+        <div class="feat-desc">All data lives locally in your browser — no internet needed, ever. Add a free Supabase cloud backup in Settings to sync across devices or with a co-coach. Your data stays yours — no third party ever touches it.</div>
+        <span class="feat-pill">Local-First · BYOC</span>
       </div>
     </div>
   </div>
 </section>
-
-<div class="divider"><span>App Preview</span></div>
-
-<!-- ── APP PREVIEW ── -->
-<section class="section" style="padding-top:72px;padding-bottom:90px" id="preview">
-  <div class="section-inner">
-
-    <!-- Section header -->
-    <div class="reveal" style="text-align:center;max-width:700px;margin:0 auto 70px">
-      <span class="s-kicker" style="display:inline-block">Real screenshots. Nothing staged.</span>
-      <h2 class="s-title">This is what you open<br><span style="color:var(--accent)">every morning.</span></h2>
-      <p class="s-sub" style="margin:0 auto">Exact screens from the live app. Combat coaches, gym trainers and remote coaches all use the same interface — it just works for both.</p>
-    </div>
-
-    <!-- ── LAPTOP — MORNING BRIEF ── -->
-    <div class="reveal" style="margin-bottom:90px">
-      <!-- BIG LABEL -->
-      <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px">
-        <div style="height:1px;flex:1;max-width:120px;background:linear-gradient(90deg,transparent,rgba(0,212,240,0.3))"></div>
-        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,240,0.07);border:1px solid rgba(0,212,240,0.22);border-radius:30px;padding:8px 20px">
-          <span style="width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:kdot 2s ease-in-out infinite;flex-shrink:0"></span>
-          <span style="font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)">Coach View · Morning Brief · Desktop</span>
-        </div>
-        <div style="height:1px;flex:1;max-width:120px;background:linear-gradient(90deg,rgba(0,212,240,0.3),transparent)"></div>
-      </div>
-
-      <!-- Laptop frame -->
-      <div style="max-width:940px;margin:0 auto;position:relative;filter:drop-shadow(0 40px 80px rgba(0,0,0,0.9)) drop-shadow(0 0 60px rgba(0,212,240,0.08))">
-        <!-- Screen body -->
-        <div style="background:#0d1018;border:1.5px solid rgba(255,255,255,0.11);border-radius:16px 16px 0 0;padding:10px 10px 0;position:relative">
-          <!-- Glow line top -->
-          <div style="position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,240,0.4),rgba(139,92,246,0.3),transparent)"></div>
-          <!-- Camera -->
-          <div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.05);margin:0 auto 8px;box-shadow:inset 0 0 3px rgba(0,0,0,0.5)"></div>
-          <!-- App screen -->
-          <div style="background:#080b14;border-radius:8px 8px 0 0;overflow:hidden;border:1px solid rgba(255,255,255,0.07);border-bottom:none">
-            <!-- App top bar -->
-            <div style="background:#0a0e1c;border-bottom:1px solid rgba(255,255,255,0.06);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px">
-              <div style="display:flex;align-items:center;gap:10px">
-                <svg width="26" height="26" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="lg1" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs><circle cx="45" cy="45" r="43" fill="url(#lg1)" stroke="#00D4F0" stroke-width="1.5" stroke-opacity="0.6"/><line x1="45" y1="2" x2="45" y2="26" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/><line x1="45" y1="64" x2="45" y2="88" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/><line x1="2" y1="45" x2="26" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/><line x1="64" y1="45" x2="88" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/><circle cx="45" cy="45" r="11" fill="#00D4F0"/><text x="45" y="49" font-family="'Bebas Neue',sans-serif" font-size="8" fill="#050e1a" text-anchor="middle">SP</text></svg>
-                <span style="font-family:var(--fh);font-size:17px;letter-spacing:2px">Strike<span style="color:var(--accent)">Panel</span>™</span>
-                <span style="font-family:var(--fc);font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green);background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.22);padding:2px 8px;border-radius:20px;display:flex;align-items:center;gap:4px"><span style="width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block"></span>Live</span>
-              </div>
-              <div style="display:flex;align-items:center;gap:6px">
-                <span style="font-family:var(--fc);font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2)">Phase 1 · v1</span>
-                <span style="font-family:var(--fc);font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);background:rgba(0,212,240,0.07);border:1px solid rgba(0,212,240,0.18);padding:2px 8px;border-radius:20px">Training Intelligence</span>
-              </div>
-            </div>
-            <!-- Tab bar -->
-            <div style="background:#0b0f1d;border-bottom:1px solid rgba(255,255,255,0.05);padding:0 20px;display:flex;gap:2px;overflow:hidden">
-              <div style="font-family:var(--fc);font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:11px 16px;color:var(--accent);border-bottom:2px solid var(--accent);white-space:nowrap">⚡ Morning Brief</div>
-              <div style="font-family:var(--fc);font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:11px 16px;color:var(--muted2);white-space:nowrap">🥊 Fight Dates</div>
-              <div style="font-family:var(--fc);font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:11px 16px;color:var(--muted2);white-space:nowrap">👥 Members</div>
-              <div style="font-family:var(--fc);font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:11px 16px;color:var(--muted2);white-space:nowrap">✦ Workouts</div>
-              <div style="font-family:var(--fc);font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:11px 16px;color:var(--muted2);white-space:nowrap">📊 Progress</div>
-              <div style="font-family:var(--fc);font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:11px 16px;color:var(--muted2);white-space:nowrap">⏱ Timer</div>
-              <div style="font-family:var(--fc);font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:11px 16px;color:var(--muted2);white-space:nowrap">⚙ Settings</div>
-            </div>
-            <!-- Morning Brief Content -->
-            <div style="padding:22px 24px 24px">
-              <!-- Header row -->
-              <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px">
-                <div>
-                  <div style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted2);margin-bottom:5px" id="prevDate">Thursday, 1 May 2025 · Fight Camp Intelligence</div>
-                  <div style="font-family:var(--fh);font-size:clamp(20px,3.5vw,32px);letter-spacing:2px;line-height:1.05;margin-bottom:6px"><span style="color:var(--red)">1</span> NEEDS REST &nbsp;·&nbsp; <span style="color:var(--green)">2</span> READY TO PUSH</div>
-                  <div style="font-size:12.5px;color:var(--muted)">Squad avg <strong style="color:var(--text)">68/100</strong> · Marcus flagged — reduce sparring load today</div>
-                </div>
-                <div style="display:flex;gap:8px;flex-shrink:0;margin-top:2px">
-                  <div style="font-family:var(--fc);font-size:8.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:7px 13px;background:rgba(0,212,240,0.07);border:1px solid rgba(0,212,240,0.2);border-radius:20px;color:var(--accent);cursor:pointer">↻ Refresh</div>
-                  <div style="font-family:var(--fc);font-size:8.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:7px 13px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.22);border-radius:20px;color:var(--green);cursor:pointer">+ Log Check-In</div>
-                  <div style="font-family:var(--fc);font-size:8.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:7px 13px;background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.2);border-radius:20px;color:#a78bfa;cursor:pointer">📄 Export</div>
-                </div>
-              </div>
-              <!-- 3 athlete cards -->
-              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:14px">
-                <div style="background:rgba(16,185,129,0.065);border:1px solid rgba(16,185,129,0.22);border-radius:12px;padding:16px;position:relative;overflow:hidden">
-                  <div style="position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--green),transparent)"></div>
-                  <div style="font-family:var(--fc);font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:7px">Priya Sharma 🔥</div>
-                  <div style="font-family:var(--fh);font-size:44px;color:var(--green);line-height:1;margin-bottom:6px">95</div>
-                  <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin-bottom:8px;overflow:hidden"><div style="width:95%;height:100%;background:linear-gradient(90deg,var(--green),#34d399);border-radius:2px"></div></div>
-                  <span style="font-family:var(--fc);font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:rgba(16,185,129,0.15);color:var(--green)">🔥 PUSH HARD</span>
-                  <div style="font-family:var(--fm);font-size:10px;color:var(--muted2);margin-top:6px">↑ +9 vs yesterday · Submitted 08:14</div>
-                </div>
-                <div style="background:rgba(0,212,240,0.055);border:1px solid rgba(0,212,240,0.2);border-radius:12px;padding:16px;position:relative;overflow:hidden">
-                  <div style="position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--accent),transparent)"></div>
-                  <div style="font-family:var(--fc);font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:7px">Marcus Okafor ✅</div>
-                  <div style="font-family:var(--fh);font-size:44px;color:var(--accent);line-height:1;margin-bottom:6px">72</div>
-                  <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin-bottom:8px;overflow:hidden"><div style="width:72%;height:100%;background:linear-gradient(90deg,var(--accent),#67e8f9);border-radius:2px"></div></div>
-                  <span style="font-family:var(--fc);font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:rgba(0,212,240,0.12);color:var(--accent)">✅ TRAIN NORMAL</span>
-                  <div style="font-family:var(--fm);font-size:10px;color:var(--muted2);margin-top:6px">↑ +4 vs yesterday · Submitted 08:31</div>
-                </div>
-                <div style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.22);border-radius:12px;padding:16px;position:relative;overflow:hidden">
-                  <div style="position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--red),transparent)"></div>
-                  <div style="font-family:var(--fc);font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:7px">Tyler Novak 🛑</div>
-                  <div style="font-family:var(--fh);font-size:44px;color:var(--red);line-height:1;margin-bottom:6px">38</div>
-                  <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin-bottom:8px;overflow:hidden"><div style="width:38%;height:100%;background:linear-gradient(90deg,var(--red),#f87171);border-radius:2px"></div></div>
-                  <span style="font-family:var(--fc);font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:rgba(239,68,68,0.14);color:var(--red)">🛑 REST TODAY</span>
-                  <div style="font-family:var(--fm);font-size:10px;color:var(--muted2);margin-top:6px">↓ −17 · Knee pain · Submitted 09:02</div>
-                </div>
-              </div>
-              <!-- Alerts -->
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-                <div style="display:flex;align-items:flex-start;gap:11px;padding:12px 14px;background:rgba(239,68,68,0.055);border:1px solid rgba(239,68,68,0.2);border-radius:11px">
-                  <span style="font-size:18px;flex-shrink:0;margin-top:1px">🛑</span>
-                  <div><div style="font-size:12.5px;font-weight:600;color:var(--text);margin-bottom:2px">Tyler Novak — REST TODAY (38/100)</div><div style="font-size:11.5px;color:var(--muted)">Knee pain. Active recovery only. Do not run hard training.</div></div>
-                </div>
-                <div style="display:flex;align-items:flex-start;gap:11px;padding:12px 14px;background:rgba(16,185,129,0.055);border:1px solid rgba(16,185,129,0.2);border-radius:11px">
-                  <span style="font-size:18px;flex-shrink:0;margin-top:1px">✅</span>
-                  <div><div style="font-size:12.5px;font-weight:600;color:var(--text);margin-bottom:2px">Priya Sharma is peaking — push her hard</div><div style="font-size:11.5px;color:var(--muted)">Elite scores across all metrics. High-intensity session today.</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Laptop base -->
-        <div style="background:linear-gradient(180deg,#12161e,#0d1016);height:16px;border-radius:0 0 5px 5px;border:1.5px solid rgba(255,255,255,0.08);border-top:none"></div>
-        <div style="background:linear-gradient(180deg,#0c1016,#080c12);height:9px;border-radius:0 0 24px 24px;border:1px solid rgba(255,255,255,0.05);border-top:none;width:55%;margin:0 auto;box-shadow:0 6px 30px rgba(0,0,0,0.8)"></div>
-        <!-- Glow under screen -->
-        <div style="position:absolute;bottom:-30px;left:20%;right:20%;height:40px;background:rgba(0,212,240,0.06);filter:blur(20px);pointer-events:none"></div>
-      </div>
-    </div>
-
-    <!-- ── PHONES ── -->
-    <div class="reveal">
-      <!-- BIG LABEL -->
-      <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:36px">
-        <div style="height:1px;flex:1;max-width:100px;background:linear-gradient(90deg,transparent,rgba(139,92,246,0.3))"></div>
-        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.22);border-radius:30px;padding:8px 20px">
-          <span style="width:8px;height:8px;border-radius:50%;background:#a78bfa;box-shadow:0 0 10px rgba(167,139,250,0.6);animation:kdot 2s ease-in-out infinite;flex-shrink:0"></span>
-          <span style="font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#a78bfa">Athlete View · Mobile · Any Phone</span>
-        </div>
-        <div style="height:1px;flex:1;max-width:100px;background:linear-gradient(90deg,rgba(139,92,246,0.3),transparent)"></div>
-      </div>
-
-      <div style="display:flex;gap:28px;justify-content:center;align-items:flex-start;flex-wrap:wrap">
-
-        <!-- ── PHONE 1 — Athlete Check-In ── -->
-        <div style="display:flex;flex-direction:column;align-items:center;gap:16px">
-          <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:5px 14px">Athlete's phone</div>
-          <!-- Phone frame -->
-          <div style="width:262px;background:linear-gradient(180deg,#1a1d28,#0f1118);border:2px solid rgba(255,255,255,0.14);border-radius:44px;padding:16px 11px 20px;box-shadow:0 32px 80px rgba(0,0,0,0.9),0 0 0 1px rgba(255,255,255,0.04),0 0 50px rgba(0,212,240,0.07);position:relative">
-            <!-- Side buttons -->
-            <div style="position:absolute;left:-2.5px;top:90px;width:3px;height:28px;background:rgba(255,255,255,0.12);border-radius:2px 0 0 2px"></div>
-            <div style="position:absolute;left:-2.5px;top:128px;width:3px;height:48px;background:rgba(255,255,255,0.12);border-radius:2px 0 0 2px"></div>
-            <div style="position:absolute;right:-2.5px;top:110px;width:3px;height:60px;background:rgba(255,255,255,0.12);border-radius:0 2px 2px 0"></div>
-            <!-- Notch pill -->
-            <div style="width:80px;height:7px;background:#0d0f18;border-radius:4px;margin:0 auto 10px;border:1px solid rgba(255,255,255,0.08)"></div>
-            <!-- Screen -->
-            <div style="background:#080b14;border-radius:30px;overflow:hidden">
-              <!-- Status bar -->
-              <div style="background:#0a0d1a;padding:9px 18px 7px;display:flex;justify-content:space-between;align-items:center">
-                <div style="font-family:var(--fm);font-size:10px;color:var(--muted2);font-weight:500">9:41</div>
-                <div style="display:flex;gap:4px;align-items:center">
-                  <div style="font-size:9px;color:var(--muted2)">●●●●</div>
-                  <div style="font-size:9px;color:var(--muted2)">WiFi</div>
-                  <div style="font-family:var(--fc);font-size:8px;color:var(--muted2)">100%</div>
-                </div>
-              </div>
-              <!-- Check-in header -->
-              <div style="padding:16px 16px 10px;text-align:center;background:linear-gradient(180deg,rgba(0,212,240,0.04),transparent)">
-                <div style="font-size:26px;margin-bottom:7px">🥊</div>
-                <div style="font-family:var(--fh);font-size:22px;letter-spacing:3px;margin-bottom:3px">DAILY CHECK-IN</div>
-                <div style="font-family:var(--fc);font-size:9px;letter-spacing:2px;color:var(--muted2);text-transform:uppercase">How are you feeling today?</div>
-              </div>
-              <!-- Name badge -->
-              <div style="margin:0 14px 12px;background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.16);border-radius:8px;padding:7px 12px;display:flex;align-items:center;justify-content:space-between">
-                <span style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted)">Athlete</span>
-                <span style="font-family:var(--fc);font-size:11px;font-weight:700;color:var(--accent)">Priya Sharma ▼</span>
-              </div>
-              <!-- Sliders -->
-              <div style="padding:0 16px 12px;display:flex;flex-direction:column;gap:9px">
-                <div style="display:flex;align-items:center;gap:9px">
-                  <div style="font-size:12px;min-width:88px;color:var(--muted)">😴 Sleep</div>
-                  <div style="flex:1;height:3px;background:rgba(255,255,255,0.07);border-radius:2px;position:relative"><div style="width:80%;height:100%;background:linear-gradient(90deg,var(--accent),#67e8f9);border-radius:2px"></div><div style="position:absolute;right:20%;top:-5px;width:13px;height:13px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(0,212,240,0.6);margin-right:-6px"></div></div>
-                  <div style="font-family:var(--fh);font-size:17px;color:var(--accent);min-width:18px;text-align:right">8</div>
-                </div>
-                <div style="display:flex;align-items:center;gap:9px">
-                  <div style="font-size:12px;min-width:88px;color:var(--muted)">⚡ Energy</div>
-                  <div style="flex:1;height:3px;background:rgba(255,255,255,0.07);border-radius:2px;position:relative"><div style="width:90%;height:100%;background:linear-gradient(90deg,var(--accent),#67e8f9);border-radius:2px"></div><div style="position:absolute;right:10%;top:-5px;width:13px;height:13px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(0,212,240,0.6);margin-right:-6px"></div></div>
-                  <div style="font-family:var(--fh);font-size:17px;color:var(--accent);min-width:18px;text-align:right">9</div>
-                </div>
-                <div style="display:flex;align-items:center;gap:9px">
-                  <div style="font-size:12px;min-width:88px;color:var(--muted)">💪 Soreness</div>
-                  <div style="flex:1;height:3px;background:rgba(255,255,255,0.07);border-radius:2px;position:relative"><div style="width:10%;height:100%;background:linear-gradient(90deg,var(--green),#34d399);border-radius:2px"></div><div style="position:absolute;left:10%;top:-5px;width:13px;height:13px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(16,185,129,0.6);margin-left:-6px"></div></div>
-                  <div style="font-family:var(--fh);font-size:17px;color:var(--green);min-width:18px;text-align:right">1</div>
-                </div>
-                <div style="display:flex;align-items:center;gap:9px">
-                  <div style="font-size:12px;min-width:88px;color:var(--muted)">🧠 Motivation</div>
-                  <div style="flex:1;height:3px;background:rgba(255,255,255,0.07);border-radius:2px;position:relative"><div style="width:100%;height:100%;background:linear-gradient(90deg,var(--accent),#67e8f9);border-radius:2px"></div><div style="position:absolute;right:0;top:-5px;width:13px;height:13px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(0,212,240,0.6);margin-right:-1px"></div></div>
-                  <div style="font-family:var(--fh);font-size:17px;color:var(--accent);min-width:18px;text-align:right">10</div>
-                </div>
-                <div style="display:flex;align-items:center;gap:9px">
-                  <div style="font-size:12px;min-width:88px;color:var(--muted)">🥗 Nutrition</div>
-                  <div style="flex:1;height:3px;background:rgba(255,255,255,0.07);border-radius:2px;position:relative"><div style="width:90%;height:100%;background:linear-gradient(90deg,var(--accent),#67e8f9);border-radius:2px"></div><div style="position:absolute;right:10%;top:-5px;width:13px;height:13px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(0,212,240,0.6);margin-right:-6px"></div></div>
-                  <div style="font-family:var(--fh);font-size:17px;color:var(--accent);min-width:18px;text-align:right">9</div>
-                </div>
-                <div style="display:flex;align-items:center;gap:9px">
-                  <div style="font-size:12px;min-width:88px;color:var(--muted)">🩺 Pain</div>
-                  <div style="flex:1;height:3px;background:rgba(255,255,255,0.07);border-radius:2px;position:relative"><div style="width:0%;height:100%;background:linear-gradient(90deg,var(--red),#f87171);border-radius:2px"></div><div style="position:absolute;left:0;top:-5px;width:13px;height:13px;border-radius:50%;background:rgba(255,255,255,0.15);margin-left:-1px"></div></div>
-                  <div style="font-family:var(--fh);font-size:17px;color:var(--muted2);min-width:18px;text-align:right">0</div>
-                </div>
-              </div>
-              <!-- Score result -->
-              <div style="margin:0 14px 12px;background:rgba(0,0,0,0.25);border:1px solid rgba(16,185,129,0.25);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:12px">
-                <div style="font-family:var(--fh);font-size:42px;color:var(--green);line-height:1;text-shadow:0 0 20px rgba(16,185,129,0.3)">95</div>
-                <div>
-                  <div style="font-family:var(--fh);font-size:16px;letter-spacing:1px;color:var(--green)">🔥 PUSH HARD</div>
-                  <div style="font-size:11px;color:var(--muted);margin-top:2px">Elite day. Go all out.</div>
-                </div>
-              </div>
-              <!-- Submit button -->
-              <div style="margin:0 14px 6px;background:linear-gradient(135deg,var(--accent),#009ab0);border-radius:24px;padding:13px;text-align:center;font-family:var(--fc);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#050810;box-shadow:0 0 20px rgba(0,212,240,0.3)">✓ Submit Check-In</div>
-              <div style="text-align:center;font-size:9px;color:var(--muted2);font-family:var(--fc);letter-spacing:1px;padding:8px 14px 16px">Powered by StrikePanel™ · No app download needed</div>
-            </div>
-            <!-- Home bar -->
-            <div style="width:50px;height:5px;background:rgba(255,255,255,0.12);border-radius:3px;margin:12px auto 0"></div>
-          </div>
-        </div>
-
-        <!-- ── PHONE 2 — Fight Dates ── -->
-        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:60px">
-          <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:5px 14px">Coach · Fight Dates</div>
-          <div style="width:262px;background:linear-gradient(180deg,#1a1d28,#0f1118);border:2px solid rgba(255,255,255,0.14);border-radius:44px;padding:16px 11px 20px;box-shadow:0 32px 80px rgba(0,0,0,0.9),0 0 0 1px rgba(255,255,255,0.04),0 0 50px rgba(239,68,68,0.06)">
-            <div style="position:absolute;left:-2.5px;top:90px;width:3px;height:28px;background:rgba(255,255,255,0.12);border-radius:2px 0 0 2px"></div>
-            <div style="width:80px;height:7px;background:#0d0f18;border-radius:4px;margin:0 auto 10px;border:1px solid rgba(255,255,255,0.08)"></div>
-            <div style="background:#080b14;border-radius:30px;overflow:hidden">
-              <div style="background:#0a0d1a;padding:9px 18px 7px;display:flex;justify-content:space-between">
-                <div style="font-family:var(--fm);font-size:10px;color:var(--muted2)">9:41</div>
-                <div style="font-size:9px;color:var(--muted2)">●●●● 100%</div>
-              </div>
-              <div style="padding:14px 15px 10px">
-                <div style="font-family:var(--fc);font-size:8.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted2);margin-bottom:4px">Fight Dates</div>
-                <div style="font-family:var(--fh);font-size:20px;letter-spacing:2px;margin-bottom:12px">COUNTDOWNS &amp; CUTS</div>
-                <!-- Fight 1 -->
-                <div style="background:linear-gradient(135deg,rgba(239,68,68,0.08),rgba(139,92,246,0.03));border:1px solid rgba(239,68,68,0.2);border-radius:13px;padding:14px;position:relative;overflow:hidden;margin-bottom:10px">
-                  <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent)"></div>
-                  <div style="font-family:var(--fc);font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:2px">Marcus Okafor</div>
-                  <div style="font-size:11.5px;font-weight:600;color:var(--text);margin-bottom:2px">vs Carlos "El Toro" Mendez</div>
-                  <div style="font-size:10px;color:var(--muted);margin-bottom:10px">Fight Night London · 77kg</div>
-                  <div style="font-family:var(--fh);font-size:50px;color:var(--red);line-height:1;text-shadow:0 0 20px rgba(239,68,68,0.35)">21</div>
-                  <div style="font-family:var(--fc);font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted2);margin-bottom:10px">days until fight</div>
-                  <div style="background:rgba(0,0,0,0.22);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:9px 11px">
-                    <div style="font-family:var(--fc);font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-bottom:5px">⚖️ 81.5kg → 77kg</div>
-                    <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;margin-bottom:5px"><div style="width:88%;height:100%;background:linear-gradient(90deg,var(--red),#f87171);border-radius:2px"></div></div>
-                    <div style="font-size:10.5px;color:var(--muted)">3 wks · <strong style="color:var(--amber)">1.5kg/wk · Aggressive</strong></div>
-                  </div>
-                </div>
-                <!-- Fight 2 -->
-                <div style="background:linear-gradient(135deg,rgba(245,158,11,0.07),rgba(139,92,246,0.03));border:1px solid rgba(245,158,11,0.18);border-radius:13px;padding:14px;position:relative;overflow:hidden">
-                  <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--amber),transparent)"></div>
-                  <div style="font-family:var(--fc);font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:2px">Tyler Novak</div>
-                  <div style="font-size:11.5px;font-weight:600;color:var(--text);margin-bottom:8px">Regional Kickboxing Champs</div>
-                  <div style="font-family:var(--fh);font-size:50px;color:var(--amber);line-height:1;text-shadow:0 0 20px rgba(245,158,11,0.3)">56</div>
-                  <div style="font-family:var(--fc);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2)">days · 8 wks · Comfortable</div>
-                </div>
-              </div>
-            </div>
-            <div style="width:50px;height:5px;background:rgba(255,255,255,0.12);border-radius:3px;margin:12px auto 0"></div>
-          </div>
-        </div>
-
-        <!-- ── PHONE 3 — Boxing Timer ── -->
-        <div style="display:flex;flex-direction:column;align-items:center;gap:16px">
-          <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:5px 14px">Ringside · Offline PWA</div>
-          <div style="width:262px;background:linear-gradient(180deg,#1a1d28,#0f1118);border:2px solid rgba(255,255,255,0.14);border-radius:44px;padding:16px 11px 20px;box-shadow:0 32px 80px rgba(0,0,0,0.9),0 0 0 1px rgba(255,255,255,0.04),0 0 50px rgba(0,212,240,0.06)">
-            <div style="width:80px;height:7px;background:#0d0f18;border-radius:4px;margin:0 auto 10px;border:1px solid rgba(255,255,255,0.08)"></div>
-            <div style="background:#080b14;border-radius:30px;overflow:hidden">
-              <div style="background:#0a0d1a;padding:9px 18px 7px;display:flex;justify-content:space-between">
-                <div style="font-family:var(--fm);font-size:10px;color:var(--muted2)">9:41</div>
-                <div style="font-size:9px;color:var(--muted2)">●●●● 100%</div>
-              </div>
-              <div style="padding:12px 15px 20px;text-align:center">
-                <div style="font-family:var(--fc);font-size:8.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted2);margin-bottom:4px">Boxing Round Timer</div>
-                <div style="font-family:var(--fh);font-size:18px;letter-spacing:2px;margin-bottom:16px">PROFESSIONAL TIMER</div>
-                <!-- Timer ring -->
-                <div style="position:relative;width:160px;height:160px;margin:0 auto 16px">
-                  <svg width="160" height="160" viewBox="0 0 160 160">
-                    <circle cx="80" cy="80" r="72" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="10"/>
-                    <circle cx="80" cy="80" r="72" fill="none" stroke="#00D4F0" stroke-width="10" stroke-linecap="round" stroke-dasharray="452.4" stroke-dashoffset="113.1" transform="rotate(-90 80 80)" style="filter:drop-shadow(0 0 8px rgba(0,212,240,0.5))"/>
-                  </svg>
-                  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-                    <div style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:4px">ROUND 2</div>
-                    <div style="font-family:var(--fh);font-size:52px;letter-spacing:3px;line-height:1;color:var(--accent);text-shadow:0 0 20px rgba(0,212,240,0.4)">2:15</div>
-                    <div style="font-family:var(--fc);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-top:4px">of 6 rounds</div>
-                  </div>
-                </div>
-                <!-- Round pips -->
-                <div style="display:flex;gap:8px;justify-content:center;margin-bottom:18px">
-                  <div style="width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 6px rgba(16,185,129,0.5)"></div>
-                  <div style="width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px rgba(0,212,240,0.6)"></div>
-                  <div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.08)"></div>
-                  <div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.08)"></div>
-                  <div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.08)"></div>
-                  <div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.08)"></div>
-                </div>
-                <!-- Controls -->
-                <div style="display:flex;gap:14px;justify-content:center;align-items:center;margin-bottom:18px">
-                  <div style="width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);display:flex;align-items:center;justify-content:center;font-size:15px">↺</div>
-                  <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#009ab0);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 0 28px rgba(0,212,240,0.45),0 4px 16px rgba(0,0,0,0.4)">⏸</div>
-                  <div style="width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);display:flex;align-items:center;justify-content:center;font-size:15px">⏭</div>
-                </div>
-                <!-- Config grid -->
-                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:7px">
-                  <div style="background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.06);border-radius:9px;padding:9px 5px;text-align:center"><div style="font-family:var(--fh);font-size:20px;color:var(--text);line-height:1">3</div><div style="font-family:var(--fc);font-size:7.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-top:3px">Warm</div></div>
-                  <div style="background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.06);border-radius:9px;padding:9px 5px;text-align:center"><div style="font-family:var(--fh);font-size:20px;color:var(--accent);line-height:1">6</div><div style="font-family:var(--fc);font-size:7.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-top:3px">Rounds</div></div>
-                  <div style="background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.06);border-radius:9px;padding:9px 5px;text-align:center"><div style="font-family:var(--fh);font-size:20px;color:var(--text);line-height:1">3</div><div style="font-family:var(--fc);font-size:7.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-top:3px">Work</div></div>
-                  <div style="background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.06);border-radius:9px;padding:9px 5px;text-align:center"><div style="font-family:var(--fh);font-size:20px;color:var(--text);line-height:1">1</div><div style="font-family:var(--fc);font-size:7.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-top:3px">Rest</div></div>
-                </div>
-              </div>
-            </div>
-            <div style="width:50px;height:5px;background:rgba(255,255,255,0.12);border-radius:3px;margin:12px auto 0"></div>
-          </div>
-        </div>
-
-      </div><!-- /phones flex -->
-    </div><!-- /phones reveal -->
-
-    <!-- CTA -->
-    <div class="reveal" style="text-align:center;margin-top:64px">
-      <p style="font-size:14.5px;color:var(--muted);margin-bottom:22px">Want to click around with real data? The live demo is fully interactive — try every feature free.</p>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="https://strikepanel.vercel.app/?demo=1" target="_blank" class="btn-ghost">👁 Open Live Demo</a>
-        <a href="https://strikepanel.gumroad.com" target="_blank" class="btn-primary">
-          <svg width="18" height="18" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><defs><radialGradient id="btn-orb2" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1a2236"/><stop offset="100%" stop-color="#050810"/></radialGradient></defs><circle cx="45" cy="45" r="43" fill="url(#btn-orb2)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="45" cy="45" r="29" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/><line x1="45" y1="2" x2="45" y2="27" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="45" y1="63" x2="45" y2="88" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="2" y1="45" x2="27" y2="45" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="63" y1="45" x2="88" y2="45" stroke="white" stroke-width="2.8" stroke-linecap="round"/><circle cx="45" cy="45" r="11" fill="white"/><text x="45" y="49.5" font-family="Arial Black,sans-serif" font-weight="900" font-size="9" fill="#050810" text-anchor="middle">SP</text></svg>
-          Get StrikePanel — $99
-        </a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
+ 
 <div class="divider"><span>Fight Dates</span></div>
-
-<!-- ── FIGHT COUNTDOWN ── -->
+ 
+<!-- ── FIGHT COUNTDOWN DEMO ── -->
 <section class="section" style="padding-top:64px;padding-bottom:64px">
   <div class="section-inner">
     <div class="reveal">
-      <span class="s-kicker">🥊 Fight Date Tracker</span>
+      <div class="s-kicker">🥊 Fight Date Tracker</div>
       <h2 class="s-title">Countdown to fight day.<br>Weight cut on autopilot.</h2>
-      <p class="s-sub">Enter current and target weight. StrikePanel calculates the full plan — week-by-week targets, daily calorie deficit, and colour-coded urgency as the fight gets closer.</p>
+      <p class="s-sub">Add a fight, enter current and target weight — StrikePanel calculates the plan automatically. Week-by-week cut targets, calorie deficit per day, and camp urgency colour-coding.</p>
     </div>
     <div class="fight-grid reveal">
       <div class="fight-card">
         <div class="fight-ath">Marcus Okafor</div>
         <div class="fight-vs">vs Carlos "El Toro" Mendez</div>
         <div class="fight-meta">Fight Night London · Welterweight (77kg)</div>
-        <div class="fight-days">21</div>
+        <div class="fight-days" id="fdays1">21</div>
         <div class="fight-lbl">days until fight</div>
         <div class="wc-block">
           <div class="wc-lbl">⚖️ Weight Cut — 81.5kg → 77kg</div>
@@ -1348,73 +737,73 @@ body::after{
     </div>
   </div>
 </section>
-
+ 
 <div class="divider"><span>AI Workouts</span></div>
-
+ 
 <!-- ── AI WORKOUT ── -->
 <section class="section" style="padding-top:64px;padding-bottom:64px">
   <div class="section-inner reveal">
-    <span class="s-kicker">✦ AI Workout Generator</span>
+    <div class="s-kicker">✦ AI Workout Generator</div>
     <h2 class="s-title">A full coached session<br>in seconds.</h2>
-    <p class="s-sub" style="margin-bottom:0">Powered by Google Gemini — free API key, no credit card. The AI reads each athlete's readiness score before generating, so a 38/100 day gets a recovery session, not a PB attempt.</p>
+    <p class="s-sub" style="margin-bottom:0">Powered by Google Gemini — free API key, no credit card, takes 2 minutes to set up at aistudio.google.com.</p>
     <div class="ai-card">
       <div class="ai-badge"><div class="ai-dot"></div>Generating session…</div>
       <div class="ai-title">Marcus Okafor — Combat Performance</div>
-      <div class="ai-sub">Goal: Athletic performance · 60 min · Full gym · Advanced · Right shoulder — monitor load</div>
+      <div class="ai-sub">Goal: Athletic performance · 60 min · Full gym · Advanced · Bad knee, skip heavy squats</div>
       <div class="ai-resp">
         <h4>Warm-Up (10 min)</h4>
-        Jump rope — 3 min easy · Dynamic hip circles 2×10 · Band pull-aparts 3×15 · Shadow boxing 3 min
+        Jump rope — 3 min easy · Dynamic hip circles — 2×10 each · Band pull-aparts — 3×15 · Shadow boxing — 3 min
         <h4>Strength (30 min)</h4>
-        <strong>A1.</strong> Trap Bar Deadlift — 5×3 @ 80% 1RM · 2 min rest<br>
-        <strong>A2.</strong> Single-leg RDL — 4×8 each · 90s rest<br>
+        <strong>A1.</strong> Trap Bar Deadlift — 5×3 @ 80% · 2 min rest<br>
+        <strong>A2.</strong> Single-leg RDL — 4×8 each side · 90s rest<br>
         <strong>B1.</strong> Weighted Pull-ups — 4×5 · 90s rest<br>
-        <strong>B2.</strong> Landmine Press — 4×8 each · 60s rest (shoulder-friendly)
+        <strong>B2.</strong> Landmine Press — 4×8 each · 60s rest
         <h4>Conditioning (15 min)</h4>
-        Assault Bike — 10 × 20s hard / 40s easy · HR below 160 before each interval
-        <h4>Cool Down</h4>
-        Shoulder mobility + hip flexor stretch · Coach note: Readiness 72/100 — moderate intensity only. Shoulder tight; skip overhead pressing today.
+        Assault Bike Intervals — 10 × 20s hard / 40s easy · Heart rate below 160 before next interval
+        <h4>Cool Down (5 min)</h4>
+        Coach's note: Shoulder feels tight — monitor during pressing. High intensity given 95/100 readiness score today.
       </div>
-      <div class="ai-note">✦ Tyler (38/100 today) would get an active recovery session — AI adapts automatically to readiness scores.</div>
+      <div class="ai-note">✦ AI reads each athlete's readiness score before generating — Tyler (38/100 today) would get a recovery session instead.</div>
     </div>
   </div>
 </section>
-
+ 
 <div class="divider"><span>Team & Group Use</span></div>
-
+ 
 <!-- ── TEAM SPLIT ── -->
 <section class="section" style="padding-top:64px;padding-bottom:64px">
   <div class="section-inner">
     <div class="reveal">
-      <span class="s-kicker">👥 Built for fight teams</span>
-      <h2 class="s-title">One coach buys.<br><span style="color:var(--accent)">The whole team wins.</span></h2>
-      <p class="s-sub">One license. Up to 20 athletes. Every fighter checks in from their own phone — you see everyone's readiness in one brief. No per-seat pricing. No per-athlete fees. Ever.</p>
+      <div class="s-kicker">👥 Split it with your team</div>
+      <h2 class="s-title">10 fighters.<br><span style="color:var(--accent)">$14.90 each.</span></h2>
+      <p class="s-sub">One person buys. The whole team benefits. That's less than a protein shake per fighter for a full camp intelligence system.</p>
     </div>
     <div class="split-card reveal">
       <div class="split-inner">
         <div>
-          <div class="split-big">20</div>
-          <div class="split-label">Athletes. One license.</div>
+          <div class="split-big">$14<span style="font-size:50%;color:var(--muted2)">.90</span></div>
+          <div class="split-label">Per fighter (team of 10)</div>
         </div>
         <div>
           <div class="split-row">
             <div class="split-ico">📲</div>
             <div class="split-text">
               <strong>Athletes check in from their own phones</strong>
-              <p>Share a link. Each fighter submits daily readiness in 30 seconds — no download, no account, no friction.</p>
+              <p>Share a link. Each fighter submits daily readiness in 30 seconds — no download, no account.</p>
             </div>
           </div>
           <div class="split-row">
             <div class="split-ico">☁️</div>
             <div class="split-text">
-              <strong>All check-ins sync to coach's brief in real time</strong>
-              <p>Connect a free Supabase project in Settings. All 20 check-ins appear instantly in your Morning Brief.</p>
+              <strong>Cloud sync keeps everyone live</strong>
+              <p>Add a free Supabase project in Settings. All 10 check-ins sync to the coach's Morning Brief in real time.</p>
             </div>
           </div>
           <div class="split-row" style="margin-bottom:0">
-            <div class="split-ico">♾️</div>
+            <div class="split-ico">🔥</div>
             <div class="split-text">
-              <strong>One payment. Works forever. No renewal.</strong>
-              <p>Pay $99 now (goes to $149 after June 1). Use it for every camp, every season, every year.</p>
+              <strong>Works for 75 Hard groups too</strong>
+              <p>Group of 10 friends doing 75 Hard? Track daily compliance, readiness scores and progress together for under $15 each.</p>
             </div>
           </div>
         </div>
@@ -1422,350 +811,254 @@ body::after{
     </div>
   </div>
 </section>
-
+ 
 <div class="divider"><span>Cloud Sync</span></div>
-
-<!-- ── SUPABASE ── -->
+ 
+<!-- ── SUPABASE SECTION ── -->
 <section class="section" style="padding-top:64px;padding-bottom:64px">
   <div class="section-inner">
     <div class="reveal supa-grid">
       <div>
-        <span class="s-kicker">☁️ Optional Cloud — Powered by Supabase</span>
+        <div class="s-kicker">☁️ Optional Cloud Backup — Powered by Supabase</div>
         <h2 class="s-title">Your data.<br><span style="color:var(--accent)">Your cloud.</span></h2>
-        <p class="s-sub" style="margin-bottom:24px">Works 100% offline by default. Connect your own free Supabase project to sync across devices, back up your coaching data, and receive athlete check-ins in real time.</p>
-        <div style="display:flex;flex-direction:column;gap:12px">
+        <p class="s-sub" style="margin-bottom:24px">StrikePanel works 100% offline out of the box — no cloud account ever required. But if you want to sync across devices, share with a co-coach, or receive athlete check-ins in real time, you can connect your own free Supabase project in under 5 minutes.</p>
+        <div style="display:flex;flex-direction:column;gap:11px">
           <div style="display:flex;align-items:flex-start;gap:12px">
             <span style="font-size:18px;flex-shrink:0;margin-top:2px">🆓</span>
             <div>
-              <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);margin-bottom:2px">Free forever on Supabase</div>
-              <div style="font-size:13px;color:var(--muted)">500MB database storage — enough for hundreds of athletes and years of check-ins. No credit card required.</div>
+              <div style="font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);margin-bottom:2px">Supabase free tier is enough</div>
+              <div style="font-size:13px;color:var(--muted)">Supabase's free tier gives you 500MB database storage and 50,000 monthly active users — more than enough for any coach or fight team. No credit card required to start.</div>
             </div>
           </div>
           <div style="display:flex;align-items:flex-start;gap:12px">
             <span style="font-size:18px;flex-shrink:0;margin-top:2px">🔐</span>
             <div>
-              <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);margin-bottom:2px">Your project, your data</div>
-              <div style="font-size:13px;color:var(--muted)">You connect your own Supabase project — not ours. StrikePanel never sees, touches or stores your athletes' data.</div>
+              <div style="font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);margin-bottom:2px">Your project, your data</div>
+              <div style="font-size:13px;color:var(--muted)">StrikePanel connects to <em>your</em> Supabase project — not ours. We never see, touch or store your athletes' data. Paste your URL and anon key in Settings and you're live.</div>
             </div>
           </div>
           <div style="display:flex;align-items:flex-start;gap:12px">
             <span style="font-size:18px;flex-shrink:0;margin-top:2px">📲</span>
             <div>
-              <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);margin-bottom:2px">Real-time athlete check-ins</div>
-              <div style="font-size:13px;color:var(--muted)">Once connected, athlete check-ins sync straight to your Morning Brief from any device, anywhere, in real time.</div>
+              <div style="font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);margin-bottom:2px">Real-time athlete check-ins</div>
+              <div style="font-size:13px;color:var(--muted)">Once connected, athlete self check-ins submitted via their share link sync straight to your Morning Brief — from any device, anywhere in the world, in real time.</div>
             </div>
           </div>
           <div style="display:flex;align-items:flex-start;gap:12px">
             <span style="font-size:18px;flex-shrink:0;margin-top:2px">⚡</span>
             <div>
-              <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);margin-bottom:2px">5-minute setup, wizard included</div>
-              <div style="font-size:13px;color:var(--muted)">StrikePanel ships with a step-by-step setup wizard and the exact SQL schema. Copy, paste, run — done.</div>
+              <div style="font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);margin-bottom:2px">5-minute setup, full schema included</div>
+              <div style="font-size:13px;color:var(--muted)">StrikePanel ships with the exact SQL schema you need. Copy, paste into Supabase's SQL editor, run — done. Step-by-step guide included in the app's Settings page.</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="reveal rd1">
+      <div class="reveal rd2">
+        <!-- Supabase visual card -->
         <div style="background:linear-gradient(135deg,rgba(16,185,129,0.07),rgba(0,212,240,0.04));border:1px solid rgba(16,185,129,0.2);border-radius:16px;padding:24px;position:relative;overflow:hidden">
           <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),var(--accent),transparent)"></div>
           <div style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted2);margin-bottom:16px">Supabase Setup — 3 Steps</div>
+ 
           <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
-            <div style="display:flex;align-items:center;gap:12px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.16);border-radius:10px;padding:12px 14px">
+            <div style="display:flex;align-items:center;gap:12px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.18);border-radius:10px;padding:12px 14px">
               <div style="width:24px;height:24px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:var(--fc);font-size:12px;font-weight:700;color:#050810;flex-shrink:0">1</div>
-              <div><div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)">Create free Supabase project</div><div style="font-size:11.5px;color:var(--muted);margin-top:1px">supabase.com → New Project → free tier</div></div>
+              <div>
+                <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)">Create free Supabase project</div>
+                <div style="font-size:11.5px;color:var(--muted);margin-top:1px">supabase.com → New Project → free tier</div>
+              </div>
             </div>
-            <div style="display:flex;align-items:center;gap:12px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.16);border-radius:10px;padding:12px 14px">
+            <div style="display:flex;align-items:center;gap:12px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.18);border-radius:10px;padding:12px 14px">
               <div style="width:24px;height:24px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:var(--fc);font-size:12px;font-weight:700;color:#050810;flex-shrink:0">2</div>
-              <div><div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)">Run the included SQL schema</div><div style="font-size:11.5px;color:var(--muted);margin-top:1px">Copy from Settings → paste in SQL editor → Run</div></div>
+              <div>
+                <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)">Run the included SQL schema</div>
+                <div style="font-size:11.5px;color:var(--muted);margin-top:1px">Copy from Settings → paste in SQL editor → Run</div>
+              </div>
             </div>
-            <div style="display:flex;align-items:center;gap:12px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.16);border-radius:10px;padding:12px 14px">
+            <div style="display:flex;align-items:center;gap:12px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.18);border-radius:10px;padding:12px 14px">
               <div style="width:24px;height:24px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:var(--fc);font-size:12px;font-weight:700;color:#050810;flex-shrink:0">3</div>
-              <div><div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)">Paste URL & anon key in StrikePanel</div><div style="font-size:11.5px;color:var(--muted);margin-top:1px">Settings → Cloud Sync → Save & Connect</div></div>
+              <div>
+                <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)">Paste URL & key in StrikePanel</div>
+                <div style="font-size:11.5px;color:var(--muted);margin-top:1px">Settings → Cloud Backup → paste → Save</div>
+              </div>
             </div>
           </div>
-          <div style="background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 12px;font-family:var(--fm);font-size:11px;color:var(--muted2);line-height:1.8">
-            <span style="color:var(--green)">✓</span> Cloud connected · 30s auto-poll<br>
+ 
+          <div style="background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 12px;font-family:var(--fm);font-size:11px;color:var(--muted2);line-height:1.7">
+            <span style="color:var(--green)">✓</span> Cloud connected<br>
             <span style="color:var(--green)">✓</span> 3 athlete check-ins synced today<br>
             <span style="color:var(--accent)">↻</span> Priya — submitted 08:14<br>
             <span style="color:var(--accent)">↻</span> Marcus — submitted 08:31<br>
             <span style="color:var(--accent)">↻</span> Tyler — submitted 09:02
           </div>
-          <div style="margin-top:10px;font-size:11px;color:var(--muted2);text-align:center">Always optional · StrikePanel never touches your data</div>
+          <div style="margin-top:10px;font-size:11.5px;color:var(--muted2);text-align:center">Always optional · StrikePanel never touches your data</div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
+ 
 <div class="divider"><span>FAQ</span></div>
-
+ 
 <!-- ── FAQ ── -->
 <section class="section" style="padding-top:64px;padding-bottom:64px" id="faq">
   <div class="section-inner">
     <div class="reveal">
-      <span class="s-kicker">Common questions</span>
+      <div class="s-kicker">Common questions</div>
       <h2 class="s-title">Everything you<br>need to know.</h2>
     </div>
     <div class="faq-grid reveal">
-      <div class="faq-item">
-        <div class="faq-q">How do athlete check-ins actually work?</div>
-        <div class="faq-a">From your Morning Brief tab, copy your unique share link and send it to athletes via WhatsApp. They open it on their phone — no download, no account — slide through 6 readiness questions in 30 seconds, and submit. Their score syncs instantly to your Morning Brief. <strong>That's the whole flow.</strong></div>
-      </div>
+ 
       <div class="faq-item">
         <div class="faq-q">Do I need technical skills to use this?</div>
-        <div class="faq-a">No. Open the app in any browser — it works immediately. The AI feature needs a free Google Gemini key (2 min, no card). Cloud sync via Supabase is optional — a step-by-step wizard is built in if you want it.</div>
+        <div class="faq-a">No. The app is a single HTML file — open it in any browser and it works immediately. No install, no accounts, no setup. The AI feature needs a free Google Gemini key (takes 2 minutes to get at aistudio.google.com, no credit card). Cloud sync via Supabase is 100% optional and only for coaches who want multi-device access.</div>
       </div>
+ 
       <div class="faq-item">
         <div class="faq-q">Can I use this on multiple devices?</div>
-        <div class="faq-a">Yes. Connect a free Supabase project in Settings (5-minute setup). All your data syncs across every device — phone, tablet, desktop. Your coaching brief is always up to date, everywhere.</div>
+        <div class="faq-a">Yes. The app runs in any browser — phone, tablet, desktop. By default data lives in that browser's local storage. To sync across devices, connect a free Supabase project in Settings (5-minute setup, full guide included). Athletes can always submit their check-ins from any phone via a simple share link — no device setup needed.</div>
       </div>
+ 
       <div class="faq-item">
         <div class="faq-q">What if I lose my data?</div>
-        <div class="faq-a">Use <strong>Full Backup</strong> in Settings → Data Management to download a JSON of everything. Restore it on any device. With Supabase cloud sync connected, your data is automatically backed up there too.</div>
+        <div class="faq-a">Use the <strong>Full Backup</strong> button in Settings → Data Management to download a JSON backup of everything. You can restore from that file on any device at any time. If you've set up Supabase cloud sync, your data is also backed up there automatically. We recommend exporting a backup weekly.</div>
       </div>
+ 
+      <div class="faq-item">
+        <div class="faq-q">How does the athlete check-in work?</div>
+        <div class="faq-a">From the Morning Brief tab, copy your unique share link and send it to your athletes (WhatsApp, iMessage, email — anything). They open it on their own phone, slide through 6 readiness questions in about 30 seconds, and submit. Their score instantly appears in your Morning Brief. No app download, no account, no friction.</div>
+      </div>
+ 
       <div class="faq-item">
         <div class="faq-q">Is this really a one-time payment — no hidden fees?</div>
-        <div class="faq-a">Yes. $149 once, yours forever. No monthly plan, no "premium tier", no surprise charges. Supabase free tier is more than enough for any coach. The AI runs on Google Gemini's free tier — no card needed.</div>
+        <div class="faq-a">Yes. $149 once, yours forever. No monthly plan. No "premium tier". No surprise charges. The only optional paid thing outside this app is Supabase, and their free tier is more than enough for any coach. The AI uses Google Gemini's free tier (also no card required).</div>
       </div>
+ 
       <div class="faq-item">
         <div class="faq-q">Can a team split the cost?</div>
-        <div class="faq-a">Yes — and many do. One coach buys the license, sets up the app, and shares the check-in link with all 20 fighters. One license covers everyone — no per-athlete fees, no renewal. One-time, shared forever.</div>
+        <div class="faq-a">Absolutely — and many do. One person buys the license, opens the app, adds all athletes, and shares the check-in link with each fighter. A team of 10 sharing costs works out to $14.90 per person. The app supports up to 20 athletes per installation.</div>
       </div>
-      <div class="faq-item">
-        <div class="faq-q">Does it work offline? Can I use the timer ringside?</div>
-        <div class="faq-a">Yes. Install it as a PWA from your phone's browser — it caches everything locally. The boxing timer, morning brief, athlete profiles and workouts all work with zero internet. Perfect ringside.</div>
-      </div>
+ 
       <div class="faq-item">
         <div class="faq-q">What's your refund policy?</div>
-        <div class="faq-a">We offer a <strong>30-day money-back guarantee</strong> — if StrikePanel doesn't work for your gym within 30 days, email us and we'll refund in full, no questions asked. We also offer a <strong>full live demo</strong> so you can try every feature with real data before you buy.</div>
+        <div class="faq-a">Because this is a digital product (a downloadable file), all sales are final. That's why we offer a full live demo — try every feature before you buy. If you have a genuine technical issue that prevents the app from working at all, email us and we'll sort it.</div>
       </div>
+ 
+      <div class="faq-item">
+        <div class="faq-q">Does it work offline? Can I use the timer ringside?</div>
+        <div class="faq-a">Yes. Once you've opened the app in a browser, it caches itself as a Progressive Web App (PWA). You can install it to your phone's home screen and use it with no internet — including the boxing timer, which works perfectly ringside. Just keep the file saved locally.</div>
+      </div>
+ 
     </div>
-
+ 
+    <!-- Trust signals -->
     <div class="trust-row reveal" style="margin-top:52px">
       <div class="trust-item">
         <div class="trust-icon">🔒</div>
-        <div class="trust-text"><strong>Your data stays yours</strong>Nothing sent to our servers. Ever.</div>
+        <div class="trust-text"><strong>Your data stays yours</strong><br>Nothing is sent to our servers. Ever.</div>
       </div>
       <div class="trust-item">
         <div class="trust-icon">📁</div>
-        <div class="trust-text"><strong>Single HTML file</strong>No install. Works in any browser.</div>
+        <div class="trust-text"><strong>Single HTML file</strong><br>No install. Works in any browser.</div>
       </div>
       <div class="trust-item">
         <div class="trust-icon">♾️</div>
-        <div class="trust-text"><strong>No subscription</strong>Pay once. Use forever.</div>
+        <div class="trust-text"><strong>No subscription</strong><br>Pay once. Use forever. Full stop.</div>
       </div>
       <div class="trust-item">
         <div class="trust-icon">📲</div>
-        <div class="trust-text"><strong>PWA installable</strong>Add to home screen. Works offline.</div>
+        <div class="trust-text"><strong>PWA installable</strong><br>Add to home screen. Works offline.</div>
       </div>
       <div class="trust-item">
         <div class="trust-icon">🆓</div>
-        <div class="trust-text"><strong>AI is free to use</strong>Google Gemini key — no card needed.</div>
+        <div class="trust-text"><strong>AI is free to use</strong><br>Google Gemini key — no card needed.</div>
       </div>
     </div>
   </div>
 </section>
-
-<div class="divider"><span>What Coaches Say</span></div>
-
-<!-- ── TESTIMONIALS ── -->
-<section class="section" style="padding-top:64px;padding-bottom:64px">
-  <div class="section-inner">
-    <div class="reveal" style="text-align:center">
-      <span class="s-kicker">Early access coaches</span>
-      <h2 class="s-title">Used by coaches.<br><span style="color:var(--accent)">Trusted ringside.</span></h2>
-    </div>
-    <div class="testi-grid reveal">
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"I was running everything on WhatsApp voice notes and a Notes app. I had no idea who was actually ready to spar and who was gassed. <strong>The Morning Brief changed that in one session.</strong> I can see at a glance — green means go, red means protect. My fighters stopped picking up soft injuries in camp."</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:rgba(0,212,240,0.12);color:#00D4F0;border:1.5px solid rgba(0,212,240,0.25)">AR</div>
-          <div>
-            <div class="testi-name">Ahmed Al-Rashidi</div>
-            <div class="testi-role">Boxing & MMA Coach · Dubai, UAE</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"We had a fighter go into a title fight overtrained — we didn't catch it. That was the last time. <strong>StrikePanel's check-in scores flagged two of my lads as red the week before their last bout</strong>, I pulled back the intensity. Both performed better than camp suggested they would."</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:rgba(139,92,246,0.12);color:#8b5cf6;border:1.5px solid rgba(139,92,246,0.25)">CW</div>
-          <div>
-            <div class="testi-name">Connor Walsh</div>
-            <div class="testi-role">MMA & Strength Coach · Manchester, UK</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"The fight countdown with the weight cut calculator is insane. <strong>I used to do this on a spreadsheet I built myself</strong> — daily deficit, cut rate, check-ins. StrikePanel does all of it, plus I can see everyone's readiness in one screen. The PDF report to send to promoters alone is worth the price."</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:rgba(245,158,11,0.12);color:#f59e0b;border:1.5px solid rgba(245,158,11,0.25)">MG</div>
-          <div>
-            <div class="testi-name">Marcus Greene</div>
-            <div class="testi-role">Fight Team Coach · Houston, TX</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><span>vs. The Old Way</span></div>
-
-<!-- ── VS COMPARISON ── -->
-<section class="section" style="padding-top:64px;padding-bottom:64px">
-  <div class="section-inner">
-    <div class="reveal" style="text-align:center">
-      <span class="s-kicker">Why coaches switch</span>
-      <h2 class="s-title">Stop coaching<br><span style="color:var(--red)">in the dark.</span></h2>
-      <p class="s-sub" style="margin:0 auto 0">Most coaches are running WhatsApp voice notes, gut feel, and a spreadsheet they built at 1am. It works — until it doesn't.</p>
-    </div>
-    <div class="vs-strip reveal">
-      <div class="vs-col old">
-        <div class="vs-label bad">❌ WhatsApp + Notes + Guesswork</div>
-        <div class="vs-item"><span class="vs-x">✕</span> No readiness scores — you're guessing who's fresh</div>
-        <div class="vs-item"><span class="vs-x">✕</span> Injury risk from missed overtraining signals</div>
-        <div class="vs-item"><span class="vs-x">✕</span> Weight cut plans built manually per fighter</div>
-        <div class="vs-item"><span class="vs-x">✕</span> No fight countdown — you're tracking dates in your head</div>
-        <div class="vs-item"><span class="vs-x">✕</span> Athlete data scattered across texts and PDFs</div>
-        <div class="vs-item"><span class="vs-x">✕</span> Session plans rebuilt from scratch every camp</div>
-        <div class="vs-item"><span class="vs-x">✕</span> $30–80/month for tools that don't talk to each other</div>
-      </div>
-      <div class="vs-mid">VS</div>
-      <div class="vs-col new">
-        <div class="vs-label good">✓ StrikePanel™</div>
-        <div class="vs-item"><span class="vs-check">✓</span> Daily readiness score per athlete — <strong>every morning</strong></div>
-        <div class="vs-item"><span class="vs-check">✓</span> Red/amber/green alerts — protect athletes before they break</div>
-        <div class="vs-item"><span class="vs-check">✓</span> Auto weight-cut calculator with daily deficit targets</div>
-        <div class="vs-item"><span class="vs-check">✓</span> Fight countdown + peak planning built in</div>
-        <div class="vs-item"><span class="vs-check">✓</span> All athlete data, sessions, biometrics in one place</div>
-        <div class="vs-item"><span class="vs-check">✓</span> AI workout generator — new session in 10 seconds</div>
-        <div class="vs-item"><span class="vs-check">✓</span> <strong style="color:var(--accent)">$99 once.</strong> Not per month. Not per athlete.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
+ 
 <div class="divider"><span>Pricing</span></div>
-
+ 
 <!-- ── PRICING ── -->
 <section class="section" style="padding-top:64px" id="pricing">
   <div class="section-inner" style="text-align:center">
     <div class="reveal">
-      <span class="s-kicker" style="display:inline-block">One price. Everything included.</span>
+      <div class="s-kicker" style="display:inline-block">One price. Everything included.</div>
       <h2 class="s-title">No subscriptions.<br><span style="color:var(--accent)">Ever.</span></h2>
-      <p class="s-sub" style="margin:0 auto">The fitness app industry runs on $10–40/month subscriptions. StrikePanel doesn't. Pay once. Own it forever. Every feature, every update.</p>
+      <p class="s-sub" style="margin:0 auto">The fitness app industry runs on subscriptions that drain $10–40/month forever. StrikePanel doesn't. Pay once. Own it forever.</p>
     </div>
-
+ 
     <div class="price-card reveal">
-      <div class="price-badge">StrikePanel™ — Full Access · Founding Price</div>
-      <div class="price-main" style="display:flex;align-items:baseline;justify-content:center;gap:14px"><span class="curr">$</span>99<span style="font-size:40%;color:var(--muted2);text-decoration:line-through;font-weight:400">$149</span></div>
-      <div class="price-per">Founding price · One-time payment · Instant access</div>
-      <div class="price-tagline">Price goes to <strong>$149 on June 1.</strong> Lock in $99 today — yours forever.</div>
+      <div class="price-badge">StrikePanel™ — Full Access</div>
+      <div class="price-main"><span class="curr">$</span>149</div>
+      <div class="price-per">One-time payment · Instant download</div>
+      <div class="price-tagline">License unlocks on Gumroad. Works in any browser. <strong>No monthly fee. Ever.</strong></div>
       <ul class="price-feats">
-        <li><strong>Morning Brief</strong> — daily readiness scoring for up to 20 athletes</li>
-        <li><strong>Athlete Self Check-In</strong> — shareable link, no accounts, real-time sync</li>
+        <li><strong>Morning Brief</strong> — daily readiness scoring for up to 10 athletes</li>
+        <li><strong>Athlete Self Check-In</strong> — shareable link, no accounts needed</li>
         <li><strong>Fight Countdown & Weight Cut Calculator</strong></li>
         <li><strong>AI Workout Generator</strong> (free Gemini key — no card)</li>
         <li><strong>Boxing Round Timer</strong> — works fully offline</li>
         <li><strong>Food AI & Macro Tracker</strong></li>
-        <li><strong>Biometrics Engine</strong> — BMI, BMR, TDEE, lean mass, wearable data</li>
-        <li><strong>PDF Athlete Reports</strong> — printable, shareable via WhatsApp</li>
+        <li><strong>Biometrics Engine</strong> — BMI, BMR, TDEE, lean mass + wearable data</li>
+        <li><strong>PDF Athlete Reports</strong> — printable, shareable</li>
         <li><strong>Offline-first PWA</strong> — installs on any phone or desktop</li>
         <li><strong>Optional cloud sync</strong> — your Supabase, your data</li>
         <li>Combat Sports mode <strong>and</strong> Gym & Fitness mode</li>
       </ul>
-      <a href="https://strikepanel.gumroad.com" target="_blank" class="btn-primary price-cta">
-        <svg width="18" height="18" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><defs><radialGradient id="btn-orb2" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1a2236"/><stop offset="100%" stop-color="#050810"/></radialGradient></defs><circle cx="45" cy="45" r="43" fill="url(#btn-orb2)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="45" cy="45" r="29" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/><line x1="45" y1="2" x2="45" y2="27" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="45" y1="63" x2="45" y2="88" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="2" y1="45" x2="27" y2="45" stroke="white" stroke-width="2.8" stroke-linecap="round"/><line x1="63" y1="45" x2="88" y2="45" stroke="white" stroke-width="2.8" stroke-linecap="round"/><circle cx="45" cy="45" r="11" fill="white"/><text x="45" y="49.5" font-family="Arial Black,sans-serif" font-weight="900" font-size="9" fill="#050810" text-anchor="middle">SP</text></svg>
-        Lock in $99 — Founding Price
-      </a>
-      <a href="https://strikepanel.vercel.app/?demo=1" target="_blank" class="btn-ghost" style="width:100%;justify-content:center;margin-bottom:18px">👁 Try the Full Demo First</a>
-      <div class="guarantee-badge">
-        <div class="guarantee-icon">🛡️</div>
-        <div class="guarantee-text">
-          <strong>30-Day Money-Back Guarantee</strong>
-          If it doesn't work for your gym within 30 days, email us and we'll refund in full. No questions asked.
-        </div>
-      </div>
+      <a href="https://strikepanel.gumroad.com" target="_blank" class="btn-primary price-cta">🥊 Get StrikePanel — $149</a>
+      <a href="strikepanel-demo.html" target="_blank" class="btn-ghost" style="width:100%;justify-content:center;margin-bottom:18px">👁 Try the Live Demo First</a>
       <div class="price-guarantee">
-        <strong style="color:var(--text)">One avoided injury pays for this 10×.</strong> The average soft-tissue injury in combat sports costs 3–6 weeks of camp. StrikePanel's readiness scores catch the warning signs before they become injuries.<br><br>
-        Works in Chrome, Safari, Firefox, Edge — on any device, online or offline.
+        <strong>Single file. No install. No account.</strong><br>
+        Works in Chrome, Safari, Firefox, Edge — on any device.<br>
+        Split with a team of 10 — <strong style="color:var(--accent)">$14.90 per person.</strong>
       </div>
     </div>
   </div>
 </section>
-
+ 
 <!-- ── FOOTER ── -->
 <footer class="footer">
   <div class="footer-brand">Strike<span>Panel</span>™</div>
-  <div class="footer-sub">Training Intelligence for Combat Coaches, Gyms, Fight Teams & Athletes<br>One-time fee · No subscription · Works offline · Your data stays yours</div>
-  <div class="footer-links">
-    <a href="https://strikepanel.vercel.app/?demo=1" target="_blank">Live Demo</a>
-    <a href="https://strikepanel.gumroad.com" target="_blank">Get it — $99</a>
-    <a href="#how-it-works">How it works</a>
-    <a href="#features">Features</a>
-    <a href="#faq">FAQ</a>
-    <a href="mailto:corepanelv1@gmail.com">Contact</a>
-  </div>
+  <div class="footer-sub">Training Intelligence · One-time fee · No subscription · Instant download · strikepanel.gumroad.com</div>
 </footer>
-
+ 
 <script>
-const DEMO_URL = 'https://strikepanel.vercel.app/?demo=1';
-
-// Set live date in brief mockup + preview
+// ══════════════════════════════════════════════════════════
+// DEMO URL CONFIG
+// When you host these files, set DEMO_URL to the absolute
+// URL of your demo file so it works from any context.
+// e.g. 'https://yourdomain.com/strikepanel-demo.html'
+// Leave as '' to use relative path (works when files are
+// in the same folder on the same server).
+// ══════════════════════════════════════════════════════════
+const DEMO_URL = 'https://strikepanel.vercel.app/demo'
+ 
+(function resolveDemoLinks(){
+  if(!DEMO_URL) return; // relative links already work fine
+  document.querySelectorAll('a[href="strikepanel-demo.html"]').forEach(a=>{
+    a.href = DEMO_URL;
+  });
+})();
+ 
+// ── Set live date in brief mockup ──
 (function(){
   const d = new Date();
   const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  const dateStr = days[d.getDay()] + ', ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
-  const el = document.getElementById('briefDate'); if(el) el.textContent = dateStr + ' · Fight Camp Intelligence';
-  const el2 = document.getElementById('prevDate'); if(el2) el2.textContent = dateStr + ' · Fight Camp Intelligence';
+  const el = document.getElementById('briefDate');
+  if(el) el.textContent = days[d.getDay()] + ', ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear() + ' · Fight Camp Intelligence';
 })();
-
-// Reveal on scroll
+ 
+// ── Reveal on scroll ──
 const reveals = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, { threshold: 0.10, rootMargin: '0px 0px -36px 0px' });
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 reveals.forEach(el => io.observe(el));
-
-// Show nav links on desktop
-if(window.innerWidth > 768){
-  const f = document.getElementById('navFaq'); if(f) f.style.display = '';
-  const h = document.getElementById('navHow'); if(h) h.style.display = '';
-}
-
-// Responsive 2-col → 1-col for check-in demo section
-function fixCheckinGrid(){
-  const grids = document.querySelectorAll('[style*="grid-template-columns:1fr 1fr"]');
-  grids.forEach(g => {
-    if(window.innerWidth < 700) g.style.gridTemplateColumns = '1fr';
-    else g.style.gridTemplateColumns = '1fr 1fr';
-  });
-}
-fixCheckinGrid();
-window.addEventListener('resize', fixCheckinGrid);
-
-// Urgency countdown to June 1
-(function(){
-  const el = document.getElementById('urgencyCountdown');
-  if (!el) return;
-  function update() {
-    const deadline = new Date('2026-06-01T00:00:00');
-    const now = new Date();
-    const diff = deadline - now;
-    if (diff <= 0) { el.textContent = 'Price increase live'; return; }
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    el.textContent = d + 'd ' + String(h).padStart(2,'0') + 'h ' + String(m).padStart(2,'0') + 'm ' + String(s).padStart(2,'0') + 's';
-  }
-  update();
-  setInterval(update, 1000);
-})();
+ 
+// Show FAQ nav link on desktop only
+if(window.innerWidth > 768){ const f=document.getElementById('navFaq');if(f)f.style.display=''; }
 </script>
 </body>
 </html>
+ 

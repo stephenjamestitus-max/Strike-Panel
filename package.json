@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "puppeteer": "^24.42.0"
+  },
+  "devDependencies": {
+    "serve-handler": "^6.1.7"
+  }
+}
