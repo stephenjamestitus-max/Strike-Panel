@@ -1035,7 +1035,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;margin-top:8px;font-size:13px" onclick="lgActivate()">🔓 Activate License</button>
     <div class="lg-msg" id="lgMsg"></div>
     <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);font-size:11px;color:var(--muted2);line-height:1.7">
-      Don't have a license? <a href="https://strikepanel.gumroad.com" target="_blank" style="color:var(--accent);text-decoration:underline">Get StrikePanel — $149 →</a>
+      Don't have a license? <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" style="color:var(--accent);text-decoration:underline">Get StrikePanel — $99 →</a>
     </div>
   </div>
 </div>
@@ -1049,7 +1049,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   <div class="demo-mode-text">
     You're exploring StrikePanel™ with sample data. Nothing you do here is saved permanently.
   </div>
-  <a href="https://strikepanel.gumroad.com" target="_blank" class="demo-buy-btn">🥊 Buy to unlock — $149</a>
+  <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" class="demo-buy-btn">Buy to unlock — $99</a>
   <button class="demo-exit-btn" onclick="demoExit()" title="Exit demo">✕ Exit</button>
 </div>
 
@@ -1061,8 +1061,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px">
     You're exploring with demo data. To save your own athletes, sessions and check-ins — grab your license.
   </div>
-  <a href="https://strikepanel.gumroad.com" target="_blank" class="demo-buy-btn" style="width:100%;justify-content:center;padding:13px;font-size:12px">🥊 Get StrikePanel — $149</a>
-  <div style="font-size:11px;color:var(--muted2);margin-top:10px">One-time fee · No subscription · Instant download</div>
+  <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" class="demo-buy-btn" style="width:100%;justify-content:center;padding:13px;font-size:12px">Get StrikePanel — $99</a>
+  <div style="font-size:11px;color:var(--muted2);margin-top:10px">One-time fee · No subscription · Instant access</div>
   <button class="btn btn-ghost btn-sm" style="margin-top:10px;width:100%;justify-content:center" onclick="demoCloseBlock()">Keep exploring demo</button>
 </div>
 
@@ -5503,35 +5503,17 @@ document.getElementById('pdfShareBtn').style.display='inline-flex';
   });
 }
 // ══════════════════════════════════════════════════════════════════════
-// LICENSE GATE — Gumroad key validation (offline, client-side)
+// LICENSE GATE — Gumroad live API verification
 //
-// HOW TO ADD NEW KEYS WHEN A CUSTOMER BUYS:
-//   1. Open this file
-//   2. Find the VALID_LICENSE_KEYS array below
-//   3. Add the Gumroad license key (from the Gumroad dashboard)
-//      as a new string entry, e.g.: 'ABCD1234-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
-//   4. Save and re-deploy the file
+// When a customer enters their key, the app calls the Gumroad API to
+// verify it in real time. No manual key management needed — every
+// purchase is automatically accepted.
 //
-// MASTER KEY: Use SP-MASTER-2024-STRIKEPANEL-OWNER to always unlock
-// (change this string to something only you know, and never share it)
-//
-// Keys are stored as SHA-256 hashes so even if someone views source,
-// they can't just copy a key from the list — they'd need the raw key.
+// MASTER KEY: SP-MASTER-2024-STRIKEPANEL-OWNER (owner use only)
 // ══════════════════════════════════════════════════════════════════════
 
-// ── VALID KEYS LIST ─────────────────────────────────────────────────
-// Add each customer's Gumroad license key here after purchase.
-// Format: 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
-// Keys are case-insensitive — the app normalises to uppercase on entry.
-// ── LICENSE GATE — Simple & Reliable ─────────────────────────────────
-// Add customer Gumroad keys to this list after purchase.
-// Master key always works for the owner.
-var VALID_LICENSE_KEYS = [
-  // ↓ ADD CUSTOMER KEYS BELOW THIS LINE ↓
-  // 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
-  // ↑ ADD CUSTOMER KEYS ABOVE THIS LINE ↑
-];
 var MASTER_KEY = 'SP-MASTER-2024-STRIKEPANEL-OWNER';
+var GUMROAD_PRODUCT = 'strikepanel';
 
 function lgSetMsg(txt, ok) {
   const el = document.getElementById('lgMsg');
@@ -5547,19 +5529,37 @@ function lgUnlock() {
 
 function lgIsValidKey(key) {
   const k = key.trim().toUpperCase();
-  if (k === MASTER_KEY.trim().toUpperCase()) return true;
-  return VALID_LICENSE_KEYS.some(v => v.trim().toUpperCase() === k);
+  return k === MASTER_KEY.trim().toUpperCase();
 }
 
-function lgActivate() {
+async function lgVerifyWithGumroad(key) {
+  try {
+    const res = await fetch('https://api.gumroad.com/v2/licenses/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `product_permalink=${GUMROAD_PRODUCT}&license_key=${encodeURIComponent(key)}&increment_uses_count=false`
+    });
+    const data = await res.json();
+    return data.success === true;
+  } catch (e) {
+    return false;
+  }
+}
+
+async function lgActivate() {
   const input = document.getElementById('lgKeyInput');
   const btn   = document.querySelector('#licenseGate .btn-primary');
   const key   = (input?.value || '').trim();
 
   if (!key) { lgSetMsg('Paste your license key first.', false); return; }
 
-  const valid = lgIsValidKey(key);
-  if (valid) {
+  if (btn) { btn.textContent = 'Checking…'; btn.disabled = true; }
+  lgSetMsg('Verifying your key…', null);
+
+  const isMaster = lgIsValidKey(key);
+  const isGumroad = isMaster ? false : await lgVerifyWithGumroad(key);
+
+  if (isMaster || isGumroad) {
     localStorage.setItem('cp_license_key', key.toUpperCase());
     localStorage.setItem('cp_license_activated', new Date().toISOString());
     lgSetMsg('✓ Activated! Welcome to StrikePanel™', true);
@@ -5578,11 +5578,14 @@ function lgActivate() {
   }
 }
 
-function lgCheck() {
+async function lgCheck() {
   if (window.location.search.includes('checkin=1')) return; // athlete check-in — bypass gate
   const stored = localStorage.getItem('cp_license_key');
-  if (stored && lgIsValidKey(stored)) { lgUnlock(); return; }
-  // No valid key → gate stays visible
+  if (!stored) return; // no key stored — gate stays visible
+  // Master key unlocks immediately without a network call
+  if (lgIsValidKey(stored)) { lgUnlock(); return; }
+  // Previously verified Gumroad key — unlock without re-calling API every load
+  if (localStorage.getItem('cp_license_activated')) { lgUnlock(); return; }
 }
 
 lgCheck();
