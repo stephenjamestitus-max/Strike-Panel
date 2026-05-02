@@ -2154,7 +2154,7 @@ create policy "allow_all" on sp_sync
     <div class="card-title" style="margin-bottom:12px"><span class="ctdot"></span>Units of Measurement</div>
     <div style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.7">Switch between metric (kg/cm) and imperial (lbs/ft). Your stored data stays as-is — units are converted on display. Both systems fully supported.</div>
     <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-      <button id="unitToggleBtn" class="btn btn-ghost" onclick="toggleUnits()" style="min-width:200px">Metric (kg/cm)</button>
+      <button id="unitToggleBtn" class="btn btn-ghost" onclick="toggleUnits()" style="min-width:200px">Imperial (lbs/ft)</button>
       <span style="font-size:12px;color:var(--muted2)">Affects all weight, height and water displays across the app</span>
     </div>
   </div>
@@ -2448,7 +2448,7 @@ function mkS() {
     progress: { clients:[] }, // [{name,weight,height,bmi,week1..8}]
     timer: { warmupTime:180, roundTime:180, restTime:60, rounds:3, warnAt:10 },
     branding: { name:'', tagline:'', accent:'#00E5FF' },
-    units: 'metric',
+    units: 'imperial',
     mode: 'combat',
     wearable: {},
     meta: { lastExport:null, version:'11' }
