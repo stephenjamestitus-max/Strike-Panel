@@ -1817,25 +1817,6 @@ create policy "allow_all" on sp_sync
       <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:var(--r-xs);padding:10px;text-align:center"><div style="font-family:var(--fh);font-size:16px;color:var(--red)">≥ 30.0</div><div style="font-family:var(--fc);font-size:10px;color:var(--red);letter-spacing:1px;margin-top:3px">Obese</div></div>
     </div>
   </div>
-
-  <!-- WEARABLE DATA CARD -->
-  <div class="card" style="margin-top:14px">
-    <div class="card-header" style="margin-bottom:14px">
-      <div class="card-title"><span class="ctdot"></span>📱 Wearable / Tracker Data</div>
-      <span class="saved-flash" id="wearFlash">Saved ✓</span>
-    </div>
-    <div class="fgrid2" style="margin-bottom:10px">
-      <div class="field"><div class="flabel">Date</div><input class="finput" id="wearDate" type="date"></div>
-      <div class="field"><div class="flabel">Sleep Hours</div><input class="finput" id="wearSleep" type="number" placeholder="e.g. 7.5" step="0.5" min="0" max="24"></div>
-      <div class="field"><div class="flabel">Resting HR (bpm)</div><input class="finput" id="wearRHR" type="number" placeholder="e.g. 52" min="30" max="120"></div>
-      <div class="field"><div class="flabel">HRV (ms)</div><input class="finput" id="wearHRV" type="number" placeholder="e.g. 68" min="1" max="300"></div>
-      <div class="field"><div class="flabel">Steps</div><input class="finput" id="wearSteps" type="number" placeholder="e.g. 8500"></div>
-      <div class="field"><div class="flabel">Active Calories</div><input class="finput" id="wearActiveCal" type="number" placeholder="e.g. 620"></div>
-      <div class="field"><div class="flabel" id="wearDistLbl">Distance (km)</div><input class="finput" id="wearDist" type="number" placeholder="e.g. 5.2" step="0.1"></div>
-    </div>
-    <button class="btn btn-primary btn-sm" onclick="wearSave()">Save Entry</button>
-    <div id="wearLog" style="margin-top:14px"></div>
-  </div>
 </section>
 
 <!-- ═══ PROGRESS ═══ -->
@@ -2518,7 +2499,6 @@ function updateUnitUI(){
   ['athWeightLbl','fdCurWeightLbl','bioWeightLbl','pgWeightLbl'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=`Weight (${imp?'lbs':'kg'})`;});
   const twEl=document.getElementById('athTargetWeightLbl');if(twEl)twEl.textContent=`Target Weight (${imp?'lbs':'kg'})`;
   const fdTwEl=document.getElementById('fdTargetWeightLbl');if(fdTwEl)fdTwEl.textContent=`Target Weight (${imp?'lbs':'kg'})`;
-const wdEl=document.getElementById('wearDistLbl');if(wdEl)wdEl.textContent=`Distance (${imp?'miles':'km'})`;
   ['athHeightLbl','bioHeightLbl','pgHeightLbl'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=`Height (${imp?'ft/in':'cm'})`;});
   const pmap={athWeight:imp?'e.g. 165':'75.0',athTargetWeight:imp?'e.g. 154':'70.0',athHeight:imp?"5'11\"":"178",bioWeight:imp?'165':'75.5',bioHeight:imp?"5'10\"":"178",pgWeight:imp?'165':'75.0',pgHeight:imp?"5'10\"":"178",fdCurWeight:imp?'e.g. 181':'e.g. 82.5',fdTargetWeight:imp?'e.g. 170':'e.g. 77.0'};
   Object.entries(pmap).forEach(([id,ph])=>{const el=document.getElementById(id);if(el)el.placeholder=ph;});
@@ -3087,7 +3067,6 @@ function bioLoad(){
   const lastSaved=document.getElementById('bioLastSaved');
   if(lastSaved)lastSaved.textContent=b.date?'Last saved: '+b.date:'';
   bioCalc();
-  wearRender(id);
 }
 function bioCalc(){
   const w=parseFloat(document.getElementById('bioWeight')?.value)||0;
@@ -6398,44 +6377,6 @@ function sbStopPolling() { clearInterval(_sbPollTimer); _sbPollTimer = null; }
     sbSetStatus('Could not reach Supabase. Working offline.', 'var(--amber)');
   }
 })();
-// ── WEARABLE DATA ─────────────────────────────────────────────────────
-function wearSave(){
-  const athId=document.getElementById('bioAthlete')?.value;
-  if(!athId){alert('Select an athlete first (use the selector above).');return;}
-  const entry={
-    date: document.getElementById('wearDate')?.value || new Date().toISOString().slice(0,10),
-    rhr:  document.getElementById('wearRHR')?.value  || '',
-    hrv:  document.getElementById('wearHRV')?.value  || '',
-    steps:document.getElementById('wearSteps')?.value|| '',
-    cal:  document.getElementById('wearActiveCal')?.value||'',
-    dist: document.getElementById('wearDist')?.value || '',
-    sleep:document.getElementById('wearSleep')?.value|| ''
-  };
-  if(!S.wearable) S.wearable={};
-  if(!S.wearable[athId]) S.wearable[athId]=[];
-  // Replace if same date
-  const idx=S.wearable[athId].findIndex(e=>e.date===entry.date);
-  if(idx>-1) S.wearable[athId][idx]=entry; else S.wearable[athId].unshift(entry);
-  saveState();
-  const fl=document.getElementById('wearFlash');if(fl){fl.classList.add('show');setTimeout(()=>fl.classList.remove('show'),2200);}
-  wearRender(athId);
-}
-function wearRender(athId){
-  const el=document.getElementById('wearLog');if(!el)return;
-  const entries=(S.wearable&&S.wearable[athId])||[];
-  if(!entries.length){el.innerHTML='<div style="font-size:12px;color:var(--muted2)">No wearable entries yet.</div>';return;}
-  el.innerHTML=`<div style="font-size:10px;font-family:var(--fc);letter-spacing:2px;color:var(--muted2);text-transform:uppercase;margin-bottom:8px">Recent Entries</div>`+
-  entries.slice(0,7).map(e=>`
-    <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04)">
-      <span style="color:var(--text);font-weight:600;min-width:90px">${e.date}</span>
-      ${e.rhr?`<span>❤️ ${e.rhr} bpm</span>`:''}
-      ${e.hrv?`<span>📶 HRV ${e.hrv}ms</span>`:''}
-      ${e.steps?`<span>👟 ${Number(e.steps).toLocaleString()} steps</span>`:''}
-      ${e.cal?`<span>🔥 ${e.cal} kcal</span>`:''}
-      ${e.dist?`<span>📍 ${e.dist}${isImperial()?'mi':'km'}</span>`:''}
-      ${e.sleep?`<span>😴 ${e.sleep}h sleep</span>`:''}
-    </div>`).join('');
-}
 function pdfShare(){
   const content=document.getElementById('pdfContent');
   if(!content)return;
