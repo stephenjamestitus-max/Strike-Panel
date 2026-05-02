@@ -984,6 +984,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   z-index:9998;opacity:0;pointer-events:none;transition:opacity .2s;
 }
 .demo-overlay.show{opacity:1;pointer-events:all}
+/* ── SVG icon system ── */
+.sp-icon{width:1em;height:1em;display:inline-block;vertical-align:-0.15em;flex-shrink:0}
+.stype-btn .sp-icon{width:22px;height:22px;vertical-align:middle}
+.ri-label .sp-icon{width:15px;height:15px;vertical-align:-0.2em;margin-right:2px}
+.p2card-icon .sp-icon{width:18px;height:18px}
+.pwa-banner-icon .sp-icon{width:26px;height:26px}
+.tab .sp-icon{width:13px;height:13px;vertical-align:-0.1em}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -6468,6 +6475,174 @@ function pdfShare(){
     if(shareBtn){shareBtn.textContent='📤 Share';shareBtn.disabled=false;}
   });
 }
+</script>
+<script>
+// ── SVG Icon Library ────────────────────────────────────────────────────
+const _IC = {
+  lightning:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M10 1.5L5.5 8.5H9L6 14.5L12 6.5H8.5Z" fill="currentColor"/></svg>`,
+  glove:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M7 3C6 3 5.5 3.8 5.5 4.5V7H5C4.2 7 3.5 7.7 3.5 8.5C3.5 10.4 5.5 12 8 12C10.5 12 12.5 10.4 12.5 8.5V8C12.5 7.2 11.8 6.5 11 6.5H10.5V4.5C10.5 3.8 10 3 9 3H7Z" fill="currentColor"/><rect x="3.5" y="12" width="9" height="2.5" rx="1.2" fill="currentColor"/></svg>`,
+  stopwatch:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="9.5" r="5.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 9.5V6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M6 2H10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M8 2V4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M13.5 4.5L12.3 5.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`,
+  gear:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.3" stroke="currentColor" stroke-width="1.3"/><path d="M8 1.5V3M8 13V14.5M1.5 8H3M13 8H14.5M3.3 3.3L4.4 4.4M11.6 11.6L12.7 12.7M3.3 12.7L4.4 11.6M11.6 4.4L12.7 3.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
+  users:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><circle cx="6" cy="5" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 14C1.5 11.5 3.5 9.5 6 9.5C8.5 9.5 10.5 11.5 10.5 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="11.5" cy="5" r="2" stroke="currentColor" stroke-width="1.2"/><path d="M13.5 13.5C13.5 11.5 12.3 10 11 9.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+  dumbbell:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><rect x="1" y="6.5" width="2.8" height="3" rx="0.7" fill="currentColor"/><rect x="12.2" y="6.5" width="2.8" height="3" rx="0.7" fill="currentColor"/><rect x="3.6" y="5.5" width="1.6" height="5" rx="0.5" fill="currentColor"/><rect x="10.8" y="5.5" width="1.6" height="5" rx="0.5" fill="currentColor"/><rect x="5.2" y="7.2" width="5.6" height="1.6" rx="0.5" fill="currentColor"/></svg>`,
+  activity:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M1 8H4L5.5 4L8 12L10 6L11.5 9.5L14 8H15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  trending:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M1 12L6 7L9.5 10L15 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 4H15V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  target:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="1" fill="currentColor"/><path d="M8 1V3M8 13V15M1 8H3M13 8H15" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+  impact:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" fill="currentColor"/><path d="M8 1.5V3.5M8 12.5V14.5M1.5 8H3.5M12.5 8H14.5M3.4 3.4L4.8 4.8M11.2 11.2L12.6 12.6M3.4 12.6L4.8 11.2M11.2 4.8L12.6 3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`,
+  rotate:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M3 8C3 5.2 5.2 3 8 3C9.8 3 11.4 3.9 12.3 5.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M13 8C13 10.8 10.8 13 8 13C6.2 13 4.6 12.1 3.7 10.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M12.3 3.5V5.5H14.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.7 10.5H1.7V12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  wrestle:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><circle cx="5" cy="3.5" r="1.5" fill="currentColor"/><circle cx="11" cy="3.5" r="1.5" fill="currentColor"/><path d="M5 5.5C5 5.5 6 7 8 7C10 7 11 5.5 11 5.5V9L8 11L5 9V5.5Z" fill="currentColor"/><path d="M5 9L3 12H5.5M11 9L13 12H10.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+  run:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><circle cx="10.5" cy="2.5" r="1.5" fill="currentColor"/><path d="M9 5L7 9L4 10L5 12L8.5 11L10 8L12.5 9.5L13.5 7.5L10.5 6Z" fill="currentColor"/><path d="M7 9L5.5 13M8.5 11L9.5 14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+  barbell:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><rect x="1" y="6" width="2.5" height="4" rx="0.8" fill="currentColor"/><rect x="12.5" y="6" width="2.5" height="4" rx="0.8" fill="currentColor"/><rect x="3" y="5" width="2" height="6" rx="0.6" fill="currentColor"/><rect x="11" y="5" width="2" height="6" rx="0.6" fill="currentColor"/><rect x="5" y="7" width="6" height="2" rx="0.5" fill="currentColor"/></svg>`,
+  shadow:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="4" r="2.2" stroke="currentColor" stroke-width="1.3"/><path d="M4 14C4 11.2 5.8 9 8 9C10.2 9 12 11.2 12 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M6.5 9.5L5 12M9.5 9.5L11 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+  moon:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M13 9.5C12.2 11.3 10.4 12.5 8.3 12.5C5.4 12.5 3 10.1 3 7.2C3 5.1 4.2 3.3 6 2.5C3.5 3.3 1.8 5.7 2 8.4C2.2 11.6 4.9 14 8.1 14C10.7 14 12.9 12.3 13.7 9.9C13.5 9.8 13.2 9.6 13 9.5Z" fill="currentColor"/></svg>`,
+  muscle:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M3.5 10C3.5 10 3 8.2 4.5 7.2C6 6.2 6.5 7.2 7.5 6.7C8.5 6.2 9 4.7 10.5 4.2C12 3.7 13.5 4.7 13.5 6.2C13.5 7.7 12 8.2 11 8.7C10 9.2 9.5 10.2 8.5 10.7C7.5 11.2 6.5 11.2 5.5 10.7C4.5 10.2 4 10.7 3.5 10Z" fill="currentColor"/><path d="M4.5 12.5C5 12 6 11.5 7 12C8 12.5 8.5 13 8.5 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+  brain:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M8 2.5C6 2.5 4.5 4 4.5 5.5C4.5 6 4.7 6.5 5 6.9C3.8 7.2 3 8.1 3 9.2C3 10.5 4.2 11.5 5.5 11.5H6V13.5H10V11.5H10.5C11.8 11.5 13 10.5 13 9.2C13 8.1 12.2 7.2 11 6.9C11.3 6.5 11.5 6 11.5 5.5C11.5 4 10 2.5 8 2.5Z" stroke="currentColor" stroke-width="1.3" fill="none"/><path d="M8 6V9M6.5 7.5H9.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+  leaf:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M13 2C13 2 13 8 8 10C6 10.8 4 11 3 11C3 9 3.5 6 6 4.5C8.5 3 11 2.5 13 2Z" fill="currentColor"/><path d="M3 13L8 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
+  plus_circle:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M8 5V11M5 8H11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`,
+  flame:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.5C8 1.5 11.5 5.5 11.5 8.5C11.5 10 10.5 11.2 9.2 11.8C9.6 11.1 9.7 10.3 9.4 9.5C8.9 8 7 7.2 7 7.2C7 7.2 7.6 8.8 6.6 9.8C5.8 10.6 5 9.8 5 8.2C5 6.5 6 5 8 1.5Z" fill="currentColor"/><path d="M8 14.5C6.3 14.5 5 13.2 5 11.5C5 10.8 5.3 10.2 5.7 9.8C5.9 10.8 6.8 11.5 8 11.5C9.2 11.5 10.1 10.8 10.3 9.8C10.7 10.2 11 10.8 11 11.5C11 13.2 9.7 14.5 8 14.5Z" fill="currentColor"/></svg>`,
+  lock:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 7V5C5 3.3 6.3 2 8 2C9.7 2 11 3.3 11 5V7" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="11" r="1.2" fill="currentColor"/></svg>`,
+  unlock:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 7V5C5 3.3 6.3 2 8 2C9.7 2 11 3.3 11 5" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="11" r="1.2" fill="currentColor"/></svg>`,
+  clipboard:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><rect x="3" y="3" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 3V2H10V3" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 7H10.5M5.5 9.5H10.5M5.5 12H8.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+  check_circle:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 8L7 10L11 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  refresh:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M2.5 8C2.5 5 5 2.5 8 2.5C9.8 2.5 11.4 3.4 12.4 4.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M13.5 8C13.5 11 11 13.5 8 13.5C6.2 13.5 4.6 12.6 3.6 11.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M11.5 3L13.5 5L15.5 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.5 13L2.5 11L0.5 13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  box:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M1.5 5.5L8 2L14.5 5.5V10.5L8 14L1.5 10.5V5.5Z" stroke="currentColor" stroke-width="1.3"/><path d="M8 2V14M1.5 5.5L8 9L14.5 5.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+  trash:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M2 4H14M5 4V3H11V4M4 4L4.5 13H11.5L12 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M6.5 6.5V11M9.5 6.5V11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+  bulb:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.8 2 4 3.8 4 6C4 7.5 4.8 8.8 6 9.6V11H10V9.6C11.2 8.8 12 7.5 12 6C12 3.8 10.2 2 8 2Z" stroke="currentColor" stroke-width="1.3"/><path d="M6 12H10M6.5 13.5H9.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
+  link:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5L9.5 6.5M5 11C3.5 11 2.5 10 2.5 8.5C2.5 7 3.5 6 5 6H7M9 10H11C12.5 10 13.5 9 13.5 7.5C13.5 6 12.5 5 11 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`,
+  doc:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M3 2H10L13 5V14H3V2Z" stroke="currentColor" stroke-width="1.3"/><path d="M10 2V5H13" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8H10.5M5.5 10.5H9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+  calendar:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 7H14M5 2V4M11 2V4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M5 10H5.5M8 10H8.5M11 10H11.5M5 12.5H5.5M8 12.5H8.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
+  upload:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><path d="M5 6L8 3L11 6M8 3V11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 13H13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`,
+  chart:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><rect x="2" y="10" width="3" height="4" rx="0.5" fill="currentColor"/><rect x="6.5" y="7" width="3" height="7" rx="0.5" fill="currentColor"/><rect x="11" y="4" width="3" height="10" rx="0.5" fill="currentColor"/><path d="M1 14.5H15" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+  yoga:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="2.5" r="1.5" fill="currentColor"/><path d="M8 4.5V8L5 11M8 8L11 11M6 7H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
+  group:`<svg class="sp-icon" viewBox="0 0 16 16" fill="none"><circle cx="4" cy="5" r="2" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="5" r="2" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="4" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 14C1 11.8 2.3 10 4 10C5 10 5.9 10.5 6.5 11.3M15 14C15 11.8 13.7 10 12 10C11 10 10.1 10.5 9.5 11.3M4 14C4 11.5 5.8 9.5 8 9.5C10.2 9.5 12 11.5 12 14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+};
+
+// ── Apply icons to specific UI elements ──────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  function ic(name, color) {
+    const wrap = document.createElement('span');
+    wrap.innerHTML = _IC[name] || '';
+    const svg = wrap.querySelector('svg');
+    if (svg && color) svg.style.color = color;
+    return wrap.innerHTML;
+  }
+
+  // Nav tabs
+  const tabMap = {
+    brief:       [_IC.lightning, 'Morning Brief'],
+    fightdates:  [_IC.glove,     'Fight Dates'],
+    athletes:    [_IC.users,     'Members'],
+    workouts:    [_IC.dumbbell,  'Workouts'],
+    biometrics:  [_IC.activity,  'Body Stats'],
+    progress:    [_IC.trending,  'Progress'],
+    timer:       [_IC.stopwatch, 'Timer'],
+    settings:    [_IC.gear,      'Settings'],
+  };
+  document.querySelectorAll('.tab[data-tab]').forEach(btn => {
+    const cfg = tabMap[btn.dataset.tab];
+    if (cfg) btn.innerHTML = cfg[0] + ' ' + cfg[1];
+  });
+
+  // Buttons that reference tabs
+  document.querySelectorAll('[onclick*="switchTab(\'brief\')"]').forEach(btn => {
+    if (btn.textContent.includes('Morning Brief') || btn.textContent.includes('Full Brief')) {
+      btn.innerHTML = btn.innerHTML
+        .replace(/⚡\s*/g, _IC.lightning + ' ')
+        .replace(/Morning Brief|Full Brief/, m => m);
+    }
+  });
+
+  // Check-in form labels
+  const riLabels = {
+    'Sleep Quality':     [_IC.moon,        null],
+    'Energy Level':      [_IC.lightning,   null],
+    'Muscle Soreness':   [_IC.muscle,      null],
+    'Motivation':        [_IC.brain,       null],
+    'Nutrition':         [_IC.leaf,        null],
+    'Any Pain/Injury':   [_IC.plus_circle, null],
+  };
+  document.querySelectorAll('.ri-label').forEach(el => {
+    for (const [text, [svg]] of Object.entries(riLabels)) {
+      if (el.textContent.includes(text)) {
+        el.innerHTML = svg + ' ' + text + (el.textContent.includes('?') ? '?' : '');
+        break;
+      }
+    }
+  });
+
+  // Session type buttons
+  const stypeMap = {
+    sparring:     _IC.glove,
+    pads:         _IC.target,
+    bag:          _IC.impact,
+    drilling:     _IC.rotate,
+    wrestling:    _IC.wrestle,
+    conditioning: _IC.run,
+    strength:     _IC.barbell,
+    shadowboxing: _IC.shadow,
+  };
+  document.querySelectorAll('.stype-btn[data-type]').forEach(btn => {
+    const icon = stypeMap[btn.dataset.type];
+    const iconEl = btn.querySelector('.stype-icon');
+    if (icon && iconEl) iconEl.innerHTML = icon;
+  });
+
+  // P2 card icons
+  const p2IconMap = [
+    ['Multiple Groups',      _IC.group],
+    ['Invite Your Crew',     _IC.link],
+    ['PDF Profile Card',     _IC.doc],
+    ['Session Templates',    _IC.clipboard],
+    ['Periodisation',        _IC.calendar],
+    ['Session Sheet PDF',    _IC.upload],
+    ['Performance Charts',   _IC.chart],
+    ['Head-to-Head Compare', _IC.lightning],
+    ['Progress Report PDF',  _IC.upload],
+  ];
+  document.querySelectorAll('.p2card-icon').forEach(el => {
+    const text = el.closest('.p2card')?.querySelector('.p2card-name')?.textContent || '';
+    for (const [label, svg] of p2IconMap) {
+      if (text.includes(label.split(' ')[0])) { el.innerHTML = svg; break; }
+    }
+  });
+
+  // PWA banner icon
+  const pwaIcon = document.querySelector('.pwa-banner-icon');
+  if (pwaIcon) pwaIcon.innerHTML = _IC.glove;
+
+  // License icon
+  const licIcon = document.querySelector('.lic-icon');
+  if (licIcon) licIcon.innerHTML = _IC.flame;
+
+  // Inline emoji replacements in buttons
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.innerHTML = btn.innerHTML
+      .replace(/🔓\s*/g, _IC.unlock + ' ')
+      .replace(/🔒\s*/g, _IC.lock + ' ')
+      .replace(/⚡\s*/g, _IC.lightning + ' ')
+      .replace(/📋\s*/g, _IC.clipboard + ' ')
+      .replace(/🔄\s*/g, _IC.refresh + ' ')
+      .replace(/📦\s*/g, _IC.box + ' ')
+      .replace(/🗑\s*/g, _IC.trash + ' ')
+      .replace(/📤\s*/g, _IC.upload + ' ');
+  });
+
+  // Demo onboard feature list icons
+  document.querySelectorAll('[style*="font-size:15px"]').forEach(el => {
+    if (el.textContent.trim() === '⚡') el.innerHTML = _IC.lightning;
+    if (el.textContent.trim() === '⏱') el.innerHTML = _IC.stopwatch;
+  });
+
+  // Tip lightbulb hints
+  document.querySelectorAll('strong, div').forEach(el => {
+    if (el.innerHTML && el.innerHTML.startsWith('💡')) {
+      el.innerHTML = el.innerHTML.replace('💡', _IC.bulb);
+    }
+  });
+
+  // Gym workout type select options (text only, can't SVG these)
+  // Left as-is since <option> doesn't support HTML
+});
 </script>
 </body>
 </html>
