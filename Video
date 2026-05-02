@@ -78,15 +78,15 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)}
   border-radius:44px;padding:14px 10px 20px;position:relative;
   box-shadow:0 32px 90px rgba(0,0,0,0.9),0 0 0 1px rgba(255,255,255,0.03)}
 .phone-notch{width:72px;height:6px;background:#0a0c14;border-radius:3px;margin:0 auto 10px;border:1px solid rgba(255,255,255,0.07)}
-.phone-screen{border-radius:28px;overflow:hidden;line-height:0;border:1px solid rgba(255,255,255,0.06)}
-.phone-screen img{width:100%;display:block}
+.phone-screen{border-radius:28px;overflow:hidden;line-height:0;border:1px solid rgba(255,255,255,0.06);max-height:420px}
+.phone-screen img{width:100%;display:block;object-fit:cover;object-position:top center}
 .phone-home-bar{width:48px;height:4px;background:rgba(255,255,255,0.12);border-radius:2px;margin:10px auto 0}
 .phone-btn-l{position:absolute;left:-3px;top:82px;width:3px;height:28px;background:rgba(255,255,255,0.12);border-radius:2px 0 0 2px}
 .phone-btn-l2{position:absolute;left:-3px;top:120px;width:3px;height:50px;background:rgba(255,255,255,0.12);border-radius:2px 0 0 2px}
 .phone-btn-r{position:absolute;right:-3px;top:100px;width:3px;height:60px;background:rgba(255,255,255,0.12);border-radius:0 2px 2px 0}
 
 /* ── COPY ELEMENTS ── */
-.slide-copy{max-width:540px;text-align:left}
+.slide-copy{max-width:540px;text-align:center}
 .eyebrow{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;
   margin-bottom:14px;display:inline-flex;align-items:center;gap:8px;
   padding:5px 16px;border-radius:20px}
@@ -99,14 +99,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)}
 .slide-title .accent{color:var(--accent)}
 .slide-title .red{color:var(--red)}
 .slide-title .green{color:var(--green)}
-.slide-title .dim{color:rgba(238,240,248,0.22)}
+.slide-title .dim{color:rgba(238,240,248,0.50)}
 .slide-sub{font-size:clamp(13px,1.5vw,16px);color:var(--muted);line-height:1.8;margin-bottom:22px}
 .slide-sub strong{color:var(--text)}
-.stat-row{display:flex;gap:20px;flex-wrap:wrap;margin-top:10px}
+.stat-row{display:flex;gap:20px;flex-wrap:wrap;margin-top:10px;justify-content:center}
 .stat{text-align:left}
 .stat-val{font-family:var(--fh);font-size:38px;letter-spacing:2px;line-height:1}
 .stat-lbl{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-top:2px}
-.check-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin-top:4px}
+.check-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin-top:4px;align-items:center}
 .check-list li{font-size:14px;color:var(--muted);display:flex;align-items:flex-start;gap:9px;line-height:1.5}
 .check-list li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px}
 .check-list li strong{color:var(--text)}
@@ -118,7 +118,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)}
 
 /* ── SLIDE LAYOUTS ── */
 .layout-hero{flex-direction:column;text-align:center;padding:60px 40px 80px}
-.layout-split{gap:clamp(24px,4vw,64px);padding:40px clamp(24px,5vw,80px) 80px;max-width:1300px;width:100%}
+.layout-split{gap:clamp(24px,4vw,64px);padding:40px clamp(24px,5vw,80px) 80px;max-width:1300px;width:100%;align-items:center}
 .layout-center{flex-direction:column;padding:40px 40px 80px;max-width:960px;width:100%}
 .layout-fullscreen{padding:20px 20px 80px;max-width:1100px;width:100%}
 
@@ -175,9 +175,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)}
     </div>
     <div class="fade-up fd2" style="font-family:var(--fh);font-size:clamp(16px,2vw,20px);letter-spacing:4px;color:var(--muted);margin-bottom:10px">STRIKEPANEL™ · TRAINING INTELLIGENCE</div>
     <div class="fade-up fd3" style="font-family:var(--fh);font-size:clamp(52px,9vw,110px);letter-spacing:3px;line-height:0.88;margin-bottom:24px;text-align:center">
-      <div style="color:rgba(238,240,248,0.22)">STOP</div>
+      <div style="color:rgba(238,240,248,0.50)">STOP</div>
       <div style="color:var(--accent)">GUESSING.</div>
-      <div style="color:rgba(238,240,248,0.22)">START</div>
+      <div style="color:rgba(238,240,248,0.50)">START</div>
       <div style="color:var(--red)">KNOWING.</div>
     </div>
     <div class="fade-up fd4" style="font-size:clamp(14px,1.8vw,18px);color:var(--muted);max-width:580px;line-height:1.8;margin-bottom:28px">
@@ -206,7 +206,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)}
         <div class="stat"><div class="stat-val" style="color:var(--text)">4</div><div class="stat-lbl">Check-ins today</div></div>
       </div>
     </div>
-    <div class="laptop-frame fade-up fd2" style="flex:1;min-width:0;max-width:700px">
+    <div class="laptop-frame fade-up fd2" style="flex:1;min-width:0;max-width:640px">
       <div class="laptop-screen">
         <div class="laptop-cam"></div>
         <div class="laptop-screen-inner" style="position:relative">
@@ -234,7 +234,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)}
         <li><strong>Marcus Okafor — TRAIN NORMAL (72/100)</strong> — Consistent</li>
       </ul>
     </div>
-    <div class="laptop-frame fade-up fd2" style="flex:1;min-width:0;max-width:700px">
+    <div class="laptop-frame fade-up fd2" style="flex:1;min-width:0;max-width:640px">
       <div class="laptop-screen">
         <div class="laptop-cam"></div>
         <div class="laptop-screen-inner" style="position:relative">
@@ -254,7 +254,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)}
   <div class="slide layout-center" id="s4" style="flex-direction:column;align-items:center">
     <div style="text-align:center;margin-bottom:40px" class="fade-up fd1">
       <div class="eyebrow cyan" style="display:inline-flex"><span class="pdot" style="background:var(--accent);box-shadow:0 0 8px var(--accent)"></span>How athletes check in</div>
-      <div class="slide-title" style="text-align:center">30 seconds.<br><span class="accent">Any phone.</span><br><span class="dim">No app.</span></div>
+      <div class="slide-title" style="text-align:center">30 seconds.<br><span class="accent">Any phone.</span><br><span class="dim">No app. No login.</span></div>
       <div class="slide-sub" style="max-width:520px;margin:0 auto">You share one WhatsApp link. Athletes open it — no download, no account. 6 sliders. Submit. Score appears in your Morning Brief instantly.</div>
     </div>
     <div class="fade-up fd2" style="display:flex;gap:32px;align-items:center;justify-content:center;flex-wrap:wrap">
@@ -285,7 +285,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)}
        SLIDE 5 — FIGHT DATES (PHONE MOCKUP)
   ══════════════════════════════════════════ -->
   <div class="slide layout-split" id="s5">
-    <div class="phone-frame fade-up fd1" style="width:240px;flex-shrink:0">
+    <div class="phone-frame fade-up fd1" style="width:260px;flex-shrink:0">
       <div class="phone-btn-l"></div><div class="phone-btn-l2"></div><div class="phone-btn-r"></div>
       <div class="phone-notch"></div>
       <div class="phone-screen" style="position:relative">
@@ -321,7 +321,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)}
         <li><strong>Tyler Novak</strong> — Kickboxing · 28-6-0 · Old ACL, keep volume low</li>
       </ul>
     </div>
-    <div class="laptop-frame fade-up fd2" style="flex:1;min-width:0;max-width:660px">
+    <div class="laptop-frame fade-up fd2" style="flex:1;min-width:0;max-width:620px">
       <div class="laptop-screen">
         <div class="laptop-cam"></div>
         <div class="laptop-screen-inner" style="position:relative">
@@ -349,7 +349,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)}
         <li>Free Google Gemini key — no credit card</li>
       </ul>
     </div>
-    <div class="laptop-frame fade-up fd2" style="flex:1;min-width:0;max-width:660px">
+    <div class="laptop-frame fade-up fd2" style="flex:1;min-width:0;max-width:620px">
       <div class="laptop-screen">
         <div class="laptop-cam"></div>
         <div class="laptop-screen-inner" style="position:relative">
@@ -377,7 +377,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)}
         <div class="stat"><div class="stat-val" style="color:var(--text)">3</div><div class="stat-lbl">Athletes</div></div>
       </div>
     </div>
-    <div class="laptop-frame fade-up fd2" style="flex:1;min-width:0;max-width:660px">
+    <div class="laptop-frame fade-up fd2" style="flex:1;min-width:0;max-width:620px">
       <div class="laptop-screen">
         <div class="laptop-cam"></div>
         <div class="laptop-screen-inner" style="position:relative">
