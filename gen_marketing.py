@@ -20,12 +20,14 @@ CARD_BG = (15, 20, 30)
 
 # Source screenshots
 S = {
-    'dashboard':    Image.open(f'{SRC}/01.png').convert('RGB'),  # 1638×730
-    'morning_brief': Image.open(f'{SRC}/02.png').convert('RGB'), # 1057×505
-    'fight_dates':  Image.open(f'{SRC}/03.png').convert('RGB'),  # 265×725
-    'members':      Image.open(f'{SRC}/04.png').convert('RGB'),  # 1067×553
-    'workouts':     Image.open(f'{SRC}/05.png').convert('RGB'),  # 1067×642
-    'progress':     Image.open(f'{SRC}/06.png').convert('RGB'),  # 1050×751
+    'dashboard':      Image.open(f'{SRC}/01.png').convert('RGB'),  # 1638×730
+    'morning_brief':  Image.open(f'{SRC}/02.png').convert('RGB'),  # 1057×505
+    'fight_dates':    Image.open(f'{SRC}/03.png').convert('RGB'),  # 265×725
+    'members':        Image.open(f'{SRC}/04.png').convert('RGB'),  # 1067×553
+    'workouts':       Image.open(f'{SRC}/05.png').convert('RGB'),  # 1067×642
+    'progress':       Image.open(f'{SRC}/06.png').convert('RGB'),  # 1050×751
+    'phone_fights':   Image.open(f'{SRC}/phone-fight-dates-3x.png').convert('RGB'),  # 1170×2532
+    'phone_brief':    Image.open(f'{SRC}/phone-morning-brief-3x.png').convert('RGB'),# 1170×2532
 }
 
 # Fonts
@@ -125,58 +127,101 @@ def make_gumroad_cover():
     img = Image.new('RGB', (W, H), BG)
     d   = ImageDraw.Draw(img)
 
-    # Subtle grid overlay
-    for x in range(0, W, 60):
-        d.line([(x, 0), (x, H)], fill=(20, 26, 36), width=1)
-    for y in range(0, H, 60):
-        d.line([(0, y), (W, y)], fill=(20, 26, 36), width=1)
+    # Subtle grid
+    for x in range(0, W, 56): d.line([(x,0),(x,H)], fill=(18,24,34), width=1)
+    for y in range(0, H, 56): d.line([(0,y),(W,y)], fill=(18,24,34), width=1)
 
-    # Accent glow blobs
+    # Glow blobs: cyan top-left, purple bottom-right
     glow = Image.new('RGB', (W, H), BG)
     gd = ImageDraw.Draw(glow)
-    gd.ellipse([(-100, -100), (500, 500)], fill=(0, 40, 55))
-    gd.ellipse([(750, 200), (1400, 750)], fill=(20, 0, 40))
-    img = Image.blend(img, glow, 0.5)
+    gd.ellipse([(-160,-160),(520,520)], fill=(0,36,50))
+    gd.ellipse([(700,280),(1500,900)], fill=(18,0,38))
+    img = Image.blend(img, glow, 0.55)
     d = ImageDraw.Draw(img)
 
-    # ── Left text block ────────────────────────────────────────
-    tx = 60
-    # Kicker
-    d.text((tx, 80), '⚡  COMBAT SPORTS · TRAINING INTELLIGENCE', font=font(MONO, 12),
-           fill=ACCENT)
-    # Logo
-    d.text((tx, 118), 'StrikePanel™', font=font(BOLD, 56), fill=WHITE)
-    d.text((tx, 184), 'TRAINING INTELLIGENCE', font=font(MONO, 13), fill=MUTED)
+    # ── LEFT COLUMN: branding + headline + pricing  (x=52..480) ──
+    tx = 52
+
+    # SP logo mark (simple circle cross)
+    lx, ly, lr = tx+14, 52, 14
+    d.ellipse([(lx-lr, ly-lr),(lx+lr, ly+lr)], outline=ACCENT, width=2)
+    d.ellipse([(lx-5, ly-5),(lx+5, ly+5)], fill=ACCENT)
+    for pt in [((lx,ly-lr),(lx,ly-6)),((lx,ly+6),(lx,ly+lr)),
+               ((lx-lr,ly),(lx-6,ly)),((lx+6,ly),(lx+lr,ly))]:
+        d.line(pt, fill=ACCENT, width=2)
+
+    d.text((tx+36, 40), 'STRIKEPANEL™', font=font(MONO, 11), fill=ACCENT)
+    d.text((tx+36, 56), 'TRAINING INTELLIGENCE', font=font(MONO, 9), fill=MUTED)
+
+    # Main headline
+    d.text((tx, 96),  'KNOW WHO', font=font(BOLD, 42), fill=WHITE)
+    d.text((tx, 136), 'TO PUSH.', font=font(BOLD, 42), fill=ACCENT)
+    d.text((tx, 184), 'KNOW WHO', font=font(BOLD, 42), fill=WHITE)
+    d.text((tx, 224), 'TO PROTECT.', font=font(BOLD, 42), fill=RED)
 
     # Divider
-    d.rectangle([(tx, 210), (tx + 260, 212)], fill=ACCENT)
+    d.rectangle([(tx, 280),(tx+200, 282)], fill=ACCENT)
 
-    # Headline
-    for i, (line, clr) in enumerate([
-        ('KNOW WHO', WHITE),
-        ('TO PUSH.', ACCENT),
-        ('KNOW WHO', WHITE),
-        ('TO PROTECT.', RED),
-    ]):
-        d.text((tx, 228 + i * 68), line, font=font(BOLD, 58), fill=clr)
+    # Feature list
+    features = [
+        'Morning readiness brief — every athlete',
+        'Fight countdown + auto weight-cut plans',
+        'AI workout generator (free Gemini key)',
+        'Athlete self check-in — any phone',
+    ]
+    fy0 = 292
+    for i, text in enumerate(features):
+        d.text((tx,    fy0 + i*24), '✓', font=font(BOLD, 12), fill=GREEN)
+        d.text((tx+20, fy0 + i*24), text, font=font(REG,  12), fill=MUTED)
 
-    # Sub
-    d.text((tx, 510), 'Daily readiness briefs. Fight camp planning.', font=font(REG, 17), fill=MUTED)
-    d.text((tx, 534), 'Round timer. AI workouts. One HTML file.', font=font(REG, 17), fill=MUTED)
-
-    # Price badge
-    badge_x, badge_y = tx, 568
-    d.rounded_rectangle([(badge_x, badge_y), (badge_x+120, badge_y+34)],
+    # Pricing block
+    py = 400
+    d.rounded_rectangle([(tx, py),(tx+314, py+122)],
+                        radius=10, fill=(12,18,28), outline=(0,80,95), width=1)
+    d.rectangle([(tx+1, py+1),(tx+313, py+3)], fill=ACCENT)
+    # Row 1: was $149 → now $99
+    d.text((tx+16, py+12), 'WAS $149', font=font(REG, 11), fill=(72,82,98))
+    d.line([(tx+16+32, py+19),(tx+16+84, py+19)], fill=(65,75,92), width=1)
+    # Big price + label side by side
+    d.text((tx+16, py+28), '$99', font=font(BOLD, 44), fill=ACCENT)
+    d.text((tx+106, py+30), 'LAUNCH', font=font(BOLD, 14), fill=WHITE)
+    d.text((tx+106, py+46), 'PRICE', font=font(BOLD, 14), fill=WHITE)
+    d.text((tx+106, py+66), 'One-time · No subscription', font=font(REG, 10), fill=MUTED)
+    # CTA pill
+    d.rounded_rectangle([(tx+12, py+92),(tx+302, py+116)],
                         radius=6, fill=ACCENT)
-    d.text((badge_x+12, badge_y+7), '$99  LAUNCH PRICE', font=font(BOLD, 14), fill=BG)
+    d.text((tx+40, py+97), 'GET FULL ACCESS NOW  →', font=font(BOLD, 13), fill=BG)
 
-    # ── Right: laptop mockup ───────────────────────────────────
-    frame = laptop_frame(S['morning_brief'], frame_w=620)
-    fw, fh = frame.size
-    fx = W - fw - 20
-    fy = (H - fh) // 2 + 10
-    img.paste(frame, (fx, fy), frame)
+    # ── CENTER: large laptop with dashboard ───────────────────
+    lap = laptop_frame(S['dashboard'], frame_w=600)
+    lw, lh = lap.size
+    lx2 = 340
+    ly2 = (H - lh) // 2 - 8
+    img.paste(lap, (lx2, ly2), lap)
 
+    # Subtle glow under laptop
+    gl = Image.new('RGB', (lw, 24), BG)
+    gl_d = ImageDraw.Draw(gl)
+    gl_d.ellipse([(lw//4, -8),(3*lw//4, 24)], fill=(0,55,70))
+    gl = gl.filter(ImageFilter.GaussianBlur(14))
+    img.paste(gl, (lx2, ly2+lh-6))
+
+    # ── RIGHT: phone frame with fight countdown (cropped top) ──
+    ph_src = S['phone_fights']
+    ph_crop = ph_src.crop((0, 0, ph_src.width, 880))  # top 880px = fight info
+    ph_frame = phone_frame(ph_crop, frame_w=152)
+    pw, phh = ph_frame.size
+    px2 = W - pw - 22
+    py2 = (H - phh) // 2 + 8
+    img.paste(ph_frame, (px2, py2), ph_frame)
+
+    # Label above phone
+    label = 'FIGHT COUNTDOWN'
+    label_x = px2 + (pw - len(label)*7) // 2
+    d.text((label_x, py2 - 22), label, font=font(MONO, 8), fill=ACCENT)
+
+    # Sharpen the whole image slightly
+    img = img.filter(ImageFilter.UnsharpMask(radius=0.5, percent=120, threshold=2))
     save(img, 'gumroad-cover-1200x630.png')
 
 
