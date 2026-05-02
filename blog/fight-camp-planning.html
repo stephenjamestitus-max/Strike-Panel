@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>How to Structure a Fight Camp: Base, Build, Peak and Fight Week — StrikePanel</title>
+<meta name="description" content="A complete framework for structuring a 10–12 week fight camp — from base conditioning through peaking, taper, and fight week. Practical periodization for combat sports coaches."/>
+<meta property="og:title" content="How to Structure a Fight Camp: Base, Build, Peak and Fight Week"/>
+<meta property="og:description" content="The four-phase fight camp framework used by professional combat sports coaches — base, build, peak, fight week. Know what to do and when."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://strikepanel.vercel.app/blog/fight-camp-planning"/>
+<meta property="og:image" content="https://strikepanel.vercel.app/og.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://strikepanel.vercel.app/blog/fight-camp-planning"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='45' cy='45' r='43' fill='%230b0d14' stroke='%2300D4F0' stroke-width='1.5'/%3E%3Cline x1='45' y1='2' x2='45' y2='26' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='45' y1='64' x2='45' y2='88' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='26' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='64' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='11' fill='%2300D4F0'/%3E%3C/svg%3E"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080b14;--bg2:#0c1020;--surface:#101420;--card:#161c2c;--card2:#1a2030;
+  --accent:#00D4F0;--green:#10b981;--red:#ef4444;--amber:#f59e0b;--purple:#8b5cf6;
+  --text:#eef0f8;--muted:#7a85a0;--muted2:#3d4560;
+  --fh:'Bebas Neue',sans-serif;--fc:'Barlow Condensed',sans-serif;
+  --fb:'Barlow',sans-serif;--fm:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:16px;line-height:1.75;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 80% 50% at 10% 0%,rgba(139,92,246,0.04) 0%,transparent 55%),
+             radial-gradient(ellipse 60% 40% at 90% 100%,rgba(0,212,240,0.03) 0%,transparent 55%)}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(0,212,240,0.2)}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--muted2);border-radius:99px}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(8,11,20,0.92);backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.06);padding:0 clamp(16px,4vw,48px);
+  display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{width:28px;height:28px;filter:drop-shadow(0 0 6px rgba(0,212,240,0.45))}
+.nav-name{font-family:var(--fh);font-size:18px;letter-spacing:2px}
+.nav-name span{color:var(--accent)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-link{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);padding:8px 14px;border-radius:30px;border:1px solid rgba(255,255,255,0.08);transition:all .2s}
+.nav-link:hover{color:var(--accent);border-color:rgba(0,212,240,0.3)}
+.nav-cta{background:linear-gradient(135deg,var(--accent),#00a8c4);color:#050810;
+  font-family:var(--fc);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  padding:9px 20px;border-radius:30px;display:inline-flex;align-items:center;gap:6px;
+  box-shadow:0 0 18px rgba(0,212,240,0.3);transition:all .2s}
+.nav-cta:hover{box-shadow:0 0 30px rgba(0,212,240,0.55);transform:translateY(-1px)}
+@media(max-width:540px){.nav-link{display:none}}
+
+.article-wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:64px clamp(16px,4vw,48px) 80px}
+.article-kicker{display:inline-flex;align-items:center;gap:8px;font-family:var(--fc);font-size:9px;
+  font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--purple);padding:5px 14px;border-radius:20px;
+  background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.2);margin-bottom:24px}
+.article-title{font-family:var(--fh);font-size:clamp(36px,6vw,72px);letter-spacing:2px;
+  line-height:0.95;margin-bottom:24px}
+.article-title span{color:var(--accent)}
+.article-meta{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:36px;
+  padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.meta-item{font-family:var(--fm);font-size:11px;color:var(--muted2);display:flex;align-items:center;gap:6px}
+.meta-dot{width:3px;height:3px;border-radius:50%;background:var(--muted2)}
+.article-lead{font-size:clamp(17px,2vw,20px);color:var(--muted);line-height:1.7;
+  margin-bottom:40px;padding-left:20px;border-left:3px solid var(--purple)}
+
+/* ── PHASE TIMELINE ── */
+.phase-timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:40px 0;
+  border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.06)}
+@media(max-width:600px){.phase-timeline{grid-template-columns:1fr 1fr}}
+.phase-block{padding:24px 20px;position:relative}
+.phase-block::after{content:'';position:absolute;top:0;right:0;width:1px;height:100%;
+  background:rgba(255,255,255,0.05)}
+.phase-block:last-child::after{display:none}
+.phase-block.base{background:linear-gradient(160deg,rgba(16,185,129,0.06),rgba(16,185,129,0.02))}
+.phase-block.build{background:linear-gradient(160deg,rgba(0,212,240,0.06),rgba(0,212,240,0.02))}
+.phase-block.peak{background:linear-gradient(160deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02))}
+.phase-block.fight{background:linear-gradient(160deg,rgba(139,92,246,0.08),rgba(139,92,246,0.03))}
+.phase-weeks{font-family:var(--fm);font-size:9px;color:var(--muted2);margin-bottom:8px}
+.phase-name{font-family:var(--fh);font-size:22px;letter-spacing:2px;margin-bottom:6px}
+.phase-block.base .phase-name{color:var(--green)}
+.phase-block.build .phase-name{color:var(--accent)}
+.phase-block.peak .phase-name{color:var(--amber)}
+.phase-block.fight .phase-name{color:#a78bfa}
+.phase-focus{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1px;color:var(--muted2)}
+
+.phase-detail{background:var(--card);border-radius:16px;padding:32px;margin:36px 0;
+  border-left:4px solid var(--accent)}
+.phase-detail.base{border-left-color:var(--green)}
+.phase-detail.build{border-left-color:var(--accent)}
+.phase-detail.peak{border-left-color:var(--amber)}
+.phase-detail.fight{border-left-color:#a78bfa}
+.detail-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+.detail-title{font-family:var(--fh);font-size:30px;letter-spacing:2px}
+.detail-badge{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:5px 14px;border-radius:20px}
+.phase-detail.base .detail-badge{color:var(--green);background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2)}
+.phase-detail.build .detail-badge{color:var(--accent);background:rgba(0,212,240,0.08);border:1px solid rgba(0,212,240,0.2)}
+.phase-detail.peak .detail-badge{color:var(--amber);background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2)}
+.phase-detail.fight .detail-badge{color:#a78bfa;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.2)}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+@media(max-width:480px){.detail-grid{grid-template-columns:1fr}}
+.detail-item .detail-label{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted2);margin-bottom:4px}
+.detail-item .detail-val{font-size:14px;color:rgba(238,240,248,0.82);line-height:1.6}
+
+.article-body h2{font-family:var(--fh);font-size:clamp(26px,3.5vw,38px);letter-spacing:2px;
+  margin:48px 0 16px;color:var(--text)}
+.article-body h3{font-family:var(--fc);font-size:18px;font-weight:700;letter-spacing:1px;
+  margin:32px 0 12px;color:var(--accent)}
+.article-body p{margin-bottom:20px;color:rgba(238,240,248,0.85)}
+.article-body ul,.article-body ol{margin:0 0 20px 24px;color:rgba(238,240,248,0.85)}
+.article-body li{margin-bottom:8px;line-height:1.7}
+.article-body strong{color:var(--text);font-weight:600}
+
+.callout{background:rgba(0,212,240,0.05);border:1px solid rgba(0,212,240,0.18);border-radius:12px;
+  padding:20px 24px;margin:28px 0}
+.callout-label{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:8px}
+.callout p{margin:0;font-size:14px;color:var(--muted);line-height:1.7}
+
+.week-table{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:12px;
+  overflow:hidden;margin:28px 0}
+.week-table table{width:100%;border-collapse:collapse;font-size:13px}
+.week-table th{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted2);padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.06);text-align:left;
+  background:rgba(255,255,255,0.02)}
+.week-table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.03);
+  color:rgba(238,240,248,0.8);vertical-align:top}
+.week-table tr:last-child td{border-bottom:none}
+.week-table tr:hover td{background:rgba(255,255,255,0.02)}
+.tag{font-family:var(--fc);font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:2px 8px;border-radius:10px;display:inline-block}
+.tag.high{color:var(--red);background:rgba(239,68,68,0.1)}
+.tag.mod{color:var(--amber);background:rgba(245,158,11,0.1)}
+.tag.low{color:var(--green);background:rgba(16,185,129,0.1)}
+
+.article-cta{background:linear-gradient(135deg,rgba(139,92,246,0.06),rgba(0,212,240,0.04));
+  border:1px solid rgba(139,92,246,0.12);border-radius:20px;padding:40px;
+  text-align:center;margin:56px 0 0}
+.article-cta h3{font-family:var(--fh);font-size:clamp(28px,4vw,44px);letter-spacing:2px;margin-bottom:12px}
+.article-cta h3 span{color:var(--accent)}
+.article-cta p{font-size:14px;color:var(--muted);margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#00a8c4);color:#050810;
+  font-family:var(--fc);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  padding:13px 28px;border-radius:30px;display:inline-flex;align-items:center;gap:8px;
+  box-shadow:0 0 24px rgba(0,212,240,0.35);transition:all .2s;text-decoration:none}
+.btn-primary:hover{box-shadow:0 0 40px rgba(0,212,240,0.6);transform:translateY(-2px)}
+.btn-ghost{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:12px 24px;border-radius:30px;border:1px solid rgba(255,255,255,0.1);
+  color:var(--muted);transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn-ghost:hover{border-color:rgba(0,212,240,0.3);color:var(--accent)}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+.related{max-width:760px;margin:0 auto;padding:48px clamp(16px,4vw,48px) 64px}
+.related-label{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--muted2);margin-bottom:24px;display:flex;align-items:center;gap:8px}
+.related-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.06)}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:640px){.related-grid{grid-template-columns:1fr}}
+.related-card{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:12px;
+  padding:20px;transition:all .2s}
+.related-card:hover{border-color:rgba(0,212,240,0.2);transform:translateY(-3px)}
+.related-cat{font-family:var(--fc);font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:8px}
+.related-title{font-family:var(--fc);font-size:14px;font-weight:700;letter-spacing:0.5px;line-height:1.3;
+  margin-bottom:8px;color:var(--text)}
+.related-card:hover .related-title{color:var(--accent)}
+.related-meta{font-family:var(--fm);font-size:10px;color:var(--muted2)}
+
+.footer{position:relative;z-index:1;padding:32px clamp(16px,4vw,48px);
+  border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-brand{font-family:var(--fh);font-size:15px;letter-spacing:2px}
+.footer-brand span{color:var(--accent)}
+.footer-links{display:flex;gap:16px;flex-wrap:wrap}
+.footer-links a{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted2);transition:color .2s}
+.footer-links a:hover{color:var(--accent)}
+.footer-copy{font-size:11px;color:var(--muted2);width:100%;text-align:center;margin-top:4px}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav-brand">
+    <svg class="nav-logo" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="45" cy="45" r="43" fill="#0b0d14" stroke="#00D4F0" stroke-width="1.5"/>
+      <line x1="45" y1="2" x2="45" y2="26" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="45" y1="64" x2="45" y2="88" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="2" y1="45" x2="26" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="64" y1="45" x2="88" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="45" cy="45" r="11" fill="#00D4F0"/>
+    </svg>
+    <span class="nav-name">STRIKE<span>PANEL</span></span>
+  </a>
+  <div class="nav-right">
+    <a href="/blog" class="nav-link">← Blog</a>
+    <a href="/landing" class="nav-link">Home</a>
+    <a href="/demo" class="nav-link">Demo</a>
+    <a href="https://strikepanel.gumroad.com/l/strikepanel" class="nav-cta">Get Access — $99</a>
+  </div>
+</nav>
+
+<article class="article-wrap">
+
+  <div class="article-kicker">Fight Camp · 9 min read</div>
+
+  <h1 class="article-title">HOW TO STRUCTURE<br>A <span>FIGHT CAMP</span></h1>
+
+  <div class="article-meta">
+    <span class="meta-item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      May 2, 2026
+    </span>
+    <span class="meta-dot"></span>
+    <span class="meta-item">9 min read</span>
+    <span class="meta-dot"></span>
+    <span class="meta-item">Fight Camp</span>
+  </div>
+
+  <p class="article-lead">A fight camp without a periodization structure is just a collection of hard sessions. The difference between a fighter who peaks on fight night and one who arrives flat, injured, or mentally exhausted is almost always the structure — or lack of it — in the weeks before.</p>
+
+  <div class="article-body">
+
+    <p>Periodization is the science of organizing training stress over time to produce peak performance at a specific moment. Every Olympic program, every professional sports team, every elite individual athlete coach uses it. Most combat sports gyms do not — which is why so many fighters arrive at their biggest fights depleted instead of peaked.</p>
+
+    <p>A fight camp is, by definition, a periodized training block. It has a defined end point (the fight), a defined duration (usually 8–12 weeks), and a defined objective (peak performance on fight night). The question is whether you're structuring it deliberately or just training hard and hoping for the best.</p>
+
+    <div class="phase-timeline">
+      <div class="phase-block base">
+        <div class="phase-weeks">Weeks 1–3</div>
+        <div class="phase-name">BASE</div>
+        <div class="phase-focus">Foundation</div>
+      </div>
+      <div class="phase-block build">
+        <div class="phase-weeks">Weeks 4–7</div>
+        <div class="phase-name">BUILD</div>
+        <div class="phase-focus">Intensity</div>
+      </div>
+      <div class="phase-block peak">
+        <div class="phase-weeks">Weeks 8–10</div>
+        <div class="phase-name">PEAK</div>
+        <div class="phase-focus">Specificity</div>
+      </div>
+      <div class="phase-block fight">
+        <div class="phase-weeks">Week 11</div>
+        <div class="phase-name">FIGHT</div>
+        <div class="phase-focus">Performance</div>
+      </div>
+    </div>
+
+    <h2>PHASE 1: BASE (WEEKS 1–3)</h2>
+
+    <div class="phase-detail base">
+      <div class="detail-header">
+        <div class="detail-title">BASE PHASE</div>
+        <div class="detail-badge">Weeks 1–3 · Foundation</div>
+      </div>
+      <p style="color:rgba(238,240,248,0.82);font-size:14px;margin-bottom:16px">Build the engine before you push the throttle. Aerobic base, technical refinement, and athlete intake — no high-intensity work yet.</p>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <div class="detail-label">Training Volume</div>
+          <div class="detail-val">High — 2x daily sessions possible. Volume over intensity.</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Training Intensity</div>
+          <div class="detail-val">Low–moderate. Zone 2 cardio. Technical drilling at 60%.</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Sparring</div>
+          <div class="detail-val">Light technical only. No hard rounds before Week 4.</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Primary Goal</div>
+          <div class="detail-val">Build aerobic capacity, movement quality, and tissue resilience.</div>
+        </div>
+      </div>
+    </div>
+
+    <p>The base phase is the most skipped phase in combat sports camp preparation. Coaches and fighters alike are eager to get into the "real work" — hard sparring, intensive pad rounds, competition-level intensity. Skipping the base phase doesn't accelerate development. It compresses the window before overtraining starts.</p>
+
+    <p>Aerobic base work in weeks 1–3 does something specific: it increases the ceiling for high-intensity work in weeks 4–7. An athlete with a well-developed aerobic system recovers faster between rounds, within sessions, and between training days. They can absorb more hard work because they process the metabolic byproducts of that work faster.</p>
+
+    <p>Technical drilling at 60–70% effort in the base phase also builds movement patterns without the fatigue-masking that happens at high intensity. Technique is more transferable when practiced in a non-fatigued state — it's encoded more cleanly and degrades less under fight-night pressure.</p>
+
+    <h3>Base Phase Daily Structure</h3>
+    <ul>
+      <li>Morning: 45–60 min aerobic conditioning (running, cycling, skipping) at Zone 2</li>
+      <li>Afternoon: 90–120 min technical session — shadowboxing, drilling, bag work at moderate pace</li>
+      <li>Active recovery: mobility, foam rolling, cold contrast therapy</li>
+      <li>No live sparring — technical only</li>
+    </ul>
+
+    <h2>PHASE 2: BUILD (WEEKS 4–7)</h2>
+
+    <div class="phase-detail build">
+      <div class="detail-header">
+        <div class="detail-title">BUILD PHASE</div>
+        <div class="detail-badge">Weeks 4–7 · Intensity</div>
+      </div>
+      <p style="color:rgba(238,240,248,0.82);font-size:14px;margin-bottom:16px">The hardest phase. Maximum training load, competition-level sparring, fight-specific conditioning. This is where the work gets done — and where overtraining risk peaks.</p>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <div class="detail-label">Training Volume</div>
+          <div class="detail-val">High–very high. Peak volume at weeks 5–6.</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Training Intensity</div>
+          <div class="detail-val">High. Competition-level sparring. High-intensity intervals.</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Sparring</div>
+          <div class="detail-val">Full competitive rounds 2–3x per week. Controlled hard work.</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Primary Goal</div>
+          <div class="detail-val">Build fight-specific fitness. Test and pressure-test gameplan.</div>
+        </div>
+      </div>
+    </div>
+
+    <p>The build phase is where most coaches live — it's the hard work that produces fighters. It's also the phase that breaks them if it runs too long. Four weeks is approximately the maximum sustainable window for this level of training stress before adaptive capacity is exceeded. Extending the build phase doesn't make fighters sharper — it makes them tired.</p>
+
+    <p>The key structural principle: <strong>hard days need adjacent easy days.</strong> For every high-intensity sparring session, the preceding and following sessions should be low-to-moderate intensity. Most combat sports gyms run consecutive hard days because of scheduling constraints. This is the single biggest structural error in amateur fight camp design.</p>
+
+    <div class="callout">
+      <div class="callout-label">Load Management Principle</div>
+      <p>The Norwegian national team popularized "High-Low" periodization — alternating high and low intensity days rather than medium intensity every day. Applied to fight camp: one hard sparring day, one technical day, one hard conditioning day, one recovery day. The pattern looks underpowered on paper. The results are not.</p>
+    </div>
+
+    <h3>Managing the Build Phase Readiness Scores</h3>
+
+    <p>Athlete readiness typically trends downward through the build phase. This is expected and intentional — you are accumulating training stress faster than the body can dissipate it. What you're monitoring is the depth and rate of that decline:</p>
+
+    <ul>
+      <li><strong>Green zone athletes (75+):</strong> Can handle full training prescription</li>
+      <li><strong>Amber zone athletes (55–74):</strong> Reduce sparring intensity by one level. Full technical work.</li>
+      <li><strong>Red zone athletes (below 55):</strong> No sparring. Technical and movement work only. Investigate cause.</li>
+    </ul>
+
+    <p>A squad where multiple athletes are consistently in the red zone during the build phase is a squad being overloaded. Adjust load structure, not your athletes' character.</p>
+
+    <h2>PHASE 3: PEAK (WEEKS 8–10)</h2>
+
+    <div class="phase-detail peak">
+      <div class="detail-header">
+        <div class="detail-title">PEAK PHASE</div>
+        <div class="detail-badge">Weeks 8–10 · Specificity</div>
+      </div>
+      <p style="color:rgba(238,240,248,0.82);font-size:14px;margin-bottom:16px">Volume drops sharply. Intensity remains high but becomes highly specific to the fight. The body begins to recover from the build phase while sharpening fight-specific output.</p>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <div class="detail-label">Training Volume</div>
+          <div class="detail-val">Moderate — 30–40% reduction from peak build volume.</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Training Intensity</div>
+          <div class="detail-val">High — but shorter, more targeted. Quality over quantity.</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Sparring</div>
+          <div class="detail-val">1–2x per week. Fight-specific scenarios. Reduce contact by week 10.</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Primary Goal</div>
+          <div class="detail-val">Convert accumulated fitness into fight-night sharpness. Let fatigue dissipate.</div>
+        </div>
+      </div>
+    </div>
+
+    <p>The peak phase is where readiness scores should begin to rise. If they're still trending down, the build phase ran too hard for too long. If they don't rise in the peak phase, fight-night performance will be compromised.</p>
+
+    <p>The mechanism is supercompensation — the body's adaptive response to training stress. When load reduces after a sustained period of overload, the body adapts to a level above the pre-loading baseline. This is why a taper produces a performance peak rather than a performance loss. But supercompensation requires the load reduction to happen in time. Two weeks is minimum. Three weeks is ideal.</p>
+
+    <div class="week-table">
+      <table>
+        <thead>
+          <tr><th>Day</th><th>Session</th><th>Intensity</th><th>Focus</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Monday</td><td>Technical + Light Pads</td><td><span class="tag mod">Mod</span></td><td>Gameplan execution</td></tr>
+          <tr><td>Tuesday</td><td>Conditioning</td><td><span class="tag mod">Mod</span></td><td>Aerobic maintenance</td></tr>
+          <tr><td>Wednesday</td><td>Sparring</td><td><span class="tag high">High</span></td><td>Fight-specific rounds</td></tr>
+          <tr><td>Thursday</td><td>Recovery / Mobility</td><td><span class="tag low">Low</span></td><td>Tissue recovery</td></tr>
+          <tr><td>Friday</td><td>Technical Drilling</td><td><span class="tag low">Low</span></td><td>Movement sharpness</td></tr>
+          <tr><td>Saturday</td><td>Light Pads / Shadow</td><td><span class="tag low">Low</span></td><td>Feel and timing</td></tr>
+          <tr><td>Sunday</td><td>Rest</td><td>—</td><td>Full recovery</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>PHASE 4: FIGHT WEEK</h2>
+
+    <div class="phase-detail fight">
+      <div class="detail-header">
+        <div class="detail-title">FIGHT WEEK</div>
+        <div class="detail-badge">Week 11 · Execution</div>
+      </div>
+      <p style="color:rgba(238,240,248,0.82);font-size:14px;margin-bottom:16px">Nothing new. Nothing hard. Preserve fitness, manage weight, protect the athlete physically and psychologically. Everything you've built over 10 weeks is about to pay off — don't spend it on last-minute training.</p>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <div class="detail-label">Training Volume</div>
+          <div class="detail-val">Minimal. Movement maintenance only.</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Training Intensity</div>
+          <div class="detail-val">Low. No high-intensity work after Monday.</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Sparring</div>
+          <div class="detail-val">None. Last sparring is end of week 10 at the latest.</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Primary Goal</div>
+          <div class="detail-val">Arrive at weigh-in healthy, sharp, and mentally ready.</div>
+        </div>
+      </div>
+    </div>
+
+    <p>Fight week is not a training week. It is a performance preservation and psychological preparation week. Every hard session a coach adds in fight week is a session that costs recovery resources the athlete needs for competition. The work is done. The job now is to deliver it intact.</p>
+
+    <p>Fight week structure: short, movement-based sessions on Monday and Tuesday. Technical shadow and light pad work only — no resistance, no conditioning. Wednesday is active recovery. Thursday is weigh-in preparation. After weigh-in: rehydration protocol begins. Friday is minimal movement — stretch, walk, stay loose. Saturday is the fight.</p>
+
+    <h2>THE PLANNING MISTAKE MOST COACHES MAKE</h2>
+
+    <p>The most common fight camp planning error is not failing to plan the phases — it's failing to plan the recovery weeks within each phase. Every 3–4 weeks of progressive loading should include one deload microcycle: 40–50% volume reduction, maintained intensity, full skill work.</p>
+
+    <p>This is the difference between a camp that builds and a camp that grinds. Building requires strategic recovery — not as a concession to weakness, but as a physiological requirement for adaptation. The hard weeks make the fighter. The recovery weeks convert that stimulus into performance.</p>
+
+    <h2>USING DATA TO VALIDATE YOUR PLAN</h2>
+
+    <p>A structured fight camp plan is a hypothesis. The athlete's readiness data is the test. If your plan has the peak phase running at moderate intensity with readiness scores rising to green, but the actual data shows athletes still in amber heading into week 9, your plan needs to adjust — not be defended.</p>
+
+    <p>This is the entire point of tracking: not to generate paperwork, but to give you real-time feedback on whether the plan is working. A coach with daily readiness data can see a recovery deficit developing in week 6 and adjust week 7 before the athlete hits the red zone. A coach without it only discovers the problem when the athlete breaks.</p>
+
+    <p>Map your fight camp phases in advance. Track athlete readiness daily. Compare the plan against the data weekly. Adjust. That cycle — plan, monitor, adjust — is what separates systematic coaching from guesswork.</p>
+
+  </div>
+
+  <div class="article-cta">
+    <h3>PLAN AND TRACK YOUR<br><span>ENTIRE FIGHT CAMP</span></h3>
+    <p>Fight calendar, daily readiness, weight tracking and squad management — all in one coaching web app.</p>
+    <div class="cta-btns">
+      <a href="https://strikepanel.gumroad.com/l/strikepanel" class="btn-primary">Get Instant Access — $99</a>
+      <a href="/demo" class="btn-ghost">See the Demo →</a>
+    </div>
+  </div>
+
+</article>
+
+<section class="related">
+  <div class="related-label">More Articles</div>
+  <div class="related-grid">
+    <a href="/blog/morning-brief-method" class="related-card">
+      <div class="related-cat">Readiness</div>
+      <div class="related-title">The Morning Brief Method: How Elite Coaches Track Athlete Readiness</div>
+      <div class="related-meta">8 min read · May 2026</div>
+    </a>
+    <a href="/blog/overtraining-signs" class="related-card">
+      <div class="related-cat">Recovery</div>
+      <div class="related-title">5 Signs Your Fighter Is Overtrained (Before It's Too Late)</div>
+      <div class="related-meta">7 min read · May 2026</div>
+    </a>
+    <a href="/blog/weight-cut-guide" class="related-card">
+      <div class="related-cat">Weight Management</div>
+      <div class="related-title">The Complete Fight Camp Weight Cut Guide: Week by Week</div>
+      <div class="related-meta">10 min read · May 2026</div>
+    </a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-brand">STRIKE<span>PANEL</span>™</div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/blog">Blog</a>
+    <a href="/demo">Demo</a>
+    <a href="https://strikepanel.gumroad.com/l/strikepanel">Get Access</a>
+  </div>
+  <div class="footer-copy">© 2026 StrikePanel™. Training Intelligence for Combat Sports.</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>StrikePanel Blog — Training Intelligence for Combat Sports Coaches</title>
+<meta name="description" content="Expert articles on fight camp planning, athlete readiness tracking, weight cut management and combat sports coaching — from the team behind StrikePanel™."/>
+<meta property="og:title" content="StrikePanel Blog — Training Intelligence"/>
+<meta property="og:description" content="Fight camp planning, readiness tracking, weight cuts and coaching intelligence — expert articles for combat sports coaches."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://strikepanel.vercel.app/blog"/>
+<meta property="og:image" content="https://strikepanel.vercel.app/og.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://strikepanel.vercel.app/blog"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='45' cy='45' r='43' fill='%230b0d14' stroke='%2300D4F0' stroke-width='1.5'/%3E%3Cline x1='45' y1='2' x2='45' y2='26' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='45' y1='64' x2='45' y2='88' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='26' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='64' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='11' fill='%2300D4F0'/%3E%3C/svg%3E"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080b14;--bg2:#0c1020;--surface:#101420;--card:#161c2c;--card2:#1a2030;
+  --accent:#00D4F0;--green:#10b981;--red:#ef4444;--amber:#f59e0b;--purple:#8b5cf6;
+  --text:#eef0f8;--muted:#7a85a0;--muted2:#3d4560;
+  --fh:'Bebas Neue',sans-serif;--fc:'Barlow Condensed',sans-serif;
+  --fb:'Barlow',sans-serif;--fm:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:15px;line-height:1.65;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 80% 50% at 10% 0%,rgba(0,212,240,0.055) 0%,transparent 55%),
+             radial-gradient(ellipse 60% 40% at 90% 100%,rgba(139,92,246,0.04) 0%,transparent 55%)}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(0,212,240,0.2)}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--muted2);border-radius:99px}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;background:rgba(8,11,20,0.92);backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.06);padding:0 clamp(16px,4vw,48px);
+  display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{width:28px;height:28px;filter:drop-shadow(0 0 6px rgba(0,212,240,0.45))}
+.nav-name{font-family:var(--fh);font-size:18px;letter-spacing:2px}
+.nav-name span{color:var(--accent)}
+.nav-badge{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  padding:3px 9px;border-radius:20px;background:rgba(0,212,240,0.07);color:var(--accent);border:1px solid rgba(0,212,240,0.18)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-link{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);padding:8px 14px;border-radius:30px;border:1px solid rgba(255,255,255,0.08);transition:all .2s}
+.nav-link:hover{color:var(--accent);border-color:rgba(0,212,240,0.3)}
+.nav-cta{background:linear-gradient(135deg,var(--accent),#00a8c4);color:#050810;
+  font-family:var(--fc);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  padding:9px 20px;border-radius:30px;display:inline-flex;align-items:center;gap:6px;
+  box-shadow:0 0 18px rgba(0,212,240,0.3);transition:all .2s}
+.nav-cta:hover{box-shadow:0 0 30px rgba(0,212,240,0.55);transform:translateY(-1px)}
+@media(max-width:540px){.nav-badge,.nav-link{display:none}}
+
+/* ── BLOG HERO ── */
+.blog-hero{position:relative;z-index:1;padding:80px clamp(16px,5vw,80px) 64px;text-align:center;
+  border-bottom:1px solid rgba(255,255,255,0.05)}
+.blog-hero-kicker{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:20px;display:inline-flex;align-items:center;gap:8px;
+  padding:5px 16px;border-radius:30px;background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.2)}
+.blog-hero h1{font-family:var(--fh);font-size:clamp(48px,8vw,96px);letter-spacing:3px;line-height:0.92;margin-bottom:20px}
+.blog-hero h1 span{color:var(--accent)}
+.blog-hero-sub{font-size:clamp(15px,1.8vw,18px);color:var(--muted);max-width:560px;margin:0 auto 36px;line-height:1.75}
+
+/* ── CATEGORIES ── */
+.cats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:0}
+.cat{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:6px 16px;border-radius:30px;border:1px solid rgba(255,255,255,0.08);
+  background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
+.cat.active,.cat:hover{background:rgba(0,212,240,0.08);border-color:rgba(0,212,240,0.3);color:var(--accent)}
+.cat.red{border-color:rgba(239,68,68,0.25);color:var(--red);background:rgba(239,68,68,0.06)}
+.cat.green{border-color:rgba(16,185,129,0.25);color:var(--green);background:rgba(16,185,129,0.06)}
+.cat.amber{border-color:rgba(245,158,11,0.25);color:var(--amber);background:rgba(245,158,11,0.06)}
+.cat.purple{border-color:rgba(139,92,246,0.25);color:#a78bfa;background:rgba(139,92,246,0.06)}
+
+/* ── FEATURED POST ── */
+.featured-wrap{position:relative;z-index:1;max-width:1200px;margin:64px auto;padding:0 clamp(16px,4vw,48px)}
+.featured-label{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.featured-label::after{content:'';flex:1;height:1px;background:rgba(0,212,240,0.18)}
+.featured-card{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:20px;overflow:hidden;
+  border:1px solid rgba(0,212,240,0.15);background:var(--card);
+  box-shadow:0 0 60px rgba(0,212,240,0.05),0 24px 80px rgba(0,0,0,0.4)}
+@media(max-width:768px){.featured-card{grid-template-columns:1fr}}
+.featured-img{position:relative;min-height:360px;background:linear-gradient(135deg,#0a1428 0%,#0d1e38 40%,#071220 100%);overflow:hidden}
+.featured-img-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.feat-graphic{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px}
+.feat-score-row{display:flex;gap:16px;align-items:flex-end}
+.feat-score{display:flex;flex-direction:column;align-items:center;gap:4px}
+.feat-score-num{font-family:var(--fh);font-size:64px;line-height:1;letter-spacing:2px}
+.feat-score-lbl{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2)}
+.feat-score.green .feat-score-num{color:var(--green);text-shadow:0 0 30px rgba(16,185,129,0.4)}
+.feat-score.cyan .feat-score-num{color:var(--accent);text-shadow:0 0 30px rgba(0,212,240,0.4)}
+.feat-score.red .feat-score-num{color:var(--red);text-shadow:0 0 30px rgba(239,68,68,0.4)}
+.feat-bar-wrap{width:100%;max-width:280px}
+.feat-bar-lbl{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:6px;display:flex;justify-content:space-between}
+.feat-bar{height:5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;margin-bottom:8px}
+.feat-bar-fill{height:100%;border-radius:3px}
+.feat-img-label{position:absolute;bottom:20px;left:20px;font-family:var(--fc);font-size:9px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:var(--accent);
+  padding:4px 12px;border-radius:20px;background:rgba(0,212,240,0.1);border:1px solid rgba(0,212,240,0.2)}
+.featured-body{padding:48px 44px;display:flex;flex-direction:column;justify-content:center}
+@media(max-width:540px){.featured-body{padding:28px 24px}}
+.post-cat{display:inline-flex;font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:16px}
+.post-cat.cyan{color:var(--accent);background:rgba(0,212,240,0.08);border:1px solid rgba(0,212,240,0.2)}
+.post-cat.red{color:var(--red);background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2)}
+.post-cat.green{color:var(--green);background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2)}
+.post-cat.amber{color:var(--amber);background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2)}
+.featured-title{font-family:var(--fh);font-size:clamp(28px,3.5vw,42px);letter-spacing:2px;line-height:1.0;margin-bottom:16px}
+.featured-excerpt{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:28px}
+.post-meta{display:flex;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.post-meta-item{font-family:var(--fm);font-size:11px;color:var(--muted2);display:flex;align-items:center;gap:5px}
+.read-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--fc);font-size:11px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;padding:12px 24px;border-radius:30px;
+  background:linear-gradient(135deg,var(--accent),#00a8c4);color:#050810;
+  box-shadow:0 0 20px rgba(0,212,240,0.3);transition:all .2s}
+.read-btn:hover{box-shadow:0 0 36px rgba(0,212,240,0.55);transform:translateY(-2px)}
+
+/* ── POST GRID ── */
+.posts-wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto 80px;padding:0 clamp(16px,4vw,48px)}
+.posts-label{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--muted2);margin-bottom:28px;display:flex;align-items:center;gap:8px}
+.posts-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.06)}
+.posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:900px){.posts-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.posts-grid{grid-template-columns:1fr}}
+.post-card{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:16px;
+  overflow:hidden;transition:all .25s;display:flex;flex-direction:column}
+.post-card:hover{transform:translateY(-4px);border-color:rgba(0,212,240,0.2);
+  box-shadow:0 16px 50px rgba(0,0,0,0.4),0 0 30px rgba(0,212,240,0.06)}
+.post-thumb{height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.post-thumb-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:24px}
+.post-info{padding:24px;flex:1;display:flex;flex-direction:column}
+.post-title{font-family:var(--fh);font-size:22px;letter-spacing:1.5px;line-height:1.1;margin-bottom:10px;
+  transition:color .2s}
+.post-card:hover .post-title{color:var(--accent)}
+.post-excerpt{font-size:13px;color:var(--muted);line-height:1.7;flex:1;margin-bottom:18px}
+.post-footer{display:flex;align-items:center;justify-content:space-between;padding-top:16px;
+  border-top:1px solid rgba(255,255,255,0.05)}
+.post-date{font-family:var(--fm);font-size:10px;color:var(--muted2)}
+.post-read-more{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:4px;transition:gap .2s}
+.post-card:hover .post-read-more{gap:8px}
+
+/* ── CTA STRIP ── */
+.cta-strip{position:relative;z-index:1;background:linear-gradient(135deg,rgba(0,212,240,0.06),rgba(139,92,246,0.04));
+  border-top:1px solid rgba(0,212,240,0.1);border-bottom:1px solid rgba(0,212,240,0.1);
+  padding:64px clamp(16px,4vw,48px);text-align:center;margin-bottom:0}
+.cta-strip h2{font-family:var(--fh);font-size:clamp(32px,5vw,56px);letter-spacing:3px;margin-bottom:12px}
+.cta-strip h2 span{color:var(--accent)}
+.cta-strip p{font-size:15px;color:var(--muted);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#00a8c4);color:#050810;
+  font-family:var(--fc);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  padding:13px 28px;border-radius:30px;display:inline-flex;align-items:center;gap:8px;
+  box-shadow:0 0 24px rgba(0,212,240,0.35);transition:all .2s}
+.btn-primary:hover{box-shadow:0 0 40px rgba(0,212,240,0.6);transform:translateY(-2px)}
+.btn-ghost{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:12px 24px;border-radius:30px;border:1px solid rgba(255,255,255,0.1);
+  color:var(--muted);transition:all .2s}
+.btn-ghost:hover{border-color:rgba(0,212,240,0.3);color:var(--accent)}
+
+/* ── FOOTER ── */
+.footer{position:relative;z-index:1;padding:40px clamp(16px,4vw,48px);
+  border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-brand{font-family:var(--fh);font-size:16px;letter-spacing:2px}
+.footer-brand span{color:var(--accent)}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted2);transition:color .2s}
+.footer-links a:hover{color:var(--accent)}
+.footer-copy{font-size:11px;color:var(--muted2);width:100%;text-align:center;margin-top:8px}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav-brand">
+    <svg class="nav-logo" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+      <defs><radialGradient id="ng" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="55%" stop-color="#0f1220"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs>
+      <circle cx="45" cy="45" r="43" fill="url(#ng)" stroke="#00D4F0" stroke-width="1.5" stroke-opacity="0.6"/>
+      <circle cx="45" cy="45" r="29" fill="none" stroke="#00D4F0" stroke-width="0.9" stroke-opacity="0.2"/>
+      <line x1="45" y1="2" x2="45" y2="26" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="45" y1="64" x2="45" y2="88" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="2" y1="45" x2="26" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="64" y1="45" x2="88" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="45" cy="45" r="11" fill="#00D4F0"/>
+    </svg>
+    <div class="nav-name">Strike<span>Panel</span>™</div>
+    <span class="nav-badge">Blog</span>
+  </a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/demo" target="_blank" class="nav-link">👁 Live Demo</a>
+    <a href="https://strikepanel.gumroad.com" target="_blank" class="nav-cta">🥊 Get it — $99</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="blog-hero">
+  <div class="blog-hero-kicker">
+    <span style="width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:kdot 2s ease-in-out infinite;display:inline-block"></span>
+    StrikePanel™ · Training Intelligence
+  </div>
+  <h1>THE COACHING<br><span>INTELLIGENCE</span><br>BLOG</h1>
+  <p class="blog-hero-sub">Fight camp planning, athlete readiness, weight cut management and combat sports coaching — written for coaches who take performance seriously.</p>
+  <div class="cats">
+    <span class="cat active">All Posts</span>
+    <span class="cat red">Fight Camp</span>
+    <span class="cat cyan">Readiness</span>
+    <span class="cat amber">Weight Cut</span>
+    <span class="cat green">Recovery</span>
+    <span class="cat purple">Coaching</span>
+  </div>
+</div>
+
+<!-- ── FEATURED POST ── -->
+<div class="featured-wrap">
+  <div class="featured-label">Featured Article</div>
+  <a href="/blog/morning-brief-method" class="featured-card">
+
+    <!-- Visual -->
+    <div class="featured-img">
+      <div class="featured-img-inner">
+        <div class="feat-graphic">
+          <div class="feat-score-row">
+            <div class="feat-score green">
+              <div class="feat-score-num">91</div>
+              <div class="feat-score-lbl">Priya</div>
+            </div>
+            <div class="feat-score cyan">
+              <div class="feat-score-num">74</div>
+              <div class="feat-score-lbl">Jake</div>
+            </div>
+            <div class="feat-score red">
+              <div class="feat-score-num">38</div>
+              <div class="feat-score-lbl">Marcus</div>
+            </div>
+          </div>
+          <div class="feat-bar-wrap">
+            <div class="feat-bar-lbl"><span>Squad Readiness</span><span style="color:var(--accent)">68 avg</span></div>
+            <div class="feat-bar"><div class="feat-bar-fill" style="width:91%;background:linear-gradient(90deg,var(--green),#34d399)"></div></div>
+            <div class="feat-bar"><div class="feat-bar-fill" style="width:74%;background:linear-gradient(90deg,var(--accent),#67e8f9)"></div></div>
+            <div class="feat-bar"><div class="feat-bar-fill" style="width:38%;background:linear-gradient(90deg,var(--red),#f87171)"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="feat-img-label">Morning Brief</div>
+    </div>
+
+    <!-- Body -->
+    <div class="featured-body">
+      <span class="post-cat cyan">Readiness Coaching</span>
+      <div class="featured-title">The Morning Brief Method: How Elite Coaches Track Athlete Readiness Every Day</div>
+      <p class="featured-excerpt">Most coaches run every athlete through the same session every day. The best coaches don't. Here's the system that tells you — in under two minutes — exactly who to push, who to hold back, and who needs a rest day before they get injured.</p>
+      <div class="post-meta">
+        <span class="post-meta-item">📅 May 2025</span>
+        <span class="post-meta-item">⏱ 8 min read</span>
+        <span class="post-meta-item">🥊 Fight Camp</span>
+      </div>
+      <span class="read-btn">Read Article →</span>
+    </div>
+
+  </a>
+</div>
+
+<!-- ── POST GRID ── -->
+<div class="posts-wrap">
+  <div class="posts-label">All Articles</div>
+  <div class="posts-grid">
+
+    <!-- Post 2 -->
+    <a href="/blog/weight-cut-guide" class="post-card">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#1a0a0a,#2a0f0f)">
+        <div class="post-thumb-inner">
+          <div style="text-align:center">
+            <div style="font-family:var(--fh);font-size:72px;color:var(--red);text-shadow:0 0 30px rgba(239,68,68,0.5);line-height:1">21</div>
+            <div style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted2);margin-top:4px">DAYS TO FIGHT</div>
+            <div style="margin-top:12px;font-size:12px;color:var(--red);font-family:var(--fm)">81.5kg → 77kg</div>
+          </div>
+        </div>
+      </div>
+      <div class="post-info">
+        <span class="post-cat amber">Weight Cut</span>
+        <div class="post-title">The Complete Fight Camp Weight Cut Guide: Week by Week</div>
+        <p class="post-excerpt">A dangerous weight cut doesn't announce itself — it creeps up in the final week. Here's how to plan a safe, effective cut from day one of fight camp.</p>
+        <div class="post-footer">
+          <span class="post-date">May 2025 · 10 min</span>
+          <span class="post-read-more">Read →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Post 3 -->
+    <a href="/blog/overtraining-signs" class="post-card">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#0a0f1a,#0f1828)">
+        <div class="post-thumb-inner">
+          <div style="display:flex;flex-direction:column;gap:8px;width:100%">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px">
+              <span style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--red)">🛑 Marcus — REST</span>
+              <span style="font-family:var(--fh);font-size:22px;color:var(--red)">38</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:8px">
+              <span style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--amber)">⚠️ Tyler — LIGHT</span>
+              <span style="font-family:var(--fh);font-size:22px;color:var(--amber)">54</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:8px">
+              <span style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green)">✅ Priya — PUSH</span>
+              <span style="font-family:var(--fh);font-size:22px;color:var(--green)">91</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="post-info">
+        <span class="post-cat red">Recovery</span>
+        <div class="post-title">5 Signs Your Fighter Is Overtrained (Before It's Too Late)</div>
+        <p class="post-excerpt">Overtraining doesn't show up on a training plan. It shows up in a fighter who goes flat on fight night. Here's what to look for — and how to catch it weeks before it matters.</p>
+        <div class="post-footer">
+          <span class="post-date">May 2025 · 7 min</span>
+          <span class="post-read-more">Read →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Post 4 -->
+    <a href="/blog/fight-camp-planning" class="post-card">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#080d1a,#0f1530)">
+        <div class="post-thumb-inner">
+          <div style="display:flex;flex-direction:column;gap:6px;width:100%">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+              <span style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2)">8 WEEKS OUT</span>
+              <span style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green)">BASE CAMP</span>
+            </div>
+            <div style="height:3px;background:rgba(255,255,255,0.04);border-radius:2px;overflow:hidden"><div style="height:100%;width:15%;background:var(--green);border-radius:2px"></div></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
+              <span style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2)">4 WEEKS OUT</span>
+              <span style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber)">BUILD PHASE</span>
+            </div>
+            <div style="height:3px;background:rgba(255,255,255,0.04);border-radius:2px;overflow:hidden"><div style="height:100%;width:50%;background:var(--amber);border-radius:2px"></div></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
+              <span style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2)">1 WEEK OUT</span>
+              <span style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red)">PEAK WEEK</span>
+            </div>
+            <div style="height:3px;background:rgba(255,255,255,0.04);border-radius:2px;overflow:hidden"><div style="height:100%;width:88%;background:var(--red);border-radius:2px"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="post-info">
+        <span class="post-cat cyan">Fight Camp</span>
+        <div class="post-title">How to Structure a Fight Camp: Base, Build, Peak and Fight Week</div>
+        <p class="post-excerpt">The four phases of a fight camp and exactly what your athletes should be doing — and feeling — in each one. A framework every coach can use from day one.</p>
+        <div class="post-footer">
+          <span class="post-date">May 2025 · 9 min</span>
+          <span class="post-read-more">Read →</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- ── CTA ── -->
+<div class="cta-strip">
+  <h2>TRAIN WITH<br><span>INTELLIGENCE.</span></h2>
+  <p>Stop guessing. Start knowing. Every athlete scored. Every session informed. One coaching web app.</p>
+  <div class="cta-btns">
+    <a href="https://strikepanel.gumroad.com" target="_blank" class="btn-primary">🥊 Get StrikePanel — $99</a>
+    <a href="/demo" target="_blank" class="btn-ghost">👁 Try Free Demo</a>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-brand">Strike<span>Panel</span>™</div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/blog">Blog</a>
+    <a href="/demo">Demo</a>
+    <a href="https://strikepanel.gumroad.com" target="_blank">Buy — $99</a>
+  </div>
+  <div class="footer-copy">© 2025 StrikePanel™ · Training Intelligence · No subscription · Instant access</div>
+</footer>
+
+<style>@keyframes kdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}</style>
+</body>
+</html>
