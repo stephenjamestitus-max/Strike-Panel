@@ -5540,9 +5540,12 @@ async function lgVerifyWithGumroad(key) {
       body: `product_permalink=${GUMROAD_PRODUCT}&license_key=${encodeURIComponent(key)}&increment_uses_count=false`
     });
     const data = await res.json();
-    return data.success === true;
+    console.log('[SP License]', data);
+    if (data.success === true) return { ok: true };
+    return { ok: false, msg: data.message || 'Key not recognised by Gumroad.' };
   } catch (e) {
-    return false;
+    console.error('[SP License] Network error:', e);
+    return { ok: false, network: true };
   }
 }
 
@@ -5557,25 +5560,38 @@ async function lgActivate() {
   lgSetMsg('Verifying your key…', null);
 
   const isMaster = lgIsValidKey(key);
-  const isGumroad = isMaster ? false : await lgVerifyWithGumroad(key);
 
-  if (isMaster || isGumroad) {
-    localStorage.setItem('cp_license_key', key.toUpperCase());
-    localStorage.setItem('cp_license_activated', new Date().toISOString());
-    lgSetMsg('✓ Activated! Welcome to StrikePanel™', true);
-    if (btn) { btn.textContent = '✓ Activated!'; btn.disabled = true; }
-    setTimeout(() => {
-      lgUnlock();
-      if (!localStorage.getItem('cp_onboarded')) {
-        setTimeout(() => openModal('onboardModal'), 400);
-      }
-    }, 900);
+  if (isMaster) {
+    lgActivateSuccess(key, btn);
+    return;
+  }
+
+  const result = await lgVerifyWithGumroad(key);
+
+  if (result.ok) {
+    lgActivateSuccess(key, btn);
+  } else if (result.network) {
+    lgSetMsg('Could not reach Gumroad — check your connection and try again.', false);
+    if (btn) { btn.textContent = '🔓 Activate License'; btn.disabled = false; }
   } else {
-    lgSetMsg('Invalid key — check the key in your Gumroad email and try again.', false);
+    lgSetMsg(result.msg || 'Invalid key — check the key in your Gumroad email and try again.', false);
     if (btn) { btn.textContent = '🔓 Activate License'; btn.disabled = false; }
     input?.classList.add('err');
     setTimeout(() => input?.classList.remove('err'), 600);
   }
+}
+
+function lgActivateSuccess(key, btn) {
+  localStorage.setItem('cp_license_key', key.toUpperCase());
+  localStorage.setItem('cp_license_activated', new Date().toISOString());
+  lgSetMsg('✓ Activated! Welcome to StrikePanel™', true);
+  if (btn) { btn.textContent = '✓ Activated!'; btn.disabled = true; }
+  setTimeout(() => {
+    lgUnlock();
+    if (!localStorage.getItem('cp_onboarded')) {
+      setTimeout(() => openModal('onboardModal'), 400);
+    }
+  }, 900);
 }
 
 async function lgCheck() {
