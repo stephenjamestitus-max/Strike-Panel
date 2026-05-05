@@ -260,7 +260,9 @@ a{color:inherit;text-decoration:none}
   color:rgba(200,137,42,0.1);line-height:1;pointer-events:none}
 .feat-icon{width:48px;height:48px;border-radius:12px;margin-bottom:24px;
   background:rgba(200,137,42,0.07);border:1px solid rgba(200,137,42,0.18);
-  display:flex;align-items:center;justify-content:center;font-size:20px}
+  display:flex;align-items:center;justify-content:center}
+.feat-icon svg{color:var(--amber);opacity:0.85;transition:opacity .25s}
+.feat-card:hover .feat-icon svg{opacity:1}
 .feat-title{font-family:var(--fh);font-size:26px;letter-spacing:2px;
   margin-bottom:10px;color:var(--cream)}
 .feat-body{font-size:13px;color:rgba(245,240,232,0.42);line-height:1.82;font-weight:300}
@@ -410,7 +412,88 @@ a{color:inherit;text-decoration:none}
   .blog-callout-inner{padding:32px 28px}
   .sc-content{gap:36px}
   .features-grid{border-radius:12px}
+  .wif-grid{grid-template-columns:1fr!important}
+  .ticker-track{animation-duration:22s}
 }
+
+/* ═══════════════════════════════════════════════
+   TICKER / MARQUEE
+═══════════════════════════════════════════════ */
+.ticker-wrap{overflow:hidden;position:relative;z-index:10;
+  background:rgba(5,3,2,0.95);
+  border-bottom:1px solid rgba(200,137,42,0.1);
+  padding:11px 0}
+.ticker-track{display:flex;gap:0;white-space:nowrap;
+  animation:ticker-scroll 38s linear infinite}
+.ticker-track:hover{animation-play-state:paused}
+.ticker-item{display:inline-flex;align-items:center;gap:28px;
+  padding:0 28px;
+  font-family:var(--fc);font-size:9.5px;font-weight:700;
+  letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(200,137,42,0.38);transition:color .2s}
+.ticker-item.hl{color:rgba(200,137,42,0.75)}
+.ticker-dot{width:4px;height:4px;border-radius:50%;
+  background:rgba(200,137,42,0.25);flex-shrink:0}
+@keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ═══════════════════════════════════════════════
+   DOT GRID TEXTURE
+═══════════════════════════════════════════════ */
+.dot-grid{position:relative}
+.dot-grid::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(circle,rgba(200,137,42,0.07) 1px,transparent 1px);
+  background-size:32px 32px;
+  mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.6) 15%,rgba(0,0,0,0.6) 85%,transparent 100%);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.6) 15%,rgba(0,0,0,0.6) 85%,transparent 100%)}
+.dot-grid>*{position:relative;z-index:1}
+
+/* Stat animated counters */
+.stat-num{cursor:default}
+.stat-num.counting{animation:stat-pop .4s ease}
+@keyframes stat-pop{0%{transform:scale(1)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
+
+/* ═══════════════════════════════════════════════
+   WHO IT'S FOR
+═══════════════════════════════════════════════ */
+.wif{padding:80px clamp(20px,6vw,80px) 0;position:relative;z-index:10}
+.wif-wrap{max-width:1200px;margin:0 auto}
+.wif-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px}
+.wif-card{padding:36px 32px;border-radius:16px;position:relative;overflow:hidden;
+  border:1px solid rgba(200,137,42,0.08);
+  background:linear-gradient(145deg,rgba(18,12,7,0.9),rgba(10,7,4,0.95));
+  transition:border-color .3s,transform .3s;
+  opacity:0;transform:translateY(28px);
+  transition:opacity .65s ease,transform .65s ease,border-color .3s}
+.wif-card.revealed{opacity:1;transform:translateY(0)}
+.wif-card:hover{border-color:rgba(200,137,42,0.22);transform:translateY(-4px)}
+.wif-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(200,137,42,0.5),transparent);
+  opacity:0;transition:opacity .3s}
+.wif-card:hover::before{opacity:1}
+.wif-avatar{width:52px;height:52px;border-radius:50%;margin-bottom:22px;
+  background:rgba(200,137,42,0.08);border:1px solid rgba(200,137,42,0.2);
+  display:flex;align-items:center;justify-content:center}
+.wif-avatar svg{color:var(--amber);opacity:0.8}
+.wif-role{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+.wif-name{font-family:var(--fh);font-size:22px;letter-spacing:2px;
+  color:var(--cream);margin-bottom:12px;line-height:1}
+.wif-desc{font-size:13px;color:rgba(245,240,232,0.4);line-height:1.8;font-weight:300}
+.wif-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+.wif-tag{font-family:var(--fc);font-size:8px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:rgba(200,137,42,0.55);
+  padding:3px 10px;border-radius:20px;
+  background:rgba(200,137,42,0.06);border:1px solid rgba(200,137,42,0.14)}
+
+/* ═══════════════════════════════════════════════
+   FEATURE CARD — TOP ACCENT ALWAYS VISIBLE
+═══════════════════════════════════════════════ */
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(200,137,42,0.15),transparent)}
+.feat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--amber),transparent);
+  opacity:0;transition:opacity .35s}
+.feat-card:hover::after{opacity:1}
 </style>
 </head>
 <body>
@@ -492,8 +575,35 @@ a{color:inherit;text-decoration:none}
   <div class="stat reveal d3"><div class="stat-num">∞</div><div class="stat-lbl">Days of access</div></div>
 </div>
 
+<!-- ══ TICKER ══ -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item hl">Morning Brief Scoring<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Weight Cut Tracking<span class="ticker-dot"></span></span>
+    <span class="ticker-item hl">Fight Camp Management<span class="ticker-dot"></span></span>
+    <span class="ticker-item">AI Session Builder<span class="ticker-dot"></span></span>
+    <span class="ticker-item hl">Athlete Check-in Links<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Works Offline<span class="ticker-dot"></span></span>
+    <span class="ticker-item hl">PWA · No App Store<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Pay Once. Own Forever.<span class="ticker-dot"></span></span>
+    <span class="ticker-item hl">MMA · Boxing · Muay Thai · Wrestling<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Zero Monthly Fees<span class="ticker-dot"></span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item hl">Morning Brief Scoring<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Weight Cut Tracking<span class="ticker-dot"></span></span>
+    <span class="ticker-item hl">Fight Camp Management<span class="ticker-dot"></span></span>
+    <span class="ticker-item">AI Session Builder<span class="ticker-dot"></span></span>
+    <span class="ticker-item hl">Athlete Check-in Links<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Works Offline<span class="ticker-dot"></span></span>
+    <span class="ticker-item hl">PWA · No App Store<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Pay Once. Own Forever.<span class="ticker-dot"></span></span>
+    <span class="ticker-item hl">MMA · Boxing · Muay Thai · Wrestling<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Zero Monthly Fees<span class="ticker-dot"></span></span>
+  </div>
+</div>
+
 <!-- ══ FEATURES ══ -->
-<section class="section">
+<section class="section dot-grid">
   <div class="features-wrap">
     <div class="features-head">
       <div class="section-eyebrow reveal">What it does</div>
@@ -503,42 +613,83 @@ a{color:inherit;text-decoration:none}
     <div class="features-grid">
       <div class="feat-card">
         <div class="feat-num">01</div>
-        <div class="feat-icon">📋</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <rect x="9" y="3" width="6" height="4" rx="1"/>
+            <polyline points="9 12 11 14 15 10"/>
+            <line x1="9" y1="17" x2="13" y2="17"/>
+          </svg>
+        </div>
         <div class="feat-title">MORNING BRIEF</div>
         <p class="feat-body">Daily athlete check-ins scored automatically. Sleep, mood, soreness, energy — one number tells you who to push and who to protect.</p>
         <span class="feat-pill">Readiness Scoring</span>
       </div>
       <div class="feat-card">
         <div class="feat-num">02</div>
-        <div class="feat-icon">⚖️</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <line x1="12" y1="3" x2="12" y2="8"/>
+            <path d="M4 12a8 8 0 0 1 16 0"/>
+            <line x1="3" y1="16" x2="21" y2="16"/>
+            <path d="M6 16v2a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2"/>
+            <line x1="7" y1="12" x2="9" y2="12"/>
+            <line x1="15" y1="12" x2="17" y2="12"/>
+          </svg>
+        </div>
         <div class="feat-title">WEIGHT TRACKING</div>
         <p class="feat-body">Daily logs with fight-night projections. Know weeks in advance whether the cut is on track — or needs adjusting before it becomes a crisis.</p>
         <span class="feat-pill">Fight Camp Ready</span>
       </div>
       <div class="feat-card">
         <div class="feat-num">03</div>
-        <div class="feat-icon">🥊</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+            <circle cx="8" cy="15" r="1" fill="currentColor"/>
+            <circle cx="12" cy="15" r="1" fill="currentColor"/>
+            <circle cx="16" cy="15" r="1" fill="currentColor"/>
+          </svg>
+        </div>
         <div class="feat-title">FIGHT CALENDAR</div>
         <p class="feat-body">Countdowns for every bout on your roster. Fight dates, camp phases, opponent notes — visible across your entire team at a single glance.</p>
         <span class="feat-pill">Full Roster View</span>
       </div>
       <div class="feat-card">
         <div class="feat-num">04</div>
-        <div class="feat-icon">⚡</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
         <div class="feat-title">SESSION BUILDER</div>
         <p class="feat-body">Plan sessions with AI or from scratch. Tag rounds, drills, intensity zones. Build a library your whole camp runs from — consistent and repeatable.</p>
         <span class="feat-pill">AI-Assisted</span>
       </div>
       <div class="feat-card">
         <div class="feat-num">05</div>
-        <div class="feat-icon">📡</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+        </div>
         <div class="feat-title">ATHLETE CHECK-IN</div>
         <p class="feat-body">Athletes submit their morning brief from their phone — no login, no download. A unique link is all they need. Data lands in your dashboard instantly.</p>
         <span class="feat-pill">Zero Friction</span>
       </div>
       <div class="feat-card">
         <div class="feat-num">06</div>
-        <div class="feat-icon">☁️</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <polyline points="16 16 12 12 8 16"/>
+            <line x1="12" y1="12" x2="12" y2="21"/>
+            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+          </svg>
+        </div>
         <div class="feat-title">CLOUD SYNC</div>
         <p class="feat-body">Optional Supabase sync keeps your data across every device. Gym floor, corner, hotel room — the full picture follows you everywhere you coach.</p>
         <span class="feat-pill">Multi-Device</span>
@@ -546,6 +697,69 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
 </section>
+
+<!-- ══ WHO IT'S FOR ══ -->
+<div class="wif dot-grid">
+  <div class="wif-wrap">
+    <div class="features-head">
+      <div class="section-eyebrow reveal">Who it's for</div>
+      <h2 class="section-title reveal d1">BUILT FOR<br><span>YOUR GYM.</span></h2>
+      <p class="section-sub reveal d2">One tool. Every discipline. Whether you run a fight team of five or a full combat sports academy.</p>
+    </div>
+    <div class="wif-grid">
+      <div class="wif-card">
+        <div class="wif-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <div class="wif-role">Head Coach</div>
+        <div class="wif-name">THE FIGHT TEAM COACH</div>
+        <p class="wif-desc">You run a small-to-mid fight team and need to track your fighters' readiness, weight, and fight camp phases without drowning in spreadsheets or WhatsApp messages.</p>
+        <div class="wif-tags">
+          <span class="wif-tag">MMA</span>
+          <span class="wif-tag">Boxing</span>
+          <span class="wif-tag">Muay Thai</span>
+          <span class="wif-tag">5–20 Athletes</span>
+        </div>
+      </div>
+      <div class="wif-card">
+        <div class="wif-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+        </div>
+        <div class="wif-role">Academy Owner</div>
+        <div class="wif-name">THE GYM OPERATOR</div>
+        <p class="wif-desc">You operate a full combat sports academy with multiple coaches and a rotating roster. You need a single dashboard that keeps the whole operation visible and organized.</p>
+        <div class="wif-tags">
+          <span class="wif-tag">Full Academy</span>
+          <span class="wif-tag">Multi-Discipline</span>
+          <span class="wif-tag">20+ Athletes</span>
+        </div>
+      </div>
+      <div class="wif-card">
+        <div class="wif-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <div class="wif-role">S&C / Performance</div>
+        <div class="wif-name">THE PERFORMANCE COACH</div>
+        <p class="wif-desc">You're the strength and conditioning or sports science side. You need daily readiness data and load tracking to inform training decisions and prevent overtraining before a fight.</p>
+        <div class="wif-tags">
+          <span class="wif-tag">S&amp;C</span>
+          <span class="wif-tag">Sports Science</span>
+          <span class="wif-tag">Load Management</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ══ SHOWCASE ══ -->
 <div class="showcase" id="showcase">
@@ -578,13 +792,13 @@ a{color:inherit;text-decoration:none}
     </div>
     <div class="phones-rig reveal d2" id="phonesRig">
       <div class="ph ph-l" id="phL">
-        <img src="/sp-media/phone-morning-brief-3x.png" alt="Morning Brief" loading="lazy"/>
+        <img src="/marketing/phone-morning-brief.png" alt="Morning Brief" loading="lazy"/>
       </div>
       <div class="ph ph-c" id="phC">
-        <img src="/sp-media/phone-dashboard-3x.png" alt="Dashboard" loading="lazy"/>
+        <img src="/marketing/phone-dashboard.png" alt="Dashboard" loading="lazy"/>
       </div>
       <div class="ph ph-r" id="phR">
-        <img src="/sp-media/phone-fight-dates-3x.png" alt="Fight Dates" loading="lazy"/>
+        <img src="/marketing/phone-fight-dates.png" alt="Fight Dates" loading="lazy"/>
       </div>
     </div>
   </div>
@@ -743,8 +957,58 @@ window.addEventListener('scroll',()=>{
   nav.classList.toggle('scrolled',window.pageYOffset>60);
 },{passive:true});
 
+/* ── Animated stat counters ── */
+function countUp(el, target, suffix, dur) {
+  const start = performance.now();
+  const isInfinity = target === Infinity;
+  const isDollar = suffix === '';
+  function step(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    if (isInfinity) {
+      el.textContent = p < 1 ? Math.round(ease * 999) : '∞';
+    } else {
+      const val = Math.round(ease * target);
+      el.textContent = (isDollar && target === 0 ? '$' : '') + (target === 0 ? val : val) + suffix;
+    }
+    if (p < 1) requestAnimationFrame(step);
+    else {
+      if (isInfinity) el.textContent = '∞';
+      else if (target === 0) el.textContent = '$0';
+      else el.textContent = target + suffix;
+    }
+  }
+  requestAnimationFrame(step);
+}
+
+const statsData = [
+  { el: null, target: 20, suffix: '', raw: '20' },
+  { el: null, target: 0, suffix: '', raw: '$0' },
+  { el: null, target: 1, suffix: '', raw: '1' },
+  { el: null, target: Infinity, suffix: '', raw: '∞' },
+];
+document.querySelectorAll('.stat-num').forEach((el, i) => {
+  if (statsData[i]) statsData[i].el = el;
+});
+
+let statsFired = false;
+const statsObs = new IntersectionObserver(entries => {
+  if (statsFired) return;
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      statsFired = true;
+      statsData.forEach((d, i) => {
+        if (!d.el) return;
+        setTimeout(() => countUp(d.el, d.target, d.suffix, 1200), i * 120);
+      });
+    }
+  });
+}, { threshold: 0.5 });
+const statsStrip = document.querySelector('.stats-strip');
+if (statsStrip) statsObs.observe(statsStrip);
+
 /* ── Scroll reveal ── */
-const revEls=document.querySelectorAll('.reveal,.feat-card');
+const revEls=document.querySelectorAll('.reveal,.feat-card,.wif-card');
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
