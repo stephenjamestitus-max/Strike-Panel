@@ -3,1062 +3,775 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>StrikePanel™ — Training Intelligence for Coaches, Teams & Athletes</title>
-<meta name="description" content="Daily readiness scores, fight countdowns, AI workouts, boxing timer & weight cut tracking — one app, one-time fee. No subscription. Works offline. Built for combat coaches, gym trainers, fight teams, 75 Hard, and self-coached athletes."/>
-<meta property="og:title" content="StrikePanel™ — Training Intelligence"/>
-<meta property="og:description" content="Know who to push and who to protect — every morning. One-time $149. No subscription ever."/>
+<title>StrikePanel™ — Old School Grit. Modern Tracking.</title>
+<meta name="description" content="The coaching dashboard for elite combat sports programs. Track readiness, manage fight camps, own your athletes' data. One-time $99 — no subscription ever."/>
+<meta property="og:title" content="StrikePanel™ — Old School Grit. Modern Tracking."/>
+<meta property="og:description" content="The ultimate coaching dashboard for combat sports. Built for performance. Zero subscriptions. Pay once, own forever."/>
 <meta property="og:type" content="website"/>
-<meta property="og:url" content="https://strikepanel.gumroad.com"/>
+<meta property="og:url" content="https://strikepanel.vercel.app/landing"/>
+<meta property="og:image" content="https://strikepanel.vercel.app/og.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="StrikePanel™ — Training Intelligence"/>
-<meta name="twitter:description" content="Daily readiness scores · Fight countdowns · AI Workouts · Boxing Timer. One fee, no subscription."/>
-<meta name="theme-color" content="#080b14"/>
 <meta name="robots" content="index,follow"/>
-<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='45' cy='45' r='43' fill='%230b0d14' stroke='%2300D4F0' stroke-width='1.5' stroke-opacity='0.6'/%3E%3Cline x1='45' y1='2' x2='45' y2='26' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='45' y1='64' x2='45' y2='88' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='26' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='64' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='12' fill='%2300D4F0'/%3E%3C/svg%3E"/>
+<link rel="canonical" href="https://strikepanel.vercel.app/landing"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
- 
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='45' cy='45' r='43' fill='%230b0d14' stroke='%2300D4F0' stroke-width='1.5'/%3E%3Cline x1='45' y1='2' x2='45' y2='26' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='45' y1='64' x2='45' y2='88' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='26' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='64' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='11' fill='%2300D4F0'/%3E%3C/svg%3E"/>
 <style>
+/* ═══════════════════════════════════════════════
+   RESET & ROOT
+═══════════════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#080b14;--bg2:#0c1020;--surface:#101420;--card:#161c2c;--card2:#1a2030;
-  --accent:#00D4F0;--accent-dim:rgba(0,212,240,0.10);--accent-glow:rgba(0,212,240,0.28);
-  --green:#10b981;--green-dim:rgba(16,185,129,0.10);
-  --amber:#f59e0b;--amber-dim:rgba(245,158,11,0.10);
-  --red:#ef4444;--red-dim:rgba(239,68,68,0.10);
-  --purple:#8b5cf6;
-  --text:#eef0f8;--muted:#7a85a0;--muted2:#3d4560;
-  --border:rgba(0,212,240,0.12);--border2:rgba(255,255,255,0.06);
-  --r:14px;--r-sm:10px;--r-pill:999px;
+  --black:#050302;--dark:#0c0805;--mid:#1a100a;
+  --amber:#c8892a;--gold:#e0a83a;--cream:#f5f0e8;--white:#ffffff;
+  --cyan:#00D4F0;--cyan2:#00a8c4;
+  --muted:#8a7a6a;--muted2:#4a3a2a;
   --fh:'Bebas Neue',sans-serif;
   --fc:'Barlow Condensed',sans-serif;
   --fb:'Barlow',sans-serif;
   --fm:'DM Mono',monospace;
 }
- 
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:15px;line-height:1.65;overflow-x:hidden}
- 
-/* Ambient */
-body::before{
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 80% 60% at 5% -10%,rgba(0,212,240,0.07) 0%,transparent 55%),
-    radial-gradient(ellipse 60% 40% at 95% 110%,rgba(139,92,246,0.06) 0%,transparent 55%),
-    radial-gradient(ellipse 50% 35% at 50% 50%,rgba(239,68,68,0.025) 0%,transparent 55%);
-}
-body::after{
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-  background-size:200px;opacity:0.5;
-}
- 
-::selection{background:rgba(0,212,240,0.2);color:var(--text)}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:transparent}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--black);color:var(--cream);font-family:var(--fb);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(200,137,42,0.3)}
+::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-thumb{background:var(--muted2);border-radius:99px}
- 
-/* ── NAV ── */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:14px 32px;
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  background:rgba(8,11,20,0.88);
-  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  border-bottom:1px solid rgba(255,255,255,0.05);
-}
-.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav-logo{width:34px;height:34px;filter:drop-shadow(0 0 8px rgba(0,212,240,0.5))}
-.nav-name{font-family:var(--fh);font-size:21px;letter-spacing:2px;color:var(--text)}
-.nav-name span{color:var(--accent)}
-.nav-badge{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:rgba(0,212,240,0.07);color:var(--accent);border:1px solid rgba(0,212,240,0.18)}
-.nav-right{display:flex;align-items:center;gap:10px}
-.nav-demo{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:8px 16px;border-radius:30px;border:1px solid rgba(255,255,255,0.09);text-decoration:none;transition:all .2s}
-.nav-demo:hover{color:var(--accent);border-color:rgba(0,212,240,0.3)}
-.nav-cta{
-  background:linear-gradient(135deg,var(--accent),#00a8c4);
-  color:#050810;font-family:var(--fc);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
-  padding:9px 20px;border-radius:30px;border:none;cursor:pointer;text-decoration:none;
-  box-shadow:0 0 18px rgba(0,212,240,0.3);display:inline-flex;align-items:center;gap:6px;transition:all .2s;
-}
-.nav-cta:hover{box-shadow:0 0 30px rgba(0,212,240,0.55);transform:translateY(-1px)}
- 
-/* ── HERO ── */
-.hero{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  padding:120px 24px 80px;text-align:center;position:relative;z-index:1;
-}
-.hero-inner{max-width:860px}
- 
+
+/* ═══════════════════════════════════════════════
+   GRAIN OVERLAY
+═══════════════════════════════════════════════ */
+.grain{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.038;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;animation:grain-shift 0.5s steps(1) infinite}
+@keyframes grain-shift{
+  0%{transform:translate(0,0)}10%{transform:translate(-2%,-3%)}20%{transform:translate(3%,1%)}
+  30%{transform:translate(-1%,4%)}40%{transform:translate(2%,-2%)}50%{transform:translate(-3%,2%)}
+  60%{transform:translate(1%,-1%)}70%{transform:translate(-2%,3%)}80%{transform:translate(3%,-3%)}
+  90%{transform:translate(-1%,2%)}100%{transform:translate(2%,0)}}
+
+/* ═══════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:0 clamp(20px,4vw,60px);height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .4s,backdrop-filter .4s}
+.nav.scrolled{background:rgba(5,3,2,0.9);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(200,137,42,0.12)}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{width:30px;height:30px;filter:drop-shadow(0 0 8px rgba(0,212,240,0.5))}
+.nav-name{font-family:var(--fh);font-size:20px;letter-spacing:3px;color:var(--white)}
+.nav-name span{color:var(--cyan)}
+.nav-links{display:flex;align-items:center;gap:8px}
+.nav-link{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:rgba(245,240,232,0.5);padding:8px 16px;
+  border-radius:30px;border:1px solid rgba(245,240,232,0.08);transition:all .25s}
+.nav-link:hover{color:var(--cream);border-color:rgba(200,137,42,0.35)}
+.nav-cta{background:linear-gradient(135deg,var(--amber),var(--gold));
+  color:var(--black);font-family:var(--fc);font-size:11px;font-weight:800;
+  letter-spacing:2px;text-transform:uppercase;padding:10px 22px;
+  border-radius:30px;box-shadow:0 0 24px rgba(200,137,42,0.35);transition:all .25s}
+.nav-cta:hover{box-shadow:0 0 40px rgba(200,137,42,0.6);transform:translateY(-1px)}
+@media(max-width:600px){.nav-link{display:none}}
+
+/* ═══════════════════════════════════════════════
+   HERO — PARALLAX SCENE
+═══════════════════════════════════════════════ */
+.hero{position:relative;height:100vh;min-height:640px;overflow:hidden;
+  display:flex;align-items:center}
+.layer{position:absolute;inset:0;will-change:transform}
+
+/* Layer 0: Background */
+.l-bg{z-index:0}
+.l-bg-img{position:absolute;inset:-15%;
+  background:url('/blog/gym-wide.jpg.png') center center / cover no-repeat;
+  filter:brightness(0.42) saturate(0.65) sepia(0.3)}
+.l-bg-vignette{position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 100% 55% at 50% 100%,rgba(5,3,2,1) 0%,transparent 65%),
+    radial-gradient(ellipse 45% 100% at 0% 50%,rgba(5,3,2,0.9) 0%,transparent 70%),
+    radial-gradient(ellipse 45% 100% at 100% 50%,rgba(5,3,2,0.9) 0%,transparent 70%),
+    radial-gradient(ellipse 100% 35% at 50% 0%,rgba(5,3,2,0.65) 0%,transparent 70%)}
+
+/* Layer 1: Light rays */
+.l-rays{z-index:1;pointer-events:none}
+.ray{position:absolute;top:-20%;transform-origin:top center;
+  background:linear-gradient(to bottom,rgba(200,137,42,0.18),transparent);
+  animation:ray-breathe 4s ease-in-out infinite alternate}
+.ray-1{left:16%;width:160px;height:88vh;transform:rotate(13deg);animation-delay:0s}
+.ray-2{left:36%;width:100px;height:72vh;transform:rotate(-6deg);
+  background:linear-gradient(to bottom,rgba(220,160,60,0.09),transparent);animation-delay:1.5s}
+.ray-3{right:18%;width:190px;height:82vh;transform:rotate(-16deg);animation-delay:0.8s}
+.ray-4{left:52%;width:70px;height:58vh;transform:rotate(5deg);
+  background:linear-gradient(to bottom,rgba(200,137,42,0.06),transparent);animation-delay:2.2s}
+@keyframes ray-breathe{from{opacity:0.55}to{opacity:1}}
+
+/* Dust particles */
+.dust-layer{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.mote{position:absolute;border-radius:50%;background:rgba(220,160,60,0.5);
+  animation:float-up linear infinite}
+@keyframes float-up{
+  0%{transform:translateY(0) translateX(0);opacity:0}
+  8%{opacity:1}88%{opacity:0.5}
+  100%{transform:translateY(-115vh) translateX(var(--drift));opacity:0}}
+
+/* Layer 2: Equipment */
+.l-equip{z-index:3;pointer-events:none}
+.equip-bag{
+  position:absolute;bottom:-8%;left:-4%;
+  width:50%;height:110%;
+  background:url('/blog/heavy-bag.jpg.png') bottom left / contain no-repeat;
+  filter:brightness(0.55) saturate(0.72) sepia(0.28) contrast(1.12);
+  -webkit-mask-image:radial-gradient(ellipse 72% 82% at 32% 58%,black 28%,transparent 72%);
+  mask-image:radial-gradient(ellipse 72% 82% at 32% 58%,black 28%,transparent 72%)}
+.equip-speed{
+  position:absolute;bottom:-4%;right:-3%;
+  width:44%;height:102%;
+  background:url('/blog/speed-bag.jpg.png') bottom right / contain no-repeat;
+  filter:brightness(0.5) saturate(0.68) sepia(0.32) contrast(1.18);
+  -webkit-mask-image:radial-gradient(ellipse 72% 82% at 68% 55%,black 28%,transparent 72%);
+  mask-image:radial-gradient(ellipse 72% 82% at 68% 55%,black 28%,transparent 72%)}
+
+/* Layer 3: Centre glow */
+.l-glow{z-index:4;pointer-events:none;
+  background:radial-gradient(ellipse 52% 62% at 50% 55%,rgba(5,3,2,0.62) 0%,transparent 100%)}
+
+/* Layer 4: UI */
+.l-ui{z-index:5;display:flex;align-items:center;justify-content:center;pointer-events:none}
+
+/* ═══════════════════════════════════════════════
+   HERO CONTENT
+═══════════════════════════════════════════════ */
+.hero-content{
+  pointer-events:auto;text-align:center;
+  padding:0 clamp(20px,6vw,80px);max-width:1000px;
+  display:flex;flex-direction:column;align-items:center}
 .hero-kicker{
-  font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;
-  color:var(--accent);margin-bottom:22px;display:inline-flex;align-items:center;gap:8px;
-  padding:6px 18px;border-radius:30px;background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.22);
-}
-.kicker-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:kdot 2s ease-in-out infinite}
-@keyframes kdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
- 
-.hero-title{
-  font-family:var(--fh);font-size:clamp(58px,10vw,116px);
-  letter-spacing:4px;line-height:0.9;margin-bottom:10px;
-}
-.hero-title .line{display:block}
-.hero-title .cyan{color:var(--accent);text-shadow:0 0 50px rgba(0,212,240,0.3)}
-.hero-title .dim{color:var(--muted2)}
- 
-.hero-hook{
-  font-family:var(--fc);font-size:clamp(16px,2.5vw,22px);font-weight:600;
-  letter-spacing:1.5px;text-transform:uppercase;color:var(--text);
-  margin:24px auto 16px;line-height:1.4;max-width:640px;
-}
-.hero-sub{
-  font-size:clamp(14px,1.8vw,16px);color:var(--muted);line-height:1.8;
-  max-width:580px;margin:0 auto 36px;
-}
-.hero-sub strong{color:var(--text)}
- 
-.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
-.btn-primary{
-  background:linear-gradient(135deg,var(--accent),#00a8c4);
-  color:#050810;font-family:var(--fc);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
-  padding:15px 34px;border-radius:30px;border:none;cursor:pointer;text-decoration:none;
-  box-shadow:0 0 28px rgba(0,212,240,0.4),0 4px 20px rgba(0,0,0,0.3);
-  display:inline-flex;align-items:center;gap:8px;transition:all .22s;
-}
-.btn-primary:hover{box-shadow:0 0 44px rgba(0,212,240,0.65),0 6px 28px rgba(0,0,0,0.4);transform:translateY(-2px)}
-.btn-ghost{
-  background:rgba(255,255,255,0.035);color:var(--muted);font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  padding:15px 28px;border-radius:30px;border:1px solid rgba(255,255,255,0.09);cursor:pointer;text-decoration:none;
-  display:inline-flex;align-items:center;gap:8px;transition:all .2s;
-}
-.btn-ghost:hover{border-color:rgba(0,212,240,0.3);color:var(--accent);background:rgba(0,212,240,0.04)}
-.btn-demo-hero{
-  background:rgba(0,212,240,0.06);color:var(--accent);font-family:var(--fc);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
-  padding:15px 28px;border-radius:30px;border:1.5px solid rgba(0,212,240,0.3);cursor:pointer;text-decoration:none;
-  display:inline-flex;align-items:center;gap:8px;transition:all .2s;
-}
-.btn-demo-hero:hover{background:rgba(0,212,240,0.13);border-color:rgba(0,212,240,0.6);box-shadow:0 0 24px rgba(0,212,240,0.2);transform:translateY(-2px)}
- 
-/* Price flash */
-.price-flash{
+  font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:4px;
+  text-transform:uppercase;color:var(--amber);
   display:inline-flex;align-items:center;gap:10px;
-  border:1px solid rgba(255,255,255,0.07);border-radius:12px;
-  padding:12px 20px;background:rgba(0,0,0,0.2);margin-bottom:24px;
-}
-.price-num{font-family:var(--fh);font-size:42px;letter-spacing:2px;color:var(--text);line-height:1}
-.price-detail{text-align:left}
-.price-detail .once{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green)}
-.price-detail .never{font-family:var(--fc);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-top:2px}
- 
-/* Audience pills */
-.for-pills{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:6px}
-.for-pill{
-  font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1.5px;
-  padding:5px 12px;border-radius:20px;
-  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:var(--muted);
-  transition:all .18s;cursor:default;
-}
- 
-/* ── MORNING BRIEF HERO MOCKUP ── */
-.brief-mockup-wrap{
-  margin:60px auto 0;max-width:860px;
-  background:linear-gradient(135deg,rgba(0,212,240,0.06),rgba(139,92,246,0.04));
-  border:1px solid rgba(0,212,240,0.18);border-radius:20px;
-  padding:28px;position:relative;overflow:hidden;
-}
-.brief-mockup-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),rgba(139,92,246,0.8),transparent)}
-.brief-date-lbl{font-family:var(--fc);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted2);margin-bottom:6px}
-.brief-headline{font-family:var(--fh);font-size:clamp(22px,3.5vw,38px);letter-spacing:2px;line-height:1.05;margin-bottom:8px}
-.brief-headline .red{color:var(--red)}
-.brief-headline .green{color:var(--green)}
-.brief-sub-text{font-size:13px;color:var(--muted);margin-bottom:20px}
-.r-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
-@media(max-width:560px){.r-grid{grid-template-columns:1fr 1fr}}
-.r-card{border-radius:11px;padding:14px;border:1px solid;overflow:hidden}
-.r-card.g{background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.22)}
-.r-card.c{background:rgba(0,212,240,0.06);border-color:rgba(0,212,240,0.2)}
-.r-card.r{background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.22)}
-.r-n{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-.r-s{font-family:var(--fh);font-size:38px;letter-spacing:1px;line-height:1;margin-bottom:5px}
-.r-card.g .r-s{color:var(--green)}
-.r-card.c .r-s{color:var(--accent)}
-.r-card.r .r-s{color:var(--red)}
-.r-b{height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin-bottom:7px;overflow:hidden}
-.r-bf{height:100%;border-radius:2px}
-.r-card.g .r-bf{background:linear-gradient(90deg,var(--green),#34d399);width:95%}
-.r-card.c .r-bf{background:linear-gradient(90deg,var(--accent),#67e8f9);width:72%}
-.r-card.r .r-bf{background:linear-gradient(90deg,var(--red),#f87171);width:38%}
-.r-v{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border-radius:20px;display:inline-block}
-.r-card.g .r-v{background:rgba(16,185,129,0.14);color:var(--green)}
-.r-card.c .r-v{background:rgba(0,212,240,0.12);color:var(--accent)}
-.r-card.r .r-v{background:rgba(239,68,68,0.14);color:var(--red)}
-.r-t{font-family:var(--fm);font-size:10px;color:var(--muted2);margin-top:5px}
-.alert-row{display:flex;gap:8px;flex-direction:column}
-.alrt{display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:10px;border:1px solid}
-.alrt.r{background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.2)}
-.alrt.g{background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.2)}
-.alrt-ico{font-size:18px;flex-shrink:0}
-.alrt-text strong{font-size:13px;color:var(--text)}
-.alrt-text p{font-size:12px;color:var(--muted);margin-top:2px}
- 
-/* ── SECTION SKELETON ── */
-.section{padding:96px 24px;position:relative;z-index:1}
-.section-inner{max-width:1100px;margin:0 auto}
-.s-kicker{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
-.s-title{font-family:var(--fh);font-size:clamp(34px,5.5vw,62px);letter-spacing:3px;line-height:1.02;margin-bottom:16px}
-.s-sub{font-size:15px;color:var(--muted);max-width:560px;line-height:1.8}
- 
-/* Divider */
-.divider{display:flex;align-items:center;gap:12px;margin:0 24px;position:relative;z-index:1}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.04)}
-.divider span{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted2)}
- 
-/* ── WHO IT'S FOR SECTION ── */
-.who-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:48px}
-.who-card{
-  background:rgba(16,20,36,0.8);border:1px solid rgba(255,255,255,0.055);
-  border-radius:14px;padding:22px;
-  transition:border-color .2s,transform .2s;position:relative;overflow:hidden;
-}
-.who-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,240,0.12),transparent);opacity:0;transition:opacity .2s}
-.who-card:hover{border-color:rgba(0,212,240,0.2);transform:translateY(-2px)}
-.who-card:hover::before{opacity:1}
-.who-icon{font-size:26px;margin-bottom:12px}
-.who-title{font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text);margin-bottom:6px}
-.who-desc{font-size:12.5px;color:var(--muted);line-height:1.65}
- 
-/* ── FEATURE CARDS ── */
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:52px}
-.feat-card{
-  background:linear-gradient(135deg,rgba(20,24,38,0.96),rgba(14,18,28,0.98));
-  border:1px solid rgba(255,255,255,0.055);border-radius:16px;padding:26px;
-  position:relative;overflow:hidden;
-  transition:border-color .25s,transform .22s,box-shadow .25s;
-}
-.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,240,0.1),transparent);opacity:0;transition:opacity .25s}
-.feat-card:hover{border-color:rgba(0,212,240,0.2);transform:translateY(-3px);box-shadow:0 18px 50px rgba(0,0,0,0.5)}
-.feat-card:hover::before{opacity:1}
-.feat-icon{font-size:26px;margin-bottom:13px;display:block}
-.feat-title{font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);margin-bottom:7px}
-.feat-desc{font-size:13px;color:var(--muted);line-height:1.72}
-.feat-pill{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:2px 9px;border-radius:10px;background:rgba(0,212,240,0.07);color:var(--accent);border:1px solid rgba(0,212,240,0.15);display:inline-block;margin-top:11px}
- 
-/* ── USP BAR ── */
-.usp-bar{
-  display:flex;gap:0;border:1px solid rgba(255,255,255,0.06);
-  border-radius:16px;overflow:hidden;margin:52px 0 0;
-}
-.usp{flex:1;padding:20px 16px;text-align:center;border-right:1px solid rgba(255,255,255,0.06)}
-.usp:last-child{border-right:none}
-.usp-val{font-family:var(--fh);font-size:30px;letter-spacing:2px;color:var(--accent);line-height:1;margin-bottom:4px}
-.usp-lbl{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted2)}
-@media(max-width:600px){
-  .usp-bar{flex-direction:column}
-  .usp{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
-  .usp:last-child{border-bottom:none}
-}
- 
-/* ── FIGHT COUNTDOWN ── */
-.fight-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:48px}
-@media(max-width:640px){.fight-grid{grid-template-columns:1fr}}
-.fight-card{
-  background:linear-gradient(135deg,rgba(239,68,68,0.07),rgba(139,92,246,0.04));
-  border:1px solid rgba(239,68,68,0.2);border-radius:16px;padding:22px;
-  position:relative;overflow:hidden;
-}
-.fight-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent)}
-.fight-ath{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
-.fight-vs{font-size:13.5px;color:var(--text);margin-bottom:3px;font-weight:600}
-.fight-meta{font-size:11.5px;color:var(--muted);margin-bottom:14px}
-.fight-days{font-family:var(--fh);font-size:52px;letter-spacing:2px;line-height:1;color:var(--red);text-shadow:0 0 20px rgba(239,68,68,0.3)}
-.fight-lbl{font-family:var(--fc);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted2);margin-top:2px;margin-bottom:12px}
-.wc-block{background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:10px 12px}
-.wc-lbl{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:6px}
-.wc-bar{height:5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;margin-bottom:5px}
-.wc-fill{height:100%;border-radius:3px}
-.wc-fill.amber{background:linear-gradient(90deg,var(--amber),#fbbf24);width:62%}
-.wc-fill.red{background:linear-gradient(90deg,var(--red),#f87171);width:87%}
-.wc-stat{font-size:11.5px;color:var(--muted)}
-.wc-stat strong{color:var(--amber)}
- 
-/* ── AI SECTION ── */
-.ai-card{
-  background:linear-gradient(135deg,rgba(124,58,237,0.09),rgba(79,70,229,0.05));
-  border:1px solid rgba(124,58,237,0.22);border-radius:20px;padding:30px;
-  position:relative;overflow:hidden;margin-top:48px;
-}
-.ai-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(167,139,250,0.4),transparent)}
-.ai-badge{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#a78bfa;margin-bottom:10px;display:flex;align-items:center;gap:7px}
-.ai-dot{width:7px;height:7px;border-radius:50%;background:#a78bfa;animation:aidot 1.4s ease-in-out infinite}
-@keyframes aidot{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
-.ai-title{font-family:var(--fh);font-size:clamp(20px,3vw,30px);letter-spacing:2px;margin-bottom:6px}
-.ai-sub{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:18px;max-width:560px}
-.ai-resp{font-size:13px;color:var(--text);line-height:1.8;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:14px 16px}
-.ai-resp h4{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#a78bfa;margin:10px 0 5px}
-.ai-resp h4:first-child{margin-top:0}
-.ai-note{font-size:11.5px;color:var(--muted2);margin-top:12px}
- 
-/* ── TEAM SPLIT ── */
-.split-card{
-  background:linear-gradient(135deg,rgba(0,212,240,0.06),rgba(16,185,129,0.04));
-  border:1px solid rgba(0,212,240,0.2);border-radius:20px;
-  padding:32px;margin-top:48px;position:relative;overflow:hidden;
-}
-.split-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),var(--green),transparent)}
-.split-big{font-family:var(--fh);font-size:clamp(60px,10vw,100px);letter-spacing:3px;color:var(--accent);line-height:1}
-.split-label{font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-top:2px;margin-bottom:16px}
-.split-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
-.split-ico{font-size:16px;flex-shrink:0;margin-top:2px}
-.split-text strong{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text)}
-.split-text p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:2px}
- 
-/* ── PRICING ── */
-.price-card{
-  max-width:480px;margin:52px auto 0;
-  background:linear-gradient(160deg,rgba(20,24,38,0.98),rgba(14,18,26,0.99));
-  border:1px solid rgba(0,212,240,0.22);border-radius:24px;padding:44px 36px;
-  position:relative;overflow:hidden;text-align:center;
-  box-shadow:0 28px 80px rgba(0,0,0,0.65),0 0 0 1px rgba(0,212,240,0.04);
-}
-.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),rgba(139,92,246,0.6),transparent)}
-.price-badge{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:5px 14px;border-radius:20px;background:rgba(0,212,240,0.08);color:var(--accent);border:1px solid rgba(0,212,240,0.2);display:inline-block;margin-bottom:22px}
-.price-main{font-family:var(--fh);font-size:90px;letter-spacing:2px;line-height:1;color:var(--text);margin-bottom:4px}
-.price-main .curr{font-size:40px;vertical-align:top;padding-top:16px;color:var(--accent)}
-.price-per{font-family:var(--fc);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted2);margin-bottom:6px}
-.price-tagline{font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.6}
-.price-tagline strong{color:var(--green)}
-.price-feats{list-style:none;text-align:left;margin-bottom:30px;display:flex;flex-direction:column;gap:10px}
-.price-feats li{font-size:13.5px;color:var(--muted);display:flex;align-items:flex-start;gap:9px;line-height:1.5}
-.price-feats li::before{content:'✓';color:var(--green);font-weight:700;font-size:14px;flex-shrink:0;margin-top:1px}
-.price-feats li strong{color:var(--text)}
-.price-cta{width:100%;padding:15px;font-size:14px;margin-bottom:14px}
-.price-guarantee{font-size:11.5px;color:var(--muted2);line-height:1.6}
-.price-guarantee strong{color:var(--muted)}
- 
-/* ── FAQ ── */
-.faq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:0;margin-top:44px;border:1px solid rgba(255,255,255,0.055);border-radius:16px;overflow:hidden}
-.faq-item{padding:22px 26px;border-bottom:1px solid rgba(255,255,255,0.055);transition:background .18s}
-.faq-item:last-child{border-bottom:none}
-.faq-item:nth-child(odd){border-right:1px solid rgba(255,255,255,0.055)}
-.faq-item:hover{background:rgba(0,212,240,0.025)}
-.faq-q{font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:.5px;color:var(--text);margin-bottom:8px;line-height:1.4}
-.faq-a{font-size:13px;color:var(--muted);line-height:1.75}
-.faq-a strong{color:var(--text)}
-@media(max-width:820px){
-  .faq-grid{grid-template-columns:1fr}
-  .faq-item:nth-child(odd){border-right:none}
-}
- 
-/* ── TRUST ROW ── */
-.trust-row{display:flex;gap:0;border:1px solid rgba(255,255,255,0.055);border-radius:16px;overflow:hidden;flex-wrap:wrap}
-.trust-item{flex:1;min-width:160px;padding:20px 18px;display:flex;align-items:flex-start;gap:12px;border-right:1px solid rgba(255,255,255,0.055)}
-.trust-item:last-child{border-right:none}
-.trust-icon{font-size:22px;flex-shrink:0;margin-top:2px}
-.trust-text{font-size:12.5px;color:var(--muted);line-height:1.6}
-.trust-text strong{color:var(--text);display:block;margin-bottom:2px;font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
-@media(max-width:700px){
-  .trust-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.055);min-width:100%}
-  .trust-item:last-child{border-bottom:none}
-}
- 
-/* ── FOOTER ── */
-.footer{padding:40px 32px;border-top:1px solid rgba(255,255,255,0.04);text-align:center;position:relative;z-index:1}
-.footer-brand{font-family:var(--fh);font-size:20px;letter-spacing:2px;margin-bottom:6px}
-.footer-brand span{color:var(--accent)}
-.footer-sub{font-size:12px;color:var(--muted2)}
- 
-/* ── REVEAL ANIMATIONS ── */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  padding:6px 20px;border-radius:30px;
+  background:rgba(200,137,42,0.08);border:1px solid rgba(200,137,42,0.25);
+  margin-bottom:32px}
+.kicker-dot{width:6px;height:6px;border-radius:50%;background:var(--amber);
+  box-shadow:0 0 10px var(--amber);animation:kdot 2s ease-in-out infinite}
+@keyframes kdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.5)}}
+
+.hero-title{
+  font-family:var(--fh);font-size:clamp(64px,11.5vw,152px);
+  letter-spacing:4px;line-height:0.87;margin-bottom:28px;
+  color:var(--white);text-shadow:0 4px 60px rgba(0,0,0,0.9)}
+.hero-title .line{display:block;opacity:0;transform:translateY(28px);
+  transition:opacity .72s ease, transform .72s ease}
+.hero-title .line-amber{color:var(--amber);
+  text-shadow:0 0 80px rgba(200,137,42,0.45),0 4px 60px rgba(0,0,0,0.9)}
+.hero-title .line-cyan{color:var(--cyan);
+  text-shadow:0 0 80px rgba(0,212,240,0.35),0 4px 60px rgba(0,0,0,0.9)}
+
+.hero-sub{font-size:clamp(14px,1.7vw,18px);color:rgba(245,240,232,0.6);
+  line-height:1.75;max-width:500px;margin-bottom:32px;font-weight:300}
+.hero-badge{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--amber);padding:8px 24px;border-radius:30px;
+  border:1px solid rgba(200,137,42,0.28);background:rgba(200,137,42,0.05);
+  margin-bottom:40px}
+.hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--amber),var(--gold));color:var(--black);
+  font-family:var(--fc);font-size:13px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;padding:15px 36px;border-radius:40px;
+  box-shadow:0 0 32px rgba(200,137,42,0.4),0 8px 32px rgba(0,0,0,0.55);
+  transition:all .25s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{
+  box-shadow:0 0 64px rgba(200,137,42,0.7),0 12px 40px rgba(0,0,0,0.65);
+  transform:translateY(-3px) scale(1.02)}
+.btn-ghost{
+  font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;padding:14px 32px;border-radius:40px;
+  border:1px solid rgba(245,240,232,0.18);color:rgba(245,240,232,0.65);
+  transition:all .25s;display:inline-flex;align-items:center;gap:8px}
+.btn-ghost:hover{border-color:rgba(200,137,42,0.5);color:var(--amber);
+  background:rgba(200,137,42,0.06)}
+
+.scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  z-index:10;display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:0;animation:hint-in 1s ease 2.5s forwards, hint-pulse 3s ease-in-out 3.5s infinite alternate}
+.scroll-hint span{font-family:var(--fc);font-size:9px;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;color:rgba(200,137,42,0.6)}
+.scroll-hint-line{width:1px;height:36px;
+  background:linear-gradient(to bottom,rgba(200,137,42,0.5),transparent)}
+@keyframes hint-in{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes hint-pulse{from{opacity:1}to{opacity:0.25}}
+
+/* ═══════════════════════════════════════════════
+   STAT STRIP
+═══════════════════════════════════════════════ */
+.stats-strip{
+  position:relative;z-index:10;
+  background:linear-gradient(90deg,rgba(200,137,42,0.04),rgba(200,137,42,0.1),rgba(200,137,42,0.04));
+  border-top:1px solid rgba(200,137,42,0.18);border-bottom:1px solid rgba(200,137,42,0.18);
+  padding:28px clamp(20px,4vw,60px);
+  display:flex;align-items:center;justify-content:center;
+  gap:clamp(24px,5vw,80px);flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-family:var(--fh);font-size:clamp(32px,4.5vw,54px);letter-spacing:2px;
+  color:var(--amber);line-height:1;text-shadow:0 0 30px rgba(200,137,42,0.35)}
+.stat-lbl{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(245,240,232,0.35);margin-top:5px}
+.stat-div{width:1px;height:40px;background:rgba(200,137,42,0.18)}
+@media(max-width:480px){.stat-div{display:none}}
+
+/* ═══════════════════════════════════════════════
+   SHARED SECTION
+═══════════════════════════════════════════════ */
+.section{position:relative;z-index:10;padding:96px clamp(20px,6vw,80px)}
+.section-eyebrow{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:4px;
+  text-transform:uppercase;color:var(--amber);margin-bottom:14px;
+  display:flex;align-items:center;gap:10px}
+.section-eyebrow::after{content:'';height:1px;background:rgba(200,137,42,0.2);width:80px}
+.section-title{font-family:var(--fh);font-size:clamp(38px,5.5vw,76px);
+  letter-spacing:3px;line-height:0.9;color:var(--white);margin-bottom:20px}
+.section-title span{color:var(--amber)}
+.section-sub{font-size:clamp(14px,1.5vw,16px);color:rgba(245,240,232,0.45);
+  line-height:1.85;max-width:520px;font-weight:300}
+
+/* ═══════════════════════════════════════════════
+   FEATURES
+═══════════════════════════════════════════════ */
+.features-wrap{max-width:1200px;margin:0 auto}
+.features-head{margin-bottom:60px}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:rgba(200,137,42,0.08);border:1px solid rgba(200,137,42,0.08);border-radius:16px;overflow:hidden}
+@media(max-width:900px){.features-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.features-grid{grid-template-columns:1fr}}
+
+.feat-card{padding:44px 36px;background:rgba(12,8,5,0.9);position:relative;overflow:hidden;
+  transition:background .35s;opacity:0;transform:translateY(36px);
+  transition:opacity .65s ease,transform .65s ease,background .35s}
+.feat-card.revealed{opacity:1;transform:translateY(0)}
+.feat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--amber),transparent);
+  opacity:0;transition:opacity .35s}
+.feat-card:hover{background:rgba(26,16,8,0.95)}
+.feat-card:hover::after{opacity:1}
+.feat-num{position:absolute;top:16px;right:24px;font-family:var(--fh);font-size:52px;
+  color:rgba(200,137,42,0.1);line-height:1;pointer-events:none}
+.feat-icon{width:48px;height:48px;border-radius:12px;margin-bottom:24px;
+  background:rgba(200,137,42,0.07);border:1px solid rgba(200,137,42,0.18);
+  display:flex;align-items:center;justify-content:center;font-size:20px}
+.feat-title{font-family:var(--fh);font-size:26px;letter-spacing:2px;
+  margin-bottom:10px;color:var(--cream)}
+.feat-body{font-size:13px;color:rgba(245,240,232,0.42);line-height:1.82;font-weight:300}
+.feat-pill{display:inline-flex;margin-top:18px;font-family:var(--fc);font-size:8px;
+  font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--amber);padding:3px 10px;border-radius:20px;
+  background:rgba(200,137,42,0.07);border:1px solid rgba(200,137,42,0.18)}
+
+/* ═══════════════════════════════════════════════
+   SHOWCASE
+═══════════════════════════════════════════════ */
+.showcase{position:relative;overflow:hidden;min-height:580px;display:flex;align-items:center}
+.sc-bg{position:absolute;inset:-20%;
+  background:url('/blog/gym-wide.jpg.png') center 30% / cover no-repeat;
+  filter:brightness(0.15) saturate(0.45) sepia(0.45);will-change:transform}
+.sc-overlay{position:absolute;inset:0;
+  background:
+    linear-gradient(to right,rgba(5,3,2,0.97) 0%,rgba(5,3,2,0.65) 48%,rgba(5,3,2,0.93) 100%),
+    linear-gradient(to bottom,rgba(5,3,2,0.55) 0%,transparent 25%,transparent 75%,rgba(5,3,2,0.97) 100%)}
+.sc-content{position:relative;z-index:5;max-width:1200px;margin:0 auto;
+  padding:80px clamp(20px,6vw,80px);
+  display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+@media(max-width:768px){.sc-content{grid-template-columns:1fr;gap:48px}}
+
+.check-list{display:flex;flex-direction:column;gap:13px;margin:24px 0 32px}
+.check-item{display:flex;align-items:flex-start;gap:12px;
+  font-size:14px;color:rgba(245,240,232,0.6);line-height:1.6;font-weight:300}
+.check-mark{flex-shrink:0;width:19px;height:19px;border-radius:50%;margin-top:2px;
+  background:rgba(0,212,240,0.08);border:1px solid rgba(0,212,240,0.28);
+  display:flex;align-items:center;justify-content:center}
+.check-mark svg{width:9px;height:9px;stroke:var(--cyan);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+.phones-rig{position:relative;height:420px}
+.ph{position:absolute;border-radius:26px;overflow:hidden;
+  border:1px solid rgba(255,255,255,0.1);will-change:transform;
+  box-shadow:0 24px 80px rgba(0,0,0,0.75),0 0 0 1px rgba(255,255,255,0.03)}
+.ph img{display:block;object-fit:cover;object-position:top center}
+.ph-l{width:148px;left:4%;bottom:0;
+  transform:rotate(-7deg) translateY(22px);
+  filter:brightness(0.8)}
+.ph-l img{height:330px;width:100%}
+.ph-c{width:172px;left:50%;transform:translateX(-50%);bottom:0;z-index:3;
+  border-color:rgba(0,212,240,0.18);
+  box-shadow:0 32px 100px rgba(0,0,0,0.9),0 0 40px rgba(0,212,240,0.06)}
+.ph-c img{height:390px;width:100%}
+.ph-r{width:145px;right:4%;bottom:0;
+  transform:rotate(7deg) translateY(22px);
+  filter:brightness(0.8)}
+.ph-r img{height:330px;width:100%}
+
+/* ═══════════════════════════════════════════════
+   PROMISE SECTION
+═══════════════════════════════════════════════ */
+.promise{position:relative;padding:120px clamp(20px,6vw,80px);
+  text-align:center;overflow:hidden}
+.promise-bg{position:absolute;inset:-12%;
+  background:url('/blog/heavy-bag.jpg.png') center 38% / cover no-repeat;
+  filter:brightness(0.1) saturate(0.4) sepia(0.5);will-change:transform}
+.promise-veil{position:absolute;inset:0;
+  background:radial-gradient(ellipse 85% 85% at 50% 50%,rgba(5,3,2,0.55) 0%,rgba(5,3,2,0.99) 68%)}
+.promise-inner{position:relative;z-index:5;max-width:820px;margin:0 auto}
+.promise-eye{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:5px;
+  text-transform:uppercase;color:rgba(200,137,42,0.55);margin-bottom:24px}
+.promise-title{font-family:var(--fh);font-size:clamp(42px,7vw,96px);
+  letter-spacing:3px;line-height:0.87;color:var(--white);margin-bottom:0}
+.promise-title .t-amber{color:var(--amber);display:block}
+.promise-title .t-cyan{color:var(--cyan);display:block}
+.promise-rule{width:72px;height:2px;margin:36px auto;border:none;
+  background:linear-gradient(90deg,transparent,var(--amber),transparent)}
+.promise-tag{font-family:var(--fc);font-size:clamp(13px,1.8vw,18px);font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;color:rgba(245,240,232,0.45);
+  line-height:1.9;margin-bottom:48px}
+.promise-tag strong{color:var(--cream);font-weight:700}
+
+.price-box{display:inline-flex;align-items:center;gap:24px;
+  padding:22px 44px;border-radius:14px;margin-bottom:48px;
+  background:rgba(200,137,42,0.05);border:1px solid rgba(200,137,42,0.22)}
+.price-old{font-family:var(--fm);font-size:12px;
+  color:rgba(245,240,232,0.28);text-decoration:line-through;text-align:left}
+.price-big{font-family:var(--fh);font-size:76px;color:var(--amber);
+  letter-spacing:2px;line-height:1;text-shadow:0 0 48px rgba(200,137,42,0.4)}
+.price-meta{text-align:left}
+.price-meta .label{font-family:var(--fc);font-size:11px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,0.38)}
+.price-meta .note{font-family:var(--fm);font-size:10px;
+  color:rgba(245,240,232,0.25);margin-top:3px}
+.promise-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+/* ═══════════════════════════════════════════════
+   BLOG CALLOUT
+═══════════════════════════════════════════════ */
+.blog-callout{padding:72px clamp(20px,6vw,80px);max-width:1200px;margin:0 auto}
+.blog-callout-inner{
+  border:1px solid rgba(200,137,42,0.12);border-radius:18px;
+  padding:48px 52px;
+  background:linear-gradient(135deg,rgba(26,16,10,0.55),rgba(12,8,5,0.85));
+  display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.bc-text .eye{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.bc-text h3{font-family:var(--fh);font-size:clamp(26px,3.5vw,44px);
+  letter-spacing:2px;color:var(--white);line-height:1}
+.bc-text p{font-size:13px;color:rgba(245,240,232,0.42);margin-top:8px;
+  max-width:440px;font-weight:300;line-height:1.75}
+.btn-blog{background:rgba(26,32,52,0.8);color:rgba(245,240,232,0.8);
+  border:1px solid rgba(255,255,255,0.1);
+  font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;padding:14px 32px;border-radius:40px;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .25s;flex-shrink:0;white-space:nowrap}
+.btn-blog:hover{border-color:rgba(0,212,240,0.3);color:var(--cyan);
+  background:rgba(0,212,240,0.05)}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+.footer{border-top:1px solid rgba(200,137,42,0.1);
+  padding:36px clamp(20px,4vw,60px);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-brand{font-family:var(--fh);font-size:17px;letter-spacing:3px;color:var(--white)}
+.footer-brand span{color:var(--cyan)}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:rgba(245,240,232,0.28);transition:color .2s}
+.footer-links a:hover{color:var(--amber)}
+.footer-copy{font-size:11px;color:rgba(245,240,232,0.18);width:100%;
+  text-align:center;margin-top:6px;font-family:var(--fm)}
+
+/* ═══════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(30px);
+  transition:opacity .7s ease,transform .7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.rd1{transition-delay:.08s}.rd2{transition-delay:.16s}.rd3{transition-delay:.24s}.rd4{transition-delay:.32s}
- 
-/* ── RESPONSIVE ── */
+.d1{transition-delay:.08s}.d2{transition-delay:.18s}
+.d3{transition-delay:.3s}.d4{transition-delay:.42s}
+
+/* ═══════════════════════════════════════════════
+   MOBILE
+═══════════════════════════════════════════════ */
 @media(max-width:768px){
-  .nav{padding:12px 18px}
-  .nav-badge{display:none}
-  .feat-grid{grid-template-columns:1fr}
-  .who-grid{grid-template-columns:1fr 1fr}
+  .hero{height:100svh}
+  .hero-title{font-size:clamp(52px,15vw,76px)}
+  .ph-l,.ph-r{display:none}
+  .ph-c{position:relative;left:auto;transform:none;margin:0 auto}
+  .phones-rig{height:340px;display:flex;align-items:flex-end;justify-content:center}
+  .promise{padding:80px clamp(20px,5vw,36px)}
+  .blog-callout-inner{padding:32px 28px}
+  .sc-content{gap:36px}
+  .features-grid{border-radius:12px}
 }
-@media(max-width:520px){
-  .hero{padding:100px 16px 60px}
-  .section{padding:64px 16px}
-  .hero-actions{flex-direction:column;align-items:center}
-  .hero-actions a{width:100%;justify-content:center;max-width:320px}
-  .who-grid{grid-template-columns:1fr}
-  .price-card{padding:28px 20px}
-  .price-main{font-size:72px}
-  .nav-demo{display:none}
-}
-@media(hover:none){
-  .btn-primary,.btn-ghost,.btn-demo-hero,.nav-cta{min-height:48px}
-  .feat-card:hover,.who-card:hover{transform:none}
-}
- 
-/* ── SUPABASE GRID ── */
-.supa-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-@media(max-width:860px){.supa-grid{grid-template-columns:1fr;gap:32px}}
- 
-/* ── SPLIT CARD INNER ── */
-.split-inner{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center}
-@media(max-width:640px){.split-inner{grid-template-columns:1fr;gap:20px}}
 </style>
 </head>
 <body>
- 
-<!-- ── NAV ── -->
-<nav class="nav">
-  <a href="#" class="nav-brand">
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ══ NAV ══ -->
+<nav class="nav" id="mainNav">
+  <a href="/landing" class="nav-brand">
     <svg class="nav-logo" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
-      <defs><radialGradient id="no" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="55%" stop-color="#0f1220"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs>
-      <circle cx="45" cy="45" r="43" fill="url(#no)" stroke="#00D4F0" stroke-width="1.5" stroke-opacity="0.6"/>
-      <circle cx="45" cy="45" r="29" fill="none" stroke="#00D4F0" stroke-width="0.9" stroke-opacity="0.2"/>
+      <circle cx="45" cy="45" r="43" fill="#0b0d14" stroke="#00D4F0" stroke-width="1.5"/>
       <line x1="45" y1="2" x2="45" y2="26" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
       <line x1="45" y1="64" x2="45" y2="88" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
       <line x1="2" y1="45" x2="26" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
       <line x1="64" y1="45" x2="88" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
       <circle cx="45" cy="45" r="11" fill="#00D4F0"/>
-      <text x="45" y="49" font-family="'Bebas Neue',sans-serif" font-size="8" fill="#050e1a" text-anchor="middle">SP</text>
     </svg>
-    <div class="nav-name">Strike<span>Panel</span>™</div>
-    <span class="nav-badge">Training Intelligence</span>
+    <span class="nav-name">STRIKE<span>PANEL</span></span>
   </a>
-  <div class="nav-right">
-    <a href="#faq" class="nav-demo" style="display:none" id="navFaq">FAQ</a>
-    <a href="strikepanel-demo.html" target="_blank" class="nav-demo">👁 Live Demo</a>
-    <a href="https://strikepanel.gumroad.com" target="_blank" class="nav-cta">🥊 Get it — $149</a>
+  <div class="nav-links">
+    <a href="/demo" class="nav-link">Demo</a>
+    <a href="/blog" class="nav-link">Blog</a>
+    <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" class="nav-cta">Get Access — $99</a>
   </div>
 </nav>
- 
-<!-- ── HERO ── -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-kicker">
-      <span class="kicker-dot"></span>
-      Training Intelligence · Combat · Fitness · Teams · Athletes
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="hero">
+  <div class="layer l-bg" id="lBg">
+    <div class="l-bg-img" id="bgImg"></div>
+    <div class="l-bg-vignette"></div>
+  </div>
+  <div class="layer l-rays" id="lRays">
+    <div class="ray ray-1"></div>
+    <div class="ray ray-2"></div>
+    <div class="ray ray-3"></div>
+    <div class="ray ray-4"></div>
+  </div>
+  <div class="dust-layer" id="dustLayer"></div>
+  <div class="layer l-equip" id="lEquip">
+    <div class="equip-bag" id="equipBag"></div>
+    <div class="equip-speed" id="equipSpeed"></div>
+  </div>
+  <div class="layer l-glow"></div>
+  <div class="layer l-ui">
+    <div class="hero-content">
+      <div class="hero-kicker">
+        <span class="kicker-dot"></span>
+        StrikePanel™ · Training Intelligence
+      </div>
+      <h1 class="hero-title">
+        <span class="line">OLD SCHOOL</span>
+        <span class="line line-amber">GRIT.</span>
+        <span class="line line-cyan">MODERN</span>
+        <span class="line">TRACKING.</span>
+      </h1>
+      <p class="hero-sub">The coaching dashboard built for combat sports. Track readiness, manage fight camps, own your data — every athlete, every day.</p>
+      <div class="hero-badge">Built for Performance &nbsp;·&nbsp; Zero Subscriptions &nbsp;·&nbsp; Pay Once, Own Forever</div>
+      <div class="hero-ctas">
+        <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" class="btn-primary">Get the Dashboard — $99</a>
+        <a href="/blog" class="btn-ghost">Read the Blog →</a>
+      </div>
     </div>
- 
-    <h1 class="hero-title">
-      <span class="line dim">KNOW WHO</span>
-      <span class="line cyan">TO PUSH.</span>
-      <span class="line dim">KNOW WHO</span>
-      <span class="line" style="color:var(--red)">TO PROTECT.</span>
-    </h1>
- 
-    <p class="hero-hook">Every morning. Every athlete. Zero guesswork.</p>
-    <p class="hero-sub">
-      StrikePanel™ is a <strong>coaching web app</strong> that gives coaches, fight teams, gym groups and self-coached athletes
-      a <strong>daily readiness brief</strong> — so you train smarter, peak on fight day, and never over-train again.
+  </div>
+  <div class="scroll-hint" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-hint-line"></div>
+  </div>
+</section>
+
+<!-- ══ STATS ══ -->
+<div class="stats-strip">
+  <div class="stat reveal"><div class="stat-num">20</div><div class="stat-lbl">Athletes per coach</div></div>
+  <div class="stat-div"></div>
+  <div class="stat reveal d1"><div class="stat-num">$0</div><div class="stat-lbl">Monthly fee</div></div>
+  <div class="stat-div"></div>
+  <div class="stat reveal d2"><div class="stat-num">1</div><div class="stat-lbl">App. Any device.</div></div>
+  <div class="stat-div"></div>
+  <div class="stat reveal d3"><div class="stat-num">∞</div><div class="stat-lbl">Days of access</div></div>
+</div>
+
+<!-- ══ FEATURES ══ -->
+<section class="section">
+  <div class="features-wrap">
+    <div class="features-head">
+      <div class="section-eyebrow reveal">What it does</div>
+      <h2 class="section-title reveal d1">EVERY TOOL.<br><span>ONE PLACE.</span></h2>
+      <p class="section-sub reveal d2">No spreadsheets. No guesswork. Every athlete on your roster — scored, tracked, and ready for your decision before the session starts.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-num">01</div>
+        <div class="feat-icon">📋</div>
+        <div class="feat-title">MORNING BRIEF</div>
+        <p class="feat-body">Daily athlete check-ins scored automatically. Sleep, mood, soreness, energy — one number tells you who to push and who to protect.</p>
+        <span class="feat-pill">Readiness Scoring</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">02</div>
+        <div class="feat-icon">⚖️</div>
+        <div class="feat-title">WEIGHT TRACKING</div>
+        <p class="feat-body">Daily logs with fight-night projections. Know weeks in advance whether the cut is on track — or needs adjusting before it becomes a crisis.</p>
+        <span class="feat-pill">Fight Camp Ready</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">03</div>
+        <div class="feat-icon">🥊</div>
+        <div class="feat-title">FIGHT CALENDAR</div>
+        <p class="feat-body">Countdowns for every bout on your roster. Fight dates, camp phases, opponent notes — visible across your entire team at a single glance.</p>
+        <span class="feat-pill">Full Roster View</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">04</div>
+        <div class="feat-icon">⚡</div>
+        <div class="feat-title">SESSION BUILDER</div>
+        <p class="feat-body">Plan sessions with AI or from scratch. Tag rounds, drills, intensity zones. Build a library your whole camp runs from — consistent and repeatable.</p>
+        <span class="feat-pill">AI-Assisted</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">05</div>
+        <div class="feat-icon">📡</div>
+        <div class="feat-title">ATHLETE CHECK-IN</div>
+        <p class="feat-body">Athletes submit their morning brief from their phone — no login, no download. A unique link is all they need. Data lands in your dashboard instantly.</p>
+        <span class="feat-pill">Zero Friction</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">06</div>
+        <div class="feat-icon">☁️</div>
+        <div class="feat-title">CLOUD SYNC</div>
+        <p class="feat-body">Optional Supabase sync keeps your data across every device. Gym floor, corner, hotel room — the full picture follows you everywhere you coach.</p>
+        <span class="feat-pill">Multi-Device</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SHOWCASE ══ -->
+<div class="showcase" id="showcase">
+  <div class="sc-bg" id="scBg"></div>
+  <div class="sc-overlay"></div>
+  <div class="sc-content">
+    <div class="reveal">
+      <div class="section-eyebrow">The app</div>
+      <h2 class="section-title">RUNS ON<br><span>EVERYTHING.</span></h2>
+      <p class="section-sub">Phone, tablet, laptop — StrikePanel installs from the browser in one tap. No App Store. No updates. Open it and coach.</p>
+      <div class="check-list">
+        <div class="check-item">
+          <span class="check-mark"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
+          Works offline — no connection needed mid-session
+        </div>
+        <div class="check-item">
+          <span class="check-mark"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
+          Installs to home screen like a native app
+        </div>
+        <div class="check-item">
+          <span class="check-mark"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
+          One license — unlimited devices, one coach
+        </div>
+        <div class="check-item">
+          <span class="check-mark"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
+          Your data stays in your browser — fully private
+        </div>
+      </div>
+      <a href="/demo" class="btn-ghost">Try the Live Demo →</a>
+    </div>
+    <div class="phones-rig reveal d2" id="phonesRig">
+      <div class="ph ph-l" id="phL">
+        <img src="/sp-media/phone-morning-brief-3x.png" alt="Morning Brief" loading="lazy"/>
+      </div>
+      <div class="ph ph-c" id="phC">
+        <img src="/sp-media/phone-dashboard-3x.png" alt="Dashboard" loading="lazy"/>
+      </div>
+      <div class="ph ph-r" id="phR">
+        <img src="/sp-media/phone-fight-dates-3x.png" alt="Fight Dates" loading="lazy"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROMISE ══ -->
+<section class="promise" id="promise">
+  <div class="promise-bg" id="promiseBg"></div>
+  <div class="promise-veil"></div>
+  <div class="promise-inner">
+    <p class="promise-eye reveal">The StrikePanel Promise</p>
+    <h2 class="promise-title reveal d1">
+      <span class="t-amber">OLD SCHOOL</span>
+      DISCIPLINE.
+      <span class="t-cyan">NEW SCHOOL</span>
+      DATA.
+    </h2>
+    <hr class="promise-rule reveal d2"/>
+    <p class="promise-tag reveal d3">
+      <strong>Built for Performance.</strong><br>
+      Zero Subscriptions.<br>
+      Pay Once, Own Forever.
     </p>
- 
-    <div style="display:flex;justify-content:center;margin-bottom:28px">
-      <div class="price-flash">
-        <div class="price-num" style="text-decoration:line-through;opacity:0.45;font-size:0.6em">$149</div><div class="price-num">$99</div>
-        <div class="price-detail">
-          <div class="once">One-time payment</div>
-          <div class="never">No subscription. Ever.</div>
-        </div>
-      </div>
+    <div class="price-box reveal d4">
+      <div><div class="price-old">was $149</div><div class="price-meta note" style="color:rgba(245,240,232,0.28);font-family:var(--fm);font-size:10px">Launch price</div></div>
+      <div class="price-big">$99</div>
+      <div class="price-meta"><div class="label">One-time</div><div class="note">No renewals ever</div></div>
     </div>
- 
-    <div class="hero-actions">
-      <a href="https://strikepanel.gumroad.com" target="_blank" class="btn-primary">🥊 Get Instant Access — $99</a>
-      <a href="strikepanel-demo.html" target="_blank" class="btn-demo-hero">👁 Try Live Demo</a>
-    </div>
- 
-    <div class="for-pills">
-      <span class="for-pill">🥊 Boxing Coaches</span>
-      <span class="for-pill">🤼 MMA Gyms</span>
-      <span class="for-pill">🎯 Kickboxing Trainers</span>
-      <span class="for-pill">👥 Fight Teams</span>
-      <span class="for-pill">🏋️ Gym Coaches</span>
-      <span class="for-pill">🔥 75 Hard Groups</span>
-      <span class="for-pill">💪 Solo Athletes</span>
-    </div>
- 
-    <!-- Morning Brief Mockup -->
-    <div class="brief-mockup-wrap">
-      <div class="brief-date-lbl" id="briefDate">Tuesday, 28 April 2026 · Fight Camp Week 6</div>
-      <div class="brief-headline"><span class="red">1</span> NEEDS REST · <span class="green">2</span> READY TO PUSH</div>
-      <div class="brief-sub-text">Squad avg 68/100 · Marcus flagged — reduce sparring load today.</div>
-      <div class="r-grid">
-        <div class="r-card g">
-          <div class="r-n">Priya Sharma 🔥</div>
-          <div class="r-s">95</div>
-          <div class="r-b"><div class="r-bf"></div></div>
-          <span class="r-v">PUSH HARD</span>
-          <div class="r-t">↑ +9 vs yesterday</div>
-        </div>
-        <div class="r-card c">
-          <div class="r-n">Marcus Okafor ✅</div>
-          <div class="r-s">72</div>
-          <div class="r-b"><div class="r-bf"></div></div>
-          <span class="r-v">TRAIN NORMAL</span>
-          <div class="r-t">↑ +4 vs yesterday</div>
-        </div>
-        <div class="r-card r">
-          <div class="r-n">Tyler Novak 🛑</div>
-          <div class="r-s">38</div>
-          <div class="r-b"><div class="r-bf"></div></div>
-          <span class="r-v">REST TODAY</span>
-          <div class="r-t">↓ −17 vs yesterday</div>
-        </div>
-      </div>
-      <div class="alert-row">
-        <div class="alrt r">
-          <div class="alrt-ico">🛑</div>
-          <div class="alrt-text">
-            <strong>Tyler Novak — REST TODAY (38/100)</strong>
-            <p>Knee pain reported. Do not run hard training. Active recovery or full rest only.</p>
-          </div>
-        </div>
-        <div class="alrt g">
-          <div class="alrt-ico">✅</div>
-          <div class="alrt-text">
-            <strong>Priya Sharma is primed — push her hard today</strong>
-            <p>Elite scores across all metrics. High-intensity session. Don't hold back.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
- 
-<div class="divider"><span>See it in action</span></div>
-
-<!-- ── SCREENSHOTS ── -->
-<section class="section" style="padding-top:64px;padding-bottom:64px" id="screenshots">
-  <div class="section-inner">
-    <div class="reveal" style="text-align:center;margin-bottom:48px">
-      <div class="s-kicker">Real app. Real data.</div>
-      <h2 class="s-title">Every view. One app.</h2>
-      <p class="s-sub">Morning Brief, Fight Dates, Workouts, Progress — everything your athletes need you to know, before you step on the floor.</p>
-    </div>
-
-    <!-- Laptop screenshot -->
-    <div class="reveal" style="text-align:center;margin-bottom:48px">
-      <img src="/media/screen-laptop.png" alt="StrikePanel Morning Brief on desktop"
-           style="max-width:100%;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.6)">
-      <p style="margin-top:12px;font-size:13px;color:var(--muted)">Morning Brief — squad readiness at a glance</p>
-    </div>
-
-    <!-- Phone + laptop side by side -->
-    <div class="reveal" style="display:flex;gap:40px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:48px">
-      <div style="text-align:center;flex:0 0 auto">
-        <img src="/media/screen-mobile.png" alt="StrikePanel Fight Dates on mobile"
-             style="max-height:480px;border-radius:12px;box-shadow:0 16px 60px rgba(0,0,0,0.6)">
-        <p style="margin-top:12px;font-size:13px;color:var(--muted)">Fight Dates &amp; weight cut plan</p>
-      </div>
-      <div style="flex:1;min-width:280px;max-width:560px">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-          <div style="background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:20px">
-            <div style="font-family:var(--fc);font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:8px">MORNING BRIEF</div>
-            <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">Daily readiness</div>
-            <div style="font-size:12px;color:var(--muted)">Who to push. Who to rest. Every morning before training.</div>
-          </div>
-          <div style="background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:20px">
-            <div style="font-family:var(--fc);font-size:10px;letter-spacing:2px;color:var(--red);margin-bottom:8px">FIGHT DATES</div>
-            <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">Fight camp planning</div>
-            <div style="font-size:12px;color:var(--muted)">Countdowns, weight cut calculators, weekly phase planning.</div>
-          </div>
-          <div style="background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:20px">
-            <div style="font-family:var(--fc);font-size:10px;letter-spacing:2px;color:var(--green);margin-bottom:8px">WORKOUTS</div>
-            <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">AI session builder</div>
-            <div style="font-size:12px;color:var(--muted)">Generate full training sessions in seconds. Log everything.</div>
-          </div>
-          <div style="background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:20px">
-            <div style="font-family:var(--fc);font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:8px">PROGRESS</div>
-            <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">Squad analytics</div>
-            <div style="font-size:12px;color:var(--muted)">14-day readiness chart, leaderboard, export athlete reports.</div>
-          </div>
-        </div>
-      </div>
+    <div class="promise-ctas reveal d4">
+      <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" class="btn-primary">Get the Dashboard — $99</a>
+      <a href="/demo" class="btn-ghost">Try Free Demo</a>
     </div>
   </div>
 </section>
 
-<div class="divider"><span>Who it's for</span></div>
- 
-<!-- ── WHO IT'S FOR ── -->
-<section class="section" style="padding-top:64px;padding-bottom:64px">
-  <div class="section-inner">
-    <div class="reveal">
-      <div class="s-kicker">Built for everyone who trains seriously</div>
-      <h2 class="s-title">One app.<br>Every athlete.</h2>
-      <p class="s-sub">StrikePanel isn't just for combat coaches. Whether you run a gym, fight as a team, or train solo — it adapts to how you train.</p>
+<!-- ══ BLOG ══ -->
+<div class="blog-callout">
+  <div class="blog-callout-inner reveal">
+    <div class="bc-text">
+      <div class="eye">From the coaching intelligence blog</div>
+      <h3>TRAIN SMARTER.<br>COACH BETTER.</h3>
+      <p>Fight camp planning, overtraining signs, weight cut frameworks and athlete readiness — written for coaches who take performance seriously.</p>
     </div>
-    <div class="who-grid">
-      <div class="who-card reveal rd1">
-        <div class="who-icon">🥊</div>
-        <div class="who-title">Combat Sports Coaches</div>
-        <div class="who-desc">Boxing, MMA, Kickboxing, Muay Thai. Know your squad's readiness before you step on the floor. Fight countdowns, weight cuts, camp planning — all in one brief.</div>
-      </div>
-      <div class="who-card reveal rd2">
-        <div class="who-icon">🏋️</div>
-        <div class="who-title">Gym & Fitness Coaches</div>
-        <div class="who-desc">Track up to 10 clients, log sessions, generate AI workouts, and monitor biometrics. Switch between Combat and Gym mode in Settings.</div>
-      </div>
-      <div class="who-card reveal rd3">
-        <div class="who-icon">🔥</div>
-        <div class="who-title">75 Hard & Challenge Groups</div>
-        <div class="who-desc">Run your own 75-day challenge group. Daily check-ins, accountability scores, 8-week progress tracking. One person buys — the whole group benefits.</div>
-      </div>
-      <div class="who-card reveal rd4">
-        <div class="who-icon">💪</div>
-        <div class="who-title">Self-Coached Athletes</div>
-        <div class="who-desc">Track your own readiness, body stats, nutrition, sessions and progress. No coach needed — you are the coach. AI workouts generated in seconds.</div>
-      </div>
-      <div class="who-card reveal rd1">
-        <div class="who-icon">👥</div>
-        <div class="who-title">Fight Teams & Squads</div>
-        <div class="who-desc">One person buys, the whole crew benefits. Athletes check in from their phones, coach sees everything in one brief. Fight teams, training groups, challenge crews — all welcome.</div>
-      </div>
-      <div class="who-card reveal rd2">
-        <div class="who-icon">🎓</div>
-        <div class="who-title">Online & Remote Coaches</div>
-        <div class="who-desc">Athletes submit daily readiness via a shared link from any phone — no download, no account. Scores sync to your Morning Brief instantly.</div>
-      </div>
-    </div>
- 
-    <!-- USP bar -->
-    <div class="usp-bar reveal" style="margin-top:48px">
-      <div class="usp"><div class="usp-val">10</div><div class="usp-lbl">Athletes per app</div></div>
-      <div class="usp"><div class="usp-val">100%</div><div class="usp-lbl">Offline capable</div></div>
-      <div class="usp"><div class="usp-val">∞</div><div class="usp-lbl">No subscription</div></div>
-      <div class="usp"><div class="usp-val">20</div><div class="usp-lbl">Athletes per app</div></div>
-    </div>
+    <a href="/blog" class="btn-blog">Read the Blog →</a>
   </div>
-</section>
- 
-<div class="divider"><span>Features</span></div>
- 
-<!-- ── FEATURES ── -->
-<section class="section" style="padding-top:64px" id="features">
-  <div class="section-inner">
-    <div class="reveal">
-      <div class="s-kicker">Professional tools. No accounts. No subscriptions.</div>
-      <h2 class="s-title">Nine tools.<br><span style="color:var(--accent)">One price.</span></h2>
-      <p class="s-sub">StrikePanel is a web app that installs on any phone, tablet or desktop. Works offline. No backend, no login, no monthly bill.</p>
-    </div>
-    <div class="feat-grid">
-      <div class="feat-card reveal">
-        <span class="feat-icon">⚡</span>
-        <div class="feat-title">Morning Brief & Readiness Engine</div>
-        <div class="feat-desc">Every athlete gets a 0–100 readiness score based on sleep, energy, soreness, motivation, nutrition and pain — logged daily via a 30-second check-in. Your brief tells you exactly who to push and who to protect.</div>
-        <span class="feat-pill">Readiness Score Engine</span>
-      </div>
-      <div class="feat-card reveal rd1">
-        <span class="feat-icon">📲</span>
-        <div class="feat-title">Athlete Self Check-In</div>
-        <div class="feat-desc">Share a link with your athletes. They submit from any phone in under 30 seconds — no app download, no account needed. Scores flow straight into your Morning Brief. Optional cloud sync keeps everything live across devices.</div>
-        <span class="feat-pill">Share Link · Cloud Sync</span>
-      </div>
-      <div class="feat-card reveal rd2">
-        <span class="feat-icon">🥊</span>
-        <div class="feat-title">Fight Date Countdown & Weight Cut</div>
-        <div class="feat-desc">Add any upcoming fight and StrikePanel auto-generates a week-by-week weight cut plan — safe deficit targets, kg per week, calorie deficits and camp phase labels. Colour-coded urgency as fight day approaches.</div>
-        <span class="feat-pill">Weight Cut Calculator</span>
-      </div>
-      <div class="feat-card reveal">
-        <span class="feat-icon">✦</span>
-        <div class="feat-title">AI Workout Generator</div>
-        <div class="feat-desc">Tell the AI the goal, muscle groups, equipment and duration — get a complete coached session with sets, reps, rest periods and coaching cues in seconds. Powered by Google Gemini (free key — no card required).</div>
-        <span class="feat-pill">Gemini AI · Free Key</span>
-      </div>
-      <div class="feat-card reveal rd1">
-        <span class="feat-icon">⏱</span>
-        <div class="feat-title">Boxing Round Timer</div>
-        <div class="feat-desc">Professional interval timer with configurable warm-up, rounds, rest periods and warning bell. Visual round progress ring, pip tracker and audio cues. Works fully offline — install as a PWA and use ringside, no internet.</div>
-        <span class="feat-pill">Offline · PWA Installable</span>
-      </div>
-      <div class="feat-card reveal rd2">
-        <span class="feat-icon">🥗</span>
-        <div class="feat-title">Food AI & Macro Tracker</div>
-        <div class="feat-desc">Describe what you ate in plain English — the AI breaks down calories, protein, carbs and fats instantly. Running daily nutrition log with totals and targets. Works for weight cuts, bulks and maintenance phases.</div>
-        <span class="feat-pill">AI Nutrition Analysis</span>
-      </div>
-      <div class="feat-card reveal">
-        <span class="feat-icon">📊</span>
-        <div class="feat-title">Biometrics & Progress Tracking</div>
-        <div class="feat-desc">BMI, BMR, TDEE, lean mass, fat mass, protein targets and hydration — all auto-calculated per athlete. 8-week performance score tracking with trend detection. Wearable data logging (HRV, RHR, steps, sleep).</div>
-        <span class="feat-pill">Biometrics Engine</span>
-      </div>
-      <div class="feat-card reveal rd1">
-        <span class="feat-icon">📄</span>
-        <div class="feat-title">Athlete PDF Reports</div>
-        <div class="feat-desc">Generate a professional report for any athlete — readiness history, fight dates, session log, biometrics and goals. Share to WhatsApp, email or print. One click, print-ready.</div>
-        <span class="feat-pill">PDF · Share to WhatsApp</span>
-      </div>
-      <div class="feat-card reveal rd2">
-        <span class="feat-icon">☁️</span>
-        <div class="feat-title">Offline-First · Optional Cloud Sync</div>
-        <div class="feat-desc">All data lives locally in your browser — no internet needed, ever. Add a free Supabase cloud backup in Settings to sync across devices or with a co-coach. Your data stays yours — no third party ever touches it.</div>
-        <span class="feat-pill">Local-First · BYOC</span>
-      </div>
-    </div>
-  </div>
-</section>
- 
-<div class="divider"><span>Fight Dates</span></div>
- 
-<!-- ── FIGHT COUNTDOWN DEMO ── -->
-<section class="section" style="padding-top:64px;padding-bottom:64px">
-  <div class="section-inner">
-    <div class="reveal">
-      <div class="s-kicker">🥊 Fight Date Tracker</div>
-      <h2 class="s-title">Countdown to fight day.<br>Weight cut on autopilot.</h2>
-      <p class="s-sub">Add a fight, enter current and target weight — StrikePanel calculates the plan automatically. Week-by-week cut targets, calorie deficit per day, and camp urgency colour-coding.</p>
-    </div>
-    <div class="fight-grid reveal">
-      <div class="fight-card">
-        <div class="fight-ath">Marcus Okafor</div>
-        <div class="fight-vs">vs Carlos "El Toro" Mendez</div>
-        <div class="fight-meta">Fight Night London · Welterweight (77kg)</div>
-        <div class="fight-days" id="fdays1">21</div>
-        <div class="fight-lbl">days until fight</div>
-        <div class="wc-block">
-          <div class="wc-lbl">⚖️ Weight Cut — 81.5kg → 77kg</div>
-          <div class="wc-bar"><div class="wc-fill red"></div></div>
-          <div class="wc-stat">3 weeks out · <strong>1.5 kg/wk · Aggressive</strong> · −1,500 kcal/day</div>
-        </div>
-      </div>
-      <div class="fight-card">
-        <div class="fight-ath">Tyler Novak</div>
-        <div class="fight-vs">Regional Kickboxing Championship</div>
-        <div class="fight-meta">Light Heavyweight (80kg)</div>
-        <div class="fight-days" style="color:var(--amber);text-shadow:0 0 20px rgba(245,158,11,0.3)">56</div>
-        <div class="fight-lbl">days until fight</div>
-        <div class="wc-block">
-          <div class="wc-lbl">⚖️ Weight Cut — 84kg → 80kg</div>
-          <div class="wc-bar"><div class="wc-fill amber"></div></div>
-          <div class="wc-stat">8 weeks out · <strong>0.5 kg/wk · Comfortable</strong> · −500 kcal/day</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
- 
-<div class="divider"><span>AI Workouts</span></div>
- 
-<!-- ── AI WORKOUT ── -->
-<section class="section" style="padding-top:64px;padding-bottom:64px">
-  <div class="section-inner reveal">
-    <div class="s-kicker">✦ AI Workout Generator</div>
-    <h2 class="s-title">A full coached session<br>in seconds.</h2>
-    <p class="s-sub" style="margin-bottom:0">Powered by Google Gemini — free API key, no credit card, takes 2 minutes to set up at aistudio.google.com.</p>
-    <div class="ai-card">
-      <div class="ai-badge"><div class="ai-dot"></div>Generating session…</div>
-      <div class="ai-title">Marcus Okafor — Combat Performance</div>
-      <div class="ai-sub">Goal: Athletic performance · 60 min · Full gym · Advanced · Bad knee, skip heavy squats</div>
-      <div class="ai-resp">
-        <h4>Warm-Up (10 min)</h4>
-        Jump rope — 3 min easy · Dynamic hip circles — 2×10 each · Band pull-aparts — 3×15 · Shadow boxing — 3 min
-        <h4>Strength (30 min)</h4>
-        <strong>A1.</strong> Trap Bar Deadlift — 5×3 @ 80% · 2 min rest<br>
-        <strong>A2.</strong> Single-leg RDL — 4×8 each side · 90s rest<br>
-        <strong>B1.</strong> Weighted Pull-ups — 4×5 · 90s rest<br>
-        <strong>B2.</strong> Landmine Press — 4×8 each · 60s rest
-        <h4>Conditioning (15 min)</h4>
-        Assault Bike Intervals — 10 × 20s hard / 40s easy · Heart rate below 160 before next interval
-        <h4>Cool Down (5 min)</h4>
-        Coach's note: Shoulder feels tight — monitor during pressing. High intensity given 95/100 readiness score today.
-      </div>
-      <div class="ai-note">✦ AI reads each athlete's readiness score before generating — Tyler (38/100 today) would get a recovery session instead.</div>
-    </div>
-  </div>
-</section>
- 
-<div class="divider"><span>Team & Group Use</span></div>
- 
-<!-- ── TEAM SPLIT ── -->
-<section class="section" style="padding-top:64px;padding-bottom:64px">
-  <div class="section-inner">
-    <div class="reveal">
-      <div class="s-kicker">👥 One app. Your whole crew.</div>
-      <h2 class="s-title">One person buys.<br><span style="color:var(--accent)">Everyone trains smarter.</span></h2>
-      <p class="s-sub">Whether it's your fight camp, your 75 Hard crew, your gym squad, or a group of friends competing together — one license covers up to 20 athletes. They check in from their phones. You see everything.</p>
-    </div>
-    <div class="split-card reveal">
-      <div class="split-inner">
-        <div>
-          <div class="split-big">20</div>
-          <div class="split-label">Athletes per license</div>
-        </div>
-        <div>
-          <div class="split-row">
-            <div class="split-ico">📲</div>
-            <div class="split-text">
-              <strong>Your crew checks in from their phones</strong>
-              <p>Share a link. Each person submits daily readiness in 30 seconds — no download, no account needed.</p>
-            </div>
-          </div>
-          <div class="split-row">
-            <div class="split-ico">☁️</div>
-            <div class="split-text">
-              <strong>Cloud sync keeps everyone live</strong>
-              <p>Add a free Supabase project in Settings. All check-ins sync to your Morning Brief in real time.</p>
-            </div>
-          </div>
-          <div class="split-row" style="margin-bottom:0">
-            <div class="split-ico">🔥</div>
-            <div class="split-text">
-              <strong>Any group. Any goal.</strong>
-              <p>Fight camp. 75 Hard. Gym squad. Friends competing with each other. One app handles all of it — no extra cost per person.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
- 
-<div class="divider"><span>Cloud Sync</span></div>
- 
-<!-- ── SUPABASE SECTION ── -->
-<section class="section" style="padding-top:64px;padding-bottom:64px">
-  <div class="section-inner">
-    <div class="reveal supa-grid">
-      <div>
-        <div class="s-kicker">☁️ Optional Cloud Backup — Powered by Supabase</div>
-        <h2 class="s-title">Your data.<br><span style="color:var(--accent)">Your cloud.</span></h2>
-        <p class="s-sub" style="margin-bottom:24px">StrikePanel works 100% offline out of the box — no cloud account ever required. But if you want to sync across devices, share with a co-coach, or receive athlete check-ins in real time, you can connect your own free Supabase project in under 5 minutes.</p>
-        <div style="display:flex;flex-direction:column;gap:11px">
-          <div style="display:flex;align-items:flex-start;gap:12px">
-            <span style="font-size:18px;flex-shrink:0;margin-top:2px">🆓</span>
-            <div>
-              <div style="font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);margin-bottom:2px">Supabase free tier is enough</div>
-              <div style="font-size:13px;color:var(--muted)">Supabase's free tier gives you 500MB database storage and 50,000 monthly active users — more than enough for any coach or fight team. No credit card required to start.</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:12px">
-            <span style="font-size:18px;flex-shrink:0;margin-top:2px">🔐</span>
-            <div>
-              <div style="font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);margin-bottom:2px">Your project, your data</div>
-              <div style="font-size:13px;color:var(--muted)">StrikePanel connects to <em>your</em> Supabase project — not ours. We never see, touch or store your athletes' data. Paste your URL and anon key in Settings and you're live.</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:12px">
-            <span style="font-size:18px;flex-shrink:0;margin-top:2px">📲</span>
-            <div>
-              <div style="font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);margin-bottom:2px">Real-time athlete check-ins</div>
-              <div style="font-size:13px;color:var(--muted)">Once connected, athlete self check-ins submitted via their share link sync straight to your Morning Brief — from any device, anywhere in the world, in real time.</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:12px">
-            <span style="font-size:18px;flex-shrink:0;margin-top:2px">⚡</span>
-            <div>
-              <div style="font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);margin-bottom:2px">5-minute setup, full schema included</div>
-              <div style="font-size:13px;color:var(--muted)">StrikePanel ships with the exact SQL schema you need. Copy, paste into Supabase's SQL editor, run — done. Step-by-step guide included in the app's Settings page.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="reveal rd2">
-        <!-- Supabase visual card -->
-        <div style="background:linear-gradient(135deg,rgba(16,185,129,0.07),rgba(0,212,240,0.04));border:1px solid rgba(16,185,129,0.2);border-radius:16px;padding:24px;position:relative;overflow:hidden">
-          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),var(--accent),transparent)"></div>
-          <div style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted2);margin-bottom:16px">Supabase Setup — 3 Steps</div>
- 
-          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
-            <div style="display:flex;align-items:center;gap:12px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.18);border-radius:10px;padding:12px 14px">
-              <div style="width:24px;height:24px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:var(--fc);font-size:12px;font-weight:700;color:#050810;flex-shrink:0">1</div>
-              <div>
-                <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)">Create free Supabase project</div>
-                <div style="font-size:11.5px;color:var(--muted);margin-top:1px">supabase.com → New Project → free tier</div>
-              </div>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.18);border-radius:10px;padding:12px 14px">
-              <div style="width:24px;height:24px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:var(--fc);font-size:12px;font-weight:700;color:#050810;flex-shrink:0">2</div>
-              <div>
-                <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)">Run the included SQL schema</div>
-                <div style="font-size:11.5px;color:var(--muted);margin-top:1px">Copy from Settings → paste in SQL editor → Run</div>
-              </div>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.18);border-radius:10px;padding:12px 14px">
-              <div style="width:24px;height:24px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:var(--fc);font-size:12px;font-weight:700;color:#050810;flex-shrink:0">3</div>
-              <div>
-                <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)">Paste URL & key in StrikePanel</div>
-                <div style="font-size:11.5px;color:var(--muted);margin-top:1px">Settings → Cloud Backup → paste → Save</div>
-              </div>
-            </div>
-          </div>
- 
-          <div style="background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 12px;font-family:var(--fm);font-size:11px;color:var(--muted2);line-height:1.7">
-            <span style="color:var(--green)">✓</span> Cloud connected<br>
-            <span style="color:var(--green)">✓</span> 3 athlete check-ins synced today<br>
-            <span style="color:var(--accent)">↻</span> Priya — submitted 08:14<br>
-            <span style="color:var(--accent)">↻</span> Marcus — submitted 08:31<br>
-            <span style="color:var(--accent)">↻</span> Tyler — submitted 09:02
-          </div>
-          <div style="margin-top:10px;font-size:11.5px;color:var(--muted2);text-align:center">Always optional · StrikePanel never touches your data</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
- 
-<div class="divider"><span>FAQ</span></div>
- 
-<!-- ── FAQ ── -->
-<section class="section" style="padding-top:64px;padding-bottom:64px" id="faq">
-  <div class="section-inner">
-    <div class="reveal">
-      <div class="s-kicker">Common questions</div>
-      <h2 class="s-title">Everything you<br>need to know.</h2>
-    </div>
-    <div class="faq-grid reveal">
- 
-      <div class="faq-item">
-        <div class="faq-q">Do I need technical skills to use this?</div>
-        <div class="faq-a">No. The app is a single HTML file — open it in any browser and it works immediately. No install, no accounts, no setup. The AI feature needs a free Google Gemini key (takes 2 minutes to get at aistudio.google.com, no credit card). Cloud sync via Supabase is 100% optional and only for coaches who want multi-device access.</div>
-      </div>
- 
-      <div class="faq-item">
-        <div class="faq-q">Can I use this on multiple devices?</div>
-        <div class="faq-a">Yes. StrikePanel is a web app — it works on any phone, tablet or desktop. By default your data lives locally on your device. To sync across devices, connect a free Supabase project in Settings (5-minute setup, full guide included). Athletes can always submit their check-ins from any phone via a simple share link — no device setup needed.</div>
-      </div>
- 
-      <div class="faq-item">
-        <div class="faq-q">What if I lose my data?</div>
-        <div class="faq-a">Use the <strong>Full Backup</strong> button in Settings → Data Management to download a JSON backup of everything. You can restore from that file on any device at any time. If you've set up Supabase cloud sync, your data is also backed up there automatically. We recommend exporting a backup weekly.</div>
-      </div>
- 
-      <div class="faq-item">
-        <div class="faq-q">How does the athlete check-in work?</div>
-        <div class="faq-a">From the Morning Brief tab, copy your unique share link and send it to your athletes (WhatsApp, iMessage, email — anything). They open it on their own phone, slide through 6 readiness questions in about 30 seconds, and submit. Their score instantly appears in your Morning Brief. No app download, no account, no friction.</div>
-      </div>
- 
-      <div class="faq-item">
-        <div class="faq-q">Is this really a one-time payment — no hidden fees?</div>
-        <div class="faq-a">Yes. $99 once, yours forever. No monthly plan. No "premium tier". No surprise charges. The only optional paid thing outside this app is Supabase, and their free tier is more than enough for any coach. The AI uses Google Gemini's free tier (also no card required).</div>
-      </div>
- 
-      <div class="faq-item">
-        <div class="faq-q">Can a team split the cost?</div>
-        <div class="faq-a">Absolutely — and many do. One person buys the license, opens the app, adds everyone, and shares the check-in link. The app supports up to 20 athletes per installation — fight teams, gym squads, challenge groups, friends competing together. One $99 purchase covers the whole crew.</div>
-      </div>
- 
-      <div class="faq-item">
-        <div class="faq-q">What's your refund policy?</div>
-        <div class="faq-a">Because this is a digital product, all sales are final. That's why we offer a full live demo — try every feature free before you buy. If you have a genuine technical issue that prevents the app from working at all, email us and we'll sort it.</div>
-      </div>
- 
-      <div class="faq-item">
-        <div class="faq-q">Does it work offline? Can I use the timer ringside?</div>
-        <div class="faq-a">Yes. Once you've opened the app in a browser, it caches itself as a Progressive Web App (PWA). You can install it to your phone's home screen and use it with no internet — including the boxing timer, which works perfectly ringside.</div>
-      </div>
- 
-    </div>
- 
-    <!-- Trust signals -->
-    <div class="trust-row reveal" style="margin-top:52px">
-      <div class="trust-item">
-        <div class="trust-icon">🔒</div>
-        <div class="trust-text"><strong>Your data stays yours</strong><br>Nothing is sent to our servers. Ever.</div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">📁</div>
-        <div class="trust-text"><strong>Works everywhere</strong><br>Phone, tablet, desktop. No App Store.</div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">♾️</div>
-        <div class="trust-text"><strong>No subscription</strong><br>Pay once. Use forever. Full stop.</div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">📲</div>
-        <div class="trust-text"><strong>PWA installable</strong><br>Add to home screen. Works offline.</div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">🆓</div>
-        <div class="trust-text"><strong>AI is free to use</strong><br>Google Gemini key — no card needed.</div>
-      </div>
-    </div>
-  </div>
-</section>
- 
-<div class="divider"><span>Pricing</span></div>
- 
-<!-- ── PRICING ── -->
-<section class="section" style="padding-top:64px" id="pricing">
-  <div class="section-inner" style="text-align:center">
-    <div class="reveal">
-      <div class="s-kicker" style="display:inline-block">One price. Everything included.</div>
-      <h2 class="s-title">No subscriptions.<br><span style="color:var(--accent)">Ever.</span></h2>
-      <p class="s-sub" style="margin:0 auto">The fitness app industry runs on subscriptions that drain $10–40/month forever. StrikePanel doesn't. Pay once. Own it forever.</p>
-    </div>
- 
-    <div class="price-card reveal">
-      <div class="price-badge">StrikePanel™ — Full Access</div>
-      <div class="price-main"><span class="curr" style="font-size:0.5em;opacity:0.5;text-decoration:line-through">$149</span><span class="curr">$</span>99</div>
-      <div class="price-per">One-time payment · Instant access</div>
-      <div class="price-tagline">Instant access via web — installs on your phone in one tap. <strong>No monthly fee. Ever.</strong></div>
-      <ul class="price-feats">
-        <li><strong>Morning Brief</strong> — daily readiness scoring for up to 10 athletes</li>
-        <li><strong>Athlete Self Check-In</strong> — shareable link, no accounts needed</li>
-        <li><strong>Fight Countdown & Weight Cut Calculator</strong></li>
-        <li><strong>AI Workout Generator</strong> (free Gemini key — no card)</li>
-        <li><strong>Boxing Round Timer</strong> — works fully offline</li>
-        <li><strong>Food AI & Macro Tracker</strong></li>
-        <li><strong>Biometrics Engine</strong> — BMI, BMR, TDEE, lean mass + wearable data</li>
-        <li><strong>PDF Athlete Reports</strong> — printable, shareable</li>
-        <li><strong>Offline-first PWA</strong> — installs on any phone or desktop</li>
-        <li><strong>Optional cloud sync</strong> — your Supabase, your data</li>
-        <li>Combat Sports mode <strong>and</strong> Gym & Fitness mode</li>
-      </ul>
-      <a href="https://strikepanel.gumroad.com" target="_blank" class="btn-primary price-cta">🥊 Get Instant Access — $99</a>
-      <a href="strikepanel-demo.html" target="_blank" class="btn-ghost" style="width:100%;justify-content:center;margin-bottom:18px">👁 Try the Live Demo First</a>
-      <div class="price-guarantee">
-        <strong>Single file. No install. No account.</strong><br>
-        Works in Chrome, Safari, Firefox, Edge — on any device.<br>
-        Covers up to <strong style="color:var(--accent)">20 athletes</strong> — coaches, squads, and groups welcome.
-      </div>
-    </div>
-  </div>
-</section>
- 
-<!-- ── FOOTER ── -->
+</div>
+
+<!-- ══ FOOTER ══ -->
 <footer class="footer">
-  <div class="footer-brand">Strike<span>Panel</span>™</div>
-  <div class="footer-sub">Training Intelligence · One-time fee · No subscription · Instant access · strikepanel.gumroad.com</div>
+  <div class="footer-brand">STRIKE<span>PANEL</span>™</div>
+  <div class="footer-links">
+    <a href="/landing">Home</a>
+    <a href="/demo">Demo</a>
+    <a href="/blog">Blog</a>
+    <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank">Get Access</a>
+  </div>
+  <div class="footer-copy">© 2026 StrikePanel™ · Training Intelligence for Combat Sports · No subscription · Instant access</div>
 </footer>
- 
+
 <script>
-// ══════════════════════════════════════════════════════════
-// DEMO URL CONFIG
-// When you host these files, set DEMO_URL to the absolute
-// URL of your demo file so it works from any context.
-// e.g. 'https://yourdomain.com/strikepanel-demo.html'
-// Leave as '' to use relative path (works when files are
-// in the same folder on the same server).
-// ══════════════════════════════════════════════════════════
-const DEMO_URL = 'https://strikepanel.vercel.app/demo'
- 
-(function resolveDemoLinks(){
-  if(!DEMO_URL) return; // relative links already work fine
-  document.querySelectorAll('a[href="strikepanel-demo.html"]').forEach(a=>{
-    a.href = DEMO_URL;
-  });
-})();
- 
-// ── Set live date in brief mockup ──
+/* ── Dust particles ── */
 (function(){
-  const d = new Date();
-  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  const el = document.getElementById('briefDate');
-  if(el) el.textContent = days[d.getDay()] + ', ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear() + ' · Fight Camp Intelligence';
+  const layer = document.getElementById('dustLayer');
+  if(!layer) return;
+  for(let i=0;i<30;i++){
+    const m=document.createElement('div');
+    m.className='mote';
+    const sz=0.8+Math.random()*2.4;
+    const l=Math.random()*100;
+    const delay=Math.random()*14;
+    const dur=9+Math.random()*16;
+    const drift=(Math.random()-0.5)*90;
+    m.style.cssText=`width:${sz}px;height:${sz}px;left:${l}%;bottom:-4%;`+
+      `--drift:${drift}px;animation-duration:${dur}s;animation-delay:-${delay}s;`+
+      `opacity:${0.15+Math.random()*0.55}`;
+    layer.appendChild(m);
+  }
 })();
- 
-// ── Reveal on scroll ──
-const reveals = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-reveals.forEach(el => io.observe(el));
- 
-// Show FAQ nav link on desktop only
-if(window.innerWidth > 768){ const f=document.getElementById('navFaq');if(f)f.style.display=''; }
+
+/* ── Parallax + mouse tilt engine ── */
+const IS_MOBILE=()=>window.innerWidth<=768;
+
+let sY=0,tSY=window.pageYOffset;
+let mX=0,mY=0,tMX=0,tMY=0;
+let rafId=null;
+
+const lerp=(a,b,t)=>a+(b-a)*t;
+
+window.addEventListener('scroll',()=>{tSY=window.pageYOffset;kick();},{passive:true});
+window.addEventListener('mousemove',e=>{
+  if(IS_MOBILE())return;
+  tMX=(e.clientX/window.innerWidth-0.5)*2;
+  tMY=(e.clientY/window.innerHeight-0.5)*2;
+},{passive:true});
+
+const bgImg  = document.getElementById('bgImg');
+const lRays  = document.getElementById('lRays');
+const lEquip = document.getElementById('lEquip');
+const scBg   = document.getElementById('scBg');
+const pbg    = document.getElementById('promiseBg');
+const phL    = document.getElementById('phL');
+const phC    = document.getElementById('phC');
+const phR    = document.getElementById('phR');
+
+function frame(){
+  rafId=null;
+  sY=lerp(sY,tSY,0.09);
+  mX=lerp(mX,tMX,0.045);
+  mY=lerp(mY,tMY,0.045);
+
+  if(!IS_MOBILE()){
+    const heroH=document.getElementById('hero').offsetHeight;
+    const p=Math.min(sY/heroH,1);
+
+    if(bgImg)  bgImg.style.transform =`translateY(${sY*0.14}px) translate(${mX*9}px,${mY*5}px)`;
+    if(lRays)  lRays.style.transform =`translateY(${sY*0.27}px) translate(${mX*17}px,${mY*10}px)`;
+    if(lEquip) lEquip.style.transform=`translateY(${sY*0.44}px) translate(${mX*27}px,${mY*15}px)`;
+
+    const bag=document.getElementById('equipBag');
+    const spd=document.getElementById('equipSpeed');
+    if(bag) bag.style.transform=`scale(${1+p*0.07}) translateX(${p*-18}px)`;
+    if(spd) spd.style.transform=`scale(${1+p*0.05}) translateX(${p*18}px)`;
+
+    /* Showcase bg */
+    const sc=document.getElementById('showcase');
+    if(sc&&scBg){
+      const off=sc.offsetTop;
+      const pp=(sY-off+window.innerHeight)/(sc.offsetHeight+window.innerHeight);
+      scBg.style.transform=`translateY(${(pp-0.5)*-110}px)`;
+    }
+    /* Promise bg */
+    const pr=document.getElementById('promise');
+    if(pr&&pbg){
+      const off=pr.offsetTop;
+      const pp=(sY-off+window.innerHeight)/(pr.offsetHeight+window.innerHeight);
+      pbg.style.transform=`translateY(${(pp-0.5)*-95}px)`;
+    }
+    /* Phone tilt */
+    if(phL) phL.style.transform=`rotate(-7deg) translateY(22px) translate(${mX*-7}px,${mY*-4}px)`;
+    if(phC) phC.style.transform=`translate(${mX*-11}px,${mY*-7}px)`;
+    if(phR) phR.style.transform=`rotate(7deg) translateY(22px) translate(${mX*-6}px,${mY*-4}px)`;
+  }
+
+  const stillMoving=
+    Math.abs(sY-tSY)>0.4||
+    Math.abs(mX-tMX)>0.0008||
+    Math.abs(mY-tMY)>0.0008;
+  if(stillMoving) kick();
+}
+
+function kick(){if(!rafId) rafId=requestAnimationFrame(frame);}
+
+/* ── Nav scroll state ── */
+const nav=document.getElementById('mainNav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.pageYOffset>60);
+},{passive:true});
+
+/* ── Scroll reveal ── */
+const revEls=document.querySelectorAll('.reveal,.feat-card');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible','revealed');
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.1,rootMargin:'0px 0px -32px 0px'});
+revEls.forEach(el=>obs.observe(el));
+
+/* ── Hero title entrance ── */
+document.querySelectorAll('.hero-title .line').forEach((l,i)=>{
+  l.style.transitionDelay=`${0.08+i*0.13}s`;
+});
+const heroSubs=document.querySelectorAll('.hero-kicker,.hero-sub,.hero-badge,.hero-ctas');
+heroSubs.forEach((el,i)=>{
+  el.style.cssText+=`opacity:0;transform:translateY(18px);`+
+    `transition:opacity .65s ease ${0.62+i*0.1}s,transform .65s ease ${0.62+i*0.1}s`;
+});
+requestAnimationFrame(()=>{
+  document.querySelectorAll('.hero-title .line').forEach(l=>{
+    l.style.opacity='1';l.style.transform='translateY(0)';
+  });
+  heroSubs.forEach(el=>{el.style.opacity='1';el.style.transform='translateY(0)';});
+});
+
+kick();
 </script>
 </body>
 </html>
- 
