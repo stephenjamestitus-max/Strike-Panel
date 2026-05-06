@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>StrikePanel™ — Coaching Intelligence for Combat Sports</title>
+<meta name="description" content="The coaching dashboard built for combat sports. Track readiness, manage fight camps, own your athletes' data. One-time $99 — no subscription ever."/>
+<meta property="og:title" content="StrikePanel™ — Old School Coaching. Modern Data."/>
+<meta property="og:description" content="Track readiness, manage fight camps, own your athletes' data. Pay once, coach forever."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://strikepanel.vercel.app/vintage"/>
+<meta name="robots" content="index,follow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   RESET & ROOT
+═══════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0a0a0a;
+  --dark:#0f0f0f;
+  --charcoal:#1a1a1a;
+  --amber:#c8952a;
+  --amber-glow:rgba(200,149,42,0.35);
+  --cream:#e8dcc8;
+  --red:#8b1a1a;
+  --white:#ffffff;
+  --fh:'Bebas Neue',sans-serif;
+  --fb:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--black);color:var(--cream);font-family:var(--fb);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+::selection{background:rgba(200,149,42,0.25)}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:rgba(200,149,42,0.3);border-radius:99px}
+
+/* ═══════════════════════════════════════════════
+   GRAIN TEXTURE
+═══════════════════════════════════════════════ */
+body::after{
+  content:'';
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:9999;opacity:0.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:200px 200px}
+
+/* ═══════════════════════════════════════════════
+   ANIMATE-IN SYSTEM
+═══════════════════════════════════════════════ */
+.animate-in{opacity:0;transform:translateY(30px);transition:opacity .6s ease-out,transform .6s ease-out}
+.animate-in.visible{opacity:1;transform:translateY(0)}
+.animate-in:nth-child(1){transition-delay:.0s}
+.animate-in:nth-child(2){transition-delay:.1s}
+.animate-in:nth-child(3){transition-delay:.2s}
+.animate-in:nth-child(4){transition-delay:.3s}
+.animate-in:nth-child(5){transition-delay:.4s}
+.animate-in:nth-child(6){transition-delay:.5s}
+
+/* ═══════════════════════════════════════════════
+   PARALLAX HELPER
+═══════════════════════════════════════════════ */
+.parallax-bg{background-attachment:fixed;background-size:cover;background-position:center;background-repeat:no-repeat}
+@media(max-width:768px),(pointer:coarse){.parallax-bg{background-attachment:scroll!important}}
+
+/* ═══════════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:0 clamp(1rem,4vw,3.5rem);height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .4s,backdrop-filter .4s,border-color .4s;
+  border-bottom:1px solid transparent}
+.nav.scrolled{
+  background:rgba(10,10,10,0.96);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom-color:rgba(200,149,42,0.15)}
+.nav-brand{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--fh);font-size:1.35rem;
+  letter-spacing:.18em;color:var(--amber)}
+.nav-brand svg{width:24px;height:24px;flex-shrink:0}
+.nav-links{display:flex;align-items:center;gap:clamp(10px,2vw,26px)}
+.nav-link{
+  font-size:.7rem;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.65);transition:color .22s}
+.nav-link:hover{color:var(--amber)}
+.nav-cta{
+  font-size:.7rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--amber);border:1px solid var(--amber);
+  padding:8px 18px;transition:background .22s,color .22s}
+.nav-cta:hover{background:var(--amber);color:var(--black)}
+.nav-hamburger{
+  display:none;background:none;border:none;
+  cursor:pointer;color:var(--cream);font-size:1.5rem;line-height:1}
+@media(max-width:760px){.nav-links{display:none}.nav-hamburger{display:block}}
+
+/* Mobile overlay nav */
+.nav-overlay{
+  display:none;position:fixed;inset:0;z-index:998;
+  background:rgba(10,10,10,.98);
+  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.nav-overlay.open{display:flex}
+.nav-overlay a{font-family:var(--fh);font-size:2.4rem;letter-spacing:.15em;color:var(--cream);transition:color .2s}
+.nav-overlay a:hover{color:var(--amber)}
+.nav-overlay-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:var(--cream);font-size:1.8rem;cursor:pointer;line-height:1}
+
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+.hero{
+  position:relative;height:100vh;min-height:620px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  background-image:url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=1920&q=80');
+  background-size:cover;background-position:center;background-attachment:fixed}
+@media(max-width:768px){.hero{background-attachment:scroll}}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,.78) 0%,rgba(0,0,0,.32) 40%,rgba(0,0,0,.88) 100%)}
+.hero-content{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;
+  padding:0 1.5rem;max-width:960px}
+.hero-badge{
+  display:inline-block;border:1px solid var(--amber);
+  color:var(--amber);font-size:.62rem;letter-spacing:.28em;
+  text-transform:uppercase;font-weight:500;
+  padding:6px 20px;margin-bottom:2rem;
+  opacity:0;animation:fadeUp .6s ease-out .2s forwards}
+.hero-title{font-family:var(--fh);line-height:.87;margin-bottom:1.5rem}
+.hero-line1{
+  display:block;font-size:clamp(68px,12.5vw,155px);color:var(--white);
+  opacity:0;animation:fadeUp .7s ease-out .4s forwards}
+.hero-line2{
+  display:block;font-size:clamp(68px,12.5vw,155px);color:var(--amber);
+  opacity:0;animation:fadeUp .7s ease-out .62s forwards}
+.hero-sub{
+  font-size:1.05rem;font-weight:300;color:rgba(255,255,255,.75);
+  max-width:500px;line-height:1.8;margin-bottom:2rem;
+  opacity:0;animation:fadeUp .6s ease-out .82s forwards}
+.hero-btns{
+  display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;
+  opacity:0;animation:fadeUp .6s ease-out 1s forwards}
+.btn-amber{
+  background:var(--amber);color:var(--black);
+  font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:1rem 2.5rem;transition:filter .25s,transform .25s;display:inline-block}
+.btn-amber:hover{filter:brightness(1.1);transform:translateY(-2px)}
+.btn-ghost{
+  border:2px solid rgba(255,255,255,.42);color:var(--white);
+  font-size:.78rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  padding:1rem 2.5rem;background:rgba(255,255,255,.04);
+  backdrop-filter:blur(8px);transition:border-color .25s,color .25s;display:inline-block}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+.scroll-indicator{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:2;
+  opacity:0;animation:fadeUp .5s ease-out 1.4s forwards,pulse-scroll 1.5s ease-in-out 2s infinite}
+.scroll-indicator svg{width:26px;height:26px;color:rgba(255,255,255,.5)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse-scroll{
+  0%,100%{transform:translateX(-50%) scale(1);opacity:.55}
+  50%{transform:translateX(-50%) scale(1.15);opacity:.18}}
+
+/* ═══════════════════════════════════════════════
+   STATS BAR
+═══════════════════════════════════════════════ */
+.stats-bar{
+  background:#111111;
+  border-top:1px solid rgba(200,149,42,.2);border-bottom:1px solid rgba(200,149,42,.2);
+  padding:3rem clamp(1rem,5vw,4rem);
+  display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:2rem}
+.stat{text-align:center}
+.stat-num{
+  font-family:var(--fh);font-size:3.5rem;letter-spacing:.05em;
+  color:var(--amber);line-height:1}
+.stat-label{
+  font-size:.67rem;font-weight:400;letter-spacing:.22em;
+  text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:6px}
+.stats-divider{width:1px;height:50px;background:rgba(200,149,42,.18)}
+@media(max-width:560px){.stats-divider{display:none}}
+
+/* ═══════════════════════════════════════════════
+   ABOUT SECTION
+═══════════════════════════════════════════════ */
+.about{
+  position:relative;padding:8rem clamp(1.5rem,7vw,5.5rem);
+  background-image:url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1920&q=80');
+  background-size:cover;background-position:center;background-attachment:fixed}
+@media(max-width:768px){.about{background-attachment:scroll}}
+.about-overlay{position:absolute;inset:0;background:rgba(0,0,0,.9)}
+.about-inner{
+  position:relative;z-index:2;max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+@media(max-width:900px){.about-inner{grid-template-columns:1fr}}
+.about-label{
+  font-size:.68rem;font-weight:500;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:.9rem}
+.about-title{
+  font-family:var(--fh);font-size:clamp(2rem,3.8vw,3.4rem);
+  color:var(--white);line-height:1.06;margin-bottom:0}
+.about-rule{width:60px;height:2px;background:var(--amber);margin:1.8rem 0;border:none}
+.about-body{
+  font-size:.93rem;font-weight:300;color:rgba(255,255,255,.66);
+  line-height:1.88;margin-bottom:1.8rem}
+.btn-text{
+  display:inline-block;font-size:.73rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--amber);
+  border-bottom:1px solid var(--amber);padding-bottom:2px;transition:opacity .2s}
+.btn-text:hover{opacity:.68}
+.about-cards{display:flex;flex-direction:column;gap:.85rem}
+.about-card{
+  background:rgba(255,255,255,.03);border:1px solid rgba(200,149,42,.18);
+  padding:1.4rem 1.5rem;transition:border-color .28s}
+.about-card:hover{border-color:rgba(200,149,42,.55)}
+.about-card-icon{color:var(--amber);font-size:.95rem;margin-bottom:.5rem}
+.about-card-title{
+  font-family:var(--fh);font-size:1.15rem;letter-spacing:.1em;
+  color:var(--white);margin-bottom:.35rem}
+.about-card-body{font-size:.83rem;font-weight:300;color:rgba(255,255,255,.48);line-height:1.72}
+
+/* ═══════════════════════════════════════════════
+   FEATURES HEADER
+═══════════════════════════════════════════════ */
+.features-header{
+  background:var(--black);padding:6rem clamp(1.5rem,5vw,4rem) 2.5rem;text-align:center}
+.features-header h2{
+  font-family:var(--fh);font-size:clamp(2.8rem,7vw,5.2rem);
+  color:var(--white);letter-spacing:.06em;margin-bottom:.8rem}
+.amber-rule{width:80px;height:2px;background:var(--amber);margin:0 auto 1.4rem;border:none}
+.features-sub{
+  font-size:.93rem;font-weight:300;color:rgba(255,255,255,.42);
+  max-width:500px;margin:0 auto;line-height:1.78}
+
+/* ═══════════════════════════════════════════════
+   FEATURE PANELS
+═══════════════════════════════════════════════ */
+.feat-panel{position:relative;min-height:72vh;display:flex;align-items:center}
+.feat-panel-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-attachment:fixed}
+@media(max-width:768px){.feat-panel-bg{background-attachment:scroll!important}}
+.feat-panel-overlay{position:absolute;inset:0}
+.feat-panel-content{position:relative;z-index:2;padding:5rem clamp(1.5rem,10vw,7rem);max-width:600px}
+.feat-panel.right .feat-panel-content{margin-left:auto}
+@media(max-width:768px){.feat-panel.right .feat-panel-content{margin-left:0}}
+.feat-panel.dark{background:#111111}
+.feat-badge{
+  display:inline-block;font-size:.6rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;margin-bottom:1.2rem}
+.feat-badge.amber{background:var(--amber);color:var(--black)}
+.feat-badge.red{background:var(--red);color:var(--white)}
+.feat-badge.outline{border:1px solid var(--amber);color:var(--amber)}
+.feat-badge.cyan{background:rgba(0,180,210,.12);border:1px solid rgba(0,180,210,.4);color:#00c8e0}
+.feat-panel-title{
+  font-family:var(--fh);font-size:clamp(2.2rem,4.5vw,4rem);
+  color:var(--white);line-height:1;margin-bottom:1.1rem;letter-spacing:.05em}
+.feat-panel-desc{
+  font-size:.93rem;font-weight:300;color:rgba(255,255,255,.62);
+  line-height:1.82;margin-bottom:1.5rem}
+.feat-panel-list{list-style:none;margin-bottom:1.6rem;display:flex;flex-direction:column;gap:.55rem}
+.feat-panel-list li{
+  font-size:.85rem;font-weight:300;color:rgba(255,255,255,.6);
+  display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.feat-panel-list li::before{content:'—';color:var(--amber);flex-shrink:0;font-weight:700}
+
+/* ═══════════════════════════════════════════════
+   QUOTE / MANIFESTO
+═══════════════════════════════════════════════ */
+.quote-section{
+  position:relative;min-height:60vh;display:flex;
+  align-items:center;justify-content:center;text-align:center;padding:5rem 2rem;
+  background-image:url('https://images.unsplash.com/photo-1517438476312-10d79c077509?w=1920&q=80');
+  background-size:cover;background-position:center;background-attachment:fixed}
+@media(max-width:768px){.quote-section{background-attachment:scroll}}
+.quote-overlay{position:absolute;inset:0;background:rgba(0,0,0,.9)}
+.quote-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+.quote-mark{
+  font-family:var(--fh);font-size:11rem;
+  color:rgba(200,149,42,.13);line-height:.6;
+  margin-bottom:-1.5rem;display:block;letter-spacing:0}
+.quote-text{
+  font-family:Georgia,'Times New Roman',serif;font-style:italic;
+  font-size:clamp(1.55rem,3.2vw,2.6rem);
+  color:var(--white);max-width:730px;line-height:1.48}
+.quote-attr{
+  font-size:.7rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--amber);margin-top:2rem}
+
+/* ═══════════════════════════════════════════════
+   WHO IT'S FOR  (adapted from Trainers)
+═══════════════════════════════════════════════ */
+.coaches-section{background:#0f0f0f;padding:7rem clamp(1.5rem,6vw,4rem)}
+.section-header{text-align:center;margin-bottom:3.5rem}
+.section-header h2{
+  font-family:var(--fh);font-size:clamp(2.8rem,6vw,4.8rem);
+  color:var(--white);letter-spacing:.06em;margin-bottom:.7rem}
+.section-header p{
+  font-size:.93rem;font-weight:300;color:rgba(255,255,255,.42);
+  max-width:480px;margin:0 auto;line-height:1.72}
+.coaches-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;max-width:1100px;margin:0 auto}
+@media(max-width:900px){.coaches-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.coaches-grid{grid-template-columns:1fr}}
+.coach-card{
+  background:var(--charcoal);border:1px solid rgba(200,149,42,.14);
+  overflow:hidden;transition:border-color .3s,transform .3s}
+.coach-card:hover{border-color:rgba(200,149,42,.48);transform:translateY(-4px)}
+.coach-img{
+  height:210px;background:#1e1e1e;display:flex;
+  align-items:center;justify-content:center;
+  filter:sepia(.28);transition:filter .3s;overflow:hidden}
+.coach-card:hover .coach-img{filter:sepia(0)}
+.coach-body{padding:1.5rem}
+.coach-name{
+  font-family:var(--fh);font-size:1.5rem;
+  color:var(--amber);letter-spacing:.08em;line-height:1;margin-bottom:4px}
+.coach-title{
+  font-size:.63rem;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:.85rem}
+.coach-bio{
+  font-size:.83rem;font-weight:300;color:rgba(255,255,255,.52);
+  line-height:1.72;margin-bottom:1rem}
+.coach-tags{display:flex;flex-wrap:wrap;gap:6px}
+.coach-tag{
+  font-size:.62rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(200,149,42,.7);border:1px solid rgba(200,149,42,.22);padding:3px 9px}
+
+/* ═══════════════════════════════════════════════
+   FEATURE TABLE  (adapted from Schedule)
+═══════════════════════════════════════════════ */
+.table-section{background:var(--black);padding:7rem clamp(1.5rem,6vw,4rem)}
+.table-section h2{
+  font-family:var(--fh);font-size:clamp(2.8rem,6vw,4.8rem);
+  color:var(--amber);letter-spacing:.06em;text-align:center;margin-bottom:.5rem}
+.table-section .sub{
+  text-align:center;font-size:.88rem;font-weight:300;
+  color:rgba(255,255,255,.38);margin-bottom:3rem;line-height:1.7}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;min-width:680px;border-collapse:collapse;font-family:var(--fb)}
+thead th{
+  background:rgba(200,149,42,.12);font-family:var(--fh);
+  font-size:.95rem;letter-spacing:.15em;color:var(--amber);
+  padding:1rem 1.3rem;text-align:left;border:1px solid rgba(200,149,42,.1)}
+tbody tr:nth-child(odd){background:#111}
+tbody tr:nth-child(even){background:#0f0f0f}
+tbody tr{transition:background .2s}
+tbody tr:hover{background:#161616}
+tbody td{
+  padding:.9rem 1.3rem;border:1px solid rgba(255,255,255,.05);
+  font-size:.82rem;color:rgba(255,255,255,.7);vertical-align:top;line-height:1.55}
+.cell-name{color:var(--white);font-weight:500;display:block}
+.cell-sub{color:rgba(200,149,42,.6);font-size:.74rem}
+.cell-yes{color:rgba(200,149,42,.8);font-weight:600}
+.cell-no{color:rgba(255,255,255,.2);font-style:italic}
+.cell-note{color:rgba(255,255,255,.38);font-size:.76rem}
+
+/* ═══════════════════════════════════════════════
+   PRICING  (fight-poster style)
+═══════════════════════════════════════════════ */
+.pricing-section{background:#111;padding:7rem clamp(1.5rem,6vw,4rem)}
+.pricing-section h2{
+  font-family:var(--fh);font-size:clamp(3rem,8vw,5.8rem);
+  color:var(--white);text-shadow:2px 2px 0 var(--amber);
+  letter-spacing:.05em;text-align:center;margin-bottom:.5rem}
+.pricing-sub{
+  text-align:center;font-size:.9rem;color:var(--amber);
+  margin-bottom:3.5rem;letter-spacing:.04em;font-weight:300}
+.pricing-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;max-width:1100px;margin:0 auto}
+@media(max-width:880px){.pricing-grid{grid-template-columns:1fr;max-width:420px}}
+.price-card{
+  border:2px solid rgba(200,149,42,.3);background:#0f0f0f;
+  padding:2.5rem 2rem;position:relative;transition:border-color .3s}
+.price-card.featured{border-color:var(--amber)}
+.price-card:hover{border-color:rgba(200,149,42,.65)}
+.price-accent{width:40px;height:3px;background:var(--amber);margin-bottom:1.5rem}
+.price-plan{font-family:var(--fh);font-size:1.7rem;letter-spacing:.1em;color:var(--white);margin-bottom:.25rem}
+.price-amount{font-family:var(--fh);font-size:4.5rem;color:var(--amber);line-height:1;letter-spacing:.02em}
+.price-period{font-size:.88rem;color:rgba(255,255,255,.38);font-weight:300;margin-left:3px}
+.price-note{font-size:.7rem;color:rgba(255,255,255,.28);margin-bottom:1.5rem;margin-top:4px;font-weight:300}
+.price-features{list-style:none;margin-bottom:2rem;display:flex;flex-direction:column;gap:.6rem}
+.price-features li{
+  font-size:.84rem;font-weight:300;color:rgba(255,255,255,.65);
+  display:flex;align-items:flex-start;gap:9px;line-height:1.5}
+.price-features li .ck{color:var(--amber);flex-shrink:0;font-weight:700}
+.price-features li.off{color:rgba(255,255,255,.22)}
+.price-features li.off .ck{color:rgba(255,255,255,.18)}
+.btn-price{
+  display:block;width:100%;background:var(--amber);color:var(--black);
+  font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:1rem;text-align:center;transition:filter .25s,box-shadow .25s;cursor:pointer;border:none}
+.btn-price:hover{filter:brightness(1.1)}
+.btn-price.glow:hover{box-shadow:0 0 28px rgba(200,149,42,.4)}
+.price-badge{
+  position:absolute;top:1.1rem;right:1.1rem;
+  background:var(--amber);color:var(--black);
+  font-size:.55rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:4px 9px}
+
+/* ═══════════════════════════════════════════════
+   CTA SECTION
+═══════════════════════════════════════════════ */
+.cta-section{
+  background:var(--black);padding:8rem clamp(1.5rem,6vw,4rem);text-align:center;
+  background-image:radial-gradient(ellipse at 50% 50%,rgba(200,149,42,.07) 0%,transparent 68%)}
+.cta-gloves{margin-bottom:2rem}
+.cta-gloves svg{width:84px;height:52px}
+.cta-title{
+  font-family:var(--fh);font-size:clamp(3.2rem,9vw,7.5rem);
+  color:var(--white);letter-spacing:.06em;line-height:.9;margin-bottom:1.5rem}
+.cta-sub{
+  font-size:1.05rem;font-weight:300;color:rgba(255,255,255,.55);
+  max-width:480px;margin:0 auto 2.5rem;line-height:1.78}
+.btn-cta{
+  display:inline-block;background:var(--amber);color:var(--black);
+  font-family:var(--fh);font-size:1.4rem;letter-spacing:.1em;padding:1.2rem 3rem;
+  transition:filter .25s,transform .25s,box-shadow .25s}
+.btn-cta:hover{filter:brightness(1.1);transform:translateY(-2px);box-shadow:0 10px 36px rgba(200,149,42,.32)}
+.cta-note{margin-top:1.5rem;font-size:.76rem;color:rgba(255,255,255,.3);letter-spacing:.04em}
+.cta-note a{color:var(--amber);text-decoration:underline;text-underline-offset:3px}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+.footer{background:#050505;border-top:1px solid rgba(200,149,42,.14);padding:3.5rem clamp(1.5rem,6vw,4rem)}
+.footer-grid{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr;
+  gap:3rem;max-width:1100px;margin:0 auto 2.5rem}
+@media(max-width:760px){.footer-grid{grid-template-columns:1fr;gap:2rem}}
+.footer-brand-name{font-family:var(--fh);font-size:1.45rem;color:var(--amber);letter-spacing:.12em;margin-bottom:.7rem}
+.footer-brand-desc{font-size:.82rem;font-weight:300;color:rgba(255,255,255,.35);line-height:1.78}
+.footer-col-label{font-size:.62rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--amber);margin-bottom:.9rem}
+.footer-links{display:flex;flex-direction:column;gap:.45rem}
+.footer-links a{font-size:.82rem;font-weight:300;color:rgba(255,255,255,.42);transition:color .2s}
+.footer-links a:hover{color:var(--amber)}
+.footer-specs{display:flex;flex-direction:column;gap:.45rem}
+.footer-spec-row{display:flex;justify-content:space-between;font-size:.8rem;font-weight:300;color:rgba(255,255,255,.4);gap:1rem}
+.footer-spec-row span:last-child{color:rgba(255,255,255,.6)}
+.footer-bottom{
+  text-align:center;font-size:.7rem;color:rgba(255,255,255,.22);
+  border-top:1px solid rgba(255,255,255,.05);padding-top:1.5rem;
+  max-width:1100px;margin:0 auto}
+</style>
+</head>
+<body>
+
+<!-- ══ MOBILE OVERLAY NAV ══ -->
+<div class="nav-overlay" id="navOverlay">
+  <button class="nav-overlay-close" id="navClose" aria-label="Close">✕</button>
+  <a href="#hero"      onclick="closeNav()">Home</a>
+  <a href="#features"  onclick="closeNav()">Features</a>
+  <a href="#coaches"   onclick="closeNav()">Who It's For</a>
+  <a href="#pricing"   onclick="closeNav()">Pricing</a>
+  <a href="/blog"      onclick="closeNav()">Blog</a>
+  <a href="#contact"   onclick="closeNav()">Get Access</a>
+</div>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="nav" id="mainNav">
+  <a href="#hero" class="nav-brand">
+    <!-- Boxing glove icon -->
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="7" y="13" width="18" height="13" rx="5.5" fill="#c8952a"/>
+      <rect x="9" y="7"  width="8"  height="10" rx="4"   fill="#c8952a"/>
+      <rect x="15" y="8" width="6"  height="9"  rx="3"   fill="#c8952a"/>
+      <rect x="7" y="22" width="18" height="5"  rx="2.5" fill="#a07020"/>
+      <rect x="20" y="9" width="5"  height="11" rx="2.5" fill="#c8952a"/>
+    </svg>
+    STRIKEPANEL
+  </a>
+  <div class="nav-links">
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#coaches"  class="nav-link">Who It's For</a>
+    <a href="#pricing"  class="nav-link">Pricing</a>
+    <a href="/blog"     class="nav-link">Blog</a>
+    <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" class="nav-cta">Get Access — $99</a>
+  </div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">☰</button>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">StrikePanel™ · Combat Sports Intelligence · Est. 2024</div>
+    <h1 class="hero-title">
+      <span class="hero-line1">COACH SMARTER.</span>
+      <span class="hero-line2">FIGHT HARDER.</span>
+    </h1>
+    <p class="hero-sub">The coaching dashboard built for combat sports. Track readiness, manage fight camps, own your athletes' data — every day, every fight.</p>
+    <div class="hero-btns">
+      <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" class="btn-amber">Get the Dashboard — $99</a>
+      <a href="#features" class="btn-ghost">See What It Does ↓</a>
+    </div>
+  </div>
+  <div class="scroll-indicator" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ══ STATS BAR ══ -->
+<div class="stats-bar" id="statsBar">
+  <div class="stat animate-in">
+    <div class="stat-num" data-target="20" data-suffix="+">20+</div>
+    <div class="stat-label">Athletes per coach</div>
+  </div>
+  <div class="stats-divider"></div>
+  <div class="stat animate-in">
+    <div class="stat-num" data-target="0" data-prefix="$">$0</div>
+    <div class="stat-label">Monthly subscription</div>
+  </div>
+  <div class="stats-divider"></div>
+  <div class="stat animate-in">
+    <div class="stat-num" data-target="6" data-suffix="">6</div>
+    <div class="stat-label">Core features</div>
+  </div>
+  <div class="stats-divider"></div>
+  <div class="stat animate-in">
+    <div class="stat-num">∞</div>
+    <div class="stat-label">Days of access</div>
+  </div>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<section class="about" id="about">
+  <div class="about-overlay"></div>
+  <div class="about-inner">
+    <div class="animate-in">
+      <p class="about-label">The Problem</p>
+      <h2 class="about-title">OLD SCHOOL COACHING. THE DATA IT DESERVES.</h2>
+      <hr class="about-rule"/>
+      <p class="about-body">Combat sports coaching runs on instinct, discipline, and experience. But great coaches lose fighters to missed weight cuts, overtraining, and blind spots they never had the data to see.<br><br>StrikePanel gives you the dashboard to track every variable — without turning you into a spreadsheet operator. Built by combat sports people, for combat sports people.</p>
+      <a href="/blog" class="btn-text">Read the Coaching Blog →</a>
+    </div>
+    <div class="about-cards animate-in">
+      <div class="about-card">
+        <div class="about-card-icon">✦</div>
+        <div class="about-card-title">NO SUBSCRIPTIONS. EVER.</div>
+        <div class="about-card-body">Pay once at $99. Own the dashboard forever. No monthly fees, no paywalled tiers, no surprise renewals. Your data stays yours.</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">✦</div>
+        <div class="about-card-title">WORKS EVERYWHERE</div>
+        <div class="about-card-body">Phone, tablet, laptop. Installs from the browser in one tap — no App Store, no download. Fully offline-capable. Works in the corner on fight night.</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">✦</div>
+        <div class="about-card-title">BUILT FOR THE GYM FLOOR</div>
+        <div class="about-card-body">Designed for real coaching environments — fast, minimal, and honest. Every piece of data is one or two taps from wherever you're standing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURES ══ -->
+<div id="features">
+  <div class="features-header">
+    <h2 class="animate-in">WHAT IT DOES</h2>
+    <hr class="amber-rule animate-in"/>
+    <p class="features-sub animate-in">Six tools. One dashboard. Every piece of data your coaching needs — in the ring, in camp, on the road.</p>
+  </div>
+
+  <!-- Panel 1: Morning Brief -->
+  <div class="feat-panel">
+    <div class="feat-panel-bg parallax-bg" style="background-image:url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=1920&q=80')"></div>
+    <div class="feat-panel-overlay" style="background:rgba(0,0,0,.82)"></div>
+    <div class="feat-panel-content animate-in">
+      <span class="feat-badge amber">01 · Daily Readiness</span>
+      <h3 class="feat-panel-title">MORNING BRIEF SCORING</h3>
+      <p class="feat-panel-desc">Athletes submit sleep, mood, soreness, and energy scores each morning from their phones — no login, no app, just a link. One readiness number tells you who to push and who to protect before the session starts.</p>
+      <ul class="feat-panel-list">
+        <li>Five-metric self-report form, auto-scored 0–100</li>
+        <li>Athlete link — no account, no download required</li>
+        <li>Full team readiness visible before you unlock the gym</li>
+      </ul>
+      <a href="/" class="btn-text">See it in the demo →</a>
+    </div>
+  </div>
+
+  <!-- Panel 2: Weight Tracker (dark, content right) -->
+  <div class="feat-panel dark right">
+    <div class="feat-panel-content animate-in" style="max-width:580px;margin-left:auto;text-align:right">
+      <span class="feat-badge red">02 · Fight Camp</span>
+      <h3 class="feat-panel-title">WEIGHT CUT TRACKER</h3>
+      <p class="feat-panel-desc">Daily weight logs with fight-night projections. Know weeks out whether the cut is on track — or needs adjusting before it becomes a crisis. Camp phases, target weights, and cut timelines all in one view.</p>
+      <ul class="feat-panel-list" style="align-items:flex-end">
+        <li>Daily weight log with target line projection</li>
+        <li>Fight-night cut trajectory visible at a glance</li>
+        <li>Phase labels: Base, Build, Peak, Fight Week</li>
+      </ul>
+      <a href="/" class="btn-text">Explore the feature →</a>
+    </div>
+  </div>
+
+  <!-- Panel 3: Fight Calendar -->
+  <div class="feat-panel">
+    <div class="feat-panel-bg parallax-bg" style="background-image:url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1920&q=80')"></div>
+    <div class="feat-panel-overlay" style="background:rgba(0,0,0,.86)"></div>
+    <div class="feat-panel-content animate-in">
+      <span class="feat-badge outline">03 · Roster View</span>
+      <h3 class="feat-panel-title">FIGHT CALENDAR</h3>
+      <p class="feat-panel-desc">Live countdowns for every fight on your roster. Fighter name, opponent, event, and camp phase — your whole team's fight schedule visible in one place. Never miss a deadline or a camp milestone again.</p>
+      <ul class="feat-panel-list">
+        <li>Countdown per fighter to fight night</li>
+        <li>Opponent and event notes attached to each bout</li>
+        <li>Camp phase indicator: where is each fighter right now?</li>
+      </ul>
+      <a href="/" class="btn-text">Try it in the demo →</a>
+    </div>
+  </div>
+
+  <!-- Panel 4: Session Builder (dark, right) -->
+  <div class="feat-panel dark right">
+    <div class="feat-panel-content animate-in" style="max-width:580px;margin-left:auto;text-align:right">
+      <span class="feat-badge cyan">04 · AI-Assisted</span>
+      <h3 class="feat-panel-title">SESSION BUILDER</h3>
+      <p class="feat-panel-desc">Plan sessions from scratch or with AI. Tag rounds, drills, and intensity zones into a saved library. Build a catalogue your whole camp runs from — consistent, repeatable, and adaptable to each fighter's readiness score.</p>
+      <ul class="feat-panel-list" style="align-items:flex-end">
+        <li>AI session generation or full manual control</li>
+        <li>Round and drill tagging with intensity zones</li>
+        <li>Save and reuse session templates across your camp</li>
+      </ul>
+      <a href="/" class="btn-text">Build a session →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ QUOTE / MANIFESTO ══ -->
+<div class="quote-section">
+  <div class="quote-overlay"></div>
+  <div class="quote-inner animate-in">
+    <span class="quote-mark">&ldquo;</span>
+    <p class="quote-text">A champion is not made on fight night. A champion is built every morning, in the data you had the discipline to track and the calls you had the courage to make.</p>
+    <span class="quote-attr">— The StrikePanel Coaching Philosophy</span>
+  </div>
+</div>
+
+<!-- ══ WHO IT'S FOR ══ -->
+<section class="coaches-section" id="coaches">
+  <div class="section-header animate-in">
+    <h2>WHO IT'S BUILT FOR</h2>
+    <p>Combat sports coaches who take performance seriously. Every discipline. Every gym size.</p>
+  </div>
+  <div class="coaches-grid">
+
+    <div class="coach-card animate-in">
+      <div class="coach-img">
+        <svg viewBox="0 0 120 200" width="72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="30" r="20" fill="#c8952a" opacity=".82"/>
+          <path d="M28 82 Q60 62 92 82 L98 148 H22 Z" fill="#c8952a" opacity=".82"/>
+          <path d="M28 82 L8 132 Q6 144 18 146 L30 112" fill="#c8952a" opacity=".72"/>
+          <path d="M92 82 L112 132 Q114 144 102 146 L90 112" fill="#c8952a" opacity=".72"/>
+          <path d="M22 148 L18 192 H40 L44 152" fill="#c8952a" opacity=".78"/>
+          <path d="M98 148 L102 192 H80 L76 152" fill="#c8952a" opacity=".78"/>
+          <!-- boxing gloves in hands -->
+          <ellipse cx="12" cy="130" rx="9" ry="12" fill="#a07020" opacity=".6"/>
+          <ellipse cx="108" cy="130" rx="9" ry="12" fill="#a07020" opacity=".6"/>
+        </svg>
+      </div>
+      <div class="coach-body">
+        <div class="coach-name">FIGHT TEAM COACH</div>
+        <div class="coach-title">Head Coach · Small to Mid-Sized Gyms</div>
+        <p class="coach-bio">You run a fight team and need to track readiness, weight, and fight camp phases without drowning in WhatsApp threads and spreadsheet hell.</p>
+        <div class="coach-tags">
+          <span class="coach-tag">MMA</span>
+          <span class="coach-tag">Boxing</span>
+          <span class="coach-tag">Muay Thai</span>
+          <span class="coach-tag">5–20 Athletes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="coach-card animate-in">
+      <div class="coach-img">
+        <svg viewBox="0 0 120 200" width="72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="30" r="20" fill="#c8952a" opacity=".82"/>
+          <path d="M32 80 Q60 58 88 80 L84 148 H36 Z" fill="#c8952a" opacity=".82"/>
+          <path d="M32 80 L12 128 Q10 140 22 142 L34 110" fill="#c8952a" opacity=".72"/>
+          <path d="M88 80 L108 128 Q110 140 98 142 L86 110" fill="#c8952a" opacity=".72"/>
+          <rect x="24" y="148" width="16" height="42" rx="4" fill="#c8952a" opacity=".78"/>
+          <rect x="80" y="148" width="16" height="42" rx="4" fill="#c8952a" opacity=".78"/>
+          <!-- clipboard -->
+          <rect x="52" y="90" width="32" height="36" rx="2" fill="#a07020" opacity=".55"/>
+          <rect x="56" y="99" width="22" height="2" rx="1" fill="#e8dcc8" opacity=".55"/>
+          <rect x="56" y="106" width="22" height="2" rx="1" fill="#e8dcc8" opacity=".55"/>
+          <rect x="56" y="113" width="14" height="2" rx="1" fill="#e8dcc8" opacity=".55"/>
+        </svg>
+      </div>
+      <div class="coach-body">
+        <div class="coach-name">GYM OPERATOR</div>
+        <div class="coach-title">Academy Owner · Multi-Coach Setup</div>
+        <p class="coach-bio">You operate a full combat sports academy. Multiple coaches, multiple disciplines, rotating roster. You need one view that keeps the whole operation organized.</p>
+        <div class="coach-tags">
+          <span class="coach-tag">Full Academy</span>
+          <span class="coach-tag">Multi-Coach</span>
+          <span class="coach-tag">20+ Athletes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="coach-card animate-in">
+      <div class="coach-img">
+        <svg viewBox="0 0 120 200" width="72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="30" r="20" fill="#c8952a" opacity=".82"/>
+          <path d="M30 82 Q60 60 90 82 L94 148 H26 Z" fill="#c8952a" opacity=".82"/>
+          <path d="M30 82 L10 130 Q8 142 20 144 L32 112" fill="#c8952a" opacity=".72"/>
+          <path d="M90 82 L110 130 Q112 142 100 144 L88 112" fill="#c8952a" opacity=".72"/>
+          <path d="M26 148 L22 192 H44 L48 152" fill="#c8952a" opacity=".78"/>
+          <path d="M94 148 L98 192 H76 L72 152" fill="#c8952a" opacity=".78"/>
+          <!-- data bars -->
+          <rect x="42" y="84" width="36" height="30" rx="2" fill="#a07020" opacity=".5"/>
+          <rect x="46" y="101" width="5" height="11" rx="1" fill="#c8952a" opacity=".85"/>
+          <rect x="54" y="94" width="5" height="18" rx="1" fill="#c8952a" opacity=".9"/>
+          <rect x="62" y="97" width="5" height="15" rx="1" fill="#c8952a" opacity=".75"/>
+          <rect x="70" y="90" width="4" height="22" rx="1" fill="#c8952a" opacity=".88"/>
+        </svg>
+      </div>
+      <div class="coach-body">
+        <div class="coach-name">PERFORMANCE COACH</div>
+        <div class="coach-title">S&amp;C · Sports Science · Load Management</div>
+        <p class="coach-bio">You're the strength and conditioning or performance science side. You need daily readiness data and load tracking to prevent overtraining and peak athletes on time.</p>
+        <div class="coach-tags">
+          <span class="coach-tag">S&amp;C</span>
+          <span class="coach-tag">Sports Science</span>
+          <span class="coach-tag">Load Management</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ FEATURE TABLE ══ -->
+<section class="table-section" id="schedule">
+  <h2 class="animate-in">FULL FEATURE BREAKDOWN</h2>
+  <p class="sub animate-in">Everything included in your one-time $99 license. No tiers. No add-ons.</p>
+  <div class="table-wrap animate-in">
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>What It Does</th>
+          <th>Used By</th>
+          <th>Works Offline</th>
+          <th>Device</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="cell-name">Morning Brief</span><span class="cell-sub">Daily Readiness</span></td>
+          <td>Athletes self-report 5 metrics via a unique link. Auto-scored 0–100 per athlete.</td>
+          <td>Coach + Athletes</td>
+          <td><span class="cell-yes">Yes</span></td>
+          <td><span class="cell-note">Any</span></td>
+        </tr>
+        <tr>
+          <td><span class="cell-name">Weight Tracker</span><span class="cell-sub">Fight Camp</span></td>
+          <td>Daily weight logs with cut projections against fight-night target weight.</td>
+          <td>Coach</td>
+          <td><span class="cell-yes">Yes</span></td>
+          <td><span class="cell-note">Any</span></td>
+        </tr>
+        <tr>
+          <td><span class="cell-name">Fight Calendar</span><span class="cell-sub">Roster View</span></td>
+          <td>Live countdown per fighter, camp phases, opponent notes, event details.</td>
+          <td>Coach</td>
+          <td><span class="cell-yes">Yes</span></td>
+          <td><span class="cell-note">Any</span></td>
+        </tr>
+        <tr>
+          <td><span class="cell-name">Session Builder</span><span class="cell-sub">AI-Assisted</span></td>
+          <td>Build and save sessions with rounds, drills, and intensity tags. AI or manual.</td>
+          <td>Coach</td>
+          <td><span class="cell-yes">Yes</span></td>
+          <td><span class="cell-note">Any</span></td>
+        </tr>
+        <tr>
+          <td><span class="cell-name">Athlete Check-in</span><span class="cell-sub">Zero Friction</span></td>
+          <td>Athletes use a shareable link — no login, no app install needed on their end.</td>
+          <td>Athletes</td>
+          <td><span class="cell-no">—</span></td>
+          <td><span class="cell-note">Mobile</span></td>
+        </tr>
+        <tr>
+          <td><span class="cell-name">Cloud Sync</span><span class="cell-sub">Optional</span></td>
+          <td>Supabase integration keeps your data synced across every device you coach from.</td>
+          <td>Coach</td>
+          <td><span class="cell-note">Cached</span></td>
+          <td><span class="cell-note">All</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══ PRICING ══ -->
+<section class="pricing-section" id="pricing">
+  <h2 class="animate-in">ONE PRICE. FOREVER.</h2>
+  <p class="pricing-sub animate-in">No contracts. No monthly fees. No surprises. Try the live demo free — no sign-up needed.</p>
+  <div class="pricing-grid">
+
+    <div class="price-card animate-in">
+      <div class="price-accent"></div>
+      <div class="price-plan">Free Demo</div>
+      <div class="price-amount">$0<span class="price-period">/always</span></div>
+      <div class="price-note">Try before you buy — no account needed</div>
+      <ul class="price-features">
+        <li><span class="ck">✓</span> Full dashboard access</li>
+        <li><span class="ck">✓</span> All 6 features unlocked</li>
+        <li><span class="ck">✓</span> Sample data pre-loaded</li>
+        <li class="off"><span class="ck">✗</span> Your own athletes' data</li>
+        <li class="off"><span class="ck">✗</span> License key / ownership</li>
+      </ul>
+      <a href="/" class="btn-price">TRY THE DEMO</a>
+    </div>
+
+    <div class="price-card featured animate-in">
+      <div class="price-badge">Best Value</div>
+      <div class="price-accent"></div>
+      <div class="price-plan">StrikePanel</div>
+      <div class="price-amount">$99<span class="price-period">one-time</span></div>
+      <div class="price-note">Was $149 — launch price, limited time</div>
+      <ul class="price-features">
+        <li><span class="ck">✓</span> Full dashboard — all 6 features</li>
+        <li><span class="ck">✓</span> Up to 20 athletes tracked</li>
+        <li><span class="ck">✓</span> Morning Brief scoring system</li>
+        <li><span class="ck">✓</span> Weight cut + fight calendar</li>
+        <li><span class="ck">✓</span> AI session builder</li>
+        <li><span class="ck">✓</span> Unlimited devices (one coach)</li>
+        <li><span class="ck">✓</span> All future updates — free</li>
+        <li><span class="ck">✓</span> No monthly fees. Ever.</li>
+      </ul>
+      <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" class="btn-price glow">GET THE DASHBOARD</a>
+    </div>
+
+    <div class="price-card animate-in">
+      <div class="price-accent"></div>
+      <div class="price-plan">What You Get</div>
+      <div class="price-amount" style="font-size:2rem;line-height:1.2;color:var(--cream)">Pay Once.<br>Own Forever.</div>
+      <div class="price-note">No subscription. Period.</div>
+      <ul class="price-features" style="margin-top:.5rem">
+        <li><span class="ck">✓</span> Instant Gumroad delivery</li>
+        <li><span class="ck">✓</span> Works on any device</li>
+        <li><span class="ck">✓</span> Offline-capable PWA</li>
+        <li><span class="ck">✓</span> Your data stays with you</li>
+        <li><span class="ck">✓</span> No cloud login required</li>
+        <li><span class="ck">✓</span> Gumroad license key included</li>
+      </ul>
+      <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" class="btn-price">START COACHING</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section" id="contact">
+  <div class="cta-gloves animate-in" aria-hidden="true">
+    <!-- Two boxing gloves facing in -->
+    <svg viewBox="0 0 110 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Left glove (mirrored) -->
+      <g transform="scale(-1,1) translate(-52,0)">
+        <rect x="4"  y="16" width="30" height="22" rx="10" fill="#c8952a"/>
+        <rect x="6"  y="8"  width="14" height="16" rx="7"  fill="#c8952a"/>
+        <rect x="18" y="9"  width="10" height="14" rx="5"  fill="#c8952a"/>
+        <rect x="4"  y="33" width="30" height="8"  rx="4"  fill="#a07020"/>
+        <rect x="27" y="10" width="8"  height="18" rx="4"  fill="#c8952a"/>
+      </g>
+      <!-- Right glove -->
+      <g transform="translate(58,0)">
+        <rect x="4"  y="16" width="30" height="22" rx="10" fill="#c8952a"/>
+        <rect x="6"  y="8"  width="14" height="16" rx="7"  fill="#c8952a"/>
+        <rect x="18" y="9"  width="10" height="14" rx="5"  fill="#c8952a"/>
+        <rect x="4"  y="33" width="30" height="8"  rx="4"  fill="#a07020"/>
+        <rect x="27" y="10" width="8"  height="18" rx="4"  fill="#c8952a"/>
+      </g>
+    </svg>
+  </div>
+  <h2 class="cta-title animate-in">GET IN<br>THE RING.</h2>
+  <p class="cta-sub animate-in">Try the live demo free — no account, no sign-up. When you're ready to own it, it's $99. Once. Forever.</p>
+  <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" class="btn-cta animate-in">CLAIM THE DASHBOARD — $99 →</a>
+  <p class="cta-note animate-in">Or try free first: <a href="/">strikepanel.vercel.app</a> · No account needed</p>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">STRIKEPANEL™</div>
+      <p class="footer-brand-desc">The coaching dashboard for combat sports. Track readiness, manage fight camps, and own your athletes' data — with no subscription, ever. Pay once. Coach forever. Built by fighters, for coaches.</p>
+    </div>
+    <div>
+      <div class="footer-col-label">Quick Links</div>
+      <div class="footer-links">
+        <a href="#hero">Home</a>
+        <a href="#features">Features</a>
+        <a href="#coaches">Who It's For</a>
+        <a href="#pricing">Pricing</a>
+        <a href="/blog">Blog</a>
+        <a href="/">Free Demo</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-label">Access Details</div>
+      <div class="footer-specs">
+        <div class="footer-spec-row"><span>Price</span><span>$99 one-time</span></div>
+        <div class="footer-spec-row"><span>Monthly fee</span><span>$0 forever</span></div>
+        <div class="footer-spec-row"><span>Delivery</span><span>Instant · Gumroad</span></div>
+        <div class="footer-spec-row"><span>Devices</span><span>Any · PWA</span></div>
+        <div class="footer-spec-row"><span>Athletes</span><span>Up to 20</span></div>
+        <div class="footer-spec-row"><span>Updates</span><span>Free · Always</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 StrikePanel™ · Training Intelligence for Combat Sports · No subscription · Instant access · Built with Claude Code
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════
+   1. NAVBAR SCROLL
+════════════════════════ */
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+/* ════════════════════════
+   2. MOBILE HAMBURGER
+════════════════════════ */
+const hamburger = document.getElementById('navHamburger');
+const overlay   = document.getElementById('navOverlay');
+const closeBtn  = document.getElementById('navClose');
+
+hamburger.addEventListener('click', () => {
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+});
+closeBtn.addEventListener('click', closeNav);
+
+function closeNav() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ════════════════════════
+   3. SMOOTH SCROLL
+════════════════════════ */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+/* ════════════════════════
+   4. SCROLL REVEAL
+════════════════════════ */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.animate-in').forEach(el => revealObs.observe(el));
+
+/* ════════════════════════
+   5. COUNTER ANIMATION
+════════════════════════ */
+function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+
+function animateCounter(el, target, duration, prefix, suffix) {
+  const start = performance.now();
+  function step(now) {
+    const elapsed  = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased    = easeOutQuart(progress);
+    const value    = Math.round(eased * target);
+    el.textContent = (prefix || '') + value + (suffix || '');
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      el.textContent = (prefix || '') + target + (suffix || '');
+    }
+  }
+  requestAnimationFrame(step);
+}
+
+let countersFired = false;
+const statsSection = document.getElementById('statsBar');
+
+const counterObs = new IntersectionObserver((entries) => {
+  if (countersFired) return;
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      countersFired = true;
+      document.querySelectorAll('.stat-num[data-target]').forEach((el, i) => {
+        const target = parseInt(el.dataset.target, 10);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix !== undefined ? el.dataset.suffix : '';
+        setTimeout(() => animateCounter(el, target, 1500, prefix, suffix), i * 160);
+      });
+    }
+  });
+}, { threshold: 0.4 });
+
+if (statsSection) counterObs.observe(statsSection);
+
+/* ════════════════════════
+   6. MOBILE PARALLAX FIX
+════════════════════════ */
+(function () {
+  const isTouch = /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)
+    || ('ontouchstart' in window)
+    || (navigator.maxTouchPoints > 0);
+  if (!isTouch) return;
+  document.querySelectorAll('.parallax-bg').forEach(el => {
+    el.style.backgroundAttachment = 'scroll';
+  });
+  const hero = document.querySelector('.hero');
+  const about = document.querySelector('.about');
+  const quote = document.querySelector('.quote-section');
+  [hero, about, quote].forEach(el => { if (el) el.style.backgroundAttachment = 'scroll'; });
+})();
+</script>
+</body>
+</html>
