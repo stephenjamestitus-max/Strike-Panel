@@ -608,16 +608,10 @@ a{color:inherit;text-decoration:none}
 <section class="scrub-wrap" id="scrubWrap" aria-label="Feature intro">
   <div class="scrub-stage" id="scrubStage">
     <div class="scrub-card" id="scrubCard">
-      <!-- Desktop landscape video -->
-      <video class="scrub-video" id="scrubVideoDesktop"
+      <video class="scrub-video" id="scrubVideo"
         src="https://github.com/stephenjamestitus-max/Strike-Panel/releases/download/v1.0.0/9944628-uhd_3840_2160_24fps.mp4"
         muted playsinline preload="auto"
-        style="display:block"></video>
-      <!-- Mobile portrait video (hidden on desktop, shown on mobile) -->
-      <video class="scrub-video" id="scrubVideoMobile"
-        src="https://github.com/stephenjamestitus-max/Strike-Panel/releases/download/v1.0.0/4753947-uhd_2160_4096_25fps.mp4"
-        muted playsinline preload="auto"
-        style="display:none;position:absolute;inset:0"></video>
+        style="display:block;width:100%;height:100%;object-fit:cover"></video>
       <!-- Corner brackets -->
       <div class="scrub-br tl" aria-hidden="true"></div>
       <div class="scrub-br tr" aria-hidden="true"></div>
@@ -936,62 +930,45 @@ if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
    HERO SCRUB — GSAP ScrollTrigger
 ═══════════════════════════════════════ */
 (function() {
-  const isMobile = () => window.innerWidth <= 640;
   const IMMERSE_OVERFILL = 1.04;
-  const START_SCALE_D = 0.6;   // desktop
-  const START_SCALE_M = 0.82;  // mobile
-  const ASPECT_D = 16 / 9;     // landscape video
-  const ASPECT_M = 9 / 16;     // portrait video
+  const ASPECT = 16 / 9;
 
-  const stage   = document.getElementById('scrubStage');
-  const card    = document.getElementById('scrubCard');
-  const vidD    = document.getElementById('scrubVideoDesktop');
-  const vidM    = document.getElementById('scrubVideoMobile');
-  const titleT  = document.getElementById('scrubTitleTop');
-  const titleB  = document.getElementById('scrubTitleBot');
-  const hint    = document.getElementById('scrubHint');
+  const card   = document.getElementById('scrubCard');
+  const vid    = document.getElementById('scrubVideo');
+  const titleT = document.getElementById('scrubTitleTop');
+  const titleB = document.getElementById('scrubTitleBot');
+  const hint   = document.getElementById('scrubHint');
 
-  function getActiveVideo() {
-    return isMobile() ? vidM : vidD;
-  }
+  function isMobile() { return window.innerWidth < 768; }
+
+  function startScale() { return isMobile() ? 0.88 : 0.6; }
 
   function cardDims() {
     const vw = window.innerWidth, vh = window.innerHeight;
-    const aspect = isMobile() ? ASPECT_M : ASPECT_D;
-    const w = Math.min(vw * 0.96, vh * 0.72 * aspect);
-    const h = Math.min(vh * 0.72, (vw * 0.96) / aspect);
+    const w = Math.min(vw * 0.96, vh * 0.72 * ASPECT);
+    const h = w / ASPECT;
     return { w, h };
   }
 
   function immerseScale() {
     const { w, h } = cardDims();
-    const vw = window.innerWidth, vh = window.innerHeight;
-    return Math.max(vw / w, vh / h) * IMMERSE_OVERFILL;
+    return Math.max(window.innerWidth / w, window.innerHeight / h) * IMMERSE_OVERFILL;
   }
 
-  function startScale() {
-    return isMobile() ? START_SCALE_M : START_SCALE_D;
-  }
-
-  /* Set initial card size */
   function initCard() {
     const { w, h } = cardDims();
     gsap.set(card, { width: w, height: h });
-    /* Show correct video */
-    if (isMobile()) {
-      vidD.style.display = 'none';
-      vidM.style.display = 'block';
-    } else {
-      vidD.style.display = 'block';
-      vidM.style.display = 'none';
-    }
   }
 
-  /* ── Preload video ── */
-  function loadVideo(vid) {
-    if (vid.readyState >= 1) return;
-    vid.load();
+  /* iOS Safari requires a play→pause to make currentTime seekable */
+  function unlockSeek() {
+    const p = vid.play();
+    if (p && p.then) p.then(() => { vid.pause(); vid.currentTime = 0; }).catch(() => {});
+    else { vid.pause(); vid.currentTime = 0; }
   }
+
+  vid.addEventListener('loadedmetadata', unlockSeek, { once: true });
+  if (vid.readyState < 1) vid.load();
 
   /* ── Build ScrollTrigger timeline ── */
   let scrubTL;
@@ -1001,109 +978,60 @@ if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
     ScrollTrigger.getAll().filter(t => t.vars.id === 'heroScrub').forEach(t => t.kill());
 
     initCard();
-    loadVideo(getActiveVideo());
 
     const sS = startScale();
     const iS = immerseScale();
 
-    /* Start hidden then spring in */
-    gsap.set(card, { scale: sS, opacity: 0, borderRadius: 12 });
+    gsap.set(card,   { scale: sS, opacity: 0, borderRadius: 12 });
     gsap.set([titleT, titleB], { opacity: 0 });
-    gsap.set(hint, { opacity: 0 });
+    gsap.set(hint,   { opacity: 0 });
 
-    /* Entry animation on page load */
-    gsap.timeline({ delay: 0.3 })
+    /* Entry spring */
+    gsap.timeline({ delay: 0.4 })
       .to(card,   { scale: sS, opacity: 1, duration: 0.8, ease: 'power2.out' })
-      .to(titleT, { opacity: 1, y: 0,  duration: 0.65, ease: 'power2.out' }, '-=0.5')
-      .to(titleB, { opacity: 1, y: 0,  duration: 0.65, ease: 'power2.out' }, '-=0.55')
+      .to(titleT, { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out' }, '-=0.5')
+      .to(titleB, { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out' }, '-=0.55')
       .to(hint,   { opacity: 1, duration: 0.5 }, '-=0.3');
 
-    /* Scroll-scrub timeline */
+    /* Scrub timeline */
     scrubTL = gsap.timeline({
       scrollTrigger: {
-        id:       'heroScrub',
-        trigger:  '#scrubWrap',
-        start:    'top top',
-        end:      'bottom bottom',
-        scrub:    1.2,
-        pin:      false,
-        onUpdate: (self) => {
-          const p  = self.progress; // 0..1
-          const vid = getActiveVideo();
-
-          /* ── Video scrub: active in middle band 0.15 → 0.78 ── */
+        id:      'heroScrub',
+        trigger: '#scrubWrap',
+        start:   'top top',
+        end:     'bottom bottom',
+        scrub:   1.2,
+        onUpdate(self) {
           if (vid.duration) {
-            const mapped = Math.max(0, Math.min(1, (p - 0.15) / 0.63));
+            const mapped = Math.max(0, Math.min(1, (self.progress - 0.15) / 0.63));
             vid.currentTime = mapped * vid.duration;
           }
         }
       }
     });
 
-    /* Phase 0→0.15 : card scales from startScale → 1; titles slide outward */
     scrubTL
-      .fromTo(card,
-        { scale: sS },
-        { scale: 1, borderRadius: 12, ease: 'none', duration: 0.15 },
-        0
-      )
-      .fromTo(titleT,
-        { x: 0, opacity: 1 },
-        { x: '-40vw', opacity: 0, ease: 'power1.in', duration: 0.15 },
-        0
-      )
-      .fromTo(titleB,
-        { x: 0, opacity: 1 },
-        { x:  '40vw', opacity: 0, ease: 'power1.in', duration: 0.15 },
-        0
-      )
-      .fromTo(hint,
-        { opacity: 1 },
-        { opacity: 0, ease: 'none', duration: 0.08 },
-        0
-      )
-
-      /* Phase 0.15→0.78 : card fills viewport (immerseScale); borderRadius drops */
-      .fromTo(card,
-        { scale: 1, borderRadius: 12 },
-        { scale: iS, borderRadius: 0, ease: 'none', duration: 0.63 },
-        0.15
-      )
-
-      /* Phase 0.78→1.0 : card shrinks back; titles slide back in */
-      .fromTo(card,
-        { scale: iS, borderRadius: 0 },
-        { scale: sS, borderRadius: 12, ease: 'none', duration: 0.22 },
-        0.78
-      )
-      .fromTo(titleT,
-        { x: '-40vw', opacity: 0 },
-        { x: 0, opacity: 1, ease: 'power2.out', duration: 0.22 },
-        0.78
-      )
-      .fromTo(titleB,
-        { x: '40vw', opacity: 0 },
-        { x: 0, opacity: 1, ease: 'power2.out', duration: 0.22 },
-        0.78
-      );
+      /* 0→0.15 : scale up; titles fly out */
+      .fromTo(card,   { scale: sS }, { scale: 1, borderRadius: 12, ease: 'none', duration: 0.15 }, 0)
+      .fromTo(titleT, { x: 0, opacity: 1 }, { x: '-40vw', opacity: 0, ease: 'power1.in', duration: 0.15 }, 0)
+      .fromTo(titleB, { x: 0, opacity: 1 }, { x: '40vw',  opacity: 0, ease: 'power1.in', duration: 0.15 }, 0)
+      .fromTo(hint,   { opacity: 1 }, { opacity: 0, ease: 'none', duration: 0.08 }, 0)
+      /* 0.15→0.78 : immerse (fill viewport) */
+      .fromTo(card,   { scale: 1, borderRadius: 12 }, { scale: iS, borderRadius: 0, ease: 'none', duration: 0.63 }, 0.15)
+      /* 0.78→1.0 : retract; titles fly back */
+      .fromTo(card,   { scale: iS, borderRadius: 0  }, { scale: sS, borderRadius: 12, ease: 'none', duration: 0.22 }, 0.78)
+      .fromTo(titleT, { x: '-40vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'power2.out', duration: 0.22 }, 0.78)
+      .fromTo(titleB, { x: '40vw',  opacity: 0 }, { x: 0, opacity: 1, ease: 'power2.out', duration: 0.22 }, 0.78);
   }
 
-  /* Run after GSAP is ready */
   gsap.registerPlugin(ScrollTrigger);
   buildTimeline();
 
-  /* Rebuild on resize with debounce */
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(buildTimeline, 250);
   });
-
-  /* Reduce motion: skip scrub, show static frame */
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const vid = getActiveVideo();
-    vid.pause();
-  }
 })();
 </script>
 </body>
