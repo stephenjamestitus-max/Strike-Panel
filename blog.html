@@ -21,7 +21,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='45' cy='45' r='43' fill='%230b0d14' stroke='%2300D4F0' stroke-width='1.5'/%3E%3Cline x1='45' y1='2' x2='45' y2='26' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='45' y1='64' x2='45' y2='88' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='26' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='64' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='11' fill='%2300D4F0'/%3E%3C/svg%3E"/>
 <style>
 /* ═══════════════════════════════════════════
-   RESET & ROOT — COMBAT.AI Lab palette
+   RESET & ROOT
 ═══════════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -31,35 +31,31 @@
   --text:#eef0f8;--muted:#7a85a0;--muted2:#3d4560;--muted3:#1e2840;
   --fh:'Bebas Neue',sans-serif;--fc:'Barlow Condensed',sans-serif;
   --fb:'Barlow',sans-serif;--fm:'DM Mono',monospace;
-  --grid-color:rgba(0,212,240,0.04);
-  --scan:rgba(0,212,240,0.015);
+  --grid-color:rgba(0,212,240,0.035);
+  --scan:rgba(0,212,240,0.012);
+  --radius:6px;
 }
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:var(--fb);font-size:15px;line-height:1.65;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:15px;line-height:1.65;overflow-x:hidden}
 
-/* ── Global grid overlay (The Lab) ── */
+/* Global grid overlay */
 body::before{
   content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:
-    linear-gradient(var(--grid-color) 1px,transparent 1px),
-    linear-gradient(90deg,var(--grid-color) 1px,transparent 1px);
+  background-image:linear-gradient(var(--grid-color) 1px,transparent 1px),linear-gradient(90deg,var(--grid-color) 1px,transparent 1px);
   background-size:52px 52px}
-/* ── Scanline pass ── */
+/* Scanline */
 body::after{
   content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
-  background:repeating-linear-gradient(
-    0deg,transparent,transparent 2px,var(--scan) 2px,var(--scan) 4px);
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,var(--scan) 2px,var(--scan) 4px);
   animation:scan-drift 8s linear infinite}
 @keyframes scan-drift{from{background-position:0 0}to{background-position:0 100px}}
 
-/* ── Ambient glow blobs ── */
+/* Ambient glow blobs */
 .ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.blob{position:absolute;border-radius:50%;filter:blur(120px);opacity:.06}
-.blob-1{width:700px;height:500px;top:-10%;left:-8%;background:var(--accent)}
-.blob-2{width:500px;height:400px;bottom:-5%;right:-5%;background:var(--purple)}
-.blob-3{width:300px;height:300px;top:40%;left:45%;background:var(--impact);opacity:.04}
+.blob{position:absolute;border-radius:50%;filter:blur(140px)}
+.blob-1{width:800px;height:600px;top:-15%;left:-10%;background:var(--accent);opacity:.05}
+.blob-2{width:600px;height:500px;bottom:-10%;right:-8%;background:var(--purple);opacity:.05}
+.blob-3{width:400px;height:400px;top:35%;left:40%;background:var(--impact);opacity:.03}
 
 a{color:inherit;text-decoration:none}
 ::selection{background:rgba(0,212,240,0.2)}
@@ -67,29 +63,31 @@ a{color:inherit;text-decoration:none}
 ::-webkit-scrollbar-thumb{background:rgba(0,212,240,0.25);border-radius:99px}
 
 /* ═══════════════════════════════════════════
-   SPRING ANIMATION SYSTEM  (framer-motion-style)
-   Uses CSS custom properties + JS for staggering
+   READING PROGRESS BAR
 ═══════════════════════════════════════════ */
-.sp{
-  opacity:0;
-  transform:translateY(40px) scale(0.97);
-  transition:
-    opacity   0.65s cubic-bezier(0.34,1.56,0.64,1),
-    transform 0.65s cubic-bezier(0.34,1.56,0.64,1)}
-.sp.in{opacity:1;transform:translateY(0) scale(1)}
-/* Stagger delays */
-.sp[data-d="1"]{transition-delay:.06s}
-.sp[data-d="2"]{transition-delay:.14s}
-.sp[data-d="3"]{transition-delay:.22s}
-.sp[data-d="4"]{transition-delay:.30s}
-.sp[data-d="5"]{transition-delay:.40s}
-.sp[data-d="6"]{transition-delay:.50s}
+#readProgress{
+  position:fixed;top:0;left:0;z-index:10000;height:2px;width:0%;
+  background:linear-gradient(90deg,var(--accent),var(--impact),var(--accent));
+  background-size:200% 100%;
+  animation:progress-shimmer 2s linear infinite;
+  transition:width .1s linear;
+  pointer-events:none}
+@keyframes progress-shimmer{0%{background-position:0% 0}100%{background-position:200% 0}}
 
-/* Slide-in-right variant for stat bar items */
-.sp-x{
-  opacity:0;transform:translateX(-24px);
-  transition:opacity .5s cubic-bezier(0.34,1.56,0.64,1),
-             transform .5s cubic-bezier(0.34,1.56,0.64,1)}
+/* ═══════════════════════════════════════════
+   SPRING ANIMATION SYSTEM
+═══════════════════════════════════════════ */
+.sp{opacity:0;transform:translateY(36px) scale(0.97);
+  transition:opacity .7s cubic-bezier(0.34,1.56,0.64,1),transform .7s cubic-bezier(0.34,1.56,0.64,1)}
+.sp.in{opacity:1;transform:translateY(0) scale(1)}
+.sp[data-d="1"]{transition-delay:.07s}
+.sp[data-d="2"]{transition-delay:.15s}
+.sp[data-d="3"]{transition-delay:.23s}
+.sp[data-d="4"]{transition-delay:.31s}
+.sp[data-d="5"]{transition-delay:.41s}
+.sp[data-d="6"]{transition-delay:.52s}
+.sp-x{opacity:0;transform:translateX(-20px);
+  transition:opacity .55s cubic-bezier(0.34,1.56,0.64,1),transform .55s cubic-bezier(0.34,1.56,0.64,1)}
 .sp-x.in{opacity:1;transform:translateX(0)}
 
 /* ═══════════════════════════════════════════
@@ -97,279 +95,280 @@ a{color:inherit;text-decoration:none}
 ═══════════════════════════════════════════ */
 .nav{
   position:sticky;top:0;z-index:1000;
-  background:rgba(4,7,15,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(0,212,240,0.08);
+  background:rgba(4,7,15,0.9);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(0,212,240,0.07);
   padding:0 clamp(16px,4vw,48px);
   display:flex;align-items:center;justify-content:space-between;height:60px}
-/* Thin neon top-border on nav */
 .nav::before{
   content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--accent),rgba(0,212,240,0.3),transparent)}
-.nav-brand{display:flex;align-items:center;gap:10px}
-.nav-logo{width:28px;height:28px;filter:drop-shadow(0 0 8px rgba(0,212,240,0.6))}
+  background:linear-gradient(90deg,transparent,var(--accent),rgba(0,212,240,0.25),transparent)}
+.nav-brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nav-logo{width:28px;height:28px;filter:drop-shadow(0 0 8px rgba(0,212,240,0.55))}
 .nav-name{font-family:var(--fh);font-size:18px;letter-spacing:2px}
 .nav-name span{color:var(--accent)}
-.nav-badge{
-  font-family:var(--fm);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  padding:3px 9px;border-radius:3px;
-  background:rgba(0,212,240,0.07);color:var(--accent);border:1px solid rgba(0,212,240,0.2)}
+.nav-badge{font-family:var(--fm);font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  padding:3px 9px;border-radius:3px;background:rgba(0,212,240,0.07);color:var(--accent);border:1px solid rgba(0,212,240,0.18)}
 .nav-right{display:flex;align-items:center;gap:10px}
-.nav-link{
-  font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--muted);padding:8px 14px;
-  border:1px solid rgba(255,255,255,0.07);
-  border-radius:3px;transition:all .2s}
-.nav-link:hover{color:var(--accent);border-color:rgba(0,212,240,0.3);background:rgba(0,212,240,0.04)}
+.nav-link{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);padding:8px 14px;border:1px solid rgba(255,255,255,0.06);border-radius:3px;transition:all .2s}
+.nav-link:hover{color:var(--accent);border-color:rgba(0,212,240,0.28);background:rgba(0,212,240,0.04)}
 .nav-cta{
   background:transparent;color:var(--accent);
   font-family:var(--fc);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
-  padding:9px 20px;border-radius:3px;
-  border:1px solid var(--accent);
-  box-shadow:0 0 16px rgba(0,212,240,0.18),inset 0 0 16px rgba(0,212,240,0.04);
-  transition:all .2s;display:inline-flex;align-items:center;gap:6px}
-.nav-cta:hover{background:rgba(0,212,240,0.1);box-shadow:0 0 28px rgba(0,212,240,0.4)}
-@media(max-width:540px){.nav-badge,.nav-link{display:none}}
+  padding:9px 20px;border-radius:3px;border:1px solid var(--accent);
+  box-shadow:0 0 16px rgba(0,212,240,0.16),inset 0 0 16px rgba(0,212,240,0.03);
+  transition:all .22s;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.nav-cta:hover{background:rgba(0,212,240,0.09);box-shadow:0 0 32px rgba(0,212,240,0.38)}
+
+/* Hamburger */
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;
+  background:none;border:none;z-index:1010}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--muted);
+  transition:all .3s;border-radius:2px}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--accent)}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--accent)}
+
+/* Mobile overlay nav */
+.nav-overlay{
+  display:none;position:fixed;inset:0;z-index:999;
+  background:rgba(4,7,15,0.97);backdrop-filter:blur(24px);
+  flex-direction:column;align-items:center;justify-content:center;gap:32px}
+.nav-overlay.open{display:flex}
+.nav-overlay a{font-family:var(--fh);font-size:40px;letter-spacing:4px;color:var(--text);
+  opacity:.7;transition:all .2s}
+.nav-overlay a:hover{opacity:1;color:var(--accent)}
+.nav-overlay .ov-cta{
+  margin-top:12px;font-size:16px;letter-spacing:3px;
+  padding:14px 40px;border:1px solid var(--accent);border-radius:4px;
+  color:var(--accent);opacity:1;
+  box-shadow:0 0 24px rgba(0,212,240,0.2)}
+
+@media(max-width:640px){
+  .nav-badge,.nav-link{display:none}
+  .nav-hamburger{display:flex}
+  .nav-cta{display:none}
+}
 
 /* ═══════════════════════════════════════════
-   PARALLAX HERO  — The Lab header
+   VIDEO SCRUB — GSAP ScrollTrigger
 ═══════════════════════════════════════════ */
-.blog-hero{
-  position:relative;z-index:1;
-  min-height:460px;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;
-  padding:100px clamp(16px,5vw,80px) 72px;overflow:hidden}
-
-/* Parallax background layer */
-.hero-parallax-bg{
-  position:absolute;inset:-20%;z-index:0;
-  background:url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1920&q=80') center/cover no-repeat;
-  filter:brightness(0.12) saturate(0.5) hue-rotate(190deg);
-  will-change:transform}
-/* Corner brackets — lab feel */
-.hero-bracket{
-  position:absolute;width:32px;height:32px;opacity:.4;z-index:2}
-.hero-bracket.tl{top:24px;left:24px;border-top:1px solid var(--accent);border-left:1px solid var(--accent)}
-.hero-bracket.tr{top:24px;right:24px;border-top:1px solid var(--accent);border-right:1px solid var(--accent)}
-.hero-bracket.bl{bottom:24px;left:24px;border-bottom:1px solid var(--accent);border-left:1px solid var(--accent)}
-.hero-bracket.br{bottom:24px;right:24px;border-bottom:1px solid var(--accent);border-right:1px solid var(--accent)}
-
-/* Animated horizontal scan line through hero */
-.hero-scan{
-  position:absolute;left:0;right:0;height:1px;z-index:2;
-  background:linear-gradient(90deg,transparent,var(--accent),transparent);
-  opacity:.35;animation:hero-scan-move 4s ease-in-out infinite}
-@keyframes hero-scan-move{
-  0%{top:10%;opacity:0}10%{opacity:.35}
-  90%{opacity:.35}100%{top:90%;opacity:0}}
-
-.hero-content{position:relative;z-index:3}
-.blog-hero-kicker{
-  font-family:var(--fm);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;
-  color:var(--accent);margin-bottom:20px;
-  display:inline-flex;align-items:center;gap:10px;
-  padding:5px 16px;border-radius:3px;
-  background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.2);
-  box-shadow:0 0 20px rgba(0,212,240,0.08)}
-.kicker-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--accent);box-shadow:0 0 8px var(--accent);
-  animation:kdot 2s ease-in-out infinite}
-@keyframes kdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.6)}}
-
-.blog-hero h1{
-  font-family:var(--fh);font-size:clamp(48px,8vw,96px);
-  letter-spacing:4px;line-height:0.9;margin-bottom:20px}
-.blog-hero h1 span{
-  color:var(--accent);
-  text-shadow:0 0 40px rgba(0,212,240,0.5)}
-/* Glitching underline on INTELLIGENCE */
-.blog-hero h1 span::after{
-  content:'';display:block;height:2px;
-  background:linear-gradient(90deg,transparent,var(--accent),var(--impact),transparent);
-  margin-top:4px;animation:glitch-line 3s ease-in-out infinite}
-@keyframes glitch-line{
-  0%,90%,100%{opacity:.7;transform:scaleX(1)}
-  92%{opacity:1;transform:scaleX(1.03) translateX(2px)}
-  94%{opacity:.5;transform:scaleX(.98) translateX(-1px)}
-  96%{opacity:1;transform:scaleX(1)}}
-
-.blog-hero-sub{
-  font-family:var(--fb);font-size:clamp(15px,1.8vw,18px);
-  color:var(--muted);max-width:560px;margin:0 auto 36px;line-height:1.75}
-
-/* ── Impact stat row below headline ── */
-.hero-stats{
+.scrub-wrap{
+  position:relative;height:420vh;z-index:2;
+  overflow:clip} /* clip doesn't break sticky, but contains title flyout */
+.scrub-stage{
+  position:sticky;top:0;height:100vh;
   display:flex;align-items:center;justify-content:center;
-  gap:clamp(20px,4vw,56px);flex-wrap:wrap;
-  margin-bottom:40px;padding:16px 32px;
-  background:rgba(0,212,240,0.03);
-  border:1px solid rgba(0,212,240,0.1);
-  border-radius:4px;backdrop-filter:blur(8px)}
-.hstat{text-align:center}
-.hstat-num{
-  font-family:var(--fh);font-size:2rem;letter-spacing:2px;
-  color:var(--accent);line-height:1;
-  text-shadow:0 0 20px rgba(0,212,240,0.4)}
-.hstat-lbl{
-  font-family:var(--fm);font-size:9px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--muted2);margin-top:3px}
-.hstat-div{width:1px;height:32px;background:rgba(0,212,240,0.12)}
-@media(max-width:480px){.hstat-div{display:none}}
-
-/* ── Category pills ── */
-.cats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.cat{
-  font-family:var(--fm);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  padding:6px 16px;border-radius:3px;border:1px solid rgba(255,255,255,0.07);
-  background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
-.cat.active,.cat:hover{
-  background:rgba(0,212,240,0.06);border-color:rgba(0,212,240,0.3);color:var(--accent);
-  box-shadow:0 0 12px rgba(0,212,240,0.12)}
-.cat.red{border-color:rgba(239,68,68,0.2);color:var(--red)}
-.cat.red:hover,.cat.red.active{background:rgba(239,68,68,0.06);box-shadow:0 0 12px rgba(239,68,68,0.12)}
-.cat.green{border-color:rgba(16,185,129,0.2);color:var(--green)}
-.cat.amber{border-color:rgba(245,158,11,0.2);color:var(--amber)}
-.cat.purple{border-color:rgba(139,92,246,0.2);color:#a78bfa}
+  overflow:hidden;background:var(--bg)}
+.scrub-card{
+  position:relative;border-radius:14px;overflow:hidden;flex-shrink:0}
+.scrub-video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+/* Neon border */
+.scrub-card::after{
+  content:'';position:absolute;inset:0;border-radius:14px;
+  border:1px solid rgba(0,212,240,0.22);pointer-events:none;z-index:5}
+/* Dark vignette over video for text legibility */
+.scrub-vignette{
+  position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:radial-gradient(ellipse 110% 100% at 50% 50%,transparent 40%,rgba(4,7,15,0.7) 100%)}
+/* Corner brackets */
+.scrub-br{position:absolute;width:22px;height:22px;z-index:6;pointer-events:none;opacity:.6}
+.scrub-br.tl{top:14px;left:14px;border-top:1px solid var(--accent);border-left:1px solid var(--accent)}
+.scrub-br.tr{top:14px;right:14px;border-top:1px solid var(--accent);border-right:1px solid var(--accent)}
+.scrub-br.bl{bottom:14px;left:14px;border-bottom:1px solid var(--accent);border-left:1px solid var(--accent)}
+.scrub-br.br{bottom:14px;right:14px;border-bottom:1px solid var(--accent);border-right:1px solid var(--accent)}
+/* SYS badge */
+.scrub-badge{
+  position:absolute;top:18px;left:50%;transform:translateX(-50%);
+  font-family:var(--fm);font-size:8px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--accent);padding:3px 12px;
+  background:rgba(4,7,15,0.6);border:1px solid rgba(0,212,240,0.22);
+  border-radius:2px;z-index:6;white-space:nowrap;backdrop-filter:blur(8px)}
+.scrub-badge::before{
+  content:'';display:inline-block;width:5px;height:5px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 6px var(--green);
+  margin-right:8px;vertical-align:middle;animation:kdot 2s ease-in-out infinite}
+/* Split titles — outside the card, inside the stage */
+.scrub-title-top{
+  position:absolute;top:0;left:0;right:0;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:clamp(10px,2vh,24px);height:50%;
+  pointer-events:none;z-index:7}
+.scrub-title-bot{
+  position:absolute;bottom:0;left:0;right:0;
+  display:flex;align-items:flex-start;justify-content:center;
+  padding-top:clamp(10px,2vh,24px);height:50%;
+  pointer-events:none;z-index:7}
+.scrub-headline{
+  font-family:var(--fh);font-size:clamp(52px,9vw,108px);
+  letter-spacing:5px;line-height:0.9;text-align:center;
+  color:#fff;text-shadow:0 2px 40px rgba(0,0,0,0.9)}
+.scrub-headline span{color:var(--accent);text-shadow:0 0 50px rgba(0,212,240,0.7)}
+.scrub-sub{
+  font-family:var(--fm);font-size:clamp(8px,1.1vw,12px);
+  letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--accent);opacity:.8;margin-top:12px}
+/* Scroll hint */
+.scrub-hint{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  font-family:var(--fm);font-size:8px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);z-index:6;animation:hint-bounce 2.2s ease-in-out infinite}
+.scrub-hint svg{opacity:.4}
+@keyframes hint-bounce{0%,100%{opacity:.45;transform:translateX(-50%) translateY(0)}55%{opacity:.9;transform:translateX(-50%) translateY(5px)}}
 
 /* ═══════════════════════════════════════════
-   SECTION DIVIDER  — data tape
+   DATA TAPE
 ═══════════════════════════════════════════ */
 .data-tape{
-  position:relative;z-index:1;
-  height:28px;overflow:hidden;
-  background:rgba(0,212,240,0.03);
-  border-top:1px solid rgba(0,212,240,0.08);
-  border-bottom:1px solid rgba(0,212,240,0.08);
+  position:relative;z-index:1;height:28px;overflow:hidden;
+  background:rgba(0,212,240,0.025);
+  border-top:1px solid rgba(0,212,240,0.07);
+  border-bottom:1px solid rgba(0,212,240,0.07);
   display:flex;align-items:center}
-.tape-track{
-  display:flex;gap:48px;white-space:nowrap;
-  animation:tape-scroll 28s linear infinite;font-family:var(--fm)}
-.tape-track span{
-  font-size:8px;letter-spacing:3px;text-transform:uppercase;
-  color:rgba(0,212,240,0.28)}
-.tape-track .hl{color:rgba(0,212,240,0.55)}
+.tape-track{display:flex;gap:48px;white-space:nowrap;animation:tape-scroll 30s linear infinite;font-family:var(--fm)}
+.tape-track span{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(0,212,240,0.24)}
+.tape-track .hl{color:rgba(0,212,240,0.5)}
+@keyframes tape-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ═══════════════════════════════════════════
-   FEATURED  — "Impact Report" card
+   INTRO STRIP (replaces old blog-hero)
 ═══════════════════════════════════════════ */
-.featured-wrap{
+.intro-strip{
   position:relative;z-index:1;
-  max-width:1200px;margin:56px auto;
-  padding:0 clamp(16px,4vw,48px)}
+  max-width:1200px;margin:0 auto;
+  padding:56px clamp(16px,4vw,48px) 40px}
+.intro-top{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;margin-bottom:32px}
+.intro-headline{
+  font-family:var(--fh);font-size:clamp(38px,5vw,64px);
+  letter-spacing:3px;line-height:0.9}
+.intro-headline span{color:var(--accent)}
+.intro-meta{
+  display:flex;gap:32px;flex-shrink:0;align-items:flex-end}
+.intro-stat{text-align:center}
+.intro-stat-num{
+  font-family:var(--fh);font-size:28px;letter-spacing:2px;color:var(--accent);
+  line-height:1;text-shadow:0 0 20px rgba(0,212,240,0.35)}
+.intro-stat-lbl{font-family:var(--fm);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-top:2px}
+.intro-stat-div{width:1px;height:36px;background:rgba(0,212,240,0.1);align-self:center}
+.intro-sub{font-size:15px;color:var(--muted);max-width:560px;line-height:1.75;margin-bottom:28px}
+
+/* Category filter pills */
+.cats{display:flex;gap:8px;flex-wrap:wrap}
+.cat{
+  font-family:var(--fm);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:6px 16px;border-radius:3px;border:1px solid rgba(255,255,255,0.06);
+  background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;
+  user-select:none;-webkit-user-select:none}
+.cat.active,.cat:hover{
+  background:rgba(0,212,240,0.06);border-color:rgba(0,212,240,0.28);color:var(--accent);
+  box-shadow:0 0 12px rgba(0,212,240,0.1)}
+.cat[data-cat="weight-cut"].active,.cat[data-cat="weight-cut"]:hover{
+  background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.28);color:var(--amber);box-shadow:0 0 12px rgba(245,158,11,0.1)}
+.cat[data-cat="recovery"].active,.cat[data-cat="recovery"]:hover{
+  background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.28);color:var(--green);box-shadow:0 0 12px rgba(16,185,129,0.1)}
+.cat[data-cat="fight-camp"].active,.cat[data-cat="fight-camp"]:hover{
+  background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.28);color:var(--red);box-shadow:0 0 12px rgba(239,68,68,0.1)}
+.cat[data-cat="coaching"].active,.cat[data-cat="coaching"]:hover{
+  background:rgba(139,92,246,0.06);border-color:rgba(139,92,246,0.28);color:#a78bfa;box-shadow:0 0 12px rgba(139,92,246,0.1)}
+
+/* ═══════════════════════════════════════════
+   SECTION LABEL
+═══════════════════════════════════════════ */
 .section-label{
   font-family:var(--fm);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
   color:var(--accent);margin-bottom:20px;
   display:flex;align-items:center;gap:10px}
-.section-label .label-dot{
-  width:5px;height:5px;border-radius:50%;
-  background:var(--accent);box-shadow:0 0 6px var(--accent)}
-.section-label::after{content:'';flex:1;height:1px;background:rgba(0,212,240,0.14)}
+.label-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 7px var(--accent);animation:kdot 2s ease-in-out infinite}
+@keyframes kdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.55)}}
+.section-label::after{content:'';flex:1;height:1px;background:rgba(0,212,240,0.12)}
+.section-label .lbl-count{
+  color:var(--muted2);margin-left:-4px;
+  font-size:8px;letter-spacing:1px}
 
-/* The featured card itself */
+/* ═══════════════════════════════════════════
+   FEATURED CARD
+═══════════════════════════════════════════ */
+.featured-wrap{
+  position:relative;z-index:1;
+  max-width:1200px;margin:0 auto 56px;
+  padding:0 clamp(16px,4vw,48px)}
 .featured-card{
   display:grid;grid-template-columns:1fr 1fr;gap:0;
-  border-radius:6px;overflow:hidden;
-  border:1px solid rgba(0,212,240,0.15);
+  border-radius:var(--radius);overflow:hidden;
+  border:1px solid rgba(0,212,240,0.12);
   background:var(--card);
-  box-shadow:0 0 0 1px rgba(0,212,240,0.04),0 0 60px rgba(0,212,240,0.06),0 32px 80px rgba(0,0,0,0.5);
-  transition:border-color .3s,box-shadow .3s;
-  position:relative}
+  box-shadow:0 0 0 1px rgba(0,212,240,0.03),0 0 60px rgba(0,212,240,0.05),0 40px 90px rgba(0,0,0,0.5);
+  transition:border-color .3s,box-shadow .35s;position:relative}
 .featured-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--accent),rgba(0,212,240,0.4),transparent);z-index:2}
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;z-index:2;
+  background:linear-gradient(90deg,transparent,var(--accent),rgba(0,212,240,0.35),transparent)}
 .featured-card:hover{
-  border-color:rgba(0,212,240,0.28);
-  box-shadow:0 0 0 1px rgba(0,212,240,0.08),0 0 80px rgba(0,212,240,0.1),0 40px 100px rgba(0,0,0,0.55)}
+  border-color:rgba(0,212,240,0.25);
+  box-shadow:0 0 0 1px rgba(0,212,240,0.07),0 0 90px rgba(0,212,240,0.09),0 48px 110px rgba(0,0,0,0.55)}
 @media(max-width:768px){.featured-card{grid-template-columns:1fr}}
 
 .featured-img{
-  position:relative;min-height:360px;
-  background:linear-gradient(135deg,#04091a 0%,#070e24 40%,#050a18 100%);
-  overflow:hidden}
-/* Subtle inner grid on the featured visual panel */
+  position:relative;min-height:380px;
+  background:linear-gradient(135deg,#04091a 0%,#070e24 40%,#050a18 100%);overflow:hidden}
 .featured-img::before{
   content:'';position:absolute;inset:0;z-index:0;
-  background-image:
-    linear-gradient(rgba(0,212,240,0.05) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,212,240,0.05) 1px,transparent 1px);
-  background-size:28px 28px}
-.featured-img-inner{
-  position:absolute;inset:0;display:flex;
-  align-items:center;justify-content:center;z-index:1}
-.feat-graphic{
-  width:100%;height:100%;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:16px;padding:40px}
-.feat-score-row{display:flex;gap:24px;align-items:flex-end}
+  background-image:linear-gradient(rgba(0,212,240,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,240,0.05) 1px,transparent 1px);
+  background-size:26px 26px}
+.featured-img-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:1}
+.feat-graphic{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:40px}
+.feat-score-row{display:flex;gap:28px;align-items:flex-end}
 .feat-score{display:flex;flex-direction:column;align-items:center;gap:4px}
-.feat-score-num{
-  font-family:var(--fh);font-size:64px;line-height:1;letter-spacing:2px}
-.feat-score-lbl{
-  font-family:var(--fm);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2)}
-.feat-score.green .feat-score-num{color:var(--green);text-shadow:0 0 30px rgba(16,185,129,0.5)}
-.feat-score.cyan  .feat-score-num{color:var(--accent);text-shadow:0 0 30px rgba(0,212,240,0.5)}
-.feat-score.red   .feat-score-num{color:var(--red);  text-shadow:0 0 30px rgba(239,68,68,0.5)}
-.feat-bar-wrap{width:100%;max-width:280px}
-.feat-bar-lbl{
-  font-family:var(--fm);font-size:9px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--muted2);margin-bottom:8px;display:flex;justify-content:space-between}
-.feat-bar{
-  height:4px;background:rgba(255,255,255,0.05);margin-bottom:10px;
-  border-radius:0;overflow:hidden;position:relative}
-.feat-bar-fill{
-  height:100%;border-radius:0;
-  position:relative;
-  animation:bar-fill-in 1.2s cubic-bezier(0.34,1.56,0.64,1) both}
+.feat-score-num{font-family:var(--fh);font-size:68px;line-height:1;letter-spacing:2px}
+.feat-score-lbl{font-family:var(--fm);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2)}
+.feat-score.green .feat-score-num{color:var(--green);text-shadow:0 0 32px rgba(16,185,129,0.55)}
+.feat-score.cyan  .feat-score-num{color:var(--accent);text-shadow:0 0 32px rgba(0,212,240,0.55)}
+.feat-score.red   .feat-score-num{color:var(--red);  text-shadow:0 0 32px rgba(239,68,68,0.55)}
+.feat-bar-wrap{width:100%;max-width:260px}
+.feat-bar-lbl{font-family:var(--fm);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:8px;display:flex;justify-content:space-between}
+.feat-bar{height:4px;background:rgba(255,255,255,0.04);margin-bottom:10px;border-radius:0;overflow:hidden;position:relative}
+.feat-bar-fill{height:100%;border-radius:0;animation:bar-fill-in 1.4s cubic-bezier(0.34,1.56,0.64,1) both}
 @keyframes bar-fill-in{from{width:0!important}to{}}
 .feat-img-label{
   position:absolute;bottom:16px;left:16px;z-index:2;
   font-family:var(--fm);font-size:8px;letter-spacing:2px;text-transform:uppercase;
   color:var(--accent);padding:4px 10px;border-radius:2px;
-  background:rgba(0,212,240,0.08);border:1px solid rgba(0,212,240,0.2)}
-/* Corner system indicator — top right of featured visual */
+  background:rgba(0,212,240,0.08);border:1px solid rgba(0,212,240,0.18)}
 .feat-corner-badge{
   position:absolute;top:16px;right:16px;z-index:2;
   font-family:var(--fm);font-size:8px;letter-spacing:2px;
   color:rgba(0,212,240,0.5);display:flex;align-items:center;gap:6px}
 .feat-corner-badge::before{
   content:'';width:5px;height:5px;border-radius:50%;
-  background:var(--green);box-shadow:0 0 6px var(--green);
-  animation:kdot 2s ease-in-out infinite}
-
-.featured-body{
-  padding:48px 44px;display:flex;flex-direction:column;justify-content:center;
-  position:relative}
-/* Subtle right-side line on featured body */
+  background:var(--green);box-shadow:0 0 6px var(--green);animation:kdot 2s ease-in-out infinite}
+.featured-body{padding:48px 44px;display:flex;flex-direction:column;justify-content:center;position:relative}
 .featured-body::before{
   content:'';position:absolute;left:0;top:20%;bottom:20%;
-  width:1px;background:linear-gradient(to bottom,transparent,rgba(0,212,240,0.15),transparent)}
-@media(max-width:540px){.featured-body{padding:28px 24px}}
-
+  width:1px;background:linear-gradient(to bottom,transparent,rgba(0,212,240,0.12),transparent)}
+@media(max-width:540px){.featured-body{padding:28px 22px}}
 .post-cat{
   display:inline-flex;font-family:var(--fm);font-size:8px;letter-spacing:2px;
   text-transform:uppercase;padding:4px 10px;border-radius:2px;margin-bottom:16px}
-.post-cat.cyan  {color:var(--accent);background:rgba(0,212,240,0.07);border:1px solid rgba(0,212,240,0.18)}
-.post-cat.red   {color:var(--red);  background:rgba(239,68,68,0.07);  border:1px solid rgba(239,68,68,0.18)}
-.post-cat.green {color:var(--green);background:rgba(16,185,129,0.07); border:1px solid rgba(16,185,129,0.18)}
-.post-cat.amber {color:var(--amber);background:rgba(245,158,11,0.07); border:1px solid rgba(245,158,11,0.18)}
-
-.featured-title{
-  font-family:var(--fh);font-size:clamp(28px,3.5vw,42px);
-  letter-spacing:2px;line-height:1.0;margin-bottom:16px}
-.featured-excerpt{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:28px}
+.post-cat.cyan {color:var(--accent);background:rgba(0,212,240,0.07);border:1px solid rgba(0,212,240,0.16)}
+.post-cat.red  {color:var(--red);background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.16)}
+.post-cat.green{color:var(--green);background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.16)}
+.post-cat.amber{color:var(--amber);background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.16)}
+.post-cat.purple{color:#a78bfa;background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.16)}
+.featured-title{font-family:var(--fh);font-size:clamp(26px,3.2vw,42px);letter-spacing:2px;line-height:1.0;margin-bottom:14px}
+.featured-excerpt{font-size:15px;color:var(--muted);line-height:1.78;margin-bottom:24px}
 .post-meta{display:flex;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
 .post-meta-item{font-family:var(--fm);font-size:10px;color:var(--muted2)}
+.post-meta-item.dot::before{content:'·';margin-right:16px}
 .read-btn{
-  display:inline-flex;align-items:center;gap:8px;
+  display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
   font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;
-  padding:12px 24px;border-radius:3px;
-  color:var(--accent);border:1px solid rgba(0,212,240,0.3);
-  background:rgba(0,212,240,0.04);
-  box-shadow:0 0 16px rgba(0,212,240,0.1);
-  transition:all .25s}
-.read-btn:hover{
-  background:rgba(0,212,240,0.1);
-  box-shadow:0 0 28px rgba(0,212,240,0.28);
-  border-color:var(--accent);transform:translateY(-1px)}
+  padding:12px 24px;border-radius:3px;color:var(--accent);
+  border:1px solid rgba(0,212,240,0.28);background:rgba(0,212,240,0.04);
+  box-shadow:0 0 16px rgba(0,212,240,0.08);transition:all .25s}
+.read-btn:hover{background:rgba(0,212,240,0.1);box-shadow:0 0 32px rgba(0,212,240,0.28);border-color:var(--accent);transform:translateY(-1px)}
 
 /* ═══════════════════════════════════════════
    POST GRID
@@ -383,202 +382,209 @@ a{color:inherit;text-decoration:none}
 @media(max-width:560px){.posts-grid{grid-template-columns:1fr}}
 
 .post-card{
-  background:var(--card);
-  border:1px solid rgba(255,255,255,0.05);
-  border-radius:6px;overflow:hidden;
-  display:flex;flex-direction:column;
+  background:var(--card);border:1px solid rgba(255,255,255,0.04);
+  border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;
   position:relative;
-  transition:border-color .3s,box-shadow .3s,transform .3s cubic-bezier(0.34,1.56,0.64,1)}
-/* Top accent line per card */
+  transition:border-color .3s,box-shadow .3s,transform .35s cubic-bezier(0.34,1.56,0.64,1)}
 .post-card::before{
   content:'';position:absolute;top:0;left:0;right:0;height:1px;z-index:1;
   opacity:0;transition:opacity .3s;
   background:linear-gradient(90deg,transparent,var(--accent),transparent)}
 .post-card:hover{
-  transform:translateY(-6px) scale(1.01);
-  border-color:rgba(0,212,240,0.2);
-  box-shadow:0 0 0 1px rgba(0,212,240,0.06),0 20px 60px rgba(0,0,0,0.5),0 0 40px rgba(0,212,240,0.07)}
+  transform:translateY(-7px) scale(1.012);
+  border-color:rgba(0,212,240,0.18);
+  box-shadow:0 0 0 1px rgba(0,212,240,0.05),0 24px 64px rgba(0,0,0,0.5),0 0 40px rgba(0,212,240,0.06)}
 .post-card:hover::before{opacity:1}
 .post-card:hover .post-title{color:var(--accent)}
+/* Hide filtered out cards */
+.post-card.hidden{display:none}
 
 .post-thumb{
   height:180px;position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center}
-/* Inner grid on thumbs */
 .post-thumb::after{
   content:'';position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(0,212,240,0.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,212,240,0.04) 1px,transparent 1px);
+  background-image:linear-gradient(rgba(0,212,240,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,240,0.04) 1px,transparent 1px);
   background-size:20px 20px;pointer-events:none}
-.post-thumb-inner{
-  width:100%;height:100%;display:flex;align-items:center;
-  justify-content:center;padding:24px;position:relative;z-index:1}
-.post-info{padding:24px;flex:1;display:flex;flex-direction:column}
+.post-thumb-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:22px;position:relative;z-index:1}
+.post-info{padding:22px 24px;flex:1;display:flex;flex-direction:column}
+.post-author{
+  display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.post-author-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.post-author-name{font-family:var(--fm);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2)}
 .post-title{
-  font-family:var(--fh);font-size:22px;letter-spacing:1.5px;line-height:1.1;
-  margin-bottom:10px;transition:color .2s}
-.post-excerpt{font-size:13px;color:var(--muted);line-height:1.72;flex:1;margin-bottom:18px}
+  font-family:var(--fh);font-size:20px;letter-spacing:1.5px;line-height:1.1;
+  margin-bottom:9px;transition:color .2s}
+.post-excerpt{font-size:13px;color:var(--muted);line-height:1.72;flex:1;margin-bottom:16px}
 .post-footer{
   display:flex;align-items:center;justify-content:space-between;
-  padding-top:14px;border-top:1px solid rgba(255,255,255,0.04)}
+  padding-top:12px;border-top:1px solid rgba(255,255,255,0.04)}
 .post-date{font-family:var(--fm);font-size:9px;color:var(--muted2)}
 .post-read-more{
-  font-family:var(--fm);font-size:9px;letter-spacing:1.5px;
-  text-transform:uppercase;color:var(--accent);
-  display:flex;align-items:center;gap:4px;transition:gap .2s}
+  font-family:var(--fm);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:4px;transition:gap .2s}
 .post-card:hover .post-read-more{gap:8px}
 
 /* ═══════════════════════════════════════════
-   CTA STRIP  — Impact-style
+   NEWSLETTER SECTION
+═══════════════════════════════════════════ */
+.newsletter-wrap{
+  position:relative;z-index:1;
+  max-width:1200px;margin:0 auto 80px;
+  padding:0 clamp(16px,4vw,48px)}
+.newsletter-card{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  background:var(--card);border:1px solid rgba(0,212,240,0.12);
+  padding:56px clamp(24px,5vw,72px);
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
+  box-shadow:0 0 80px rgba(0,212,240,0.04),0 40px 80px rgba(0,0,0,0.4)}
+.newsletter-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent)}
+.newsletter-card::after{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 100% at 100% 50%,rgba(0,212,240,0.04) 0%,transparent 60%)}
+@media(max-width:768px){.newsletter-card{grid-template-columns:1fr;gap:28px;padding:36px 24px}}
+.nl-left{position:relative;z-index:1}
+.nl-kicker{
+  font-family:var(--fm);font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.nl-kicker::before{content:'//';opacity:.5}
+.nl-headline{font-family:var(--fh);font-size:clamp(28px,3.5vw,44px);letter-spacing:2px;line-height:0.95;margin-bottom:14px}
+.nl-headline span{color:var(--accent)}
+.nl-sub{font-size:14px;color:var(--muted);line-height:1.7}
+.nl-right{position:relative;z-index:1}
+.nl-form{display:flex;flex-direction:column;gap:12px}
+.nl-input-row{display:flex;gap:10px}
+.nl-input{
+  flex:1;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);
+  border-radius:3px;padding:13px 16px;
+  font-family:var(--fm);font-size:12px;letter-spacing:1px;color:var(--text);
+  transition:border-color .2s,box-shadow .2s;outline:none;min-width:0}
+.nl-input::placeholder{color:var(--muted2)}
+.nl-input:focus{border-color:rgba(0,212,240,0.3);box-shadow:0 0 16px rgba(0,212,240,0.08)}
+.nl-btn{
+  flex-shrink:0;background:var(--accent);color:var(--bg);
+  font-family:var(--fc);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  padding:13px 24px;border-radius:3px;border:none;cursor:pointer;
+  transition:all .22s;white-space:nowrap}
+.nl-btn:hover{background:#22e4ff;transform:translateY(-1px);box-shadow:0 0 28px rgba(0,212,240,0.4)}
+.nl-note{font-family:var(--fm);font-size:9px;color:var(--muted2);letter-spacing:.5px}
+.nl-social-proof{display:flex;align-items:center;gap:12px;margin-top:8px}
+.nl-avatars{display:flex}
+.nl-avatar{
+  width:24px;height:24px;border-radius:50%;margin-right:-8px;
+  border:2px solid var(--card);font-family:var(--fh);font-size:10px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--surface);color:var(--accent)}
+.nl-proof-text{font-family:var(--fm);font-size:9px;color:var(--muted2);letter-spacing:.5px;margin-left:16px}
+@media(max-width:480px){.nl-input-row{flex-direction:column}.nl-btn{width:100%}}
+
+/* ═══════════════════════════════════════════
+   CTA STRIP
 ═══════════════════════════════════════════ */
 .cta-strip{
   position:relative;z-index:1;
-  padding:72px clamp(16px,4vw,48px);text-align:center;
-  overflow:hidden;margin-bottom:0}
-/* Animated neon border top/bottom */
-.cta-strip::before,.cta-strip::after{
-  content:'';position:absolute;left:0;right:0;height:1px}
-.cta-strip::before{
-  top:0;
-  background:linear-gradient(90deg,transparent,var(--accent),var(--impact),var(--accent),transparent);
-  animation:border-march 4s linear infinite}
-.cta-strip::after{
-  bottom:0;
-  background:linear-gradient(90deg,transparent,rgba(0,212,240,0.4),transparent)}
-@keyframes border-march{
-  from{background-position:0 0}to{background-position:200px 0}}
-/* Background glow */
-.cta-strip-bg{
-  position:absolute;inset:0;z-index:0;
-  background:radial-gradient(ellipse 80% 100% at 50% 50%,rgba(0,212,240,0.05) 0%,transparent 70%)}
-
+  padding:88px clamp(16px,4vw,48px) 80px;text-align:center;overflow:hidden}
+.cta-strip::before,.cta-strip::after{content:'';position:absolute;left:0;right:0;height:1px}
+.cta-strip::before{top:0;background:linear-gradient(90deg,transparent,var(--accent),var(--impact),var(--accent),transparent);animation:border-march 4s linear infinite}
+.cta-strip::after{bottom:0;background:linear-gradient(90deg,transparent,rgba(0,212,240,0.3),transparent)}
+@keyframes border-march{from{background-position:0 0}to{background-position:200px 0}}
+.cta-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 100% at 50% 50%,rgba(0,212,240,0.04) 0%,transparent 70%)}
+.cta-eyebrow{
+  position:relative;z-index:1;
+  font-family:var(--fm);font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:20px;
+  display:inline-flex;align-items:center;gap:10px}
 .cta-strip h2{
   position:relative;z-index:1;
-  font-family:var(--fh);font-size:clamp(32px,5vw,56px);
-  letter-spacing:3px;margin-bottom:12px}
-.cta-strip h2 span{
-  color:var(--accent);text-shadow:0 0 40px rgba(0,212,240,0.4)}
+  font-family:var(--fh);font-size:clamp(36px,6vw,72px);
+  letter-spacing:4px;margin-bottom:14px;line-height:.95}
+.cta-strip h2 span{color:var(--accent);text-shadow:0 0 40px rgba(0,212,240,0.4)}
 .cta-strip p{
   position:relative;z-index:1;
-  font-size:15px;color:var(--muted);margin-bottom:28px;
-  max-width:480px;margin-left:auto;margin-right:auto}
-.cta-btns{
+  font-size:16px;color:var(--muted);margin-bottom:36px;
+  max-width:520px;margin-left:auto;margin-right:auto;line-height:1.75}
+.cta-proof{
   position:relative;z-index:1;
-  display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  display:flex;align-items:center;justify-content:center;gap:32px;
+  flex-wrap:wrap;margin-bottom:36px}
+.cta-proof-item{
+  font-family:var(--fm);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted2);display:flex;align-items:center;gap:8px}
+.cta-proof-item::before{content:'✓';color:var(--green);font-size:10px}
+.cta-btns{position:relative;z-index:1;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .btn-primary{
   background:transparent;color:var(--accent);
-  font-family:var(--fc);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
-  padding:13px 28px;border-radius:3px;border:1px solid var(--accent);
+  font-family:var(--fc);font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  padding:14px 32px;border-radius:3px;border:1px solid var(--accent);
   display:inline-flex;align-items:center;gap:8px;
-  box-shadow:0 0 20px rgba(0,212,240,0.2),inset 0 0 20px rgba(0,212,240,0.04);
+  box-shadow:0 0 20px rgba(0,212,240,0.18),inset 0 0 20px rgba(0,212,240,0.03);
   transition:all .25s}
-.btn-primary:hover{
-  background:rgba(0,212,240,0.08);
-  box-shadow:0 0 40px rgba(0,212,240,0.45);transform:translateY(-2px)}
+.btn-primary:hover{background:rgba(0,212,240,0.09);box-shadow:0 0 44px rgba(0,212,240,0.45);transform:translateY(-2px)}
 .btn-ghost{
-  font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  padding:12px 24px;border-radius:3px;
-  border:1px solid rgba(255,255,255,0.08);color:var(--muted);transition:all .2s}
-.btn-ghost:hover{border-color:rgba(0,212,240,0.25);color:var(--accent)}
+  font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:13px 28px;border-radius:3px;border:1px solid rgba(255,255,255,0.08);
+  color:var(--muted);transition:all .2s}
+.btn-ghost:hover{border-color:rgba(0,212,240,0.22);color:var(--accent)}
 
 /* ═══════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════ */
 .footer{
-  position:relative;z-index:1;padding:40px clamp(16px,4vw,48px);
-  border-top:1px solid rgba(0,212,240,0.08);
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  position:relative;z-index:1;
+  padding:48px clamp(16px,4vw,48px) 32px;
+  border-top:1px solid rgba(0,212,240,0.07)}
 .footer::before{
   content:'';position:absolute;top:0;left:5%;right:5%;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(0,212,240,0.2),transparent)}
-.footer-brand{font-family:var(--fh);font-size:16px;letter-spacing:2px}
+  background:linear-gradient(90deg,transparent,rgba(0,212,240,0.18),transparent)}
+.footer-inner{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:1fr auto;gap:40px;align-items:start;
+  margin-bottom:36px}
+@media(max-width:600px){.footer-inner{grid-template-columns:1fr;gap:28px}}
+.footer-brand-block{}
+.footer-brand{font-family:var(--fh);font-size:20px;letter-spacing:2px;margin-bottom:8px}
 .footer-brand span{color:var(--accent)}
-.footer-links{display:flex;gap:20px;flex-wrap:wrap}
-.footer-links a{
-  font-family:var(--fm);font-size:9px;letter-spacing:1.5px;
-  text-transform:uppercase;color:var(--muted2);transition:color .2s}
-.footer-links a:hover{color:var(--accent)}
-.footer-copy{font-family:var(--fm);font-size:10px;color:var(--muted2);width:100%;text-align:center;margin-top:8px}
-
-/* ── Data tape animation ── */
-@keyframes tape-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-/* ═══════════════════════════════════════════
-   HERO SCRUB  — GSAP ScrollTrigger video pin
-═══════════════════════════════════════════ */
-.scrub-wrap{
-  position:relative;height:420vh;z-index:2}
-.scrub-stage{
-  position:sticky;top:0;height:100vh;
-  display:flex;align-items:center;justify-content:center;overflow:hidden;
-  background:var(--bg)}
-/* Outer card container */
-.scrub-card{
-  position:relative;
-  border-radius:12px;overflow:hidden;
-  /* initial size set via JS */ }
-.scrub-video{
-  width:100%;height:100%;object-fit:cover;display:block}
-/* Title split — top half */
-.scrub-title-top{
-  position:absolute;top:0;left:0;right:0;
-  display:flex;align-items:flex-end;justify-content:center;
-  padding-bottom:clamp(12px,2vh,28px);
-  height:50%;pointer-events:none;z-index:4}
-/* Title split — bottom half */
-.scrub-title-bot{
-  position:absolute;bottom:0;left:0;right:0;
-  display:flex;align-items:flex-start;justify-content:center;
-  padding-top:clamp(12px,2vh,28px);
-  height:50%;pointer-events:none;z-index:4}
-.scrub-headline{
-  font-family:var(--fh);
-  font-size:clamp(48px,8vw,96px);
-  letter-spacing:4px;line-height:0.9;
-  text-align:center;color:#fff;
-  text-shadow:0 4px 40px rgba(0,0,0,0.8)}
-.scrub-headline span{color:var(--accent);text-shadow:0 0 40px rgba(0,212,240,0.6)}
-.scrub-sub{
-  font-family:var(--fm);font-size:clamp(9px,1.2vw,13px);
-  letter-spacing:3px;text-transform:uppercase;
-  color:var(--accent);opacity:.85;margin-top:10px}
-/* Neon border on card */
-.scrub-card::after{
-  content:'';position:absolute;inset:0;border-radius:12px;
-  border:1px solid rgba(0,212,240,0.25);pointer-events:none;z-index:5}
-/* Corner bracket overlays inside card */
-.scrub-br{
-  position:absolute;width:24px;height:24px;z-index:6;pointer-events:none;
-  opacity:.55}
-.scrub-br.tl{top:12px;left:12px;border-top:1px solid var(--accent);border-left:1px solid var(--accent)}
-.scrub-br.tr{top:12px;right:12px;border-top:1px solid var(--accent);border-right:1px solid var(--accent)}
-.scrub-br.bl{bottom:12px;left:12px;border-bottom:1px solid var(--accent);border-left:1px solid var(--accent)}
-.scrub-br.br{bottom:12px;right:12px;border-bottom:1px solid var(--accent);border-right:1px solid var(--accent)}
-/* SYS label inside card */
-.scrub-badge{
-  position:absolute;top:16px;left:50%;transform:translateX(-50%);
-  font-family:var(--fm);font-size:8px;letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--accent);padding:3px 10px;
-  background:rgba(0,212,240,0.07);border:1px solid rgba(0,212,240,0.25);
-  border-radius:2px;z-index:6;white-space:nowrap}
-/* Scroll hint arrow */
-.scrub-scroll-hint{
-  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  font-family:var(--fm);font-size:8px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--muted);z-index:6;animation:hint-pulse 2s ease-in-out infinite}
-.scrub-scroll-hint svg{opacity:.5}
-@keyframes hint-pulse{0%,100%{opacity:.5;transform:translateX(-50%) translateY(0)}50%{opacity:1;transform:translateX(-50%) translateY(4px)}}
+.footer-tagline{font-family:var(--fm);font-size:10px;letter-spacing:1.5px;color:var(--muted2);text-transform:uppercase}
+.footer-links-block{display:flex;gap:40px;flex-wrap:wrap}
+.footer-link-col{}
+.footer-link-col-title{font-family:var(--fm);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:12px}
+.footer-link-col a{
+  display:block;font-family:var(--fm);font-size:10px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--muted2);margin-bottom:8px;transition:color .2s}
+.footer-link-col a:hover{color:var(--accent)}
+.footer-bottom{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  padding-top:20px;border-top:1px solid rgba(255,255,255,0.03)}
+.footer-copy{font-family:var(--fm);font-size:10px;color:var(--muted2)}
+.footer-social{display:flex;gap:12px}
+.footer-social a{
+  width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,0.06);border-radius:4px;
+  color:var(--muted2);transition:all .2s}
+.footer-social a:hover{border-color:rgba(0,212,240,0.28);color:var(--accent)}
 </style>
 </head>
 <body>
+
+<!-- Reading progress bar -->
+<div id="readProgress"></div>
 
 <!-- Ambient glow blobs -->
 <div class="ambient" aria-hidden="true">
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
   <div class="blob blob-3"></div>
+</div>
+
+<!-- Mobile nav overlay -->
+<div class="nav-overlay" id="navOverlay">
+  <a href="/landing" onclick="closeNav()">Home</a>
+  <a href="/blog" onclick="closeNav()">The Lab</a>
+  <a href="/demo" onclick="closeNav()">Live Demo</a>
+  <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" class="ov-cta" onclick="closeNav()">Get Access — $99</a>
 </div>
 
 <!-- ══ NAV ══ -->
@@ -601,6 +607,9 @@ a{color:inherit;text-decoration:none}
     <a href="/landing" class="nav-link">Home</a>
     <a href="/demo" class="nav-link">Live Demo</a>
     <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" class="nav-cta">Get Access — $99</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -608,23 +617,20 @@ a{color:inherit;text-decoration:none}
 <section class="scrub-wrap" id="scrubWrap" aria-label="Feature intro">
   <div class="scrub-stage" id="scrubStage">
     <div class="scrub-card" id="scrubCard">
-      <video class="scrub-video" id="scrubVideo"
+      <video id="scrubVideo"
         src="https://github.com/stephenjamestitus-max/Strike-Panel/releases/download/v1.0.0/9944628-uhd_3840_2160_24fps.mp4"
         muted playsinline preload="auto"
-        style="display:block;width:100%;height:100%;object-fit:cover"></video>
-      <!-- Corner brackets -->
+        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
+      <div class="scrub-vignette" aria-hidden="true"></div>
       <div class="scrub-br tl" aria-hidden="true"></div>
       <div class="scrub-br tr" aria-hidden="true"></div>
       <div class="scrub-br bl" aria-hidden="true"></div>
       <div class="scrub-br br" aria-hidden="true"></div>
-      <!-- SYS badge -->
       <div class="scrub-badge" id="scrubBadge">SYS.LIVE · STRIKEPANEL™</div>
     </div>
-    <!-- Split titles -->
+    <!-- Split titles (siblings to card, inside stage) -->
     <div class="scrub-title-top" id="scrubTitleTop" aria-hidden="true">
-      <div>
-        <div class="scrub-headline">TRAINING</div>
-      </div>
+      <div><div class="scrub-headline">TRAINING</div></div>
     </div>
     <div class="scrub-title-bot" id="scrubTitleBot" aria-hidden="true">
       <div>
@@ -632,111 +638,85 @@ a{color:inherit;text-decoration:none}
         <div class="scrub-sub">Combat Sports Coaching Platform</div>
       </div>
     </div>
-    <!-- Scroll hint -->
-    <div class="scrub-scroll-hint" id="scrubHint">
-      <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
-        <rect x="1" y="1" width="14" height="18" rx="7" stroke="currentColor" stroke-width="1.2"/>
-        <circle cx="8" cy="6" r="2" fill="currentColor"/>
+    <div class="scrub-hint" id="scrubHint" aria-hidden="true">
+      <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
+        <rect x=".75" y=".75" width="12.5" height="16.5" rx="6.25" stroke="currentColor" stroke-width="1.2"/>
+        <circle cx="7" cy="5.5" r="1.75" fill="currentColor"/>
       </svg>
       SCROLL
     </div>
   </div>
 </section>
 
-<!-- ══ HERO ══ -->
-<div class="blog-hero">
-  <div class="hero-parallax-bg" id="heroBg"></div>
-  <div class="hero-scan" aria-hidden="true"></div>
-  <div class="hero-bracket tl" aria-hidden="true"></div>
-  <div class="hero-bracket tr" aria-hidden="true"></div>
-  <div class="hero-bracket bl" aria-hidden="true"></div>
-  <div class="hero-bracket br" aria-hidden="true"></div>
-
-  <div class="hero-content">
-    <div class="blog-hero-kicker sp" data-d="1">
-      <span class="kicker-dot"></span>
-      StrikePanel™ · Training Intelligence
-    </div>
-    <h1 class="sp" data-d="2">THE COACHING<br><span>INTELLIGENCE</span><br>BLOG</h1>
-
-    <!-- Mini impact stats row -->
-    <div class="hero-stats sp" data-d="3">
-      <div class="hstat">
-        <div class="hstat-num">4</div>
-        <div class="hstat-lbl">Articles</div>
-      </div>
-      <div class="hstat-div"></div>
-      <div class="hstat">
-        <div class="hstat-num">34<span style="font-size:1rem">min</span></div>
-        <div class="hstat-lbl">Total Reading</div>
-      </div>
-      <div class="hstat-div"></div>
-      <div class="hstat">
-        <div class="hstat-num">100<span style="font-size:1rem">%</span></div>
-        <div class="hstat-lbl">Coach-focused</div>
-      </div>
-    </div>
-
-    <p class="blog-hero-sub sp" data-d="4">Fight camp planning, athlete readiness, weight cut management and combat sports coaching — written for coaches who take performance seriously.</p>
-    <div class="cats sp" data-d="5">
-      <span class="cat active">All Posts</span>
-      <span class="cat red">Fight Camp</span>
-      <span class="cat">Readiness</span>
-      <span class="cat amber">Weight Cut</span>
-      <span class="cat green">Recovery</span>
-      <span class="cat purple">Coaching</span>
-    </div>
-  </div>
-</div>
-
 <!-- ══ DATA TAPE ══ -->
 <div class="data-tape" aria-hidden="true">
   <div class="tape-track">
-    <span class="hl">MORNING BRIEF SCORING</span>
-    <span>·</span><span>WEIGHT CUT PROJECTIONS</span>
-    <span>·</span><span class="hl">FIGHT CAMP ANALYSIS</span>
-    <span>·</span><span>OVERTRAINING DETECTION</span>
-    <span>·</span><span class="hl">SESSION PLANNING</span>
-    <span>·</span><span>ATHLETE READINESS</span>
-    <span>·</span><span class="hl">IMPACT ANALYSIS</span>
-    <span>·</span><span>LOAD MANAGEMENT</span>
-    <span>·</span>
-    <!-- duplicate for seamless loop -->
-    <span class="hl">MORNING BRIEF SCORING</span>
-    <span>·</span><span>WEIGHT CUT PROJECTIONS</span>
-    <span>·</span><span class="hl">FIGHT CAMP ANALYSIS</span>
-    <span>·</span><span>OVERTRAINING DETECTION</span>
-    <span>·</span><span class="hl">SESSION PLANNING</span>
-    <span>·</span><span>ATHLETE READINESS</span>
-    <span>·</span><span class="hl">IMPACT ANALYSIS</span>
-    <span>·</span><span>LOAD MANAGEMENT</span>
-    <span>·</span>
+    <span class="hl">MORNING BRIEF SCORING</span><span>·</span>
+    <span>WEIGHT CUT PROJECTIONS</span><span>·</span>
+    <span class="hl">FIGHT CAMP ANALYSIS</span><span>·</span>
+    <span>OVERTRAINING DETECTION</span><span>·</span>
+    <span class="hl">SESSION PLANNING</span><span>·</span>
+    <span>ATHLETE READINESS</span><span>·</span>
+    <span class="hl">IMPACT ANALYSIS</span><span>·</span>
+    <span>LOAD MANAGEMENT</span><span>·</span>
+    <span class="hl">MORNING BRIEF SCORING</span><span>·</span>
+    <span>WEIGHT CUT PROJECTIONS</span><span>·</span>
+    <span class="hl">FIGHT CAMP ANALYSIS</span><span>·</span>
+    <span>OVERTRAINING DETECTION</span><span>·</span>
+    <span class="hl">SESSION PLANNING</span><span>·</span>
+    <span>ATHLETE READINESS</span><span>·</span>
+    <span class="hl">IMPACT ANALYSIS</span><span>·</span>
+    <span>LOAD MANAGEMENT</span><span>·</span>
+  </div>
+</div>
+
+<!-- ══ INTRO STRIP ══ -->
+<div class="intro-strip">
+  <div class="intro-top sp">
+    <div>
+      <div class="intro-headline">THE COACHING<br><span>INTELLIGENCE</span> BLOG</div>
+    </div>
+    <div class="intro-meta">
+      <div class="intro-stat">
+        <div class="intro-stat-num">7</div>
+        <div class="intro-stat-lbl">Articles</div>
+      </div>
+      <div class="intro-stat-div"></div>
+      <div class="intro-stat">
+        <div class="intro-stat-num">58<span style="font-size:.75rem">min</span></div>
+        <div class="intro-stat-lbl">Total Reading</div>
+      </div>
+      <div class="intro-stat-div"></div>
+      <div class="intro-stat">
+        <div class="intro-stat-num">100<span style="font-size:.75rem">%</span></div>
+        <div class="intro-stat-lbl">Coach-focused</div>
+      </div>
+    </div>
+  </div>
+  <p class="intro-sub sp" data-d="1">Fight camp planning, athlete readiness, weight cut management and combat sports coaching — written for coaches who take performance seriously.</p>
+  <div class="cats sp" data-d="2">
+    <button class="cat active" data-cat="all">All Posts</button>
+    <button class="cat" data-cat="fight-camp">Fight Camp</button>
+    <button class="cat" data-cat="readiness">Readiness</button>
+    <button class="cat" data-cat="weight-cut">Weight Cut</button>
+    <button class="cat" data-cat="recovery">Recovery</button>
+    <button class="cat" data-cat="coaching">Coaching</button>
   </div>
 </div>
 
 <!-- ══ FEATURED POST ══ -->
 <div class="featured-wrap">
   <div class="section-label sp"><span class="label-dot"></span>Featured Article</div>
-  <a href="/blog/morning-brief-method" class="featured-card sp" data-d="1">
+  <a href="/blog/morning-brief-method" class="featured-card sp" data-d="1" data-category="readiness">
 
-    <!-- Visual panel -->
     <div class="featured-img">
       <div class="feat-corner-badge">SYS.LIVE</div>
       <div class="featured-img-inner">
         <div class="feat-graphic">
           <div class="feat-score-row">
-            <div class="feat-score green">
-              <div class="feat-score-num">91</div>
-              <div class="feat-score-lbl">Priya</div>
-            </div>
-            <div class="feat-score cyan">
-              <div class="feat-score-num">74</div>
-              <div class="feat-score-lbl">Jake</div>
-            </div>
-            <div class="feat-score red">
-              <div class="feat-score-num">38</div>
-              <div class="feat-score-lbl">Marcus</div>
-            </div>
+            <div class="feat-score green"><div class="feat-score-num">91</div><div class="feat-score-lbl">Priya</div></div>
+            <div class="feat-score cyan"><div class="feat-score-num">74</div><div class="feat-score-lbl">Jake</div></div>
+            <div class="feat-score red"><div class="feat-score-num">38</div><div class="feat-score-lbl">Marcus</div></div>
           </div>
           <div class="feat-bar-wrap">
             <div class="feat-bar-lbl"><span>Squad Readiness</span><span style="color:var(--accent)">68 avg</span></div>
@@ -749,17 +729,18 @@ a{color:inherit;text-decoration:none}
       <div class="feat-img-label">// MORNING BRIEF</div>
     </div>
 
-    <!-- Body -->
     <div class="featured-body">
       <span class="post-cat cyan">Readiness Coaching</span>
       <div class="featured-title">The Morning Brief Method: How Elite Coaches Track Athlete Readiness Every Day</div>
       <p class="featured-excerpt">Most coaches run every athlete through the same session every day. The best coaches don't. Here's the system that tells you — in under two minutes — exactly who to push, who to hold back, and who needs a rest day before they get injured.</p>
       <div class="post-meta">
         <span class="post-meta-item">May 2026</span>
-        <span class="post-meta-item">8 min read</span>
-        <span class="post-meta-item">Fight Camp</span>
+        <span class="post-meta-item dot">8 min read</span>
+        <span class="post-meta-item dot">Readiness</span>
       </div>
-      <span class="read-btn">Read Article →</span>
+      <span class="read-btn">Read Article
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
     </div>
 
   </a>
@@ -767,11 +748,11 @@ a{color:inherit;text-decoration:none}
 
 <!-- ══ POST GRID ══ -->
 <div class="posts-wrap">
-  <div class="section-label sp"><span class="label-dot"></span>All Articles</div>
-  <div class="posts-grid">
+  <div class="section-label sp"><span class="label-dot"></span>All Articles <span class="lbl-count">— 6 posts</span></div>
+  <div class="posts-grid" id="postsGrid">
 
-    <!-- Post 2 -->
-    <a href="/blog/weight-cut-guide" class="post-card sp" data-d="1">
+    <!-- Post: Weight Cut -->
+    <a href="/blog/weight-cut-guide" class="post-card sp" data-d="1" data-category="weight-cut">
       <div class="post-thumb" style="background:linear-gradient(135deg,#100606,#1e0a0a)">
         <div class="post-thumb-inner">
           <div style="text-align:center">
@@ -782,7 +763,8 @@ a{color:inherit;text-decoration:none}
         </div>
       </div>
       <div class="post-info">
-        <span class="post-cat amber">Weight Cut</span>
+        <div class="post-author"><div class="post-author-dot" style="background:var(--amber);box-shadow:0 0 5px var(--amber)"></div><span class="post-author-name">Weight Cut</span></div>
+        <span class="post-cat amber" style="margin-bottom:10px">Weight Cut</span>
         <div class="post-title">The Complete Fight Camp Weight Cut Guide: Week by Week</div>
         <p class="post-excerpt">A dangerous weight cut doesn't announce itself — it creeps up in the final week. Here's how to plan a safe, effective cut from day one of fight camp.</p>
         <div class="post-footer">
@@ -792,20 +774,20 @@ a{color:inherit;text-decoration:none}
       </div>
     </a>
 
-    <!-- Post 3 -->
-    <a href="/blog/overtraining-signs" class="post-card sp" data-d="2">
+    <!-- Post: Overtraining -->
+    <a href="/blog/overtraining-signs" class="post-card sp" data-d="2" data-category="recovery">
       <div class="post-thumb" style="background:linear-gradient(135deg,#060c16,#0a1220)">
         <div class="post-thumb-inner">
-          <div style="display:flex;flex-direction:column;gap:8px;width:100%">
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.18);border-radius:3px">
+          <div style="display:flex;flex-direction:column;gap:7px;width:100%">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.16);border-radius:3px">
               <span style="font-family:var(--fm);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--red)">Marcus — REST</span>
               <span style="font-family:var(--fh);font-size:22px;color:var(--red)">38</span>
             </div>
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.18);border-radius:3px">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.16);border-radius:3px">
               <span style="font-family:var(--fm);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--amber)">Tyler — LIGHT</span>
               <span style="font-family:var(--fh);font-size:22px;color:var(--amber)">54</span>
             </div>
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.18);border-radius:3px">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.16);border-radius:3px">
               <span style="font-family:var(--fm);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--green)">Priya — PUSH</span>
               <span style="font-family:var(--fh);font-size:22px;color:var(--green)">91</span>
             </div>
@@ -813,7 +795,8 @@ a{color:inherit;text-decoration:none}
         </div>
       </div>
       <div class="post-info">
-        <span class="post-cat red">Recovery</span>
+        <div class="post-author"><div class="post-author-dot" style="background:var(--red);box-shadow:0 0 5px var(--red)"></div><span class="post-author-name">Recovery</span></div>
+        <span class="post-cat red" style="margin-bottom:10px">Recovery</span>
         <div class="post-title">5 Signs Your Fighter Is Overtrained (Before It's Too Late)</div>
         <p class="post-excerpt">Overtraining doesn't show up on a training plan. It shows up in a fighter who goes flat on fight night. Here's what to look for — and how to catch it weeks before it matters.</p>
         <div class="post-footer">
@@ -823,8 +806,8 @@ a{color:inherit;text-decoration:none}
       </div>
     </a>
 
-    <!-- Post 4 -->
-    <a href="/blog/fight-camp-planning" class="post-card sp" data-d="3">
+    <!-- Post: Fight Camp Structure -->
+    <a href="/blog/fight-camp-planning" class="post-card sp" data-d="3" data-category="fight-camp">
       <div class="post-thumb" style="background:linear-gradient(135deg,#060a14,#0a1022)">
         <div class="post-thumb-inner">
           <div style="display:flex;flex-direction:column;gap:6px;width:100%">
@@ -847,7 +830,8 @@ a{color:inherit;text-decoration:none}
         </div>
       </div>
       <div class="post-info">
-        <span class="post-cat cyan">Fight Camp</span>
+        <div class="post-author"><div class="post-author-dot" style="background:var(--accent);box-shadow:0 0 5px var(--accent)"></div><span class="post-author-name">Fight Camp</span></div>
+        <span class="post-cat cyan" style="margin-bottom:10px">Fight Camp</span>
         <div class="post-title">How to Structure a Fight Camp: Base, Build, Peak and Fight Week</div>
         <p class="post-excerpt">The four phases of a fight camp and exactly what your athletes should be doing — and feeling — in each one. A framework every coach can use from day one.</p>
         <div class="post-footer">
@@ -857,15 +841,148 @@ a{color:inherit;text-decoration:none}
       </div>
     </a>
 
+    <!-- Post: Peak Week -->
+    <a href="/blog/peak-week-protocol" class="post-card sp" data-d="1" data-category="fight-camp">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#0a0610,#14091e)">
+        <div class="post-thumb-inner">
+          <div style="text-align:center;width:100%">
+            <div style="font-family:var(--fm);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted2);margin-bottom:12px">FIGHT WEEK</div>
+            <div style="display:flex;justify-content:center;gap:8px;margin-bottom:12px">
+              <div style="text-align:center"><div style="font-family:var(--fh);font-size:36px;color:var(--purple);text-shadow:0 0 20px rgba(139,92,246,0.5);line-height:1">7</div><div style="font-family:var(--fm);font-size:7px;letter-spacing:2px;color:var(--muted2)">DAYS</div></div>
+              <div style="width:1px;background:rgba(255,255,255,0.06);margin:4px 0"></div>
+              <div style="text-align:center"><div style="font-family:var(--fh);font-size:36px;color:var(--accent);text-shadow:0 0 20px rgba(0,212,240,0.5);line-height:1">3</div><div style="font-family:var(--fm);font-size:7px;letter-spacing:2px;color:var(--muted2)">SESSIONS</div></div>
+              <div style="width:1px;background:rgba(255,255,255,0.06);margin:4px 0"></div>
+              <div style="text-align:center"><div style="font-family:var(--fh);font-size:36px;color:var(--green);text-shadow:0 0 20px rgba(16,185,129,0.5);line-height:1">94</div><div style="font-family:var(--fm);font-size:7px;letter-spacing:2px;color:var(--muted2)">PEAK</div></div>
+            </div>
+            <div style="font-family:var(--fm);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(139,92,246,0.7)">TAPER PROTOCOL ACTIVE</div>
+          </div>
+        </div>
+      </div>
+      <div class="post-info">
+        <div class="post-author"><div class="post-author-dot" style="background:var(--purple);box-shadow:0 0 5px var(--purple)"></div><span class="post-author-name">Fight Camp</span></div>
+        <span class="post-cat purple" style="margin-bottom:10px">Fight Camp</span>
+        <div class="post-title">The Peak Week Protocol: How to Taper a Fighter Without Losing Sharpness</div>
+        <p class="post-excerpt">Most coaches overtrain their fighters in the final week. Here's the exact session structure, load targets and readiness thresholds that produce a sharp, fresh athlete on fight night.</p>
+        <div class="post-footer">
+          <span class="post-date">May 2026 · 8 min</span>
+          <span class="post-read-more">Read →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Post: Coaching Metrics -->
+    <a href="/blog/data-driven-coaching" class="post-card sp" data-d="2" data-category="coaching">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#050d10,#091520)">
+        <div class="post-thumb-inner">
+          <div style="width:100%">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <div style="padding:10px;background:rgba(0,212,240,0.05);border:1px solid rgba(0,212,240,0.14);border-radius:3px;text-align:center">
+                <div style="font-family:var(--fh);font-size:28px;color:var(--accent);line-height:1">4.2</div>
+                <div style="font-family:var(--fm);font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-top:3px">Sessions/wk</div>
+              </div>
+              <div style="padding:10px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);border-radius:3px;text-align:center">
+                <div style="font-family:var(--fh);font-size:28px;color:var(--green);line-height:1">87</div>
+                <div style="font-family:var(--fm);font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-top:3px">Avg Score</div>
+              </div>
+              <div style="padding:10px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.14);border-radius:3px;text-align:center">
+                <div style="font-family:var(--fh);font-size:28px;color:var(--amber);line-height:1">12</div>
+                <div style="font-family:var(--fm);font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-top:3px">Athletes</div>
+              </div>
+              <div style="padding:10px;background:rgba(139,92,246,0.05);border:1px solid rgba(139,92,246,0.14);border-radius:3px;text-align:center">
+                <div style="font-family:var(--fh);font-size:28px;color:#a78bfa;line-height:1">0</div>
+                <div style="font-family:var(--fm);font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-top:3px">Injuries</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="post-info">
+        <div class="post-author"><div class="post-author-dot" style="background:#a78bfa;box-shadow:0 0 5px #a78bfa"></div><span class="post-author-name">Coaching</span></div>
+        <span class="post-cat purple" style="margin-bottom:10px">Coaching</span>
+        <div class="post-title">4 Metrics Every Combat Sports Coach Should Track (But Doesn't)</div>
+        <p class="post-excerpt">You track wins and losses. You track weight. But the coaches outperforming everyone else are tracking something different — here are the four numbers that predict fight night performance 3 weeks out.</p>
+        <div class="post-footer">
+          <span class="post-date">May 2026 · 6 min</span>
+          <span class="post-read-more">Read →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Post: HRV & Readiness -->
+    <a href="/blog/hrv-readiness" class="post-card sp" data-d="3" data-category="readiness">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#050a0d,#080f18)">
+        <div class="post-thumb-inner">
+          <div style="text-align:center;width:100%">
+            <div style="font-family:var(--fm);font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted2);margin-bottom:8px">MORNING HRV</div>
+            <div style="position:relative;display:inline-block">
+              <svg width="120" height="60" viewBox="0 0 120 60">
+                <polyline points="0,50 15,50 25,20 35,45 50,30 65,38 75,10 90,42 105,35 120,38" fill="none" stroke="rgba(0,212,240,0.2)" stroke-width="1.5"/>
+                <polyline points="0,50 15,50 25,20 35,45 50,30 65,38 75,10 90,42 105,35 120,38" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="200" stroke-dashoffset="0"/>
+                <circle cx="75" cy="10" r="3" fill="var(--accent)"/>
+              </svg>
+            </div>
+            <div style="font-family:var(--fh);font-size:42px;color:var(--accent);text-shadow:0 0 24px rgba(0,212,240,0.5);line-height:1;margin-top:6px">78ms</div>
+            <div style="font-family:var(--fm);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-top:4px">↑ TRENDING UP</div>
+          </div>
+        </div>
+      </div>
+      <div class="post-info">
+        <div class="post-author"><div class="post-author-dot" style="background:var(--accent);box-shadow:0 0 5px var(--accent)"></div><span class="post-author-name">Readiness</span></div>
+        <span class="post-cat cyan" style="margin-bottom:10px">Readiness</span>
+        <div class="post-title">HRV for Fighters: What It Means and How to Use It to Coach Better</div>
+        <p class="post-excerpt">Heart Rate Variability isn't just for endurance athletes. Here's a plain-English breakdown of what HRV actually measures and how to turn your athletes' morning numbers into better coaching decisions.</p>
+        <div class="post-footer">
+          <span class="post-date">May 2026 · 7 min</span>
+          <span class="post-read-more">Read →</span>
+        </div>
+      </div>
+    </a>
+
   </div>
 </div>
 
-<!-- ══ CTA ══ -->
+<!-- ══ NEWSLETTER ══ -->
+<div class="newsletter-wrap">
+  <div class="newsletter-card sp">
+    <div class="nl-left">
+      <div class="nl-kicker">The Lab Dispatch</div>
+      <div class="nl-headline">COACHING<br><span>INTELLIGENCE</span><br>IN YOUR INBOX.</div>
+      <p class="nl-sub" style="margin-top:14px">Weekly articles, fight camp frameworks and athlete management tactics — delivered every Tuesday. Free, forever. No spam.</p>
+    </div>
+    <div class="nl-right">
+      <form class="nl-form" onsubmit="handleNLSubmit(event)">
+        <div class="nl-input-row">
+          <input class="nl-input" type="email" id="nlEmail" placeholder="your@email.com" required autocomplete="email"/>
+          <button class="nl-btn" type="submit">Subscribe</button>
+        </div>
+        <div class="nl-note" id="nlNote">Join coaches tracking athlete performance with StrikePanel™.</div>
+        <div class="nl-social-proof">
+          <div class="nl-avatars">
+            <div class="nl-avatar">C</div>
+            <div class="nl-avatar">M</div>
+            <div class="nl-avatar">R</div>
+            <div class="nl-avatar">S</div>
+          </div>
+          <span class="nl-proof-text">247+ coaches already subscribed</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CTA STRIP ══ -->
 <div class="cta-strip">
-  <div class="cta-strip-bg"></div>
-  <h2 class="sp">TRAIN WITH<br><span>INTELLIGENCE.</span></h2>
-  <p class="sp" data-d="1">Stop guessing. Start knowing. Every athlete scored. Every session informed. One coaching web app.</p>
-  <div class="cta-btns sp" data-d="2">
+  <div class="cta-bg"></div>
+  <div class="cta-eyebrow sp"><span class="label-dot"></span>Ready to coach smarter?</div>
+  <h2 class="sp" data-d="1">STOP GUESSING.<br><span>START KNOWING.</span></h2>
+  <p class="sp" data-d="2">Every athlete scored every morning. Every session informed by data. One coaching web app built for combat sports — no subscriptions, no monthly fees.</p>
+  <div class="cta-proof sp" data-d="3">
+    <span class="cta-proof-item">Pay once, own forever</span>
+    <span class="cta-proof-item">Works on any device</span>
+    <span class="cta-proof-item">No subscription</span>
+    <span class="cta-proof-item">Instant access</span>
+  </div>
+  <div class="cta-btns sp" data-d="4">
     <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" class="btn-primary">Get StrikePanel — $99</a>
     <a href="/demo" class="btn-ghost">Try Free Demo</a>
   </div>
@@ -873,34 +990,107 @@ a{color:inherit;text-decoration:none}
 
 <!-- ══ FOOTER ══ -->
 <footer class="footer">
-  <div class="footer-brand">Strike<span>Panel</span>™</div>
-  <div class="footer-links">
-    <a href="/landing">Home</a>
-    <a href="/blog">Blog</a>
-    <a href="/demo">Demo</a>
-    <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank">Get Access — $99</a>
+  <div class="footer-inner">
+    <div class="footer-brand-block">
+      <div class="footer-brand">Strike<span>Panel</span>™</div>
+      <div class="footer-tagline">Training Intelligence for Combat Sports</div>
+    </div>
+    <div class="footer-links-block">
+      <div class="footer-link-col">
+        <div class="footer-link-col-title">Product</div>
+        <a href="/landing">Home</a>
+        <a href="/demo">Live Demo</a>
+        <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank">Get Access — $99</a>
+      </div>
+      <div class="footer-link-col">
+        <div class="footer-link-col-title">Content</div>
+        <a href="/blog">The Lab Blog</a>
+        <a href="/blog/morning-brief-method">Morning Brief</a>
+        <a href="/blog/fight-camp-planning">Fight Camp</a>
+        <a href="/blog/weight-cut-guide">Weight Cut</a>
+      </div>
+    </div>
   </div>
-  <div class="footer-copy">© 2026 StrikePanel™ · Training Intelligence for Combat Sports.</div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 StrikePanel™ · Built for coaches who take performance seriously.</div>
+    <div class="footer-social">
+      <!-- X / Twitter -->
+      <a href="#" aria-label="X">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.732-8.855L1.254 2.25H8.08l4.259 5.631L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+      </a>
+      <!-- Instagram -->
+      <a href="#" aria-label="Instagram">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+      </a>
+      <!-- YouTube -->
+      <a href="#" aria-label="YouTube">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+    </div>
+  </div>
 </footer>
 
 <script>
-/* ── Parallax hero on scroll ── */
-const heroBg = document.getElementById('heroBg');
-let tY = 0, cY = 0, raf = null;
-const lerp = (a, b, t) => a + (b - a) * t;
+/* ── Reading progress bar ── */
+const progressBar = document.getElementById('readProgress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (window.scrollY / (h.scrollHeight - h.clientHeight)) * 100;
+  progressBar.style.width = Math.min(pct, 100) + '%';
+}, { passive: true });
 
-window.addEventListener('scroll', () => { tY = window.scrollY; kick(); }, { passive: true });
-
-function frame() {
-  raf = null;
-  cY = lerp(cY, tY, 0.1);
-  if (heroBg) heroBg.style.transform = `translateY(${cY * 0.35}px)`;
-  if (Math.abs(cY - tY) > 0.5) kick();
+/* ── Mobile nav toggle ── */
+function toggleNav() {
+  const h = document.getElementById('navHamburger');
+  const o = document.getElementById('navOverlay');
+  h.classList.toggle('open');
+  o.classList.toggle('open');
+  document.body.style.overflow = o.classList.contains('open') ? 'hidden' : '';
 }
-function kick() { if (!raf) raf = requestAnimationFrame(frame); }
-kick();
+function closeNav() {
+  document.getElementById('navHamburger').classList.remove('open');
+  document.getElementById('navOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
 
-/* ── Spring scroll reveal (framer-motion style) ── */
+/* ── Category filter ── */
+document.querySelectorAll('.cat').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    const cards = document.querySelectorAll('#postsGrid .post-card');
+    const count = { shown: 0 };
+    cards.forEach(card => {
+      const match = cat === 'all' || card.dataset.category === cat;
+      card.classList.toggle('hidden', !match);
+      if (match) count.shown++;
+    });
+    /* Also toggle featured card */
+    const fc = document.querySelector('.featured-card');
+    if (fc) {
+      const fmatch = cat === 'all' || fc.dataset.category === cat;
+      fc.closest('.featured-wrap').style.display = fmatch ? '' : 'none';
+    }
+    /* Update count label */
+    const lbl = document.querySelector('.lbl-count');
+    if (lbl) lbl.textContent = `— ${count.shown} post${count.shown !== 1 ? 's' : ''}`;
+  });
+});
+
+/* ── Newsletter submit ── */
+function handleNLSubmit(e) {
+  e.preventDefault();
+  const note = document.getElementById('nlNote');
+  note.textContent = '✓ You\'re in. First dispatch lands Tuesday.';
+  note.style.color = 'var(--green)';
+  document.getElementById('nlEmail').disabled = true;
+  document.querySelector('.nl-btn').disabled = true;
+  document.querySelector('.nl-btn').textContent = 'Subscribed ✓';
+  document.querySelector('.nl-btn').style.background = 'var(--green)';
+}
+
+/* ── Spring scroll reveal ── */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -908,21 +1098,15 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
+}, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
 document.querySelectorAll('.sp').forEach(el => observer.observe(el));
 
-/* ── Auto-stagger sibling .sp elements inside grids ── */
-document.querySelectorAll('.posts-grid, .hero-stats').forEach(parent => {
+/* Auto-stagger siblings */
+document.querySelectorAll('.posts-grid').forEach(parent => {
   parent.querySelectorAll('.sp').forEach((el, i) => {
-    if (!el.dataset.d) el.dataset.d = Math.min(i + 1, 6);
+    if (!el.dataset.d) el.dataset.d = Math.min((i % 3) + 1, 6);
   });
 });
-
-/* ── Mobile: disable parallax on touch ── */
-if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-  if (heroBg) heroBg.style.transform = 'none';
-}
 </script>
 
 <script>
@@ -940,12 +1124,11 @@ if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
   const hint   = document.getElementById('scrubHint');
 
   function isMobile() { return window.innerWidth < 768; }
-
-  function startScale() { return isMobile() ? 0.88 : 0.6; }
+  function startScale() { return isMobile() ? 0.88 : 0.58; }
 
   function cardDims() {
     const vw = window.innerWidth, vh = window.innerHeight;
-    const w = Math.min(vw * 0.96, vh * 0.72 * ASPECT);
+    const w = Math.min(vw * 0.94, vh * 0.74 * ASPECT);
     const h = w / ASPECT;
     return { w, h };
   }
@@ -960,17 +1143,15 @@ if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
     gsap.set(card, { width: w, height: h });
   }
 
-  /* iOS Safari requires a play→pause to make currentTime seekable */
+  /* iOS Safari seek unlock */
   function unlockSeek() {
     const p = vid.play();
     if (p && p.then) p.then(() => { vid.pause(); vid.currentTime = 0; }).catch(() => {});
     else { vid.pause(); vid.currentTime = 0; }
   }
-
   vid.addEventListener('loadedmetadata', unlockSeek, { once: true });
   if (vid.readyState < 1) vid.load();
 
-  /* ── Build ScrollTrigger timeline ── */
   let scrubTL;
 
   function buildTimeline() {
@@ -982,25 +1163,24 @@ if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
     const sS = startScale();
     const iS = immerseScale();
 
-    gsap.set(card,   { scale: sS, opacity: 0, borderRadius: 12 });
+    gsap.set(card,   { scale: sS, opacity: 0, borderRadius: 14 });
     gsap.set([titleT, titleB], { opacity: 0 });
     gsap.set(hint,   { opacity: 0 });
 
     /* Entry spring */
-    gsap.timeline({ delay: 0.4 })
-      .to(card,   { scale: sS, opacity: 1, duration: 0.8, ease: 'power2.out' })
-      .to(titleT, { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out' }, '-=0.5')
-      .to(titleB, { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out' }, '-=0.55')
+    gsap.timeline({ delay: 0.35 })
+      .to(card,   { scale: sS, opacity: 1, duration: 0.9, ease: 'power2.out' })
+      .to(titleT, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '-=0.55')
+      .to(titleB, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '-=0.62')
       .to(hint,   { opacity: 1, duration: 0.5 }, '-=0.3');
 
-    /* Scrub timeline */
     scrubTL = gsap.timeline({
       scrollTrigger: {
         id:      'heroScrub',
         trigger: '#scrubWrap',
         start:   'top top',
         end:     'bottom bottom',
-        scrub:   1.2,
+        scrub:   1.4,
         onUpdate(self) {
           if (vid.duration) {
             const mapped = Math.max(0, Math.min(1, (self.progress - 0.15) / 0.63));
@@ -1011,17 +1191,14 @@ if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
     });
 
     scrubTL
-      /* 0→0.15 : scale up; titles fly out */
-      .fromTo(card,   { scale: sS }, { scale: 1, borderRadius: 12, ease: 'none', duration: 0.15 }, 0)
-      .fromTo(titleT, { x: 0, opacity: 1 }, { x: '-40vw', opacity: 0, ease: 'power1.in', duration: 0.15 }, 0)
-      .fromTo(titleB, { x: 0, opacity: 1 }, { x: '40vw',  opacity: 0, ease: 'power1.in', duration: 0.15 }, 0)
-      .fromTo(hint,   { opacity: 1 }, { opacity: 0, ease: 'none', duration: 0.08 }, 0)
-      /* 0.15→0.78 : immerse (fill viewport) */
-      .fromTo(card,   { scale: 1, borderRadius: 12 }, { scale: iS, borderRadius: 0, ease: 'none', duration: 0.63 }, 0.15)
-      /* 0.78→1.0 : retract; titles fly back */
-      .fromTo(card,   { scale: iS, borderRadius: 0  }, { scale: sS, borderRadius: 12, ease: 'none', duration: 0.22 }, 0.78)
-      .fromTo(titleT, { x: '-40vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'power2.out', duration: 0.22 }, 0.78)
-      .fromTo(titleB, { x: '40vw',  opacity: 0 }, { x: 0, opacity: 1, ease: 'power2.out', duration: 0.22 }, 0.78);
+      .fromTo(card,   { scale: sS }, { scale: 1, borderRadius: 14, ease: 'none', duration: 0.15 }, 0)
+      .fromTo(titleT, { x: 0, opacity: 1 }, { x: '-45vw', opacity: 0, ease: 'power2.in', duration: 0.15 }, 0)
+      .fromTo(titleB, { x: 0, opacity: 1 }, { x:  '45vw', opacity: 0, ease: 'power2.in', duration: 0.15 }, 0)
+      .fromTo(hint,   { opacity: 1 }, { opacity: 0, ease: 'none', duration: 0.06 }, 0)
+      .fromTo(card,   { scale: 1, borderRadius: 14 }, { scale: iS, borderRadius: 0, ease: 'none', duration: 0.63 }, 0.15)
+      .fromTo(card,   { scale: iS, borderRadius: 0  }, { scale: sS, borderRadius: 14, ease: 'none', duration: 0.22 }, 0.78)
+      .fromTo(titleT, { x: '-45vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'power2.out', duration: 0.22 }, 0.78)
+      .fromTo(titleB, { x:  '45vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'power2.out', duration: 0.22 }, 0.78);
   }
 
   gsap.registerPlugin(ScrollTrigger);
