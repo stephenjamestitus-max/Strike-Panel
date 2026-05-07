@@ -1111,6 +1111,9 @@ document.querySelectorAll('.posts-grid').forEach(parent => {
 <script>
 /* ═══════════════════════════════════════
    HERO SCRUB — GSAP ScrollTrigger
+   Desktop: scroll-scrub video currentTime
+   Mobile:  autoplay loop (GitHub redirect
+            breaks range requests on iOS)
 ═══════════════════════════════════════ */
 (function() {
   const IMMERSE_OVERFILL = 1.04;
@@ -1123,13 +1126,17 @@ document.querySelectorAll('.posts-grid').forEach(parent => {
   const hint   = document.getElementById('scrubHint');
 
   function isMobile() { return window.innerWidth < 768; }
-  function startScale() { return isMobile() ? 0.88 : 0.58; }
+  function startScale() { return isMobile() ? 0.9 : 0.58; }
 
   function cardDims() {
     const vw = window.innerWidth, vh = window.innerHeight;
+    if (isMobile()) {
+      /* On mobile use full viewport width, 16:9 aspect */
+      const w = vw * 0.96;
+      return { w, h: w / ASPECT };
+    }
     const w = Math.min(vw * 0.94, vh * 0.74 * ASPECT);
-    const h = w / ASPECT;
-    return { w, h };
+    return { w, h: w / ASPECT };
   }
 
   function immerseScale() {
@@ -1142,14 +1149,26 @@ document.querySelectorAll('.posts-grid').forEach(parent => {
     gsap.set(card, { width: w, height: h });
   }
 
-  /* iOS Safari seek unlock */
+  /* ── Mobile: autoplay loop, no scrub ── */
+  function setupMobile() {
+    vid.muted    = true;
+    vid.autoplay = true;
+    vid.loop     = true;
+    vid.setAttribute('playsinline', '');
+    vid.setAttribute('preload', 'auto');
+    /* Force play — some browsers need explicit call after attr changes */
+    const tryPlay = () => vid.play().catch(() => {});
+    if (vid.readyState >= 2) tryPlay();
+    else vid.addEventListener('canplay', tryPlay, { once: true });
+    if (vid.readyState < 1) vid.load();
+  }
+
+  /* ── Desktop: seek-unlock then scrub ── */
   function unlockSeek() {
     const p = vid.play();
     if (p && p.then) p.then(() => { vid.pause(); vid.currentTime = 0; }).catch(() => {});
-    else { vid.pause(); vid.currentTime = 0; }
+    else { try { vid.pause(); vid.currentTime = 0; } catch(e) {} }
   }
-  vid.addEventListener('loadedmetadata', unlockSeek, { once: true });
-  if (vid.readyState < 1) vid.load();
 
   let scrubTL;
 
@@ -1161,29 +1180,42 @@ document.querySelectorAll('.posts-grid').forEach(parent => {
 
     const sS = startScale();
     const iS = immerseScale();
+    const mobile = isMobile();
+
+    /* On mobile set up autoplay and skip scrub timeline */
+    if (mobile) {
+      setupMobile();
+    } else {
+      vid.removeAttribute('autoplay');
+      vid.loop = false;
+      vid.addEventListener('loadedmetadata', unlockSeek, { once: true });
+      if (vid.readyState < 1) vid.load();
+    }
 
     gsap.set(card,   { scale: sS, opacity: 0, borderRadius: 14 });
     gsap.set([titleT, titleB], { opacity: 0 });
     gsap.set(hint,   { opacity: 0 });
 
-    /* Entry spring */
+    /* Entry spring — runs on both mobile and desktop */
     gsap.timeline({ delay: 0.35 })
       .to(card,   { scale: sS, opacity: 1, duration: 0.9, ease: 'power2.out' })
       .to(titleT, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '-=0.55')
       .to(titleB, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '-=0.62')
       .to(hint,   { opacity: 1, duration: 0.5 }, '-=0.3');
 
+    /* Scroll animation — card scale + title fly (runs on both) */
     scrubTL = gsap.timeline({
       scrollTrigger: {
         id:      'heroScrub',
         trigger: '#scrubWrap',
         start:   'top top',
         end:     'bottom bottom',
-        scrub:   1.4,
-        onUpdate(self) {
-          if (vid.duration) {
+        scrub:   mobile ? 0.8 : 1.4,
+        onUpdate: mobile ? undefined : function(self) {
+          /* Desktop only: scrub video currentTime */
+          if (vid.duration && vid.readyState >= 2) {
             const mapped = Math.max(0, Math.min(1, (self.progress - 0.15) / 0.63));
-            vid.currentTime = mapped * vid.duration;
+            try { vid.currentTime = mapped * vid.duration; } catch(e) {}
           }
         }
       }
