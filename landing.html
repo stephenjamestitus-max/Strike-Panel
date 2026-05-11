@@ -362,13 +362,82 @@ a{text-decoration:none;color:inherit}
 .phones-con{position:relative;z-index:5;text-align:center}
 .phones-hl{font-family:var(--fh);font-size:clamp(52px,9vw,120px);line-height:.88;margin-bottom:18px}
 .phones-sub{font-family:var(--fb);font-weight:300;font-size:clamp(14px,1.8vw,17px);color:rgba(245,240,232,.65);max-width:500px;margin:0 auto 56px;line-height:1.75}
-.phones-row{display:flex;align-items:flex-end;justify-content:center;gap:clamp(12px,2.5vw,28px);margin-bottom:52px;perspective:1000px}
-.ph-wrap{position:relative;transition:transform .08s linear}
-.ph-img{height:clamp(260px,33vw,420px);width:auto;object-fit:cover;border-radius:24px;border:2px solid rgba(255,255,255,.08)}
-.ph-left{transform:rotate(-8deg);filter:brightness(.75)}
-.ph-right{transform:rotate(8deg);filter:brightness(.75)}
-.ph-center{transform:translateY(-30px)}
-.ph-center .ph-img{border:2px solid rgba(0,212,240,.35);box-shadow:0 0 60px rgba(0,212,240,.3),0 30px 60px rgba(0,0,0,.5)}
+/* ── Device row ── */
+.devices-row{display:flex;align-items:flex-end;justify-content:center;gap:clamp(16px,3vw,36px);margin-bottom:60px;perspective:1200px}
+.dev-wrap{position:relative;transition:transform .08s linear}
+
+/* ── iPhone ── */
+.iphone-wrap{transform:rotate(-6deg);filter:brightness(.82);align-self:center}
+.iphone{
+  width:200px;height:430px;
+  background:linear-gradient(160deg,#222 0%,#111 60%,#0d0d0d 100%);
+  border-radius:44px;border:1.5px solid rgba(255,255,255,.14);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),0 0 0 1px rgba(0,0,0,.9),0 24px 60px rgba(0,0,0,.8);
+  position:relative;overflow:hidden;
+  padding:18px 10px 30px;display:flex;flex-direction:column
+}
+.iphone::before{
+  content:'';position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  width:72px;height:24px;background:#0d0d0d;border-radius:0 0 16px 16px;z-index:10
+}
+.iphone::after{
+  content:'';position:absolute;right:-3px;top:100px;
+  width:3px;height:60px;background:linear-gradient(to bottom,#1a1a1a,#111);border-radius:0 2px 2px 0
+}
+.iphone-vol{position:absolute;left:-3px;top:90px;width:3px;height:36px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 48px 0 #1a1a1a,0 96px 0 #1a1a1a}
+.iphone-screen{flex:1;border-radius:32px;overflow:hidden;background:#000;margin-top:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.iphone-screen img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.iphone-bar{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);width:100px;height:4px;background:rgba(255,255,255,.4);border-radius:2px}
+
+/* ── MacBook ── */
+.macbook-wrap{transform:translateY(-40px);transition:transform .08s linear;position:relative;z-index:10;flex-shrink:0}
+.macbook{width:clamp(300px,40vw,520px);position:relative}
+.macbook-lid{
+  background:linear-gradient(168deg,#2c2c2e 0%,#1c1c1e 45%,#181818 100%);
+  border-radius:10px 10px 0 0;
+  border:1.5px solid rgba(255,255,255,.13);border-bottom:1px solid rgba(255,255,255,.06);
+  padding:8px 8px 0;position:relative;overflow:hidden
+}
+.macbook-lid::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,transparent 55%);
+  pointer-events:none;border-radius:10px 10px 0 0
+}
+.macbook-cam{position:absolute;top:-5px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.2);z-index:5}
+.macbook-bezel{background:#090909;border-radius:4px 4px 0 0;overflow:hidden;aspect-ratio:16/10;position:relative}
+.macbook-bezel img{width:100%;height:100%;object-fit:cover;display:block}
+.macbook-hinge{height:5px;background:linear-gradient(to bottom,#0f0f0f,#080808);border-left:1.5px solid rgba(255,255,255,.08);border-right:1.5px solid rgba(255,255,255,.08)}
+.macbook-base{
+  background:linear-gradient(to bottom,#1c1c1e 0%,#151517 100%);
+  border-radius:0 0 6px 6px;
+  border:1.5px solid rgba(255,255,255,.1);border-top:none;
+  padding:10px 20px 14px;
+  width:calc(100% + 20px);margin-left:-10px;position:relative
+}
+.macbook-base::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.12),transparent)}
+.macbook-keys{
+  height:50px;border-radius:3px;margin-bottom:10px;opacity:.5;
+  background:
+    repeating-linear-gradient(90deg,transparent 0,transparent 6px,rgba(0,0,0,.3) 6px,rgba(0,0,0,.3) 7px),
+    repeating-linear-gradient(0deg,transparent 0,transparent 7px,rgba(0,0,0,.3) 7px,rgba(0,0,0,.3) 8px)
+}
+.macbook-trackpad{width:100px;height:26px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);border-radius:5px;margin:0 auto}
+.macbook-lip{height:8px;background:linear-gradient(to bottom,#111,#0a0a0a);border-radius:0 0 8px 8px;border:1.5px solid rgba(255,255,255,.07);border-top:none;width:calc(100% + 36px);margin-left:-18px}
+.macbook-glow{position:absolute;bottom:-28px;left:8%;right:8%;height:28px;background:rgba(0,212,240,.2);filter:blur(22px);border-radius:50%}
+
+/* ── iPad ── */
+.ipad-wrap{transform:rotate(6deg);filter:brightness(.82);align-self:center}
+.ipad{
+  width:260px;height:360px;
+  background:linear-gradient(160deg,#1e1e20 0%,#111 60%);
+  border-radius:18px;border:2px solid rgba(255,255,255,.1);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 24px 60px rgba(0,0,0,.7);
+  position:relative;padding:18px 14px 48px;display:flex;flex-direction:column
+}
+.ipad::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.18)}
+.ipad-screen{flex:1;border-radius:4px;overflow:hidden;background:#000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+.ipad-screen img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.ipad-home{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03)}
 .checks{display:flex;align-items:center;justify-content:center;gap:clamp(16px,3.5vw,44px);flex-wrap:wrap}
 .chk-item{display:flex;align-items:center;gap:8px;font-family:var(--fm);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
 .chk-ico{color:var(--accent);font-size:13px}
@@ -492,8 +561,9 @@ footer{
   .price-card{padding:32px 24px;min-width:240px}
   .p-ctas{flex-direction:column}
   .pricing-hl{font-size:clamp(48px,14vw,80px)}
-  .phones-row{gap:8px}
-  .ph-img{height:clamp(200px,40vw,300px)}
+  .iphone-wrap,.ipad-wrap{display:none}
+  .macbook{width:min(88vw,360px)}
+  .macbook-keys{height:34px}
   .trust-row{gap:14px}
   .blog-card{padding:32px 24px}
   .checks{gap:14px}
@@ -806,16 +876,48 @@ footer{
     <h2 class="phones-hl ru">RUNS ON<br>EVERYTHING.</h2>
     <p class="phones-sub ru">Phone, tablet, laptop. Install from your browser. No app store. No updates. Works offline.</p>
 
-    <div class="phones-row" id="phones-row">
-      <div class="ph-wrap ph-left">
-        <img src="marketing/phone-morning-brief.png" alt="Morning Brief on mobile" class="ph-img" loading="lazy">
+    <div class="devices-row" id="phones-row">
+
+      <!-- iPhone -->
+      <div class="dev-wrap iphone-wrap" id="dev-left">
+        <div class="iphone">
+          <div class="iphone-vol"></div>
+          <div class="iphone-screen">
+            <img src="marketing/phone-dashboard.png" alt="StrikePanel on iPhone" loading="lazy">
+          </div>
+          <div class="iphone-bar"></div>
+        </div>
       </div>
-      <div class="ph-wrap ph-center">
-        <img src="marketing/phone-dashboard.png" alt="Dashboard on mobile" class="ph-img" loading="lazy">
+
+      <!-- MacBook — hero device -->
+      <div class="dev-wrap macbook-wrap" id="dev-centre">
+        <div class="macbook">
+          <div class="macbook-lid">
+            <div class="macbook-cam"></div>
+            <div class="macbook-bezel">
+              <img src="marketing/laptop-morning-brief.png" alt="StrikePanel on MacBook" loading="lazy">
+            </div>
+          </div>
+          <div class="macbook-hinge"></div>
+          <div class="macbook-base">
+            <div class="macbook-keys"></div>
+            <div class="macbook-trackpad"></div>
+          </div>
+          <div class="macbook-lip"></div>
+          <div class="macbook-glow"></div>
+        </div>
       </div>
-      <div class="ph-wrap ph-right">
-        <img src="marketing/phone-fight-dates.png" alt="Fight dates on mobile" class="ph-img" loading="lazy">
+
+      <!-- iPad -->
+      <div class="dev-wrap ipad-wrap" id="dev-right">
+        <div class="ipad">
+          <div class="ipad-screen">
+            <img src="marketing/laptop-members.png" alt="StrikePanel on iPad" loading="lazy">
+          </div>
+          <div class="ipad-home"></div>
+        </div>
       </div>
+
     </div>
 
     <div class="checks ru">
@@ -1155,8 +1257,10 @@ ScrollTrigger.create({
   }
 });
 
-/* ── Phone parallax ───────────────────────────────────────── */
-const phonesRow = document.getElementById('phones-row');
+/* ── Device parallax ─────────────────────────────────────── */
+const devLeft   = document.getElementById('dev-left');
+const devCentre = document.getElementById('dev-centre');
+const devRight  = document.getElementById('dev-right');
 let tx = 0, ty = 0, cx = 0, cy = 0;
 const LERP = 0.06, MAX = 12;
 
@@ -1168,14 +1272,9 @@ document.addEventListener('mousemove', e => {
 function lerpPhones() {
   cx += (tx - cx) * LERP;
   cy += (ty - cy) * LERP;
-  if (phonesRow) {
-    const left   = phonesRow.querySelector('.ph-left');
-    const centre = phonesRow.querySelector('.ph-center');
-    const right  = phonesRow.querySelector('.ph-right');
-    if (left)   left.style.transform   = `rotate(-8deg) translate(${cx * -0.6}px,${cy * 0.3}px)`;
-    if (centre) centre.style.transform = `translateY(-30px) translate(${cx * 0.25}px,${cy * 0.35}px)`;
-    if (right)  right.style.transform  = `rotate(8deg) translate(${cx * 0.6}px,${cy * 0.3}px)`;
-  }
+  if (devLeft)   devLeft.style.transform   = `rotate(-6deg) translate(${cx * -0.6}px,${cy * 0.3}px)`;
+  if (devCentre) devCentre.style.transform = `translateY(-40px) translate(${cx * 0.2}px,${cy * 0.3}px)`;
+  if (devRight)  devRight.style.transform  = `rotate(6deg) translate(${cx * 0.6}px,${cy * 0.3}px)`;
   requestAnimationFrame(lerpPhones);
 }
 lerpPhones();
