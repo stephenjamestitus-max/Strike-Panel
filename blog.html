@@ -18,7 +18,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='45' cy='45' r='43' fill='%230b0d14' stroke='%2300D4F0' stroke-width='1.5'/%3E%3Cline x1='45' y1='2' x2='45' y2='26' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='45' y1='64' x2='45' y2='88' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='26' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='64' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='11' fill='%2300D4F0'/%3E%3C/svg%3E"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='ng' cx='38%25' cy='32%25' r='62%25'%3E%3Cstop offset='0%25' stop-color='%231e2540'/%3E%3Cstop offset='55%25' stop-color='%230f1220'/%3E%3Cstop offset='100%25' stop-color='%230b0d14'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='45' cy='45' r='43' fill='url(%23ng)' stroke='%2300D4F0' stroke-width='1.5' stroke-opacity='0.6'/%3E%3Ccircle cx='45' cy='45' r='29' fill='none' stroke='%2300D4F0' stroke-width='0.9' stroke-opacity='0.2'/%3E%3Cline x1='45' y1='2' x2='45' y2='26' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='45' y1='64' x2='45' y2='88' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='26' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='64' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='11' fill='%2300D4F0'/%3E%3C/svg%3E"/>
+<meta name="theme-color" content="#04070f"/>
 <style>
 /* ═══════════════════════════════════════════
    RESET & ROOT
@@ -151,71 +152,33 @@ a{color:inherit;text-decoration:none}
 }
 
 /* ═══════════════════════════════════════════
-   VIDEO SCRUB — GSAP ScrollTrigger
+   BLOG HERO
 ═══════════════════════════════════════════ */
-.scrub-wrap{
-  position:relative;height:420vh;z-index:2;
-  overflow:clip} /* clip doesn't break sticky, but contains title flyout */
-.scrub-stage{
-  position:sticky;top:0;height:100vh;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;background:var(--bg)}
-.scrub-card{
-  position:relative;border-radius:14px;overflow:hidden;flex-shrink:0}
-.scrub-video{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-/* Neon border */
-.scrub-card::after{
-  content:'';position:absolute;inset:0;border-radius:14px;
-  border:1px solid rgba(0,212,240,0.22);pointer-events:none;z-index:5}
-/* Dark vignette over video for text legibility */
-.scrub-vignette{
-  position:absolute;inset:0;z-index:3;pointer-events:none;
-  background:radial-gradient(ellipse 110% 100% at 50% 50%,transparent 40%,rgba(4,7,15,0.7) 100%)}
-/* Corner brackets */
-.scrub-br{position:absolute;width:22px;height:22px;z-index:6;pointer-events:none;opacity:.6}
-.scrub-br.tl{top:14px;left:14px;border-top:1px solid var(--accent);border-left:1px solid var(--accent)}
-.scrub-br.tr{top:14px;right:14px;border-top:1px solid var(--accent);border-right:1px solid var(--accent)}
-.scrub-br.bl{bottom:14px;left:14px;border-bottom:1px solid var(--accent);border-left:1px solid var(--accent)}
-.scrub-br.br{bottom:14px;right:14px;border-bottom:1px solid var(--accent);border-right:1px solid var(--accent)}
-/* SYS badge */
-.scrub-badge{
-  position:absolute;top:18px;left:50%;transform:translateX(-50%);
-  font-family:var(--fm);font-size:8px;letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--accent);padding:3px 12px;
-  background:rgba(4,7,15,0.6);border:1px solid rgba(0,212,240,0.22);
-  border-radius:2px;z-index:6;white-space:nowrap;backdrop-filter:blur(8px)}
-.scrub-badge::before{
-  content:'';display:inline-block;width:5px;height:5px;border-radius:50%;
-  background:var(--green);box-shadow:0 0 6px var(--green);
-  margin-right:8px;vertical-align:middle;animation:kdot 2s ease-in-out infinite}
-/* Split titles — outside the card, inside the stage */
-.scrub-title-top{
-  position:absolute;top:0;left:0;right:0;
-  display:flex;align-items:flex-end;justify-content:center;
-  padding-bottom:clamp(10px,2vh,24px);height:50%;
-  pointer-events:none;z-index:7}
-.scrub-title-bot{
-  position:absolute;bottom:0;left:0;right:0;
-  display:flex;align-items:flex-start;justify-content:center;
-  padding-top:clamp(10px,2vh,24px);height:50%;
-  pointer-events:none;z-index:7}
-.scrub-headline{
-  font-family:var(--fh);font-size:clamp(52px,9vw,108px);
-  letter-spacing:5px;line-height:0.9;text-align:center;
-  color:#fff;text-shadow:0 2px 40px rgba(0,0,0,0.9)}
-.scrub-headline span{color:var(--accent);text-shadow:0 0 50px rgba(0,212,240,0.7)}
-.scrub-sub{
-  font-family:var(--fm);font-size:clamp(8px,1.1vw,12px);
-  letter-spacing:3.5px;text-transform:uppercase;
-  color:var(--accent);opacity:.8;margin-top:12px}
-/* Scroll hint */
-.scrub-hint{
-  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  font-family:var(--fm);font-size:8px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--muted);z-index:6;animation:hint-bounce 2.2s ease-in-out infinite}
-.scrub-hint svg{opacity:.4}
+#blog-hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:80px clamp(20px,6vw,80px)}
+.bh-bg{position:absolute;inset:-15%;background:#1a0f08 url('blog/gym-wide.jpg.png') center/cover no-repeat;filter:brightness(.28) sepia(.4);transform:scale(1.15);z-index:0;will-change:transform}
+.bh-vignette{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse 110% 100% at 50% 50%,transparent 35%,rgba(4,7,15,.82) 100%)}
+.bh-content{position:relative;z-index:10;text-align:center;max-width:860px;width:100%}
+.bh-kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,240,.08);border:1px solid rgba(0,212,240,.2);border-radius:100px;padding:7px 18px;font-family:var(--fm);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:28px;opacity:0}
+.bh-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:bh-pulse 2s ease-in-out infinite;flex-shrink:0}
+@keyframes bh-pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,212,240,.7)}50%{box-shadow:0 0 0 6px rgba(0,212,240,0)}}
+.bh-hl{font-family:var(--fh);font-size:clamp(64px,10vw,130px);line-height:.87;margin-bottom:24px;opacity:0}
+.bh-white{color:#fff}
+.bh-cyan{color:var(--accent);text-shadow:0 0 60px rgba(0,212,240,.5),0 0 120px rgba(0,212,240,.2)}
+.bh-amber{color:#c8892a;text-shadow:0 0 60px rgba(200,137,42,.5),0 0 120px rgba(200,137,42,.2)}
+.bh-sub{font-family:var(--fb);font-weight:300;font-size:clamp(15px,2vw,18px);color:rgba(238,240,248,.72);max-width:560px;margin:0 auto 28px;line-height:1.75;opacity:0}
+.bh-pills{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;opacity:0}
+.bh-pill{font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:7px 16px;border-radius:100px;background:rgba(0,212,240,.07);border:1px solid rgba(0,212,240,.18);color:var(--accent)}
+.bh-scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;font-family:var(--fm);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);z-index:6;opacity:.5;animation:hint-bounce 2.2s ease-in-out infinite}
+/* Light rays */
+.rays{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.ray{position:absolute;top:-20%;left:50%;width:1px;height:140%;transform-origin:top center;background:linear-gradient(to bottom,rgba(0,212,240,0),rgba(0,212,240,.07) 30%,rgba(0,212,240,0))}
+.ray:nth-child(1){transform:rotate(-28deg);opacity:.6}
+.ray:nth-child(2){transform:rotate(-8deg);opacity:.4}
+.ray:nth-child(3){transform:rotate(12deg);opacity:.5}
+.ray:nth-child(4){transform:rotate(32deg);opacity:.35}
+.motes{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
+/* Dust motes */
+@keyframes mote-drift{0%{transform:translateY(0) translateX(0);opacity:0}20%{opacity:1}80%{opacity:.6}100%{transform:translateY(-120px) translateX(30px);opacity:0}}
 @keyframes hint-bounce{0%,100%{opacity:.45;transform:translateX(-50%) translateY(0)}55%{opacity:.9;transform:translateX(-50%) translateY(5px)}}
 
 /* ═══════════════════════════════════════════
@@ -387,15 +350,27 @@ a{color:inherit;text-decoration:none}
   position:relative;
   transition:border-color .3s,box-shadow .3s,transform .35s cubic-bezier(0.34,1.56,0.64,1)}
 .post-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;z-index:1;
-  opacity:0;transition:opacity .3s;
-  background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;z-index:1;
+  opacity:0;transition:opacity .3s}
+/* Category glow borders */
+.post-card[data-category="weight-cut"]::before{background:linear-gradient(90deg,transparent,var(--amber),transparent)}
+.post-card[data-category="recovery"]::before{background:linear-gradient(90deg,transparent,var(--red),transparent)}
+.post-card[data-category="fight-camp"]::before{background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.post-card[data-category="nutrition"]::before{background:linear-gradient(90deg,transparent,var(--green),transparent)}
+.post-card[data-category="psychology"]::before{background:linear-gradient(90deg,transparent,#a78bfa,transparent)}
+.post-card[data-category="technique"]::before{background:linear-gradient(90deg,transparent,var(--accent),transparent)}
 .post-card:hover{
-  transform:translateY(-7px) scale(1.012);
+  transform:translateY(-8px);
   border-color:rgba(0,212,240,0.18);
   box-shadow:0 0 0 1px rgba(0,212,240,0.05),0 24px 64px rgba(0,0,0,0.5),0 0 40px rgba(0,212,240,0.06)}
+.post-card[data-category="weight-cut"]:hover{border-color:rgba(245,158,11,0.22);box-shadow:0 24px 64px rgba(0,0,0,0.5),0 0 40px rgba(245,158,11,0.08)}
+.post-card[data-category="recovery"]:hover{border-color:rgba(239,68,68,0.22);box-shadow:0 24px 64px rgba(0,0,0,0.5),0 0 40px rgba(239,68,68,0.08)}
+.post-card[data-category="nutrition"]:hover{border-color:rgba(16,185,129,0.22);box-shadow:0 24px 64px rgba(0,0,0,0.5),0 0 40px rgba(16,185,129,0.08)}
+.post-card[data-category="psychology"]:hover{border-color:rgba(139,92,246,0.22);box-shadow:0 24px 64px rgba(0,0,0,0.5),0 0 40px rgba(139,92,246,0.08)}
 .post-card:hover::before{opacity:1}
 .post-card:hover .post-title{color:var(--accent)}
+/* Reading time progress bar */
+.post-thumb-bar{position:absolute;bottom:0;left:0;height:2px;background:var(--accent);opacity:.6;transition:width 1.2s cubic-bezier(0.25,1,0.5,1)}
 /* Hide filtered out cards */
 .post-card.hidden{display:none}
 
@@ -462,13 +437,14 @@ a{color:inherit;text-decoration:none}
   font-family:var(--fm);font-size:12px;letter-spacing:1px;color:var(--text);
   transition:border-color .2s,box-shadow .2s;outline:none;min-width:0}
 .nl-input::placeholder{color:var(--muted2)}
-.nl-input:focus{border-color:rgba(0,212,240,0.3);box-shadow:0 0 16px rgba(0,212,240,0.08)}
+.nl-input:focus{border-color:rgba(0,212,240,0.5);box-shadow:0 0 0 3px rgba(0,212,240,0.08),0 0 24px rgba(0,212,240,0.14);background:rgba(0,212,240,0.03)}
+@keyframes nl-pulse{0%,100%{box-shadow:0 0 28px rgba(0,212,240,0.35)}50%{box-shadow:0 0 48px rgba(0,212,240,0.65),0 0 80px rgba(0,212,240,0.2)}}
 .nl-btn{
   flex-shrink:0;background:var(--accent);color:var(--bg);
   font-family:var(--fc);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
   padding:13px 24px;border-radius:3px;border:none;cursor:pointer;
-  transition:all .22s;white-space:nowrap}
-.nl-btn:hover{background:#22e4ff;transform:translateY(-1px);box-shadow:0 0 28px rgba(0,212,240,0.4)}
+  transition:all .22s;white-space:nowrap;animation:nl-pulse 2.8s ease-in-out infinite}
+.nl-btn:hover{background:#22e4ff;transform:translateY(-1px);box-shadow:0 0 48px rgba(0,212,240,0.6);animation:none}
 .nl-note{font-family:var(--fm);font-size:9px;color:var(--muted2);letter-spacing:.5px}
 .nl-social-proof{display:flex;align-items:center;gap:12px;margin-top:8px}
 .nl-avatars{display:flex}
@@ -490,7 +466,9 @@ a{color:inherit;text-decoration:none}
 .cta-strip::before{top:0;background:linear-gradient(90deg,transparent,var(--accent),var(--impact),var(--accent),transparent);animation:border-march 4s linear infinite}
 .cta-strip::after{bottom:0;background:linear-gradient(90deg,transparent,rgba(0,212,240,0.3),transparent)}
 @keyframes border-march{from{background-position:0 0}to{background-position:200px 0}}
-.cta-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 100% at 50% 50%,rgba(0,212,240,0.04) 0%,transparent 70%)}
+.cta-bg{position:absolute;inset:0;z-index:0;background:url('blog/heavy-bag.jpg.png') center/cover no-repeat;opacity:.1;mix-blend-mode:luminosity}
+.cta-strip::after{bottom:0;background:linear-gradient(90deg,transparent,rgba(0,212,240,0.3),transparent);content:'';position:absolute;left:0;right:0;height:1px}
+.cta-glow{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 100% at 50% 50%,rgba(0,212,240,0.06) 0%,transparent 70%);pointer-events:none}
 .cta-eyebrow{
   position:relative;z-index:1;
   font-family:var(--fm);font-size:9px;letter-spacing:3px;text-transform:uppercase;
@@ -612,38 +590,24 @@ a{color:inherit;text-decoration:none}
   </div>
 </nav>
 
-<!-- ══ VIDEO SCRUB HERO ══ -->
-<section class="scrub-wrap" id="scrubWrap" aria-label="Feature intro">
-  <div class="scrub-stage" id="scrubStage">
-    <div class="scrub-card" id="scrubCard">
-      <video id="scrubVideo"
-        src="https://github.com/stephenjamestitus-max/Strike-Panel/releases/download/v1.0.0/9944628-uhd_3840_2160_24fps.mp4"
-        muted playsinline preload="auto"
-        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
-      <div class="scrub-vignette" aria-hidden="true"></div>
-      <div class="scrub-br tl" aria-hidden="true"></div>
-      <div class="scrub-br tr" aria-hidden="true"></div>
-      <div class="scrub-br bl" aria-hidden="true"></div>
-      <div class="scrub-br br" aria-hidden="true"></div>
-      <div class="scrub-badge" id="scrubBadge">SYS.LIVE · STRIKEPANEL™</div>
+<!-- ══ BLOG HERO ══ -->
+<section id="blog-hero" aria-label="Blog hero">
+  <div class="bh-bg" id="bhBg"></div>
+  <div class="rays" aria-hidden="true"><div class="ray"></div><div class="ray"></div><div class="ray"></div><div class="ray"></div></div>
+  <div class="motes" id="blogMotes" aria-hidden="true"></div>
+  <div class="bh-vignette" aria-hidden="true"></div>
+  <div class="bh-content">
+    <div class="bh-kicker" id="bhKicker"><div class="bh-dot"></div>StrikePanel™ · Coaching Intelligence Blog</div>
+    <h1 class="bh-hl" id="bhHl"><span class="bh-white">THE COACHING</span><br><span class="bh-cyan">INTELLIGENCE</span><br><span class="bh-amber">BLOG.</span></h1>
+    <p class="bh-sub" id="bhSub">Fight camp planning, athlete readiness, weight cuts — written for coaches who take performance seriously.</p>
+    <div class="bh-pills" id="bhPills">
+      <div class="bh-pill">7 Articles</div>
+      <div class="bh-pill">58 min reading</div>
     </div>
-    <!-- Split titles (siblings to card, inside stage) -->
-    <div class="scrub-title-top" id="scrubTitleTop" aria-hidden="true">
-      <div><div class="scrub-headline">TRAINING</div></div>
-    </div>
-    <div class="scrub-title-bot" id="scrubTitleBot" aria-hidden="true">
-      <div>
-        <div class="scrub-headline"><span>INTELLIGENCE</span></div>
-        <div class="scrub-sub">Combat Sports Coaching Platform</div>
-      </div>
-    </div>
-    <div class="scrub-hint" id="scrubHint" aria-hidden="true">
-      <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
-        <rect x=".75" y=".75" width="12.5" height="16.5" rx="6.25" stroke="currentColor" stroke-width="1.2"/>
-        <circle cx="7" cy="5.5" r="1.75" fill="currentColor"/>
-      </svg>
-      SCROLL
-    </div>
+  </div>
+  <div class="bh-scroll-hint" aria-hidden="true">
+    <span>SCROLL</span>
+    <svg width="14" height="18" viewBox="0 0 14 18" fill="none"><rect x=".75" y=".75" width="12.5" height="16.5" rx="6.25" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="5.5" r="1.75" fill="currentColor"/></svg>
   </div>
 </section>
 
@@ -970,8 +934,9 @@ a{color:inherit;text-decoration:none}
 </div>
 
 <!-- ══ CTA STRIP ══ -->
-<div class="cta-strip">
+<div class="cta-strip" id="ctaStrip">
   <div class="cta-bg"></div>
+  <div class="cta-glow"></div>
   <div class="cta-eyebrow sp"><span class="label-dot"></span>Ready to coach smarter?</div>
   <h2 class="sp" data-d="1">STOP GUESSING.<br><span>START KNOWING.</span></h2>
   <p class="sp" data-d="2">Every athlete scored every morning. Every session informed by data. One coaching web app built for combat sports — no subscriptions, no monthly fees.</p>
@@ -1109,138 +1074,81 @@ document.querySelectorAll('.posts-grid').forEach(parent => {
 </script>
 
 <script>
-/* ═══════════════════════════════════════
-   HERO SCRUB — GSAP ScrollTrigger
-   Desktop: scroll-scrub video currentTime
-   Mobile:  autoplay loop (GitHub redirect
-            breaks range requests on iOS)
-═══════════════════════════════════════ */
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── Blog hero entrance ── */
 (function() {
-  const IMMERSE_OVERFILL = 1.04;
-  const ASPECT = 16 / 9;
+  const tl = gsap.timeline({ delay: 0.2 });
+  tl.to('#bhKicker', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 0)
+    .fromTo('#bhHl',  { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.85, ease: 'power3.out' }, 0.2)
+    .fromTo('#bhSub', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7,  ease: 'power3.out' }, 0.55)
+    .fromTo('#bhPills',{ opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, 0.8);
 
-  const card   = document.getElementById('scrubCard');
-  const vid    = document.getElementById('scrubVideo');
-  const titleT = document.getElementById('scrubTitleTop');
-  const titleB = document.getElementById('scrubTitleBot');
-  const hint   = document.getElementById('scrubHint');
-
-  function isMobile() { return window.innerWidth < 768; }
-  function startScale() { return isMobile() ? 0.9 : 0.58; }
-
-  function cardDims() {
-    const vw = window.innerWidth, vh = window.innerHeight;
-    if (isMobile()) {
-      /* On mobile use full viewport width, 16:9 aspect */
-      const w = vw * 0.96;
-      return { w, h: w / ASPECT };
-    }
-    const w = Math.min(vw * 0.94, vh * 0.74 * ASPECT);
-    return { w, h: w / ASPECT };
-  }
-
-  function immerseScale() {
-    const { w, h } = cardDims();
-    return Math.max(window.innerWidth / w, window.innerHeight / h) * IMMERSE_OVERFILL;
-  }
-
-  function initCard() {
-    const { w, h } = cardDims();
-    gsap.set(card, { width: w, height: h });
-  }
-
-  /* ── Mobile: autoplay loop, no scrub ── */
-  function setupMobile() {
-    vid.muted    = true;
-    vid.autoplay = true;
-    vid.loop     = true;
-    vid.setAttribute('playsinline', '');
-    vid.setAttribute('preload', 'auto');
-    /* Force play — some browsers need explicit call after attr changes */
-    const tryPlay = () => vid.play().catch(() => {});
-    if (vid.readyState >= 2) tryPlay();
-    else vid.addEventListener('canplay', tryPlay, { once: true });
-    if (vid.readyState < 1) vid.load();
-  }
-
-  /* ── Desktop: seek-unlock then scrub ── */
-  function unlockSeek() {
-    const p = vid.play();
-    if (p && p.then) p.then(() => { vid.pause(); vid.currentTime = 0; }).catch(() => {});
-    else { try { vid.pause(); vid.currentTime = 0; } catch(e) {} }
-  }
-
-  let scrubTL;
-
-  function buildTimeline() {
-    if (scrubTL) { scrubTL.kill(); scrubTL = null; }
-    ScrollTrigger.getAll().filter(t => t.vars.id === 'heroScrub').forEach(t => t.kill());
-
-    initCard();
-
-    const sS = startScale();
-    const iS = immerseScale();
-    const mobile = isMobile();
-
-    /* On mobile set up autoplay and skip scrub timeline */
-    if (mobile) {
-      setupMobile();
-    } else {
-      vid.removeAttribute('autoplay');
-      vid.loop = false;
-      vid.addEventListener('loadedmetadata', unlockSeek, { once: true });
-      if (vid.readyState < 1) vid.load();
-    }
-
-    gsap.set(card,   { scale: sS, opacity: 0, borderRadius: 14 });
-    gsap.set([titleT, titleB], { opacity: 0 });
-    gsap.set(hint,   { opacity: 0 });
-
-    /* Entry spring — runs on both mobile and desktop */
-    gsap.timeline({ delay: 0.35 })
-      .to(card,   { scale: sS, opacity: 1, duration: 0.9, ease: 'power2.out' })
-      .to(titleT, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '-=0.55')
-      .to(titleB, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '-=0.62')
-      .to(hint,   { opacity: 1, duration: 0.5 }, '-=0.3');
-
-    /* Scroll animation — card scale + title fly (runs on both) */
-    scrubTL = gsap.timeline({
-      scrollTrigger: {
-        id:      'heroScrub',
-        trigger: '#scrubWrap',
-        start:   'top top',
-        end:     'bottom bottom',
-        scrub:   mobile ? 0.8 : 1.4,
-        onUpdate: mobile ? undefined : function(self) {
-          /* Desktop only: scrub video currentTime */
-          if (vid.duration && vid.readyState >= 2) {
-            const mapped = Math.max(0, Math.min(1, (self.progress - 0.15) / 0.63));
-            try { vid.currentTime = mapped * vid.duration; } catch(e) {}
-          }
-        }
-      }
-    });
-
-    scrubTL
-      .fromTo(card,   { scale: sS }, { scale: 1, borderRadius: 14, ease: 'none', duration: 0.15 }, 0)
-      .fromTo(titleT, { x: 0, opacity: 1 }, { x: '-45vw', opacity: 0, ease: 'power2.in', duration: 0.15 }, 0)
-      .fromTo(titleB, { x: 0, opacity: 1 }, { x:  '45vw', opacity: 0, ease: 'power2.in', duration: 0.15 }, 0)
-      .fromTo(hint,   { opacity: 1 }, { opacity: 0, ease: 'none', duration: 0.06 }, 0)
-      .fromTo(card,   { scale: 1, borderRadius: 14 }, { scale: iS, borderRadius: 0, ease: 'none', duration: 0.63 }, 0.15)
-      .fromTo(card,   { scale: iS, borderRadius: 0  }, { scale: sS, borderRadius: 14, ease: 'none', duration: 0.22 }, 0.78)
-      .fromTo(titleT, { x: '-45vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'power2.out', duration: 0.22 }, 0.78)
-      .fromTo(titleB, { x:  '45vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'power2.out', duration: 0.22 }, 0.78);
-  }
-
-  gsap.registerPlugin(ScrollTrigger);
-  buildTimeline();
-
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(buildTimeline, 250);
+  /* Subtle parallax on bg */
+  gsap.to('#bhBg', {
+    yPercent: 20,
+    ease: 'none',
+    scrollTrigger: { trigger: '#blog-hero', start: 'top top', end: 'bottom top', scrub: true }
   });
 })();
+
+/* ── Dust motes ── */
+(function() {
+  const container = document.getElementById('blogMotes');
+  if (!container) return;
+  for (let i = 0; i < 18; i++) {
+    const m = document.createElement('div');
+    const size = Math.random() * 3 + 1;
+    m.style.cssText = `position:absolute;border-radius:50%;background:rgba(0,212,240,${(Math.random()*.4+.1).toFixed(2)});width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${(Math.random()*60+30)}%;animation:mote-drift ${(Math.random()*6+6).toFixed(1)}s ease-in-out ${(Math.random()*8).toFixed(1)}s infinite;pointer-events:none`;
+    container.appendChild(m);
+  }
+})();
+
+
+/* ── Reading time progress bars ── */
+(function() {
+  const maxMin = 10;
+  document.querySelectorAll('#postsGrid .post-card').forEach(card => {
+    const dateEl = card.querySelector('.post-date');
+    if (!dateEl) return;
+    const m = dateEl.textContent.match(/(\d+)\s*min/);
+    if (!m) return;
+    const pct = Math.round((parseInt(m[1]) / maxMin) * 100);
+    const thumb = card.querySelector('.post-thumb');
+    if (!thumb) return;
+    thumb.style.position = 'relative';
+    const bar = document.createElement('div');
+    bar.className = 'post-thumb-bar';
+    bar.style.width = '0';
+    thumb.appendChild(bar);
+    const catColor = {
+      'weight-cut': 'var(--amber)', 'recovery': 'var(--red)',
+      'fight-camp': 'var(--accent)', 'coaching': '#a78bfa',
+      'readiness': 'var(--accent)', 'nutrition': 'var(--green)'
+    }[card.dataset.category] || 'var(--accent)';
+    bar.style.background = catColor;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { bar.style.width = pct + '%'; obs.disconnect(); }
+    }, { threshold: 0.3 });
+    obs.observe(card);
+  });
+})();
+
+/* ── Featured card parallax ── */
+(function() {
+  const fc = document.querySelector('.featured-card .feat-img-wrap img, .featured-card .feat-img');
+  if (!fc) return;
+  gsap.to(fc, {
+    yPercent: -15, ease: 'none',
+    scrollTrigger: { trigger: '.featured-wrap', start: 'top bottom', end: 'bottom top', scrub: true }
+  });
+})();
+
+/* ── CTA bg parallax ── */
+gsap.to('#ctaStrip .cta-bg', {
+  yPercent: -10, ease: 'none',
+  scrollTrigger: { trigger: '#ctaStrip', start: 'top bottom', end: 'bottom top', scrub: true }
+});
 </script>
 </body>
 </html>
