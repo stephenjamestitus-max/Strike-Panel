@@ -480,6 +480,10 @@ footer{
   .blog-card{flex-direction:column}
   .foot-top{flex-direction:column;align-items:flex-start}
 }
+@media(max-width:768px){
+  .dev-side-img{display:none}
+  .dev-main-img{width:90vw}
+}
 @media(max-width:640px){
   .nav-links{display:none}
   .hamburger{display:flex}
@@ -492,12 +496,11 @@ footer{
   .price-card{padding:32px 24px;min-width:240px}
   .p-ctas{flex-direction:column}
   .pricing-hl{font-size:clamp(48px,14vw,80px)}
-  .dev-iphone,.dev-ipad{display:none}
-  .dev-macbook{width:90vw}
   .trust-row{gap:14px}
   .blog-card{padding:32px 24px}
   .checks{gap:14px}
 }
+@keyframes kdot{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.7)}50%{box-shadow:0 0 0 6px rgba(239,68,68,0)}}
 </style>
 </head>
 <body>
@@ -604,7 +607,7 @@ footer{
         <div class="ath-row">
           <div class="ath-dot" style="background:var(--green)"></div>
           <div class="ath-name">PRIYA</div>
-          <div class="ath-score" style="color:var(--green)"><span class="snum">0</span></div>
+          <div class="ath-score" style="color:var(--green)"><span class="snum">91</span></div>
           <div class="badge bg-green">PUSH HARD</div>
         </div>
         <div class="ath-track"><div class="ath-bar bar-g" data-val="91"></div></div>
@@ -613,7 +616,7 @@ footer{
         <div class="ath-row">
           <div class="ath-dot" style="background:var(--accent)"></div>
           <div class="ath-name">JAKE</div>
-          <div class="ath-score" style="color:var(--accent)"><span class="snum">0</span></div>
+          <div class="ath-score" style="color:var(--accent)"><span class="snum">74</span></div>
           <div class="badge bg-cyan">TRAIN NORMAL</div>
         </div>
         <div class="ath-track"><div class="ath-bar bar-c" data-val="74"></div></div>
@@ -622,7 +625,7 @@ footer{
         <div class="ath-row">
           <div class="ath-dot" style="background:var(--red)"></div>
           <div class="ath-name">MARCUS</div>
-          <div class="ath-score" style="color:var(--red)"><span class="snum">0</span></div>
+          <div class="ath-score" style="color:var(--red)"><span class="snum">38</span></div>
           <div class="badge bg-red">REST DAY</div>
         </div>
         <div class="ath-track"><div class="ath-bar bar-r" data-val="38"></div></div>
@@ -806,10 +809,13 @@ footer{
     <h2 class="phones-hl ru">RUNS ON<br>EVERYTHING.</h2>
     <p class="phones-sub ru">Phone, tablet, laptop. Install from your browser. No app store. No updates. Works offline.</p>
 
-    <div class="devices-row">
-      <img src="marketing/iphone_final2.png" class="dev-iphone" alt="StrikePanel on iPhone" loading="lazy">
-      <img src="marketing/macbook_final2.png" class="dev-macbook" alt="StrikePanel on MacBook" loading="lazy">
-      <img src="marketing/ipad_v3.png"        class="dev-ipad"   alt="StrikePanel on iPad"   loading="lazy">
+    <div style="display:flex;align-items:flex-end;justify-content:center;gap:40px;flex-wrap:wrap;padding:40px 0">
+      <img src="marketing/iphone_final2.png" alt="StrikePanel on iPhone" class="dev-side-img"
+           style="height:520px;object-fit:contain;transform:rotate(-6deg) translateY(30px);filter:drop-shadow(0 30px 60px rgba(0,0,0,0.7))" loading="lazy">
+      <img src="marketing/macbook_final2.png" alt="StrikePanel on MacBook" class="dev-main-img"
+           style="width:560px;object-fit:contain;filter:drop-shadow(0 40px 80px rgba(0,212,240,0.18)) drop-shadow(0 20px 40px rgba(0,0,0,0.8))" loading="lazy">
+      <img src="marketing/ipad_v3.png" alt="StrikePanel on iPad" class="dev-side-img"
+           style="height:480px;object-fit:contain;transform:rotate(5deg) translateY(30px);filter:drop-shadow(0 30px 60px rgba(0,0,0,0.7))" loading="lazy">
     </div>
 
     <div class="checks ru">
@@ -910,6 +916,17 @@ footer{
       <span class="phl-a">NEW SCHOOL DATA.</span>
     </h2>
     <div class="pricing-rule"></div>
+
+    <div style="display:inline-flex;align-items:center;gap:10px;
+  padding:8px 20px;border-radius:30px;margin-bottom:24px;
+  background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25)">
+      <span style="width:8px;height:8px;border-radius:50%;background:#ef4444;
+    box-shadow:0 0 12px #ef4444;animation:kdot 1.5s ease-in-out infinite;flex-shrink:0"></span>
+      <span style="font-family:var(--fc);font-size:11px;font-weight:700;
+    letter-spacing:2px;text-transform:uppercase;color:#ef4444">
+        🔥 Launch Price — Was $149, Now $99. Goes up with Phase 2.
+      </span>
+    </div>
 
     <div class="price-card ru">
       <div class="p-was">was $149</div>
@@ -1046,31 +1063,37 @@ const heroTL = gsap.timeline({ delay: 0.15 });
 });
 
 /* ── Widget bar + number animation ───────────────────────── */
-function runWidget() {
-  document.querySelectorAll('.ath-bar').forEach(bar => {
-    const target = parseInt(bar.dataset.val);
-    const block  = bar.closest('.ath-block');
-    const numEl  = block ? block.querySelector('.snum') : null;
-    // Trigger CSS transition (needs two rAF ticks to escape the 0-width state)
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      bar.style.width = target + '%';
-    }));
-    // Count-up number separately
-    if (!numEl) return;
-    const dur = 1400;
-    let t0 = null;
-    function step(ts) {
-      if (!t0) t0 = ts;
-      const p    = Math.min((ts - t0) / dur, 1);
-      const ease = 1 - Math.pow(1 - p, 3);
-      numEl.textContent = Math.round(ease * target);
-      if (p < 1) requestAnimationFrame(step);
+document.addEventListener('DOMContentLoaded', function() {
+  function countTo(el, target, duration) {
+    var start = 0;
+    var step = Math.ceil(target / (duration / 16));
+    var timer = setInterval(function() {
+      start = Math.min(start + step, target);
+      el.textContent = start;
+      if (start >= target) clearInterval(timer);
+    }, 16);
+  }
+
+  var scores = document.querySelectorAll('.snum');
+  var targets = [91, 74, 38];
+  scores.forEach(function(el, i) {
+    if (targets[i] !== undefined) {
+      setTimeout(function() {
+        countTo(el, targets[i], 800);
+      }, 800 + (i * 200));
     }
-    requestAnimationFrame(step);
   });
-}
-// Delay past GSAP widget reveal (delay 0.15 + offset 0.36 + duration 0.75 ≈ 1.26s)
-setTimeout(runWidget, 1400);
+
+  var bars = document.querySelectorAll('.ath-bar');
+  var widths = ['91%', '74%', '38%'];
+  bars.forEach(function(bar, i) {
+    if (widths[i]) {
+      setTimeout(function() {
+        bar.style.width = widths[i];
+      }, 800 + (i * 200));
+    }
+  });
+});
 
 /* ── IntersectionObserver reveal ─────────────────────────── */
 const io = new IntersectionObserver(entries => {
