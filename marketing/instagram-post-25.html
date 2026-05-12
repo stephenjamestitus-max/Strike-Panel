@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>StrikePanel™ — Instagram Post 25</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1080px;overflow:hidden;background:#04070f;font-family:'DM Mono',monospace}
+#canvas{position:relative;width:1080px;height:1080px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#grain{position:absolute;inset:-50%;width:200%;height:200%;z-index:100;pointer-events:none;opacity:.035;animation:grain .8s steps(1) infinite}
+@keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-2%,-3%)}20%{transform:translate(3%,2%)}30%{transform:translate(-3%,4%)}40%{transform:translate(2%,-2%)}50%{transform:translate(-4%,3%)}60%{transform:translate(3%,-4%)}70%{transform:translate(-2%,2%)}80%{transform:translate(4%,-3%)}90%{transform:translate(-3%,4%)}}
+#dotgrid{position:absolute;inset:0;z-index:1;pointer-events:none;background-image:radial-gradient(circle,rgba(0,212,240,.038) 1.2px,transparent 1.2px);background-size:44px 44px}
+.blob{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+.blob-cyan{width:700px;height:700px;top:-220px;left:-220px;background:rgba(0,212,240,.07)}
+.blob-amber{width:500px;height:500px;top:300px;right:-180px;background:rgba(200,137,42,.065)}
+.blob-purple{width:550px;height:550px;bottom:-200px;left:50px;background:rgba(139,92,246,.07)}
+.corner{position:absolute;width:28px;height:28px;z-index:10;opacity:.22}
+.corner-tl{top:32px;left:32px;border-top:1.5px solid #00D4F0;border-left:1.5px solid #00D4F0}
+.corner-tr{top:32px;right:32px;border-top:1.5px solid #00D4F0;border-right:1.5px solid #00D4F0}
+.corner-bl{bottom:32px;left:32px;border-bottom:1.5px solid #00D4F0;border-left:1.5px solid #00D4F0}
+.corner-br{bottom:32px;right:32px;border-bottom:1.5px solid #00D4F0;border-right:1.5px solid #00D4F0}
+#inner{position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;gap:26px;width:760px}
+.kicker{display:inline-flex;align-items:center;gap:9px;background:rgba(0,212,240,.07);border:1px solid rgba(0,212,240,.22);border-radius:100px;padding:9px 22px;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:#00D4F0}
+.kdot{width:7px;height:7px;border-radius:50%;background:#00D4F0;flex-shrink:0;animation:pdot 2s ease-in-out infinite}
+@keyframes pdot{0%,100%{box-shadow:0 0 0 0 rgba(0,212,240,.8)}50%{box-shadow:0 0 0 7px rgba(0,212,240,0)}}
+.ktext{display:flex;align-items:center;gap:12px}
+.ksep{opacity:.35;font-size:10px}
+.divider{width:100%;height:1px;background:linear-gradient(to right,transparent,rgba(0,212,240,.2),rgba(200,137,42,.15),transparent)}
+.bottom-row{width:100%;display:flex;align-items:center;justify-content:space-between;padding:0 2px}
+.tagline-small{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(122,133,160,.5)}
+.logo-wrap{display:flex;align-items:center;gap:10px}
+.logo-svg{width:32px;height:32px;flex-shrink:0}
+.logo-text{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;text-transform:uppercase;color:#f5f0e8}
+.logo-text span{color:#00D4F0}
+.logo-tm{font-family:'DM Mono',monospace;font-size:9px;color:rgba(0,212,240,.6);vertical-align:super;letter-spacing:.5px}
+
+.price-hero{text-align:center}
+.price-big{font-family:'Bebas Neue',sans-serif;font-size:130px;letter-spacing:2px;color:#c8892a;line-height:.85;text-shadow:0 0 80px rgba(200,137,42,.55),0 0 160px rgba(200,137,42,.2)}
+.price-once{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:4px;color:rgba(245,240,232,.3);display:block;margin-top:4px}
+.price-sub{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:3px;color:rgba(245,240,232,.55);display:block}
+.price-card{width:100%;background:rgba(10,18,34,.82);border:1px solid rgba(200,137,42,.18);border-radius:20px;padding:26px 30px;box-shadow:0 0 40px rgba(200,137,42,.06),0 24px 60px rgba(0,0,0,.7);backdrop-filter:blur(12px)}
+.price-feature{display:flex;align-items:center;gap:14px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.price-feature:last-child{border-bottom:none;padding-bottom:0}
+.price-feature:first-child{padding-top:0}
+.price-check{color:#10b981;font-size:13px;flex-shrink:0}
+.price-feat-text{font-size:13px;color:rgba(245,240,232,.55);letter-spacing:.3px}
+.price-cta{display:flex;gap:12px;align-items:center;justify-content:center}
+.price-cta-demo{display:inline-flex;align-items:center;background:rgba(0,212,240,.08);border:1px solid rgba(0,212,240,.3);border-radius:100px;padding:11px 24px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#00D4F0}
+.price-cta-buy{display:inline-flex;align-items:center;background:rgba(200,137,42,.12);border:1px solid rgba(200,137,42,.35);border-radius:100px;padding:11px 24px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#c8892a}
+</style>
+</head>
+<body>
+<div id="canvas">
+  
+  <svg id="grain" xmlns="http://www.w3.org/2000/svg">
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noise)"/>
+  </svg>
+  <div id="dotgrid"></div>
+  <div class="blob blob-cyan"></div><div class="blob blob-amber"></div><div class="blob blob-purple"></div>
+  <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div><div class="corner corner-br"></div>
+  <div id="inner">
+    
+    <div class="kicker"><div class="kdot"></div><div class="ktext"><span>StrikePanel™</span><span class="ksep">·</span><span>Pricing</span><span class="ksep">·</span><span>SYS.LIVE</span></div></div>
+    <div class="price-hero">
+      <div class="price-big">$99</div>
+      <span class="price-once">ONCE</span>
+      <span class="price-sub">YOURS FOREVER.</span>
+    </div>
+    <div class="price-card">
+      <div class="price-feature"><div class="price-check">✓</div><div class="price-feat-text">Morning Brief readiness scoring — all athletes, every morning</div></div>
+        <div class="price-feature"><div class="price-check">✓</div><div class="price-feat-text">Fight camp management — countdown, phases, milestones</div></div>
+        <div class="price-feature"><div class="price-check">✓</div><div class="price-feat-text">Weight cut planner — daily tracking, automated alerts</div></div>
+        <div class="price-feature"><div class="price-check">✓</div><div class="price-feat-text">AI session builder — powered by Gemini, combat-sports specific</div></div>
+        <div class="price-feature"><div class="price-check">✓</div><div class="price-feat-text">Athlete check-in links — 60 seconds, no app required</div></div>
+        <div class="price-feature"><div class="price-check">✓</div><div class="price-feat-text">Cloud sync — works offline, every device</div></div>
+    </div>
+    <div class="price-cta">
+      <div class="price-cta-demo">Demo → strikepanel.vercel.app/demo</div>
+      <div class="price-cta-buy">Buy → gumroad.com/l/strikepanel</div>
+    </div>
+    <div class="divider"></div>
+    <div class="bottom-row">
+      <div class="tagline-small">Training Intelligence for Combat Sports</div>
+      <div class="logo-wrap"><svg class="logo-svg" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="14" r="12.5" stroke="#00D4F0" stroke-width="1.5"/>
+          <circle cx="14" cy="14" r="3.5" fill="#00D4F0" opacity=".9"/>
+          <line x1="14" y1="1.5" x2="14" y2="8" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="14" y1="20" x2="14" y2="26.5" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="1.5" y1="14" x2="8" y2="14" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="20" y1="14" x2="26.5" y2="14" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round"/>
+        </svg><div class="logo-text">Strike<span>Panel</span><span class="logo-tm">™</span></div></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

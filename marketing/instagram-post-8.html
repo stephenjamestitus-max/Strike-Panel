@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>StrikePanel™ — Instagram Post 8</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1080px;overflow:hidden;background:#04070f;font-family:'DM Mono',monospace}
+#canvas{position:relative;width:1080px;height:1080px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#grain{position:absolute;inset:-50%;width:200%;height:200%;z-index:100;pointer-events:none;opacity:.035;animation:grain .8s steps(1) infinite}
+@keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-2%,-3%)}20%{transform:translate(3%,2%)}30%{transform:translate(-3%,4%)}40%{transform:translate(2%,-2%)}50%{transform:translate(-4%,3%)}60%{transform:translate(3%,-4%)}70%{transform:translate(-2%,2%)}80%{transform:translate(4%,-3%)}90%{transform:translate(-3%,4%)}}
+#dotgrid{position:absolute;inset:0;z-index:1;pointer-events:none;background-image:radial-gradient(circle,rgba(0,212,240,.038) 1.2px,transparent 1.2px);background-size:44px 44px}
+.blob{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+.blob-cyan{width:700px;height:700px;top:-220px;left:-220px;background:rgba(0,212,240,.07)}
+.blob-amber{width:500px;height:500px;top:300px;right:-180px;background:rgba(200,137,42,.065)}
+.blob-purple{width:550px;height:550px;bottom:-200px;left:50px;background:rgba(139,92,246,.07)}
+.corner{position:absolute;width:28px;height:28px;z-index:10;opacity:.22}
+.corner-tl{top:32px;left:32px;border-top:1.5px solid #00D4F0;border-left:1.5px solid #00D4F0}
+.corner-tr{top:32px;right:32px;border-top:1.5px solid #00D4F0;border-right:1.5px solid #00D4F0}
+.corner-bl{bottom:32px;left:32px;border-bottom:1.5px solid #00D4F0;border-left:1.5px solid #00D4F0}
+.corner-br{bottom:32px;right:32px;border-bottom:1.5px solid #00D4F0;border-right:1.5px solid #00D4F0}
+#inner{position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;gap:26px;width:760px}
+.kicker{display:inline-flex;align-items:center;gap:9px;background:rgba(0,212,240,.07);border:1px solid rgba(0,212,240,.22);border-radius:100px;padding:9px 22px;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:#00D4F0}
+.kdot{width:7px;height:7px;border-radius:50%;background:#00D4F0;flex-shrink:0;animation:pdot 2s ease-in-out infinite}
+@keyframes pdot{0%,100%{box-shadow:0 0 0 0 rgba(0,212,240,.8)}50%{box-shadow:0 0 0 7px rgba(0,212,240,0)}}
+.ktext{display:flex;align-items:center;gap:12px}
+.ksep{opacity:.35;font-size:10px}
+.divider{width:100%;height:1px;background:linear-gradient(to right,transparent,rgba(0,212,240,.2),rgba(200,137,42,.15),transparent)}
+.bottom-row{width:100%;display:flex;align-items:center;justify-content:space-between;padding:0 2px}
+.tagline-small{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(122,133,160,.5)}
+.logo-wrap{display:flex;align-items:center;gap:10px}
+.logo-svg{width:32px;height:32px;flex-shrink:0}
+.logo-text{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;text-transform:uppercase;color:#f5f0e8}
+.logo-text span{color:#00D4F0}
+.logo-tm{font-family:'DM Mono',monospace;font-size:9px;color:rgba(0,212,240,.6);vertical-align:super;letter-spacing:.5px}
+
+.widget{width:100%;background:rgba(10,18,34,.82);border:1px solid rgba(0,212,240,.22);border-radius:20px;padding:30px 34px;box-shadow:0 0 0 1px rgba(0,212,240,.05),0 0 60px rgba(0,212,240,.13),0 0 120px rgba(0,212,240,.06),0 32px 80px rgba(0,0,0,.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.w-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.06)}
+.w-title{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#7a85a0}
+.wlive{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:1.5px;color:#10b981}
+.ldot{width:6px;height:6px;border-radius:50%;background:#10b981;animation:gdot 1.5s infinite}
+@keyframes gdot{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.8)}50%{box-shadow:0 0 0 6px rgba(16,185,129,0)}}
+.ath{margin-bottom:18px}.ath:last-of-type{margin-bottom:0}
+.ath-row{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.ath-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ath-name{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(245,240,232,.6);flex:1}
+.ath-score{font-family:'Bebas Neue',sans-serif;font-size:36px;line-height:1;flex-shrink:0;margin-right:2px;letter-spacing:1px}
+.ath-denom{font-size:10px;color:rgba(245,240,232,.28);margin-right:8px;align-self:flex-end;padding-bottom:4px;letter-spacing:.5px}
+.badge{font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:5px;white-space:nowrap;flex-shrink:0;font-weight:500}
+.bg-green{background:rgba(16,185,129,.12);color:#10b981;border:1px solid rgba(16,185,129,.22)}
+.bg-cyan{background:rgba(0,212,240,.1);color:#00D4F0;border:1px solid rgba(0,212,240,.22)}
+.bg-red{background:rgba(239,68,68,.1);color:#ef4444;border:1px solid rgba(239,68,68,.22)}
+.bg-amber{background:rgba(200,137,42,.1);color:#c8892a;border:1px solid rgba(200,137,42,.22)}
+.ath-track{height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.ath-bar{height:100%;border-radius:3px;width:0;transition:width 1.2s cubic-bezier(.25,1,.5,1)}
+.bar-g{background:linear-gradient(to right,#10b981,#34d399)}
+.bar-c{background:linear-gradient(to right,#00D4F0,#67e8f9)}
+.bar-r{background:linear-gradient(to right,#ef4444,#f87171)}
+.bar-a{background:linear-gradient(to right,#c8892a,#f59e0b)}
+.w-foot{display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.06)}
+.wavg{font-size:11px;color:#7a85a0;letter-spacing:.8px}
+.wavg em{font-style:normal;color:#f5f0e8}
+.headline{text-align:center;line-height:.9}
+.hl-white{font-family:'Bebas Neue',sans-serif;font-size:88px;letter-spacing:3px;color:#fff;display:block}
+.hl-amber{font-family:'Bebas Neue',sans-serif;font-size:88px;letter-spacing:3px;color:#c8892a;display:block;text-shadow:0 0 60px rgba(200,137,42,.55),0 0 120px rgba(200,137,42,.2)}
+.hl-cyan{font-family:'Bebas Neue',sans-serif;font-size:88px;letter-spacing:3px;color:#00D4F0;display:block;text-shadow:0 0 60px rgba(0,212,240,.4)}
+</style>
+</head>
+<body>
+<div id="canvas">
+  
+  <svg id="grain" xmlns="http://www.w3.org/2000/svg">
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noise)"/>
+  </svg>
+  <div id="dotgrid"></div>
+  <div class="blob blob-cyan"></div><div class="blob blob-amber"></div><div class="blob blob-purple"></div>
+  <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div><div class="corner corner-br"></div>
+  <div id="inner">
+    
+    <div class="kicker"><div class="kdot"></div><div class="ktext"><span>StrikePanel™</span><span class="ksep">·</span><span>Morning Brief</span><span class="ksep">·</span><span>SYS.LIVE</span></div></div>
+    <div class="widget">
+      <div class="w-head">
+        <div class="w-title">Morning Brief · 7:14 AM</div>
+        <div class="wlive"><div class="ldot"></div>LIVE</div>
+      </div>
+      <div class="ath">
+        <div class="ath-row">
+          <div class="ath-dot" style="background:#10b981"></div>
+          <div class="ath-name">Dev</div>
+          <div class="ath-score" style="color:#10b981">88</div>
+          <div class="ath-denom">/100</div>
+          <div class="badge bg-green">Push Hard</div>
+        </div>
+        <div class="ath-track"><div class="ath-bar bar-g" id="b1"></div></div>
+      </div>
+<div class="ath">
+        <div class="ath-row">
+          <div class="ath-dot" style="background:#c8892a"></div>
+          <div class="ath-name">Chloe</div>
+          <div class="ath-score" style="color:#c8892a">63</div>
+          <div class="ath-denom">/100</div>
+          <div class="badge bg-amber">Monitor</div>
+        </div>
+        <div class="ath-track"><div class="ath-bar bar-a" id="b2"></div></div>
+      </div>
+<div class="ath">
+        <div class="ath-row">
+          <div class="ath-dot" style="background:#ef4444"></div>
+          <div class="ath-name">Ray</div>
+          <div class="ath-score" style="color:#ef4444">42</div>
+          <div class="ath-denom">/100</div>
+          <div class="badge bg-red">Rest Day</div>
+        </div>
+        <div class="ath-track"><div class="ath-bar bar-r" id="b3"></div></div>
+      </div>
+      <div class="w-foot">
+        <div class="wavg">Squad Avg: <em>64</em> · Morning Brief</div>
+        <div class="wlive"><div class="ldot"></div>SYS.LIVE</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="headline">
+      <span class="hl-amber">7:14 AM.</span>
+      <span class="hl-white">YOU ALREADY KNOW.</span>
+    </div>
+    <div class="bottom-row">
+      <div class="tagline-small">Training Intelligence for Combat Sports</div>
+      <div class="logo-wrap"><svg class="logo-svg" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="14" r="12.5" stroke="#00D4F0" stroke-width="1.5"/>
+          <circle cx="14" cy="14" r="3.5" fill="#00D4F0" opacity=".9"/>
+          <line x1="14" y1="1.5" x2="14" y2="8" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="14" y1="20" x2="14" y2="26.5" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="1.5" y1="14" x2="8" y2="14" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="20" y1="14" x2="26.5" y2="14" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round"/>
+        </svg><div class="logo-text">Strike<span>Panel</span><span class="logo-tm">™</span></div></div>
+    </div>
+  </div>
+</div>
+<script>
+window.addEventListener('load',function(){setTimeout(function(){
+  document.getElementById('b1').style.width='88%';
+  document.getElementById('b2').style.width='63%';
+  document.getElementById('b3').style.width='42%';
+},200)});
+</script>
+</body>
+</html>
