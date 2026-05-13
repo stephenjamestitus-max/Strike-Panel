@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X Ray Boxing</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#04070f}
+canvas{display:block;width:100%;height:100%}
+#hint{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(0,212,240,0.7);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:4px;pointer-events:none;text-transform:uppercase;transition:opacity 1.5s;text-shadow:0 0 20px rgba(0,212,240,0.5)}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hint">// MOVE CURSOR TO REVEAL</div>
+<script>
+const PHOTO='boxing.jpg';
+const canvas=document.getElementById('c');
+const gl=canvas.getContext('webgl')||canvas.getContext('webgl2');
+let W,H,mouse={x:0.5,y:0.5},sm={x:0.5,y:0.5},t0=performance.now();
+function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;gl.viewport(0,0,W,H);}
+window.addEventListener('resize',resize);resize();
+window.addEventListener('mousemove',e=>{mouse.x=e.clientX/W;mouse.y=1-e.clientY/H;});
+window.addEventListener('touchmove',e=>{e.preventDefault();mouse.x=e.touches[0].clientX/W;mouse.y=1-e.touches[0].clientY/H;},{passive:false});
+const vs=`attribute vec2 a;varying vec2 v;void main(){v=a*.5+.5;gl_Position=vec4(a,0,1);}`;
+const fs=`precision highp float;
+varying vec2 v;
+uniform float T;
+uniform vec2 M,R;
+uniform sampler2D uPhoto;
+vec3 h3(vec2 p){vec3 q=vec3(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3)),dot(p,vec2(419.2,371.9)));return fract(sin(q)*43758.5453);}
+float ns(vec2 p){vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);return mix(mix(dot(h3(i).xy,f),dot(h3(i+vec2(1,0)).xy,f-vec2(1,0)),u.x),mix(dot(h3(i+vec2(0,1)).xy,f-vec2(0,1)),dot(h3(i+vec2(1,1)).xy,f-vec2(1,1)),u.x),u.y)*.5+.5;}
+float fbm(vec2 p){float v=0.,a=.5,f=1.;for(int i=0;i<5;i++){v+=a*ns(p*f);a*=.5;f*=2.;}return v;}
+float gr(vec2 uv,vec2 s,float t){vec2 d=uv-s;float ang=atan(d.y,d.x),dist=length(d),r=0.;for(int i=0;i<6;i++){float o=float(i)*.785+t*.3;r+=(sin(ang*4.+o)*.5+.5)*smoothstep(1.6,0.,dist);}return r/6.;}
+vec2 ld(vec2 uv,float s){vec2 c=uv-.5;return uv+c*dot(c,c)*s;}
+float luma(vec3 c){return dot(c,vec3(0.299,0.587,0.114));}
+float sobel(sampler2D tex,vec2 uv,vec2 px){
+float tl=luma(texture2D(tex,uv+vec2(-px.x,px.y)).rgb);
+float t=luma(texture2D(tex,uv+vec2(0,px.y)).rgb);
+float tr=luma(texture2D(tex,uv+vec2(px.x,px.y)).rgb);
+float l=luma(texture2D(tex,uv+vec2(-px.x,0)).rgb);
+float r=luma(texture2D(tex,uv+vec2(px.x,0)).rgb);
+float bl=luma(texture2D(tex,uv+vec2(-px.x,-px.y)).rgb);
+float b=luma(texture2D(tex,uv+vec2(0,-px.y)).rgb);
+float br=luma(texture2D(tex,uv+vec2(px.x,-px.y)).rgb);
+float gx=(-tl-2.*l-bl+tr+2.*r+br);
+float gy=(tl+2.*t+tr-bl-2.*b-br);
+return clamp(length(vec2(gx,gy))*3.0,0.,1.);}
+void main(){
+float t=T*.4;
+vec2 asp=vec2(R.x/R.y,1.),uv=v;
+vec2 du=ld(uv,.12+length(M-.5)*.08);
+vec2 pu=du+(M-.5)*vec2(-.025,-.018);
+float imgAsp=16./9.,scrAsp=R.x/R.y;
+vec2 texUV=pu;
+if(scrAsp>imgAsp){float s=scrAsp/imgAsp;texUV.y=(texUV.y-.5)*s+.5;}
+else{float s=imgAsp/scrAsp;texUV.x=(texUV.x-.5)*s+.5;}
+texUV=clamp(texUV,0.001,0.999);
+vec3 photoRGB=texture2D(uPhoto,texUV).rgb;
+vec3 inv=vec3(1.)-photoRGB;
+inv=clamp((inv-.35)*2.4+.35,0.,1.);
+float lumaV=luma(inv);
+vec3 xray=mix(vec3(0.,0.02,0.06),vec3(0.15,0.95,1.0),lumaV);
+xray+=vec3(0.,0.4,0.6)*pow(lumaV,1.5);
+float edge=sobel(uPhoto,texUV,vec2(2.0)/R);
+xray+=vec3(0.4,1.0,1.0)*edge*2.0;
+float scan=sin((texUV.y*R.y*0.4)+t*10.)*.025;
+xray+=vec3(0.,0.08,0.12)*scan;
+xray+=vec3(0.,0.15,0.25)*fbm(texUV*3.+vec2(t*.15,-t*.1))*.12;
+vec2 uvA=uv*asp,mA=M*asp;
+float dist=length(uvA-mA);
+float rr=0.22;
+float reveal=smoothstep(rr,rr*0.08,dist);
+float rim=smoothstep(rr,rr*.82,dist)-smoothstep(rr*.82,rr*.08,dist);
+vec3 col=photoRGB;
+float lumaP=luma(photoRGB);
+col=mix(col,mix(vec3(lumaP),vec3(lumaP*.8+.01,lumaP*.9+.02,lumaP+.04),0.3),0.25);
+col+=vec3(.04,.14,.20)*gr(pu,vec2(.3+(M.x-.5)*.15,1.5),t)*.3;
+col+=vec3(.03,.2,.3)*exp(-dist*asp.x*7.)*.1;
+col=mix(col,xray,reveal);
+col+=vec3(0.,0.85,1.0)*rim*2.2*(1.-reveal*.4);
+col+=vec3(.15,.7,.9)*exp(-dist*asp.x*9.)*.25*reveal;
+vec2 vu=uv*2.-1.;
+col*=pow(clamp(1.-dot(vu*vec2(.78,.88),vu*vec2(.78,.88)),0.,1.),.55);
+col=col/(col+.65);
+col=pow(max(col,0.),vec3(.44));
+gl_FragColor=vec4(col,1.);}`;
+function cs(t,s){const sh=gl.createShader(t);gl.shaderSource(sh,s);gl.compileShader(sh);if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS))console.error(gl.getShaderInfoLog(sh));return sh;}
+const prog=gl.createProgram();
+gl.attachShader(prog,cs(gl.VERTEX_SHADER,vs));
+gl.attachShader(prog,cs(gl.FRAGMENT_SHADER,fs));
+gl.linkProgram(prog);gl.useProgram(prog);
+const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+const al=gl.getAttribLocation(prog,'a');gl.enableVertexAttribArray(al);gl.vertexAttribPointer(al,2,gl.FLOAT,false,0,0);
+const uT=gl.getUniformLocation(prog,'T'),uM=gl.getUniformLocation(prog,'M'),uR=gl.getUniformLocation(prog,'R');
+const uPhoto=gl.getUniformLocation(prog,'uPhoto');
+const tex=gl.createTexture();
+gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,tex);
+gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([4,7,15,255]));
+const img=new Image();img.crossOrigin='anonymous';
+img.onload=()=>{
+gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,tex);
+gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);};
+img.src=PHOTO;
+gl.uniform1i(uPhoto,0);
+setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity='0';},5000);
+function loop(now){
+const t=(now-t0)*.001;
+sm.x+=(mouse.x-sm.x)*.07;sm.y+=(mouse.y-sm.y)*.07;
+gl.uniform1f(uT,t);gl.uniform2f(uM,sm.x,sm.y);gl.uniform2f(uR,W,H);
+gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+requestAnimationFrame(loop);}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

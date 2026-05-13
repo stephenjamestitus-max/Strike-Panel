@@ -566,12 +566,14 @@ footer{
      HERO
 ══════════════════════════════════════════════════ -->
 <section id="hero">
-  <div
-    id="unicorn-hero"
-    style="position:absolute;inset:0;width:100%;height:100%;z-index:0;"
-  ></div>
+  <iframe
+    src="marketing/xray-hero.html"
+    style="position:absolute;inset:0;width:100%;height:100%;border:none;z-index:0;pointer-events:auto;"
+    scrolling="no"
+    title="Interactive X-Ray Hero"
+  ></iframe>
 
-  <div class="motes" id="motes" aria-hidden="true"></div>
+  <div class="motes" id="motes" aria-hidden="true" style="pointer-events:none;"></div>
   <div class="hero-vignette" aria-hidden="true"></div>
 
   <div class="hero-content">
@@ -1168,20 +1170,6 @@ ScrollTrigger.create({
   }
 });
 
-</script>
-<script src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.12/dist/unicornStudio.umd.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  UnicornStudio.addScene({
-    elementId: 'unicorn-hero',
-    projectId: 'gnk7RazQJP6HsLOZsyc9',
-    scale: 0.5,
-    dpi: 1,
-    fps: 30,
-    lazyLoad: true,
-    production: true
-  });
-});
 </script>
 </body>
 </html>
