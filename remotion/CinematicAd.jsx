@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  useCurrentFrame, useVideoConfig,
+  useCurrentFrame,
   spring, interpolate, Easing,
-  Sequence, Video, Audio,
+  Sequence, Video,
   delayRender, continueRender,
   staticFile,
 } from 'remotion';
@@ -13,38 +13,40 @@ const bebasFont  = loadBebas();
 const dmMonoFont = loadDMMono();
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-const W = 1080;
-const H = 1920;
-const CYAN   = '#00D4F0';
-const AMBER  = '#F59E0B';
-const DARK   = '#04070f';
-const WHITE  = '#FFFFFF';
+const W     = 1080;
+const H     = 1920;
+const CYAN  = '#00D4F0';
+const AMBER = '#F59E0B';
+const RED   = '#ef4444';
+const GREEN = '#10b981';
+const DARK  = '#04070f';
+const WHITE = '#FFFFFF';
+
+const BEBAS = "'Bebas Neue', sans-serif";
+const MONO  = "'DM Mono', monospace";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
 
-function sp(frame, from, to, damping = 12, stiffness = 180, mass = 1) {
+function sp(frame, from, to, damping = 14, stiffness = 160, mass = 1) {
   return spring({ frame, fps: 30, config: { damping, stiffness, mass }, from, to });
 }
 
-// ─── ErrorBoundary for Video ──────────────────────────────────────────────────
+function fadeIn(localFrame, startFrame, duration = 8) {
+  return clamp((localFrame - startFrame) / duration, 0, 1);
+}
+
+// ─── Video background ────────────────────────────────────────────────────────
 class VideoFallback extends React.Component {
   constructor(props) { super(props); this.state = { failed: false }; }
   static getDerivedStateFromError() { return { failed: true }; }
   render() {
-    if (this.state.failed) {
-      return (
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: this.props.fallbackColor || '#0a0f1a',
-        }} />
-      );
-    }
+    if (this.state.failed) return <div style={{ position: 'absolute', inset: 0, background: this.props.fallbackColor || '#06090f' }} />;
     return this.props.children;
   }
 }
 
-function BgVideo({ src, fallbackColor, opacity = 1 }) {
+function BgVideo({ src, brightness = 0.2, fallbackColor }) {
   return (
     <VideoFallback fallbackColor={fallbackColor}>
       <Video
@@ -52,11 +54,10 @@ function BgVideo({ src, fallbackColor, opacity = 1 }) {
         style={{
           position: 'absolute',
           top: '50%', left: '50%',
-          transform: 'translate(-50%, -50%)',
+          transform: 'translate(-50%,-50%)',
           minWidth: '100%', minHeight: '100%',
           objectFit: 'cover',
-          opacity,
-          filter: 'brightness(0.45) saturate(1.3)',
+          filter: `brightness(${brightness}) saturate(0.8)`,
         }}
         volume={0}
       />
@@ -64,134 +65,8 @@ function BgVideo({ src, fallbackColor, opacity = 1 }) {
   );
 }
 
-// ─── Particles ────────────────────────────────────────────────────────────────
-function Particles({ count = 30, frame, startFrame }) {
-  const age = frame - startFrame;
-  return (
-    <svg
-      style={{ position: 'absolute', inset: 0, overflow: 'visible', pointerEvents: 'none' }}
-      width={W} height={H}
-    >
-      {Array.from({ length: count }, (_, i) => {
-        const angle = (i / count) * Math.PI * 2 + i * 0.31;
-        const speed = 6 + (i % 7) * 2.5;
-        const life  = clamp(age / 40, 0, 1);
-        const x     = W / 2 + Math.cos(angle) * speed * age;
-        const y     = H / 2 + Math.sin(angle) * speed * age - 0.5 * age * age * 0.04;
-        const alpha = interpolate(life, [0, 0.3, 1], [0, 1, 0]);
-        const r     = interpolate(life, [0, 0.4, 1], [0, 4 + (i % 4), 1]);
-        const color = i % 3 === 0 ? CYAN : i % 3 === 1 ? AMBER : WHITE;
-        return (
-          <circle key={i} cx={x} cy={y} r={r} fill={color} opacity={alpha} />
-        );
-      })}
-    </svg>
-  );
-}
-
-// ─── RGB Glitch ───────────────────────────────────────────────────────────────
-function GlitchText({ children, style, active }) {
-  if (!active) return <div style={style}>{children}</div>;
-  const shift = 4;
-  return (
-    <div style={{ position: 'relative', ...style }}>
-      <div style={{ position: 'absolute', color: '#ff0040', left: -shift, top: shift, opacity: 0.7 }}>{children}</div>
-      <div style={{ position: 'absolute', color: '#00ffee', left:  shift, top: -shift, opacity: 0.7 }}>{children}</div>
-      <div style={{ position: 'relative' }}>{children}</div>
-    </div>
-  );
-}
-
-// ─── Scene 1: Cold open (frames 0–90) ────────────────────────────────────────
-function Scene1({ frame }) {
-  const wordIn = sp(frame - 20, 0, 1, 10, 260);
-  return (
-    <div style={{ position: 'absolute', inset: 0, background: DARK, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      {/* Vignette */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.85) 100%)',
-      }} />
-      <div style={{
-        fontFamily: "'Bebas Neue', sans-serif",
-        fontSize: 160,
-        lineHeight: 0.95,
-        color: WHITE,
-        textAlign: 'center',
-        letterSpacing: '0.04em',
-        transform: `translateY(${interpolate(wordIn, [0, 1], [60, 0])}px)`,
-        opacity: wordIn,
-        textShadow: `0 0 80px ${CYAN}55`,
-        padding: '0 60px',
-      }}>
-        EVERY<br />
-        <span style={{ color: CYAN }}>MORNING.</span>
-      </div>
-      {/* Bottom rule */}
-      <div style={{
-        position: 'absolute', bottom: 160, left: 0, right: 0,
-        display: 'flex', justifyContent: 'center',
-      }}>
-        <div style={{
-          width: interpolate(frame, [40, 80], [0, 320], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }),
-          height: 2,
-          background: `linear-gradient(90deg, transparent, ${CYAN}, transparent)`,
-        }} />
-      </div>
-    </div>
-  );
-}
-
-// ─── Scene 2: Pain points (frames 90–270) ────────────────────────────────────
-const PAIN_LINES = [
-  { text: 'MOST COACHES', start: 0,  color: WHITE  },
-  { text: 'ARE COACHING BLIND.', start: 22, color: WHITE  },
-  { text: '',                  start: 44, color: WHITE  },
-  { text: 'NO READINESS DATA.', start: 55, color: AMBER  },
-  { text: 'NO LOAD DATA.',       start: 77, color: AMBER  },
-  { text: 'NO PLAN.',            start: 99, color: AMBER  },
-  { text: '',                    start: 120, color: WHITE },
-  { text: 'JUST VIBES.',         start: 131, color: '#ef4444' },
-];
-
-function Scene2({ frame }) {
-  const localFrame = frame - 90;
-  return (
-    <div style={{ position: 'absolute', inset: 0 }}>
-      <BgVideo src={staticFile('footage/boxer.mp4')} fallbackColor="#080d15" />
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(to bottom, rgba(4,7,15,0.6) 0%, rgba(4,7,15,0.3) 50%, rgba(4,7,15,0.8) 100%)',
-      }} />
-      <div style={{
-        position: 'absolute', left: 60, right: 60,
-        top: '50%', transform: 'translateY(-50%)',
-      }}>
-        {PAIN_LINES.filter(l => l.text).map((line, idx) => {
-          const age = localFrame - line.start;
-          const inVal = age >= 0 ? sp(age, 0, 1, 14, 200) : 0;
-          return (
-            <div key={idx} style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: 88,
-              lineHeight: 1.05,
-              color: line.color,
-              letterSpacing: '0.03em',
-              opacity: inVal,
-              transform: `translateX(${interpolate(inVal, [0, 1], [-40, 0])}px)`,
-              marginBottom: 8,
-            }}>
-              {line.text}
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-// ─── Scene 3: Logo reveal + particles (frames 270–450) ───────────────────────
-function LogoMark({ size = 120 }) {
+// ─── Logo (crosshair) ────────────────────────────────────────────────────────
+function LogoMark({ size = 100 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
       <circle cx="45" cy="45" r="43" fill="#0b0d14" stroke="#00D4F0" strokeWidth="1.5" />
@@ -205,56 +80,218 @@ function LogoMark({ size = 120 }) {
   );
 }
 
-function Scene3({ frame }) {
-  const localFrame = frame - 270;
-  const logoScale = sp(clamp(localFrame - 10, 0, 999), 0, 1, 20, 100);
-  const glowVal   = interpolate(localFrame, [20, 60], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const wordIn    = sp(clamp(localFrame - 35, 0, 999), 0, 1, 12, 160);
-  const tagIn     = sp(clamp(localFrame - 55, 0, 999), 0, 1, 14, 140);
-  const doParticles = localFrame > 45 && localFrame < 140;
+// ─── Shared: line-by-line text reveal ────────────────────────────────────────
+function NarrativeLine({ localFrame, startFrame, text, size = 95, color = WHITE, weight = 'normal', align = 'left', tracking = '0.02em', maxWidth }) {
+  const age  = clamp(localFrame - startFrame, 0, 999);
+  const inSp = sp(age, 0, 1, 22, 120);
+  return (
+    <div style={{
+      fontFamily: BEBAS,
+      fontSize: size,
+      lineHeight: 1.05,
+      color,
+      letterSpacing: tracking,
+      textAlign: align,
+      opacity: inSp,
+      transform: `translateY(${interpolate(inSp, [0, 1], [28, 0])}px)`,
+      maxWidth: maxWidth || 'none',
+    }}>
+      {text}
+    </div>
+  );
+}
+
+// ─── ACT 1: The Burden (frames 0–240) ────────────────────────────────────────
+function Act1({ localFrame }) {
+  const vignette = (
+    <div style={{
+      position: 'absolute', inset: 0,
+      background: 'radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.88) 100%)',
+    }} />
+  );
+
+  const bgFade = clamp(localFrame / 15, 0, 1);
+
+  return (
+    <div style={{ position: 'absolute', inset: 0 }}>
+      <BgVideo src={staticFile('footage/boxer.mp4')} brightness={0.15} fallbackColor="#030507" />
+      {vignette}
+
+      <div style={{
+        position: 'absolute', left: 72, right: 72,
+        top: '38%', transform: 'translateY(-50%)',
+        display: 'flex', flexDirection: 'column', gap: 16,
+        opacity: bgFade,
+      }}>
+        <NarrativeLine localFrame={localFrame} startFrame={30}  text="You've been coaching" size={100} />
+        <NarrativeLine localFrame={localFrame} startFrame={30}  text="for years." size={100} color={CYAN} />
+        <div style={{ height: 18 }} />
+        <NarrativeLine localFrame={localFrame} startFrame={95}  text="Every fighter." size={88} />
+        <NarrativeLine localFrame={localFrame} startFrame={118} text="Every camp." size={88} />
+        <div style={{ height: 10 }} />
+        <NarrativeLine localFrame={localFrame} startFrame={162} text="You carry it all." size={128} tracking="0.04em" />
+      </div>
+    </div>
+  );
+}
+
+// ─── ACT 2: The Problem (frames 240–540) ─────────────────────────────────────
+const CHAOS_MSGS = [
+  { text: "Jake: weight stuck at 143.2",      x: 60,  y: 160, rot: -1.2, delay: 10 },
+  { text: "Priya: shoulder feels off tbh",     x: 380, y: 240, rot: 1.5,  delay: 28 },
+  { text: "Marcus: didn't sleep, stressed",    x: 50,  y: 380, rot: -0.8, delay: 46 },
+  { text: "Sparring tomorrow — who's ready?",  x: 300, y: 480, rot: 1.2,  delay: 62 },
+  { text: "Is the cut happening tmrw??",       x: 70,  y: 590, rot: -1.5, delay: 78 },
+];
+
+function ChaosMessages({ localFrame }) {
+  return (
+    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
+      {CHAOS_MSGS.map((m, i) => {
+        const age = clamp(localFrame - m.delay, 0, 999);
+        const inSp = sp(age, 0, 1, 14, 180);
+        return (
+          <div key={i} style={{
+            position: 'absolute',
+            left: m.x, top: m.y,
+            background: 'rgba(0,200,80,0.12)',
+            border: '1px solid rgba(0,200,80,0.25)',
+            borderRadius: 12,
+            padding: '10px 18px',
+            opacity: inSp * 0.35,
+            transform: `rotate(${m.rot}deg) translateY(${interpolate(inSp, [0, 1], [-20, 0])}px)`,
+          }}>
+            <span style={{ fontFamily: MONO, fontSize: 26, color: 'rgba(255,255,255,0.8)' }}>
+              {m.text}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function Act2({ localFrame }) {
+  return (
+    <div style={{ position: 'absolute', inset: 0 }}>
+      <BgVideo src={staticFile('footage/boxer.mp4')} brightness={0.2} fallbackColor="#060810" />
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(to bottom, rgba(4,7,15,0.5) 0%, rgba(4,7,15,0.85) 100%)',
+      }} />
+
+      <ChaosMessages localFrame={localFrame} />
+
+      <div style={{
+        position: 'absolute', left: 72, right: 72,
+        bottom: '28%',
+        display: 'flex', flexDirection: 'column', gap: 14,
+      }}>
+        <NarrativeLine localFrame={localFrame} startFrame={20}  text="But every morning" size={88} />
+        <NarrativeLine localFrame={localFrame} startFrame={20}  text="you wake up guessing." size={88} color={AMBER} />
+        <div style={{ height: 12 }} />
+        <NarrativeLine localFrame={localFrame} startFrame={100} text="Who's ready? Who's not?" size={80} />
+        <NarrativeLine localFrame={localFrame} startFrame={148} text="Is the cut on track?" size={80} />
+        <div style={{ height: 16 }} />
+        <NarrativeLine localFrame={localFrame} startFrame={200} text="You don't know." size={130} color={AMBER} tracking="0.03em" />
+        <NarrativeLine localFrame={localFrame} startFrame={248} text="You never know." size={100} color={RED} />
+      </div>
+    </div>
+  );
+}
+
+// ─── ACT 3: The Shift (frames 540–840) ───────────────────────────────────────
+function Act3({ localFrame }) {
+  const untilNowIn  = sp(clamp(localFrame - 55, 0, 999), 0, 1, 28, 70);
+  const logoScale   = sp(clamp(localFrame - 130, 0, 999), 0, 1, 20, 100);
+  const wordIn      = sp(clamp(localFrame - 160, 0, 999), 0, 1, 14, 140);
+  const tagIn       = sp(clamp(localFrame - 190, 0, 999), 0, 1, 16, 120);
+
+  const glowOp = interpolate(localFrame, [120, 200], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+
+  // Particle burst after logo appears
+  const doParticles = localFrame > 135 && localFrame < 230;
+  const age = localFrame - 136;
 
   return (
     <div style={{ position: 'absolute', inset: 0, background: DARK, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+
       {/* Radial glow */}
       <div style={{
         position: 'absolute',
-        width: 600, height: 600,
+        width: 700, height: 700,
         borderRadius: '50%',
-        background: `radial-gradient(circle, ${CYAN}22 0%, transparent 70%)`,
-        opacity: glowVal,
+        background: `radial-gradient(circle, ${CYAN}18 0%, transparent 65%)`,
+        opacity: glowOp,
         top: '50%', left: '50%',
-        transform: 'translate(-50%, -50%)',
+        transform: 'translate(-50%,-50%)',
       }} />
 
-      {doParticles && <Particles count={30} frame={localFrame} startFrame={46} />}
+      {/* Particles */}
+      {doParticles && (
+        <svg style={{ position: 'absolute', inset: 0, overflow: 'visible', pointerEvents: 'none' }} width={W} height={H}>
+          {Array.from({ length: 28 }, (_, i) => {
+            const angle = (i / 28) * Math.PI * 2 + i * 0.28;
+            const speed = 5 + (i % 6) * 2.8;
+            const life  = clamp(age / 45, 0, 1);
+            const x     = W / 2 + Math.cos(angle) * speed * age;
+            const y     = H / 2 + Math.sin(angle) * speed * age - 0.018 * age * age;
+            const alpha = interpolate(life, [0, 0.25, 1], [0, 1, 0]);
+            const r     = interpolate(life, [0, 0.4, 1], [0, 3 + (i % 4), 1]);
+            const col   = i % 3 === 0 ? CYAN : i % 3 === 1 ? AMBER : WHITE;
+            return <circle key={i} cx={x} cy={y} r={r} fill={col} opacity={alpha} />;
+          })}
+        </svg>
+      )}
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
-        {/* Logo — own spring, completely static otherwise */}
+      {/* "Until now." */}
+      <div style={{
+        position: 'absolute',
+        top: '30%',
+        left: 0, right: 0,
+        textAlign: 'center',
+        fontFamily: BEBAS,
+        fontSize: 180,
+        color: WHITE,
+        letterSpacing: '0.04em',
+        opacity: untilNowIn,
+        transform: `translateY(${interpolate(untilNowIn, [0, 1], [40, 0])}px)`,
+        textShadow: `0 0 120px ${WHITE}22`,
+      }}>
+        Until now.
+      </div>
+
+      {/* Logo + wordmark */}
+      <div style={{
+        position: 'absolute',
+        bottom: '28%',
+        left: 0, right: 0,
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28,
+      }}>
         <div style={{
           transform: `scale(${logoScale})`,
           filter: 'drop-shadow(0 0 30px rgba(0,212,240,0.6))',
         }}>
           <LogoMark size={120} />
         </div>
-
         <div style={{
-          fontFamily: "'Bebas Neue', sans-serif",
-          fontSize: 130,
-          letterSpacing: '0.06em',
+          fontFamily: BEBAS,
+          fontSize: 120,
+          letterSpacing: '0.07em',
           color: WHITE,
           opacity: wordIn,
-          transform: `translateY(${interpolate(wordIn, [0, 1], [20, 0])}px)`,
-          textShadow: `0 0 60px ${CYAN}66`,
+          transform: `translateY(${interpolate(wordIn, [0, 1], [18, 0])}px)`,
+          textShadow: `0 0 60px ${CYAN}55`,
         }}>
           STRIKE<span style={{ color: CYAN }}>PANEL</span>
         </div>
         <div style={{
-          fontFamily: "'DM Mono', monospace",
-          fontSize: 26,
-          letterSpacing: '0.35em',
+          fontFamily: MONO,
+          fontSize: 24,
+          letterSpacing: '0.3em',
           color: CYAN,
           opacity: tagIn,
-          transform: `translateY(${interpolate(tagIn, [0, 1], [12, 0])}px)`,
+          transform: `translateY(${interpolate(tagIn, [0, 1], [10, 0])}px)`,
         }}>
           TRAINING INTELLIGENCE
         </div>
@@ -263,63 +300,57 @@ function Scene3({ frame }) {
   );
 }
 
-// ─── Scene 4: Widget demo (frames 450–720) ───────────────────────────────────
-function MiniWidget({ frame, localFrame }) {
-  const athletes = [
-    { name: 'Priya',  score: 91, color: '#10b981', badge: 'Push Hard' },
-    { name: 'Jake',   score: 74, color: CYAN,       badge: 'Train Normal' },
-    { name: 'Marcus', score: 38, color: '#ef4444',  badge: 'Rest Day' },
-  ];
+// ─── ACT 4: The Product (frames 840–1350) ────────────────────────────────────
+const ATHLETES = [
+  { name: 'Priya',  score: 91, color: GREEN, badge: 'Push Hard' },
+  { name: 'Jake',   score: 74, color: CYAN,  badge: 'Train Normal' },
+  { name: 'Marcus', score: 38, color: RED,   badge: 'Rest Day' },
+];
 
-  const widgetIn = sp(clamp(localFrame - 20, 0, 999), 0, 1, 14, 160);
+function MorningBriefWidget({ localFrame }) {
+  const widgetIn = sp(clamp(localFrame - 10, 0, 999), 0, 1, 16, 140);
 
   return (
     <div style={{
-      background: 'rgba(4, 7, 15, 0.88)',
-      border: `1px solid ${CYAN}44`,
-      borderRadius: 24,
-      padding: '32px 36px',
-      width: 520,
-      backdropFilter: 'blur(20px)',
-      transform: `translateX(${interpolate(widgetIn, [0, 1], [80, 0])}px)`,
+      background: 'rgba(4,7,15,0.92)',
+      border: `1px solid ${CYAN}55`,
+      borderRadius: 28,
+      padding: '36px 42px',
+      width: 580,
+      boxShadow: `0 0 80px ${CYAN}1A`,
       opacity: widgetIn,
-      boxShadow: `0 0 60px ${CYAN}22`,
+      transform: `translateX(${interpolate(widgetIn, [0, 1], [60, 0])}px)`,
     }}>
-      <div style={{
-        fontFamily: "'DM Mono', monospace",
-        fontSize: 18,
-        color: CYAN,
-        letterSpacing: '0.3em',
-        marginBottom: 24,
-        opacity: 0.8,
-      }}>
-        MORNING BRIEF
+      <div style={{ fontFamily: MONO, fontSize: 18, color: CYAN, letterSpacing: '0.3em', marginBottom: 28, opacity: 0.8 }}>
+        ◎ MORNING BRIEF
       </div>
-      {athletes.map((a, i) => {
-        const rowIn = sp(clamp(localFrame - 40 - i * 15, 0, 999), 0, 1, 14, 180);
+      {ATHLETES.map((a, i) => {
+        const rowIn = sp(clamp(localFrame - 30 - i * 18, 0, 999), 0, 1, 16, 170);
         const scoreVal = Math.round(interpolate(
-          clamp(localFrame - 60, 0, 50),
-          [0, 50], [0, a.score],
+          clamp(localFrame - 55, 0, 55),
+          [0, 55], [0, a.score],
           { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.out(Easing.quad) },
         ));
         const barFill = interpolate(
-          clamp(localFrame - 60, 0, 60),
-          [0, 60], [0, a.score],
+          clamp(localFrame - 55, 0, 65),
+          [0, 65], [0, a.score],
           { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' },
         );
-
         return (
           <div key={a.name} style={{
-            marginBottom: 20,
+            marginBottom: 24,
             opacity: rowIn,
-            transform: `translateX(${interpolate(rowIn, [0, 1], [-30, 0])}px)`,
+            transform: `translateX(${interpolate(rowIn, [0, 1], [-24, 0])}px)`,
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8, alignItems: 'center' }}>
-              <span style={{ fontFamily: "'DM Mono', monospace", color: WHITE, fontSize: 20 }}>{a.name}</span>
-              <span style={{ fontFamily: "'Bebas Neue', sans-serif", color: a.color, fontSize: 36, lineHeight: 1 }}>{scoreVal}</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 10 }}>
+              <span style={{ fontFamily: MONO, color: WHITE, fontSize: 22 }}>{a.name}</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <span style={{ fontFamily: MONO, fontSize: 18, color: a.color, letterSpacing: '0.15em' }}>{a.badge}</span>
+                <span style={{ fontFamily: BEBAS, color: a.color, fontSize: 44, lineHeight: 1 }}>{scoreVal}</span>
+              </div>
             </div>
-            <div style={{ height: 6, background: 'rgba(255,255,255,0.1)', borderRadius: 3 }}>
-              <div style={{ height: '100%', width: `${barFill}%`, background: a.color, borderRadius: 3 }} />
+            <div style={{ height: 7, background: 'rgba(255,255,255,0.08)', borderRadius: 4 }}>
+              <div style={{ height: '100%', width: `${barFill}%`, background: a.color, borderRadius: 4 }} />
             </div>
           </div>
         );
@@ -328,224 +359,221 @@ function MiniWidget({ frame, localFrame }) {
   );
 }
 
-function Scene4({ frame }) {
-  const localFrame = frame - 450;
-  const textIn1 = sp(clamp(localFrame - 130, 0, 999), 0, 1, 12, 180);
-  const textIn2 = sp(clamp(localFrame - 160, 0, 999), 0, 1, 12, 180);
-
-  return (
-    <div style={{ position: 'absolute', inset: 0 }}>
-      <BgVideo src={staticFile('footage/boxer.mp4')} fallbackColor="#06101a" />
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(135deg, rgba(4,7,15,0.7) 0%, rgba(0,212,240,0.08) 100%)',
-      }} />
-      <div style={{
-        position: 'absolute', inset: 0,
-        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-        gap: 48, padding: '0 60px',
-      }}>
-        <MiniWidget frame={frame} localFrame={localFrame} />
-        <div style={{ textAlign: 'center' }}>
-          <div style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: 96,
-            color: WHITE,
-            letterSpacing: '0.04em',
-            lineHeight: 1,
-            opacity: textIn1,
-            transform: `translateY(${interpolate(textIn1, [0, 1], [30, 0])}px)`,
-          }}>
-            KNOW WHO TO PUSH.
-          </div>
-          <div style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: 96,
-            color: AMBER,
-            letterSpacing: '0.04em',
-            lineHeight: 1,
-            opacity: textIn2,
-            transform: `translateY(${interpolate(textIn2, [0, 1], [30, 0])}px)`,
-          }}>
-            KNOW WHO TO PROTECT.
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ─── Scene 5: Feature flash cuts (frames 720–810) ────────────────────────────
-const FEATURES = [
-  { text: 'MORNING BRIEF',       sub: 'Daily athlete readiness',   color: CYAN        },
-  { text: 'FIGHT CAMP',          sub: 'Camp load & phase tracking', color: AMBER       },
-  { text: 'WEIGHT CUT PLANNER',  sub: 'Cut timeline & safety',     color: '#10b981'   },
-  { text: 'AI SESSIONS',         sub: 'Auto-generated session plans', color: '#8b5cf6' },
-];
-
-function Scene5({ frame }) {
-  const localFrame = frame - 720;
-  const cutLen = 22;
-  const cutIdx = Math.floor(localFrame / cutLen);
-  const cutAge = localFrame % cutLen;
-  const feat = FEATURES[clamp(cutIdx, 0, FEATURES.length - 1)];
-  const isGlitch = cutAge < 4;
-
-  const fadeIn = interpolate(cutAge, [0, 4], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-
-  return (
-    <div style={{ position: 'absolute', inset: 0 }}>
-      <BgVideo src={staticFile('footage/boxer.mp4')} fallbackColor="#080c14" />
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'rgba(4,7,15,0.55)',
-      }} />
-      <div style={{
-        position: 'absolute', inset: 0,
-        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-        gap: 16,
-      }}>
-        <GlitchText
-          active={isGlitch}
-          style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: 120,
-            color: feat.color,
-            letterSpacing: '0.04em',
-            lineHeight: 1,
-            opacity: fadeIn,
-            textShadow: `0 0 40px ${feat.color}88`,
-          }}
-        >
-          {feat.text}
-        </GlitchText>
-        <div style={{
-          fontFamily: "'DM Mono', monospace",
-          fontSize: 28,
-          color: 'rgba(255,255,255,0.6)',
-          letterSpacing: '0.2em',
-          opacity: fadeIn,
-        }}>
-          {feat.sub}
-        </div>
-      </div>
-      {/* Scan line on glitch */}
-      {isGlitch && (
-        <div style={{
-          position: 'absolute', left: 0, right: 0,
-          top: `${20 + (cutAge * 8)}%`,
-          height: 3,
-          background: `${feat.color}88`,
-        }} />
-      )}
-    </div>
-  );
-}
-
-// ─── Scene 6: CTA (frames 810–900) ───────────────────────────────────────────
-function Scene6({ frame }) {
-  const localFrame = frame - 810;
-
-  const bgIn  = interpolate(localFrame, [0, 20], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const p1In  = sp(clamp(localFrame - 10, 0, 999), 0, 1, 12, 180);
-  const p2In  = sp(clamp(localFrame - 28, 0, 999), 0, 1, 12, 180);
-  const p3In  = sp(clamp(localFrame - 46, 0, 999), 0, 1, 12, 180);
-  const ctaIn = sp(clamp(localFrame - 60, 0, 999), 0, 1, 10, 200);
-
-  const price = Math.round(interpolate(
-    clamp(localFrame - 15, 0, 35),
-    [0, 35], [0, 99],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.out(Easing.cubic) },
-  ));
+function FightCampCard({ localFrame }) {
+  const cardIn = sp(clamp(localFrame - 230, 0, 999), 0, 1, 16, 140);
+  const barW   = interpolate(clamp(localFrame - 250, 0, 60), [0, 60], [0, 78], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
   return (
     <div style={{
-      position: 'absolute', inset: 0,
-      background: DARK,
-      opacity: bgIn,
-      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-      gap: 0,
+      background: 'rgba(4,7,15,0.88)',
+      border: `1px solid ${AMBER}44`,
+      borderRadius: 20,
+      padding: '28px 38px',
+      width: 580,
+      opacity: cardIn,
+      transform: `translateX(${interpolate(cardIn, [0, 1], [60, 0])}px)`,
     }}>
-      {/* Cyan top bar */}
-      <div style={{
-        position: 'absolute', top: 0, left: 0, right: 0, height: 6,
-        background: CYAN,
-        scaleX: p1In,
-        transformOrigin: 'left',
-      }} />
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+        <span style={{ fontFamily: MONO, fontSize: 18, color: AMBER, letterSpacing: '0.25em' }}>FIGHT CAMP</span>
+        <span style={{ fontFamily: BEBAS, fontSize: 28, color: WHITE, letterSpacing: '0.1em' }}>DAY 18 / 23</span>
+      </div>
+      <div style={{ height: 8, background: 'rgba(255,255,255,0.08)', borderRadius: 4, marginBottom: 14 }}>
+        <div style={{ height: '100%', width: `${barW}%`, background: AMBER, borderRadius: 4 }} />
+      </div>
+      <div style={{ fontFamily: MONO, fontSize: 20, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.15em' }}>
+        5 DAYS TO WEIGH-IN
+      </div>
+    </div>
+  );
+}
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 40 }}>
-        {/* Price */}
+function Act4({ localFrame }) {
+  const txt1In = sp(clamp(localFrame - 110, 0, 999), 0, 1, 18, 130);
+  const txt2In = sp(clamp(localFrame - 148, 0, 999), 0, 1, 18, 130);
+  const txt3In = sp(clamp(localFrame - 186, 0, 999), 0, 1, 18, 130);
+  const txt4In = sp(clamp(localFrame - 320, 0, 999), 0, 1, 18, 130);
+
+  return (
+    <div style={{ position: 'absolute', inset: 0 }}>
+      <BgVideo src={staticFile('footage/boxer.mp4')} brightness={0.18} fallbackColor="#05080f" />
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: `linear-gradient(160deg, rgba(4,7,15,0.72) 0%, rgba(0,212,240,0.06) 100%)`,
+      }} />
+      <div style={{
+        position: 'absolute', inset: 0,
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
+        gap: 36, padding: '0 72px',
+      }}>
+        <MorningBriefWidget localFrame={localFrame} />
+
+        <div style={{ width: 580, display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{
+            fontFamily: BEBAS, fontSize: 82, color: WHITE, letterSpacing: '0.03em', lineHeight: 1.05,
+            opacity: txt1In, transform: `translateY(${interpolate(txt1In, [0, 1], [20, 0])}px)`,
+          }}>
+            Every athlete. Scored.
+          </div>
+          <div style={{
+            fontFamily: BEBAS, fontSize: 82, color: WHITE, letterSpacing: '0.03em', lineHeight: 1.05,
+            opacity: txt2In, transform: `translateY(${interpolate(txt2In, [0, 1], [20, 0])}px)`,
+          }}>
+            Every morning.
+          </div>
+          <div style={{
+            fontFamily: BEBAS, fontSize: 68, color: CYAN, letterSpacing: '0.03em', lineHeight: 1.05,
+            opacity: txt3In, transform: `translateY(${interpolate(txt3In, [0, 1], [20, 0])}px)`,
+          }}>
+            Before you leave the house.
+          </div>
+        </div>
+
+        <FightCampCard localFrame={localFrame} />
+
         <div style={{
-          opacity: p1In,
-          transform: `translateY(${interpolate(p1In, [0, 1], [40, 0])}px)`,
+          fontFamily: BEBAS, fontSize: 90, color: WHITE, letterSpacing: '0.04em',
+          opacity: txt4In, transform: `translateY(${interpolate(txt4In, [0, 1], [20, 0])}px)`,
           textAlign: 'center',
         }}>
-          <div style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: 200,
-            color: CYAN,
-            lineHeight: 0.85,
-            letterSpacing: '0.02em',
-            textShadow: `0 0 100px ${CYAN}66`,
-          }}>
-            ${price}
-          </div>
-          <div style={{
-            fontFamily: "'DM Mono', monospace",
-            fontSize: 22,
-            color: 'rgba(255,255,255,0.5)',
-            letterSpacing: '0.25em',
-          }}>
-            ONE-TIME
-          </div>
-        </div>
-
-        {/* No sub */}
-        <div style={{
-          fontFamily: "'Bebas Neue', sans-serif",
-          fontSize: 64,
-          color: AMBER,
-          letterSpacing: '0.04em',
-          opacity: p2In,
-          transform: `translateY(${interpolate(p2In, [0, 1], [20, 0])}px)`,
-        }}>
-          NO SUBSCRIPTION. EVER.
-        </div>
-
-        {/* URL */}
-        <div style={{
-          fontFamily: "'DM Mono', monospace",
-          fontSize: 30,
-          color: 'rgba(255,255,255,0.45)',
-          letterSpacing: '0.18em',
-          opacity: p3In,
-        }}>
-          strikepanel.vercel.app/demo
-        </div>
-
-        {/* CTA button */}
-        <div style={{
-          marginTop: 24,
-          border: `2px solid ${CYAN}`,
-          borderRadius: 60,
-          padding: '20px 64px',
-          opacity: ctaIn,
-          transform: `scale(${interpolate(ctaIn, [0, 1], [0.85, 1])})`,
-          boxShadow: `0 0 40px ${CYAN}44`,
-        }}>
-          <span style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: 44,
-            color: WHITE,
-            letterSpacing: '0.12em',
-          }}>
-            GET EARLY ACCESS
-          </span>
+          Your whole camp.<br />
+          <span style={{ color: CYAN }}>One place.</span>
         </div>
       </div>
     </div>
   );
+}
+
+// ─── ACT 5: The Result (frames 1350–1650) ────────────────────────────────────
+const RESULT_ATHLETES = [
+  { name: 'Priya',  call: 'Push hard.',    color: GREEN },
+  { name: 'Jake',   call: 'Train normal.', color: CYAN  },
+  { name: 'Marcus', call: 'Rest day.',     color: RED   },
+];
+
+function Act5({ localFrame }) {
+  const knewIn = sp(clamp(localFrame - 240, 0, 999), 0, 1, 22, 90);
+
+  return (
+    <div style={{ position: 'absolute', inset: 0, background: '#020509', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'radial-gradient(ellipse at center, rgba(0,212,240,0.04) 0%, transparent 70%)',
+      }} />
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 0, padding: '0 72px', width: '100%' }}>
+        {RESULT_ATHLETES.map((a, i) => {
+          const rowIn = sp(clamp(localFrame - i * 60, 0, 999), 0, 1, 18, 140);
+          return (
+            <div key={a.name} style={{
+              display: 'flex', alignItems: 'baseline', gap: 24,
+              borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+              paddingBottom: 32, marginBottom: 32,
+              opacity: rowIn,
+              transform: `translateX(${interpolate(rowIn, [0, 1], [-50, 0])}px)`,
+            }}>
+              <span style={{ fontFamily: BEBAS, fontSize: 130, color: WHITE, letterSpacing: '0.04em', lineHeight: 1, flex: 1 }}>
+                {a.name}
+              </span>
+              <span style={{ fontFamily: MONO, fontSize: 30, color: a.color, letterSpacing: '0.15em', lineHeight: 1 }}>
+                {a.call}
+              </span>
+            </div>
+          );
+        })}
+
+        <div style={{
+          marginTop: 24,
+          fontFamily: BEBAS,
+          fontSize: 110,
+          color: WHITE,
+          letterSpacing: '0.03em',
+          lineHeight: 1.05,
+          opacity: knewIn,
+          transform: `translateY(${interpolate(knewIn, [0, 1], [30, 0])}px)`,
+          textShadow: `0 0 80px ${WHITE}22`,
+        }}>
+          You already knew.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── ACT 6: CTA (frames 1650–1800) ───────────────────────────────────────────
+function Act6({ localFrame }) {
+  const logoScale = sp(clamp(localFrame - 5, 0, 999), 0, 1, 20, 100);
+  const wordIn    = sp(clamp(localFrame - 25, 0, 999), 0, 1, 16, 140);
+  const l1In      = sp(clamp(localFrame - 48, 0, 999), 0, 1, 16, 140);
+  const l2In      = sp(clamp(localFrame - 66, 0, 999), 0, 1, 16, 140);
+  const priceIn   = sp(clamp(localFrame - 86, 0, 999), 0, 1, 14, 160);
+
+  const topBar = interpolate(localFrame, [0, 18], [0, 1080], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+
+  return (
+    <div style={{ position: 'absolute', inset: 0, background: DARK, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      {/* Top cyan bar */}
+      <div style={{ position: 'absolute', top: 0, left: 0, height: 5, width: topBar, background: CYAN }} />
+
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28 }}>
+        <div style={{
+          transform: `scale(${logoScale})`,
+          filter: 'drop-shadow(0 0 30px rgba(0,212,240,0.5))',
+        }}>
+          <LogoMark size={90} />
+        </div>
+
+        <div style={{
+          fontFamily: BEBAS, fontSize: 110, letterSpacing: '0.06em', color: WHITE,
+          opacity: wordIn, transform: `translateY(${interpolate(wordIn, [0, 1], [16, 0])}px)`,
+          textShadow: `0 0 50px ${CYAN}44`,
+        }}>
+          STRIKE<span style={{ color: CYAN }}>PANEL™</span>
+        </div>
+
+        <div style={{
+          fontFamily: BEBAS, fontSize: 72, color: WHITE, letterSpacing: '0.03em',
+          opacity: l1In, transform: `translateY(${interpolate(l1In, [0, 1], [14, 0])}px)`,
+          textAlign: 'center',
+        }}>
+          Know who to push.
+        </div>
+        <div style={{
+          fontFamily: BEBAS, fontSize: 72, color: CYAN, letterSpacing: '0.03em',
+          opacity: l2In, transform: `translateY(${interpolate(l2In, [0, 1], [14, 0])}px)`,
+          textAlign: 'center',
+        }}>
+          Know who to protect.
+        </div>
+
+        <div style={{
+          fontFamily: MONO, fontSize: 28, color: AMBER, letterSpacing: '0.18em',
+          opacity: priceIn, transform: `translateY(${interpolate(priceIn, [0, 1], [10, 0])}px)`,
+          textAlign: 'center',
+          marginTop: 12,
+        }}>
+          $99. Once. Yours forever.
+        </div>
+
+        <div style={{
+          fontFamily: MONO, fontSize: 22, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.2em',
+          opacity: priceIn,
+          marginTop: 4,
+        }}>
+          strikepanel.vercel.app/demo
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Flash cut between acts ───────────────────────────────────────────────────
+function FlashCut({ localFrame, durationIn = 6, durationOut = 6 }) {
+  const opacity = localFrame < durationIn
+    ? interpolate(localFrame, [0, durationIn], [1, 0])
+    : 0;
+  if (opacity <= 0) return null;
+  return <div style={{ position: 'absolute', inset: 0, background: DARK, opacity, zIndex: 10, pointerEvents: 'none' }} />;
 }
 
 // ─── Root composition ─────────────────────────────────────────────────────────
@@ -560,17 +588,12 @@ export function CinematicAd() {
   }, [handle]);
 
   return (
-    <div style={{
-      width: W, height: H,
-      background: DARK,
-      overflow: 'hidden',
-      fontFamily: "'Bebas Neue', sans-serif",
-    }}>
-      {/* Global film grain */}
+    <div style={{ width: W, height: H, background: DARK, overflow: 'hidden' }}>
+      {/* Film grain */}
       <svg style={{ position: 'absolute', width: 0, height: 0 }}>
         <defs>
           <filter id="grain">
-            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch" />
+            <feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="4" stitchTiles="stitch" />
             <feColorMatrix type="saturate" values="0" />
             <feBlend in="SourceGraphic" mode="overlay" />
           </filter>
@@ -578,28 +601,38 @@ export function CinematicAd() {
       </svg>
       <div style={{
         position: 'absolute', inset: 0, zIndex: 99, pointerEvents: 'none',
-        filter: 'url(#grain)', opacity: 0.04,
-        background: WHITE,
+        filter: 'url(#grain)', opacity: 0.045, background: WHITE,
       }} />
 
-      {/* Scenes */}
-      <Sequence from={0}   durationInFrames={90}>
-        <Scene1 frame={frame} />
+      {/* Acts */}
+      <Sequence from={0}    durationInFrames={240}>
+        <Act1 localFrame={frame - 0} />
+        <FlashCut localFrame={frame - 0} />
       </Sequence>
-      <Sequence from={90}  durationInFrames={180}>
-        <Scene2 frame={frame} />
+
+      <Sequence from={240}  durationInFrames={300}>
+        <Act2 localFrame={frame - 240} />
+        <FlashCut localFrame={frame - 240} />
       </Sequence>
-      <Sequence from={270} durationInFrames={180}>
-        <Scene3 frame={frame} />
+
+      <Sequence from={540}  durationInFrames={300}>
+        <Act3 localFrame={frame - 540} />
+        <FlashCut localFrame={frame - 540} />
       </Sequence>
-      <Sequence from={450} durationInFrames={270}>
-        <Scene4 frame={frame} />
+
+      <Sequence from={840}  durationInFrames={510}>
+        <Act4 localFrame={frame - 840} />
+        <FlashCut localFrame={frame - 840} />
       </Sequence>
-      <Sequence from={720} durationInFrames={90}>
-        <Scene5 frame={frame} />
+
+      <Sequence from={1350} durationInFrames={300}>
+        <Act5 localFrame={frame - 1350} />
+        <FlashCut localFrame={frame - 1350} />
       </Sequence>
-      <Sequence from={810} durationInFrames={90}>
-        <Scene6 frame={frame} />
+
+      <Sequence from={1650} durationInFrames={150}>
+        <Act6 localFrame={frame - 1650} />
+        <FlashCut localFrame={frame - 1650} />
       </Sequence>
     </div>
   );
