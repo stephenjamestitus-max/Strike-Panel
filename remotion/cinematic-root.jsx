@@ -6,7 +6,7 @@ const Root = () => (
   <Composition
     id="CinematicAd"
     component={CinematicAd}
-    durationInFrames={1800}
+    durationInFrames={1170}
     fps={30}
     width={1080}
     height={1920}
