@@ -47,16 +47,17 @@ class VideoFallback extends React.Component {
   }
 }
 
-function BgVideo({ src, brightness = 0.2, contrast = 1.1, saturate = 0.85, fallbackColor }) {
+function BgVideo({ src, brightness = 0.2, contrast = 1.1, saturate = 0.85, sepia = 0, fallbackColor, transformExtra = '' }) {
+  const filterStr = `brightness(${brightness}) contrast(${contrast}) saturate(${saturate})${sepia > 0 ? ` sepia(${sepia})` : ''}`;
   return (
     <VideoFallback fallbackColor={fallbackColor}>
       <OffthreadVideo
         src={src}
         style={{
           position: 'absolute', top: '50%', left: '50%',
-          transform: 'translate(-50%,-50%)',
+          transform: `translate(-50%,-50%) ${transformExtra}`,
           minWidth: '100%', minHeight: '100%', objectFit: 'cover',
-          filter: `brightness(${brightness}) contrast(${contrast}) saturate(${saturate})`,
+          filter: filterStr,
         }}
         volume={0}
       />
@@ -153,7 +154,7 @@ function Scene1({ lf }) {
 
   return (
     <div style={{ position: 'absolute', inset: 0 }}>
-      <BgVideo src={staticFile('footage/fighter-prep.mp4')} brightness={0.3} contrast={1.35} saturate={0.65} fallbackColor="#06080f" />
+      <BgVideo src={staticFile('footage/fighter-prep.mp4')} brightness={0.55} contrast={1.3} saturate={0.85} sepia={0.4} fallbackColor="#06080f" />
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(4,7,15,0.5) 0%, rgba(4,7,15,0.1) 50%, rgba(4,7,15,0.75) 100%)' }} />
       <Scanlines opacity={0.04} />
       <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -174,12 +175,24 @@ function Scene1({ lf }) {
 
 // ━━━ SCENE 2 — THE PROBLEM (120–300, 4–10s) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Three 60-frame cuts, each with its own footage and text
-function S2Cut({ lf, videoSrc, text, brightness, contrast }) {
+function S2Cut({ lf, videoSrc, text, brightness, contrast, saturate = 0.7, motion }) {
   const textSp = sp(clamp(lf - 8, 0, 999), 0, 1, 14, 180);
+
+  let transformExtra = '';
+  if (motion === 'zoom-in') {
+    const s = interpolate(lf, [0, 60], [1.0, 1.08], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+    transformExtra = `scale(${s})`;
+  } else if (motion === 'pan-left') {
+    const tx = interpolate(lf, [0, 60], [0, -30], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+    transformExtra = `translateX(${tx}px)`;
+  } else if (motion === 'zoom-out') {
+    const s = interpolate(lf, [0, 60], [1.1, 1.0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+    transformExtra = `scale(${s})`;
+  }
 
   return (
     <div style={{ position: 'absolute', inset: 0 }}>
-      <BgVideo src={staticFile(videoSrc)} brightness={brightness} contrast={contrast} saturate={0.75} fallbackColor="#060810" />
+      <BgVideo src={staticFile(videoSrc)} brightness={brightness} contrast={contrast} saturate={saturate} fallbackColor="#060810" transformExtra={transformExtra} />
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(4,7,15,0.65) 0%, rgba(4,7,15,0.2) 50%, rgba(4,7,15,0.85) 100%)' }} />
       <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse at center, transparent 35%, rgba(245,158,11,0.07) 100%)` }} />
       <Scanlines opacity={0.05} />
@@ -212,7 +225,7 @@ function Scene3({ lf }) {
   return (
     <div style={{ position: 'absolute', inset: 0, background: DARK }}>
       <div style={{ position: 'absolute', inset: 0, opacity: videoOp }}>
-        <BgVideo src={staticFile('footage/mma-training.mp4')} brightness={0.22} contrast={1.2} fallbackColor="#04070f" />
+        <BgVideo src={staticFile('footage/mma-training.mp4')} brightness={0.50} contrast={1.5} saturate={0.3} fallbackColor="#04070f" />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(4,7,15,0.4) 0%, rgba(4,7,15,0.1) 50%, rgba(4,7,15,0.65) 100%)' }} />
       </div>
       <div style={{
@@ -429,7 +442,7 @@ function Scene5({ lf }) {
 
   return (
     <div style={{ position: 'absolute', inset: 0 }}>
-      <BgVideo src={staticFile('footage/gym-dark.mp4')} brightness={0.1} contrast={1.15} saturate={0.55} fallbackColor="#050810" />
+      <BgVideo src={staticFile('footage/gym-dark.mp4')} brightness={0.20} contrast={1.15} saturate={0.55} fallbackColor="#050810" />
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(4,7,15,0.88) 0%, rgba(4,7,15,0.35) 50%, rgba(4,7,15,0.88) 100%)' }} />
       <Scanlines opacity={0.035} />
       {showA && (
@@ -464,8 +477,8 @@ function Scene6({ lf }) {
 
   return (
     <div style={{ position: 'absolute', inset: 0, opacity: fadeAll }}>
-      {!showMMA && <BgVideo src={staticFile('footage/fighter-rest.mp4')} brightness={0.2} contrast={1.05} fallbackColor="#04070a" />}
-      {showMMA  && <BgVideo src={staticFile('footage/mma-training.mp4')} brightness={0.25} contrast={1.15} saturate={0.85} fallbackColor="#04070a" />}
+      {!showMMA && <BgVideo src={staticFile('footage/fighter-rest.mp4')} brightness={0.50} contrast={1.3} saturate={0.85} sepia={0.2} fallbackColor="#04070a" />}
+      {showMMA  && <BgVideo src={staticFile('footage/mma-training.mp4')} brightness={0.55} contrast={1.3} saturate={0.85} sepia={0.2} fallbackColor="#04070a" />}
       <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, transparent 25%, rgba(245,158,11,0.08) 100%)' }} />
       <Scanlines opacity={0.04} />
       <CutFlash lf={lf} at={cutAt} />
@@ -579,13 +592,13 @@ export function Trailer() {
 
       {/* S2: The Problem — 3 cuts */}
       <Sequence from={120} durationInFrames={60}>
-        <S2Cut lf={frame - 120} videoSrc="footage/boxer-bag.mp4"    text="COACHES WALK IN BLIND."     brightness={0.25} contrast={1.25} />
+        <S2Cut lf={frame - 120} videoSrc="footage/boxer-bag.mp4"    text="COACHES WALK IN BLIND."   brightness={0.60} contrast={1.4} motion="zoom-in"  />
       </Sequence>
       <Sequence from={180} durationInFrames={60}>
-        <S2Cut lf={frame - 180} videoSrc="footage/coach.mp4"        text="GUESSING WHO'S READY."      brightness={0.3}  contrast={1.2}  />
+        <S2Cut lf={frame - 180} videoSrc="footage/coach.mp4"        text="GUESSING WHO'S READY."    brightness={0.50} contrast={1.4} motion="pan-left" />
       </Sequence>
       <Sequence from={240} durationInFrames={60}>
-        <S2Cut lf={frame - 240} videoSrc="footage/fighter-rest.mp4" text="GUESSING WHO NEEDS REST."   brightness={0.25} contrast={1.15} />
+        <S2Cut lf={frame - 240} videoSrc="footage/fighter-rest.mp4" text="GUESSING WHO NEEDS REST." brightness={0.45} contrast={1.4} motion="zoom-out" />
       </Sequence>
 
       {/* S3: The Silence — mma-training.mp4 */}
