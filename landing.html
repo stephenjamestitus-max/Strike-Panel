@@ -567,7 +567,7 @@ footer{
 ══════════════════════════════════════════════════ -->
 <section id="hero">
   <div
-    data-us-project="gnk7RazQJP6HsLOZsyc9"
+    id="unicorn-hero"
     style="position:absolute;inset:0;width:100%;height:100%;z-index:0;"
   ></div>
 
@@ -1170,6 +1170,18 @@ ScrollTrigger.create({
 
 </script>
 <script src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.12/dist/unicornStudio.umd.js"></script>
-<script>UnicornStudio.init();</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  UnicornStudio.addScene({
+    elementId: 'unicorn-hero',
+    projectId: 'gnk7RazQJP6HsLOZsyc9',
+    scale: 0.5,
+    dpi: 1,
+    fps: 30,
+    lazyLoad: true,
+    production: true
+  });
+});
+</script>
 </body>
 </html>
