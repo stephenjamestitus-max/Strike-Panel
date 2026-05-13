@@ -1,6 +1,13 @@
 {
   "dependencies": {
-    "puppeteer": "^24.42.0"
+    "@remotion/bundler": "^4.0.460",
+    "@remotion/google-fonts": "^4.0.460",
+    "@remotion/renderer": "^4.0.460",
+    "playwright": "^1.60.0",
+    "puppeteer": "^24.42.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "remotion": "^4.0.460"
   },
   "devDependencies": {
     "serve-handler": "^6.1.7"
