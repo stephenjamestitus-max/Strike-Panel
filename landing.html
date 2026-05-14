@@ -566,7 +566,7 @@ footer{
      HERO
 ══════════════════════════════════════════════════ -->
 <section id="hero">
-  <canvas id="xray-canvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;"></canvas>
+  <canvas id="xray-canvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block;"></canvas>
   <div id="xray-hint" style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(0,212,240,0.7);font-family:monospace;font-size:11px;letter-spacing:4px;pointer-events:none;text-transform:uppercase;transition:opacity 1.5s;z-index:4;">// MOVE CURSOR TO REVEAL</div>
 
   <div class="motes" id="motes" aria-hidden="true" style="pointer-events:none;"></div>
@@ -1170,7 +1170,7 @@ ScrollTrigger.create({
 <script>
 /* ── X-Ray WebGL Hero ─────────────────────────────────────── */
 (function(){
-const IMAGE_URL = '/marketing/boxing.jpg';
+const IMAGE_URL = 'https://strikepanel.vercel.app/marketing/boxing.jpg';
 const CFG = {
   dpi: 1.5,
   parallax: { momentum: 0.11 },
