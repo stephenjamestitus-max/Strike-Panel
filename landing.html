@@ -1036,15 +1036,15 @@ mobileMenu.querySelectorAll('a').forEach(a => {
     ].join(';');
     c.appendChild(m);
   }
-function xCreateTexture(img) {
-  const tex = xGl.createTexture();
-  xGl.bindTexture(xGl.TEXTURE_2D, tex);
-  xGl.texImage2D(xGl.TEXTURE_2D, 0, xGl.RGBA, xGl.RGBA, xGl.UNSIGNED_BYTE, img);
-  xGl.generateMipmap(xGl.TEXTURE_2D);
-  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_MIN_FILTER, xGl.LINEAR_MIPMAP_LINEAR);
-  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_MAG_FILTER, xGl.LINEAR);
-  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_WRAP_S, xGl.CLAMP_TO_EDGE);
-  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_WRAP_T, xGl.CLAMP_TO_EDGE);
+function xCreateTexture(gl, img) {
+  const tex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, tex);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+  gl.generateMipmap(gl.TEXTURE_2D);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
   return tex;
 }
 async function xLoadAndStart() {
@@ -1055,7 +1055,7 @@ async function xLoadAndStart() {
     const img = new Image();
     img.onload = () => {
       console.log('Image loaded:', img.width, 'x', img.height);
-      xPhotoTex = xCreateTexture(img);
+      xPhotoTex = xCreateTexture(xGl, img);
       initBlobs();
       xResize();
       setTimeout(()=>{const h=document.getElementById('xray-hint');if(h)h.style.opacity='0';},5000);
@@ -1068,7 +1068,7 @@ async function xLoadAndStart() {
     const img = new Image();
     img.crossOrigin = 'anonymous';
     img.onload = () => {
-      xPhotoTex = xCreateTexture(img);
+      xPhotoTex = xCreateTexture(xGl, img);
       initBlobs();
       xResize();
       requestAnimationFrame(xRender);
@@ -1248,9 +1248,9 @@ in vec2 aPos;out vec2 vUv;
 void main(){ vUv=aPos*.5+.5; gl_Position=vec4(aPos,0.,1.); }`;
 function xCompile(src,type){ const s=xGl.createShader(type); xGl.shaderSource(s,src); xGl.compileShader(s); if(!xGl.getShaderParameter(s,xGl.COMPILE_STATUS)) console.error(xGl.getShaderInfoLog(s)); return s; }
 function xProgram(vert,frag){ const p=xGl.createProgram(); xGl.attachShader(p,xCompile(vert,xGl.VERTEX_SHADER)); xGl.attachShader(p,xCompile(frag,xGl.FRAGMENT_SHADER)); xGl.linkProgram(p); if(!xGl.getProgramParameter(p,xGl.LINK_STATUS)) console.error(xGl.getProgramInfoLog(p)); return p; }
-function makeFBO(w,h){ const tex=xGl.createTexture(); xGl.bindTexture(xGl.TEXTURE_2D,tex); xGl.texImage2D(xGl.TEXTURE_2D,0,xGl.RGBA16F,w,h,0,xGl.RGBA,xGl.HALF_FLOAT,null); xGl.texParameteri(xGl.TEXTURE_2D,xGl.TEXTURE_MIN_FILTER,xGl.LINEAR); xGl.texParameteri(xGl.TEXTURE_2D,xGl.TEXTURE_MAG_FILTER,xGl.LINEAR); xGl.texParameteri(xGl.TEXTURE_2D,xGl.TEXTURE_WRAP_S,xGl.CLAMP_TO_EDGE); xGl.texParameteri(xGl.TEXTURE_2D,xGl.TEXTURE_WRAP_T,xGl.CLAMP_TO_EDGE); const fb=xGl.createFramebuffer(); xGl.bindFramebuffer(xGl.FRAMEBUFFER,fb); xGl.framebufferTexture2D(xGl.FRAMEBUFFER,xGl.COLOR_ATTACHMENT0,xGl.TEXTURE_2D,tex,0); return {tex,fb,w,h}; }
+function makeFBO(w,h){ const ext=xGl.getExtension('EXT_color_buffer_float'); const tex=xGl.createTexture(); xGl.bindTexture(xGl.TEXTURE_2D,tex); if(ext){ xGl.texImage2D(xGl.TEXTURE_2D,0,xGl.RGBA16F,w,h,0,xGl.RGBA,xGl.HALF_FLOAT,null); } else { xGl.texImage2D(xGl.TEXTURE_2D,0,xGl.RGBA,w,h,0,xGl.RGBA,xGl.UNSIGNED_BYTE,null); } xGl.texParameteri(xGl.TEXTURE_2D,xGl.TEXTURE_MIN_FILTER,xGl.LINEAR); xGl.texParameteri(xGl.TEXTURE_2D,xGl.TEXTURE_MAG_FILTER,xGl.LINEAR); xGl.texParameteri(xGl.TEXTURE_2D,xGl.TEXTURE_WRAP_S,xGl.CLAMP_TO_EDGE); xGl.texParameteri(xGl.TEXTURE_2D,xGl.TEXTURE_WRAP_T,xGl.CLAMP_TO_EDGE); const fb=xGl.createFramebuffer(); xGl.bindFramebuffer(xGl.FRAMEBUFFER,fb); xGl.framebufferTexture2D(xGl.FRAMEBUFFER,xGl.COLOR_ATTACHMENT0,xGl.TEXTURE_2D,tex,0); return {tex,fb,w,h}; }
 function bindFBO(fbo){ xGl.bindFramebuffer(xGl.FRAMEBUFFER,fbo?fbo.fb:null); if(fbo) xGl.viewport(0,0,fbo.w,fbo.h); else xGl.viewport(0,0,W,H); }
-function useAndDraw(prog,uniforms){ xGl.useProgram(prog); Object.entries(uniforms).forEach(([k,v])=>{ const loc=xGl.getUniformLocation(prog,k); if(loc===null) return; if(typeof v==='number') xGl.uniform1f(loc,v); else if(v.length===2) xGl.uniform2f(loc,v[0],v[1]); else if(v.length===3) xGl.uniform3f(loc,v[0],v[1],v[2]); else if(v.length===4) xGl.uniform4f(loc,v[0],v[1],v[2],v[3]); else if(Number.isInteger(v)) xGl.uniform1i(loc,v); }); xGl.drawArrays(xGl.TRIANGLE_STRIP,0,4); }
+function useAndDraw(prog,uniforms){ xGl.useProgram(prog); Object.entries(uniforms).forEach(([k,v])=>{ const loc=xGl.getUniformLocation(prog,k); if(loc===null) return; if(Number.isInteger(v)&&v>=0&&v<16) xGl.uniform1i(loc,v); else if(typeof v==='number') xGl.uniform1f(loc,v); else if(v.length===2) xGl.uniform2f(loc,v[0],v[1]); else if(v.length===3) xGl.uniform3f(loc,v[0],v[1],v[2]); else if(v.length===4) xGl.uniform4f(loc,v[0],v[1],v[2],v[3]); }); xGl.drawArrays(xGl.TRIANGLE_STRIP,0,4); }
 function bindTex(unit,tex){ xGl.activeTexture(xGl.TEXTURE0+unit); xGl.bindTexture(xGl.TEXTURE_2D,tex); }
 const xVao=xGl.createVertexArray(); xGl.bindVertexArray(xVao);
 const xVbuf=xGl.createBuffer(); xGl.bindBuffer(xGl.ARRAY_BUFFER,xVbuf);
@@ -1320,15 +1320,15 @@ function xRender(now){ requestAnimationFrame(xRender); const dt=Math.min((now-xL
   bindFBO(fboB); bindTex(0,fboA.tex); const blobPos=new Float32Array(16),blobLife=new Float32Array(8); xBlobs.forEach((b,i)=>{blobPos[i*2]=b.x;blobPos[i*2+1]=b.y;blobLife[i]=b.life;}); xGl.useProgram(progBlob); bindTex(0,fboA.tex); xGl.uniform1i(xGl.getUniformLocation(progBlob,'uScene'),0); xGl.uniform2fv(xGl.getUniformLocation(progBlob,'uBlobs'),blobPos); xGl.uniform1fv(xGl.getUniformLocation(progBlob,'uBlobLife'),blobLife); xGl.uniform1f(xGl.getUniformLocation(progBlob,'uRadius'),CFG.blob.radius); xGl.uniform1f(xGl.getUniformLocation(progBlob,'uOpacity'),CFG.blob.opacity); xGl.uniform3fv(xGl.getUniformLocation(progBlob,'uColor'),new Float32Array(CFG.blob.color)); xGl.uniform1f(xGl.getUniformLocation(progBlob,'uTime'),t); xGl.uniform1f(xGl.getUniformLocation(progBlob,'uAspect'),W/H); xGl.drawArrays(xGl.TRIANGLE_STRIP,0,4);
   bindFBO(null); bindTex(0,fboB.tex); useAndDraw(progFinal,{uScene:0});
 }
-function xCreateTexture(img) {
-  const tex = xGl.createTexture();
-  xGl.bindTexture(xGl.TEXTURE_2D, tex);
-  xGl.texImage2D(xGl.TEXTURE_2D, 0, xGl.RGBA, xGl.RGBA, xGl.UNSIGNED_BYTE, img);
-  xGl.generateMipmap(xGl.TEXTURE_2D);
-  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_MIN_FILTER, xGl.LINEAR_MIPMAP_LINEAR);
-  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_MAG_FILTER, xGl.LINEAR);
-  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_WRAP_S, xGl.CLAMP_TO_EDGE);
-  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_WRAP_T, xGl.CLAMP_TO_EDGE);
+function xCreateTexture(gl, img) {
+  const tex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, tex);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+  gl.generateMipmap(gl.TEXTURE_2D);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
   return tex;
 }
 async function xLoadAndStart() {
@@ -1339,7 +1339,7 @@ async function xLoadAndStart() {
     const img = new Image();
     img.onload = () => {
       console.log('Image loaded:', img.width, 'x', img.height);
-      xPhotoTex = xCreateTexture(img);
+      xPhotoTex = xCreateTexture(xGl, img);
       initBlobs();
       xResize();
       setTimeout(()=>{const h=document.getElementById('xray-hint');if(h)h.style.opacity='0';},5000);
@@ -1352,7 +1352,7 @@ async function xLoadAndStart() {
     const img = new Image();
     img.crossOrigin = 'anonymous';
     img.onload = () => {
-      xPhotoTex = xCreateTexture(img);
+      xPhotoTex = xCreateTexture(xGl, img);
       initBlobs();
       xResize();
       requestAnimationFrame(xRender);
