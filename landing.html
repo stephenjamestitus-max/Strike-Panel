@@ -1184,7 +1184,16 @@ const CFG = {
 };
 const canvas = document.getElementById('xray-canvas');
 const gl = canvas.getContext('webgl2', { antialias: false, alpha: false });
-if (!gl) return;
+console.log('WebGL2 context:', gl ? 'OK' : 'FAILED');
+if (!gl) {
+  canvas.style.background = 'red';
+  canvas.style.display = 'block';
+  const fallback = document.createElement('img');
+  fallback.src = '/marketing/boxing.jpg';
+  fallback.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.5);z-index:0;';
+  canvas.parentNode.replaceChild(fallback, canvas);
+  return;
+}
 let W = 0, H = 0;
 let xMouse = { x: 0.5, y: 0.5 };
 let smoothMouse = { x: 0.5, y: 0.5 };
@@ -1251,7 +1260,7 @@ void main(){ vec3 col=texture(uScene,vUv).rgb; float v=1.-dot(vUv-.5,vUv-.5)*1.6
 const progGrad=xProgram(QUAD_VERT,GRAD_FRAG),progImage=xProgram(QUAD_VERT,IMAGE_FRAG),progXray=xProgram(QUAD_VERT,XRAY_FRAG),progDepth=xProgram(QUAD_VERT,DEPTH_FRAG),progLens=xProgram(QUAD_VERT,LENS_FRAG),progBlurH=xProgram(QUAD_VERT,BLUR_H_FRAG),progBlurV=xProgram(QUAD_VERT,BLUR_V_FRAG),progFBM=xProgram(QUAD_VERT,FBM_FRAG),progFog=xProgram(QUAD_VERT,FOG_FRAG),progBlob=xProgram(QUAD_VERT,BLOB_FRAG),progFinal=xProgram(QUAD_VERT,FINAL_FRAG);
 let fboA,fboB,fboC;
 function resizeFBOs(){ [fboA,fboB,fboC].forEach(f=>{if(!f)return;gl.deleteTexture(f.tex);gl.deleteFramebuffer(f.fb);}); fboA=makeFBO(W,H); fboB=makeFBO(W,H); fboC=makeFBO(W,H); }
-function xLoadTexture(url){ const tex=gl.createTexture(),img=new Image(); // img.crossOrigin='anonymous'; img.onload=()=>{ gl.bindTexture(gl.TEXTURE_2D,tex); gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img); gl.generateMipmap(gl.TEXTURE_2D); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE); photoTex=tex; }; img.src=url; }
+function xLoadTexture(url){ const tex=gl.createTexture(),img=new Image(); // img.crossOrigin='anonymous'; img.onload=()=>{ console.log('Image loaded, size:', img.width, 'x', img.height); canvas.style.background='blue'; gl.bindTexture(gl.TEXTURE_2D,tex); gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img); gl.generateMipmap(gl.TEXTURE_2D); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE); photoTex=tex; }; img.src=url; }
 function initBlobs(){ xBlobs=Array.from({length:6},(_,i)=>({x:.2+Math.random()*.6,y:.2+Math.random()*.6,vx:(Math.random()-.5)*.002,vy:(Math.random()-.5)*.002,life:Math.random(),phase:Math.random()*Math.PI*2})); }
 function updateBlobs(dt){ xBlobs.forEach(b=>{ b.vx+=(xMouse.x-b.x)*.0003; b.vy+=(xMouse.y-b.y)*.0003; b.vx*=.96; b.vy*=.96; b.x=Math.max(.05,Math.min(.95,b.x+b.vx)); b.y=Math.max(.05,Math.min(.95,b.y+b.vy)); b.life=.5+.5*Math.sin(Date.now()*.001*CFG.blob.speed+b.phase); }); }
 function xResize(){ W=canvas.width=Math.round(canvas.offsetWidth*CFG.dpi); H=canvas.height=Math.round(canvas.offsetHeight*CFG.dpi); gl.viewport(0,0,W,H); resizeFBOs(); }
@@ -1276,6 +1285,7 @@ xLoadTexture(IMAGE_URL);
 initBlobs();
 xResize();
 setTimeout(()=>{const h=document.getElementById('xray-hint');if(h)h.style.opacity='0';},5000);
+console.log('Render loop started');
 requestAnimationFrame(xRender);
 })();
 </script>
