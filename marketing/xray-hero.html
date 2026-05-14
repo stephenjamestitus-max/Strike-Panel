@@ -3,120 +3,559 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>X Ray Boxing</title>
+<title>Boxing X-Ray Effect</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;overflow:hidden;background:#04070f}
-canvas{display:block;width:100%;height:100%}
-#hint{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(0,212,240,0.7);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:4px;pointer-events:none;text-transform:uppercase;transition:opacity 1.5s;text-shadow:0 0 20px rgba(0,212,240,0.5)}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: #04070f; overflow: hidden; }
+  canvas { display: block; width: 100%; height: 100%; }
 </style>
 </head>
 <body>
 <canvas id="c"></canvas>
-<div id="hint">// MOVE CURSOR TO REVEAL</div>
+<div id="hint" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(0,212,240,0.7);font-family:monospace;font-size:11px;letter-spacing:4px;pointer-events:none;text-transform:uppercase;transition:opacity 1.5s;">// MOVE CURSOR TO REVEAL</div>
 <script>
-const PHOTO='boxing.jpg';
-const canvas=document.getElementById('c');
-const gl=canvas.getContext('webgl')||canvas.getContext('webgl2');
-let W,H,mouse={x:0.5,y:0.5},sm={x:0.5,y:0.5},t0=performance.now();
-function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;gl.viewport(0,0,W,H);}
-window.addEventListener('resize',resize);resize();
-window.addEventListener('mousemove',e=>{mouse.x=e.clientX/W;mouse.y=1-e.clientY/H;});
-window.addEventListener('touchmove',e=>{e.preventDefault();mouse.x=e.touches[0].clientX/W;mouse.y=1-e.touches[0].clientY/H;},{passive:false});
-const vs=`attribute vec2 a;varying vec2 v;void main(){v=a*.5+.5;gl_Position=vec4(a,0,1);}`;
-const fs=`precision highp float;
-varying vec2 v;
-uniform float T;
-uniform vec2 M,R;
-uniform sampler2D uPhoto;
-vec3 h3(vec2 p){vec3 q=vec3(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3)),dot(p,vec2(419.2,371.9)));return fract(sin(q)*43758.5453);}
-float ns(vec2 p){vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);return mix(mix(dot(h3(i).xy,f),dot(h3(i+vec2(1,0)).xy,f-vec2(1,0)),u.x),mix(dot(h3(i+vec2(0,1)).xy,f-vec2(0,1)),dot(h3(i+vec2(1,1)).xy,f-vec2(1,1)),u.x),u.y)*.5+.5;}
-float fbm(vec2 p){float v=0.,a=.5,f=1.;for(int i=0;i<5;i++){v+=a*ns(p*f);a*=.5;f*=2.;}return v;}
-float gr(vec2 uv,vec2 s,float t){vec2 d=uv-s;float ang=atan(d.y,d.x),dist=length(d),r=0.;for(int i=0;i<6;i++){float o=float(i)*.785+t*.3;r+=(sin(ang*4.+o)*.5+.5)*smoothstep(1.6,0.,dist);}return r/6.;}
-vec2 ld(vec2 uv,float s){vec2 c=uv-.5;return uv+c*dot(c,c)*s;}
-float luma(vec3 c){return dot(c,vec3(0.299,0.587,0.114));}
-float sobel(sampler2D tex,vec2 uv,vec2 px){
-float tl=luma(texture2D(tex,uv+vec2(-px.x,px.y)).rgb);
-float t=luma(texture2D(tex,uv+vec2(0,px.y)).rgb);
-float tr=luma(texture2D(tex,uv+vec2(px.x,px.y)).rgb);
-float l=luma(texture2D(tex,uv+vec2(-px.x,0)).rgb);
-float r=luma(texture2D(tex,uv+vec2(px.x,0)).rgb);
-float bl=luma(texture2D(tex,uv+vec2(-px.x,-px.y)).rgb);
-float b=luma(texture2D(tex,uv+vec2(0,-px.y)).rgb);
-float br=luma(texture2D(tex,uv+vec2(px.x,-px.y)).rgb);
-float gx=(-tl-2.*l-bl+tr+2.*r+br);
-float gy=(tl+2.*t+tr-bl-2.*b-br);
-return clamp(length(vec2(gx,gy))*3.0,0.,1.);}
+const IMAGE_URL = 'boxing.jpg';
+
+const CFG = {
+  dpi: 1.5,
+  fps: 60,
+  parallax: { trackMouse: 0.08, momentum: 0.11 },
+  lens: { trackMouse: 0.59, momentum: 0.93, radius: 0.38, strength: 0.45 },
+  blur: { trackMouse: 0.14, momentum: 0.58, radius: 18.0 },
+  fbm: { speed: 0.1, octaves: 5, lacunarity: 2.0, gain: 0.5, scale: 3.0, opacity: 0.18 },
+  fog: { speed: 0.5, density: 0.22, color: [0.02, 0.08, 0.12] },
+  xray: { opacity: 0.72, color: [0.0, 0.83, 0.94], edgeStrength: 2.8, glowWidth: 0.012 },
+  grad: { top: [0.02, 0.08, 0.12], bottom: [0.01, 0.03, 0.05] },
+  blob: { speed: 0.5, count: 6, radius: 0.04, opacity: 0.35, color: [0.1, 0.7, 1.0] },
+};
+
+const canvas = document.getElementById('c');
+const gl = canvas.getContext('webgl2', { antialias: false, alpha: false });
+if (!gl) { document.body.innerHTML = '<p style="color:white;padding:2rem">WebGL2 not supported</p>'; }
+
+let W = 0, H = 0;
+let mouse = { x: 0.5, y: 0.5 };
+let smoothMouse = { x: 0.5, y: 0.5 };
+let parallaxTarget = { x: 0, y: 0 };
+let parallaxSmooth = { x: 0, y: 0 };
+let lensTarget = { x: 0.5, y: 0.5 };
+let lensSmooth = { x: 0.5, y: 0.5 };
+let blurTarget = { x: 0.5, y: 0.5 };
+let blurSmooth = { x: 0.5, y: 0.5 };
+let startTime = Date.now();
+let photoTex = null;
+let blobs = [];
+
+const QUAD_VERT = `#version 300 es
+in vec2 aPos;
+out vec2 vUv;
 void main(){
-float t=T*.4;
-vec2 asp=vec2(R.x/R.y,1.),uv=v;
-vec2 du=ld(uv,.12+length(M-.5)*.08);
-vec2 pu=du+(M-.5)*vec2(-.025,-.018);
-float imgAsp=16./9.,scrAsp=R.x/R.y;
-vec2 texUV=pu;
-if(scrAsp>imgAsp){float s=scrAsp/imgAsp;texUV.y=(texUV.y-.5)*s+.5;}
-else{float s=imgAsp/scrAsp;texUV.x=(texUV.x-.5)*s+.5;}
-texUV=clamp(texUV,0.001,0.999);
-vec3 photoRGB=texture2D(uPhoto,texUV).rgb;
-vec3 inv=vec3(1.)-photoRGB;
-inv=clamp((inv-.35)*2.4+.35,0.,1.);
-float lumaV=luma(inv);
-vec3 xray=mix(vec3(0.,0.02,0.06),vec3(0.15,0.95,1.0),lumaV);
-xray+=vec3(0.,0.4,0.6)*pow(lumaV,1.5);
-float edge=sobel(uPhoto,texUV,vec2(2.0)/R);
-xray+=vec3(0.4,1.0,1.0)*edge*2.0;
-float scan=sin((texUV.y*R.y*0.4)+t*10.)*.025;
-xray+=vec3(0.,0.08,0.12)*scan;
-xray+=vec3(0.,0.15,0.25)*fbm(texUV*3.+vec2(t*.15,-t*.1))*.12;
-vec2 uvA=uv*asp,mA=M*asp;
-float dist=length(uvA-mA);
-float rr=0.22;
-float reveal=smoothstep(rr,rr*0.08,dist);
-float rim=smoothstep(rr,rr*.82,dist)-smoothstep(rr*.82,rr*.08,dist);
-vec3 col=photoRGB;
-float lumaP=luma(photoRGB);
-col=mix(col,mix(vec3(lumaP),vec3(lumaP*.8+.01,lumaP*.9+.02,lumaP+.04),0.3),0.25);
-col+=vec3(.04,.14,.20)*gr(pu,vec2(.3+(M.x-.5)*.15,1.5),t)*.3;
-col+=vec3(.03,.2,.3)*exp(-dist*asp.x*7.)*.1;
-col=mix(col,xray,reveal);
-col+=vec3(0.,0.85,1.0)*rim*2.2*(1.-reveal*.4);
-col+=vec3(.15,.7,.9)*exp(-dist*asp.x*9.)*.25*reveal;
-vec2 vu=uv*2.-1.;
-col*=pow(clamp(1.-dot(vu*vec2(.78,.88),vu*vec2(.78,.88)),0.,1.),.55);
-col=col/(col+.65);
-col=pow(max(col,0.),vec3(.44));
-gl_FragColor=vec4(col,1.);}`;
-function cs(t,s){const sh=gl.createShader(t);gl.shaderSource(sh,s);gl.compileShader(sh);if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS))console.error(gl.getShaderInfoLog(sh));return sh;}
-const prog=gl.createProgram();
-gl.attachShader(prog,cs(gl.VERTEX_SHADER,vs));
-gl.attachShader(prog,cs(gl.FRAGMENT_SHADER,fs));
-gl.linkProgram(prog);gl.useProgram(prog);
-const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
-gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
-const al=gl.getAttribLocation(prog,'a');gl.enableVertexAttribArray(al);gl.vertexAttribPointer(al,2,gl.FLOAT,false,0,0);
-const uT=gl.getUniformLocation(prog,'T'),uM=gl.getUniformLocation(prog,'M'),uR=gl.getUniformLocation(prog,'R');
-const uPhoto=gl.getUniformLocation(prog,'uPhoto');
-const tex=gl.createTexture();
-gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,tex);
-gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([4,7,15,255]));
-const img=new Image();img.crossOrigin='anonymous';
-img.onload=()=>{
-gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,tex);
-gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
-gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
-gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
-gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
-gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);};
-img.src=PHOTO;
-gl.uniform1i(uPhoto,0);
+  vUv = aPos * 0.5 + 0.5;
+  gl_Position = vec4(aPos, 0.0, 1.0);
+}`;
+
+function compile(src, type) {
+  const s = gl.createShader(type);
+  gl.shaderSource(s, src);
+  gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS))
+    console.error(gl.getShaderInfoLog(s), src);
+  return s;
+}
+function program(vert, frag) {
+  const p = gl.createProgram();
+  gl.attachShader(p, compile(vert, gl.VERTEX_SHADER));
+  gl.attachShader(p, compile(frag, gl.FRAGMENT_SHADER));
+  gl.linkProgram(p);
+  if (!gl.getProgramParameter(p, gl.LINK_STATUS))
+    console.error(gl.getProgramInfoLog(p));
+  return p;
+}
+function makeFBO(w, h) {
+  const tex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, tex);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA16F, w, h, 0, gl.RGBA, gl.HALF_FLOAT, null);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  const fb = gl.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+  return { tex, fb, w, h };
+}
+function bindFBO(fbo) {
+  gl.bindFramebuffer(gl.FRAMEBUFFER, fbo ? fbo.fb : null);
+  if (fbo) gl.viewport(0, 0, fbo.w, fbo.h);
+  else gl.viewport(0, 0, W, H);
+}
+function useAndDraw(prog, uniforms) {
+  gl.useProgram(prog);
+  Object.entries(uniforms).forEach(([k, v]) => {
+    const loc = gl.getUniformLocation(prog, k);
+    if (loc === null) return;
+    if (typeof v === 'number') gl.uniform1f(loc, v);
+    else if (v.length === 2) gl.uniform2f(loc, v[0], v[1]);
+    else if (v.length === 3) gl.uniform3f(loc, v[0], v[1], v[2]);
+    else if (v.length === 4) gl.uniform4f(loc, v[0], v[1], v[2], v[3]);
+    else if (Number.isInteger(v)) gl.uniform1i(loc, v);
+  });
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+}
+function bindTex(unit, tex) {
+  gl.activeTexture(gl.TEXTURE0 + unit);
+  gl.bindTexture(gl.TEXTURE_2D, tex);
+}
+
+const vao = gl.createVertexArray();
+gl.bindVertexArray(vao);
+const vbuf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, vbuf);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+gl.enableVertexAttribArray(0);
+gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+gl.bindVertexArray(vao);
+
+const GRAD_FRAG = `#version 300 es
+precision highp float;
+in vec2 vUv;
+out vec4 fragColor;
+uniform vec3 uTop;
+uniform vec3 uBot;
+void main(){
+  vec3 c = mix(uBot, uTop, vUv.y);
+  float r = length(vUv - 0.5);
+  c += vec3(0.04, 0.10, 0.13) * (1.0 - smoothstep(0.0, 0.8, r));
+  fragColor = vec4(c, 1.0);
+}`;
+
+const IMAGE_FRAG = `#version 300 es
+precision highp float;
+in vec2 vUv;
+out vec4 fragColor;
+uniform sampler2D uTex;
+uniform vec2 uResolution;
+uniform vec2 uParallax;
+uniform float uOpacity;
+void main(){
+  float aspect = uResolution.x / uResolution.y;
+  vec2 uv = vUv;
+  uv += uParallax * vec2(0.025, 0.025);
+  vec2 texSize = vec2(textureSize(uTex, 0));
+  float ta = texSize.x / texSize.y;
+  vec2 scale = vec2(1.0);
+  if(ta > aspect) scale.x = ta / aspect;
+  else scale.y = aspect / ta;
+  uv = (uv - 0.5) / scale + 0.5;
+  uv = clamp(uv, 0.0, 1.0);
+  vec4 col = texture(uTex, uv);
+  fragColor = vec4(col.rgb, col.a * uOpacity);
+}`;
+
+const XRAY_FRAG = `#version 300 es
+precision highp float;
+in vec2 vUv;
+out vec4 fragColor;
+uniform sampler2D uTex;
+uniform sampler2D uScene;
+uniform vec2 uResolution;
+uniform vec2 uParallax;
+uniform vec3 uColor;
+uniform float uOpacity;
+uniform float uEdgeStrength;
+uniform float uGlowWidth;
+uniform float uTime;
+float edge(sampler2D tex, vec2 uv, vec2 px) {
+  float tl = dot(texture(tex, uv+vec2(-px.x, px.y)).rgb, vec3(0.299,0.587,0.114));
+  float t  = dot(texture(tex, uv+vec2( 0.0,  px.y)).rgb, vec3(0.299,0.587,0.114));
+  float tr = dot(texture(tex, uv+vec2( px.x, px.y)).rgb, vec3(0.299,0.587,0.114));
+  float l  = dot(texture(tex, uv+vec2(-px.x, 0.0 )).rgb, vec3(0.299,0.587,0.114));
+  float r  = dot(texture(tex, uv+vec2( px.x, 0.0 )).rgb, vec3(0.299,0.587,0.114));
+  float bl = dot(texture(tex, uv+vec2(-px.x,-px.y)).rgb, vec3(0.299,0.587,0.114));
+  float b  = dot(texture(tex, uv+vec2( 0.0, -px.y)).rgb, vec3(0.299,0.587,0.114));
+  float br = dot(texture(tex, uv+vec2( px.x,-px.y)).rgb, vec3(0.299,0.587,0.114));
+  float gx = -tl - 2.0*l - bl + tr + 2.0*r + br;
+  float gy = -tl - 2.0*t - tr + bl + 2.0*b + br;
+  return sqrt(gx*gx + gy*gy);
+}
+void main(){
+  vec2 px = 1.0 / uResolution;
+  vec2 uv = vUv + uParallax * 0.018;
+  vec3 scene = texture(uScene, vUv).rgb;
+  float e1 = edge(uTex, uv, px * 1.0);
+  float e2 = edge(uTex, uv, px * 2.0) * 0.6;
+  float e3 = edge(uTex, uv, px * 4.0) * 0.3;
+  float e = clamp((e1 + e2 + e3) * uEdgeStrength, 0.0, 1.0);
+  float glow = 0.0;
+  int samples = 8;
+  for(int i = 0; i < samples; i++){
+    float a = 3.14159265 * 2.0 * float(i) / float(samples);
+    vec2 offset = vec2(cos(a), sin(a)) * uGlowWidth;
+    float eg = edge(uTex, uv + offset, px * 1.5);
+    glow += eg;
+  }
+  glow = clamp(glow / float(samples) * 1.8, 0.0, 1.0);
+  float shimmer = sin(uv.y * 80.0 + uTime * 3.0) * 0.5 + 0.5;
+  shimmer *= 0.15;
+  vec3 xrayColor = uColor + vec3(shimmer * 0.1, shimmer * 0.3, shimmer * 0.5);
+  float brightness = dot(texture(uTex, uv).rgb, vec3(0.299, 0.587, 0.114));
+  vec3 highlight = mix(xrayColor, xrayColor * 1.8 + vec3(0.2, 0.4, 0.6), brightness * 0.4);
+  float xrayMask = clamp(e + glow * 0.5, 0.0, 1.0);
+  vec3 xrayFinal = highlight * xrayMask;
+  float alpha = xrayMask * uOpacity;
+  vec3 result = mix(scene, xrayFinal, alpha);
+  result += uColor * 0.06 * brightness;
+  fragColor = vec4(result, 1.0);
+}`;
+
+const DEPTH_FRAG = `#version 300 es
+precision highp float;
+in vec2 vUv;
+out vec4 fragColor;
+uniform sampler2D uScene;
+uniform sampler2D uTex;
+uniform vec2 uMouse;
+uniform vec2 uResolution;
+void main(){
+  float depth = dot(texture(uTex, vUv).rgb, vec3(0.299, 0.587, 0.114));
+  vec2 offset = uMouse * depth * 0.025;
+  vec2 uv2 = clamp(vUv + offset, 0.001, 0.999);
+  fragColor = texture(uScene, uv2);
+}`;
+
+const LENS_FRAG = `#version 300 es
+precision highp float;
+in vec2 vUv;
+out vec4 fragColor;
+uniform sampler2D uScene;
+uniform vec2 uPos;
+uniform float uRadius;
+uniform float uStrength;
+uniform float uTime;
+void main(){
+  vec2 uv = vUv;
+  vec2 delta = uv - uPos;
+  float dist = length(delta);
+  float r = uRadius;
+  if(dist < r){
+    float t = dist / r;
+    float warp = 1.0 - pow(1.0 - t*t, uStrength * 1.5);
+    float scale = mix(1.0, warp / max(t, 0.001), smoothstep(0.0, 1.0, t));
+    uv = uPos + delta * scale;
+  }
+  uv = clamp(uv, 0.001, 0.999);
+  fragColor = texture(uScene, uv);
+}`;
+
+const BLUR_H_FRAG = `#version 300 es
+precision highp float;
+in vec2 vUv;
+out vec4 fragColor;
+uniform sampler2D uScene;
+uniform vec2 uResolution;
+uniform vec2 uMouse;
+uniform float uRadius;
+void main(){
+  vec2 px = vec2(1.0) / uResolution;
+  float dist = abs(vUv.x - uMouse.x);
+  float r = uRadius * smoothstep(0.0, 0.6, dist);
+  vec4 col = vec4(0.0);
+  float total = 0.0;
+  int SAMPLES = 12;
+  for(int i = -SAMPLES; i <= SAMPLES; i++){
+    float w = exp(-float(i*i) / (2.0 * r * r + 0.01));
+    col += texture(uScene, vUv + vec2(float(i) * px.x, 0.0)) * w;
+    total += w;
+  }
+  fragColor = col / total;
+}`;
+
+const BLUR_V_FRAG = `#version 300 es
+precision highp float;
+in vec2 vUv;
+out vec4 fragColor;
+uniform sampler2D uScene;
+uniform vec2 uResolution;
+uniform vec2 uMouse;
+uniform float uRadius;
+void main(){
+  vec2 px = vec2(1.0) / uResolution;
+  float dist = abs(vUv.y - uMouse.y);
+  float r = uRadius * smoothstep(0.0, 0.6, dist);
+  vec4 col = vec4(0.0);
+  float total = 0.0;
+  int SAMPLES = 12;
+  for(int i = -SAMPLES; i <= SAMPLES; i++){
+    float w = exp(-float(i*i) / (2.0 * r * r + 0.01));
+    col += texture(uScene, vUv + vec2(0.0, float(i) * px.y)) * w;
+    total += w;
+  }
+  fragColor = col / total;
+}`;
+
+const FBM_FRAG = `#version 300 es
+precision highp float;
+in vec2 vUv;
+out vec4 fragColor;
+uniform sampler2D uScene;
+uniform float uTime;
+uniform float uOpacity;
+uniform float uScale;
+uniform vec2 uResolution;
+float hash(vec2 p){ p = fract(p * vec2(234.34, 435.345)); p += dot(p, p + 34.23); return fract(p.x * p.y); }
+float noise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3.0-2.0*f); return mix(mix(hash(i),hash(i+vec2(1,0)),f.x), mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y); }
+float fbm(vec2 p){ float v=0.0, a=0.5; mat2 rot = mat2(cos(0.5),sin(0.5),-sin(0.5),cos(0.5)); for(int i=0;i<5;i++){ v+=a*noise(p); p=rot*p*2.0; a*=0.5; } return v; }
+void main(){
+  vec2 uv = vUv * uScale;
+  float t = uTime * 0.1;
+  float n1 = fbm(uv + t);
+  float n2 = fbm(uv - t * 0.7 + vec2(3.1, 1.7));
+  float n  = fbm(uv + vec2(n1, n2));
+  vec3 nColor = vec3(0.05, 0.18, 0.25) * n;
+  vec3 scene = texture(uScene, vUv).rgb;
+  fragColor = vec4(scene + nColor * uOpacity, 1.0);
+}`;
+
+const FOG_FRAG = `#version 300 es
+precision highp float;
+in vec2 vUv;
+out vec4 fragColor;
+uniform sampler2D uScene;
+uniform float uTime;
+uniform float uDensity;
+uniform vec3 uColor;
+uniform vec2 uResolution;
+float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
+float noise(vec2 p){ vec2 i=floor(p),f=fract(p); f=f*f*(3.0-2.0*f); return mix(mix(hash(i),hash(i+vec2(1,0)),f.x), mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y); }
+float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<4;i++){v+=a*noise(p);p*=2.1;a*=0.5;} return v; }
+void main(){
+  float t = uTime * 0.5;
+  float fog = fbm(vUv * 2.5 + vec2(t*0.12,t*0.08));
+  fog += fbm(vUv * 4.0 - vec2(t*0.07,t*0.05)) * 0.5;
+  fog = clamp(fog * uDensity, 0.0, 0.4);
+  float vign = length(vUv - 0.5) * 1.4;
+  fog *= vign;
+  vec3 scene = texture(uScene, vUv).rgb;
+  fragColor = vec4(mix(scene, uColor, fog), 1.0);
+}`;
+
+const BLOB_FRAG = `#version 300 es
+precision highp float;
+in vec2 vUv;
+out vec4 fragColor;
+uniform sampler2D uScene;
+uniform vec2 uBlobs[8];
+uniform float uBlobLife[8];
+uniform float uRadius;
+uniform float uOpacity;
+uniform vec3 uColor;
+uniform float uTime;
+uniform float uAspect;
+void main(){
+  vec3 scene = texture(uScene, vUv).rgb;
+  vec3 glow = vec3(0.0);
+  for(int i = 0; i < 6; i++){
+    vec2 pos = uBlobs[i];
+    float life = uBlobLife[i];
+    if(life <= 0.0) continue;
+    vec2 diff = (vUv - pos) * vec2(uAspect, 1.0);
+    float d = length(diff);
+    float r = uRadius * (0.8 + 0.4 * life);
+    float core = exp(-d*d / (r*r * 0.1)) * life;
+    float ring = smoothstep(r*1.2,r*0.8,d) * smoothstep(0.0,r*0.3,d) * life * 0.5;
+    float pulse = 0.8 + 0.2 * sin(uTime * 4.0 + float(i) * 1.7);
+    glow += (core + ring) * uColor * pulse;
+    if(i < 5){
+      vec2 next = uBlobs[i+1];
+      float nl = uBlobLife[i+1];
+      if(nl > 0.0){
+        vec2 dir = next - pos;
+        float len = length(dir * vec2(uAspect, 1.0));
+        vec2 normDir = dir / max(len / uAspect, 0.001);
+        vec2 toP = (vUv - pos) * vec2(uAspect, 1.0);
+        float proj = clamp(dot(toP, normDir * vec2(uAspect,1.0)) / (len * uAspect), 0.0, 1.0);
+        float lineDist = length(toP - proj * normDir * vec2(uAspect,1.0) * len);
+        float lineGlow = exp(-lineDist*lineDist * 800.0) * min(life,nl) * 0.3;
+        glow += lineGlow * uColor;
+      }
+    }
+  }
+  fragColor = vec4(scene + glow * uOpacity, 1.0);
+}`;
+
+const FINAL_FRAG = `#version 300 es
+precision highp float;
+in vec2 vUv;
+out vec4 fragColor;
+uniform sampler2D uScene;
+vec3 aces(vec3 x){ float a=2.51,b=0.03,c=2.43,d=0.59,e=0.14; return clamp((x*(a*x+b))/(x*(c*x+d)+e),0.0,1.0); }
+void main(){
+  vec3 col = texture(uScene, vUv).rgb;
+  float v = 1.0 - dot(vUv-0.5, vUv-0.5) * 1.6;
+  col *= max(v, 0.0);
+  col.r *= 0.88; col.g *= 0.96; col.b *= 1.08;
+  col = aces(col * 1.1);
+  fragColor = vec4(col, 1.0);
+}`;
+
+const progGrad  = program(QUAD_VERT, GRAD_FRAG);
+const progImage = program(QUAD_VERT, IMAGE_FRAG);
+const progXray  = program(QUAD_VERT, XRAY_FRAG);
+const progDepth = program(QUAD_VERT, DEPTH_FRAG);
+const progLens  = program(QUAD_VERT, LENS_FRAG);
+const progBlurH = program(QUAD_VERT, BLUR_H_FRAG);
+const progBlurV = program(QUAD_VERT, BLUR_V_FRAG);
+const progFBM   = program(QUAD_VERT, FBM_FRAG);
+const progFog   = program(QUAD_VERT, FOG_FRAG);
+const progBlob  = program(QUAD_VERT, BLOB_FRAG);
+const progFinal = program(QUAD_VERT, FINAL_FRAG);
+
+let fboA, fboB, fboC, fboHalf;
+function resizeFBOs() {
+  [fboA, fboB, fboC].forEach(f => { if(!f) return; gl.deleteTexture(f.tex); gl.deleteFramebuffer(f.fb); });
+  fboA    = makeFBO(W, H);
+  fboB    = makeFBO(W, H);
+  fboC    = makeFBO(W, H);
+  fboHalf = makeFBO(Math.ceil(W*0.5), Math.ceil(H*0.5));
+}
+
+function loadTexture(url) {
+  const tex = gl.createTexture();
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = () => {
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+    gl.generateMipmap(gl.TEXTURE_2D);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    photoTex = tex;
+  };
+  img.src = url;
+  return tex;
+}
+
+function initBlobs() {
+  blobs = Array.from({ length: 6 }, (_, i) => ({
+    x: 0.2 + Math.random() * 0.6,
+    y: 0.2 + Math.random() * 0.6,
+    vx: (Math.random() - 0.5) * 0.002,
+    vy: (Math.random() - 0.5) * 0.002,
+    life: Math.random(),
+    phase: Math.random() * Math.PI * 2,
+  }));
+}
+function updateBlobs(dt) {
+  blobs.forEach(b => {
+    b.vx += (mouse.x - b.x) * 0.0003;
+    b.vy += (mouse.y - b.y) * 0.0003;
+    b.vx *= 0.96; b.vy *= 0.96;
+    b.x = Math.max(0.05, Math.min(0.95, b.x + b.vx));
+    b.y = Math.max(0.05, Math.min(0.95, b.y + b.vy));
+    b.life = 0.5 + 0.5 * Math.sin(Date.now() * 0.001 * CFG.blob.speed + b.phase);
+  });
+}
+
+function resize() {
+  W = canvas.width = Math.round(canvas.offsetWidth * CFG.dpi);
+  H = canvas.height = Math.round(canvas.offsetHeight * CFG.dpi);
+  gl.viewport(0, 0, W, H);
+  resizeFBOs();
+}
+
+window.addEventListener('resize', resize);
+window.addEventListener('mousemove', e => {
+  mouse.x = e.clientX / window.innerWidth;
+  mouse.y = 1.0 - e.clientY / window.innerHeight;
+});
+window.addEventListener('touchmove', e => {
+  e.preventDefault();
+  mouse.x = e.touches[0].clientX / window.innerWidth;
+  mouse.y = 1.0 - e.touches[0].clientY / window.innerHeight;
+}, { passive: false });
+
+let lastFrame = 0;
+function render(now) {
+  requestAnimationFrame(render);
+  const dt = Math.min((now - lastFrame) / 1000, 0.05);
+  lastFrame = now;
+  if (!photoTex || !fboA) return;
+  const t = (now - startTime) / 1000;
+  smoothMouse.x += (mouse.x - smoothMouse.x) * 0.07;
+  smoothMouse.y += (mouse.y - smoothMouse.y) * 0.07;
+  parallaxTarget.x = (smoothMouse.x - 0.5) * 2;
+  parallaxTarget.y = (smoothMouse.y - 0.5) * 2;
+  parallaxSmooth.x += (parallaxTarget.x - parallaxSmooth.x) * CFG.parallax.momentum;
+  parallaxSmooth.y += (parallaxTarget.y - parallaxSmooth.y) * CFG.parallax.momentum;
+  lensSmooth.x += (smoothMouse.x - lensSmooth.x) * CFG.lens.momentum;
+  lensSmooth.y += (smoothMouse.y - lensSmooth.y) * CFG.lens.momentum;
+  blurSmooth.x += (smoothMouse.x - blurSmooth.x) * CFG.blur.momentum;
+  blurSmooth.y += (smoothMouse.y - blurSmooth.y) * CFG.blur.momentum;
+  updateBlobs(dt);
+  gl.bindVertexArray(vao);
+  bindFBO(fboA);
+  useAndDraw(progGrad, { uTop: CFG.grad.top, uBot: CFG.grad.bottom });
+  bindFBO(fboB);
+  bindTex(0, fboA.tex); bindTex(1, photoTex);
+  gl.useProgram(progImage);
+  gl.uniform1i(gl.getUniformLocation(progImage,'uScene'),0);
+  gl.uniform1i(gl.getUniformLocation(progImage,'uTex'),1);
+  useAndDraw(progImage, { uResolution:[W,H], uParallax:[parallaxSmooth.x,parallaxSmooth.y], uOpacity:0.92 });
+  bindFBO(fboA);
+  bindTex(0, photoTex); bindTex(1, fboB.tex);
+  gl.useProgram(progXray);
+  gl.uniform1i(gl.getUniformLocation(progXray,'uTex'),0);
+  gl.uniform1i(gl.getUniformLocation(progXray,'uScene'),1);
+  useAndDraw(progXray, { uResolution:[W,H], uParallax:[parallaxSmooth.x,parallaxSmooth.y], uColor:CFG.xray.color, uOpacity:CFG.xray.opacity, uEdgeStrength:CFG.xray.edgeStrength, uGlowWidth:CFG.xray.glowWidth, uTime:t });
+  bindFBO(fboB);
+  bindTex(0, fboA.tex); bindTex(1, photoTex);
+  gl.useProgram(progDepth);
+  gl.uniform1i(gl.getUniformLocation(progDepth,'uScene'),0);
+  gl.uniform1i(gl.getUniformLocation(progDepth,'uTex'),1);
+  useAndDraw(progDepth, { uMouse:[parallaxSmooth.x*0.5,parallaxSmooth.y*0.5], uResolution:[W,H] });
+  bindFBO(fboA);
+  bindTex(0, fboB.tex);
+  useAndDraw(progLens, { uScene:0, uPos:[lensSmooth.x,lensSmooth.y], uRadius:CFG.lens.radius, uStrength:CFG.lens.strength, uTime:t });
+  bindFBO(fboB);
+  bindTex(0, fboA.tex);
+  useAndDraw(progBlurH, { uScene:0, uResolution:[W,H], uMouse:[blurSmooth.x,blurSmooth.y], uRadius:CFG.blur.radius });
+  bindFBO(fboA);
+  bindTex(0, fboB.tex);
+  useAndDraw(progBlurV, { uScene:0, uResolution:[W,H], uMouse:[blurSmooth.x,blurSmooth.y], uRadius:CFG.blur.radius });
+  bindFBO(fboB);
+  bindTex(0, fboA.tex);
+  useAndDraw(progFBM, { uScene:0, uTime:t, uOpacity:CFG.fbm.opacity, uScale:CFG.fbm.scale, uResolution:[W,H] });
+  bindFBO(fboA);
+  bindTex(0, fboB.tex);
+  useAndDraw(progFog, { uScene:0, uTime:t, uDensity:CFG.fog.density, uColor:CFG.fog.color, uResolution:[W,H] });
+  bindFBO(fboB);
+  bindTex(0, fboA.tex);
+  const blobPos = new Float32Array(16);
+  const blobLife = new Float32Array(8);
+  blobs.forEach((b,i) => { blobPos[i*2]=b.x; blobPos[i*2+1]=b.y; blobLife[i]=b.life; });
+  gl.useProgram(progBlob);
+  bindTex(0, fboA.tex);
+  gl.uniform1i(gl.getUniformLocation(progBlob,'uScene'),0);
+  gl.uniform2fv(gl.getUniformLocation(progBlob,'uBlobs'),blobPos);
+  gl.uniform1fv(gl.getUniformLocation(progBlob,'uBlobLife'),blobLife);
+  gl.uniform1f(gl.getUniformLocation(progBlob,'uRadius'),CFG.blob.radius);
+  gl.uniform1f(gl.getUniformLocation(progBlob,'uOpacity'),CFG.blob.opacity);
+  gl.uniform3fv(gl.getUniformLocation(progBlob,'uColor'),new Float32Array(CFG.blob.color));
+  gl.uniform1f(gl.getUniformLocation(progBlob,'uTime'),t);
+  gl.uniform1f(gl.getUniformLocation(progBlob,'uAspect'),W/H);
+  gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+  bindFBO(null);
+  bindTex(0, fboB.tex);
+  useAndDraw(progFinal, { uScene:0 });
+}
+
+loadTexture(IMAGE_URL);
+initBlobs();
+resize();
 setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity='0';},5000);
-function loop(now){
-const t=(now-t0)*.001;
-sm.x+=(mouse.x-sm.x)*.07;sm.y+=(mouse.y-sm.y)*.07;
-gl.uniform1f(uT,t);gl.uniform2f(uM,sm.x,sm.y);gl.uniform2f(uR,W,H);
-gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
-requestAnimationFrame(loop);}
-requestAnimationFrame(loop);
+requestAnimationFrame(render);
 </script>
 </body>
 </html>
