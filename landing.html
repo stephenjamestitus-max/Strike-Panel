@@ -499,6 +499,23 @@ footer{
   .checks{gap:14px}
 }
 @keyframes kdot{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.7)}50%{box-shadow:0 0 0 6px rgba(239,68,68,0)}}
+/* ── Layer system (hero background) ─────────────────────────── */
+.layer{position:absolute;inset:0;pointer-events:none}
+.l-bg-img{
+  position:absolute;inset:-10%;
+  background:url('blog/gym-wide.jpg.png') center center/cover no-repeat;
+  filter:brightness(0.42) saturate(0.65) sepia(0.3);
+  transform:scale(1.1);z-index:0
+}
+.l-bg-vignette{
+  position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 100%,rgba(4,7,15,1) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 100% at 0% 50%,rgba(4,7,15,.9) 0%,transparent 65%),
+    radial-gradient(ellipse 40% 100% at 100% 50%,rgba(4,7,15,.9) 0%,transparent 65%),
+    radial-gradient(ellipse 100% 50% at 50% 0%,rgba(4,7,15,.95) 0%,transparent 60%)
+}
+.l-rays{position:absolute;inset:0;z-index:1;overflow:hidden}
 /* hero entrance initial state — cleared by anime.js on load */
 #h-kicker,#h-hl span,#h-sub,#h-widget,#h-ctas{opacity:0}
 </style>
@@ -566,8 +583,16 @@ footer{
      HERO
 ══════════════════════════════════════════════════ -->
 <section id="hero">
-  <canvas id="xray-canvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block;"></canvas>
-  <div id="xray-hint" style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(0,212,240,0.7);font-family:monospace;font-size:11px;letter-spacing:4px;pointer-events:none;text-transform:uppercase;transition:opacity 1.5s;z-index:4;">// MOVE CURSOR TO REVEAL</div>
+  <div class="layer l-bg" id="lBg">
+    <div class="l-bg-img" id="bgImg"></div>
+    <div class="l-bg-vignette"></div>
+  </div>
+  <div class="layer l-rays" id="lRays">
+    <div class="ray ray-1"></div>
+    <div class="ray ray-2"></div>
+    <div class="ray ray-3"></div>
+    <div class="ray ray-4"></div>
+  </div>
 
   <div class="motes" id="motes" aria-hidden="true" style="pointer-events:none;"></div>
   <div class="hero-vignette" aria-hidden="true"></div>
@@ -1060,169 +1085,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 </script>
-<script>
-/* ── X-Ray WebGL Hero ─────────────────────────────────────── */
-(function(){
-const CFG = {
-  dpi: 1.5,
-  parallax: { momentum: 0.11 },
-  lens: { momentum: 0.93, radius: 0.38, strength: 0.45 },
-  blur: { momentum: 0.58, radius: 18.0 },
-  fbm: { scale: 3.0, opacity: 0.18 },
-  fog: { density: 0.22, color: [0.02, 0.08, 0.12] },
-  xray: { opacity: 0.72, color: [0.0, 0.83, 0.94], edgeStrength: 2.8, glowWidth: 0.012 },
-  grad: { top: [0.02, 0.08, 0.12], bottom: [0.01, 0.03, 0.05] },
-  blob: { speed: 0.5, radius: 0.04, opacity: 0.35, color: [0.1, 0.7, 1.0] },
-};
-const xCanvas = document.getElementById('xray-canvas');
-const xGl = xCanvas.getContext('webgl2', { antialias: false, alpha: false });
-console.log('WebGL2 context:', xGl ? 'OK' : 'FAILED');
-if (!xGl) {
-  xCanvas.style.background = 'red';
-  xCanvas.style.display = 'block';
-  const fallback = document.createElement('img');
-  fallback.src = '/marketing/boxing.jpg';
-  fallback.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.5);z-index:0;';
-  xCanvas.parentNode.replaceChild(fallback, canvas);
-  return;
-}
-let W = 0, H = 0;
-let xMouse = { x: 0.5, y: 0.5 };
-let smoothMouse = { x: 0.5, y: 0.5 };
-let parallaxSmooth = { x: 0, y: 0 };
-let lensSmooth = { x: 0.5, y: 0.5 };
-let blurSmooth = { x: 0.5, y: 0.5 };
-let xStartTime = Date.now();
-let xPhotoTex = null;
-let xBlobs = [];
-const QUAD_VERT = `#version 300 es
-in vec2 aPos;out vec2 vUv;
-void main(){ vUv=aPos*.5+.5; gl_Position=vec4(aPos,0.,1.); }`;
-function xCompile(src,type){ const s=xGl.createShader(type); xGl.shaderSource(s,src); xGl.compileShader(s); if(!xGl.getShaderParameter(s,xGl.COMPILE_STATUS)) console.error(xGl.getShaderInfoLog(s)); return s; }
-function xProgram(vert,frag){ const p=xGl.createProgram(); xGl.attachShader(p,xCompile(vert,xGl.VERTEX_SHADER)); xGl.attachShader(p,xCompile(frag,xGl.FRAGMENT_SHADER)); xGl.linkProgram(p); if(!xGl.getProgramParameter(p,xGl.LINK_STATUS)) console.error(xGl.getProgramInfoLog(p)); return p; }
-function makeFBO(w,h){ const ext=xGl.getExtension('EXT_color_buffer_float'); const tex=xGl.createTexture(); xGl.bindTexture(xGl.TEXTURE_2D,tex); if(ext){ xGl.texImage2D(xGl.TEXTURE_2D,0,xGl.RGBA16F,w,h,0,xGl.RGBA,xGl.HALF_FLOAT,null); } else { xGl.texImage2D(xGl.TEXTURE_2D,0,xGl.RGBA,w,h,0,xGl.RGBA,xGl.UNSIGNED_BYTE,null); } xGl.texParameteri(xGl.TEXTURE_2D,xGl.TEXTURE_MIN_FILTER,xGl.LINEAR); xGl.texParameteri(xGl.TEXTURE_2D,xGl.TEXTURE_MAG_FILTER,xGl.LINEAR); xGl.texParameteri(xGl.TEXTURE_2D,xGl.TEXTURE_WRAP_S,xGl.CLAMP_TO_EDGE); xGl.texParameteri(xGl.TEXTURE_2D,xGl.TEXTURE_WRAP_T,xGl.CLAMP_TO_EDGE); const fb=xGl.createFramebuffer(); xGl.bindFramebuffer(xGl.FRAMEBUFFER,fb); xGl.framebufferTexture2D(xGl.FRAMEBUFFER,xGl.COLOR_ATTACHMENT0,xGl.TEXTURE_2D,tex,0); return {tex,fb,w,h}; }
-function bindFBO(fbo){ xGl.bindFramebuffer(xGl.FRAMEBUFFER,fbo?fbo.fb:null); if(fbo) xGl.viewport(0,0,fbo.w,fbo.h); else xGl.viewport(0,0,W,H); }
-function useAndDraw(prog,uniforms){ xGl.useProgram(prog); Object.entries(uniforms).forEach(([k,v])=>{ const loc=xGl.getUniformLocation(prog,k); if(loc===null) return; if(Number.isInteger(v)&&v>=0&&v<16) xGl.uniform1i(loc,v); else if(typeof v==='number') xGl.uniform1f(loc,v); else if(v.length===2) xGl.uniform2f(loc,v[0],v[1]); else if(v.length===3) xGl.uniform3f(loc,v[0],v[1],v[2]); else if(v.length===4) xGl.uniform4f(loc,v[0],v[1],v[2],v[3]); }); xGl.drawArrays(xGl.TRIANGLE_STRIP,0,4); }
-function bindTex(unit,tex){ xGl.activeTexture(xGl.TEXTURE0+unit); xGl.bindTexture(xGl.TEXTURE_2D,tex); }
-const xVao=xGl.createVertexArray(); xGl.bindVertexArray(xVao);
-const xVbuf=xGl.createBuffer(); xGl.bindBuffer(xGl.ARRAY_BUFFER,xVbuf);
-xGl.bufferData(xGl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),xGl.STATIC_DRAW);
-xGl.enableVertexAttribArray(0); xGl.vertexAttribPointer(0,2,xGl.FLOAT,false,0,0);
-const GRAD_FRAG=`#version 300 es
-precision highp float;in vec2 vUv;out vec4 fragColor;uniform vec3 uTop,uBot;
-void main(){ vec3 c=mix(uBot,uTop,vUv.y); float r=length(vUv-.5); c+=vec3(.04,.10,.13)*(1.-smoothstep(0.,.8,r)); fragColor=vec4(c,1.); }`;
-const IMAGE_FRAG=`#version 300 es
-precision highp float;in vec2 vUv;out vec4 fragColor;uniform sampler2D uTex;uniform vec2 uResolution,uParallax;uniform float uOpacity;
-void main(){ float aspect=uResolution.x/uResolution.y; vec2 uv=vUv+uParallax*vec2(.025,.025); vec2 ts=vec2(textureSize(uTex,0)); float ta=ts.x/ts.y; vec2 scale=vec2(1.); if(ta>aspect) scale.x=ta/aspect; else scale.y=aspect/ta; uv=(uv-.5)/scale+.5; uv=clamp(uv,0.,1.); vec4 col=texture(uTex,uv); fragColor=vec4(col.rgb,col.a*uOpacity); }`;
-const XRAY_FRAG=`#version 300 es
-precision highp float;in vec2 vUv;out vec4 fragColor;uniform sampler2D uTex,uScene;uniform vec2 uResolution,uParallax;uniform vec3 uColor;uniform float uOpacity,uEdgeStrength,uGlowWidth,uTime;
-float edge(sampler2D tex,vec2 uv,vec2 px){ float tl=dot(texture(tex,uv+vec2(-px.x,px.y)).rgb,vec3(.299,.587,.114)),t=dot(texture(tex,uv+vec2(0.,px.y)).rgb,vec3(.299,.587,.114)),tr=dot(texture(tex,uv+vec2(px.x,px.y)).rgb,vec3(.299,.587,.114)),l=dot(texture(tex,uv+vec2(-px.x,0.)).rgb,vec3(.299,.587,.114)),r=dot(texture(tex,uv+vec2(px.x,0.)).rgb,vec3(.299,.587,.114)),bl=dot(texture(tex,uv+vec2(-px.x,-px.y)).rgb,vec3(.299,.587,.114)),b=dot(texture(tex,uv+vec2(0.,-px.y)).rgb,vec3(.299,.587,.114)),br=dot(texture(tex,uv+vec2(px.x,-px.y)).rgb,vec3(.299,.587,.114)); float gx=-tl-2.*l-bl+tr+2.*r+br,gy=-tl-2.*t-tr+bl+2.*b+br; return sqrt(gx*gx+gy*gy); }
-void main(){ vec2 px=1./uResolution,uv=vUv+uParallax*.018; vec3 scene=texture(uScene,vUv).rgb; float e=clamp((edge(uTex,uv,px)+edge(uTex,uv,px*2.)*.6+edge(uTex,uv,px*4.)*.3)*uEdgeStrength,0.,1.); float glow=0.; for(int i=0;i<8;i++){ float a=3.14159265*2.*float(i)/8.; glow+=edge(uTex,uv+vec2(cos(a),sin(a))*uGlowWidth,px*1.5); } glow=clamp(glow/8.*1.8,0.,1.); float shimmer=(sin(uv.y*80.+uTime*3.)*.5+.5)*.15; vec3 xc=uColor+vec3(shimmer*.1,shimmer*.3,shimmer*.5); float br=dot(texture(uTex,uv).rgb,vec3(.299,.587,.114)); vec3 hl=mix(xc,xc*1.8+vec3(.2,.4,.6),br*.4); float xm=clamp(e+glow*.5,0.,1.); vec3 result=mix(scene,hl*xm,xm*uOpacity); result+=uColor*.06*br; fragColor=vec4(result,1.); }`;
-const DEPTH_FRAG=`#version 300 es
-precision highp float;in vec2 vUv;out vec4 fragColor;uniform sampler2D uScene,uTex;uniform vec2 uMouse;
-void main(){ float depth=dot(texture(uTex,vUv).rgb,vec3(.299,.587,.114)); fragColor=texture(uScene,clamp(vUv+uMouse*depth*.025,.001,.999)); }`;
-const LENS_FRAG=`#version 300 es
-precision highp float;in vec2 vUv;out vec4 fragColor;uniform sampler2D uScene;uniform vec2 uPos;uniform float uRadius,uStrength;
-void main(){ vec2 uv=vUv,d=uv-uPos; float dist=length(d),r=uRadius; if(dist<r){ float t=dist/r,w=1.-pow(1.-t*t,uStrength*1.5),sc=mix(1.,w/max(t,.001),smoothstep(0.,1.,t)); uv=uPos+d*sc; } fragColor=texture(uScene,clamp(uv,.001,.999)); }`;
-const BLUR_H_FRAG=`#version 300 es
-precision highp float;in vec2 vUv;out vec4 fragColor;uniform sampler2D uScene;uniform vec2 uResolution,uMouse;uniform float uRadius;
-void main(){ vec2 px=1./uResolution; float r=uRadius*smoothstep(0.,.6,abs(vUv.x-uMouse.x)); vec4 col=vec4(0.); float tot=0.; for(int i=-12;i<=12;i++){ float w=exp(-float(i*i)/(2.*r*r+.01)); col+=texture(uScene,vUv+vec2(float(i)*px.x,0.))*w; tot+=w; } fragColor=col/tot; }`;
-const BLUR_V_FRAG=`#version 300 es
-precision highp float;in vec2 vUv;out vec4 fragColor;uniform sampler2D uScene;uniform vec2 uResolution,uMouse;uniform float uRadius;
-void main(){ vec2 px=1./uResolution; float r=uRadius*smoothstep(0.,.6,abs(vUv.y-uMouse.y)); vec4 col=vec4(0.); float tot=0.; for(int i=-12;i<=12;i++){ float w=exp(-float(i*i)/(2.*r*r+.01)); col+=texture(uScene,vUv+vec2(0.,float(i)*px.y))*w; tot+=w; } fragColor=col/tot; }`;
-const FBM_FRAG=`#version 300 es
-precision highp float;in vec2 vUv;out vec4 fragColor;uniform sampler2D uScene;uniform float uTime,uOpacity,uScale;
-float hash(vec2 p){ p=fract(p*vec2(234.34,435.345)); p+=dot(p,p+34.23); return fract(p.x*p.y); }
-float noise(vec2 p){ vec2 i=floor(p),f=fract(p); f=f*f*(3.-2.*f); return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y); }
-float fbm(vec2 p){ float v=0.,a=.5; mat2 rot=mat2(cos(.5),sin(.5),-sin(.5),cos(.5)); for(int i=0;i<5;i++){v+=a*noise(p);p=rot*p*2.;a*=.5;} return v; }
-void main(){ vec2 uv=vUv*uScale; float t=uTime*.1; float n=fbm(uv+vec2(fbm(uv+t),fbm(uv-t*.7+vec2(3.1,1.7)))); vec3 scene=texture(uScene,vUv).rgb; fragColor=vec4(scene+vec3(.05,.18,.25)*n*uOpacity,1.); }`;
-const FOG_FRAG=`#version 300 es
-precision highp float;in vec2 vUv;out vec4 fragColor;uniform sampler2D uScene;uniform float uTime,uDensity;uniform vec3 uColor;
-float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
-float noise(vec2 p){ vec2 i=floor(p),f=fract(p); f=f*f*(3.-2.*f); return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y); }
-float fbm(vec2 p){ float v=0.,a=.5; for(int i=0;i<4;i++){v+=a*noise(p);p*=2.1;a*=.5;} return v; }
-void main(){ float t=uTime*.5; float fog=clamp((fbm(vUv*2.5+vec2(t*.12,t*.08))+fbm(vUv*4.-vec2(t*.07,t*.05))*.5)*uDensity,0.,.4)*length(vUv-.5)*1.4; vec3 scene=texture(uScene,vUv).rgb; fragColor=vec4(mix(scene,uColor,fog),1.); }`;
-const BLOB_FRAG=`#version 300 es
-precision highp float;in vec2 vUv;out vec4 fragColor;uniform sampler2D uScene;uniform vec2 uBlobs[8];uniform float uBlobLife[8],uRadius,uOpacity,uTime,uAspect;uniform vec3 uColor;
-void main(){ vec3 scene=texture(uScene,vUv).rgb,glow=vec3(0.); for(int i=0;i<6;i++){ vec2 pos=uBlobs[i]; float life=uBlobLife[i]; if(life<=0.) continue; vec2 diff=(vUv-pos)*vec2(uAspect,1.); float d=length(diff),r=uRadius*(.8+.4*life); float core=exp(-d*d/(r*r*.1))*life; float ring=smoothstep(r*1.2,r*.8,d)*smoothstep(0.,r*.3,d)*life*.5; float pulse=.8+.2*sin(uTime*4.+float(i)*1.7); glow+=(core+ring)*uColor*pulse; if(i<5){ vec2 next=uBlobs[i+1]; float nl=uBlobLife[i+1]; if(nl>0.){ vec2 dir=next-pos; float len=length(dir*vec2(uAspect,1.)); vec2 nd=dir/max(len/uAspect,.001),toP=(vUv-pos)*vec2(uAspect,1.); float proj=clamp(dot(toP,nd*vec2(uAspect,1.))/(len*uAspect),0.,1.); glow+=exp(-length(toP-proj*nd*vec2(uAspect,1.)*len)*length(toP-proj*nd*vec2(uAspect,1.)*len)*800.)*min(life,nl)*.3*uColor; } } } fragColor=vec4(scene+glow*uOpacity,1.); }`;
-const FINAL_FRAG=`#version 300 es
-precision highp float;in vec2 vUv;out vec4 fragColor;uniform sampler2D uScene;
-vec3 aces(vec3 x){ float a=2.51,b=.03,c=2.43,d=.59,e=.14; return clamp((x*(a*x+b))/(x*(c*x+d)+e),0.,1.); }
-void main(){ vec3 col=texture(uScene,vUv).rgb; float v=1.-dot(vUv-.5,vUv-.5)*1.6; col*=max(v,0.); col.r*=.88;col.g*=.96;col.b*=1.08; fragColor=vec4(aces(col*1.1),1.); }`;
-const progGrad=xProgram(QUAD_VERT,GRAD_FRAG),progImage=xProgram(QUAD_VERT,IMAGE_FRAG),progXray=xProgram(QUAD_VERT,XRAY_FRAG),progDepth=xProgram(QUAD_VERT,DEPTH_FRAG),progLens=xProgram(QUAD_VERT,LENS_FRAG),progBlurH=xProgram(QUAD_VERT,BLUR_H_FRAG),progBlurV=xProgram(QUAD_VERT,BLUR_V_FRAG),progFBM=xProgram(QUAD_VERT,FBM_FRAG),progFog=xProgram(QUAD_VERT,FOG_FRAG),progBlob=xProgram(QUAD_VERT,BLOB_FRAG),progFinal=xProgram(QUAD_VERT,FINAL_FRAG);
-let fboA,fboB,fboC;
-function resizeFBOs(){ [fboA,fboB,fboC].forEach(f=>{if(!f)return;xGl.deleteTexture(f.tex);xGl.deleteFramebuffer(f.fb);}); fboA=makeFBO(W,H); fboB=makeFBO(W,H); fboC=makeFBO(W,H); }
-function initBlobs(){ xBlobs=Array.from({length:6},(_,i)=>({x:.2+Math.random()*.6,y:.2+Math.random()*.6,vx:(Math.random()-.5)*.002,vy:(Math.random()-.5)*.002,life:Math.random(),phase:Math.random()*Math.PI*2})); }
-function updateBlobs(dt){ xBlobs.forEach(b=>{ b.vx+=(xMouse.x-b.x)*.0003; b.vy+=(xMouse.y-b.y)*.0003; b.vx*=.96; b.vy*=.96; b.x=Math.max(.05,Math.min(.95,b.x+b.vx)); b.y=Math.max(.05,Math.min(.95,b.y+b.vy)); b.life=.5+.5*Math.sin(Date.now()*.001*CFG.blob.speed+b.phase); }); }
-function xResize(){ W=xCanvas.width=Math.round(xCanvas.offsetWidth*CFG.dpi); H=xCanvas.height=Math.round(xCanvas.offsetHeight*CFG.dpi); xGl.viewport(0,0,W,H); resizeFBOs(); }
-window.addEventListener('resize', xResize);
-window.addEventListener('mousemove',e=>{ xMouse.x=e.clientX/window.innerWidth; xMouse.y=1-e.clientY/window.innerHeight; });
-window.addEventListener('touchmove',e=>{ e.preventDefault(); xMouse.x=e.touches[0].clientX/window.innerWidth; xMouse.y=1-e.touches[0].clientY/window.innerHeight; },{passive:false});
-let xLastFrame=0;
-function xRender(now){ requestAnimationFrame(xRender); const dt=Math.min((now-xLastFrame)/1000,.05); xLastFrame=now; if(!xPhotoTex||!fboA) return; const t=(now-xStartTime)/1000; smoothMouse.x+=(xMouse.x-smoothMouse.x)*.07; smoothMouse.y+=(xMouse.y-smoothMouse.y)*.07; const px=(smoothMouse.x-.5)*2,py=(smoothMouse.y-.5)*2; parallaxSmooth.x+=(px-parallaxSmooth.x)*CFG.parallax.momentum; parallaxSmooth.y+=(py-parallaxSmooth.y)*CFG.parallax.momentum; lensSmooth.x+=(smoothMouse.x-lensSmooth.x)*CFG.lens.momentum; lensSmooth.y+=(smoothMouse.y-lensSmooth.y)*CFG.lens.momentum; blurSmooth.x+=(smoothMouse.x-blurSmooth.x)*CFG.blur.momentum; blurSmooth.y+=(smoothMouse.y-blurSmooth.y)*CFG.blur.momentum; updateBlobs(dt); xGl.bindVertexArray(xVao);
-  bindFBO(fboA); useAndDraw(progGrad,{uTop:CFG.grad.top,uBot:CFG.grad.bottom});
-  bindFBO(fboB); bindTex(0,fboA.tex); bindTex(1,xPhotoTex); xGl.useProgram(progImage); xGl.uniform1i(xGl.getUniformLocation(progImage,'uScene'),0); xGl.uniform1i(xGl.getUniformLocation(progImage,'uTex'),1); useAndDraw(progImage,{uResolution:[W,H],uParallax:[parallaxSmooth.x,parallaxSmooth.y],uOpacity:.92});
-  bindFBO(fboA); bindTex(0,xPhotoTex); bindTex(1,fboB.tex); xGl.useProgram(progXray); xGl.uniform1i(xGl.getUniformLocation(progXray,'uTex'),0); xGl.uniform1i(xGl.getUniformLocation(progXray,'uScene'),1); useAndDraw(progXray,{uResolution:[W,H],uParallax:[parallaxSmooth.x,parallaxSmooth.y],uColor:CFG.xray.color,uOpacity:CFG.xray.opacity,uEdgeStrength:CFG.xray.edgeStrength,uGlowWidth:CFG.xray.glowWidth,uTime:t});
-  bindFBO(fboB); bindTex(0,fboA.tex); bindTex(1,xPhotoTex); xGl.useProgram(progDepth); xGl.uniform1i(xGl.getUniformLocation(progDepth,'uScene'),0); xGl.uniform1i(xGl.getUniformLocation(progDepth,'uTex'),1); useAndDraw(progDepth,{uMouse:[parallaxSmooth.x*.5,parallaxSmooth.y*.5],uResolution:[W,H]});
-  bindFBO(fboA); bindTex(0,fboB.tex); useAndDraw(progLens,{uScene:0,uPos:[lensSmooth.x,lensSmooth.y],uRadius:CFG.lens.radius,uStrength:CFG.lens.strength,uTime:t});
-  bindFBO(fboB); bindTex(0,fboA.tex); useAndDraw(progBlurH,{uScene:0,uResolution:[W,H],uMouse:[blurSmooth.x,blurSmooth.y],uRadius:CFG.blur.radius});
-  bindFBO(fboA); bindTex(0,fboB.tex); useAndDraw(progBlurV,{uScene:0,uResolution:[W,H],uMouse:[blurSmooth.x,blurSmooth.y],uRadius:CFG.blur.radius});
-  bindFBO(fboB); bindTex(0,fboA.tex); useAndDraw(progFBM,{uScene:0,uTime:t,uOpacity:CFG.fbm.opacity,uScale:CFG.fbm.scale,uResolution:[W,H]});
-  bindFBO(fboA); bindTex(0,fboB.tex); useAndDraw(progFog,{uScene:0,uTime:t,uDensity:CFG.fog.density,uColor:CFG.fog.color,uResolution:[W,H]});
-  bindFBO(fboB); bindTex(0,fboA.tex); const blobPos=new Float32Array(16),blobLife=new Float32Array(8); xBlobs.forEach((b,i)=>{blobPos[i*2]=b.x;blobPos[i*2+1]=b.y;blobLife[i]=b.life;}); xGl.useProgram(progBlob); bindTex(0,fboA.tex); xGl.uniform1i(xGl.getUniformLocation(progBlob,'uScene'),0); xGl.uniform2fv(xGl.getUniformLocation(progBlob,'uBlobs'),blobPos); xGl.uniform1fv(xGl.getUniformLocation(progBlob,'uBlobLife'),blobLife); xGl.uniform1f(xGl.getUniformLocation(progBlob,'uRadius'),CFG.blob.radius); xGl.uniform1f(xGl.getUniformLocation(progBlob,'uOpacity'),CFG.blob.opacity); xGl.uniform3fv(xGl.getUniformLocation(progBlob,'uColor'),new Float32Array(CFG.blob.color)); xGl.uniform1f(xGl.getUniformLocation(progBlob,'uTime'),t); xGl.uniform1f(xGl.getUniformLocation(progBlob,'uAspect'),W/H); xGl.drawArrays(xGl.TRIANGLE_STRIP,0,4);
-  bindFBO(null); bindTex(0,fboB.tex); useAndDraw(progFinal,{uScene:0});
-}
-function xCreateTexture(img) {
-  const tex = xGl.createTexture();
-  xGl.bindTexture(xGl.TEXTURE_2D, tex);
-  xGl.texImage2D(xGl.TEXTURE_2D, 0, xGl.RGBA, xGl.RGBA, xGl.UNSIGNED_BYTE, img);
-  xGl.generateMipmap(xGl.TEXTURE_2D);
-  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_MIN_FILTER, xGl.LINEAR_MIPMAP_LINEAR);
-  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_MAG_FILTER, xGl.LINEAR);
-  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_WRAP_S, xGl.CLAMP_TO_EDGE);
-  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_WRAP_T, xGl.CLAMP_TO_EDGE);
-  return tex;
-}
-async function xLoadAndStart() {
-  try {
-    const response = await fetch('/marketing/boxing.jpg');
-    const blob = await response.blob();
-    const objectURL = URL.createObjectURL(blob);
-    const img = new Image();
-    img.onload = () => {
-      console.log('Image loaded:', img.width, 'x', img.height);
-      xPhotoTex = xCreateTexture(img);
-      initBlobs();
-      xResize();
-      setTimeout(()=>{const h=document.getElementById('xray-hint');if(h)h.style.opacity='0';},5000);
-      requestAnimationFrame(xRender);
-    };
-    img.onerror = (e) => console.error('Image load failed:', e);
-    img.src = objectURL;
-  } catch(err) {
-    console.error('Fetch failed:', err);
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      xPhotoTex = xCreateTexture(img);
-      initBlobs();
-      xResize();
-      requestAnimationFrame(xRender);
-    };
-    img.src = '/marketing/boxing.jpg';
-  }
-}
-xLoadAndStart();
-})();
-</script>
 <script type="module">
-import anime from 'https://cdn.jsdelivr.net/npm/animejs@4.0.0/lib/anime.esm.min.js';
+import { animate, stagger, createTimer } from 'https://cdn.jsdelivr.net/npm/animejs@4.0.0/lib/anime.esm.min.js';
 
 /* ── A) Scroll reveal — .ru elements ─────────────────────── */
 const revealIO = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
-    anime({ targets: entry.target, opacity: [0, 1], translateY: [32, 0], duration: 700, easing: 'spring(1,80,10,0)' });
+    animate({ targets: entry.target, opacity: [0, 1], translateY: [32, 0], duration: 700, easing: 'spring(1,80,10,0)' });
     revealIO.unobserve(entry.target);
   });
 }, { threshold: 0.14 });
@@ -1231,9 +1101,9 @@ document.querySelectorAll('.ru').forEach(el => revealIO.observe(el));
 /* ── B) Pain cards stagger ────────────────────────────────── */
 const painIO = new IntersectionObserver((entries) => {
   if (!entries[0].isIntersecting) return;
-  anime({ targets: '.pain-card', opacity: [0, 1], translateY: [24, 0], delay: anime.stagger(120), duration: 600, easing: 'easeOutCubic' });
+  animate({ targets: '.pain-card', opacity: [0, 1], translateY: [24, 0], delay: stagger(120), duration: 600, easing: 'easeOutCubic' });
   const bridge = document.querySelector('.prob-bridge');
-  if (bridge) setTimeout(() => anime({ targets: bridge, opacity: [0, 1], translateY: [16, 0], duration: 600, easing: 'easeOutCubic' }), 500);
+  if (bridge) setTimeout(() => animate({ targets: bridge, opacity: [0, 1], translateY: [16, 0], duration: 600, easing: 'easeOutCubic' }), 500);
   painIO.disconnect();
 }, { threshold: 0.2 });
 const painGrid = document.querySelector('.pain-grid');
@@ -1242,9 +1112,9 @@ if (painGrid) painIO.observe(painGrid);
 /* ── C) Feature cards stagger ─────────────────────────────── */
 const fcIO = new IntersectionObserver((entries) => {
   if (!entries[0].isIntersecting) return;
-  anime({
+  animate({
     targets: '.fc', opacity: [0, 1], translateY: [20, 0],
-    delay: anime.stagger(80), duration: 600, easing: 'easeOutCubic',
+    delay: stagger(80), duration: 600, easing: 'easeOutCubic',
     complete() {
       // Clear inline transform so CSS :hover still works
       document.querySelectorAll('.fc').forEach(el => {
@@ -1266,7 +1136,7 @@ const statIO = new IntersectionObserver((entries) => {
     const suffix = el.dataset.suffix !== undefined ? el.dataset.suffix : '';
     const prefix = el.dataset.prefix || '';
     const obj = { n: 0 };
-    anime({
+    animate({
       targets: obj, n: target, duration: 1800, easing: 'easeOutCubic',
       update() { el.textContent = prefix + Math.round(obj.n) + suffix; }
     });
@@ -1277,13 +1147,13 @@ const statStrip = document.querySelector('.stat-strip');
 if (statStrip) statIO.observe(statStrip);
 
 /* ── E) Hero entrance ─────────────────────────────────────── */
-anime({ targets: '#h-kicker', opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: 0 });
+animate({ targets: '#h-kicker', opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: 0 });
 document.querySelectorAll('#h-hl span').forEach((el, i) => {
-  anime({ targets: el, opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: [150, 250, 350, 450][i] ?? 150 + i * 100 });
+  animate({ targets: el, opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: [150, 250, 350, 450][i] ?? 150 + i * 100 });
 });
-anime({ targets: '#h-sub',    opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: 600 });
-anime({ targets: '#h-widget', opacity: [0, 1], translateY: [32, 0], scale: [0.94, 1], duration: 900, easing: 'easeOutExpo', delay: 750 });
-anime({ targets: '#h-ctas',   opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: 900 });
+animate({ targets: '#h-sub',    opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: 600 });
+animate({ targets: '#h-widget', opacity: [0, 1], translateY: [32, 0], scale: [0.94, 1], duration: 900, easing: 'easeOutExpo', delay: 750 });
+animate({ targets: '#h-ctas',   opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: 900 });
 
 /* ── F) Showcase sticky scroll ────────────────────────────── */
 const featItems = document.querySelectorAll('.feat-item');
@@ -1296,7 +1166,7 @@ function setFeat(i) {
   lastFeat = i;
   featItems.forEach((el, j) => el.classList.toggle('active', j === i));
   scrImgs.forEach((el, j) => {
-    anime({ targets: el, opacity: j === i ? 1 : 0, duration: 400, easing: 'easeOutCubic' });
+    animate({ targets: el, opacity: j === i ? 1 : 0, duration: 400, easing: 'easeOutCubic' });
   });
 }
 
@@ -1323,11 +1193,7 @@ window.addEventListener('scroll', () => {
   if (navEl) navEl.classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
-/* ── I) X-ray hint — fade on first mousemove ──────────────── */
-window.addEventListener('mousemove', () => {
-  const hint = document.getElementById('xray-hint');
-  if (hint) anime({ targets: hint, opacity: 0, duration: 800, easing: 'easeOutCubic' });
-}, { once: true });
+/* ── I) X-ray hint removed (element deleted) */
 </script>
 </body>
 </html>
