@@ -8,8 +8,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='ng' cx='38%25' cy='32%25' r='62%25'%3E%3Cstop offset='0%25' stop-color='%231e2540'/%3E%3Cstop offset='55%25' stop-color='%230f1220'/%3E%3Cstop offset='100%25' stop-color='%230b0d14'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='45' cy='45' r='43' fill='url(%23ng)' stroke='%2300D4F0' stroke-width='1.5' stroke-opacity='0.6'/%3E%3Ccircle cx='45' cy='45' r='29' fill='none' stroke='%2300D4F0' stroke-width='0.9' stroke-opacity='0.2'/%3E%3Cline x1='45' y1='2' x2='45' y2='26' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='45' y1='64' x2='45' y2='88' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='26' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='64' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='11' fill='%2300D4F0'/%3E%3C/svg%3E"/>
 <meta name="theme-color" content="#04070f">
 <style>
@@ -501,6 +499,8 @@ footer{
   .checks{gap:14px}
 }
 @keyframes kdot{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.7)}50%{box-shadow:0 0 0 6px rgba(239,68,68,0)}}
+/* hero entrance initial state — cleared by anime.js on load */
+#h-kicker,#h-hl span,#h-sub,#h-widget,#h-ctas{opacity:0}
 </style>
 </head>
 <body>
@@ -691,7 +691,7 @@ footer{
       <div class="stat-lbl">Coaches</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num" data-stat="monthly">$0</div>
+      <div class="stat-num" data-count="0" data-prefix="$" data-stat="monthly">$0</div>
       <div class="stat-lbl">Monthly Fee</div>
     </div>
     <div class="stat-item">
@@ -987,19 +987,6 @@ footer{
 <script>
 'use strict';
 
-/* ── Reading progress ─────────────────────────────────────── */
-const bar = document.getElementById('progress-bar');
-window.addEventListener('scroll', () => {
-  const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
-  bar.style.width = pct + '%';
-}, { passive: true });
-
-/* ── Nav scroll class ─────────────────────────────────────── */
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
-
 /* ── Hamburger ────────────────────────────────────────────── */
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobile-menu');
@@ -1038,24 +1025,6 @@ mobileMenu.querySelectorAll('a').forEach(a => {
   }
 })();
 
-/* ── GSAP Hero entrance ───────────────────────────────────── */
-gsap.registerPlugin(ScrollTrigger);
-
-const heroTL = gsap.timeline({ delay: 0.15 });
-[
-  ['#h-kicker', 0],
-  ['#h-hl',     0.12],
-  ['#h-sub',    0.24],
-  ['#h-widget', 0.36],
-  ['#h-ctas',   0.48]
-].forEach(([sel, offset]) => {
-  heroTL.fromTo(sel,
-    { opacity: 0, y: 40 },
-    { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out' },
-    offset
-  );
-});
-
 /* ── Widget bar + number animation ───────────────────────── */
 document.addEventListener('DOMContentLoaded', function() {
   function countTo(el, target, duration) {
@@ -1089,82 +1058,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-/* ── IntersectionObserver reveal ─────────────────────────── */
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('in');
-      io.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.14 });
-document.querySelectorAll('.ru').forEach(el => io.observe(el));
-
-/* Pain cards — stagger */
-const painIO = new IntersectionObserver(entries => {
-  if (!entries[0].isIntersecting) return;
-  document.querySelectorAll('.pain-card').forEach((c, i) => {
-    setTimeout(() => c.classList.add('in'), i * 150);
-  });
-  const bridge = document.querySelector('.prob-bridge');
-  if (bridge) setTimeout(() => bridge.classList.add('in'), 500);
-  painIO.disconnect();
-}, { threshold: 0.2 });
-const painGrid = document.querySelector('.pain-grid');
-if (painGrid) painIO.observe(painGrid);
-
-/* Feature cards — stagger */
-const featIO = new IntersectionObserver(entries => {
-  if (!entries[0].isIntersecting) return;
-  document.querySelectorAll('.fc').forEach((c, i) => {
-    setTimeout(() => c.classList.add('in'), i * 85);
-  });
-  featIO.disconnect();
-}, { threshold: 0.1 });
-const featGrid = document.getElementById('feat-grid');
-if (featGrid) featIO.observe(featGrid);
-
-/* ── Stat counters ────────────────────────────────────────── */
-const statIO = new IntersectionObserver(entries => {
-  if (!entries[0].isIntersecting) return;
-  document.querySelectorAll('[data-count]').forEach(el => {
-    const target = parseInt(el.dataset.count);
-    const suffix = el.dataset.suffix || '';
-    if (!target) return;
-    const dur = 1800;
-    let t0 = null;
-    function step(ts) {
-      if (!t0) t0 = ts;
-      const p = Math.min((ts - t0) / dur, 1);
-      el.textContent = Math.round((1 - Math.pow(1 - p, 3)) * target) + suffix;
-      if (p < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  });
-  statIO.disconnect();
-}, { threshold: 0.1 });
-const statStrip = document.querySelector('.stat-strip');
-if (statStrip) statIO.observe(statStrip);
-
-/* ── Product showcase — ScrollTrigger ────────────────────── */
-const featItems  = document.querySelectorAll('.feat-item');
-const scrImgs    = document.querySelectorAll('.scr-img');
-const N          = featItems.length;
-
-function setFeat(i) {
-  featItems.forEach((el, j) => el.classList.toggle('active', j === i));
-  scrImgs.forEach((el, j)   => el.classList.toggle('active', j === i));
-}
-
-ScrollTrigger.create({
-  trigger: '#showcase-wrap',
-  start: 'top top',
-  end: 'bottom bottom',
-  scrub: true,
-  onUpdate(self) {
-    setFeat(Math.min(Math.floor(self.progress * N), N - 1));
-  }
-});
 
 </script>
 <script>
@@ -1322,42 +1215,119 @@ async function xLoadAndStart() {
 xLoadAndStart();
 })();
 </script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const statTargets = {
-    'coaches': { target: 500, suffix: '+' },
-    'monthly': { target: 0, prefix: '$' },
-    'features': { target: 14, suffix: '' },
-    'access': { target: null, symbol: '∞' }
-  };
+<script type="module">
+import anime from 'https://cdn.jsdelivr.net/npm/animejs@4.0.0/lib/anime.esm.min.js';
 
-  function countUp(el, target, prefix, suffix, symbol) {
-    if (symbol) { el.textContent = symbol; return; }
-    let current = 0;
-    const increment = Math.ceil(target / 50);
-    const timer = setInterval(() => {
-      current = Math.min(current + increment, target);
-      el.textContent = (prefix || '') + current + (suffix || '');
-      if (current >= target) clearInterval(timer);
-    }, 30);
-  }
+/* ── A) Scroll reveal — .ru elements ─────────────────────── */
+const revealIO = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    anime({ targets: entry.target, opacity: [0, 1], translateY: [32, 0], duration: 700, easing: 'spring(1,80,10,0)' });
+    revealIO.unobserve(entry.target);
+  });
+}, { threshold: 0.14 });
+document.querySelectorAll('.ru').forEach(el => revealIO.observe(el));
 
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const el = e.target;
-        const key = el.dataset.stat;
-        if (key && statTargets[key]) {
-          const s = statTargets[key];
-          countUp(el, s.target, s.prefix, s.suffix, s.symbol);
-          obs.unobserve(el);
-        }
-      }
+/* ── B) Pain cards stagger ────────────────────────────────── */
+const painIO = new IntersectionObserver((entries) => {
+  if (!entries[0].isIntersecting) return;
+  anime({ targets: '.pain-card', opacity: [0, 1], translateY: [24, 0], delay: anime.stagger(120), duration: 600, easing: 'easeOutCubic' });
+  const bridge = document.querySelector('.prob-bridge');
+  if (bridge) setTimeout(() => anime({ targets: bridge, opacity: [0, 1], translateY: [16, 0], duration: 600, easing: 'easeOutCubic' }), 500);
+  painIO.disconnect();
+}, { threshold: 0.2 });
+const painGrid = document.querySelector('.pain-grid');
+if (painGrid) painIO.observe(painGrid);
+
+/* ── C) Feature cards stagger ─────────────────────────────── */
+const fcIO = new IntersectionObserver((entries) => {
+  if (!entries[0].isIntersecting) return;
+  anime({
+    targets: '.fc', opacity: [0, 1], translateY: [20, 0],
+    delay: anime.stagger(80), duration: 600, easing: 'easeOutCubic',
+    complete() {
+      // Clear inline transform so CSS :hover still works
+      document.querySelectorAll('.fc').forEach(el => {
+        el.style.transform = '';
+        el.classList.add('in');
+      });
+    }
+  });
+  fcIO.disconnect();
+}, { threshold: 0.1 });
+const featGrid = document.getElementById('feat-grid');
+if (featGrid) fcIO.observe(featGrid);
+
+/* ── D) Stat counters ─────────────────────────────────────── */
+const statIO = new IntersectionObserver((entries) => {
+  if (!entries[0].isIntersecting) return;
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count, 10);
+    const suffix = el.dataset.suffix !== undefined ? el.dataset.suffix : '';
+    const prefix = el.dataset.prefix || '';
+    const obj = { n: 0 };
+    anime({
+      targets: obj, n: target, duration: 1800, easing: 'easeOutCubic',
+      update() { el.textContent = prefix + Math.round(obj.n) + suffix; }
     });
-  }, { threshold: 0.1 });
+  });
+  statIO.disconnect();
+}, { threshold: 0.5 });
+const statStrip = document.querySelector('.stat-strip');
+if (statStrip) statIO.observe(statStrip);
 
-  document.querySelectorAll('[data-stat]').forEach(el => obs.observe(el));
+/* ── E) Hero entrance ─────────────────────────────────────── */
+anime({ targets: '#h-kicker', opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: 0 });
+document.querySelectorAll('#h-hl span').forEach((el, i) => {
+  anime({ targets: el, opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: [150, 250, 350, 450][i] ?? 150 + i * 100 });
 });
+anime({ targets: '#h-sub',    opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: 600 });
+anime({ targets: '#h-widget', opacity: [0, 1], translateY: [32, 0], scale: [0.94, 1], duration: 900, easing: 'easeOutExpo', delay: 750 });
+anime({ targets: '#h-ctas',   opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: 900 });
+
+/* ── F) Showcase sticky scroll ────────────────────────────── */
+const featItems = document.querySelectorAll('.feat-item');
+const scrImgs   = document.querySelectorAll('.scr-img');
+const N         = featItems.length;
+let lastFeat    = -1;
+
+function setFeat(i) {
+  if (i === lastFeat) return;
+  lastFeat = i;
+  featItems.forEach((el, j) => el.classList.toggle('active', j === i));
+  scrImgs.forEach((el, j) => {
+    anime({ targets: el, opacity: j === i ? 1 : 0, duration: 400, easing: 'easeOutCubic' });
+  });
+}
+
+window.addEventListener('scroll', () => {
+  const wrap = document.getElementById('showcase-wrap');
+  if (!wrap) return;
+  const rect = wrap.getBoundingClientRect();
+  const scrollable = wrap.offsetHeight - window.innerHeight;
+  if (scrollable <= 0) return;
+  const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
+  setFeat(Math.min(Math.floor(progress * N), N - 1));
+}, { passive: true });
+
+/* ── G) Progress bar ──────────────────────────────────────── */
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+  if (progressBar) progressBar.style.width = pct + '%';
+}, { passive: true });
+
+/* ── H) Nav scroll class ──────────────────────────────────── */
+const navEl = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (navEl) navEl.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+/* ── I) X-ray hint — fade on first mousemove ──────────────── */
+window.addEventListener('mousemove', () => {
+  const hint = document.getElementById('xray-hint');
+  if (hint) anime({ targets: hint, opacity: 0, duration: 800, easing: 'easeOutCubic' });
+}, { once: true });
 </script>
 </body>
 </html>
