@@ -130,8 +130,8 @@ function Scene1() {
   return (
     <div style={{ position: 'absolute', inset: 0, background: '#000', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
       <FilmGrain />
-      <div style={{ fontFamily: BEBAS, fontSize: 140, color: WHITE, letterSpacing: 8, lineHeight: 1, transform: `scale(${everyScale})`, opacity: everyOpacity }}>EVERY</div>
-      <div style={{ fontFamily: BEBAS, fontSize: 140, letterSpacing: 8, lineHeight: 1, transform: `scale(${morningScale})`, opacity: morningOpacity, color: AMBER, textShadow: `0 0 40px ${AMBER}88` }}>MORNING.</div>
+      <div style={{ fontFamily: BEBAS, fontSize: 160, color: WHITE, letterSpacing: 8, lineHeight: 1, transform: `scale(${everyScale})`, opacity: everyOpacity, textShadow: '0 0 40px rgba(255,255,255,0.5)' }}>EVERY</div>
+      <div style={{ fontFamily: BEBAS, fontSize: 160, letterSpacing: 8, lineHeight: 1, transform: `scale(${morningScale})`, opacity: morningOpacity, color: AMBER, textShadow: '0 0 60px rgba(200,137,42,0.9), 0 0 120px rgba(200,137,42,0.5)' }}>MORNING.</div>
     </div>
   );
 }
@@ -147,7 +147,7 @@ function Scene2() {
 
   return (
     <div style={{ position: 'absolute', inset: 0 }}>
-      <BgVideo src={staticFile('footage/gym-arrive-p.mp4')} brightness={0.5} sepia={0.3} startFrom={2} endAt={5} transformExtra={`scale(${kenBurns})`} />
+      <BgVideo src={staticFile('footage/gym-arrive-p.mp4')} brightness={0.65} sepia={0.15} startFrom={2} endAt={5} transformExtra={`scale(${kenBurns})`} />
       <FilmGrain />
       {f < 3 && <FlashCut localFrame={f} />}
       <div style={{ position: 'absolute', bottom: 260, left: 60, right: 60 }}>
@@ -234,9 +234,9 @@ function Scene6() {
 
   return (
     <div style={{ position: 'absolute', inset: 0, background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ position: 'absolute', width: glowSize, height: glowSize, borderRadius: '50%', background: `radial-gradient(circle, ${CYAN}22 0%, transparent 70%)`, top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
+      <div style={{ position: 'absolute', width: glowSize, height: glowSize, borderRadius: '50%', background: `radial-gradient(circle, ${CYAN}66 0%, transparent 70%)`, top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
       <FilmGrain />
-      <div style={{ fontFamily: BEBAS, fontSize: 110, color: WHITE, letterSpacing: 6, opacity: textOp, textShadow: `0 0 60px ${CYAN}44` }}>Until now.</div>
+      <div style={{ fontFamily: BEBAS, fontSize: 130, color: WHITE, letterSpacing: 6, opacity: textOp, textShadow: '0 0 80px rgba(255,255,255,0.6), 0 0 40px rgba(0,212,240,0.5)' }}>Until now.</div>
     </div>
   );
 }
@@ -255,7 +255,7 @@ function Scene7() {
 
   return (
     <div style={{ position: 'absolute', inset: 0 }}>
-      <BgVideo src={staticFile('footage/bag-work-p.mp4')} brightness={0.15} startFrom={2} endAt={7} />
+      <BgVideo src={staticFile('footage/bag-work-slow.mp4')} brightness={0.15} startFrom={4} endAt={14} />
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #04070fcc 50%, transparent 100%)' }} />
       <FilmGrain />
       {f < 3 && <FlashCut localFrame={f} />}
@@ -327,9 +327,9 @@ function Scene9() {
       <div style={{ transform: `scale(${logoScale})` }}>
         <SPLogo size={140} />
       </div>
-      <div style={{ fontFamily: BEBAS, fontSize: 72, color: WHITE, letterSpacing: 8, marginTop: 20, opacity: nameOp }}>STRIKEPANEL™</div>
+      <div style={{ fontFamily: BEBAS, fontSize: 90, color: WHITE, letterSpacing: 8, marginTop: 20, opacity: nameOp, textShadow: '0 0 30px rgba(255,255,255,0.4)' }}>STRIKEPANEL™</div>
       <div style={{ width: lineWidth, height: 1, background: CYAN, margin: '16px 0', boxShadow: `0 0 10px ${CYAN}` }} />
-      <div style={{ fontFamily: BEBAS, fontSize: 130, color: AMBER, letterSpacing: 4, opacity: priceOp, textShadow: `0 0 40px ${AMBER}88`, lineHeight: 1 }}>${priceCount}.</div>
+      <div style={{ fontFamily: BEBAS, fontSize: 160, color: AMBER, letterSpacing: 4, opacity: priceOp, textShadow: '0 0 60px rgba(200,137,42,1), 0 0 120px rgba(200,137,42,0.6)', lineHeight: 1 }}>${priceCount}.</div>
       <div style={{ fontFamily: BEBAS, fontSize: 50, color: WHITE, letterSpacing: 4, opacity: sub1Op, marginTop: 8 }}>ONCE. YOURS FOREVER.</div>
       <div style={{ fontFamily: MONO, fontSize: 22, color: '#666', letterSpacing: 3, opacity: sub2Op, marginTop: 10 }}>NO SUBSCRIPTION. EVER.</div>
     </div>
