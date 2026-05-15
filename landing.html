@@ -987,6 +987,83 @@ footer{
 </section>
 
 <!-- ══════════════════════════════════════════════════
+
+<!-- ══════════════════════════════════════════════════
+     FAQ + GUARANTEE
+══════════════════════════════════════════════════ -->
+<style>
+.faq-sec{padding:100px 24px;background:var(--bg);border-top:1px solid rgba(0,212,240,.08)}
+.faq-inner{max-width:760px;margin:0 auto}
+.faq-hl{font-family:var(--fh);font-size:clamp(42px,7vw,72px);color:var(--cream);line-height:1;margin-bottom:48px;text-align:center}
+.guarantee-bar{display:flex;align-items:center;gap:18px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);border-radius:12px;padding:20px 24px;margin-bottom:48px}
+.g-icon{font-size:32px;flex-shrink:0}
+.g-title{font-family:var(--fc);font-size:18px;font-weight:700;color:#10b981;letter-spacing:.5px;margin-bottom:4px}
+.g-sub{font-size:14px;color:var(--muted);line-height:1.5}
+.faq-list{display:flex;flex-direction:column;gap:2px}
+.faq-item{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:10px;overflow:hidden;transition:border-color .2s}
+.faq-item[open]{border-color:rgba(0,212,240,.25)}
+.faq-q{font-family:var(--fc);font-size:17px;font-weight:700;color:var(--cream);padding:20px 24px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;letter-spacing:.3px}
+.faq-q::after{content:'+';font-size:22px;color:var(--accent);flex-shrink:0;transition:transform .2s}
+.faq-item[open] .faq-q::after{transform:rotate(45deg)}
+.faq-q::-webkit-details-marker{display:none}
+.faq-a{font-size:15px;color:var(--muted);line-height:1.7;padding:0 24px 20px;border-top:1px solid rgba(255,255,255,.05)}
+</style>
+<section class="faq-sec" id="faq">
+  <div class="faq-inner">
+    <div class="s-label" style="text-align:center;margin-bottom:16px">// Common Questions</div>
+    <h2 class="faq-hl">EVERYTHING<br>YOU NEED TO KNOW.</h2>
+    <div class="guarantee-bar">
+      <span class="g-icon">🛡️</span>
+      <div>
+        <div class="g-title">30-Day Money-Back Guarantee</div>
+        <div class="g-sub">Not the right fit? Email us within 30 days for a full refund. No questions asked.</div>
+      </div>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary class="faq-q">Is there a monthly subscription?</summary>
+        <p class="faq-a">No. StrikePanel is a one-time payment of $99. You pay once and own it forever — no renewal, no monthly fee, no cancel risk. Ever.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Does it work on my phone?</summary>
+        <p class="faq-a">Yes — on any phone, tablet or laptop. StrikePanel is a PWA (Progressive Web App). Open it in your browser, tap "Add to Home Screen" and it installs like a native app. No app store required.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Does it work offline?</summary>
+        <p class="faq-a">Yes. Once installed, StrikePanel works fully offline. Your data is stored on your device and syncs automatically when you're back online — if you set up cloud sync.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Do my athletes need to download anything?</summary>
+        <p class="faq-a">No. You share a link once. Athletes open it in their browser on any phone, fill in 6 sliders in under 60 seconds, and submit. No account, no download, no friction.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">How many athletes can I manage?</summary>
+        <p class="faq-a">Up to 20 athletes — more than enough for independent coaches, fight teams and small gyms. Full readiness scoring, morning brief, fight camp and weight cut tracking for every one of them.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">What sports does it support?</summary>
+        <p class="faq-a">StrikePanel is built for combat sports coaches: MMA, Boxing, Muay Thai, BJJ and Kickboxing. It also includes a Gym Mode for general fitness coaching.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Is my data safe? Who can see it?</summary>
+        <p class="faq-a">Your data is yours. By default everything is stored locally on your device. If you enable cloud sync, it goes to your own private Supabase database — not ours. We never see your athlete data.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">What is the AI Session Builder?</summary>
+        <p class="faq-a">You tell it your training goal and it generates a full session plan instantly — rounds, drills, intensity, rest periods. It runs on Google Gemini. You bring your own free Gemini API key (takes 2 minutes to set up).</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">What happens after I buy?</summary>
+        <p class="faq-a">Instant access. Click the link in your Gumroad receipt, open the app in your browser, and you're live in under 60 seconds. Add your athletes and start logging check-ins immediately.</p>
+      </details>
+    </div>
+    <div style="text-align:center;margin-top:56px">
+      <a href="https://strikepanel.gumroad.com/l/strikepanel" class="btn-primary" target="_blank" rel="noopener">Get StrikePanel — $99</a>
+      <div style="margin-top:14px;font-size:13px;color:var(--muted)">One-time payment · No subscription · 30-day guarantee</div>
+    </div>
+  </div>
+</section>
+
      FOOTER
 ══════════════════════════════════════════════════ -->
 <footer>
