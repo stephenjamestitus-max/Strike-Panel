@@ -519,6 +519,7 @@ footer{
 /* hero entrance initial state — cleared by anime.js on load */
 #h-kicker,#h-hl span,#h-sub,#h-widget,#h-ctas{opacity:0}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
 </head>
 <body>
 
@@ -583,11 +584,11 @@ footer{
      HERO
 ══════════════════════════════════════════════════ -->
 <section id="hero">
-  <div class="layer l-bg" id="lBg">
-    <div class="l-bg-img" id="bgImg"></div>
-    <div class="l-bg-vignette"></div>
+  <div aria-hidden="true" style="position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none">
+    <div style="position:absolute;inset:-10%;background:#1a0f08 url('blog/gym-wide.jpg.png') center/cover no-repeat;filter:brightness(0.38) saturate(0.65) sepia(0.3);transform:scale(1.1)"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(4,7,15,1) 0%,transparent 55%),radial-gradient(ellipse 40% 100% at 0% 50%,rgba(4,7,15,.9) 0%,transparent 65%),radial-gradient(ellipse 40% 100% at 100% 50%,rgba(4,7,15,.9) 0%,transparent 65%),radial-gradient(ellipse 100% 50% at 50% 0%,rgba(4,7,15,.95) 0%,transparent 60%)"></div>
   </div>
-  <div class="layer l-rays" id="lRays">
+  <div aria-hidden="true" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none">
     <div class="ray ray-1"></div>
     <div class="ray ray-2"></div>
     <div class="ray ray-3"></div>
@@ -712,7 +713,7 @@ footer{
 <div class="stat-strip">
   <div class="stat-inner">
     <div class="stat-item">
-      <div class="stat-num" data-count="500" data-suffix="+" data-stat="coaches">0+</div>
+      <div class="stat-num" data-count="500" data-suffix="+" data-stat="coaches">500+</div>
       <div class="stat-lbl">Coaches</div>
     </div>
     <div class="stat-item">
@@ -720,7 +721,7 @@ footer{
       <div class="stat-lbl">Monthly Fee</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num" data-count="14" data-stat="features">0</div>
+      <div class="stat-num" data-count="14" data-stat="features">14</div>
       <div class="stat-lbl">Features</div>
     </div>
     <div class="stat-item">
@@ -1085,14 +1086,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 </script>
-<script type="module">
-import { animate, stagger, createTimer } from 'https://cdn.jsdelivr.net/npm/animejs@4.0.0/lib/anime.esm.min.js';
-
+<script>
 /* ── A) Scroll reveal — .ru elements ─────────────────────── */
 const revealIO = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
-    animate({ targets: entry.target, opacity: [0, 1], translateY: [32, 0], duration: 700, easing: 'spring(1,80,10,0)' });
+    anime({ targets: entry.target, opacity: [0, 1], translateY: [32, 0], duration: 700, easing: 'easeOutQuart' });
     revealIO.unobserve(entry.target);
   });
 }, { threshold: 0.14 });
@@ -1101,9 +1100,9 @@ document.querySelectorAll('.ru').forEach(el => revealIO.observe(el));
 /* ── B) Pain cards stagger ────────────────────────────────── */
 const painIO = new IntersectionObserver((entries) => {
   if (!entries[0].isIntersecting) return;
-  animate({ targets: '.pain-card', opacity: [0, 1], translateY: [24, 0], delay: stagger(120), duration: 600, easing: 'easeOutCubic' });
+  anime({ targets: '.pain-card', opacity: [0, 1], translateY: [24, 0], delay: anime.stagger(120), duration: 600, easing: 'easeOutCubic' });
   const bridge = document.querySelector('.prob-bridge');
-  if (bridge) setTimeout(() => animate({ targets: bridge, opacity: [0, 1], translateY: [16, 0], duration: 600, easing: 'easeOutCubic' }), 500);
+  if (bridge) setTimeout(() => anime({ targets: bridge, opacity: [0, 1], translateY: [16, 0], duration: 600, easing: 'easeOutCubic' }), 500);
   painIO.disconnect();
 }, { threshold: 0.2 });
 const painGrid = document.querySelector('.pain-grid');
@@ -1112,11 +1111,10 @@ if (painGrid) painIO.observe(painGrid);
 /* ── C) Feature cards stagger ─────────────────────────────── */
 const fcIO = new IntersectionObserver((entries) => {
   if (!entries[0].isIntersecting) return;
-  animate({
+  anime({
     targets: '.fc', opacity: [0, 1], translateY: [20, 0],
-    delay: stagger(80), duration: 600, easing: 'easeOutCubic',
+    delay: anime.stagger(80), duration: 600, easing: 'easeOutCubic',
     complete() {
-      // Clear inline transform so CSS :hover still works
       document.querySelectorAll('.fc').forEach(el => {
         el.style.transform = '';
         el.classList.add('in');
@@ -1136,7 +1134,7 @@ const statIO = new IntersectionObserver((entries) => {
     const suffix = el.dataset.suffix !== undefined ? el.dataset.suffix : '';
     const prefix = el.dataset.prefix || '';
     const obj = { n: 0 };
-    animate({
+    anime({
       targets: obj, n: target, duration: 1800, easing: 'easeOutCubic',
       update() { el.textContent = prefix + Math.round(obj.n) + suffix; }
     });
@@ -1147,13 +1145,13 @@ const statStrip = document.querySelector('.stat-strip');
 if (statStrip) statIO.observe(statStrip);
 
 /* ── E) Hero entrance ─────────────────────────────────────── */
-animate({ targets: '#h-kicker', opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: 0 });
+anime({ targets: '#h-kicker', opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: 0 });
 document.querySelectorAll('#h-hl span').forEach((el, i) => {
-  animate({ targets: el, opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: [150, 250, 350, 450][i] ?? 150 + i * 100 });
+  anime({ targets: el, opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: [150, 250, 350, 450][i] !== undefined ? [150, 250, 350, 450][i] : 150 + i * 100 });
 });
-animate({ targets: '#h-sub',    opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: 600 });
-animate({ targets: '#h-widget', opacity: [0, 1], translateY: [32, 0], scale: [0.94, 1], duration: 900, easing: 'easeOutExpo', delay: 750 });
-animate({ targets: '#h-ctas',   opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: 900 });
+anime({ targets: '#h-sub',    opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: 600 });
+anime({ targets: '#h-widget', opacity: [0, 1], translateY: [32, 0], scale: [0.94, 1], duration: 900, easing: 'easeOutExpo', delay: 750 });
+anime({ targets: '#h-ctas',   opacity: [0, 1], translateY: [32, 0], duration: 900, easing: 'easeOutExpo', delay: 900 });
 
 /* ── F) Showcase sticky scroll ────────────────────────────── */
 const featItems = document.querySelectorAll('.feat-item');
@@ -1166,7 +1164,7 @@ function setFeat(i) {
   lastFeat = i;
   featItems.forEach((el, j) => el.classList.toggle('active', j === i));
   scrImgs.forEach((el, j) => {
-    animate({ targets: el, opacity: j === i ? 1 : 0, duration: 400, easing: 'easeOutCubic' });
+    anime({ targets: el, opacity: j === i ? 1 : 0, duration: 400, easing: 'easeOutCubic' });
   });
 }
 
@@ -1192,8 +1190,6 @@ const navEl = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   if (navEl) navEl.classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
-
-/* ── I) X-ray hint removed (element deleted) */
 </script>
 </body>
 </html>
