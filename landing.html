@@ -687,19 +687,19 @@ footer{
 <div class="stat-strip">
   <div class="stat-inner">
     <div class="stat-item">
-      <div class="stat-num" data-count="500" data-suffix="+">0+</div>
+      <div class="stat-num" data-count="500" data-suffix="+" data-stat="coaches">0+</div>
       <div class="stat-lbl">Coaches</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">$0</div>
+      <div class="stat-num" data-stat="monthly">$0</div>
       <div class="stat-lbl">Monthly Fee</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num" data-count="14">0</div>
+      <div class="stat-num" data-count="14" data-stat="features">0</div>
       <div class="stat-lbl">Features</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num" style="font-size:clamp(40px,5vw,64px)">∞</div>
+      <div class="stat-num" data-stat="access" style="font-size:clamp(40px,5vw,64px)">∞</div>
       <div class="stat-lbl">Access</div>
     </div>
   </div>
@@ -1036,47 +1036,6 @@ mobileMenu.querySelectorAll('a').forEach(a => {
     ].join(';');
     c.appendChild(m);
   }
-function xCreateTexture(gl, img) {
-  const tex = gl.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, tex);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-  gl.generateMipmap(gl.TEXTURE_2D);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  return tex;
-}
-async function xLoadAndStart() {
-  try {
-    const response = await fetch('/marketing/boxing.jpg');
-    const blob = await response.blob();
-    const objectURL = URL.createObjectURL(blob);
-    const img = new Image();
-    img.onload = () => {
-      console.log('Image loaded:', img.width, 'x', img.height);
-      xPhotoTex = xCreateTexture(xGl, img);
-      initBlobs();
-      xResize();
-      setTimeout(()=>{const h=document.getElementById('xray-hint');if(h)h.style.opacity='0';},5000);
-      requestAnimationFrame(xRender);
-    };
-    img.onerror = (e) => console.error('Image load failed:', e);
-    img.src = objectURL;
-  } catch(err) {
-    console.error('Fetch failed:', err);
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      xPhotoTex = xCreateTexture(xGl, img);
-      initBlobs();
-      xResize();
-      requestAnimationFrame(xRender);
-    };
-    img.src = '/marketing/boxing.jpg';
-  }
-}
-xLoadAndStart();
 })();
 
 /* ── GSAP Hero entrance ───────────────────────────────────── */
@@ -1320,15 +1279,15 @@ function xRender(now){ requestAnimationFrame(xRender); const dt=Math.min((now-xL
   bindFBO(fboB); bindTex(0,fboA.tex); const blobPos=new Float32Array(16),blobLife=new Float32Array(8); xBlobs.forEach((b,i)=>{blobPos[i*2]=b.x;blobPos[i*2+1]=b.y;blobLife[i]=b.life;}); xGl.useProgram(progBlob); bindTex(0,fboA.tex); xGl.uniform1i(xGl.getUniformLocation(progBlob,'uScene'),0); xGl.uniform2fv(xGl.getUniformLocation(progBlob,'uBlobs'),blobPos); xGl.uniform1fv(xGl.getUniformLocation(progBlob,'uBlobLife'),blobLife); xGl.uniform1f(xGl.getUniformLocation(progBlob,'uRadius'),CFG.blob.radius); xGl.uniform1f(xGl.getUniformLocation(progBlob,'uOpacity'),CFG.blob.opacity); xGl.uniform3fv(xGl.getUniformLocation(progBlob,'uColor'),new Float32Array(CFG.blob.color)); xGl.uniform1f(xGl.getUniformLocation(progBlob,'uTime'),t); xGl.uniform1f(xGl.getUniformLocation(progBlob,'uAspect'),W/H); xGl.drawArrays(xGl.TRIANGLE_STRIP,0,4);
   bindFBO(null); bindTex(0,fboB.tex); useAndDraw(progFinal,{uScene:0});
 }
-function xCreateTexture(gl, img) {
-  const tex = gl.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, tex);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-  gl.generateMipmap(gl.TEXTURE_2D);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+function xCreateTexture(img) {
+  const tex = xGl.createTexture();
+  xGl.bindTexture(xGl.TEXTURE_2D, tex);
+  xGl.texImage2D(xGl.TEXTURE_2D, 0, xGl.RGBA, xGl.RGBA, xGl.UNSIGNED_BYTE, img);
+  xGl.generateMipmap(xGl.TEXTURE_2D);
+  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_MIN_FILTER, xGl.LINEAR_MIPMAP_LINEAR);
+  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_MAG_FILTER, xGl.LINEAR);
+  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_WRAP_S, xGl.CLAMP_TO_EDGE);
+  xGl.texParameteri(xGl.TEXTURE_2D, xGl.TEXTURE_WRAP_T, xGl.CLAMP_TO_EDGE);
   return tex;
 }
 async function xLoadAndStart() {
@@ -1339,7 +1298,7 @@ async function xLoadAndStart() {
     const img = new Image();
     img.onload = () => {
       console.log('Image loaded:', img.width, 'x', img.height);
-      xPhotoTex = xCreateTexture(xGl, img);
+      xPhotoTex = xCreateTexture(img);
       initBlobs();
       xResize();
       setTimeout(()=>{const h=document.getElementById('xray-hint');if(h)h.style.opacity='0';},5000);
@@ -1352,7 +1311,7 @@ async function xLoadAndStart() {
     const img = new Image();
     img.crossOrigin = 'anonymous';
     img.onload = () => {
-      xPhotoTex = xCreateTexture(xGl, img);
+      xPhotoTex = xCreateTexture(img);
       initBlobs();
       xResize();
       requestAnimationFrame(xRender);
@@ -1362,6 +1321,43 @@ async function xLoadAndStart() {
 }
 xLoadAndStart();
 })();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const statTargets = {
+    'coaches': { target: 500, suffix: '+' },
+    'monthly': { target: 0, prefix: '$' },
+    'features': { target: 14, suffix: '' },
+    'access': { target: null, symbol: '∞' }
+  };
+
+  function countUp(el, target, prefix, suffix, symbol) {
+    if (symbol) { el.textContent = symbol; return; }
+    let current = 0;
+    const increment = Math.ceil(target / 50);
+    const timer = setInterval(() => {
+      current = Math.min(current + increment, target);
+      el.textContent = (prefix || '') + current + (suffix || '');
+      if (current >= target) clearInterval(timer);
+    }, 30);
+  }
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const key = el.dataset.stat;
+        if (key && statTargets[key]) {
+          const s = statTargets[key];
+          countUp(el, s.target, s.prefix, s.suffix, s.symbol);
+          obs.unobserve(el);
+        }
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('[data-stat]').forEach(el => obs.observe(el));
+});
 </script>
 </body>
 </html>
