@@ -5,24 +5,25 @@ import { fileURLToPath } from 'url';
 
 const __dirname  = fileURLToPath(new URL('.', import.meta.url));
 const root       = path.join(__dirname, '..');
-const entryPoint = path.join(root, 'remotion', 'index.jsx');
-const outputFile = path.join(root, 'marketing', 'reel-morning-brief.mp4');
+const entryPoint = path.join(root, 'remotion', 'reel-root.jsx');
+const outputFile = path.join(root, 'marketing', 'reel.mp4');
 
 async function render() {
-  console.log('📦  Bundling composition...');
+  console.log('Bundling composition…');
   const serveUrl = await bundle({
     entryPoint,
     webpackOverride: (config) => config,
+    publicDir: path.join(root, 'public'),
   });
 
-  console.log('🎬  Loading composition...');
+  console.log('Loading composition…');
   const composition = await selectComposition({
     serveUrl,
-    id: 'MorningBrief',
+    id: 'Reel',
     inputProps: {},
   });
 
-  console.log(`⚙️   Rendering ${composition.durationInFrames} frames @ ${composition.fps}fps (${composition.durationInFrames / composition.fps}s)...\n`);
+  console.log(`Rendering ${composition.durationInFrames} frames @ ${composition.fps}fps (${composition.durationInFrames / composition.fps}s)…\n`);
 
   await renderMedia({
     composition,
@@ -35,10 +36,10 @@ async function render() {
     },
   });
 
-  console.log(`\n\n✅  Saved → marketing/reel-morning-brief.mp4`);
+  console.log(`\n\nSaved → marketing/reel.mp4`);
 }
 
 render().catch((err) => {
-  console.error('\n❌  Render failed:', err.message);
+  console.error('\nRender failed:', err.message);
   process.exit(1);
 });
