@@ -68,6 +68,7 @@
   --glow-strong:0 0 40px rgba(0,212,240,0.30);
   /* Transitions */
   --ease:cubic-bezier(0.23,1,0.32,1);
+  --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
 }
 
 /* ── PREMIUM GLOBAL ENHANCEMENTS ── */
@@ -125,7 +126,8 @@ body::after{
   position:relative;overflow:hidden;cursor:pointer;
   transition:border-color .22s var(--ease),transform .2s var(--ease),box-shadow .2s var(--ease);
 }
-.r-card:hover{transform:translateY(-2px)}
+.r-card{will-change:transform}
+.r-card:hover{transform:translate3d(0,-2px,0)}
 .r-card-name{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
 .r-score-wrap{display:flex;align-items:flex-end;gap:6px;margin-bottom:8px}
 .r-score{font-family:var(--fh);font-size:38px;line-height:1;letter-spacing:1px}
@@ -199,7 +201,7 @@ body::after{
   position:relative;overflow:hidden;margin-bottom:10px;
   transition:border-color .2s,transform .2s var(--ease);
 }
-.fight-card:hover{border-color:rgba(239,68,68,0.4);transform:translateY(-1px)}
+.fight-card:hover{border-color:rgba(239,68,68,0.4);transform:translate3d(0,-1px,0)}
 .fight-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent)}
 .fight-countdown{font-family:var(--fh);font-size:52px;letter-spacing:2px;color:var(--red);line-height:1;text-shadow:0 0 20px rgba(239,68,68,0.3)}
 .fight-countdown.safe{color:var(--green);text-shadow:0 0 20px rgba(16,185,129,0.3)}
@@ -229,7 +231,7 @@ body::after{
 
 /* ── SPARRING SESSION TYPES ── */
 .stype-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-bottom:14px}
-.stype-btn{background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.07);border-radius:var(--r-xs);padding:10px 8px;text-align:center;cursor:pointer;transition:all .18s var(--ease)}
+.stype-btn{background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.07);border-radius:var(--r-xs);padding:10px 8px;text-align:center;cursor:pointer;transition:border-color .18s var(--ease),background .18s var(--ease),box-shadow .18s var(--ease)}
 .stype-btn:hover,.stype-btn.sel{border-color:rgba(0,212,240,0.4);background:rgba(0,212,240,0.08)}
 .stype-btn.sel{box-shadow:0 0 12px rgba(0,212,240,0.15)}
 .stype-icon{font-size:20px;margin-bottom:4px}
@@ -325,7 +327,11 @@ body::after{
 .api-nudge a{color:#a78bfa;cursor:pointer;text-decoration:underline}
 
 
-body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px;line-height:1.65;min-height:100vh;overflow-x:hidden}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px;line-height:1.65;min-height:100vh;overflow-x:hidden;
+  overscroll-behavior-y:none;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility}
 
 /* ── HERO ── */
 .hero{
@@ -378,8 +384,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 /* ── LAYOUT ── */
 .wrap{max-width:1280px;margin:0 auto;padding:28px 20px 80px}
 .section{display:none}
-.section.active{display:block;animation:fadeUp .22s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.section.active{display:block;animation:fadeUp .28s var(--ease) both}
+@keyframes fadeUp{from{opacity:0;transform:translate3d(0,10px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 
 /* ── CARDS ── */
 .card{
@@ -469,7 +475,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   padding:9px 20px;
   font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
   border-radius:var(--r-pill);cursor:pointer;
-  transition:all .2s var(--ease);white-space:nowrap;
+  transition:background .2s var(--ease),box-shadow .2s var(--ease),transform .2s var(--ease),border-color .2s var(--ease);white-space:nowrap;
   position:relative;overflow:hidden;
 }
 .btn::after{
@@ -551,7 +557,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.07);
   color:var(--muted);width:30px;height:30px;border-radius:50%;cursor:pointer;
   display:flex;align-items:center;justify-content:center;font-size:14px;
-  transition:all .15s var(--ease);
+  transition:background .15s var(--ease),color .15s var(--ease);
 }
 .modal-close:hover{color:var(--text);background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.15)}
 
@@ -778,7 +784,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 .upgrade-box::before{content:'';position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--amber),transparent)}
 .upgrade-box h3{font-family:var(--fh);font-size:20px;letter-spacing:2px;margin-bottom:6px}
 .upgrade-box p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:14px}
-.btn-upgrade{display:inline-flex;align-items:center;gap:7px;padding:10px 24px;font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:30px;background:linear-gradient(135deg,var(--amber),#d97706);color:#0e1018;cursor:pointer;box-shadow:0 0 18px rgba(245,158,11,.35);transition:all .2s}
+.btn-upgrade{display:inline-flex;align-items:center;gap:7px;padding:10px 24px;font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:30px;background:linear-gradient(135deg,var(--amber),#d97706);color:#0e1018;cursor:pointer;box-shadow:0 0 18px rgba(245,158,11,.35);transition:box-shadow .2s,transform .2s}
 .btn-upgrade:hover{box-shadow:0 0 28px rgba(245,158,11,.55);transform:translateY(-1px)}
 .color-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
 .cswatch{width:36px;height:36px;border-radius:var(--r-xs);cursor:pointer;border:2px solid rgba(255,255,255,.12);transition:transform .15s;flex-shrink:0}
@@ -860,9 +866,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 }
 
 /* ── PAGE LOAD STAGGER ── */
-@keyframes slideInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideInUp{from{opacity:0;transform:translate3d(0,14px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 .section.active .card,.section.active .scard,.section.active .wlog-session{
-  animation:slideInUp .3s var(--ease) both;
+  animation:slideInUp .32s var(--ease) both;
+  will-change:transform,opacity;
 }
 .section.active .g2 > :nth-child(1),.section.active .g3 > :nth-child(1),.section.active .g4 > :nth-child(1){animation-delay:.04s}
 .section.active .g2 > :nth-child(2),.section.active .g3 > :nth-child(2),.section.active .g4 > :nth-child(2){animation-delay:.08s}
@@ -875,7 +882,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
   padding:5px 11px;border-radius:var(--r-pill);border:1px solid rgba(255,255,255,0.07);
   color:var(--muted2);background:rgba(255,255,255,0.025);cursor:default;
-  transition:all .35s;
+  transition:color .35s,background .35s,border-color .35s;
 }
 .sync-indicator.synced{border-color:rgba(16,185,129,0.28);color:var(--green);background:rgba(16,185,129,0.06)}
 .sync-indicator.syncing{border-color:rgba(0,212,240,0.3);color:var(--accent);background:rgba(0,212,240,0.06)}
@@ -954,7 +961,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   color:#050810;font-family:var(--fc);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
   padding:9px 20px;border-radius:30px;border:none;cursor:pointer;text-decoration:none;
   box-shadow:0 0 18px rgba(0,212,240,0.35);white-space:nowrap;
-  display:inline-flex;align-items:center;gap:6px;transition:all .2s;flex-shrink:0;
+  display:inline-flex;align-items:center;gap:6px;transition:box-shadow .2s,transform .2s,background .2s;flex-shrink:0;
 }
 .demo-buy-btn:hover{box-shadow:0 0 28px rgba(0,212,240,0.55);transform:translateY(-1px)}
 .demo-exit-btn{
@@ -1074,12 +1081,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
       <div style="font-family:var(--fh);font-size:26px;letter-spacing:3px;margin-bottom:6px">WELCOME TO STRIKEPANEL™</div>
       <div style="font-size:12.5px;color:var(--muted);margin-bottom:24px;line-height:1.7">What are you using this for?</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px">
-        <div onclick="obSetMode('combat')" style="cursor:pointer;background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.2);border-radius:var(--r);padding:24px 16px;transition:all .18s var(--ease)" onmouseover="this.style.background='rgba(0,212,240,0.12)'" onmouseout="this.style.background='rgba(0,212,240,0.06)'">
+        <div onclick="obSetMode('combat')" style="cursor:pointer;background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.2);border-radius:var(--r);padding:24px 16px;transition:background .18s var(--ease),border-color .18s var(--ease)" onmouseover="this.style.background='rgba(0,212,240,0.12)'" onmouseout="this.style.background='rgba(0,212,240,0.06)'">
           <div style="font-size:36px;margin-bottom:10px">🥊</div>
           <div style="font-family:var(--fh);font-size:16px;letter-spacing:2px;margin-bottom:6px">COMBAT SPORTS</div>
           <div style="font-size:11px;color:var(--muted);line-height:1.6">Boxing, MMA, Kickboxing, Wrestling, BJJ</div>
         </div>
-        <div onclick="obSetMode('gym')" style="cursor:pointer;background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.2);border-radius:var(--r);padding:24px 16px;transition:all .18s var(--ease)" onmouseover="this.style.background='rgba(0,212,240,0.12)'" onmouseout="this.style.background='rgba(0,212,240,0.06)'">
+        <div onclick="obSetMode('gym')" style="cursor:pointer;background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.2);border-radius:var(--r);padding:24px 16px;transition:background .18s var(--ease),border-color .18s var(--ease)" onmouseover="this.style.background='rgba(0,212,240,0.12)'" onmouseout="this.style.background='rgba(0,212,240,0.06)'">
           <div style="font-size:36px;margin-bottom:10px">🏋️</div>
           <div style="font-family:var(--fh);font-size:16px;letter-spacing:2px;margin-bottom:6px">GYM & FITNESS</div>
           <div style="font-size:11px;color:var(--muted);line-height:1.6">Strength, conditioning, personal training</div>
@@ -1393,7 +1400,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
         </ol>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
           <div style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2)">SQL Schema — Copy &amp; Paste This</div>
-          <button onclick="wizCopySchema(this)" style="background:rgba(0,212,240,0.08);border:1px solid rgba(0,212,240,0.2);border-radius:6px;color:var(--accent);font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;cursor:pointer;transition:all .15s">Copy SQL</button>
+          <button onclick="wizCopySchema(this)" style="background:rgba(0,212,240,0.08);border:1px solid rgba(0,212,240,0.2);border-radius:6px;color:var(--accent);font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;cursor:pointer;transition:background .15s,border-color .15s">Copy SQL</button>
         </div>
         <pre id="wizSchemaBlock" style="background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r-xs);padding:14px;font-family:var(--fm);font-size:11px;color:var(--text);overflow-x:auto;line-height:1.6;white-space:pre">-- StrikePanel™ Cloud Sync Schema
 -- Run this once in your Supabase SQL Editor
