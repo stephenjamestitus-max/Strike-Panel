@@ -1,3 +1,5 @@
 node_modules/
 sp-media/
 __pycache__/
+.env
+.env.local
