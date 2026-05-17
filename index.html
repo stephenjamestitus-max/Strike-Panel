@@ -211,23 +211,53 @@ body::after{
 .weight-cut-bar{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-top:10px;overflow:hidden}
 .weight-cut-fill{height:100%;border-radius:3px;transition:width .6s var(--ease)}
 
-/* ── PWA INSTALL BANNER ── */
+/* ── PWA INSTALL SHEET ── */
 .pwa-banner{
-  position:fixed;bottom:0;left:0;right:0;z-index:500;
-  padding-bottom:env(safe-area-inset-bottom, 16px);
-  background:linear-gradient(135deg,rgba(19,22,31,0.98),rgba(24,28,40,0.99));
-  border-top:1px solid rgba(0,212,240,0.2);
-  padding:14px 20px;display:flex;align-items:center;gap:14px;
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  bottom:auto;top:0;border-top:none;border-bottom:1px solid rgba(0,212,240,0.2);
-  transform:translateY(-100%);transition:transform .3s var(--ease);
+  position:fixed;bottom:0;left:0;right:0;z-index:9000;
+  background:linear-gradient(180deg,rgba(13,15,24,0.97) 0%,rgba(18,22,36,0.99) 100%);
+  border-top:1px solid rgba(0,212,240,0.18);
+  border-radius:24px 24px 0 0;
+  padding:0 0 env(safe-area-inset-bottom,16px);
+  backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);
+  box-shadow:0 -8px 60px rgba(0,0,0,0.7),0 -1px 0 rgba(0,212,240,0.08),inset 0 1px 0 rgba(255,255,255,0.04);
+  transform:translateY(110%);transition:transform .45s cubic-bezier(0.34,1.08,0.64,1);
+  max-width:520px;margin:0 auto;left:50%;right:auto;transform:translate(-50%,110%);width:100%;
 }
-.pwa-banner.show{transform:translateY(0)}
-.pwa-banner-icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,rgba(0,212,240,0.2),rgba(0,212,240,0.1));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;border:1px solid rgba(0,212,240,0.3)}
-.pwa-banner-text{flex:1}
-.pwa-banner-title{font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)}
-.pwa-banner-sub{font-size:11px;color:var(--muted);margin-top:1px}
-.pwa-banner-actions{display:flex;gap:8px;flex-shrink:0}
+.pwa-banner.show{transform:translate(-50%,0)}
+@media(max-width:540px){.pwa-banner{max-width:100%;left:0;transform:translateY(110%)}.pwa-banner.show{transform:translateY(0)}}
+/* drag handle */
+.pwa-drag{width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,0.12);margin:12px auto 0}
+/* inner body */
+.pwa-body{display:flex;flex-direction:column;align-items:center;padding:20px 24px 24px;gap:0}
+/* icon */
+.pwa-app-icon{position:relative;width:72px;height:72px;border-radius:18px;background:linear-gradient(135deg,#001f2e,#0b0d14);border:1px solid rgba(0,212,240,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 1px rgba(0,212,240,0.08),0 8px 32px rgba(0,0,0,0.5);margin-bottom:16px}
+.pwa-app-icon-glow{position:absolute;inset:-12px;border-radius:30px;background:radial-gradient(ellipse at center,rgba(0,212,240,0.15) 0%,transparent 70%);z-index:-1;animation:pwaGlowPulse 3s ease-in-out infinite}
+.pwa-app-icon-letters{font-family:var(--fh);font-size:22px;letter-spacing:2px;color:var(--accent)}
+@keyframes pwaGlowPulse{0%,100%{opacity:.6}50%{opacity:1}}
+/* text */
+.pwa-title{font-family:var(--fh);font-size:24px;letter-spacing:3px;color:var(--text);text-align:center;margin-bottom:6px}
+.pwa-sub{font-size:13px;color:var(--muted);text-align:center;line-height:1.6;max-width:320px;margin:0 auto 16px}
+/* feature pills */
+.pwa-pills{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-bottom:20px}
+.pwa-pill{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 11px;border-radius:20px;background:rgba(0,212,240,0.07);color:rgba(0,212,240,0.8);border:1px solid rgba(0,212,240,0.15)}
+/* android cta */
+.pwa-android-cta{width:100%;display:flex;flex-direction:column;gap:9px}
+.pwa-install-btn{width:100%;padding:14px 24px;font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:14px;background:linear-gradient(135deg,var(--accent),#0099bb);color:#020e13;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 0 28px rgba(0,212,240,0.3),0 4px 16px rgba(0,0,0,0.4);transition:box-shadow .2s,transform .15s}
+.pwa-install-btn:hover{box-shadow:0 0 40px rgba(0,212,240,0.5),0 4px 20px rgba(0,0,0,0.5);transform:translateY(-1px)}
+.pwa-install-btn:active{transform:translateY(0);box-shadow:0 0 20px rgba(0,212,240,0.25)}
+.pwa-later-btn{width:100%;padding:11px;font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(255,255,255,0.07);border-radius:12px;background:transparent;color:var(--muted);cursor:pointer;transition:color .2s,border-color .2s}
+.pwa-later-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.15)}
+/* ios steps */
+.pwa-ios-cta{width:100%;display:flex;flex-direction:column;gap:10px}
+.pwa-ios-steps{background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px;margin-bottom:4px}
+.pwa-ios-step{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);line-height:1.4}
+.pwa-ios-step strong{color:var(--text)}
+.pwa-ios-num{width:24px;height:24px;border-radius:50%;background:rgba(0,212,240,0.12);border:1px solid rgba(0,212,240,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--fc);font-size:11px;font-weight:700;color:var(--accent);flex-shrink:0}
+.pwa-ios-share-icon{display:inline-flex;align-items:center;vertical-align:middle;margin-left:4px;opacity:0.85}
+/* divider */
+.pwa-divider{width:100%;height:1px;background:rgba(255,255,255,0.06);margin:2px 0}
+/* Already installed state — hide banner */
+@media(display-mode:standalone){.pwa-banner{display:none!important}}
 
 /* ── SPARRING SESSION TYPES ── */
 .stype-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-bottom:14px}
@@ -996,7 +1026,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 .stype-btn .sp-icon{width:22px;height:22px;vertical-align:middle}
 .ri-label .sp-icon{width:15px;height:15px;vertical-align:-0.2em;margin-right:2px}
 .p2card-icon .sp-icon{width:18px;height:18px}
-.pwa-banner-icon .sp-icon{width:26px;height:26px}
 .tab .sp-icon{width:13px;height:13px;vertical-align:-0.1em}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -1616,16 +1645,50 @@ create policy "allow_all" on sp_sync
   </div>
 </div>
 
-<!-- ═══ PWA INSTALL BANNER ═══ -->
-<div class="pwa-banner" id="pwaBanner">
-  <div class="pwa-banner-icon">🥊</div>
-  <div class="pwa-banner-text">
-    <div class="pwa-banner-title">Add to Home Screen</div>
-    <div class="pwa-banner-sub">Install StrikePanel™ for instant access from your phone</div>
-  </div>
-  <div class="pwa-banner-actions">
-    <button class="btn btn-primary btn-sm" id="pwaInstallBtn">Install</button>
-    <button class="btn btn-ghost btn-sm" onclick="pwaDismiss()">Later</button>
+<!-- ═══ PWA INSTALL SHEET ═══ -->
+<div class="pwa-banner" id="pwaBanner" role="dialog" aria-label="Install StrikePanel">
+  <div class="pwa-drag"></div>
+  <div class="pwa-body">
+    <div class="pwa-app-icon">
+      <div class="pwa-app-icon-glow"></div>
+      <span class="pwa-app-icon-letters">SP</span>
+    </div>
+    <div class="pwa-title">StrikePanel™</div>
+    <div class="pwa-sub">Add to your home screen for instant access — no App Store, no browser bar.</div>
+    <div class="pwa-pills">
+      <span class="pwa-pill">⚡ Instant access</span>
+      <span class="pwa-pill">📵 Works offline</span>
+      <span class="pwa-pill">🔒 No browser bar</span>
+    </div>
+    <!-- Android / Chrome install -->
+    <div class="pwa-android-cta" id="pwaAndroidCta">
+      <button class="pwa-install-btn" id="pwaInstallBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16l-4-4 4-4"/><path d="M16 12H8"/><rect x="3" y="3" width="18" height="18" rx="4" ry="4" opacity="0"/><path d="M4 12v5a2 2 0 002 2h12a2 2 0 002-2v-5"/><polyline points="8 12 12 17 16 12"/><line x1="12" y1="3" x2="12" y2="17"/></svg>
+        Add to Home Screen
+      </button>
+      <button class="pwa-later-btn" onclick="pwaDismiss()">Not now</button>
+    </div>
+    <!-- iOS Safari instructions -->
+    <div class="pwa-ios-cta" id="pwaIosCta" style="display:none">
+      <div class="pwa-ios-steps">
+        <div class="pwa-ios-step">
+          <span class="pwa-ios-num">1</span>
+          <span>Tap the <strong>Share</strong> button
+            <svg class="pwa-ios-share-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(0,212,240,0.85)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            in Safari
+          </span>
+        </div>
+        <div class="pwa-ios-step">
+          <span class="pwa-ios-num">2</span>
+          <span>Select <strong>Add to Home Screen</strong></span>
+        </div>
+        <div class="pwa-ios-step">
+          <span class="pwa-ios-num">3</span>
+          <span>Tap <strong>Add</strong> to confirm</span>
+        </div>
+      </div>
+      <button class="pwa-later-btn" onclick="pwaDismiss()">Got it</button>
+    </div>
   </div>
 </div>
 <section class="section" id="athletes">
@@ -2097,9 +2160,13 @@ create policy "allow_all" on sp_sync
     <div class="lic-icon">🔥</div>
     <div>
       <div class="lic-title">StrikePanel™ — Up to 10 Athletes · One-Time Fee</div>
-      <div class="lic-text">Built exclusively for combat sports coaches. Track up to 20 athletes, generate daily readiness briefs, manage fight camp countdowns and weight cuts — all from one app. Add your free Gemini key in Settings to unlock AI features. No subscription. Ever.</div>
+      <div class="lic-text">Built exclusively for combat sports coaches. Track up to 10 athletes, generate daily readiness briefs, manage fight camp countdowns and weight cuts — all from one app. Add your free Gemini key in Settings to unlock AI features. No subscription. Ever.</div>
       <div class="lic-pills">
         <span class="lic-pill">🥊 Combat Sports</span><span class="lic-pill">👥 Up to 10 athletes</span><span class="lic-pill">⚡ Morning Brief</span><span class="lic-pill">✦ Gemini AI</span><span class="lic-pill">🚫 No tracking</span><span class="lic-pill">📱 PWA installable</span>
+      </div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-size:12px;color:var(--muted)">Running a bigger squad or multi-gym setup?</span>
+        <a href="mailto:corepanelv1@gmail.com?subject=Team%20Plan%20Enquiry&body=Hi%2C%20I%27m%20interested%20in%20a%20team%20plan%20for%20StrikePanel%E2%84%A2.%0A%0ACoach%20name%3A%0ANumber%20of%20athletes%3A%0AGym%20%2F%20organisation%3A" style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(0,212,240,0.35);padding-bottom:1px;transition:color .2s,border-color .2s" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(0,212,240,0.7)'" onmouseout="this.style.color='var(--accent)';this.style.borderColor='rgba(0,212,240,0.35)'">→ Email us for a team plan</a>
       </div>
     </div>
   </div>
@@ -2144,7 +2211,7 @@ create policy "allow_all" on sp_sync
         <div style="font-size:28px;margin-bottom:10px">🏷️</div>
         <div style="font-family:var(--fh);font-size:15px;letter-spacing:2px;margin-bottom:8px">PUT YOUR GYM'S NAME ON IT</div>
         <div style="font-size:12.5px;color:var(--muted);line-height:1.7;margin-bottom:14px">Replace StrikePanel™ with your gym name, set your own colours, and hand athletes a fully branded experience. Perfect for PT studios and gym chains.</div>
-        <a href="mailto:hello@strikepanel.com?subject=Studio%20Edition%20Enquiry&body=Hi%2C%20I%27m%20interested%20in%20the%20Studio%20Edition%20white-label%20version%20of%20StrikePanel%E2%84%A2." class="btn btn-primary btn-sm" style="text-decoration:none;justify-content:center">→ Enquire About Studio Edition</a>
+        <a href="mailto:corepanelv1@gmail.com?subject=Studio%20Edition%20Enquiry&body=Hi%2C%20I%27m%20interested%20in%20the%20Studio%20Edition%20white-label%20version%20of%20StrikePanel%E2%84%A2.%0A%0AGym%20name%3A%0ANumber%20of%20coaches%3A%0ANumber%20of%20athletes%3A" class="btn btn-primary btn-sm" style="text-decoration:none;justify-content:center">→ Enquire About Studio Edition</a>
       </div>
     </div>
 
@@ -4003,10 +4070,10 @@ setTimeout(() => {
   initShareLink();
   stypePopAthletes();
   applyMode();
-  // If demo mode, push PWA banner up so it doesn't overlap demo bar
+  // In demo mode, hide pwa banner — demo bar conflicts with bottom sheet
   if (DEMO_MODE) {
     const pwaBanner = document.getElementById('pwaBanner');
-    if (pwaBanner) pwaBanner.style.bottom = '54px';
+    if (pwaBanner) pwaBanner.style.display = 'none';
   }
 }, 60);
 
@@ -4680,16 +4747,34 @@ self.addEventListener('fetch', e => {
 
 // PWA install prompt
 let _pwaPrompt = null;
+const _pwaIsIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+const _pwaIsInStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+
+function _pwaShowBanner() {
+  if (_pwaIsInStandalone) return;
+  if (localStorage.getItem('sp_pwa_dismissed')) return;
+  const b = document.getElementById('pwaBanner');
+  if (!b) return;
+  if (_pwaIsIOS) {
+    const androidCta = document.getElementById('pwaAndroidCta');
+    const iosCta = document.getElementById('pwaIosCta');
+    if (androidCta) androidCta.style.display = 'none';
+    if (iosCta) iosCta.style.display = 'flex';
+  }
+  setTimeout(() => b.classList.add('show'), 3200);
+}
+
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
   _pwaPrompt = e;
-  if (!localStorage.getItem('sp_pwa_dismissed')) {
-    setTimeout(() => {
-      const b = document.getElementById('pwaBanner');
-      if (b) b.classList.add('show');
-    }, 3000);
-  }
+  _pwaShowBanner();
 });
+
+// iOS: no beforeinstallprompt — show manually after delay
+if (_pwaIsIOS && !_pwaIsInStandalone) {
+  setTimeout(_pwaShowBanner, 3200);
+}
+
 document.getElementById('pwaInstallBtn')?.addEventListener('click', async () => {
   if (!_pwaPrompt) return;
   _pwaPrompt.prompt();
@@ -4697,6 +4782,7 @@ document.getElementById('pwaInstallBtn')?.addEventListener('click', async () => 
   if (outcome === 'accepted') pwaDismiss();
   _pwaPrompt = null;
 });
+
 function pwaDismiss() {
   localStorage.setItem('sp_pwa_dismissed', '1');
   const b = document.getElementById('pwaBanner');
@@ -6574,8 +6660,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // PWA banner icon
-  const pwaIcon = document.querySelector('.pwa-banner-icon');
-  if (pwaIcon) pwaIcon.innerHTML = _IC.glove;
+  // pwa sheet icon uses text — no replacement needed
 
   // License icon
   const licIcon = document.querySelector('.lic-icon');
