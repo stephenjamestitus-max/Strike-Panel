@@ -5513,7 +5513,7 @@ document.getElementById('pdfShareBtn').style.display='inline-flex';
 // ══════════════════════════════════════════════════════════════════════
 
 var MASTER_KEY = 'SP-MASTER-2024-STRIKEPANEL-OWNER';
-var GUMROAD_PRODUCT = 'strikepanel';
+var GUMROAD_PRODUCT_ID = '9fFA5S9lE_f7gMernpp16Q==';
 
 function lgSetMsg(txt, ok) {
   const el = document.getElementById('lgMsg');
@@ -5537,7 +5537,7 @@ async function lgVerifyWithGumroad(key) {
     const res = await fetch('https://api.gumroad.com/v2/licenses/verify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `product_permalink=${GUMROAD_PRODUCT}&license_key=${encodeURIComponent(key)}&increment_uses_count=false`
+      body: `product_id=${encodeURIComponent(GUMROAD_PRODUCT_ID)}&license_key=${encodeURIComponent(key)}&increment_uses_count=false`
     });
     const data = await res.json();
     console.log('[SP License]', data);
