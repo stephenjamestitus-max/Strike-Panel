@@ -1,42 +1,120 @@
 <svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="bg" cx="30%" cy="20%" r="80%">
-      <stop offset="0%" stop-color="#0f1525"/>
-      <stop offset="100%" stop-color="#080a10"/>
+    <!-- Deep background gradient -->
+    <radialGradient id="bg1" cx="20%" cy="15%" r="70%">
+      <stop offset="0%" stop-color="#0d1528"/>
+      <stop offset="100%" stop-color="#070910"/>
     </radialGradient>
-    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#00D4F0" stop-opacity="0.15"/>
+    <!-- Accent glow left -->
+    <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00D4F0" stop-opacity="0.18"/>
       <stop offset="100%" stop-color="#00D4F0" stop-opacity="0"/>
     </radialGradient>
+    <!-- Accent glow right -->
+    <radialGradient id="glow2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Logo orb gradient -->
+    <radialGradient id="orb" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#1e2844"/>
+      <stop offset="50%" stop-color="#0f1428"/>
+      <stop offset="100%" stop-color="#080c18"/>
+    </radialGradient>
+    <!-- Wordmark gradient -->
+    <linearGradient id="textgrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#c8f8ff"/>
+    </linearGradient>
+    <!-- Orb glow filter -->
+    <filter id="orbglow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="orbshadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="12" flood-color="#00D4F0" flood-opacity="0.3"/>
+    </filter>
+    <!-- Subtle noise texture -->
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feBlend in="SourceGraphic" mode="overlay" result="blend"/>
+      <feComposite in="blend" in2="SourceGraphic" operator="in"/>
+    </filter>
   </defs>
 
   <!-- Background -->
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <!-- Subtle glow behind logo -->
-  <ellipse cx="600" cy="260" rx="320" ry="220" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#bg1)"/>
+  <!-- Noise overlay -->
+  <rect width="1200" height="630" fill="#fff" opacity="0.018" filter="url(#noise)"/>
+
+  <!-- Ambient glows -->
+  <ellipse cx="220" cy="280" rx="400" ry="320" fill="url(#glow1)"/>
+  <ellipse cx="1050" cy="400" rx="340" ry="280" fill="url(#glow2)"/>
+
+  <!-- Grid lines — subtle -->
+  <g stroke="#00D4F0" stroke-opacity="0.04" stroke-width="1">
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/>
+  </g>
+
   <!-- Top accent bar -->
-  <rect width="1200" height="3" fill="#00D4F0" opacity="0.7"/>
+  <rect width="1200" height="2.5" fill="url(#textgrad)" opacity="0.55"/>
 
-  <!-- Logo ring -->
-  <circle cx="600" cy="210" r="72" fill="none" stroke="#00D4F0" stroke-width="2" opacity="0.3"/>
-  <circle cx="600" cy="210" r="52" fill="#00D4F0"/>
-  <!-- SP text in logo -->
-  <text x="600" y="222" font-family="Arial Black, Impact, sans-serif" font-size="26" font-weight="900" fill="#080a10" text-anchor="middle" letter-spacing="1">SP</text>
+  <!-- ── LOGO MARK (left side, centered vertically) ── -->
+  <g transform="translate(108, 198) scale(1.95)" filter="url(#orbshadow)">
+    <!-- Outer ring -->
+    <circle cx="60" cy="60" r="54" fill="url(#orb)" stroke="#00D4F0" stroke-width="1.6" stroke-opacity="0.6"/>
+    <!-- Inner ring -->
+    <circle cx="60" cy="60" r="36" fill="none" stroke="#00D4F0" stroke-width="1" stroke-opacity="0.2"/>
+    <!-- Cardinal spokes -->
+    <g filter="url(#orbglow)" stroke="#00D4F0" stroke-linecap="round">
+      <line x1="60" y1="6"  x2="60" y2="33"  stroke-width="3"/>
+      <line x1="60" y1="87" x2="60" y2="114" stroke-width="3"/>
+      <line x1="6"  y1="60" x2="33" y2="60"  stroke-width="3"/>
+      <line x1="87" y1="60" x2="114" y2="60" stroke-width="3"/>
+    </g>
+    <!-- Diagonal ticks -->
+    <g stroke="#00D4F0" stroke-linecap="round" stroke-opacity="0.5">
+      <line x1="19" y1="19" x2="27" y2="27" stroke-width="2"/>
+      <line x1="101" y1="101" x2="93" y2="93" stroke-width="2"/>
+      <line x1="101" y1="19" x2="93" y2="27" stroke-width="2"/>
+      <line x1="19" y1="101" x2="27" y2="93" stroke-width="2"/>
+    </g>
+    <!-- Centre node -->
+    <circle cx="60" cy="60" r="13" fill="#00D4F0" filter="url(#orbglow)"/>
+    <circle cx="55.5" cy="55.5" r="4.5" fill="white" fill-opacity="0.25"/>
+    <!-- SP monogram -->
+    <text x="60" y="64.5" font-family="Arial Black,sans-serif" font-weight="900" font-size="10" fill="#07111e" text-anchor="middle" letter-spacing="0.8">SP</text>
+  </g>
 
-  <!-- Brand name -->
-  <text x="600" y="346" font-family="Arial Black, Impact, sans-serif" font-size="72" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="7">STRIKEPANEL</text>
+  <!-- ── WORDMARK + TAGLINE (right of mark) ── -->
+  <!-- STRIKEPANEL -->
+  <text x="382" y="298" font-family="Arial Black,Helvetica Neue,Arial,sans-serif" font-weight="900" font-size="88" letter-spacing="3" fill="url(#textgrad)">STRIKEPANEL</text>
   <!-- TM -->
-  <text x="978" y="310" font-family="Arial, sans-serif" font-size="22" fill="#ffffff" opacity="0.6">™</text>
+  <text x="1142" y="230" font-family="Arial,sans-serif" font-weight="700" font-size="24" fill="#00D4F0" fill-opacity="0.8">™</text>
 
-  <!-- Divider line -->
-  <line x1="480" y1="372" x2="720" y2="372" stroke="#00D4F0" stroke-width="1.5" opacity="0.5"/>
+  <!-- Accent divider -->
+  <rect x="382" y="316" width="640" height="1.5" fill="#00D4F0" fill-opacity="0.3" rx="1"/>
 
-  <!-- Subtitle -->
-  <text x="600" y="418" font-family="Arial, sans-serif" font-size="26" fill="#00D4F0" text-anchor="middle" letter-spacing="6" font-weight="600">DAILY CHECK-IN</text>
+  <!-- Tagline -->
+  <text x="382" y="358" font-family="Courier New,Courier,monospace" font-weight="700" font-size="17" letter-spacing="7" fill="#00D4F0" fill-opacity="0.75">TRAINING INTELLIGENCE</text>
 
-  <!-- Description -->
-  <text x="600" y="480" font-family="Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle" letter-spacing="0.5">Your coach is waiting — takes 30 seconds.</text>
+  <!-- Description line -->
+  <text x="382" y="420" font-family="Arial,Helvetica,sans-serif" font-size="22" fill="#94a3b8" letter-spacing="0.5">Daily readiness scores for every athlete. Every morning.</text>
+
+  <!-- Price / proof pill -->
+  <rect x="382" y="460" width="220" height="38" rx="19" fill="rgba(0,212,240,0.1)" stroke="#00D4F0" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="492" y="484" font-family="Arial,sans-serif" font-weight="700" font-size="15" fill="#00D4F0" text-anchor="middle" letter-spacing="1">$99 · One-Time</text>
+
+  <rect x="618" y="460" width="200" height="38" rx="19" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+  <text x="718" y="484" font-family="Arial,sans-serif" font-weight="700" font-size="15" fill="#10b981" text-anchor="middle" letter-spacing="1">No Subscription</text>
+
+  <!-- Domain -->
+  <text x="600" y="588" font-family="Courier New,Courier,monospace" font-size="14" fill="#3d4560" text-anchor="middle" letter-spacing="3">STRIKEPANEL.VERCEL.APP</text>
 
   <!-- Bottom accent bar -->
-  <rect y="627" width="1200" height="3" fill="#00D4F0" opacity="0.4"/>
+  <rect y="627.5" width="1200" height="2.5" fill="#00D4F0" fill-opacity="0.3"/>
 </svg>
