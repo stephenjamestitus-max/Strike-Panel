@@ -5625,16 +5625,27 @@ function lgIsValidKey(key) {
   return k === MASTER_KEY.trim().toUpperCase();
 }
 
+const SP_MAX_ACTIVATIONS = 3;
+
 async function lgVerifyWithGumroad(key) {
   try {
     const res = await fetch('https://api.gumroad.com/v2/licenses/verify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `product_id=${encodeURIComponent(GUMROAD_PRODUCT_ID)}&license_key=${encodeURIComponent(key)}&increment_uses_count=false`
+      body: `product_id=${encodeURIComponent(GUMROAD_PRODUCT_ID)}&license_key=${encodeURIComponent(key)}&increment_uses_count=true`
     });
     const data = await res.json();
     console.log('[SP License]', data);
-    if (data.success === true) return { ok: true };
+    if (data.success === true) {
+      // uses is the count AFTER this increment — so ≤ SP_MAX_ACTIVATIONS means valid
+      if (typeof data.uses === 'number' && data.uses > SP_MAX_ACTIVATIONS) {
+        return {
+          ok: false,
+          msg: `This key has reached its device limit (${SP_MAX_ACTIVATIONS} devices). Email corepanelv1@gmail.com to reset it.`
+        };
+      }
+      return { ok: true };
+    }
     return { ok: false, msg: data.message || 'Key not recognised by Gumroad.' };
   } catch (e) {
     console.error('[SP License] Network error:', e);
