@@ -2832,7 +2832,7 @@ function athSave(){
   };
   const idx=_athEd?S.athletes.findIndex(a=>a.id===_athEd):-1;
   if(idx>=0)S.athletes[idx]=rec;else{
-    // Enforce 4-profile limit for new additions
+    // Enforce 20-athlete limit for new additions
     const realCount=S.athletes.filter(a=>!a.id.startsWith('demo_')).length;
     if(realCount>=20){setMsg('athMsg','Maximum of 20 athletes reached. Remove one to add another.',false);return;}
     // First real save — strip all demo data
@@ -5597,15 +5597,9 @@ document.getElementById('pdfShareBtn').style.display='inline-flex';
 }
 // ══════════════════════════════════════════════════════════════════════
 // LICENSE GATE — Gumroad live API verification
-//
-// When a customer enters their key, the app calls the Gumroad API to
-// verify it in real time. No manual key management needed — every
-// purchase is automatically accepted.
-//
-// MASTER KEY: SP-MASTER-2024-STRIKEPANEL-OWNER (owner use only)
 // ══════════════════════════════════════════════════════════════════════
 
-var MASTER_KEY = 'SP-MASTER-2024-STRIKEPANEL-OWNER';
+var MASTER_KEY_HASH = 'a0228990b69749c8755c977757e4a7a0751cb7e016b5c263b8c2e2844a9b9be0';
 var GUMROAD_PRODUCT_ID = '9fFA5S9lE_f7gMernpp16Q==';
 
 function lgSetMsg(txt, ok) {
@@ -5620,9 +5614,12 @@ function lgUnlock() {
   if (gate) gate.classList.add('hidden');
 }
 
-function lgIsValidKey(key) {
-  const k = key.trim().toUpperCase();
-  return k === MASTER_KEY.trim().toUpperCase();
+async function lgIsValidKey(key) {
+  try {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(key.trim().toUpperCase()));
+    const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+    return hash === MASTER_KEY_HASH;
+  } catch { return false; }
 }
 
 const SP_MAX_ACTIVATIONS = 3;
@@ -5635,7 +5632,6 @@ async function lgVerifyWithGumroad(key) {
       body: `product_id=${encodeURIComponent(GUMROAD_PRODUCT_ID)}&license_key=${encodeURIComponent(key)}&increment_uses_count=true`
     });
     const data = await res.json();
-    console.log('[SP License]', data);
     if (data.success === true) {
       // uses is the count AFTER this increment — so ≤ SP_MAX_ACTIVATIONS means valid
       if (typeof data.uses === 'number' && data.uses > SP_MAX_ACTIVATIONS) {
@@ -5663,7 +5659,7 @@ async function lgActivate() {
   if (btn) { btn.textContent = 'Checking…'; btn.disabled = true; }
   lgSetMsg('Verifying your key…', null);
 
-  const isMaster = lgIsValidKey(key);
+  const isMaster = await lgIsValidKey(key);
 
   if (isMaster) {
     lgActivateSuccess(key, btn);
@@ -5703,7 +5699,7 @@ async function lgCheck() {
   const stored = localStorage.getItem('cp_license_key');
   if (!stored) return; // no key stored — gate stays visible
   // Master key unlocks immediately without a network call
-  if (lgIsValidKey(stored)) { lgUnlock(); return; }
+  if (await lgIsValidKey(stored)) { lgUnlock(); return; }
   // Previously verified Gumroad key — unlock without re-calling API every load
   if (localStorage.getItem('cp_license_activated')) { lgUnlock(); return; }
 }
