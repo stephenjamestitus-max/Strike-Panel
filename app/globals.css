@@ -1,24 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #04070f;
+  --surface: #080e1a;
+  --card: #0c1524;
+  --accent: #00D4F0;
+  --amber: #c8892a;
+  --gold: #e0a83a;
+  --green: #10b981;
+  --red: #ef4444;
+  --purple: #8b5cf6;
+  --cream: #f5f0e8;
+  --muted: #6b7894;
+  --muted2: #4a566b;
+  --border: rgba(255,255,255,.07);
+  --fh: 'Bebas Neue', sans-serif;
+  --fb: 'Barlow', sans-serif;
+  --fc: 'IBM Plex Sans', sans-serif;
+  --fi: 'Inter', sans-serif;
+  --fm: 'IBM Plex Mono', monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--cream); font-family: var(--fb); overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 0 0 rgba(0,212,240,.5) }
+  70%      { box-shadow: 0 0 0 7px rgba(0,212,240,0) }
 }
+@keyframes ticker    { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+@keyframes float     { 0%,100% { transform: translateY(0) rotateX(0) rotateY(0) } 50% { transform: translateY(-10px) rotateX(1deg) rotateY(1deg) } }
+@keyframes fadeUp    { from { opacity:0; transform:translateY(28px) } to { opacity:1; transform:translateY(0) } }
+@keyframes scaleIn   { from { opacity:0; transform:scale(.95) } to { opacity:1; transform:scale(1) } }
+@keyframes drawBar   { from { width:0!important } to {} }
+@keyframes glow      { 0%,100% { box-shadow:0 0 40px rgba(0,212,240,.07),0 0 0 1px rgba(0,212,240,.18) } 50% { box-shadow:0 0 70px rgba(0,212,240,.16),0 0 0 1px rgba(0,212,240,.32) } }
+@keyframes ambientPulse { 0%,100% { opacity:.04 } 50% { opacity:.09 } }
+@keyframes scanline  { 0% { top:-4px } 100% { top:100% } }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+.reveal { opacity:0; transform:translateY(32px); transition:opacity .65s ease,transform .65s ease; }
+.reveal.in { opacity:1; transform:none; }
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
