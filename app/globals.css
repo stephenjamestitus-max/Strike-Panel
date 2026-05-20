@@ -22,10 +22,12 @@
   --fm: 'IBM Plex Mono', monospace;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--cream); font-family: var(--fb); overflow-x: hidden; }
-a { text-decoration: none; color: inherit; }
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--cream); font-family: var(--fb); overflow-x: hidden; }
+  a { text-decoration: none; color: inherit; }
+}
 
 @keyframes pulse-dot {
   0%,100% { box-shadow: 0 0 0 0 rgba(0,212,240,.5) }
@@ -35,7 +37,7 @@ a { text-decoration: none; color: inherit; }
 @keyframes float     { 0%,100% { transform: translateY(0) rotateX(0) rotateY(0) } 50% { transform: translateY(-10px) rotateX(1deg) rotateY(1deg) } }
 @keyframes fadeUp    { from { opacity:0; transform:translateY(28px) } to { opacity:1; transform:translateY(0) } }
 @keyframes scaleIn   { from { opacity:0; transform:scale(.95) } to { opacity:1; transform:scale(1) } }
-@keyframes drawBar   { from { width:0!important } to {} }
+@keyframes drawBar   { from { width: 0 } to {} }
 @keyframes glow      { 0%,100% { box-shadow:0 0 40px rgba(0,212,240,.07),0 0 0 1px rgba(0,212,240,.18) } 50% { box-shadow:0 0 70px rgba(0,212,240,.16),0 0 0 1px rgba(0,212,240,.32) } }
 @keyframes ambientPulse { 0%,100% { opacity:.04 } 50% { opacity:.09 } }
 @keyframes scanline  { 0% { top:-4px } 100% { top:100% } }
@@ -43,3 +45,6 @@ a { text-decoration: none; color: inherit; }
 .reveal { opacity:0; transform:translateY(32px); transition:opacity .65s ease,transform .65s ease; }
 .reveal.in { opacity:1; transform:none; }
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transition: none; }
+}
