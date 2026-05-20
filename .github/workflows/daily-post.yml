@@ -1,0 +1,45 @@
+name: Daily X Post
+
+on:
+  schedule:
+    # Run at 8am, 12pm, 6pm UTC — matches scheduled post times
+    - cron: '0 8 * * *'
+    - cron: '0 12 * * *'
+    - cron: '0 18 * * *'
+  workflow_dispatch: # allow manual trigger
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Post to X
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+        run: python scripts/marketing/post_to_x.py
+
+      - name: Update Google Sheet with post status
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+        run: python scripts/marketing/save_to_drive.py
+        continue-on-error: true
+
+      - name: Commit posted log
+        run: |
+          git config user.name "StrikePanel Bot"
+          git config user.email "bot@strikepanel.app"
+          git add scripts/marketing/posted_log.json scripts/marketing/content_batch.json
+          git diff --staged --quiet || git commit -m "chore: post log $(date +%Y-%m-%dT%H:%M)"
+          git push
