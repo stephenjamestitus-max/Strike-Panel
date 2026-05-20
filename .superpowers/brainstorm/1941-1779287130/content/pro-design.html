@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StrikePanel — Landing Page Mockup</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #030308;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  .label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: rgba(0,255,200,0.6);
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ── SECTION TAG ── */
+  .section-tag {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(0,255,200,0.07);
+    border-top: 1px solid rgba(0,255,200,0.15);
+    padding: 8px 16px;
+    font-size: 10px;
+    font-family: monospace;
+    color: rgba(0,255,200,0.55);
+    letter-spacing: 1px;
+  }
+
+  /* ══════════════════════════════
+     SECTION 1 — HERO
+  ══════════════════════════════ */
+  .hero {
+    position: relative;
+    height: 620px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0,255,200,0.15);
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1400&q=80&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center 30%;
+    filter: brightness(0.25) saturate(0.6);
+  }
+
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(3,3,8,0.7) 0%, rgba(0,30,50,0.3) 50%, rgba(3,3,8,0.9) 100%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,200,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,200,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at 50% 100%, transparent 0%, rgba(0,0,0,0.8) 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 100%, transparent 0%, rgba(0,0,0,0.8) 70%);
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 60px;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: rgba(0,255,200,0.7);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 88px;
+    font-weight: 900;
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    color: #fff;
+    text-shadow: 0 0 80px rgba(0,255,200,0.15);
+  }
+
+  .hero-title span {
+    color: #00ffc8;
+    display: block;
+  }
+
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    max-width: 460px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .hero-cta {
+    margin-top: 36px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: #00ffc8;
+    color: #030308;
+    padding: 14px 32px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+    padding: 14px 24px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.15);
+    cursor: pointer;
+  }
+
+  .hero-3d-note {
+    position: absolute;
+    right: 60px; top: 50%;
+    transform: translateY(-50%);
+    width: 280px;
+    height: 280px;
+    border: 1px solid rgba(0,255,200,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(0,255,200,0.05) 0%, transparent 70%);
+    box-shadow: 0 0 60px rgba(0,255,200,0.08), inset 0 0 60px rgba(0,255,200,0.03);
+  }
+
+  .hero-3d-inner {
+    text-align: center;
+    font-family: monospace;
+    color: rgba(0,255,200,0.4);
+    font-size: 10px;
+    letter-spacing: 2px;
+    line-height: 1.8;
+  }
+
+  /* ══════════════════════════════
+     SECTION 2 — PAIN STRIP
+  ══════════════════════════════ */
+  .pain-strip {
+    position: relative;
+    padding: 32px 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .pain-item {
+    flex: 1;
+    padding: 0 28px;
+    border-right: 1px solid rgba(255,255,255,0.07);
+    text-align: center;
+  }
+  .pain-item:last-child { border-right: none; }
+
+  .pain-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .pain-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .pain-arrow {
+    color: rgba(0,255,200,0.3);
+    font-size: 18px;
+    padding: 0 8px;
+  }
+
+  .pain-solution {
+    flex: 1.2;
+    padding: 0 28px;
+    text-align: center;
+  }
+
+  .pain-solution-text {
+    font-size: 14px;
+    color: #00ffc8;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* ══════════════════════════════
+     SECTION 3 — DEMO
+  ══════════════════════════════ */
+  .demo-section {
+    position: relative;
+    padding: 80px 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+  }
+
+  .demo-section h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 52px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .demo-section .sub {
+    color: rgba(255,255,255,0.4);
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+
+  .demo-frame-wrap {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0,255,200,0.25);
+    box-shadow: 0 0 60px rgba(0,255,200,0.08), 0 40px 80px rgba(0,0,0,0.6);
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .demo-chrome {
+    background: #0a0a12;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: rgba(255,95,87,0.7); }
+  .dot.y { background: rgba(255,189,46,0.7); }
+  .dot.g { background: rgba(39,201,63,0.7); }
+
+  .demo-url {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    font-family: monospace;
+    text-align: center;
+  }
+
+  .demo-screen {
+    height: 420px;
+    background: #050510;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    color: rgba(0,255,200,0.3);
+    font-size: 11px;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .demo-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+  }
+
+  /* ══════════════════════════════
+     SECTION 4 — FEATURES
+  ══════════════════════════════ */
+  .features {
+    position: relative;
+    padding: 80px 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .features-header {
+    margin-bottom: 48px;
+  }
+
+  .features-header h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 52px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .feature-card {
+    background: #030308;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px;
+    height: 40px;
+    background: #00ffc8;
+  }
+
+  .feature-num {
+    font-size: 11px;
+    color: rgba(0,255,200,0.4);
+    letter-spacing: 3px;
+    font-family: monospace;
+    margin-bottom: 16px;
+  }
+
+  .feature-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+  }
+
+  .feature-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.6;
+  }
+
+  .feature-img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-top: 20px;
+    opacity: 0.5;
+    filter: saturate(0.3);
+  }
+
+  /* ══════════════════════════════
+     SECTION 5 — PRICING
+  ══════════════════════════════ */
+  .pricing {
+    position: relative;
+    padding: 80px 60px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .pricing-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1517438476312-10d79c077509?w=1400&q=80&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.08) saturate(0.3);
+  }
+
+  .pricing-content {
+    position: relative; z-index: 2;
+  }
+
+  .pricing-card {
+    display: inline-block;
+    background: rgba(3,3,8,0.9);
+    border: 1px solid rgba(0,255,200,0.3);
+    border-radius: 16px;
+    padding: 48px 64px;
+    box-shadow: 0 0 80px rgba(0,255,200,0.08), 0 40px 80px rgba(0,0,0,0.6);
+    min-width: 380px;
+  }
+
+  .pricing-eyebrow {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: rgba(0,255,200,0.6);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .pricing-amount {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 96px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .pricing-period {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+
+  .pricing-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(0,255,200,0.3);
+    margin: 24px auto;
+  }
+
+  .pricing-features {
+    list-style: none;
+    margin-bottom: 32px;
+    text-align: left;
+  }
+
+  .pricing-features li {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pricing-features li::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: #00ffc8;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .btn-pricing {
+    display: block;
+    background: #00ffc8;
+    color: #030308;
+    padding: 16px 40px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ═══════ SECTION 1: HERO ═══════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Training Intelligence for Combat Sports</div>
+    <h1 class="hero-title">
+      Know Who's Ready.<br>
+      <span>Before They</span>
+      Step In.
+    </h1>
+    <p class="hero-sub">StrikePanel gives coaches a real-time readiness dashboard, AI-generated sessions, and athlete tracking — built for the gym floor, not a spreadsheet.</p>
+    <div class="hero-cta">
+      <button class="btn-primary">Try Live Demo</button>
+      <button class="btn-ghost">Get StrikePanel — $99</button>
+    </div>
+  </div>
+
+  <div class="hero-3d-note">
+    <div class="hero-3d-inner">
+      REACT THREE FIBER<br>3D SCENE HERE<br>——<br>Particle burst<br>Mouse parallax<br>Scroll camera
+    </div>
+  </div>
+
+  <div class="section-tag">SECTION 1 · HERO — Full-viewport 3D canvas (React Three Fiber) · Gloves/fighter geometry · Particle system · Scroll-triggered camera pull-back · Framer Motion text reveal</div>
+</section>
+
+<!-- ═══════ SECTION 2: PAIN STRIP ═══════ -->
+<section class="pain-strip" style="position:relative;">
+  <div class="pain-item">
+    <div class="pain-label">The Problem</div>
+    <div class="pain-text">Coaches tracking readiness on WhatsApp voice notes and guesswork</div>
+  </div>
+  <div class="pain-arrow">—</div>
+  <div class="pain-item">
+    <div class="pain-label">The Risk</div>
+    <div class="pain-text">Overtraining an athlete before their biggest fight</div>
+  </div>
+  <div class="pain-arrow">—</div>
+  <div class="pain-solution">
+    <div class="pain-label">The Fix</div>
+    <div class="pain-solution-text">StrikePanel. Morning brief ready in 30 seconds.</div>
+  </div>
+  <div class="section-tag">SECTION 2 · PAIN STRIP — Framer Motion staggered reveal on scroll entry</div>
+</section>
+
+<!-- ═══════ SECTION 3: DEMO ═══════ -->
+<section class="demo-section">
+  <div class="label" style="margin-bottom:16px;">See It In Action</div>
+  <h2>Try It Right Now.</h2>
+  <p class="sub">No account. No install. Full demo with real data loaded.</p>
+
+  <div class="demo-frame-wrap">
+    <div class="demo-chrome">
+      <div class="dot r"></div>
+      <div class="dot y"></div>
+      <div class="dot g"></div>
+      <div class="demo-url">strikepanel.vercel.app/demo</div>
+    </div>
+    <div class="demo-screen">
+      <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=900&q=80&auto=format&fit=crop" alt="App preview placeholder" style="object-position:center top;" />
+      <div style="position:absolute;inset:0;background:rgba(3,3,8,0.5);display:flex;align-items:center;justify-content:center;">
+        <div style="font-family:monospace;color:rgba(0,255,200,0.5);font-size:11px;letter-spacing:3px;">IFRAME · strikepanel.vercel.app/demo</div>
+      </div>
+    </div>
+  </div>
+  <div class="section-tag" style="position:relative;margin-top:16px;border-radius:6px;border:1px solid rgba(0,255,200,0.1);">SECTION 3 · DEMO — Live iframe embed · Framer Motion scale-up on scroll · Glowing border pulse animation</div>
+</section>
+
+<!-- ═══════ SECTION 4: FEATURES ═══════ -->
+<section class="features">
+  <div class="features-header">
+    <div class="label" style="margin-bottom:12px;">Built for Coaches</div>
+    <h2>Everything You Need.<br>Nothing You Don't.</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-num">01</div>
+      <div class="feature-title">Morning Brief</div>
+      <div class="feature-desc">Daily readiness scores for every athlete. Know who to push, who to protect — before training starts.</div>
+      <img src="https://images.unsplash.com/photo-1517438476312-10d79c077509?w=600&q=80&auto=format&fit=crop" class="feature-img" alt="">
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">02</div>
+      <div class="feature-title">Athlete Check-ins</div>
+      <div class="feature-desc">Athletes submit readiness in 30 seconds via WhatsApp link. No app install. No friction.</div>
+      <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?w=600&q=80&auto=format&fit=crop" class="feature-img" alt="">
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">03</div>
+      <div class="feature-title">AI Workout Generator</div>
+      <div class="feature-desc">Describe the goal. Get a complete session plan instantly — personalised to the athlete's level and equipment.</div>
+      <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=600&q=80&auto=format&fit=crop" class="feature-img" alt="">
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">04</div>
+      <div class="feature-title">Timer + Biometrics</div>
+      <div class="feature-desc">Interval timer built in. BMI, TDEE, and macro targets calculated automatically from athlete profile.</div>
+      <img src="https://images.unsplash.com/photo-1517438476312-10d79c077509?w=600&q=80&auto=format&fit=crop" class="feature-img" alt="">
+    </div>
+  </div>
+  <div class="section-tag" style="position:relative;margin-top:16px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);">SECTION 4 · FEATURES — Staggered scroll reveal per card · Hover: teal left-border glow + 2px lift · Real photography from your own app</div>
+</section>
+
+<!-- ═══════ SECTION 5: PRICING ═══════ -->
+<section class="pricing">
+  <div class="pricing-bg"></div>
+  <div class="pricing-content">
+    <div class="label" style="margin-bottom:32px;">Simple Pricing</div>
+    <div class="pricing-card">
+      <div class="pricing-eyebrow">One-time payment · No subscription</div>
+      <div class="pricing-amount">$99</div>
+      <div class="pricing-period">Lifetime access · Free updates</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>Full access to all features</li>
+        <li>Unlimited athletes</li>
+        <li>AI Workout Generator included</li>
+        <li>Cloud sync via your own Supabase</li>
+        <li>Instant delivery via Gumroad</li>
+      </ul>
+      <button class="btn-pricing">Get StrikePanel</button>
+    </div>
+  </div>
+  <div class="section-tag" style="position:relative;margin-top:32px;border-radius:6px;border:1px solid rgba(0,255,200,0.1);">SECTION 5 · PRICING — Full-bleed photography bg · Framer Motion pop-in · Pulsing glow border on card</div>
+</section>
+
+</body>
+</html>
