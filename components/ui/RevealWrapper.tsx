@@ -22,7 +22,7 @@ export default function RevealWrapper({ children, className = '', delay }: Props
   }, [])
 
   return (
-    <div ref={ref} className={`reveal ${delay ?? ''} ${className}`.trim()}>
+    <div ref={ref} className={['reveal', delay, className].filter(Boolean).join(' ')}>
       {children}
     </div>
   )

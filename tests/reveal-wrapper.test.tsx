@@ -32,5 +32,6 @@ describe('RevealWrapper', () => {
     const el = container.firstChild as Element
     act(() => intersectCallback([{ isIntersecting: true, target: el } as any], {} as any))
     expect(el.classList.contains('in')).toBe(true)
+    expect(disconnectMock).toHaveBeenCalled()
   })
 })
