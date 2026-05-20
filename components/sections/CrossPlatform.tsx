@@ -1,0 +1,71 @@
+import IPhone from './devices/IPhone'
+import MacBook from './devices/MacBook'
+import IPad from './devices/IPad'
+
+const bullets = [
+  'WORKS OFFLINE',
+  'ONE LICENSE',
+  'HOME SCREEN INSTALL',
+  'YOUR DATA, NEVER OURS',
+]
+
+export default function CrossPlatform() {
+  return (
+    <section style={{ background: 'var(--bg)', padding: 'clamp(80px,10vw,130px) clamp(20px,5vw,64px) 0', overflow: 'hidden' }}>
+      <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+        {/* Header row */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', marginBottom: 64 }}>
+          <div>
+            <div style={{ fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 4, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>// CROSS-PLATFORM</div>
+            <h2 style={{ fontFamily: 'var(--fh)', fontSize: 'clamp(56px,8vw,110px)', lineHeight: .92, letterSpacing: 2 }}>
+              RUNS ON<br />EVERYTHING.
+            </h2>
+          </div>
+          <div>
+            <p style={{ fontFamily: 'var(--fb)', fontSize: 16, color: 'rgba(245,240,232,.65)', lineHeight: 1.7, marginBottom: 28 }}>
+              Phone, tablet, laptop. Install from your browser — no app store, no update prompts, works offline. One license covers every device you own.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+              {bullets.map((b) => (
+                <div key={b} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 0 8px var(--accent)', flexShrink: 0 }} />
+                  <span style={{ fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 2, color: 'var(--muted)', textTransform: 'uppercase' }}>{b}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Device row */}
+        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center', gap: 32, paddingBottom: 0 }}>
+          {/* iPhone */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, flexShrink: 0 }}>
+            <IPhone />
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--muted)', textTransform: 'uppercase' }}>MOBILE</div>
+              <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase' }}>ATHLETES</div>
+            </div>
+          </div>
+
+          {/* MacBook */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, flex: '0 0 auto', maxWidth: 580, width: '100%' }}>
+            <MacBook />
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--muted)', textTransform: 'uppercase' }}>DESKTOP</div>
+              <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase' }}>MORNING BRIEF</div>
+            </div>
+          </div>
+
+          {/* iPad */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, flexShrink: 0 }}>
+            <IPad />
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--muted)', textTransform: 'uppercase' }}>TABLET</div>
+              <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase' }}>FIGHT CAMP</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
