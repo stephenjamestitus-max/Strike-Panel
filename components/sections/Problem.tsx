@@ -37,7 +37,7 @@ export default function Problem() {
             textTransform: 'uppercase',
             marginBottom: 16,
           }}>
-            // THE PROBLEM &amp; THE FIX
+            // THE PROBLEM & THE FIX
           </div>
           <h2 style={{
             fontFamily: 'var(--fk)',
