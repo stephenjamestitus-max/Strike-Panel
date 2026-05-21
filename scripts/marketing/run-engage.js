@@ -19,6 +19,7 @@ const https = require('https');
 
 const ENGAGE_LOG_PATH = path.join(__dirname, 'engage_log.json');
 const ENGAGE_QUEUE_PATH = path.join(__dirname, 'engage_queue.json');
+const ENGAGE_TXT_PATH = path.join(__dirname, 'engage_today.txt');
 
 // Master list — US/UK coaching-focused accounts with 5k+ followers
 const MASTER_ACCOUNTS = [
@@ -207,7 +208,21 @@ async function run() {
     console.log('');
   });
 
-  console.log(`Saved to: ${ENGAGE_QUEUE_PATH}`);
+  // Save plain txt for easy mobile reading
+  const dubaiDate = new Date().toLocaleDateString('en-GB', { timeZone: 'Asia/Dubai', weekday: 'long', day: 'numeric', month: 'long' });
+  const txtLines = [
+    `STRIKEPANEL — COMMENTS FOR TODAY`,
+    `${dubaiDate}`,
+    ``,
+    ...results.map((item, idx) =>
+      `${idx + 1}. ${item.account}\n   ${item.comment}`
+    ),
+    ``,
+    `Go to each account on Instagram, find a recent post, and paste the comment.`,
+    `Never mention StrikePanel.`,
+  ];
+  fs.writeFileSync(ENGAGE_TXT_PATH, txtLines.join('\n'));
+  console.log(`Saved plain text: ${ENGAGE_TXT_PATH}`);
   console.log('\n=== Done ===\n');
 }
 
