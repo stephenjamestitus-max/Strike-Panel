@@ -1,94 +1,84 @@
-const API_KEY = process.env.ZERNIO_API_KEY;
+require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
+const Zernio = require('@zernio/node');
 
-const BASES = [
-  'https://api.zernio.com/v1',
-  'https://zernio.com/api/v1',
-  'https://zernio.com/api',
-];
-
-async function request(path, method = 'GET', body = null) {
-  if (!API_KEY) throw new Error('ZERNIO_API_KEY not set');
-
-  for (const base of BASES) {
-    try {
-      const opts = {
-        method,
-        headers: {
-          'Authorization': `Bearer ${API_KEY}`,
-          'X-API-Key': API_KEY,
-          'Content-Type': 'application/json',
-        },
-      };
-      if (body) opts.body = JSON.stringify(body);
-
-      const res = await fetch(`${base}${path}`, opts);
-      const text = await res.text();
-
-      if (res.ok) {
-        try { return JSON.parse(text); } catch { return text; }
-      }
-
-      if (res.status === 401) throw new Error('Invalid API key');
-      if (res.status === 404) continue; // try next base
-      throw new Error(`Zernio API ${res.status}: ${text}`);
-    } catch (e) {
-      if (e.message.includes('Invalid API key') || e.message.includes('Zernio API')) throw e;
-      continue;
-    }
+let _client = null;
+function client() {
+  if (!_client) {
+    if (!process.env.ZERNIO_API_KEY) throw new Error('ZERNIO_API_KEY not set in .env');
+    _client = new Zernio(); // reads ZERNIO_API_KEY from env automatically
   }
-  throw new Error('Could not reach Zernio API — check your internet connection');
+  return _client;
 }
 
-async function getConnections() {
-  return request('/connections');
+// List all connected social accounts
+async function listAccounts() {
+  const { accounts } = await client().accounts.listAccounts();
+  return accounts;
 }
 
-async function createPost({ platform = 'instagram', content, mediaUrls = [], scheduleAt = null }) {
-  return request('/posts', 'POST', {
-    platform,
+// Get the Instagram account ID (needed for posting)
+async function getInstagramAccountId() {
+  const accounts = await listAccounts();
+  const ig = accounts.find(a => a.platform === 'instagram');
+  if (!ig) throw new Error('No Instagram account connected in Zernio. Go to zernio.com/dashboard/connections');
+  return ig._id;
+}
+
+// Post immediately to Instagram
+async function createPost({ content, mediaUrls = [], accountId = null }) {
+  const igId = accountId || await getInstagramAccountId();
+  const { post } = await client().posts.createPost({
     content,
-    media_urls: mediaUrls,
-    schedule_at: scheduleAt,
-    status: scheduleAt ? 'scheduled' : 'published',
+    publishNow: true,
+    platforms: [{ platform: 'instagram', accountId: igId }],
+    ...(mediaUrls.length > 0 ? { media: mediaUrls } : {}),
   });
+  return post;
 }
 
-async function schedulePost({ platform = 'instagram', content, mediaUrls = [], scheduleAt }) {
-  return createPost({ platform, content, mediaUrls, scheduleAt });
+// Schedule a post at a specific time
+async function schedulePost({ content, scheduledFor, timezone = 'America/New_York', mediaUrls = [], accountId = null }) {
+  const igId = accountId || await getInstagramAccountId();
+  const { post } = await client().posts.createPost({
+    content,
+    scheduledFor,
+    timezone,
+    platforms: [{ platform: 'instagram', accountId: igId }],
+    ...(mediaUrls.length > 0 ? { media: mediaUrls } : {}),
+  });
+  return post;
 }
 
-async function getAnalytics({ platform = 'instagram', days = 7 }) {
-  return request(`/analytics?platform=${platform}&days=${days}`);
+// Save as draft
+async function createDraft({ content, accountId = null }) {
+  const igId = accountId || await getInstagramAccountId();
+  const { post } = await client().posts.createPost({
+    content,
+    platforms: [{ platform: 'instagram', accountId: igId }],
+  });
+  return post;
 }
 
-async function getPosts({ platform = 'instagram', limit = 20 }) {
-  return request(`/posts?platform=${platform}&limit=${limit}`);
+// List scheduled/published posts
+async function getPosts() {
+  return client().posts.listPosts();
 }
 
-async function searchAccounts({ platform = 'instagram', query, minFollowers = 5000 }) {
-  return request(`/search/accounts?platform=${platform}&q=${encodeURIComponent(query)}&min_followers=${minFollowers}`);
-}
-
-async function followAccount({ platform = 'instagram', accountId }) {
-  return request('/social/follow', 'POST', { platform, account_id: accountId });
-}
-
-async function commentOnPost({ platform = 'instagram', postId, comment }) {
-  return request('/social/comment', 'POST', { platform, post_id: postId, comment });
-}
-
-async function searchPosts({ platform = 'instagram', keywords, minFollowers = 5000 }) {
-  return request(`/search/posts?platform=${platform}&keywords=${encodeURIComponent(keywords)}&min_followers=${minFollowers}`);
+// Get analytics (if available on plan)
+async function getAnalytics() {
+  try {
+    return await client().analytics?.getAnalytics?.() || null;
+  } catch {
+    return null;
+  }
 }
 
 module.exports = {
-  getConnections,
+  listAccounts,
+  getInstagramAccountId,
   createPost,
   schedulePost,
-  getAnalytics,
+  createDraft,
   getPosts,
-  searchAccounts,
-  followAccount,
-  commentOnPost,
-  searchPosts,
+  getAnalytics,
 };

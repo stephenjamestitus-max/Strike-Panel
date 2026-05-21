@@ -170,12 +170,11 @@ async function run() {
   console.log('\n4. Posting to Instagram via Zernio...');
   try {
     const result = await zernio.createPost({
-      platform: 'instagram',
       content: fullCaption,
       mediaUrls: imagePaths,
     });
-    console.log('  Posted:', result?.id || 'success');
-    writeLog({ pillar, caption: fullCaption, status: 'posted', slides: imagePaths.length, zernioId: result?.id });
+    console.log('  Posted:', result?._id || 'success');
+    writeLog({ pillar, caption: fullCaption, status: 'posted', slides: imagePaths.length, zernioId: result?._id });
   } catch (e) {
     console.error('  Post failed:', e.message);
     console.log('\n  Manual fallback — copy this caption:\n');
