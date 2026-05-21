@@ -10,13 +10,13 @@ export default function IPhone() {
       <div className={styles.btnPower} />
 
       <div className={styles.iphoneScreen}>
-        <div className={styles.island} />
-        <div className={styles.statusBar}>
+        <div className={styles.iphoneTopBar}>
           <span className={styles.statusTime}>9:41</span>
+          <div className={styles.island} />
           <div className={styles.statusBatt} />
         </div>
         <div className={styles.iphoneContent}>
-          <AppContent scale={0.33} />
+          <AppContent scale={0.38} />
         </div>
         <div className={styles.homeBar} />
       </div>

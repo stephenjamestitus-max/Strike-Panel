@@ -3,33 +3,33 @@
 
 /* ══ iPhone 15 Pro — Natural Titanium ══ */
 .iphone {
-  width: 186px; border-radius: 50px; padding: 0 7px 7px; position: relative;
-  background: linear-gradient(160deg,#6a6055 0%,#4a4038 10%,#363028 25%,#242018 45%,#1c1a16 58%,#28221c 70%,#3c342c 84%,#504840 100%);
+  width: 200px; border-radius: 52px; padding: 6px 8px 8px; position: relative;
+  background: linear-gradient(160deg,#a09080 0%,#8a7a6a 12%,#726254 26%,#5c5044 46%,#504840 60%,#5e5448 74%,#766a5c 86%,#8e7e6e 100%);
   box-shadow:
-    inset 2px 2px 0 rgba(255,245,210,.2), inset -1.5px -1.5px 0 rgba(0,0,0,.6),
-    inset 0 0 0 1.5px rgba(255,235,160,.07),
-    0 0 0 1.5px #080604, 0 0 0 3px rgba(100,90,70,.4),
-    0 6px 18px rgba(0,0,0,.6), 0 30px 80px rgba(0,0,0,.92), 0 60px 140px rgba(0,0,0,.7);
+    inset 2px 2px 0 rgba(255,245,220,.28), inset -1.5px -1.5px 0 rgba(0,0,0,.5),
+    inset 0 0 0 1.5px rgba(255,235,180,.10),
+    0 0 0 1.5px #0c0a08, 0 0 0 3px rgba(120,105,85,.45),
+    0 6px 18px rgba(0,0,0,.55), 0 30px 80px rgba(0,0,0,.88), 0 60px 140px rgba(0,0,0,.65);
 }
 .iphone::after {
-  content: ''; position: absolute; inset: 0; border-radius: 50px;
-  background: linear-gradient(148deg,rgba(255,248,210,.14) 0%,rgba(255,245,190,.05) 25%,transparent 52%,rgba(0,0,0,.08) 100%);
+  content: ''; position: absolute; inset: 0; border-radius: 52px;
+  background: linear-gradient(148deg,rgba(255,248,220,.18) 0%,rgba(255,245,200,.06) 25%,transparent 52%,rgba(0,0,0,.08) 100%);
   pointer-events: none; z-index: 20;
 }
 .iphoneScreen {
-  background: #000; border-radius: 43px; overflow: hidden;
-  display: flex; flex-direction: column; height: 390px; position: relative;
+  background: #000; border-radius: 44px; overflow: hidden;
+  display: flex; flex-direction: column; height: 400px; position: relative;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 4px 16px rgba(0,0,0,.7);
 }
 .iphoneScreen::after {
-  content: ''; position: absolute; inset: 0; border-radius: 43px;
+  content: ''; position: absolute; inset: 0; border-radius: 44px;
   background: linear-gradient(138deg,rgba(255,255,255,.1) 0%,rgba(255,255,255,.04) 32%,transparent 62%);
   pointer-events: none; z-index: 200;
 }
 .island {
-  width: 90px; height: 30px;
+  width: 70px; height: 24px;
   background: radial-gradient(ellipse at 50% 30%,#0c0c10 0%,#000 100%);
-  border-radius: 15px; margin: 10px auto 0; flex-shrink: 0; position: relative; z-index: 5;
+  border-radius: 12px; margin: 0; flex-shrink: 0; position: relative; z-index: 5;
   box-shadow: 0 0 0 1.5px rgba(50,45,35,.7), inset 0 1px 4px rgba(0,0,0,.95);
 }
 .island::before {
@@ -44,10 +44,9 @@
   border-radius: 50%; top: 50%; right: 22px; transform: translateY(-50%);
   box-shadow: 0 0 3px rgba(0,80,255,.18);
 }
-.statusBar {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 0 20px; height: 0; flex-shrink: 0; margin-top: -30px;
-  position: relative; z-index: 10; pointer-events: none;
+.iphoneTopBar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 20px 0; flex-shrink: 0; position: relative; z-index: 10;
 }
 .statusTime { font-family: var(--fc); font-size: 11px; font-weight: 700; color: rgba(255,255,255,.95); letter-spacing: .2px; }
 .statusBatt { display: flex; align-items: center; gap: 4px; }
