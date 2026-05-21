@@ -105,20 +105,35 @@ async function generateCaption(pillar, trends) {
 
   const trendContext = trends?.themes?.slice(0, 3).join(', ') || '';
 
-  // Pick the two most relevant example captions based on the pillar
+  // Pick the two most relevant example captions based on the pillar.
+  // Example 1: matching pillar if available. Example 2: closest alternate.
   const pillarKey = Object.keys(CAPTION_POOL).find(k => pillar.includes(k)) || 'Problem/Frustration';
-  const example1 = CAPTION_POOL['Problem/Frustration'][0];
-  const example2 = CAPTION_POOL['Readiness'][0];
+
+  // Primary example: exact pillar match
+  const primaryExample = CAPTION_POOL[pillarKey][0];
+
+  // Secondary example: closest thematically related pillar (not the same one)
+  const SECONDARY_MAP = {
+    'Readiness':          'Problem/Frustration',
+    'Fight Camp':         'Readiness',
+    'Weight Cut':         'Fight Camp',
+    'AI Sessions':        'Readiness',
+    'Problem/Frustration':'Readiness',
+    'Social Proof':       'Problem/Frustration',
+    'Direct Offer':       'Social Proof',
+  };
+  const secondaryKey = SECONDARY_MAP[pillarKey] || 'Readiness';
+  const secondaryExample = CAPTION_POOL[secondaryKey][0];
 
   const prompt = `You write Instagram captions for StrikePanel — a coaching dashboard for independent combat sports coaches (boxing, MMA, Muay Thai, BJJ).
 
 Here are two GOOD captions. Study the voice, rhythm, and structure exactly.
 
---- EXAMPLE 1 (Problem/Frustration) ---
-${example1}
+--- EXAMPLE 1 (${pillarKey}) ---
+${primaryExample}
 
---- EXAMPLE 2 (Readiness) ---
-${example2}
+--- EXAMPLE 2 (${secondaryKey}) ---
+${secondaryExample}
 
 ---
 
