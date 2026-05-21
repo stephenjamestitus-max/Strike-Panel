@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import FadeIn from '@/components/ui/FadeIn'
+import { motion } from 'framer-motion'
 import Magnet from '@/components/ui/Magnet'
 
 const navLinks: [string, string][] = [
@@ -42,18 +42,18 @@ export default function Nav() {
         }}
       >
         {/* Logo */}
-        <FadeIn delay={0} y={-20} duration={0.5}>
-          <a
-            href="/landing"
-            style={{ fontFamily: 'var(--fk)', fontWeight: 900, fontSize: 20, letterSpacing: 3 }}
-          >
-            STRIKE<span style={{ color: 'var(--accent)' }}>PANEL</span>™
-          </a>
-        </FadeIn>
+        <motion.a
+          href="/landing"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+          style={{ fontFamily: 'var(--fk)', fontWeight: 900, fontSize: 20, letterSpacing: 3 }}
+        >
+          STRIKE<span style={{ color: 'var(--accent)' }}>PANEL</span>™
+        </motion.a>
 
         {/* ── Desktop: links + CTA ── */}
-        <FadeIn delay={0.1} y={-20} duration={0.5}>
-          <div className="nav-desktop" style={{ gap: 32, alignItems: 'center' }}>
+        <div className="nav-desktop" style={{ gap: 32, alignItems: 'center' }}>
             {navLinks.map(([label, href]) => (
               <a
                 key={label}
@@ -84,7 +84,6 @@ export default function Nav() {
               </a>
             </Magnet>
           </div>
-        </FadeIn>
 
         {/* ── Mobile: compact CTA + hamburger ── */}
         <div className="nav-mobile" style={{ alignItems: 'center', gap: 10 }}>
