@@ -3,7 +3,7 @@
 
 /* ══ iPhone 15 Pro — Natural Titanium ══ */
 .iphone {
-  width: 200px; border-radius: 52px; padding: 8px 8px 8px; position: relative;
+  width: 200px; border-radius: 44px; padding: 8px 8px 8px; position: relative;
   background: linear-gradient(160deg,#a09080 0%,#8a7a6a 12%,#726254 26%,#5c5044 46%,#504840 60%,#5e5448 74%,#766a5c 86%,#8e7e6e 100%);
   box-shadow:
     inset 2px 2px 0 rgba(255,245,220,.28), inset -1.5px -1.5px 0 rgba(0,0,0,.5),
@@ -12,17 +12,17 @@
     0 6px 18px rgba(0,0,0,.55), 0 30px 80px rgba(0,0,0,.88), 0 60px 140px rgba(0,0,0,.65);
 }
 .iphone::after {
-  content: ''; position: absolute; inset: 0; border-radius: 52px;
+  content: ''; position: absolute; inset: 0; border-radius: 44px;
   background: linear-gradient(148deg,rgba(255,248,220,.18) 0%,rgba(255,245,200,.06) 25%,transparent 52%,rgba(0,0,0,.08) 100%);
   pointer-events: none; z-index: 20;
 }
 .iphoneScreen {
-  background: #000; border-radius: 44px; overflow: hidden;
+  background: #000; border-radius: 36px; overflow: hidden;
   display: flex; flex-direction: column; height: 400px; position: relative;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 4px 16px rgba(0,0,0,.7);
 }
 .iphoneScreen::after {
-  content: ''; position: absolute; inset: 0; border-radius: 44px;
+  content: ''; position: absolute; inset: 0; border-radius: 36px;
   background: linear-gradient(138deg,rgba(255,255,255,.1) 0%,rgba(255,255,255,.04) 32%,transparent 62%);
   pointer-events: none; z-index: 200;
 }
@@ -46,7 +46,7 @@
 }
 .iphoneTopBar {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 3px 20px 0; flex-shrink: 0; position: relative; z-index: 10;
+  padding: 8px 20px 0; flex-shrink: 0; position: relative; z-index: 10;
 }
 .statusTime { font-family: var(--fc); font-size: 11px; font-weight: 700; color: rgba(255,255,255,.95); letter-spacing: .2px; }
 .statusBatt { display: flex; align-items: center; gap: 4px; }
