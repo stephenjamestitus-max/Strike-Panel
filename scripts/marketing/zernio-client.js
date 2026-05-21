@@ -27,7 +27,7 @@ async function createPost({ content, mediaUrls = [] }) {
     platforms: [{ platform: 'instagram', accountId: INSTAGRAM_ACCOUNT_ID }],
   };
   if (mediaUrls.length > 0) body.media = mediaUrls.map(url => ({ url }));
-  const res = await client().posts.createPost(body);
+  const res = await client().posts.createPost({ body });
   return res.data?.post || res.data;
 }
 
@@ -40,15 +40,17 @@ async function schedulePost({ content, scheduledFor, mediaUrls = [] }) {
     platforms: [{ platform: 'instagram', accountId: INSTAGRAM_ACCOUNT_ID }],
   };
   if (mediaUrls.length > 0) body.media = mediaUrls.map(url => ({ url }));
-  const res = await client().posts.createPost(body);
+  const res = await client().posts.createPost({ body });
   return res.data?.post || res.data;
 }
 
 // Save as draft (no publish date)
 async function createDraft({ content }) {
   const res = await client().posts.createPost({
-    content,
-    platforms: [{ platform: 'instagram', accountId: INSTAGRAM_ACCOUNT_ID }],
+    body: {
+      content,
+      platforms: [{ platform: 'instagram', accountId: INSTAGRAM_ACCOUNT_ID }],
+    },
   });
   return res.data?.post || res.data;
 }
