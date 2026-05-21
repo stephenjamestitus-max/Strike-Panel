@@ -111,19 +111,20 @@ ${trendContext ? `What coaches are talking about right now: ${trendContext}` : '
 
 Write one Instagram caption. These are the rules — follow every one:
 
-VOICE: Coach to coach. Direct. No corporate language. No AI phrases ("unleash", "elevate", "game-changer", "empower"). Short declarative sentences. Active voice. No hyphens. No emojis.
+VOICE: Written TO the coach, not by them. Second person ("you", "your fighters"). Direct. Confident. No corporate language. No AI phrases ("unleash", "elevate", "game-changer", "empower", "journey"). Short declarative sentences. Active voice. No hyphens. No emojis.
 
 STRUCTURE:
-- Line 1: A single-sentence hook. It names a specific problem or moment a combat sports coach recognises immediately. It creates tension or curiosity. It does NOT start with "Are you" or questions.
-- Lines 2-4: One sharp insight. Specific. Vivid. Could describe a real moment in the gym or camp.
-- Final line: A quiet observation or soft nudge. Not a hard sell unless pillar is Direct Offer.
+- Line 1: Hook. A specific, visceral moment a combat sports coach recognises from the gym. Not a question. Not "Are you". Creates instant tension.
+- Lines 2-4: One sharp insight that names the real cost of the problem or the real benefit of solving it. Concrete. A coach reading it thinks "that's exactly right."
+- Final line: A quiet, confident statement. Not "I'm looking for" — never first person. Not a question. Just a truth that lands.
 
 CONSTRAINTS:
 - 80-120 words total
 - No hashtags (added separately)
 - No quotes around the output, no intro text, no "Caption:" label
+- Never use first person ("I", "I'm", "my")
 - If pillar is Direct Offer: end with "Link in bio."
-- If pillar is Social Proof: make it feel like a coach describing a real outcome, not a testimonial
+- If pillar is Social Proof: describe a real coaching outcome, not a testimonial
 
 Output the caption only.`;
 

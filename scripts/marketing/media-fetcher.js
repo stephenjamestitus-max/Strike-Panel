@@ -92,7 +92,11 @@ function downloadFile(url, dest, headers = {}) {
     const opts = {
       hostname: parsed.hostname,
       path: parsed.pathname + parsed.search,
-      headers: { 'User-Agent': 'StrikePanel/1.0', ...headers },
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Referer': `https://${parsed.hostname}/`,
+        ...headers,
+      },
     };
     https.get(opts, res => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
