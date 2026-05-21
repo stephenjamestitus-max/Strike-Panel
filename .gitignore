@@ -3,6 +3,6 @@ sp-media/
 __pycache__/
 .env
 .env.local
-.next/
-.turbopack/
-*.tsbuildinfo
+
+marketing/media-cache/
+marketing/carousels/

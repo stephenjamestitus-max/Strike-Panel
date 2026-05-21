@@ -1,0 +1,38 @@
+name: Follow (daily accounts)
+
+on:
+  schedule:
+    - cron: '15 13 * * *'   # 17:15 Dubai (UTC+4)
+  workflow_dispatch:
+
+jobs:
+  follow:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate today's 5 follow targets
+        run: node scripts/marketing/run-follow.js
+
+      - name: Commit updated logs
+        run: |
+          git config user.name "StrikePanel Bot"
+          git config user.email "automation@strikepanel.com"
+          git add scripts/marketing/follow_log.json 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "chore: update follow log [skip ci]"
+          git push
