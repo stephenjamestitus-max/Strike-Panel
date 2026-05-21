@@ -43,9 +43,9 @@ export default function AnimatedText({ text, className, style }: AnimatedTextPro
         const start = i / total
         const end = (i + 1) / total
         return char === ' ' ? (
-          <span key={i}>&nbsp;</span>
+          <span key={`space-${i}`}>&nbsp;</span>
         ) : (
-          <AnimatedChar key={i} char={char} progress={scrollYProgress} start={start} end={end} />
+          <AnimatedChar key={`char-${i}`} char={char} progress={scrollYProgress} start={start} end={end} />
         )
       })}
     </p>

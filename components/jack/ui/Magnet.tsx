@@ -1,5 +1,5 @@
 'use client'
-import { useRef, useState, useCallback, type ReactNode } from 'react'
+import { useRef, useState, useCallback, useEffect, type ReactNode } from 'react'
 
 interface MagnetProps {
   children: ReactNode
@@ -62,12 +62,24 @@ export default function Magnet({
     window.removeEventListener('mousemove', handleMouseMove)
   }, [handleMouseMove])
 
+  const handleMouseLeaveAndDetach = useCallback(() => {
+    detachListeners()
+    handleMouseLeave()
+  }, [detachListeners, handleMouseLeave])
+
+  // Ensure listener is removed if component unmounts while hovered
+  useEffect(() => {
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [handleMouseMove])
+
   return (
     <div
       ref={ref}
       className={className}
       onMouseEnter={attachListeners}
-      onMouseLeave={() => { detachListeners(); handleMouseLeave() }}
+      onMouseLeave={handleMouseLeaveAndDetach}
       style={{ transform, transition, willChange: 'transform', display: 'inline-block' }}
     >
       {children}
