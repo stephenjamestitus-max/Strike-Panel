@@ -9,6 +9,7 @@ import CrossPlatform from '@/components/sections/CrossPlatform'
 import Social from '@/components/sections/Social'
 import Pricing from '@/components/sections/Pricing'
 import Footer from '@/components/sections/Footer'
+import RevealWrapper from '@/components/ui/RevealWrapper'
 
 export default function Page() {
   return (
@@ -17,13 +18,13 @@ export default function Page() {
       <main>
         <Hero />
         <Ticker />
-        <Stats />
-        <Problem />
-        <Demo />
-        <Features />
-        <CrossPlatform />
-        <Social />
-        <Pricing />
+        <RevealWrapper><Stats /></RevealWrapper>
+        <RevealWrapper delay="d1"><Problem /></RevealWrapper>
+        <RevealWrapper delay="d1"><Demo /></RevealWrapper>
+        <RevealWrapper><Features /></RevealWrapper>
+        <RevealWrapper delay="d1"><CrossPlatform /></RevealWrapper>
+        <RevealWrapper delay="d2"><Social /></RevealWrapper>
+        <RevealWrapper delay="d1"><Pricing /></RevealWrapper>
       </main>
       <Footer />
     </>

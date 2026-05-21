@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import Features from '@/components/sections/Features'
 
 describe('Features tabs', () => {
@@ -17,15 +17,15 @@ describe('Features tabs', () => {
     expect(screen.getByText(/SQUAD AVG/i)).toBeTruthy()
   })
 
-  it('switches to Fight Camp panel on click', () => {
+  it('switches to Fight Camp panel on click', async () => {
     render(<Features />)
     fireEvent.click(screen.getByRole('button', { name: /Fight Camp/i }))
-    expect(screen.getByText(/DAYS TO FIGHT/i)).toBeTruthy()
+    await waitFor(() => expect(screen.getByText(/DAYS TO FIGHT/i)).toBeTruthy())
   })
 
-  it('switches to Athletes panel on click', () => {
+  it('switches to Athletes panel on click', async () => {
     render(<Features />)
     fireEvent.click(screen.getByRole('button', { name: /Athletes/i }))
-    expect(screen.getByText(/ACTIVE/i)).toBeTruthy()
+    await waitFor(() => expect(screen.getByText(/IN CAMP/i)).toBeTruthy())
   })
 })

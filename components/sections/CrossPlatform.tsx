@@ -1,6 +1,4 @@
-import IPhone from './devices/IPhone'
-import MacBook from './devices/MacBook'
-import IPad from './devices/IPad'
+import DeviceParallax from './DeviceParallax'
 
 const bullets = [
   'WORKS OFFLINE',
@@ -36,35 +34,8 @@ export default function CrossPlatform() {
           </div>
         </div>
 
-        {/* Device row */}
-        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center', gap: 32, paddingBottom: 0 }}>
-          {/* iPhone */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, flexShrink: 0 }}>
-            <IPhone />
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--muted)', textTransform: 'uppercase' }}>MOBILE</div>
-              <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase' }}>ATHLETES</div>
-            </div>
-          </div>
-
-          {/* MacBook */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, flex: '0 0 auto', maxWidth: 580, width: '100%' }}>
-            <MacBook />
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--muted)', textTransform: 'uppercase' }}>DESKTOP</div>
-              <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase' }}>MORNING BRIEF</div>
-            </div>
-          </div>
-
-          {/* iPad */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, flexShrink: 0 }}>
-            <IPad />
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--muted)', textTransform: 'uppercase' }}>TABLET</div>
-              <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase' }}>FIGHT CAMP</div>
-            </div>
-          </div>
-        </div>
+        {/* Device row with parallax */}
+        <DeviceParallax />
       </div>
     </section>
   )

@@ -27,17 +27,17 @@ export default function Nav() {
       </a>
 
       <div style={{ display: 'flex', gap: 32, alignItems: 'center' }}>
-        {['DEMO', 'BLOG'].map((lk) => (
+        {[['FEATURES', '#features'], ['DEMO', '#demo'], ['PRICING', '#pricing']].map(([label, href]) => (
           <a
-            key={lk}
-            href={`#${lk.toLowerCase()}`}
+            key={label}
+            href={href}
             style={{
               fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: '2.5px',
               color: 'var(--muted)', textTransform: 'uppercase',
               transition: 'color .2s',
             }}
           >
-            {lk}
+            {label}
           </a>
         ))}
         <a
@@ -50,7 +50,7 @@ export default function Nav() {
             transition: 'box-shadow .2s, transform .15s',
           }}
         >
-          Get Access — $99
+          START FREE TRIAL
         </a>
       </div>
     </nav>

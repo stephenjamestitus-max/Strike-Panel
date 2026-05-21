@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import styles from './features.module.css'
 
 const tabs = ['Morning Brief', 'Fight Camp', 'Athletes', 'AI Sessions', 'Progress']
@@ -29,6 +30,35 @@ function MorningBrief() {
             <div style={{ height: 3, background: 'rgba(255,255,255,.06)', borderRadius: 2, marginTop: 10 }}>
               <div style={{ height: '100%', background: a.color, width: `${a.score}%`, borderRadius: 2 }} />
             </div>
+          </div>
+        ))}
+      </div>
+      {/* Activity timeline */}
+      <div style={{ marginTop: '16px' }}>
+        <div style={{ fontFamily: 'var(--fm)', fontSize: '10px', color: 'var(--muted)', letterSpacing: '1.5px', marginBottom: '10px' }}>ACTIVITY TIMELINE</div>
+        {[
+          { time: '6:42 AM', event: 'Priya Sharma checked in — Readiness 91', color: 'var(--green)' },
+          { time: '7:15 AM', event: 'Jake Thompson checked in — Readiness 74', color: 'var(--amber)' },
+          { time: '8:03 AM', event: 'Marcus Mendez flagged — Rest day recommended', color: 'var(--red)' },
+        ].map(item => (
+          <div key={item.time} style={{ display: 'flex', gap: '12px', padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,.04)', alignItems: 'center' }}>
+            <span style={{ fontFamily: 'var(--fm)', fontSize: '10px', color: 'var(--muted)', minWidth: '60px' }}>{item.time}</span>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: item.color, flexShrink: 0 }} />
+            <span style={{ fontSize: '12px', color: 'var(--cream)' }}>{item.event}</span>
+          </div>
+        ))}
+      </div>
+      {/* Squad overview 4-stat grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '8px', marginTop: '16px' }}>
+        {[
+          { label: 'AVG READINESS', value: '68', color: 'var(--amber)' },
+          { label: 'CHECKED IN', value: '2/3', color: 'var(--green)' },
+          { label: 'ON ALERT', value: '1', color: 'var(--red)' },
+          { label: 'SESSIONS TODAY', value: '4', color: 'var(--accent)' },
+        ].map(s => (
+          <div key={s.label} style={{ background: 'rgba(255,255,255,.03)', borderRadius: '8px', padding: '10px', textAlign: 'center', border: '1px solid rgba(255,255,255,.06)' }}>
+            <div style={{ fontFamily: 'var(--fh)', fontSize: '22px', color: s.color }}>{s.value}</div>
+            <div style={{ fontFamily: 'var(--fm)', fontSize: '9px', color: 'var(--muted)', letterSpacing: '1px', marginTop: '4px' }}>{s.label}</div>
           </div>
         ))}
       </div>
@@ -63,6 +93,35 @@ function FightCamp() {
           <div style={{ fontFamily:'var(--fm)', fontSize:10, color:p.color, width:80, textAlign:'right' }}>{p.status}</div>
         </div>
       ))}
+      {/* Weight cut table */}
+      <div style={{ marginTop: '20px' }}>
+        <div style={{ fontFamily: 'var(--fm)', fontSize: '10px', color: 'var(--muted)', letterSpacing: '1.5px', marginBottom: '10px' }}>WEIGHT CUT TRACKER</div>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', fontFamily: 'var(--fm)' }}>
+          <thead>
+            <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)' }}>
+              {['WEEK', 'DATE', 'TARGET', 'ACTUAL', 'STATUS'].map(h => (
+                <th key={h} style={{ padding: '6px 8px', textAlign: 'left', color: 'var(--muted)', fontWeight: 400, fontSize: '10px' }}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { wk: 'Wk 1', date: 'Jun 2', target: '80.5kg', actual: '80.3kg', status: 'ON TRACK', color: 'var(--green)' },
+              { wk: 'Wk 2', date: 'Jun 9', target: '79.5kg', actual: '79.8kg', status: 'SLIGHT OVER', color: 'var(--amber)' },
+              { wk: 'Wk 3', date: 'Jun 16', target: '78.5kg', actual: '—', status: 'PENDING', color: 'var(--muted)' },
+              { wk: 'Wk 4', date: 'Jun 23', target: '77.0kg', actual: '—', status: 'FIGHT DAY', color: 'var(--accent)' },
+            ].map(row => (
+              <tr key={row.wk} style={{ borderBottom: '1px solid rgba(255,255,255,.04)' }}>
+                <td style={{ padding: '7px 8px', color: 'var(--cream)' }}>{row.wk}</td>
+                <td style={{ padding: '7px 8px', color: 'var(--muted)' }}>{row.date}</td>
+                <td style={{ padding: '7px 8px', color: 'var(--cream)' }}>{row.target}</td>
+                <td style={{ padding: '7px 8px', color: 'var(--cream)' }}>{row.actual}</td>
+                <td style={{ padding: '7px 8px' }}><span style={{ color: row.color, fontSize: '10px', letterSpacing: '0.5px' }}>{row.status}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
@@ -213,7 +272,18 @@ export default function Features() {
           ))}
         </div>
         <div style={{ background:'rgba(8,14,26,.8)', border:'1px solid var(--border)', borderRadius:16, padding:32 }}>
-          <Panel />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
+              style={{ height: '100%' }}
+            >
+              <Panel />
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>
