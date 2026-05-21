@@ -1,5 +1,5 @@
 'use client'
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import FadeIn from '@/components/ui/FadeIn'
 import Magnet from '@/components/ui/Magnet'
@@ -11,29 +11,22 @@ const stats = [
   { value: '∞',    label: 'AI Sessions' },
 ]
 
-// SVG fractal noise encoded for use as a CSS background-image
 const GRAIN_SVG = "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")"
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
   })
-  // Video position still moves at a slower rate (parallax depth)
-  const y = useTransform(scrollYProgress, [0, 1], [0, 120])
 
-  // Scroll-scrubbing: drive video.currentTime from scroll position
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
-    return scrollYProgress.on('change', (progress) => {
-      if (video.duration) {
-        video.currentTime = progress * video.duration
-      }
-    })
-  }, [scrollYProgress])
+  // Three simultaneous scroll-driven transforms on the video layer:
+  // 1. Drift up at 0.4× scroll speed (classic parallax depth)
+  // 2. Slowly zoom in — feels like being pulled into the gym
+  // 3. Fade to black as the section exits — smooth transition into Problem
+  const videoY       = useTransform(scrollYProgress, [0, 1],    [0, 120])
+  const videoScale   = useTransform(scrollYProgress, [0, 1],    [1, 1.12])
+  const videoOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0])
 
   return (
     <section
@@ -46,21 +39,24 @@ export default function Hero() {
         minHeight: '100vh',
       }}
     >
-      {/* ── Parallax video layer ── */}
+      {/* ── Cinematic video layer: parallax + zoom-in + fade-out ── */}
       <motion.div
         style={{
-          y,
+          y: videoY,
+          scale: videoScale,
+          opacity: videoOpacity,
           position: 'absolute',
           inset: '-10%',
           zIndex: 0,
+          willChange: 'transform, opacity',
         }}
       >
         <video
-          ref={videoRef}
           src="/training.mp4"
+          autoPlay
           muted
+          loop
           playsInline
-          preload="auto"
           style={{
             position: 'absolute',
             inset: 0,
@@ -123,7 +119,6 @@ export default function Hero() {
           padding: 'clamp(100px,12vw,140px) clamp(20px,5vw,80px) 110px',
         }}
       >
-        {/* marginTop: auto pushes all content to the lower half of the section */}
         <div style={{ maxWidth: 700, marginTop: 'auto' }}>
           <FadeIn delay={0} y={-20} duration={0.6}>
             <div style={{
