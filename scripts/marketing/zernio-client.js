@@ -30,12 +30,10 @@ async function createPost({ content, mediaUrls = [] }) {
     platforms: [{ platform: 'instagram', accountId: INSTAGRAM_ACCOUNT_ID }],
   };
   if (mediaUrls.length > 0) {
-    // Log URLs so we can debug what's being sent
-    console.log('  Media URLs being sent to Zernio:');
-    mediaUrls.forEach((u, i) => console.log(`    [${i + 1}] ${u}`));
-    // Try both field names the Zernio API might expect
-    body.mediaUrls = mediaUrls;
-    body.media = mediaUrls.map(url => ({ url, type: 'image' }));
+    body.mediaItems = mediaUrls.map(url => ({
+      type: url.match(/\.(mp4|mov|avi)$/i) ? 'video' : 'image',
+      url,
+    }));
   }
   try {
     const res = await client().posts.createPost({ body });
@@ -56,7 +54,12 @@ async function schedulePost({ content, scheduledFor, mediaUrls = [] }) {
     timezone: 'Asia/Dubai',
     platforms: [{ platform: 'instagram', accountId: INSTAGRAM_ACCOUNT_ID }],
   };
-  if (mediaUrls.length > 0) body.media = mediaUrls.map(url => ({ url }));
+  if (mediaUrls.length > 0) {
+    body.mediaItems = mediaUrls.map(url => ({
+      type: url.match(/\.(mp4|mov|avi)$/i) ? 'video' : 'image',
+      url,
+    }));
+  }
   const res = await client().posts.createPost({ body });
   return res.data?.post || res.data;
 }
