@@ -6,6 +6,7 @@
   padding: 0;
   background: #0C0C0C;
   font-family: 'Kanit', sans-serif;
+  overflow-x: hidden;
   overflow-x: clip;
 }
 
@@ -13,7 +14,7 @@
   box-sizing: border-box;
 }
 
-.hero-heading {
+.jack-root .hero-heading {
   background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
