@@ -104,25 +104,36 @@ async function generateCaption(pillar, trends) {
   }
 
   const trendContext = trends?.themes?.slice(0, 3).join(', ') || '';
-  const prompt = `You write Instagram content for StrikePanel — a coaching dashboard used by independent combat sports coaches (boxing, MMA, Muay Thai, BJJ).
+
+  // Pick the two most relevant example captions based on the pillar
+  const pillarKey = Object.keys(CAPTION_POOL).find(k => pillar.includes(k)) || 'Problem/Frustration';
+  const example1 = CAPTION_POOL['Problem/Frustration'][0];
+  const example2 = CAPTION_POOL['Readiness'][0];
+
+  const prompt = `You write Instagram captions for StrikePanel — a coaching dashboard for independent combat sports coaches (boxing, MMA, Muay Thai, BJJ).
+
+Here are two GOOD captions. Study the voice, rhythm, and structure exactly.
+
+--- EXAMPLE 1 (Problem/Frustration) ---
+${example1}
+
+--- EXAMPLE 2 (Readiness) ---
+${example2}
+
+---
+
+Write in exactly this style. Short sentences. Sometimes sentence fragments. Raw, direct, coach-to-coach. No corporate language. No AI phrases. Never first person.
 
 Content pillar today: ${pillar}
 ${trendContext ? `What coaches are talking about right now: ${trendContext}` : ''}
 
-Write one Instagram caption. These are the rules — follow every one:
-
-VOICE: Written TO the coach, not by them. Second person ("you", "your fighters"). Direct. Confident. No corporate language. No AI phrases ("unleash", "elevate", "game-changer", "empower", "journey"). Short declarative sentences. Active voice. No hyphens. No emojis.
-
-STRUCTURE:
-- Line 1: Hook. A specific, visceral moment a combat sports coach recognises from the gym. Not a question. Not "Are you". Creates instant tension.
-- Lines 2-4: One sharp insight that names the real cost of the problem or the real benefit of solving it. Concrete. A coach reading it thinks "that's exactly right."
-- Final line: A quiet, confident statement. Not "I'm looking for" — never first person. Not a question. Just a truth that lands.
-
-CONSTRAINTS:
-- 80-120 words total
+Additional rules:
+- Second person only ("you", "your fighters") — never "I", "I'm", "my"
 - No hashtags (added separately)
+- No emojis
+- No hyphens
+- 80-120 words total
 - No quotes around the output, no intro text, no "Caption:" label
-- Never use first person ("I", "I'm", "my")
 - If pillar is Direct Offer: end with "Link in bio."
 - If pillar is Social Proof: describe a real coaching outcome, not a testimonial
 
