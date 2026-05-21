@@ -135,14 +135,23 @@ async function fetchPollinationsImage(pillar) {
   const dest = path.join(CACHE_DIR, `${slug}.jpg`);
 
   console.log(`  Generating AI image for: ${key}`);
-  try {
-    return await downloadFile(url, dest);
-  } catch (e) {
-    // Clean up failed partial download
-    if (fs.existsSync(dest)) fs.unlinkSync(dest);
-    console.warn('  Pollinations failed:', e.message);
-    return null;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    const s = seed + (attempt - 1) * 7;
+    const attemptUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1080&height=1080&seed=${s}&model=flux&nologo=true&enhance=true`;
+    const attemptDest = path.join(CACHE_DIR, `pollinations-${key.replace(/\W+/g, '_')}-${s}.jpg`);
+    try {
+      return await downloadFile(attemptUrl, attemptDest);
+    } catch (e) {
+      if (fs.existsSync(attemptDest)) fs.unlinkSync(attemptDest);
+      if (attempt < 3) {
+        console.warn(`  Pollinations attempt ${attempt} failed, retrying...`);
+        await new Promise(r => setTimeout(r, 2000 * attempt));
+      } else {
+        console.warn('  Pollinations failed — falling back to Pexels');
+      }
+    }
   }
+  return null;
 }
 
 // ── Pexels ────────────────────────────────────────────────────────
