@@ -16,7 +16,7 @@ require('dotenv').config({ path: require('path').join(__dirname, '../../.env') }
 
 const fs = require('fs');
 const path = require('path');
-const Anthropic = require('@anthropic-ai/sdk');
+const { execSync } = require('child_process');
 
 const { fetchTrends } = require('./trend-research');
 const { generateCarousel } = require('./carousel-generator');
@@ -59,7 +59,6 @@ function writeLog(entry) {
 }
 
 async function generateCaption(pillar, trends) {
-  const client = new Anthropic();
   const trendSummary = trends.themes?.slice(0, 4).join(', ') || 'fight camp, weight cuts, coaching';
 
   const prompt = `You are writing an Instagram post for @strikepanel — a coaching dashboard for combat sports coaches.
@@ -77,13 +76,12 @@ Write ONE Instagram post:
 - Do NOT add hashtags (added separately).
 - Output ONLY the caption text, nothing else.`;
 
-  const msg = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 400,
-    messages: [{ role: 'user', content: prompt }],
+  // Uses Claude Code (claude -p) — no API credits needed, uses your Pro subscription
+  const result = execSync(`claude -p "${prompt.replace(/"/g, '\\"').replace(/\n/g, ' ')}"`, {
+    encoding: 'utf8',
+    timeout: 60000,
   });
-
-  return msg.content[0].text.trim();
+  return result.trim();
 }
 
 async function buildCarouselSlides(pillar, caption) {
