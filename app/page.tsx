@@ -1,7 +1,31 @@
+import Nav from '@/components/nav/Nav'
+import Hero from '@/components/hero/Hero'
+import Ticker from '@/components/sections/Ticker'
+import Stats from '@/components/sections/Stats'
+import Problem from '@/components/sections/Problem'
+import Demo from '@/components/sections/Demo'
+import Features from '@/components/sections/Features'
+import CrossPlatform from '@/components/sections/CrossPlatform'
+import Social from '@/components/sections/Social'
+import Pricing from '@/components/sections/Pricing'
+import Footer from '@/components/sections/Footer'
+
 export default function Page() {
   return (
-    <main>
-      <p style={{ color: '#00D4F0', padding: 40 }}>StrikePanel™ — building…</p>
-    </main>
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <Ticker />
+        <Stats />
+        <Problem />
+        <Demo />
+        <Features />
+        <CrossPlatform />
+        <Social />
+        <Pricing />
+      </main>
+      <Footer />
+    </>
   )
 }
