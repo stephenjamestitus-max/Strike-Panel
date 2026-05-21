@@ -1,6 +1,9 @@
 require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
 const { Zernio } = require('@zernio/node');
 
+const INSTAGRAM_ACCOUNT_ID = '6a0e0f75520992756d8bcdcf';
+const PROFILE_ID = '6a0dd67d3c136d00b69d9b7e';
+
 let _client = null;
 function client() {
   if (!_client) {
@@ -10,75 +13,65 @@ function client() {
   return _client;
 }
 
-// List all connected social accounts
+// List all connected accounts
 async function listAccounts() {
-  const { accounts } = await client().accounts.listAccounts();
-  return accounts;
-}
-
-// Get the Instagram account ID (needed for posting)
-async function getInstagramAccountId() {
-  const accounts = await listAccounts();
-  const ig = accounts.find(a => a.platform === 'instagram');
-  if (!ig) throw new Error('No Instagram account connected in Zernio. Go to zernio.com/dashboard/connections');
-  return ig._id;
+  const res = await client().accounts.listAccounts();
+  return res.data.accounts;
 }
 
 // Post immediately to Instagram
-async function createPost({ content, mediaUrls = [], accountId = null }) {
-  const igId = accountId || await getInstagramAccountId();
-  const { post } = await client().posts.createPost({
+async function createPost({ content, mediaUrls = [] }) {
+  const body = {
     content,
     publishNow: true,
-    platforms: [{ platform: 'instagram', accountId: igId }],
-    ...(mediaUrls.length > 0 ? { media: mediaUrls } : {}),
-  });
-  return post;
+    platforms: [{ platform: 'instagram', accountId: INSTAGRAM_ACCOUNT_ID }],
+  };
+  if (mediaUrls.length > 0) body.media = mediaUrls.map(url => ({ url }));
+  const res = await client().posts.createPost(body);
+  return res.data?.post || res.data;
 }
 
-// Schedule a post at a specific time
-async function schedulePost({ content, scheduledFor, timezone = 'America/New_York', mediaUrls = [], accountId = null }) {
-  const igId = accountId || await getInstagramAccountId();
-  const { post } = await client().posts.createPost({
+// Schedule a post at a specific time (ISO string, Dubai = UTC+4)
+async function schedulePost({ content, scheduledFor, mediaUrls = [] }) {
+  const body = {
     content,
     scheduledFor,
-    timezone,
-    platforms: [{ platform: 'instagram', accountId: igId }],
-    ...(mediaUrls.length > 0 ? { media: mediaUrls } : {}),
-  });
-  return post;
+    timezone: 'Asia/Dubai',
+    platforms: [{ platform: 'instagram', accountId: INSTAGRAM_ACCOUNT_ID }],
+  };
+  if (mediaUrls.length > 0) body.media = mediaUrls.map(url => ({ url }));
+  const res = await client().posts.createPost(body);
+  return res.data?.post || res.data;
 }
 
-// Save as draft
-async function createDraft({ content, accountId = null }) {
-  const igId = accountId || await getInstagramAccountId();
-  const { post } = await client().posts.createPost({
+// Save as draft (no publish date)
+async function createDraft({ content }) {
+  const res = await client().posts.createPost({
     content,
-    platforms: [{ platform: 'instagram', accountId: igId }],
+    platforms: [{ platform: 'instagram', accountId: INSTAGRAM_ACCOUNT_ID }],
   });
-  return post;
+  return res.data?.post || res.data;
 }
 
-// List scheduled/published posts
-async function getPosts() {
-  return client().posts.listPosts();
+// List recent posts
+async function listPosts() {
+  const res = await client().posts.listPosts();
+  return res.data?.posts || res.data || [];
 }
 
-// Get analytics (if available on plan)
+// Get analytics
 async function getAnalytics() {
-  try {
-    return await client().analytics?.getAnalytics?.() || null;
-  } catch {
-    return null;
-  }
+  const res = await client().analytics?.getAnalytics?.({ accountId: INSTAGRAM_ACCOUNT_ID });
+  return res?.data || null;
 }
 
 module.exports = {
+  INSTAGRAM_ACCOUNT_ID,
+  PROFILE_ID,
   listAccounts,
-  getInstagramAccountId,
   createPost,
   schedulePost,
   createDraft,
-  getPosts,
+  listPosts,
   getAnalytics,
 };
