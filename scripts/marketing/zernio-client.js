@@ -1,11 +1,11 @@
 require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
-const Zernio = require('@zernio/node');
+const { Zernio } = require('@zernio/node');
 
 let _client = null;
 function client() {
   if (!_client) {
     if (!process.env.ZERNIO_API_KEY) throw new Error('ZERNIO_API_KEY not set in .env');
-    _client = new Zernio(); // reads ZERNIO_API_KEY from env automatically
+    _client = new Zernio({ apiKey: process.env.ZERNIO_API_KEY });
   }
   return _client;
 }
