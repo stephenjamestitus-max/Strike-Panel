@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import FadeIn from '@/components/ui/FadeIn'
 import { motion, AnimatePresence } from 'framer-motion'
 import styles from './features.module.css'
 
@@ -260,10 +261,21 @@ export default function Features() {
   return (
     <section id="features" style={{ padding:'clamp(80px,10vw,130px) clamp(20px,5vw,80px)' }}>
       <div style={{ maxWidth:1100, margin:'0 auto' }}>
-        <div style={{ textAlign:'center', marginBottom:56 }}>
-          <div style={{ fontFamily:'var(--fm)', fontSize:10, letterSpacing:4, color:'var(--accent)', textTransform:'uppercase', marginBottom:12 }}>// FEATURES</div>
-          <h2 style={{ fontFamily:'var(--fh)', fontSize:'clamp(40px,5vw,72px)', letterSpacing:2 }}>EVERY TOOL A COACH NEEDS</h2>
-        </div>
+        <FadeIn delay={0} y={40}>
+          <div style={{ textAlign:'center', marginBottom:56 }}>
+            <div style={{ fontFamily:'var(--fm)', fontSize:10, letterSpacing:4, color:'var(--accent)', textTransform:'uppercase', marginBottom:12 }}>// FEATURES</div>
+            <h2 style={{
+              fontFamily: 'var(--fk)',
+              fontWeight: 900,
+              fontSize: 'clamp(40px,5vw,72px)',
+              letterSpacing: 2,
+              background: 'linear-gradient(180deg, #646973 0%, #BBCCD7 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>EVERY TOOL A COACH NEEDS</h2>
+          </div>
+        </FadeIn>
         <div className={styles.tabs}>
           {tabs.map(t => (
             <button key={t} onClick={() => setActive(t)} className={[styles.tab, active===t ? styles.tabActive : ''].filter(Boolean).join(' ')}>
