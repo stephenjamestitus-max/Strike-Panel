@@ -16,7 +16,7 @@ require('dotenv').config({ path: require('path').join(__dirname, '../../.env') }
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+// caption generation uses built-in pool (no API cost)
 
 const { fetchTrends } = require('./trend-research');
 const { generateCarousel } = require('./carousel-generator');
@@ -58,30 +58,46 @@ function writeLog(entry) {
   fs.writeFileSync(LOG_PATH, JSON.stringify(log, null, 2));
 }
 
-async function generateCaption(pillar, trends) {
-  const trendSummary = trends.themes?.slice(0, 4).join(', ') || 'fight camp, weight cuts, coaching';
+// Rotating caption pool — 2 per pillar, cycles through without any API cost
+const CAPTION_POOL = {
+  'Readiness': [
+    `Monday morning. You have eight athletes walking in.\nWhich ones are ready to go hard? Which ones need protecting?\nIf you are guessing, you are gambling.\nReadiness scoring gives you the answer before the session starts. Sleep, soreness, stress, HRV trend pulled into one number.\nYou coach to that number.\nThe athletes who needed protecting do not get broken down. The ones who are peaking get pushed.\nThat is the difference between a coach and a guessing machine.`,
+    `Eight athletes. Eight different days.\nOne of them is running on four hours of sleep. One is three days into fight camp. One is carrying a shoulder he has not told you about.\nYou cannot see any of that without data.\nReadiness scoring surfaces it every morning before you touch a session plan.\nKnow your athletes before they walk through the door.`,
+  ],
+  'Fight Camp': [
+    `Six weeks out. This is where camps get won or lost.\nNot fight night. Six weeks out.\nThis is when athletes start to crack under volume. When the coach who is not watching loses an athlete to overtraining. When the smart coach pulls back at exactly the right moment.\nCountdown is on. Every session from here matters.\nCoach the camp. Not just the fight.`,
+    `The overtraining does not happen on the hardest day.\nIt happens on the day after the hardest day, when nobody pulled back.\nFight camp management is daily monitoring. It is knowing when to push and when to protect. The coaches who arrive at fight week with sharp athletes are the ones who watched the data the whole way through.`,
+  ],
+  'Weight Cut': [
+    `The weight cut does not start fight week.\nIt starts the day they sign the contract.\nIf you are not tracking daily weight from week one of camp, you are guessing on the cut. And when you guess on cuts, athletes show up drained, slow, and already beaten before the first round.\nSafe cuts are planned cuts. Planned cuts start now.`,
+    `Too many coaches are reactive with weight cuts.\nBy the time they see the problem the athlete is already behind.\nDaily trend weight from contract signing is the only way to manage it properly. You need to know where they are every day leading up to weigh-in. Track the trend. Adjust the protocol. Protect the performance.`,
+  ],
+  'AI Sessions': [
+    `Eight athletes. Eight different readiness scores.\nThat used to mean eight separate session plans written by hand.\nNow it means one input, eight tailored outputs.\nYou tell the system who is in camp, who is peaking, who is beat up. It builds the session around that. You review it. You own it. You coach it.\nThe AI does the calculation. You do the coaching.`,
+    `The session that works for your 91 is not the session that works for your 38.\nGiving both athletes the same training day is not a programme. It is a guess with a structure around it.\nReadiness-aware session building adapts to where each athlete actually is. That is not technology replacing the coach. That is technology giving the coach what they actually need.`,
+  ],
+  'Problem/Frustration': [
+    `Be honest.\nHow are you managing your athletes right now?\nWhatsApp voice notes at midnight. A spreadsheet nobody updates. Gut feeling on who is cooked and who is fresh.\nThat is not a system. That is chaos with a coaching badge.\nYou have fighters entering camp, athletes cutting weight, and sessions to plan all running at the same time.\nOther coaches are still doing it the old way. Some of them will wreck an athlete two weeks before the fight because they did not see the signs.`,
+    `You trained for years to coach at this level.\nYou did not train to manage seventeen WhatsApp threads and a spreadsheet that is three days out of date.\nThe admin is not the job. The coaching is the job.\nEvery hour you spend guessing readiness and chasing check-ins is an hour you are not coaching. That is the real cost.`,
+  ],
+  'Social Proof': [
+    `Coaches using StrikePanel stopped guessing.\nThey know which athlete needs a light day before the athlete does.\nThey walk into the gym with a session already built to each athlete score.\nThey arrive at fight week with athletes who are sharp, not empty.\nThat is not a feature. That is an outcome.\nBetter decisions win fights.`,
+    `The coaches who perform consistently are not more talented.\nThey are more informed.\nThey walk into every session knowing which athletes are ready to be pushed and which need protecting. They do not find out mid-session when something breaks.\nInformation is the advantage. The coaches who have it make better calls.`,
+  ],
+  'Direct Offer': [
+    `One payment. No subscription. No monthly bill sitting on your account.\nStrikePanel is $99.\nYou get readiness scoring for up to 20 athletes. Fight camp countdowns. Weight cut tracking. AI session generation.\nEverything a serious coach needs to run a serious programme.\nNinety-nine dollars. You own it.\nLink in bio.`,
+    `Independent coaches should not be paying SaaS prices for tools they use every day.\nStrikePanel is $99 one-time. No subscription. No renewal. No bill in six months.\nReadiness scoring, fight camps, weight cuts, AI sessions for up to 20 athletes.\nOne purchase. Yours permanently.\nLink in bio.`,
+  ],
+};
 
-  const prompt = `You are writing an Instagram post for @strikepanel — a coaching dashboard for combat sports coaches.
+function generateCaption(pillar, trends) {
+  // Match pillar to pool key
+  const key = Object.keys(CAPTION_POOL).find(k => pillar.includes(k)) || 'Problem/Frustration';
+  const captions = CAPTION_POOL[key];
 
-Brand voice: Direct, confident, no-nonsense. "Old school grit, new school data."
-Short sentences. Active voice. Combat-sports-native language. No emojis. No hyphens.
-Sound like a coach talking to a coach. Never generic.
-
-Today's content pillar: ${pillar}
-Today's trending topics in combat sports: ${trendSummary}
-
-Write ONE Instagram post:
-- Caption: 80-120 words max. Punchy opening line. Real insight coaches actually feel.
-  End with a hook to check the link in bio (only on offer pillar).
-- Do NOT add hashtags (added separately).
-- Output ONLY the caption text, nothing else.`;
-
-  // Uses Claude Code (claude -p) — no API credits needed, uses your Pro subscription
-  const result = execSync(`claude -p "${prompt.replace(/"/g, '\\"').replace(/\n/g, ' ')}"`, {
-    encoding: 'utf8',
-    timeout: 60000,
-  });
-  return result.trim();
+  // Rotate based on week number so it cycles automatically
+  const week = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000));
+  return Promise.resolve(captions[week % captions.length]);
 }
 
 async function buildCarouselSlides(pillar, caption) {
