@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, type ReactElement } from 'react'
 import FadeIn from '@/components/ui/FadeIn'
 import { motion, AnimatePresence } from 'framer-motion'
 import styles from './features.module.css'
@@ -246,7 +246,7 @@ function Progress() {
 }
 
 /* ── Features Shell ── */
-const panels: Record<string, () => React.ReactElement> = {
+const panels: Record<string, () => ReactElement> = {
   'Morning Brief': MorningBrief,
   'Fight Camp':    FightCamp,
   'Athletes':      Athletes,
