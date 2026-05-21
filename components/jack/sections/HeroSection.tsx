@@ -1,6 +1,6 @@
 'use client'
-import FadeIn from '../ui/FadeIn'
-import Magnet from '../ui/Magnet'
+import FadeIn from '@/components/ui/FadeIn'
+import Magnet from '@/components/ui/Magnet'
 import ContactButton from '../ui/ContactButton'
 
 const NAV_LINKS = ['About', 'Price', 'Projects', 'Contact']

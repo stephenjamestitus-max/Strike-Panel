@@ -1,4 +1,4 @@
-import FadeIn from '../ui/FadeIn'
+import FadeIn from '@/components/ui/FadeIn'
 
 const SERVICES = [
   {

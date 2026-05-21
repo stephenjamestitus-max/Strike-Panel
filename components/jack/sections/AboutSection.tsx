@@ -1,4 +1,4 @@
-import FadeIn from '../ui/FadeIn'
+import FadeIn from '@/components/ui/FadeIn'
 import AnimatedText from '../ui/AnimatedText'
 import ContactButton from '../ui/ContactButton'
 

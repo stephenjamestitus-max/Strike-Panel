@@ -67,7 +67,6 @@ export default function Magnet({
     handleMouseLeave()
   }, [detachListeners, handleMouseLeave])
 
-  // Ensure listener is removed if component unmounts while hovered
   useEffect(() => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
