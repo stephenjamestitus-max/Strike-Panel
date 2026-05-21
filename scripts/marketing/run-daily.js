@@ -20,6 +20,7 @@ const https = require('https');
 
 const { fetchTrends } = require('./trend-research');
 const { generateCarousel } = require('./carousel-generator');
+const { getBackgroundPhoto, getVideoClip } = require('./media-fetcher');
 const zernio = require('./zernio-client');
 
 const LOG_PATH = path.join(__dirname, 'posted_log.json');
@@ -103,20 +104,29 @@ async function generateCaption(pillar, trends) {
   }
 
   const trendContext = trends?.themes?.slice(0, 3).join(', ') || '';
-  const prompt = [
-    `You write Instagram captions for StrikePanel, a coaching dashboard for combat sports coaches.`,
-    `Today's content pillar: ${pillar}`,
-    trendContext ? `Trending topics to weave in if relevant: ${trendContext}` : '',
-    ``,
-    `Write a single Instagram caption. Rules:`,
-    `- 80-120 words`,
-    `- First line is a hook that stops the scroll`,
-    `- Body: one sharp insight, coach-to-coach tone`,
-    `- End: soft CTA or observation`,
-    `- Direct, active voice, no emojis, no hyphens`,
-    `- Do NOT include hashtags (added separately)`,
-    `- Output the caption only, no intro, no quotes`,
-  ].filter(Boolean).join('\n');
+  const prompt = `You write Instagram content for StrikePanel — a coaching dashboard used by independent combat sports coaches (boxing, MMA, Muay Thai, BJJ).
+
+Content pillar today: ${pillar}
+${trendContext ? `What coaches are talking about right now: ${trendContext}` : ''}
+
+Write one Instagram caption. These are the rules — follow every one:
+
+VOICE: Coach to coach. Direct. No corporate language. No AI phrases ("unleash", "elevate", "game-changer", "empower"). Short declarative sentences. Active voice. No hyphens. No emojis.
+
+STRUCTURE:
+- Line 1: A single-sentence hook. It names a specific problem or moment a combat sports coach recognises immediately. It creates tension or curiosity. It does NOT start with "Are you" or questions.
+- Lines 2-4: One sharp insight. Specific. Vivid. Could describe a real moment in the gym or camp.
+- Final line: A quiet observation or soft nudge. Not a hard sell unless pillar is Direct Offer.
+
+CONSTRAINTS:
+- 80-120 words total
+- No hashtags (added separately)
+- No quotes around the output, no intro text, no "Caption:" label
+- If pillar is Direct Offer: end with "Link in bio."
+- If pillar is Social Proof: make it feel like a coach describing a real outcome, not a testimonial
+
+Output the caption only.`;
+
 
   try {
     const body = JSON.stringify({
@@ -164,40 +174,45 @@ async function generateCaption(pillar, trends) {
 }
 
 async function buildCarouselSlides(pillar, caption) {
-  // Parse caption into slide structure
   const sentences = caption.split(/\.\s+/).filter(Boolean);
+  const pillarName = pillar.split('—')[0].trim();
+
+  // Fetch a real sport photo from Pexels/Pixabay for the background
+  const bgImage = await getBackgroundPhoto(pillar).catch(() => null);
 
   const slides = [
     {
       type: 'cover',
-      headline: sentences[0] || pillar.split('—')[0].trim(),
-      body: 'A note for combat sports coaches',
+      kicker: `STRIKEPANEL™ · ${pillarName.toUpperCase()}`,
+      headline: sentences[0]?.length > 50
+        ? sentences[0].substring(0, 47).toUpperCase() + '...'
+        : (sentences[0] || pillarName).toUpperCase(),
+      sub: sentences[1] || 'A note for combat sports coaches',
     },
   ];
 
-  // Middle slides from caption body
-  for (let i = 1; i < Math.min(sentences.length, 4); i++) {
+  // Middle slides — one sentence per slide, larger and more impactful
+  for (let i = 2; i < Math.min(sentences.length, 5); i++) {
     slides.push({
-      headline: sentences[i].length > 60
-        ? sentences[i].substring(0, 57) + '...'
-        : sentences[i],
-      body: sentences[i + 1] || '',
+      type: 'quote',
+      quote: sentences[i],
+      attribution: 'STRIKEPANEL™',
     });
-    i++; // pair sentences
   }
 
   // Closing CTA slide
   slides.push({
-    type: 'stat',
+    type: 'cta',
     stat: '$99',
-    statLabel: 'One-time. No subscription.',
-    body: 'StrikePanel — readiness dashboard for up to 20 athletes. Link in bio.',
+    headline: 'ONE PAYMENT.',
+    headlineCyan: 'NO SUBSCRIPTION.',
+    body: 'Readiness scoring, fight camps, weight cuts, AI sessions. Up to 20 athletes. You own it forever.',
   });
 
   const date = new Date().toISOString().split('T')[0];
   const name = `daily-${date}`;
-  const imagePaths = await generateCarousel(slides, name);
-  return imagePaths;
+  const imagePaths = await generateCarousel(slides, name, bgImage);
+  return { imagePaths, bgImage };
 }
 
 async function run() {
@@ -221,13 +236,19 @@ async function run() {
   console.log('\n  Caption preview:');
   console.log('  ' + caption.split('\n')[0].substring(0, 80) + '...');
 
-  // Step 3: Carousel
-  console.log('\n3. Building carousel slides...');
-  const imagePaths = await buildCarouselSlides(pillar, caption).catch(e => {
-    console.warn('  Carousel failed:', e.message, '— will post text-only');
-    return [];
-  });
-  console.log(`  ${imagePaths.length} slides generated`);
+  // Step 3: Visuals — background photo + video clip (run in parallel)
+  console.log('\n3. Fetching visuals...');
+  const [carouselResult, videoClip] = await Promise.all([
+    buildCarouselSlides(pillar, caption).catch(e => {
+      console.warn('  Carousel failed:', e.message, '— will post without slides');
+      return { imagePaths: [], bgImage: null };
+    }),
+    getVideoClip(pillar).catch(() => null),
+  ]);
+
+  const { imagePaths } = carouselResult;
+  if (videoClip) console.log(`  Video ready: ${path.basename(videoClip)}`);
+  console.log(`  ${imagePaths.length} carousel slides built`);
 
   // Step 4: Post via Zernio
   if (!process.env.ZERNIO_API_KEY) {
@@ -238,14 +259,12 @@ async function run() {
     return;
   }
 
-  console.log('\n4. Posting to Instagram via Zernio...');
+  console.log('\n4. Uploading & posting to Instagram via Zernio...');
   try {
-    // Upload carousel images to public CDN before posting
     let publicUrls = [];
     if (imagePaths.length > 0) {
       if (!process.env.IMGBB_API_KEY) {
         console.warn('  IMGBB_API_KEY not set — posting without carousel images');
-        console.warn('  Get a free key at https://api.imgbb.com and add IMGBB_API_KEY to .env');
       } else {
         console.log('  Uploading slides to CDN...');
         publicUrls = await zernio.uploadImages(imagePaths);
@@ -258,7 +277,11 @@ async function run() {
       mediaUrls: publicUrls,
     });
     console.log('  Posted:', result?._id || 'success');
-    writeLog({ pillar, caption: fullCaption, status: 'posted', slides: imagePaths.length, zernioId: result?._id });
+    writeLog({
+      pillar, caption: fullCaption, status: 'posted',
+      slides: imagePaths.length, videoClip: videoClip ? path.basename(videoClip) : null,
+      zernioId: result?._id,
+    });
   } catch (e) {
     console.error('  Post failed:', e.message);
     console.log('\n  Manual fallback — copy this caption:\n');

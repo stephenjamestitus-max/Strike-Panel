@@ -111,10 +111,23 @@ function grainSVG() {
   </svg>`;
 }
 
-function shell(inner, counter, total) {
+function shell(inner, counter, total, bgImagePath) {
+  // If a local photo path is supplied, embed it as base64 for a full-bleed background
+  let bgStyle = `background:${B.bg}`;
+  let bgOverlay = '';
+  if (bgImagePath && fs.existsSync(bgImagePath)) {
+    const ext = path.extname(bgImagePath).slice(1).replace('jpg', 'jpeg');
+    const b64 = fs.readFileSync(bgImagePath).toString('base64');
+    bgStyle = `background:url('data:image/${ext};base64,${b64}') center/cover no-repeat`;
+    // Dark overlay so brand text stays readable
+    bgOverlay = `<div style="position:absolute;inset:0;z-index:0;
+      background:linear-gradient(160deg,rgba(4,7,15,.82) 0%,rgba(4,7,15,.72) 50%,rgba(4,7,15,.88) 100%)"></div>`;
+  }
+
   return `<!DOCTYPE html><html><head><meta charset="utf-8">
   <style>${BASE_CSS}</style></head><body>
-  <div id="canvas">
+  <div id="canvas" style="${bgStyle}">
+    ${bgOverlay}
     ${grainSVG()}
     <div id="dotgrid"></div>
     <div class="blob blob-cyan"></div>
@@ -133,7 +146,7 @@ function shell(inner, counter, total) {
 
 // ── Slide templates ───────────────────────────────────────────────
 
-function coverSlide(s, i, total) {
+function coverSlide(s, i, total, bg) {
   const { headline, headlineCyan, sub, kicker = 'STRIKEPANEL™ · COACHING INTEL' } = s;
   return shell(`
     <div style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;gap:24px;width:800px;text-align:center">
@@ -144,10 +157,10 @@ function coverSlide(s, i, total) {
         ${headlineCyan ? `<span class="bb" style="font-size:108px;color:${B.cyan};display:block;text-shadow:0 0 60px rgba(0,212,240,.45)">${headlineCyan}</span>` : ''}
       </div>
       ${sub ? `<p style="font-size:16px;color:${B.muted};letter-spacing:.5px;max-width:600px;line-height:1.6;margin-top:8px">${sub}</p>` : ''}
-    </div>`, i + 1, total);
+    </div>`, i + 1, total, bg);
 }
 
-function widgetSlide(s, i, total) {
+function widgetSlide(s, i, total, bg) {
   const { headline, headlineAmber, athletes = [] } = s;
   const rows = athletes.map(a => {
     const barClass = a.score >= 75 ? 'bar-g' : a.score >= 50 ? 'bar-c' : a.score >= 30 ? 'bar-a' : 'bar-r';
@@ -179,10 +192,10 @@ function widgetSlide(s, i, total) {
         <span class="bb" style="font-size:76px;color:${B.text}">${headline}</span>
         ${headlineAmber ? `<br><span class="bb" style="font-size:76px;color:${B.amber};text-shadow:0 0 40px rgba(200,137,42,.5)">${headlineAmber}</span>` : ''}
       </div>
-    </div>`, i + 1, total);
+    </div>`, i + 1, total, bg);
 }
 
-function statSlide(s, i, total) {
+function statSlide(s, i, total, bg) {
   const { stat, statColor = B.cyan, statLabel, body, kicker } = s;
   const glow = statColor === B.cyan
     ? 'rgba(0,212,240,.35)' : statColor === B.amber
@@ -193,10 +206,10 @@ function statSlide(s, i, total) {
       <div class="bb" style="font-size:200px;line-height:1;color:${statColor};text-shadow:0 0 80px ${glow},0 0 160px ${glow};letter-spacing:-4px">${stat}</div>
       <div class="bb" style="font-size:44px;color:${B.text};letter-spacing:2px">${statLabel}</div>
       ${body ? `<div class="divider" style="margin:8px 0"></div><p style="font-size:22px;color:${B.muted};line-height:1.6;max-width:700px">${body}</p>` : ''}
-    </div>`, i + 1, total);
+    </div>`, i + 1, total, bg);
 }
 
-function listSlide(s, i, total) {
+function listSlide(s, i, total, bg) {
   const { headline, headlineCyan, items = [], kicker } = s;
   const listItems = items.map((item, idx) => `
     <div style="display:flex;align-items:flex-start;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.05)">
@@ -212,10 +225,10 @@ function listSlide(s, i, total) {
         ${headlineCyan ? `<br><span class="bb" style="font-size:72px;color:${B.cyan};text-shadow:0 0 50px rgba(0,212,240,.4)">${headlineCyan}</span>` : ''}
       </div>
       <div style="margin-top:4px">${listItems}</div>
-    </div>`, i + 1, total);
+    </div>`, i + 1, total, bg);
 }
 
-function quoteSlide(s, i, total) {
+function quoteSlide(s, i, total, bg) {
   const { quote, attribution } = s;
   return shell(`
     <div style="position:relative;z-index:10;width:820px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:32px">
@@ -223,10 +236,10 @@ function quoteSlide(s, i, total) {
       <div style="font-size:30px;color:${B.text};line-height:1.55;letter-spacing:.3px">${quote}</div>
       <div class="divider"></div>
       ${attribution ? `<div style="font-size:13px;letter-spacing:2.5px;text-transform:uppercase;color:${B.muted}">${attribution}</div>` : ''}
-    </div>`, i + 1, total);
+    </div>`, i + 1, total, bg);
 }
 
-function ctaSlide(s, i, total) {
+function ctaSlide(s, i, total, bg) {
   const { headline = 'ONE PAYMENT.', headlineCyan = 'NO SUBSCRIPTION.', stat = '$99', body } = s;
   return shell(`
     <div style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;gap:28px;width:820px;text-align:center">
@@ -240,14 +253,19 @@ function ctaSlide(s, i, total) {
       <div style="background:rgba(0,212,240,.08);border:1px solid rgba(0,212,240,.25);border-radius:12px;padding:14px 40px">
         <span style="font-size:13px;letter-spacing:3px;text-transform:uppercase;color:${B.cyan}">LINK IN BIO → strikepanel.com</span>
       </div>
-    </div>`, i + 1, total);
+    </div>`, i + 1, total, bg);
 }
 
 // ── Renderer ──────────────────────────────────────────────────────
 
 const TEMPLATES = { cover: coverSlide, widget: widgetSlide, stat: statSlide, list: listSlide, quote: quoteSlide, cta: ctaSlide };
 
-async function generateCarousel(slides, outputName) {
+/**
+ * @param {Array}  slides     — slide descriptors
+ * @param {string} outputName — filename prefix
+ * @param {string} [bgImage]  — optional local path to a photo used as bg on every slide
+ */
+async function generateCarousel(slides, outputName, bgImage) {
   if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
 
   const launchOpts = {
@@ -265,7 +283,9 @@ async function generateCarousel(slides, outputName) {
     const slide = slides[i];
     const type = slide.type || 'list';
     const fn = TEMPLATES[type] || listSlide;
-    const html = fn(slide, i, slides.length);
+    // Each slide can override with its own bgImage, or use the carousel-level default
+    const slideBg = slide.bgImage || bgImage || null;
+    const html = fn(slide, i, slides.length, slideBg);
     await page.setContent(html, { waitUntil: 'networkidle0', timeout: 15000 }).catch(() =>
       page.setContent(html, { waitUntil: 'domcontentloaded' })
     );
