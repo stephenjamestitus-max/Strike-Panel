@@ -110,6 +110,7 @@ export default function Hero() {
 
       {/* ── Hero content ── */}
       <div
+        className="hero-content"
         style={{
           position: 'relative',
           zIndex: 10,
@@ -208,6 +209,7 @@ export default function Hero() {
 
       {/* ── Frosted glass stats bar ── */}
       <div
+        className="hero-stats"
         style={{
           position: 'absolute',
           bottom: 0,

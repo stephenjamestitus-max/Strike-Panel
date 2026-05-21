@@ -13,7 +13,7 @@ export default function CrossPlatform() {
     <section style={{ background: 'var(--bg)', padding: 'clamp(80px,10vw,130px) clamp(20px,5vw,64px) 0', overflow: 'hidden' }}>
       <div style={{ maxWidth: 1400, margin: '0 auto' }}>
         <FadeIn delay={0} y={40}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', marginBottom: 64 }}>
+          <div className="rsp-grid-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', marginBottom: 64 }}>
             <div>
               <div style={{ fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 4, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>// CROSS-PLATFORM</div>
               <h2 style={{

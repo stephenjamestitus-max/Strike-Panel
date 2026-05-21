@@ -23,7 +23,7 @@ function MorningBrief() {
         </div>
       </div>
       <div style={{ fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 3, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 12 }}>SQUAD READINESS SCORES</div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 12 }}>
+      <div className="feat-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 12 }}>
         {[{name:'PRIYA',score:91,color:'#10b981'},{name:'JAKE',score:74,color:'#c8892a'},{name:'MARCUS',score:38,color:'#ef4444'}].map(a => (
           <div key={a.name} style={{ background: 'rgba(255,255,255,.03)', border: '1px solid rgba(255,255,255,.06)', borderRadius: 10, padding: '16px 18px' }}>
             <div style={{ fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 2, color: 'var(--muted)', marginBottom: 8 }}>{a.name}</div>
@@ -50,7 +50,7 @@ function MorningBrief() {
         ))}
       </div>
       {/* Squad overview 4-stat grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '8px', marginTop: '16px' }}>
+      <div className="feat-4col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '8px', marginTop: '16px' }}>
         {[
           { label: 'AVG READINESS', value: '68', color: 'var(--amber)' },
           { label: 'CHECKED IN', value: '2/3', color: 'var(--green)' },
@@ -71,7 +71,7 @@ function MorningBrief() {
 function FightCamp() {
   return (
     <div className={styles.panel}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 12, marginBottom: 16 }}>
+      <div className="feat-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 12, marginBottom: 16 }}>
         {[{label:'DAYS TO FIGHT',value:'21',color:'#ef4444'},{label:'CURRENT KG',value:'79.2',color:'#c8892a'},{label:'TARGET KG',value:'77',color:'#10b981'}].map(s => (
           <div key={s.label} style={{ background: 'rgba(255,255,255,.03)', border: '1px solid rgba(255,255,255,.06)', borderRadius: 10, padding: '16px 18px', textAlign: 'center' }}>
             <div style={{ fontFamily: 'var(--fh)', fontSize: 40, color: s.color }}>{s.value}</div>
@@ -97,7 +97,8 @@ function FightCamp() {
       {/* Weight cut table */}
       <div style={{ marginTop: '20px' }}>
         <div style={{ fontFamily: 'var(--fm)', fontSize: '10px', color: 'var(--muted)', letterSpacing: '1.5px', marginBottom: '10px' }}>WEIGHT CUT TRACKER</div>
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', fontFamily: 'var(--fm)' }}>
+        <div className="rsp-scroll">
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', fontFamily: 'var(--fm)', minWidth: 320 }}>
           <thead>
             <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)' }}>
               {['WEEK', 'DATE', 'TARGET', 'ACTUAL', 'STATUS'].map(h => (
@@ -122,6 +123,7 @@ function FightCamp() {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   )
@@ -136,7 +138,7 @@ function Athletes() {
   ]
   return (
     <div className={styles.panel}>
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:12, marginBottom:20 }}>
+      <div className="feat-3col" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:12, marginBottom:20 }}>
         {[{label:'ACTIVE',value:'12'},{label:'ON ALERT',value:'3'},{label:'IN CAMP',value:'2'}].map(s => (
           <div key={s.label} style={{ background:'rgba(255,255,255,.03)', border:'1px solid rgba(255,255,255,.06)', borderRadius:10, padding:'16px', textAlign:'center' }}>
             <div style={{ fontFamily:'var(--fh)', fontSize:36, color:'var(--amber)' }}>{s.value}</div>
@@ -221,8 +223,8 @@ function Progress() {
           ))}
         </div>
       </div>
-      <div style={{ overflowX:'auto' }}>
-        <table style={{ width:'100%', borderCollapse:'collapse', fontFamily:'var(--fm)', fontSize:12 }}>
+      <div className="rsp-scroll">
+        <table style={{ width:'100%', borderCollapse:'collapse', fontFamily:'var(--fm)', fontSize:12, minWidth: 340 }}>
           <thead>
             <tr>{['WEEK','READINESS','PERFORMANCE','RECOVERY','SESSIONS'].map(h => (
               <th key={h} style={{ padding:'8px 12px', textAlign:'left', color:'var(--muted)', fontSize:9, letterSpacing:2, borderBottom:'1px solid rgba(255,255,255,.06)' }}>{h}</th>
@@ -283,7 +285,7 @@ export default function Features() {
             </button>
           ))}
         </div>
-        <div style={{ background:'rgba(8,14,26,.8)', border:'1px solid var(--border)', borderRadius:16, padding:32 }}>
+        <div className="feat-panel" style={{ background:'rgba(8,14,26,.8)', border:'1px solid var(--border)', borderRadius:16, padding:32 }}>
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
