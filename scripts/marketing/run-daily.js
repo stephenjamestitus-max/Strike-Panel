@@ -240,9 +240,22 @@ async function run() {
 
   console.log('\n4. Posting to Instagram via Zernio...');
   try {
+    // Upload carousel images to public CDN before posting
+    let publicUrls = [];
+    if (imagePaths.length > 0) {
+      if (!process.env.IMGBB_API_KEY) {
+        console.warn('  IMGBB_API_KEY not set — posting without carousel images');
+        console.warn('  Get a free key at https://api.imgbb.com and add IMGBB_API_KEY to .env');
+      } else {
+        console.log('  Uploading slides to CDN...');
+        publicUrls = await zernio.uploadImages(imagePaths);
+        console.log(`  ${publicUrls.length} slides uploaded`);
+      }
+    }
+
     const result = await zernio.createPost({
       content: fullCaption,
-      mediaUrls: imagePaths,
+      mediaUrls: publicUrls,
     });
     console.log('  Posted:', result?._id || 'success');
     writeLog({ pillar, caption: fullCaption, status: 'posted', slides: imagePaths.length, zernioId: result?._id });

@@ -1,4 +1,7 @@
 require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
 const { Zernio } = require('@zernio/node');
 
 const INSTAGRAM_ACCOUNT_ID = '6a0e0f75520992756d8bcdcf';
@@ -67,6 +70,58 @@ async function getAnalytics() {
   return res?.data || null;
 }
 
+// Upload a local image file to ImgBB and return its public URL.
+// Requires IMGBB_API_KEY in .env — free at https://api.imgbb.com
+async function uploadImage(filePath) {
+  const key = process.env.IMGBB_API_KEY;
+  if (!key) throw new Error('IMGBB_API_KEY not set in .env');
+
+  const imageData = fs.readFileSync(filePath);
+  const base64 = imageData.toString('base64');
+  const name = encodeURIComponent(path.basename(filePath, path.extname(filePath)));
+  const body = `key=${encodeURIComponent(key)}&name=${name}&image=${encodeURIComponent(base64)}`;
+
+  return new Promise((resolve, reject) => {
+    const req = https.request(
+      {
+        hostname: 'api.imgbb.com',
+        path: '/1/upload',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': Buffer.byteLength(body),
+        },
+      },
+      res => {
+        let data = '';
+        res.on('data', chunk => { data += chunk; });
+        res.on('end', () => {
+          try {
+            const json = JSON.parse(data);
+            if (!json.success) return reject(new Error(`ImgBB error: ${json.error?.message || data}`));
+            resolve(json.data.url);
+          } catch (e) {
+            reject(new Error('ImgBB parse error: ' + data.slice(0, 200)));
+          }
+        });
+      }
+    );
+    req.on('error', reject);
+    req.write(body);
+    req.end();
+  });
+}
+
+// Upload multiple local image paths to ImgBB, return array of public URLs.
+async function uploadImages(filePaths) {
+  const results = [];
+  for (const fp of filePaths) {
+    const url = await uploadImage(fp);
+    results.push(url);
+  }
+  return results;
+}
+
 module.exports = {
   INSTAGRAM_ACCOUNT_ID,
   PROFILE_ID,
@@ -76,4 +131,6 @@ module.exports = {
   createDraft,
   listPosts,
   getAnalytics,
+  uploadImage,
+  uploadImages,
 };
