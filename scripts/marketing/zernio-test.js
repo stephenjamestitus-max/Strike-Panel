@@ -1,18 +1,12 @@
 require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
-const zernio = require('./zernio-client');
+const { Zernio } = require('@zernio/node');
 
 async function test() {
+  const z = new Zernio({ apiKey: process.env.ZERNIO_API_KEY });
   console.log('Testing Zernio connection...\n');
 
-  const accounts = await zernio.listAccounts();
-  console.log(`Connected accounts (${accounts.length}):`);
-  for (const a of accounts) {
-    console.log(`  ${a.platform} — ID: ${a._id} — @${a.username || a.handle || a.name || '?'}`);
-  }
-
-  const igId = await zernio.getInstagramAccountId();
-  console.log(`\nInstagram account ID: ${igId}`);
-  console.log('\nConnection OK. Save this ID to .env as ZERNIO_INSTAGRAM_ID=' + igId);
+  const result = await z.accounts.listAccounts();
+  console.log('Raw response:', JSON.stringify(result, null, 2));
 }
 
 test().catch(e => {
