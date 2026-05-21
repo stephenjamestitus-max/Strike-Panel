@@ -16,7 +16,7 @@ require('dotenv').config({ path: require('path').join(__dirname, '../../.env') }
 
 const fs = require('fs');
 const path = require('path');
-// caption generation uses built-in pool (no API cost)
+const https = require('https');
 
 const { fetchTrends } = require('./trend-research');
 const { generateCarousel } = require('./carousel-generator');
@@ -90,14 +90,77 @@ const CAPTION_POOL = {
   ],
 };
 
-function generateCaption(pillar, trends) {
-  // Match pillar to pool key
+function getPoolCaption(pillar) {
   const key = Object.keys(CAPTION_POOL).find(k => pillar.includes(k)) || 'Problem/Frustration';
-  const captions = CAPTION_POOL[key];
-
-  // Rotate based on week number so it cycles automatically
   const week = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000));
-  return Promise.resolve(captions[week % captions.length]);
+  return CAPTION_POOL[key][week % CAPTION_POOL[key].length];
+}
+
+async function generateCaption(pillar, trends) {
+  if (!process.env.GROQ_API_KEY) {
+    console.log('  No GROQ_API_KEY — using caption pool');
+    return getPoolCaption(pillar);
+  }
+
+  const trendContext = trends?.themes?.slice(0, 3).join(', ') || '';
+  const prompt = [
+    `You write Instagram captions for StrikePanel, a coaching dashboard for combat sports coaches.`,
+    `Today's content pillar: ${pillar}`,
+    trendContext ? `Trending topics to weave in if relevant: ${trendContext}` : '',
+    ``,
+    `Write a single Instagram caption. Rules:`,
+    `- 80-120 words`,
+    `- First line is a hook that stops the scroll`,
+    `- Body: one sharp insight, coach-to-coach tone`,
+    `- End: soft CTA or observation`,
+    `- Direct, active voice, no emojis, no hyphens`,
+    `- Do NOT include hashtags (added separately)`,
+    `- Output the caption only, no intro, no quotes`,
+  ].filter(Boolean).join('\n');
+
+  try {
+    const body = JSON.stringify({
+      model: 'llama-3.3-70b-versatile',
+      messages: [{ role: 'user', content: prompt }],
+      max_tokens: 300,
+      temperature: 0.8,
+    });
+
+    const caption = await new Promise((resolve, reject) => {
+      const req = https.request(
+        {
+          hostname: 'api.groq.com',
+          path: '/openai/v1/chat/completions',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+            'Content-Length': Buffer.byteLength(body),
+          },
+        },
+        res => {
+          let data = '';
+          res.on('data', chunk => { data += chunk; });
+          res.on('end', () => {
+            try {
+              const json = JSON.parse(data);
+              resolve(json.choices[0].message.content.trim());
+            } catch (e) {
+              reject(new Error('Groq parse error: ' + data.slice(0, 200)));
+            }
+          });
+        }
+      );
+      req.on('error', reject);
+      req.write(body);
+      req.end();
+    });
+
+    return caption;
+  } catch (e) {
+    console.warn('  Groq failed:', e.message, '— falling back to caption pool');
+    return getPoolCaption(pillar);
+  }
 }
 
 async function buildCarouselSlides(pillar, caption) {
@@ -152,12 +215,6 @@ async function run() {
   // Step 2: Caption
   const pillar = getTodayPillar();
   console.log(`\n2. Generating caption for pillar: ${pillar.split('—')[0].trim()}`);
-
-  if (!process.env.ANTHROPIC_API_KEY) {
-    console.warn('  ANTHROPIC_API_KEY not set — skipping AI generation');
-    console.log('  Set it in .env and re-run');
-    return;
-  }
 
   const caption = await generateCaption(pillar, trends);
   const fullCaption = `${caption}\n\n${HASHTAGS}`;
