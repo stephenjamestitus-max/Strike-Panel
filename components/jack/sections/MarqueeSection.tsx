@@ -58,7 +58,7 @@ export default function MarqueeSection() {
       >
         {ROW1.map((src, i) => (
           <img
-            key={i}
+            key={`row1-${i}`}
             src={src}
             alt=""
             loading="lazy"
@@ -75,7 +75,7 @@ export default function MarqueeSection() {
       >
         {ROW2.map((src, i) => (
           <img
-            key={i}
+            key={`row2-${i}`}
             src={src}
             alt=""
             loading="lazy"
