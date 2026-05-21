@@ -227,17 +227,31 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#04070f;font-fam
   return outFile;
 }
 
+function daysSinceLastStory() {
+  const log = readLog();
+  const last = [...log].reverse().find(e => e.status === 'story_posted');
+  if (!last) return Infinity;
+  return (Date.now() - new Date(last.timestamp).getTime()) / (1000 * 60 * 60 * 24);
+}
+
 async function run() {
-  console.log('\n=== StrikePanel Daily Story ===');
+  console.log('\n=== StrikePanel Story ===');
   console.log(new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dubai' }), '(Dubai)');
   console.log('');
+
+  // Enforce 3-day cadence (same as post)
+  const days = daysSinceLastStory();
+  if (days < 3) {
+    console.log(`Last story was ${days.toFixed(1)} days ago. Skipping — cadence is every 3 days.`);
+    return;
+  }
 
   // Step 1: Get today's caption
   console.log('1. Getting today\'s caption...');
   const caption = getTodayCaption();
   if (!caption) {
     console.warn('  No caption found in posted_log.json for today.');
-    console.warn('  Run run-daily.js first, or add a caption entry for today.');
+    console.warn('  Run run-daily.js first.');
     writeLog({ status: 'story_skipped', reason: 'no_caption_today' });
     return;
   }

@@ -3,15 +3,19 @@ REM ============================================================
 REM  StrikePanel — Windows Task Scheduler Setup
 REM  Run this once as Administrator to register all 4 tasks.
 REM
+REM  CADENCE:
+REM    Post + Story — every 3 days (scripts self-enforce this)
+REM    Engage + Follow — every day
+REM
 REM  All times are Dubai (UTC+4). Windows Task Scheduler
-REM  uses LOCAL time, so adjust if your PC is not set to
-REM  Dubai/GST (UTC+4).
+REM  uses LOCAL time — adjust /st times if your PC is not
+REM  set to Dubai/GST (UTC+4).
 REM
 REM  Schedule:
-REM    08:00 — Daily Post    (run-daily.js)
-REM    08:10 — Daily Story   (run-story.js)
-REM    17:00 — Engage        (run-engage.js)
-REM    17:15 — Follow        (run-follow.js)
+REM    08:00 — Post     (runs, skips if <3 days since last)
+REM    08:10 — Story    (runs, skips if <3 days since last)
+REM    17:00 — Engage   (15 comments generated, every day)
+REM    17:15 — Follow   (5 accounts, every day)
 REM ============================================================
 
 SET WORKDIR=C:\Users\steph\Strike-Panel
@@ -21,112 +25,65 @@ SET NODE=node
 echo.
 echo === StrikePanel Task Scheduler Setup ===
 echo Working directory: %WORKDIR%
-echo Logs directory:    %LOGDIR%
+echo Logs:              %LOGDIR%
 echo.
 
-REM Create logs directory
-if not exist "%LOGDIR%" (
-    mkdir "%LOGDIR%"
-    echo Created logs directory: %LOGDIR%
-) else (
-    echo Logs directory already exists: %LOGDIR%
-)
-echo.
+if not exist "%LOGDIR%" mkdir "%LOGDIR%"
 
 REM -------------------------------------------------------
-REM Task 1: Daily Post — 08:00 Dubai daily
+REM Task 1: Post — runs daily, script enforces 3-day gap
 REM -------------------------------------------------------
-echo Registering Task 1: StrikePanel-Daily-Post (08:00)...
+echo Registering StrikePanel-Post (08:00 daily)...
 schtasks /create ^
-  /tn "StrikePanel-Daily-Post" ^
+  /tn "StrikePanel-Post" ^
   /tr "cmd /c cd /d \"%WORKDIR%\" && %NODE% scripts/marketing/run-daily.js >> \"%LOGDIR%\run-daily.log\" 2>&1" ^
-  /sc DAILY ^
-  /st 08:00 ^
-  /rl HIGHEST ^
-  /ru SYSTEM ^
-  /f
-if %ERRORLEVEL% EQU 0 (
-    echo   [OK] StrikePanel-Daily-Post registered
-) else (
-    echo   [WARN] StrikePanel-Daily-Post may already exist or failed — check permissions
-)
-echo.
+  /sc DAILY /st 08:00 /rl HIGHEST /ru SYSTEM /f
+if %ERRORLEVEL% EQU 0 (echo   [OK]) else (echo   [FAIL] — run as Administrator)
 
 REM -------------------------------------------------------
-REM Task 2: Daily Story — 08:10 Dubai daily
+REM Task 2: Story — runs daily, script enforces 3-day gap
 REM -------------------------------------------------------
-echo Registering Task 2: StrikePanel-Daily-Story (08:10)...
+echo Registering StrikePanel-Story (08:10 daily)...
 schtasks /create ^
-  /tn "StrikePanel-Daily-Story" ^
+  /tn "StrikePanel-Story" ^
   /tr "cmd /c cd /d \"%WORKDIR%\" && %NODE% scripts/marketing/run-story.js >> \"%LOGDIR%\run-story.log\" 2>&1" ^
-  /sc DAILY ^
-  /st 08:10 ^
-  /rl HIGHEST ^
-  /ru SYSTEM ^
-  /f
-if %ERRORLEVEL% EQU 0 (
-    echo   [OK] StrikePanel-Daily-Story registered
-) else (
-    echo   [WARN] StrikePanel-Daily-Story may already exist or failed — check permissions
-)
-echo.
+  /sc DAILY /st 08:10 /rl HIGHEST /ru SYSTEM /f
+if %ERRORLEVEL% EQU 0 (echo   [OK]) else (echo   [FAIL] — run as Administrator)
 
 REM -------------------------------------------------------
-REM Task 3: Engage (comments) — 17:00 Dubai daily
+REM Task 3: Engage — every day at 5 PM Dubai
 REM -------------------------------------------------------
-echo Registering Task 3: StrikePanel-Engage (17:00)...
+echo Registering StrikePanel-Engage (17:00 daily)...
 schtasks /create ^
   /tn "StrikePanel-Engage" ^
   /tr "cmd /c cd /d \"%WORKDIR%\" && %NODE% scripts/marketing/run-engage.js >> \"%LOGDIR%\run-engage.log\" 2>&1" ^
-  /sc DAILY ^
-  /st 17:00 ^
-  /rl HIGHEST ^
-  /ru SYSTEM ^
-  /f
-if %ERRORLEVEL% EQU 0 (
-    echo   [OK] StrikePanel-Engage registered
-) else (
-    echo   [WARN] StrikePanel-Engage may already exist or failed — check permissions
-)
-echo.
+  /sc DAILY /st 17:00 /rl HIGHEST /ru SYSTEM /f
+if %ERRORLEVEL% EQU 0 (echo   [OK]) else (echo   [FAIL] — run as Administrator)
 
 REM -------------------------------------------------------
-REM Task 4: Follow — 17:15 Dubai daily
+REM Task 4: Follow — every day at 5:15 PM Dubai
 REM -------------------------------------------------------
-echo Registering Task 4: StrikePanel-Follow (17:15)...
+echo Registering StrikePanel-Follow (17:15 daily)...
 schtasks /create ^
   /tn "StrikePanel-Follow" ^
   /tr "cmd /c cd /d \"%WORKDIR%\" && %NODE% scripts/marketing/run-follow.js >> \"%LOGDIR%\run-follow.log\" 2>&1" ^
-  /sc DAILY ^
-  /st 17:15 ^
-  /rl HIGHEST ^
-  /ru SYSTEM ^
-  /f
-if %ERRORLEVEL% EQU 0 (
-    echo   [OK] StrikePanel-Follow registered
-) else (
-    echo   [WARN] StrikePanel-Follow may already exist or failed — check permissions
-)
-echo.
+  /sc DAILY /st 17:15 /rl HIGHEST /ru SYSTEM /f
+if %ERRORLEVEL% EQU 0 (echo   [OK]) else (echo   [FAIL] — run as Administrator)
 
-REM -------------------------------------------------------
-REM Summary
-REM -------------------------------------------------------
+echo.
 echo ============================================================
-echo  All tasks registered. Verify in Task Scheduler:
-echo    Start -> Task Scheduler -> Task Scheduler Library
-echo    Look for: StrikePanel-*
+echo  Done. Verify in Task Scheduler (Start menu):
+echo    Task Scheduler Library - look for StrikePanel-*
 echo.
-echo  Log files will be written to:
-echo    %LOGDIR%\run-daily.log
-echo    %LOGDIR%\run-story.log
-echo    %LOGDIR%\run-engage.log
-echo    %LOGDIR%\run-follow.log
+echo  What runs when:
+echo    08:00  Post   — every 3 days (auto-enforced)
+echo    08:10  Story  — every 3 days (auto-enforced)
+echo    17:00  Engage — EVERY DAY (15 comments to engage_queue.json)
+echo    17:15  Follow — EVERY DAY (5 accounts to follow_log.json)
 echo.
-echo  IMPORTANT: If your PC clock is not set to Dubai time
-echo  (UTC+4 / GST), adjust the /st times accordingly.
-echo  Dubai 08:00 = UTC 04:00
-echo  Dubai 17:00 = UTC 13:00
+echo  Logs: %LOGDIR%\
+echo.
+echo  Dubai time = UTC+4. If your PC clock is not Dubai,
+echo  adjust: Dubai 08:00 = UTC 04:00 / Dubai 17:00 = UTC 13:00
 echo ============================================================
-echo.
 pause

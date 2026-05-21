@@ -242,10 +242,27 @@ async function buildCarouselSlides(pillar, caption) {
   return { imagePaths, bgImage };
 }
 
+function daysSinceLastPost() {
+  const log = readLog();
+  const last = [...log].reverse().find(e => e.status === 'posted');
+  if (!last) return Infinity;
+  const ms = Date.now() - new Date(last.timestamp).getTime();
+  return ms / (1000 * 60 * 60 * 24);
+}
+
 async function run() {
-  console.log('\n=== StrikePanel Daily Automation ===');
+  console.log('\n=== StrikePanel Post & Story ===');
   console.log(new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dubai' }), '(Dubai)');
   console.log('');
+
+  // Enforce 3-day cadence
+  const days = daysSinceLastPost();
+  if (days < 3) {
+    const next = Math.ceil(3 - days);
+    console.log(`Last post was ${days.toFixed(1)} days ago. Next post in ${next} day(s).`);
+    console.log('Skipping — cadence is every 3 days.');
+    return;
+  }
 
   // Step 1: Trends
   console.log('1. Fetching trends...');
