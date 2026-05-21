@@ -317,6 +317,8 @@ body::after{
 @media(pointer:coarse){
   .ri-slider::-webkit-slider-thumb{width:28px;height:28px}
   .ri-slider::-moz-range-thumb{width:28px;height:28px}
+  .r-card{min-height:44px}
+  .btn,button,.tab{min-height:44px}
 }
 @media(max-width:480px){
   .hero{padding:8px 14px 8px}
@@ -336,6 +338,11 @@ body::after{
 @media(max-width:360px){
   .readiness-grid{grid-template-columns:1fr 1fr}
   .g4{grid-template-columns:repeat(2,1fr)}
+  .fight-countdown{font-size:28px}
+  .t-digits{font-size:38px}
+  .hero-inner{gap:8px}
+  .wordmark{font-size:20px;letter-spacing:2px}
+  .logo{width:40px;height:40px}
 }
 
 /* ── FIGHT TAB SECTION ── */
@@ -392,7 +399,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   position:sticky;top:73px;z-index:190;
   box-shadow:0 1px 0 rgba(0,212,240,0.04);
 }
-.tab-bar{max-width:1280px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none}
+.tab-bar{max-width:1280px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .tab-bar::-webkit-scrollbar{display:none}
 .tab{
   flex-shrink:0;padding:13px 20px;
@@ -629,8 +636,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 .div span{font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted2);flex-shrink:0}
 
 /* ── TABLE ── */
-.tbl-wrap{overflow-x:auto}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .tbl{width:100%;border-collapse:collapse;min-width:600px}
+@media(max-width:480px){.tbl{min-width:0;font-size:11px}.tbl th,.tbl td{padding:8px 6px}}
 .tbl th{font-family:var(--fc);font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);padding:11px 14px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(0,0,0,.15)}
 .tbl td{padding:11px 14px;font-size:13px;border-bottom:1px solid rgba(255,255,255,.03);transition:background .12s}
 .tbl tr:hover td{background:rgba(0,212,240,.025)}
