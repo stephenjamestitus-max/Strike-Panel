@@ -148,13 +148,16 @@ function shell(inner, counter, total, bgImagePath) {
 
 function coverSlide(s, i, total, bg) {
   const { headline, headlineCyan, sub, kicker = 'STRIKEPANEL™ · COACHING INTEL' } = s;
+  // Scale font down for longer headlines so text never overflows
+  const len = (headline + (headlineCyan || '')).length;
+  const fontSize = len > 40 ? 72 : len > 28 ? 88 : 108;
   return shell(`
     <div style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;gap:24px;width:800px;text-align:center">
       <div class="kicker"><span class="kdot"></span>${kicker}</div>
       <div class="divider"></div>
       <div style="line-height:.88;margin-top:8px">
-        <span class="bb" style="font-size:108px;color:${B.text};display:block">${headline}</span>
-        ${headlineCyan ? `<span class="bb" style="font-size:108px;color:${B.cyan};display:block;text-shadow:0 0 60px rgba(0,212,240,.45)">${headlineCyan}</span>` : ''}
+        <span class="bb" style="font-size:${fontSize}px;color:${B.text};display:block">${headline}</span>
+        ${headlineCyan ? `<span class="bb" style="font-size:${fontSize}px;color:${B.cyan};display:block;text-shadow:0 0 60px rgba(0,212,240,.45)">${headlineCyan}</span>` : ''}
       </div>
       ${sub ? `<p style="font-size:16px;color:${B.muted};letter-spacing:.5px;max-width:600px;line-height:1.6;margin-top:8px">${sub}</p>` : ''}
     </div>`, i + 1, total, bg);

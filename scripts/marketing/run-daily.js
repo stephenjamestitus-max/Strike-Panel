@@ -207,27 +207,35 @@ async function buildCarouselSlides(pillar, caption) {
   // Fetch a real sport photo from Pexels/Pixabay for the background
   const bgImage = await getBackgroundPhoto(pillar).catch(() => null);
 
+  // Cover headline: split into two punchy lines if long
+  const rawHeadline = sentences[0] || pillarName;
+  const words = rawHeadline.toUpperCase().split(' ');
+  const half = Math.ceil(words.length / 2);
+  const headline = words.slice(0, half).join(' ');
+  const headlineCyan = words.length > 3 ? words.slice(half).join(' ') : null;
+
   const slides = [
     {
       type: 'cover',
       kicker: `STRIKEPANEL™ · ${pillarName.toUpperCase()}`,
-      headline: sentences[0]?.length > 50
-        ? sentences[0].substring(0, 47).toUpperCase() + '...'
-        : (sentences[0] || pillarName).toUpperCase(),
+      headline,
+      headlineCyan,
       sub: sentences[1] || 'A note for combat sports coaches',
+      bgImage, // photo only on the cover slide
     },
   ];
 
-  // Middle slides — one sentence per slide, larger and more impactful
+  // Middle slides — brand bg (no photo), one sentence per slide
   for (let i = 2; i < Math.min(sentences.length, 5); i++) {
     slides.push({
       type: 'quote',
       quote: sentences[i],
       attribution: 'STRIKEPANEL™',
+      // no bgImage — uses brand dark bg for contrast and variety
     });
   }
 
-  // Closing CTA slide
+  // Closing CTA slide — brand bg
   slides.push({
     type: 'cta',
     stat: '$99',
@@ -238,7 +246,7 @@ async function buildCarouselSlides(pillar, caption) {
 
   const date = new Date().toISOString().split('T')[0];
   const name = `daily-${date}`;
-  const imagePaths = await generateCarousel(slides, name, bgImage);
+  const imagePaths = await generateCarousel(slides, name);
   return { imagePaths, bgImage };
 }
 

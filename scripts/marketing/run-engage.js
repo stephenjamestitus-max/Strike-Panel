@@ -72,15 +72,15 @@ function pickAccounts() {
   const log = readEngageLog();
   const today = new Date().toISOString().split('T')[0];
 
-  // Build set of handles used yesterday
-  const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-  const usedYesterday = new Set(
+  // 7-day cooldown — never comment on the same account twice within 7 days
+  const cutoff = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+  const usedRecently = new Set(
     log
-      .filter(e => e.date === yesterday)
+      .filter(e => e.date >= cutoff)
       .map(e => e.account)
   );
 
-  const available = MASTER_ACCOUNTS.filter(a => !usedYesterday.has(a.handle));
+  const available = MASTER_ACCOUNTS.filter(a => !usedRecently.has(a.handle));
   const pool = available.length >= 15 ? available : MASTER_ACCOUNTS;
 
   // Shuffle deterministically using today's date as seed (simple rotation)
