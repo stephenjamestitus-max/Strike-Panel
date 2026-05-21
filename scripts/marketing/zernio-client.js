@@ -29,9 +29,23 @@ async function createPost({ content, mediaUrls = [] }) {
     publishNow: true,
     platforms: [{ platform: 'instagram', accountId: INSTAGRAM_ACCOUNT_ID }],
   };
-  if (mediaUrls.length > 0) body.media = mediaUrls.map(url => ({ url }));
-  const res = await client().posts.createPost({ body });
-  return res.data?.post || res.data;
+  if (mediaUrls.length > 0) {
+    // Log URLs so we can debug what's being sent
+    console.log('  Media URLs being sent to Zernio:');
+    mediaUrls.forEach((u, i) => console.log(`    [${i + 1}] ${u}`));
+    // Try both field names the Zernio API might expect
+    body.mediaUrls = mediaUrls;
+    body.media = mediaUrls.map(url => ({ url, type: 'image' }));
+  }
+  try {
+    const res = await client().posts.createPost({ body });
+    return res.data?.post || res.data;
+  } catch (e) {
+    // Surface the full API error body for debugging
+    const detail = e?.response?.data || e?.body || '';
+    if (detail) console.error('  Zernio error detail:', JSON.stringify(detail));
+    throw e;
+  }
 }
 
 // Schedule a post at a specific time (ISO string, Dubai = UTC+4)
@@ -99,7 +113,9 @@ async function uploadImage(filePath) {
           try {
             const json = JSON.parse(data);
             if (!json.success) return reject(new Error(`ImgBB error: ${json.error?.message || data}`));
-            resolve(json.data.url);
+            const imgUrl = json.data.display_url || json.data.url;
+            console.log(`    Uploaded → ${imgUrl}`);
+            resolve(imgUrl);
           } catch (e) {
             reject(new Error('ImgBB parse error: ' + data.slice(0, 200)));
           }
