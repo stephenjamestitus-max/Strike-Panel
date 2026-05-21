@@ -3,3 +3,6 @@ sp-media/
 __pycache__/
 .env
 .env.local
+
+marketing/media-cache/
+marketing/carousels/

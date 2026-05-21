@@ -270,8 +270,9 @@ async function generateCarousel(slides, outputName, bgImage) {
 
   const launchOpts = {
     headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
   };
+  // Use cached local Chrome if available, otherwise Puppeteer finds it automatically
   if (fs.existsSync(CHROME)) launchOpts.executablePath = CHROME;
 
   const browser = await puppeteer.launch(launchOpts);

@@ -1,0 +1,56 @@
+name: Post & Story (every 3 days)
+
+on:
+  schedule:
+    - cron: '0 4 * * *'   # 08:00 Dubai (UTC+4) daily — script self-enforces 3-day gap
+  workflow_dispatch:        # Manual trigger from GitHub Actions tab
+
+jobs:
+  post-and-story:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chrome (Puppeteer)
+        run: |
+          sudo apt-get install -y libgbm-dev libxss1 libasound2-dev libatk-bridge2.0-0 libgtk-3-0
+          npx puppeteer browsers install chrome
+
+      - name: Run post script
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
+          IMGBB_API_KEY: ${{ secrets.IMGBB_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+        run: node scripts/marketing/run-daily.js
+
+      - name: Run story script
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
+          IMGBB_API_KEY: ${{ secrets.IMGBB_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+        run: node scripts/marketing/run-story.js
+
+      - name: Commit updated logs
+        run: |
+          git config user.name "StrikePanel Bot"
+          git config user.email "automation@strikepanel.com"
+          git add scripts/marketing/posted_log.json 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "chore: update post log [skip ci]"
+          git push
