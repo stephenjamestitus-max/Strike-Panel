@@ -259,9 +259,56 @@ function ctaSlide(s, i, total, bg) {
     </div>`, i + 1, total, bg);
 }
 
+// ── Series slide templates ────────────────────────────────────────
+
+// Post 1: Black card — one brutal truth, pure typography
+function blackcardSlide(s, i, total, bg) {
+  const { line, sub } = s;
+  return shell(`
+    <div style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;width:860px;text-align:center">
+      <div style="width:48px;height:2px;background:${B.cyan};opacity:.5"></div>
+      <div class="bb" style="font-size:80px;line-height:1.05;color:${B.text};letter-spacing:2px">${line}</div>
+      ${sub ? `<div style="width:48px;height:2px;background:${B.cyan};opacity:.5"></div>
+      <p style="font-size:17px;color:${B.muted};letter-spacing:.5px;max-width:640px;line-height:1.7">${sub}</p>` : '<div style="width:48px;height:2px;background:rgba(0,212,240,.3)"></div>'}
+    </div>`, i + 1, total, bg);
+}
+
+// Post 2: Split screen — chaos left, clarity right
+function splitscreenSlide(s, i, total, bg) {
+  const { chaos, clarity, label } = s;
+  return shell(`
+    <div style="position:relative;z-index:10;width:960px;display:flex;flex-direction:column;gap:0">
+      ${label ? `<div class="kicker" style="align-self:center;margin-bottom:28px"><span class="kdot"></span>${label}</div>` : ''}
+      <div style="display:flex;gap:0;border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden">
+        <!-- Chaos side -->
+        <div style="flex:1;padding:40px 36px;background:rgba(239,68,68,.06);border-right:1px solid rgba(255,255,255,.07)">
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:${B.red};margin-bottom:20px;opacity:.8">WITHOUT DATA</div>
+          <div style="font-size:20px;color:rgba(245,240,232,.65);line-height:1.65">${chaos}</div>
+        </div>
+        <!-- Clarity side -->
+        <div style="flex:1;padding:40px 36px;background:rgba(0,212,240,.05)">
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:${B.cyan};margin-bottom:20px;opacity:.8">WITH STRIKEPANEL</div>
+          <div style="font-size:20px;color:rgba(245,240,232,.85);line-height:1.65">${clarity}</div>
+        </div>
+      </div>
+    </div>`, i + 1, total, bg);
+}
+
+// Post 3: Scenario — cinematic fight corner narrative
+function scenarioSlide(s, i, total, bg) {
+  const { scene, truth, kicker } = s;
+  return shell(`
+    <div style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:flex-start;gap:32px;width:840px">
+      ${kicker ? `<div class="kicker"><span class="kdot"></span>${kicker}</div>` : ''}
+      <div style="font-size:26px;color:${B.text};line-height:1.65;letter-spacing:.2px">${scene}</div>
+      <div style="width:100%;height:1px;background:linear-gradient(to right,rgba(0,212,240,.3),transparent)"></div>
+      <div class="bb" style="font-size:44px;color:${B.cyan};line-height:1.1;letter-spacing:1px">${truth}</div>
+    </div>`, i + 1, total, bg);
+}
+
 // ── Renderer ──────────────────────────────────────────────────────
 
-const TEMPLATES = { cover: coverSlide, widget: widgetSlide, stat: statSlide, list: listSlide, quote: quoteSlide, cta: ctaSlide };
+const TEMPLATES = { cover: coverSlide, widget: widgetSlide, stat: statSlide, list: listSlide, quote: quoteSlide, cta: ctaSlide, blackcard: blackcardSlide, splitscreen: splitscreenSlide, scenario: scenarioSlide };
 
 /**
  * @param {Array}  slides     — slide descriptors
