@@ -1,5 +1,5 @@
 'use client'
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import FadeIn from '@/components/ui/FadeIn'
 import Magnet from '@/components/ui/Magnet'
@@ -16,12 +16,24 @@ const GRAIN_SVG = "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
   })
-  // Video moves down 120px over the full scroll of the hero section (parallax)
+  // Video position still moves at a slower rate (parallax depth)
   const y = useTransform(scrollYProgress, [0, 1], [0, 120])
+
+  // Scroll-scrubbing: drive video.currentTime from scroll position
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    return scrollYProgress.on('change', (progress) => {
+      if (video.duration) {
+        video.currentTime = progress * video.duration
+      }
+    })
+  }, [scrollYProgress])
 
   return (
     <section
@@ -44,11 +56,11 @@ export default function Hero() {
         }}
       >
         <video
+          ref={videoRef}
           src="/training.mp4"
-          autoPlay
           muted
-          loop
           playsInline
+          preload="auto"
           style={{
             position: 'absolute',
             inset: 0,
@@ -130,7 +142,7 @@ export default function Hero() {
             <h1 style={{
               fontFamily: 'var(--fk)',
               fontWeight: 900,
-              fontSize: 'clamp(72px,13vw,160px)',
+              fontSize: 'clamp(60px,10vw,120px)',
               lineHeight: 0.88,
               textTransform: 'uppercase',
               letterSpacing: '-1px',

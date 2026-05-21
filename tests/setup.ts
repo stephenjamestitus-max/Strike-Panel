@@ -1,3 +1,4 @@
+/// <reference types="vitest/globals" />
 import '@testing-library/jest-dom'
 
 // Framer Motion's whileInView requires IntersectionObserver — mock it for JSDOM
