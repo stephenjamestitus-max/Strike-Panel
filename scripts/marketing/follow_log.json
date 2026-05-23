@@ -58,5 +58,35 @@
     "description": "Scientific MMA training, Tristar gym head coach, US",
     "date": "2026-05-23",
     "status": "queued"
+  },
+  {
+    "handle": "@freddieroach",
+    "description": "Elite boxing coaching, Hall of Fame trainer, US",
+    "date": "2026-05-23",
+    "status": "queued"
+  },
+  {
+    "handle": "@boxing_science",
+    "description": "Sports science for boxing, UK-based, research-led",
+    "date": "2026-05-23",
+    "status": "queued"
+  },
+  {
+    "handle": "@scientificboxing",
+    "description": "Scientific boxing technique and training methodology, UK",
+    "date": "2026-05-23",
+    "status": "queued"
+  },
+  {
+    "handle": "@dingesonboxing",
+    "description": "UK boxing coaching, technical analysis and breakdowns",
+    "date": "2026-05-23",
+    "status": "queued"
+  },
+  {
+    "handle": "@thaiboxingassociation",
+    "description": "Muay Thai coaching standards and development, UK",
+    "date": "2026-05-23",
+    "status": "queued"
   }
 ]
