@@ -103,12 +103,12 @@ export default function PrivacyPage() {
 
           <h2 style={H2}>Your Rights</h2>
           <p style={P}>
-            You may request deletion of your license record at any time by emailing support@strikepanel.com. Note that deleting your license record will deactivate your access.
+            You may request deletion of your license record at any time by emailing corepanelv1@gmail.com. Note that deleting your license record will deactivate your access.
           </p>
 
           <h2 style={H2}>Contact</h2>
           <p style={P}>
-            For any privacy questions: support@strikepanel.com
+            For any privacy questions: corepanelv1@gmail.com
           </p>
         </div>
       </main>

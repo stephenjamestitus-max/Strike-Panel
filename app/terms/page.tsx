@@ -76,7 +76,7 @@ export default function TermsPage() {
 
           <h2 style={H2}>Refund Policy</h2>
           <p style={P}>
-            We offer a 30-day money-back guarantee. If StrikePanel is not the right fit for you, email support@strikepanel.com within 30 days of purchase and we will issue a full refund. No questions asked.
+            We offer a 30-day money-back guarantee. If StrikePanel is not the right fit for you, email corepanelv1@gmail.com within 30 days of purchase and we will issue a full refund. No questions asked.
           </p>
 
           <h2 style={H2}>Use of the Service</h2>
@@ -109,7 +109,7 @@ export default function TermsPage() {
 
           <h2 style={H2}>Contact</h2>
           <p style={P}>
-            Questions about these terms: support@strikepanel.com
+            Questions about these terms: corepanelv1@gmail.com
           </p>
         </div>
       </main>

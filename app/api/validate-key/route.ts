@@ -37,13 +37,13 @@ export async function POST(req: NextRequest) {
     const license = rows[0];
 
     if (license.status !== 'active') {
-      return NextResponse.json({ ok: false, msg: 'This key has been revoked. Email support@strikepanel.com.' });
+      return NextResponse.json({ ok: false, msg: 'This key has been revoked. Email corepanelv1@gmail.com.' });
     }
 
     if (license.activations >= MAX_ACTIVATIONS) {
       return NextResponse.json({
         ok: false,
-        msg: `Device limit reached (${MAX_ACTIVATIONS} devices). Email support@strikepanel.com to reset.`,
+        msg: `Device limit reached (${MAX_ACTIVATIONS} devices). Email corepanelv1@gmail.com to reset.`,
       });
     }
 
