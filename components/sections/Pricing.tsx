@@ -116,7 +116,7 @@ export default function Pricing() {
 
           <Magnet padding={120} strength={3}>
             <a
-              href="https://strikepanel.gumroad.com/l/strikepanel"
+              href="https://payhip.com/b/uOmA0"
               target="_blank"
               rel="noopener noreferrer"
               style={{

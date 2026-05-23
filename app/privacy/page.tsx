@@ -63,7 +63,7 @@ export default function PrivacyPage() {
 
           <h2 style={H2}>What We Collect</h2>
           <p style={P}>
-            StrikePanel collects only what is needed to operate the service. When you purchase, Gumroad processes your payment and email address. We receive your email to send your license key. We do not collect names, addresses, or payment card details directly.
+            StrikePanel collects only what is needed to operate the service. When you purchase, Payhip processes your payment and email address. We receive your email to send your license key. We do not collect names, addresses, or payment card details directly.
           </p>
           <p style={P}>
             The StrikePanel app stores all athlete data locally on your device. Athlete names, readiness scores, session logs, and fight camp data are never transmitted to our servers.
@@ -89,7 +89,7 @@ export default function PrivacyPage() {
             We use the following services to operate:
           </p>
           <ul style={{ ...P, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <li><strong style={{ color: 'var(--cream)' }}>Gumroad</strong> — payment processing and order fulfilment</li>
+            <li><strong style={{ color: 'var(--cream)' }}>Payhip</strong> — payment processing and order fulfilment</li>
             <li><strong style={{ color: 'var(--cream)' }}>Supabase</strong> — license key storage</li>
             <li><strong style={{ color: 'var(--cream)' }}>Vercel</strong> — web hosting</li>
             <li><strong style={{ color: 'var(--cream)' }}>Resend</strong> — transactional email (license key delivery)</li>
@@ -98,7 +98,7 @@ export default function PrivacyPage() {
 
           <h2 style={H2}>Data Retention</h2>
           <p style={P}>
-            License key records are retained indefinitely so you can reactivate on new devices. Email addresses used for key delivery are not stored by us beyond what Gumroad retains per their own policy.
+            License key records are retained indefinitely so you can reactivate on new devices. Email addresses used for key delivery are not stored by us beyond what Payhip retains per their own policy.
           </p>
 
           <h2 style={H2}>Your Rights</h2>
