@@ -28,5 +28,35 @@
     "description": "Boxing technical coaching, athlete development, US",
     "date": "2026-05-22",
     "status": "queued"
+  },
+  {
+    "handle": "@fightiqcoaching",
+    "description": "Fight IQ development, tactical MMA coaching, US",
+    "date": "2026-05-23",
+    "status": "queued"
+  },
+  {
+    "handle": "@precisionstriking",
+    "description": "Striking precision coaching, technical content, US",
+    "date": "2026-05-23",
+    "status": "queued"
+  },
+  {
+    "handle": "@boxingscience_",
+    "description": "Evidence-based boxing science, applied sports science, UK",
+    "date": "2026-05-23",
+    "status": "queued"
+  },
+  {
+    "handle": "@mnbjj",
+    "description": "BJJ competition coaching and team management, US",
+    "date": "2026-05-23",
+    "status": "queued"
+  },
+  {
+    "handle": "@firas_zahabi",
+    "description": "Scientific MMA training, Tristar gym head coach, US",
+    "date": "2026-05-23",
+    "status": "queued"
   }
 ]
