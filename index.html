@@ -1079,7 +1079,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;margin-top:8px;font-size:13px" onclick="lgActivate()">🔓 Activate License</button>
     <div class="lg-msg" id="lgMsg"></div>
     <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);font-size:11px;color:var(--muted2);line-height:1.7">
-      Don't have a license? <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" style="color:var(--accent);text-decoration:underline">Get StrikePanel — $99 →</a>
+      Don't have a license? <a href="https://strikepanel.com/landing.html" target="_blank" style="color:var(--accent);text-decoration:underline">Get StrikePanel — $99 →</a>
     </div>
   </div>
 </div>
@@ -5604,11 +5604,10 @@ document.getElementById('pdfShareBtn').style.display='inline-flex';
   });
 }
 // ══════════════════════════════════════════════════════════════════════
-// LICENSE GATE — Gumroad live API verification
+// LICENSE GATE — StrikePanel own key system (Supabase)
 // ══════════════════════════════════════════════════════════════════════
 
 var MASTER_KEY_HASH = '9039f4a7d2b4e605bf44c7c32ae0677ce312aa82f96adc3f81d4204f4641c348';
-var GUMROAD_PRODUCT_ID = '9fFA5S9lE_f7gMernpp16Q==';
 
 function lgSetMsg(txt, ok) {
   const el = document.getElementById('lgMsg');
@@ -5630,27 +5629,16 @@ async function lgIsValidKey(key) {
   } catch { return false; }
 }
 
-const SP_MAX_ACTIVATIONS = 3;
-
-async function lgVerifyWithGumroad(key) {
+async function lgVerifyWithSupabase(key) {
   try {
-    const res = await fetch('https://api.gumroad.com/v2/licenses/verify', {
+    const res = await fetch('/api/validate-key', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `product_id=${encodeURIComponent(GUMROAD_PRODUCT_ID)}&license_key=${encodeURIComponent(key)}&increment_uses_count=true`
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key: key.trim().toUpperCase() }),
     });
     const data = await res.json();
-    if (data.success === true) {
-      // uses is the count AFTER this increment — so ≤ SP_MAX_ACTIVATIONS means valid
-      if (typeof data.uses === 'number' && data.uses > SP_MAX_ACTIVATIONS) {
-        return {
-          ok: false,
-          msg: `This key has reached its device limit (${SP_MAX_ACTIVATIONS} devices). Email corepanelv1@gmail.com to reset it.`
-        };
-      }
-      return { ok: true };
-    }
-    return { ok: false, msg: data.message || 'Key not recognised by Gumroad.' };
+    if (data.ok) return { ok: true };
+    return { ok: false, msg: data.msg || 'Invalid key — check your purchase email.' };
   } catch (e) {
     console.error('[SP License] Network error:', e);
     return { ok: false, network: true };
@@ -5674,15 +5662,15 @@ async function lgActivate() {
     return;
   }
 
-  const result = await lgVerifyWithGumroad(key);
+  const result = await lgVerifyWithSupabase(key);
 
   if (result.ok) {
     lgActivateSuccess(key, btn);
   } else if (result.network) {
-    lgSetMsg('Could not reach Gumroad — check your connection and try again.', false);
+    lgSetMsg('Could not connect — check your internet and try again.', false);
     if (btn) { btn.textContent = '🔓 Activate License'; btn.disabled = false; }
   } else {
-    lgSetMsg(result.msg || 'Invalid key — check the key in your Gumroad email and try again.', false);
+    lgSetMsg(result.msg || 'Invalid key — check your purchase email and try again.', false);
     if (btn) { btn.textContent = '🔓 Activate License'; btn.disabled = false; }
     input?.classList.add('err');
     setTimeout(() => input?.classList.remove('err'), 600);
