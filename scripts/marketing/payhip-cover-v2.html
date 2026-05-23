@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1200px;
+    height: 800px;
+    overflow: hidden;
+    background: #020813;
+    font-family: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
+    color: #f5f0e8;
+    position: relative;
+  }
+
+  /* ─── BACKGROUND LAYERS ─── */
+  .bg-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,240,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,240,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 0;
+  }
+
+  .bg-glow-left {
+    position: absolute;
+    left: -100px; top: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(ellipse, rgba(0,212,240,0.12) 0%, transparent 70%);
+    z-index: 1;
+  }
+
+  .bg-glow-right {
+    position: absolute;
+    right: -80px; bottom: -80px;
+    width: 500px; height: 500px;
+    background: radial-gradient(ellipse, rgba(0,100,180,0.18) 0%, transparent 70%);
+    z-index: 1;
+  }
+
+  .bg-glow-center {
+    position: absolute;
+    left: 38%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; height: 400px;
+    background: radial-gradient(ellipse, rgba(0,212,240,0.06) 0%, transparent 60%);
+    z-index: 1;
+  }
+
+  /* Diagonal accent line */
+  .accent-line {
+    position: absolute;
+    top: 0; left: 460px;
+    width: 1px; height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(0,212,240,0.3) 30%, rgba(0,212,240,0.3) 70%, transparent);
+    z-index: 2;
+  }
+
+  /* Corner bracket top-left */
+  .corner-tl {
+    position: absolute;
+    top: 28px; left: 28px;
+    width: 32px; height: 32px;
+    border-top: 2px solid rgba(0,212,240,0.5);
+    border-left: 2px solid rgba(0,212,240,0.5);
+    z-index: 10;
+  }
+  .corner-br {
+    position: absolute;
+    bottom: 28px; right: 28px;
+    width: 32px; height: 32px;
+    border-bottom: 2px solid rgba(0,212,240,0.3);
+    border-right: 2px solid rgba(0,212,240,0.3);
+    z-index: 10;
+  }
+
+  /* ─── LAYOUT ─── */
+  .layout {
+    position: relative;
+    z-index: 5;
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: stretch;
+  }
+
+  /* ─── LEFT PANEL ─── */
+  .left {
+    width: 460px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 52px 48px 52px 52px;
+  }
+
+  .logo-lockup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .logo-mark {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, #00D4F0, #0090b8);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 900;
+    color: #020813;
+    letter-spacing: -1px;
+    box-shadow: 0 0 30px rgba(0,212,240,0.4), 0 0 60px rgba(0,212,240,0.15);
+    margin-bottom: 6px;
+  }
+
+  .logo-wordmark {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    color: #f5f0e8;
+    text-transform: uppercase;
+  }
+  .logo-wordmark span { color: #00D4F0; }
+
+  .logo-tagline {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #4a5568;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 0;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow-line {
+    width: 28px; height: 1px;
+    background: #00D4F0;
+  }
+  .eyebrow-text {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #00D4F0;
+    text-transform: uppercase;
+  }
+
+  .headline {
+    font-size: 58px;
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -2px;
+    color: #f5f0e8;
+  }
+  .headline em {
+    font-style: normal;
+    color: #00D4F0;
+    display: block;
+  }
+
+  .sub {
+    font-size: 15px;
+    color: #7a85a0;
+    line-height: 1.65;
+    max-width: 320px;
+    font-weight: 400;
+  }
+
+  .pill-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .pill {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 5px 12px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 1px solid rgba(0,212,240,0.25);
+    color: #7a85a0;
+  }
+
+  .price-block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .price-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #4a5568;
+    text-transform: uppercase;
+  }
+  .price-amount {
+    font-size: 52px;
+    font-weight: 900;
+    color: #f5f0e8;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+  .price-amount sup {
+    font-size: 24px;
+    font-weight: 700;
+    vertical-align: top;
+    margin-top: 10px;
+    display: inline-block;
+    color: #00D4F0;
+  }
+  .price-sub {
+    font-size: 11px;
+    color: #4a5568;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ─── RIGHT PANEL — floating dashboard ─── */
+  .right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 40px 40px 50px;
+    position: relative;
+  }
+
+  /* Floating card */
+  .dashboard-card {
+    width: 100%;
+    max-width: 640px;
+    background: rgba(10,18,34,0.92);
+    border: 1px solid rgba(0,212,240,0.18);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(0,212,240,0.08),
+      0 24px 80px rgba(0,0,0,0.6),
+      0 0 60px rgba(0,212,240,0.08);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Card top bar */
+  .card-bar {
+    padding: 12px 18px;
+    background: rgba(4,7,15,0.8);
+    border-bottom: 1px solid rgba(0,212,240,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot-cyan { background: #00D4F0; box-shadow: 0 0 6px #00D4F0; }
+  .dot-amber { background: #F59E0B; }
+  .dot-dark { background: #2a3448; }
+  .card-bar-title {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #4a5568;
+    text-transform: uppercase;
+    margin-left: 4px;
+  }
+  .card-bar-date {
+    font-size: 10px;
+    color: #4a5568;
+    letter-spacing: 1px;
+  }
+
+  .card-body { padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; }
+
+  /* Section header */
+  .sec { font-size: 9px; letter-spacing: 3px; color: #4a5568; text-transform: uppercase; margin-bottom: 8px; }
+
+  /* Athlete rows */
+  .a-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 44px 90px;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+  }
+  .a-push { background: rgba(0,212,240,0.06); border-left: 3px solid #00D4F0; }
+  .a-protect { background: rgba(255,60,60,0.06); border-left: 3px solid #FF4040; }
+  .a-normal { background: rgba(255,255,255,0.03); border-left: 3px solid #2a3448; }
+
+  .a-name { font-size: 12px; font-weight: 600; }
+  .bar-bg { height: 3px; background: rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden; }
+  .bar { height: 100%; border-radius: 2px; }
+  .bar-c { background: linear-gradient(90deg, #00D4F0, #0090b8); }
+  .bar-r { background: linear-gradient(90deg, #FF4040, #cc0000); }
+  .bar-m { background: rgba(245,240,232,0.35); }
+  .a-score { font-size: 18px; font-weight: 800; text-align: right; }
+  .s-hi { color: #00D4F0; }
+  .s-lo { color: #FF4040; }
+  .s-md { color: #f5f0e8; }
+
+  .a-badge {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .b-push { background: rgba(0,212,240,0.15); color: #00D4F0; border: 1px solid rgba(0,212,240,0.3); }
+  .b-protect { background: rgba(255,64,64,0.15); color: #FF4040; border: 1px solid rgba(255,64,64,0.3); }
+  .b-ready { background: rgba(80,255,140,0.1); color: #50FF8C; border: 1px solid rgba(80,255,140,0.25); }
+
+  .divider { height: 1px; background: rgba(255,255,255,0.05); }
+
+  /* Bottom stat row */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .stat-box {
+    background: rgba(4,7,15,0.6);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .stat-label { font-size: 8px; letter-spacing: 2.5px; color: #4a5568; text-transform: uppercase; margin-bottom: 6px; }
+  .stat-val { font-size: 22px; font-weight: 800; color: #00D4F0; line-height: 1; }
+  .stat-sub { font-size: 9px; color: #7a85a0; margin-top: 3px; }
+  .stat-val-sm { font-size: 14px; font-weight: 700; color: #FF4040; }
+  .stat-val-green { font-size: 22px; font-weight: 800; color: #50FF8C; line-height: 1; }
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg-grid"></div>
+<div class="bg-glow-left"></div>
+<div class="bg-glow-right"></div>
+<div class="bg-glow-center"></div>
+<div class="accent-line"></div>
+<div class="corner-tl"></div>
+<div class="corner-br"></div>
+
+<div class="layout">
+
+  <!-- ── LEFT ── -->
+  <div class="left">
+
+    <div class="logo-lockup">
+      <div class="logo-mark">SP</div>
+      <div class="logo-wordmark">STRIKE<span>PANEL</span></div>
+      <div class="logo-tagline">Combat Sports Coaching OS</div>
+    </div>
+
+    <div class="hero">
+      <div class="eyebrow">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow-text">Daily Readiness Intelligence</div>
+      </div>
+
+      <div class="headline">
+        Stop<br>guessing.<br><em>Start<br>coaching.</em>
+      </div>
+
+      <div class="sub">
+        Know exactly who to push hard and who to protect — before every single session.
+      </div>
+
+      <div class="pill-row">
+        <div class="pill">Readiness Scores</div>
+        <div class="pill">Fight Camp</div>
+        <div class="pill">Weight Cut</div>
+        <div class="pill">AI Sessions</div>
+      </div>
+    </div>
+
+    <div class="price-block">
+      <div class="price-label">One-time payment</div>
+      <div class="price-amount"><sup>$</sup>99</div>
+      <div class="price-sub">No subscription &nbsp;·&nbsp; Up to 3 devices</div>
+    </div>
+
+  </div>
+
+  <!-- ── RIGHT — Dashboard ── -->
+  <div class="right">
+    <div class="dashboard-card">
+
+      <div class="card-bar">
+        <div class="card-bar-left">
+          <div class="card-dot dot-cyan"></div>
+          <div class="card-dot dot-amber"></div>
+          <div class="card-dot dot-dark"></div>
+          <div class="card-bar-title">Morning Brief</div>
+        </div>
+        <div class="card-bar-date">Day 18 of Camp · 6 Athletes</div>
+      </div>
+
+      <div class="card-body">
+
+        <div>
+          <div class="sec">Today's Roster</div>
+          <div class="a-row a-push">
+            <div class="a-name">Marcus Webb</div>
+            <div class="bar-bg"><div class="bar bar-c" style="width:92%"></div></div>
+            <div class="a-score s-hi">92</div>
+            <div class="a-badge b-push">Push Hard</div>
+          </div>
+          <div class="a-row a-push">
+            <div class="a-name">D. Santos</div>
+            <div class="bar-bg"><div class="bar bar-c" style="width:85%"></div></div>
+            <div class="a-score s-hi">85</div>
+            <div class="a-badge b-ready">Ready</div>
+          </div>
+          <div class="a-row a-normal">
+            <div class="a-name">Lee Park</div>
+            <div class="bar-bg"><div class="bar bar-m" style="width:68%"></div></div>
+            <div class="a-score s-md">68</div>
+            <div class="a-badge b-ready">Ready</div>
+          </div>
+          <div class="a-row a-protect">
+            <div class="a-name">J. Okafor</div>
+            <div class="bar-bg"><div class="bar bar-r" style="width:37%"></div></div>
+            <div class="a-score s-lo">37</div>
+            <div class="a-badge b-protect">Protect</div>
+          </div>
+          <div class="a-row a-protect">
+            <div class="a-name">Ryan Cho</div>
+            <div class="bar-bg"><div class="bar bar-r" style="width:28%"></div></div>
+            <div class="a-score s-lo">28</div>
+            <div class="a-badge b-protect">Protect</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="stat-grid">
+          <div class="stat-box">
+            <div class="stat-label">Fight Camp</div>
+            <div class="stat-val">14</div>
+            <div class="stat-sub">days to fight night</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Weight Cut</div>
+            <div class="stat-val-sm">−3.4 lbs</div>
+            <div style="margin-top:4px;font-size:9px;color:#7a85a0">Webb · on track</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Camp Avg</div>
+            <div class="stat-val-green">72</div>
+            <div class="stat-sub">readiness score</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
