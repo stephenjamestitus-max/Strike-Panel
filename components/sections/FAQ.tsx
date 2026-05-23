@@ -86,6 +86,7 @@ export default function FAQ() {
               >
                 <button
                   onClick={() => setOpen(open === i ? null : i)}
+                  aria-expanded={open === i}
                   style={{
                     width: '100%', display: 'flex', justifyContent: 'space-between',
                     alignItems: 'center', gap: 16, padding: '22px 0',
@@ -112,7 +113,7 @@ export default function FAQ() {
                 </button>
                 <div style={{
                   overflow: 'hidden',
-                  maxHeight: open === i ? 300 : 0,
+                  maxHeight: open === i ? 800 : 0,
                   transition: 'max-height .35s ease',
                 }}>
                   <p style={{
