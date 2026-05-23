@@ -1,4 +1,4 @@
-# Terminal Setup — StrikePanel Automation
+# Terminal Setup — strikepanel Automation
 
 ## Step 1 — Install Claude Code (one time)
 
@@ -50,7 +50,7 @@ claude
 ```
 
 That's it. Claude Code reads CLAUDE.md automatically and knows everything
-about StrikePanel, your brand voice, content pillars, and available skills.
+about strikepanel, your brand voice, content pillars, and available skills.
 
 ---
 
@@ -80,7 +80,7 @@ This adds a cron job that runs `/daily` automatically at 8am Dubai time, every d
 
 ### Windows alternative (Task Scheduler):
 1. Open Task Scheduler
-2. Create Basic Task → "StrikePanel Daily"
+2. Create Basic Task → "strikepanel Daily"
 3. Trigger: Daily at 8:00 AM
 4. Action: Start a program
 5. Program: `node`

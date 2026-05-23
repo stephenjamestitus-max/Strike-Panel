@@ -72,4 +72,4 @@ VERDICT: [STRONG / NEEDS WORK / WEAK]
 
 ## Competitor Scoring
 If --competitor flag: fetch their recent posts via Zernio MCP, score the
-last 3 posts, output a comparison table vs StrikePanel benchmarks.
+last 3 posts, output a comparison table vs strikepanel benchmarks.

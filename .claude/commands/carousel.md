@@ -13,7 +13,7 @@ using HTML/CSS templates rendered via Puppeteer. Outputs to marketing/carousels/
 Optionally posts to Instagram via Zernio.
 
 ## Slide Structure
-1. Cover slide — bold headline, subtitle, StrikePanel logo
+1. Cover slide — bold headline, subtitle, strikepanel logo
 2-5. Content slides — insight per slide, numbered, dark grid background
 6. CTA slide — $99 stat, "One-time. No subscription.", link in bio
 
@@ -54,8 +54,8 @@ Optionally posts to Instagram via Zernio.
 
 ## Brand Rules
 - Background: #0a0a0a (near black)
-- Accent: #c8102e (StrikePanel red)
+- Accent: #c8102e (strikepanel red)
 - Text: #ffffff
 - No emojis on slides
-- Always end with StrikePanel logo bottom-right
+- Always end with strikepanel logo bottom-right
 - Slide counter top-right (e.g. 2 / 6)

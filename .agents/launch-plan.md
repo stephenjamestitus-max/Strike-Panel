@@ -1,11 +1,11 @@
-# StrikePanel™ — Free Launch Plan
+# strikepanel™ — Free Launch Plan
 *Generated: 2026-05-12 | No paid ads. No video required.*
 
 ---
 
 ## Strategic Overview
 
-**ORB Channel Mix for StrikePanel:**
+**ORB Channel Mix for strikepanel:**
 
 | Channel Type | Primary | Secondary |
 |---|---|---|
@@ -67,7 +67,7 @@ Plan 6 blog posts total (written over 6 weeks, one per week). Prioritise in this
 #### Reddit: Account Warmup
 - If you don't have an aged Reddit account with karma, use yours or create one now. You need ~2 weeks of gentle participation before posting a product link without getting flagged.
 - Start commenting genuinely in: `r/mma`, `r/bjj`, `r/boxing`, `r/muaythai`, `r/martialarts`
-- Answer coaching questions. Don't mention StrikePanel yet. Just be useful.
+- Answer coaching questions. Don't mention strikepanel yet. Just be useful.
 - Target: 5–10 quality comments this week.
 
 #### Directory: Build Your Hit List
@@ -108,11 +108,11 @@ Compile these now, submit over weeks 2–3:
 Work through your Tier 1 + Tier 2 list. For each submission use this consistent copy:
 
 **Tagline:** Training Intelligence for Combat Sports Coaches  
-**Description (short):** StrikePanel scores every athlete's readiness every morning — so you know who to push and who to protect before you get to the gym. Fight camp management, weight cut tracking, and AI session planning. $99 once. No subscription ever.  
+**Description (short):** strikepanel scores every athlete's readiness every morning — so you know who to push and who to protect before you get to the gym. Fight camp management, weight cut tracking, and AI session planning. $99 once. No subscription ever.  
 **Category tags:** Sports coaching, athlete management, combat sports, PWA, fitness  
 **Screenshots:** Use the widget screenshot and landing page hero  
 
-**AlternativeTo strategy (important):** Create your StrikePanel listing, then go to TrainHeroic's listing and suggest StrikePanel as an alternative. Do the same for TrueCoach, CoachMePlus, and generic spreadsheet tools. This puts you directly in front of people who are already looking to switch.
+**AlternativeTo strategy (important):** Create your strikepanel listing, then go to TrainHeroic's listing and suggest strikepanel as an alternative. Do the same for TrueCoach, CoachMePlus, and generic spreadsheet tools. This puts you directly in front of people who are already looking to switch.
 
 #### Reddit: First Genuine Post (No Direct Pitch)
 Post this style of content in `r/bjj` and `r/muaythai` (these communities are more receptive than r/mma for tool discussions):
@@ -121,7 +121,7 @@ Post this style of content in `r/bjj` and `r/muaythai` (these communities are mo
 
 > Title: *"I built a tool to replace my fight camp spreadsheet — sharing the approach in case it helps anyone"*
 >
-> Body: [Tell the story of the problem — coaches guessing readiness, WhatsApp chaos, spreadsheet failure. Describe how you built the solution. Show the Morning Brief widget as an inline image. At the END, mention StrikePanel with the link. Frame as sharing something you built, not advertising.]
+> Body: [Tell the story of the problem — coaches guessing readiness, WhatsApp chaos, spreadsheet failure. Describe how you built the solution. Show the Morning Brief widget as an inline image. At the END, mention strikepanel with the link. Frame as sharing something you built, not advertising.]
 
 Rules:
 - Only post in communities where you have karma from Week 1
@@ -134,12 +134,12 @@ Rules:
 > Title: *"Coaches — how are you tracking athlete readiness right now? Curious what's common"*
 > Poll options: Spreadsheet / WhatsApp / Nothing / Custom app / Other
 
-This gets engagement, surfaces your audience's language, and you can drop a reply mentioning StrikePanel naturally once discussion starts.
+This gets engagement, surfaces your audience's language, and you can drop a reply mentioning strikepanel naturally once discussion starts.
 
 #### Blog Post #1: Publish
 Publish *"How to Plan a Fight Camp: The Week-by-Week Guide"*  
 - 1,500+ words, structured with H2/H3 headers
-- Include a natural mention of StrikePanel with a link
+- Include a natural mention of strikepanel with a link
 - Add schema markup (Article type) — use the `/schema-markup` skill
 - Share to r/mma and r/bjj as a resource post (title: "Fight camp planning guide — wrote this for coaches")
 
@@ -159,13 +159,13 @@ Publish *"How to Plan a Fight Camp: The Week-by-Week Guide"*
 **Launch day:**
 - Post goes live at 12:01am PST (Product Hunt resets at midnight)
 - Post in your personal network (Twitter/X, WhatsApp, email list, Instagram stories) asking for upvotes and comments — NOT just upvotes. Comments weight more.
-- Post in r/indiehackers and IndieHackers: *"Just launched StrikePanel on Product Hunt — built this for combat sports coaches who are still managing fight camps on spreadsheets"*
+- Post in r/indiehackers and IndieHackers: *"Just launched strikepanel on Product Hunt — built this for combat sports coaches who are still managing fight camps on spreadsheets"*
 - Reply to every comment on PH, same day
 - Goal: Top 10 of the day. Don't stress about #1.
 
 **Hacker News Show HN (same week, different day):**
 
-> Title: *Show HN: StrikePanel — I built a coaching dashboard for combat sports because coaches are still using WhatsApp*
+> Title: *Show HN: strikepanel — I built a coaching dashboard for combat sports because coaches are still using WhatsApp*
 >
 > Body: Brief founder story. Link to demo. Honest about where it is. HN rewards authentic builder posts. Don't oversell.
 
@@ -212,7 +212,7 @@ Rotate these content types across different subreddits on different days:
 **Type A — "Value post with tool mention at end"**  
 Post educational content. Example:
 > r/bjj: *"How I structure fight camp phases for grapplers — breakdown of what I actually track"*  
-> Content: legitimate coaching framework. Last paragraph: "I built StrikePanel to automate this — happy to share if useful."
+> Content: legitimate coaching framework. Last paragraph: "I built strikepanel to automate this — happy to share if useful."
 
 **Type B — "Problem post that surfaces pain"**  
 > r/muaythai: *"Do any coaches here actually have a weight cut system or is everyone winging it?"*  
@@ -226,7 +226,7 @@ Post educational content. Example:
 - `r/mmacoaching` (small but highly targeted)
 - `r/bjj` (highly active, accepts tool posts if framed right)
 - `r/muaythai` (friendly community)
-- `r/indiehackers` (building-in-public angle: "How I'm growing StrikePanel with zero ad spend")
+- `r/indiehackers` (building-in-public angle: "How I'm growing strikepanel with zero ad spend")
 
 #### Blog Post #3: Publish + SEO Push
 *"How to Manage a Weight Cut Without a Spreadsheet"*  
@@ -237,8 +237,8 @@ Post educational content. Example:
 
 #### Internal Linking Architecture
 Go back to all 3 published posts and add internal links between them. Also add CTAs:
-- "Try StrikePanel free → [demo link]"
-- "Get StrikePanel — $99 once → [gumroad link]"
+- "Try strikepanel free → [demo link]"
+- "Get strikepanel — $99 once → [gumroad link]"
 
 ---
 
@@ -263,7 +263,7 @@ Hi [Name],
 
 Big fan of the show — [specific episode reference].
 
-I'm Stephen, I built StrikePanel — the only coaching dashboard built specifically for combat sports. I help coaches replace their WhatsApp group + spreadsheet chaos with a morning readiness scoring system.
+I'm Stephen, I built strikepanel — the only coaching dashboard built specifically for combat sports. I help coaches replace their WhatsApp group + spreadsheet chaos with a morning readiness scoring system.
 
 Happy to talk about:
 - How readiness data changes training decisions (with real examples)
@@ -291,7 +291,7 @@ Don't post your tool immediately. Spend Week 5 commenting helpfully. In Week 6, 
 #### Blog Post #4: Publish
 *"The Best Combat Sports Coaching Apps in 2026"*  
 - Review 4–5 tools (TrainHeroic, TrueCoach, CoachMePlus, generic spreadsheet tools)
-- Be honest about each. Rank StrikePanel as best-fit for combat sports.
+- Be honest about each. Rank strikepanel as best-fit for combat sports.
 - This post ranks for competitor-comparison keywords and captures high-intent buyers.
 - This is your most important SEO post — it targets people actively evaluating options.
 
@@ -306,11 +306,11 @@ If you've collected any emails from the landing page capture, send your first em
 ```
 Subject: "I built this because I watched a coach guess wrong on fight night"
 
-[Founder story — the moment that inspired StrikePanel]
+[Founder story — the moment that inspired strikepanel]
 [What it does, briefly]
 [The demo link]
 [The launch price context: $99 now, goes up with Phase 2]
-[Clear CTA: Get StrikePanel]
+[Clear CTA: Get strikepanel]
 ```
 
 #### Blog Post #5: Publish
@@ -338,7 +338,7 @@ This works because:
 #### Gym Outreach: Follow-Up Wave
 Go back to everyone you DMed in Week 3. Send a brief follow-up:
 ```
-Hey [Name] — just following up from a couple weeks ago re: StrikePanel.
+Hey [Name] — just following up from a couple weeks ago re: strikepanel.
 
 A few coaches have started using it and I've got some case study feedback now if that's useful. Still happy to give you a walkthrough over DM if you want.
 
@@ -380,7 +380,7 @@ Every new blog post = new submission opportunity. Take your best posts and submi
 ### Phase 2 Urgency Event (plan ahead)
 When you're ready to raise the price to $149:
 1. Email your list 2 weeks in advance: "Price goes up on [date]"
-2. Post in Reddit threads where StrikePanel has been mentioned
+2. Post in Reddit threads where strikepanel has been mentioned
 3. Update the landing page urgency banner (already in place)
 4. Send a final reminder 48 hours before
 

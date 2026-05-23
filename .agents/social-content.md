@@ -1,4 +1,4 @@
-# StrikePanel™ — 30-Day Social Media Content
+# strikepanel™ — 30-Day Social Media Content
 *Generated: 2026-05-13 | @strikepanel | No paid ads. No corporate fluff.*
 
 ---
@@ -38,7 +38,7 @@ That's the Morning Brief. Every athlete on your roster, scored every morning, be
 
 No WhatsApp. No guessing. No regrets on fight week.
 
-This is StrikePanel™.
+This is strikepanel™.
 
 **Hashtags:**
 #strikepanel #morningbrief #combatsportscoach #athletereadiness #fightcamp #mmacoach #boxingcoach #bjjcoach #muaythaicoach #coachingtools #fightertraining #athleteperformance #coachlife #trainingintelligence #readinessscoring
@@ -46,7 +46,7 @@ This is StrikePanel™.
 ---
 
 ### DAY 2 — Pain Point: WhatsApp Chaos
-**Visual:** Split screen — left side: a cluttered WhatsApp group chat with check-ins buried under memes and missed messages. Right side: clean StrikePanel Morning Brief. No branding needed on the messy side. Real recognition is the point.
+**Visual:** Split screen — left side: a cluttered WhatsApp group chat with check-ins buried under memes and missed messages. Right side: clean strikepanel Morning Brief. No branding needed on the messy side. Real recognition is the point.
 
 **Caption:**
 "Did everyone check in?"
@@ -78,7 +78,7 @@ The red one's been nursing a rib for 4 days and barely slept. Rest day. Non-nego
 
 You didn't text any of them. They submitted their check-ins in 60 seconds from a link you shared once.
 
-StrikePanel built the scores automatically.
+strikepanel built the scores automatically.
 
 You just coached better.
 
@@ -88,7 +88,7 @@ You just coached better.
 ---
 
 ### DAY 4 — Fight Camp Tip
-**Visual:** Bold graphic. Text: "FIGHT CAMP HAS 3 PHASES. MOST COACHES TREAT IT LIKE ONE." Dark background, amber text. StrikePanel logo watermark bottom right.
+**Visual:** Bold graphic. Text: "FIGHT CAMP HAS 3 PHASES. MOST COACHES TREAT IT LIKE ONE." Dark background, amber text. strikepanel logo watermark bottom right.
 
 **Caption:**
 Fight camp isn't just "training hard until fight night."
@@ -103,7 +103,7 @@ Know which phase you're in. Adjust the load accordingly. Track it.
 
 Your fighter's whole camp is one long decision — make it a deliberate one.
 
-(StrikePanel tracks fight camp phases automatically — countdown to fight night, phase shifts, weight cut all in one place.)
+(strikepanel tracks fight camp phases automatically — countdown to fight night, phase shifts, weight cut all in one place.)
 
 **Hashtags:**
 #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fighterprep #fightcampplanning #athleteperformance #coachlife #periodisation #smartcoaching #strikepanel #combatsports #trainingsmart
@@ -118,7 +118,7 @@ Weight cuts don't fail on fight week.
 
 They fail 3 weeks out when no one was tracking properly.
 
-StrikePanel's weight cut planner gives you:
+strikepanel's weight cut planner gives you:
 → Daily weigh-in tracking for every fighter
 → Cut timeline from current weight to fight weight
 → Automated alerts when someone's off track
@@ -158,7 +158,7 @@ That's the difference.
 ---
 
 ### DAY 7 — Blog Promo: Fight Camp Guide
-**Visual:** Blog article hero image or a bold text graphic: "HOW TO PLAN A FIGHT CAMP — WEEK BY WEEK." Clean layout, StrikePanel branding, link in bio call-out.
+**Visual:** Blog article hero image or a bold text graphic: "HOW TO PLAN A FIGHT CAMP — WEEK BY WEEK." Clean layout, strikepanel branding, link in bio call-out.
 
 **Caption:**
 Every coach knows fight camp matters. Not every coach has a system for it.
@@ -222,7 +222,7 @@ Act on the trend, not the single number.
 **Caption:**
 You've got 15 minutes before training and no plan.
 
-Open StrikePanel. Go to AI Session Builder.
+Open strikepanel. Go to AI Session Builder.
 Type: "Heavy sparring + conditioning for 8 fighters, 90 min session, fight in 3 weeks."
 
 Done. Full session plan — rounds, rest, drills, focus areas — built around your readiness data.
@@ -257,10 +257,10 @@ Combat sports coaches need a tool built for this specific job. Not a repurposed 
 ---
 
 ### DAY 12 — Testimonial Style
-**Visual:** Dark card with quote text in large type. Quote on left, subtle gym background blur. StrikePanel logo bottom right. Amber accent line on the left edge.
+**Visual:** Dark card with quote text in large type. Quote on left, subtle gym background blur. strikepanel logo bottom right. Amber accent line on the left edge.
 
 **Caption:**
-"I used to track everything in a notes app and a WhatsApp group. Now I open StrikePanel every morning, see who's ready, who's not, and exactly what to do. Game changer."
+"I used to track everything in a notes app and a WhatsApp group. Now I open strikepanel every morning, see who's ready, who's not, and exactly what to do. Game changer."
 
 — Combat Sports Coach, UK
 
@@ -376,7 +376,7 @@ This is what readiness data does. It doesn't replace the conversation — it sta
 ---
 
 ### DAY 18 — Fight Camp Tip: Sparring Load
-**Visual:** Bold stat graphic: "MOST FIGHTERS GET THEIR WORST SPARRING INJURY IN THE LAST 2 WEEKS OF CAMP." Dark background, red accent. StrikePanel watermark.
+**Visual:** Bold stat graphic: "MOST FIGHTERS GET THEIR WORST SPARRING INJURY IN THE LAST 2 WEEKS OF CAMP." Dark background, red accent. strikepanel watermark.
 
 **Caption:**
 The last 2 weeks of camp are the most dangerous for injuries.
@@ -395,14 +395,14 @@ The fighter who walks into the arena feeling 100% beats the fighter who "trained
 ---
 
 ### DAY 19 — Feature: Cloud Sync + Multi-Device
-**Visual:** Three devices side by side — iPhone, iPad, MacBook — all showing StrikePanel. Morning Brief on phone, fight camp view on tablet, progress charts on laptop. Overlay: "ONE TOOL. EVERY DEVICE."
+**Visual:** Three devices side by side — iPhone, iPad, MacBook — all showing strikepanel. Morning Brief on phone, fight camp view on tablet, progress charts on laptop. Overlay: "ONE TOOL. EVERY DEVICE."
 
 **Caption:**
 At the gym — phone.
 At home building the plan — laptop.
 In camp with the team — tablet.
 
-StrikePanel syncs across everything automatically. Offline ready. Install from your browser. No app store. No updates. No subscription.
+strikepanel syncs across everything automatically. Offline ready. Install from your browser. No app store. No updates. No subscription.
 
 One tool. Every device. $99 once.
 
@@ -465,7 +465,7 @@ Every morning, athletes submit 4 things:
 → Physical soreness
 → Mood
 
-StrikePanel weights these inputs and generates a single score from 0–100.
+strikepanel weights these inputs and generates a single score from 0–100.
 
 90+ = push hard
 60–89 = train normal
@@ -481,17 +481,17 @@ Your coaching instinct + data = better decisions every day.
 ---
 
 ### DAY 23 — Testimonial Style: The "Game Changer" Story
-**Visual:** Dark quote card. Large quote text. Amber quotation mark graphic. Coach silhouette or gym atmosphere background. StrikePanel logo.
+**Visual:** Dark quote card. Large quote text. Amber quotation mark graphic. Coach silhouette or gym atmosphere background. strikepanel logo.
 
 **Caption:**
-Before StrikePanel:
+Before strikepanel:
 
 Notes app for weight data.
 WhatsApp group for check-ins.
 Memory for fight camp phases.
 Gut feeling for readiness.
 
-After StrikePanel:
+After strikepanel:
 
 Morning Brief open before leaving the house.
 Weight cut on track.
@@ -529,12 +529,12 @@ That's the cost of coaching without information.
 ---
 
 ### DAY 25 — Product: The $99 Pitch + DEMO LINK
-**Visual:** Clean product value graphic. "$99. ONCE. YOURS FOREVER." with key features listed below. Dark background, amber price number, StrikePanel branding.
+**Visual:** Clean product value graphic. "$99. ONCE. YOURS FOREVER." with key features listed below. Dark background, amber price number, strikepanel branding.
 
 **Caption:**
 Let's be direct.
 
-StrikePanel is $99.
+strikepanel is $99.
 One time.
 No subscription.
 No renewal.
@@ -620,7 +620,7 @@ Link in bio → strikepanel.vercel.app/blog
 ---
 
 ### DAY 29 — Pain Point: No System At All
-**Visual:** Stark graphic. White text on black: "MOST COACHES DON'T HAVE A SYSTEM. THEY HAVE A HABIT OF COPING." StrikePanel small watermark bottom right.
+**Visual:** Stark graphic. White text on black: "MOST COACHES DON'T HAVE A SYSTEM. THEY HAVE A HABIT OF COPING." strikepanel small watermark bottom right.
 
 **Caption:**
 There's a difference between a system and a habit of coping.
@@ -642,7 +642,7 @@ Build the system. Stop coping.
 **Visual:** Four-panel grid — Morning Brief widget, fight camp countdown, weight cut tracker, AI session output. Each panel clean and polished. Overlay: "EVERYTHING. ONE PLACE."
 
 **Caption:**
-This is StrikePanel.
+This is strikepanel.
 
 Morning Brief — every athlete scored, every morning.
 Fight Camp — countdown, phases, milestones, automated.
@@ -671,7 +671,7 @@ The price goes up with Phase 2. It's $99 now.
 ---
 
 **DAY 1**
-Most combat sports coaches start their morning guessing who's ready to train. StrikePanel ends the guessing. Every athlete scored before you leave the house.
+Most combat sports coaches start their morning guessing who's ready to train. strikepanel ends the guessing. Every athlete scored before you leave the house.
 
 ---
 
@@ -739,7 +739,7 @@ Fight camp isn't one long "train hard." It's 3 phases. Base → Peak → Taper. 
 ---
 
 **DAY 12**
-"I open StrikePanel every morning, see who's ready, who's not, and exactly what to do. Game changer." — Combat Sports Coach, UK
+"I open strikepanel every morning, see who's ready, who's not, and exactly what to do. Game changer." — Combat Sports Coach, UK
 
 ---
 
@@ -783,7 +783,7 @@ You can't individualise training if you don't have individual data. 8 fighters, 
 ---
 
 **DAY 20**
-Most coaching apps are built for personal trainers. StrikePanel is built for combat sports coaches who manage fight camps, weight cuts, and athlete readiness. Demo: strikepanel.vercel.app/demo
+Most coaching apps are built for personal trainers. strikepanel is built for combat sports coaches who manage fight camps, weight cuts, and athlete readiness. Demo: strikepanel.vercel.app/demo
 
 ---
 
@@ -803,7 +803,7 @@ Fight camp truth: the last 2 weeks are the highest injury risk. Everyone's sharp
 ---
 
 **DAY 24**
-I built StrikePanel because I watched coaches manage fight camps on WhatsApp and spreadsheets that break. Combat sports coaches deserve purpose-built tools.
+I built strikepanel because I watched coaches manage fight camps on WhatsApp and spreadsheets that break. Combat sports coaches deserve purpose-built tools.
 
 ---
 
@@ -838,7 +838,7 @@ The coaches who win aren't always the best tacticians. They're the ones who keep
 ---
 
 **DAY 30**
-500+ combat sports coaches use StrikePanel. $99 once. Morning Brief, fight camp, weight cut, AI sessions, check-ins. Everything in one place. Demo: strikepanel.vercel.app/demo
+500+ combat sports coaches use strikepanel. $99 once. Morning Brief, fight camp, weight cut, AI sessions, check-ins. Everything in one place. Demo: strikepanel.vercel.app/demo
 
 ---
 
@@ -847,7 +847,7 @@ The coaches who win aren't always the best tacticians. They're the ones who keep
 # FACEBOOK GROUP POSTS
 
 *For: "MMA Coaches Network", "Boxing Coaches & Trainers", "BJJ Gym Owners", "Muay Thai Coaches", "Combat Sports Coaching"*
-*Rules: value-first, question at end, StrikePanel mention natural and last*
+*Rules: value-first, question at end, strikepanel mention natural and last*
 
 ---
 
@@ -865,7 +865,7 @@ What I've found works better is a structured daily check-in system where athlete
 
 Curious what the group is doing. Are you tracking readiness formally or still working on feel? And if you've tried tools — what worked and what didn't?
 
-*(For what it's worth — I built StrikePanel for exactly this problem. Free demo at strikepanel.vercel.app/demo if you want to see how we handle it.)*
+*(For what it's worth — I built strikepanel for exactly this problem. Free demo at strikepanel.vercel.app/demo if you want to see how we handle it.)*
 
 ---
 
@@ -886,7 +886,7 @@ Simple framework but it requires tracking the load to know where you are. If you
 
 How are you all periodising your camps? Do you have a formal structure or is it more reactive to how the athlete is feeling week by week?
 
-*(I track this in StrikePanel — fight camp phases automated with countdown to fight night. If anyone wants to see the system, demo is at strikepanel.vercel.app/demo.)*
+*(I track this in strikepanel — fight camp phases automated with countdown to fight night. If anyone wants to see the system, demo is at strikepanel.vercel.app/demo.)*
 
 ---
 
@@ -910,7 +910,7 @@ Not complicated. But it requires a system that makes daily tracking friction-fre
 
 What systems are you using? Anyone found something that actually works without being a headache to maintain?
 
-*(I built a weight cut planner into StrikePanel specifically for this — daily weigh-in tracking, cut timeline, automated alerts. Happy to share if useful: strikepanel.vercel.app/demo)*
+*(I built a weight cut planner into strikepanel specifically for this — daily weigh-in tracking, cut timeline, automated alerts. Happy to share if useful: strikepanel.vercel.app/demo)*
 
 ---
 
@@ -930,7 +930,7 @@ The goal should be to get that number as close to zero as possible, so you can s
 
 Has anyone successfully systemised their admin? What's worked for you? And what have you tried that sounded good but didn't stick?
 
-*(I built StrikePanel to solve this — morning readiness, fight camp, weight cuts, AI sessions, all in one tool for combat sports coaches. $99 once, demo at strikepanel.vercel.app/demo. Happy to answer questions about how it works.)*
+*(I built strikepanel to solve this — morning readiness, fight camp, weight cuts, AI sessions, all in one tool for combat sports coaches. $99 once, demo at strikepanel.vercel.app/demo. Happy to answer questions about how it works.)*
 
 ---
 
@@ -946,7 +946,7 @@ The coaches I most respect are the ones who've hacked together their own systems
 
 What's the most effective low-tech system you've seen or used for tracking athlete readiness? I'm genuinely curious what's working in the trenches before the "proper" tools existed.
 
-*(Full disclosure — I built StrikePanel to be the "proper" tool for this level of coaching. Purpose-built for combat sports, $99 once, free demo: strikepanel.vercel.app/demo. Not a plug — genuinely interested in the conversation first.)*
+*(Full disclosure — I built strikepanel to be the "proper" tool for this level of coaching. Purpose-built for combat sports, $99 once, free demo: strikepanel.vercel.app/demo. Not a plug — genuinely interested in the conversation first.)*
 
 ---
 

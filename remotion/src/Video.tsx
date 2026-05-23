@@ -264,7 +264,7 @@ const ClosingScene: React.FC<{ startFrame: number }> = ({ startFrame }) => {
 // 1170–1440 Workouts           (9s)
 // 1440–1800 Closing card       (12s)
 
-export const StrikePanelPromo: React.FC = () => {
+export const strikepanelPromo: React.FC = () => {
   const frame = useCurrentFrame();
 
   const scenes = [

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * StrikePanel Daily Story
+ * strikepanel Daily Story
  * Run: node scripts/marketing/run-story.js
  *
  * Pipeline:
@@ -235,7 +235,7 @@ function daysSinceLastStory() {
 }
 
 async function run() {
-  console.log('\n=== StrikePanel Story ===');
+  console.log('\n=== strikepanel Story ===');
   console.log(new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dubai' }), '(Dubai)');
   console.log('');
 
