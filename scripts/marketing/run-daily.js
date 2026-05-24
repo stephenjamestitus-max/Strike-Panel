@@ -95,16 +95,7 @@ const BLACKCARD_FALLBACKS = [
 ];
 
 async function generatePost1() {
-  const prompt = `You write brutal one-truth posts for StrikePanel — a coaching dashboard for combat sports coaches.
-
-Generate a single black card post. Format:
-LINE: [one brutal truth about coaching without data, ALL CAPS, max 12 words, can be 2 short lines separated by \\n]
-SUB: [one quiet follow-up line, lowercase, max 12 words, adds weight not explanation]
-CAPTION: [Instagram caption, 60-90 words, coach-to-coach voice, short sentences, no emojis, no hyphens, second person only, end with a single insight not a CTA]
-
-The truth should be specific to combat sports — a moment, a loss, an injury, a wrong call. Raw. Real. Coaches recognise it immediately.
-
-Output only LINE:, SUB:, and CAPTION: labels with their content. Nothing else.`;
+  const prompt = `You write brutal one-truth posts for StrikePanel — a coaching dashboard for combat sports coaches.\n\nGenerate a single black card post. Format:\nLINE: [one brutal truth about coaching without data, ALL CAPS, max 12 words, can be 2 short lines separated by \\n]\nSUB: [one quiet follow-up line, lowercase, max 12 words, adds weight not explanation]\nCAPTION: [Instagram caption, 60-90 words, coach-to-coach voice, short sentences, no emojis, no hyphens, second person only, end with a single insight not a CTA]\n\nThe truth should be specific to combat sports — a moment, a loss, an injury, a wrong call. Raw. Real. Coaches recognise it immediately.\n\nOutput only LINE:, SUB:, and CAPTION: labels with their content. Nothing else.`;
 
   try {
     const raw = await groq(prompt, 300);
@@ -149,19 +140,7 @@ const SPLITSCREEN_FALLBACKS = [
 ];
 
 async function generatePost2() {
-  const prompt = `You write split-screen comparison posts for StrikePanel — a coaching dashboard for combat sports coaches.
-
-Generate a single split-screen post comparing coaching without data (chaos) vs coaching with StrikePanel (clarity).
-
-Format:
-CHAOS: [one vivid snapshot of coaching chaos, 15-20 words, specific to combat sports — napkins, WhatsApp, guessing, whiteboards]
-CLARITY: [one vivid snapshot of coaching clarity, 15-20 words, what the coach knows and does differently]
-LABEL: [short banner label, ALL CAPS, max 6 words, the core contrast]
-CAPTION: [Instagram caption, 60-90 words, coach-to-coach voice, short sentences, no emojis, no hyphens, second person, builds to a quiet insight]
-
-Make it specific. Not "better data" but "eight readiness scores before the session starts."
-
-Output only CHAOS:, CLARITY:, LABEL:, CAPTION: labels. Nothing else.`;
+  const prompt = `You write split-screen comparison posts for StrikePanel — a coaching dashboard for combat sports coaches.\n\nGenerate a single split-screen post comparing coaching without data (chaos) vs coaching with StrikePanel (clarity).\n\nFormat:\nCHAOS: [one vivid snapshot of coaching chaos, 15-20 words, specific to combat sports — napkins, WhatsApp, guessing, whiteboards]\nCLARITY: [one vivid snapshot of coaching clarity, 15-20 words, what the coach knows and does differently]\nLABEL: [short banner label, ALL CAPS, max 6 words, the core contrast]\nCAPTION: [Instagram caption, 60-90 words, coach-to-coach voice, short sentences, no emojis, no hyphens, second person, builds to a quiet insight]\n\nMake it specific. Not "better data" but "eight readiness scores before the session starts."\n\nOutput only CHAOS:, CLARITY:, LABEL:, CAPTION: labels. Nothing else.`;
 
   try {
     const raw = await groq(prompt, 350);
@@ -210,19 +189,7 @@ const SCENARIO_FALLBACKS = [
 ];
 
 async function generatePost3() {
-  const prompt = `You write cinematic fight camp scenario posts for StrikePanel — a coaching dashboard for combat sports coaches.
-
-Generate a between-rounds or camp scenario where a coach discovers too late that their fighter was struggling because they had no readiness data.
-
-Format:
-SCENE: [2-3 sentences, cinematic and specific, corner of the ring or gym moment, no product mention, present tense]
-TRUTH: [one brutal conclusion line, ALL CAPS, max 8 words, what the lack of data cost]
-KICKER: [top label, ALL CAPS, format "FIGHT CAMP · [moment name]", max 5 words after the dot]
-CAPTION: [Instagram caption, 80-110 words, tells the full story, builds to the lesson, coach-to-coach, no emojis, no hyphens, no direct product sell — let the story do the work]
-
-Make it feel like it really happened. Specific details. A real coach would recognise this immediately.
-
-Output only SCENE:, TRUTH:, KICKER:, CAPTION: labels. Nothing else.`;
+  const prompt = `You write cinematic fight camp scenario posts for StrikePanel — a coaching dashboard for combat sports coaches.\n\nGenerate a between-rounds or camp scenario where a coach discovers too late that their fighter was struggling because they had no readiness data.\n\nFormat:\nSCENE: [2-3 sentences, cinematic and specific, corner of the ring or gym moment, no product mention, present tense]\nTRUTH: [one brutal conclusion line, ALL CAPS, max 8 words, what the lack of data cost]\nKICKER: [top label, ALL CAPS, format "FIGHT CAMP · [moment name]", max 5 words after the dot]\nCAPTION: [Instagram caption, 80-110 words, tells the full story, builds to the lesson, coach-to-coach, no emojis, no hyphens, no direct product sell — let the story do the work]\n\nMake it feel like it really happened. Specific details. A real coach would recognise this immediately.\n\nOutput only SCENE:, TRUTH:, KICKER:, CAPTION: labels. Nothing else.`;
 
   try {
     const raw = await groq(prompt, 400);
@@ -258,7 +225,8 @@ async function run() {
   console.log(new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dubai' }), '(Dubai)');
 
   const days = daysSinceLastPost();
-  if (days < 3) {
+  // 2.5 days allows same-calendar-day posting (3 calendar days = ~68h, not always 72h)
+  if (days < 2.5) {
     const next = Math.ceil(3 - days);
     console.log(`Last post was ${days.toFixed(1)} days ago. Next post in ${next} day(s). Skipping.`);
     return;
@@ -299,9 +267,21 @@ async function run() {
   console.log('\nUploading & posting via Zernio...');
   try {
     let publicUrls = [];
-    if (imagePaths.length > 0 && process.env.IMGBB_API_KEY) {
-      publicUrls = await zernio.uploadImages(imagePaths);
-      console.log(`  ${publicUrls.length} slides uploaded to CDN`);
+    if (imagePaths.length > 0) {
+      if (process.env.IMGBB_API_KEY) {
+        try {
+          publicUrls = await zernio.uploadImages(imagePaths);
+          console.log(`  ${publicUrls.length} slides uploaded to ImgBB`);
+        } catch (uploadErr) {
+          console.warn('  ImgBB upload failed, falling back to GitHub CDN:', uploadErr.message);
+          const branch = process.env.GITHUB_REF_NAME || 'main';
+          publicUrls = imagePaths.map(p => {
+            const rel = path.relative(path.join(__dirname, '../..'), p).replace(/\\/g, '/');
+            return `https://raw.githubusercontent.com/stephenjamestitus-max/Strike-Panel/${branch}/${rel}`;
+          });
+          console.log(`  ${publicUrls.length} slides using GitHub CDN`);
+        }
+      }
     }
     const post = await zernio.createPost({ content: caption, mediaUrls: publicUrls });
     console.log('  Posted:', post?._id || 'success');
