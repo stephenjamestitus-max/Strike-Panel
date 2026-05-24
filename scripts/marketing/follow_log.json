@@ -88,5 +88,35 @@
     "description": "Muay Thai coaching standards and development, UK",
     "date": "2026-05-23",
     "status": "queued"
+  },
+  {
+    "handle": "@ufcpi",
+    "description": "UFC Performance Institute, elite fighter science, UK/US",
+    "date": "2026-05-24",
+    "status": "queued"
+  },
+  {
+    "handle": "@mark_henry_mma",
+    "description": "Elite MMA striking coach, technical development, US",
+    "date": "2026-05-24",
+    "status": "queued"
+  },
+  {
+    "handle": "@expertboxing",
+    "description": "Online boxing coaching, fundamentals and technique, US",
+    "date": "2026-05-24",
+    "status": "queued"
+  },
+  {
+    "handle": "@combatstrengthcoaching",
+    "description": "Combat sports strength and conditioning, US",
+    "date": "2026-05-24",
+    "status": "queued"
+  },
+  {
+    "handle": "@coachfariasboxing",
+    "description": "Boxing skill development and coaching methodology, US",
+    "date": "2026-05-24",
+    "status": "queued"
   }
 ]
