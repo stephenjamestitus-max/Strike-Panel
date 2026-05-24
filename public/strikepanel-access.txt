@@ -6,7 +6,7 @@ Thank you for your purchase.
 Your license key will be emailed to you within minutes.
 
 HOW TO ACTIVATE:
-1. Go to strikepanel.com
+1. Go to strikepanel.vercel.app
 2. Enter your license key when prompted
 3. You're in — start adding your athletes immediately
 
@@ -15,4 +15,4 @@ Works on up to 3 devices.
 Need help? Email corepanelv1@gmail.com
 
 ---
-strikepanel.com — One payment. No subscription.
+strikepanel.vercel.app — One payment. No subscription.

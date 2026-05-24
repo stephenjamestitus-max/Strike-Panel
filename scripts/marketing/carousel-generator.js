@@ -136,7 +136,7 @@ function shell(inner, counter, total, bgImagePath) {
     <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
     <div class="corner corner-bl"></div><div class="corner corner-br"></div>
     <div class="counter">${counter} / ${total}</div>
-    <div class="tagline">strikepanel.com</div>
+    <div class="tagline">strikepanel.vercel.app</div>
     <div class="logo-wrap">
       <span class="logo-text">STRIKE<span>PANEL</span><sup class="logo-tm">™</sup></span>
     </div>
@@ -254,7 +254,7 @@ function ctaSlide(s, i, total, bg) {
       <div class="divider"></div>
       ${body ? `<p style="font-size:20px;color:${B.muted};line-height:1.6;max-width:660px">${body}</p>` : ''}
       <div style="background:rgba(0,212,240,.08);border:1px solid rgba(0,212,240,.25);border-radius:12px;padding:14px 40px">
-        <span style="font-size:13px;letter-spacing:3px;text-transform:uppercase;color:${B.cyan}">LINK IN BIO → strikepanel.com</span>
+        <span style="font-size:13px;letter-spacing:3px;text-transform:uppercase;color:${B.cyan}">LINK IN BIO → strikepanel.vercel.app</span>
       </div>
     </div>`, i + 1, total, bg);
 }

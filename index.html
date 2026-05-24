@@ -11,14 +11,14 @@
 <meta property="og:type"        content="website"/>
 <meta property="og:title"       content="Daily Check-In — StrikePanel™"/>
 <meta property="og:description" content="Your coach wants your daily readiness check-in. Takes 30 seconds."/>
-<meta property="og:image"       content="https://strikepanel.com/og.png" id="metaOgImage"/>
+<meta property="og:image"       content="https://strikepanel.vercel.app/og.png" id="metaOgImage"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height"content="630"/>
-<meta property="og:url"         content="https://strikepanel.com/" id="metaOgUrl"/>
+<meta property="og:url"         content="https://strikepanel.vercel.app/" id="metaOgUrl"/>
 <meta name="twitter:card"       content="summary_large_image"/>
 <meta name="twitter:title"      content="Daily Check-In — StrikePanel™"/>
 <meta name="twitter:description"content="Your coach wants your daily readiness check-in. Takes 30 seconds."/>
-<meta name="twitter:image"      content="https://strikepanel.com/og.png"/>
+<meta name="twitter:image"      content="https://strikepanel.vercel.app/og.png"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -1079,7 +1079,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;margin-top:8px;font-size:13px" onclick="lgActivate()">🔓 Activate License</button>
     <div class="lg-msg" id="lgMsg"></div>
     <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);font-size:11px;color:var(--muted2);line-height:1.7">
-      Don't have a license? <a href="https://strikepanel.com/landing.html" target="_blank" style="color:var(--accent);text-decoration:underline">Get StrikePanel — $99 →</a>
+      Don't have a license? <a href="https://strikepanel.vercel.app/landing" target="_blank" style="color:var(--accent);text-decoration:underline">Get StrikePanel — $99 →</a>
     </div>
   </div>
 </div>
@@ -5227,7 +5227,7 @@ function ciImportLink() {
   if (!_lastCiEntry) return '';
   const base = window.location.href.startsWith('http')
     ? window.location.href.split('?')[0]
-    : 'https://strikepanel.com/';
+    : 'https://strikepanel.vercel.app/';
   const p = new URLSearchParams({
     import: '1',
     d: btoa(JSON.stringify(_lastCiEntry))
@@ -5328,7 +5328,7 @@ function getShareLink() {
   const href = window.location.href;
   const base = href.startsWith('http')
     ? href.split('?')[0]
-    : 'https://strikepanel.com/';
+    : 'https://strikepanel.vercel.app/';
   const params = new URLSearchParams({ checkin: '1' });
   // Embed Supabase creds so athlete devices can push check-ins directly
   sbGetCreds();

@@ -4,7 +4,7 @@ import { createHmac } from 'crypto';
 const INTERNAL_SECRET = process.env.INTERNAL_SECRET!;
 const LEMON_SQUEEZY_SECRET = process.env.LEMON_SQUEEZY_WEBHOOK_SECRET!;
 const PAYHIP_SECRET = process.env.PAYHIP_WEBHOOK_SECRET!;
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://strikepanel.com';
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://strikepanel.vercel.app';
 
 async function generateKey(platform: string): Promise<string | null> {
   const res = await fetch(`${APP_URL}/api/generate-key`, {
@@ -42,7 +42,7 @@ async function sendKeyEmail(email: string, key: string, platform: string) {
             <div style="font-size:20px;letter-spacing:4px;color:#00D4F0">${key}</div>
           </div>
           <p style="font-size:13px;line-height:1.7;color:#7a85a0">
-            1. Go to <a href="https://strikepanel.com" style="color:#00D4F0">strikepanel.com</a><br>
+            1. Go to <a href="https://strikepanel.vercel.app" style="color:#00D4F0">strikepanel.vercel.app</a><br>
             2. Paste your key in the activation screen<br>
             3. Works on up to 3 devices
           </p>
