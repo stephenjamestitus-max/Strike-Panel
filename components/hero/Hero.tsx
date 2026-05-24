@@ -186,7 +186,7 @@ export default function Hero() {
           >
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
               <Magnet padding={100} strength={4}>
-                <a href="https://payhip.com/b/uOmA0"
+                <a href="https://payhip.com/Strikepanel"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{

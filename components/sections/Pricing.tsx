@@ -116,7 +116,7 @@ export default function Pricing() {
 
           <Magnet padding={120} strength={3}>
             <a
-              href="https://payhip.com/b/uOmA0"
+              href="https://payhip.com/Strikepanel"
               target="_blank"
               rel="noopener noreferrer"
               style={{

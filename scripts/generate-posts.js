@@ -479,7 +479,7 @@ function pricePost(day, d) {
     </div>
     <div class="price-cta">
       <div class="price-cta-demo">Demo → strikepanel.vercel.app/demo</div>
-      <div class="price-cta-buy">Buy → gumroad.com/l/strikepanel</div>
+      <div class="price-cta-buy">Buy → payhip.com/Strikepanel</div>
     </div>
     ${DIVIDER}
     ${bottomRow()}`;

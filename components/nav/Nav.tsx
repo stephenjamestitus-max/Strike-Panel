@@ -69,7 +69,7 @@ export default function Nav() {
             ))}
             <Magnet padding={100} strength={4}>
               <a
-                href="https://payhip.com/b/uOmA0"
+                href="https://payhip.com/Strikepanel"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -88,7 +88,7 @@ export default function Nav() {
         {/* ── Mobile: compact CTA + hamburger ── */}
         <div className="nav-mobile" style={{ alignItems: 'center', gap: 10 }}>
           <a
-            href="https://payhip.com/b/uOmA0"
+            href="https://payhip.com/Strikepanel"
             target="_blank"
             rel="noopener noreferrer"
             style={{
