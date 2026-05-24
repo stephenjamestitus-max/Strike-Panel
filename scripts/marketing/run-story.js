@@ -2,13 +2,6 @@
 /**
  * StrikePanel Daily Story
  * Run: node scripts/marketing/run-story.js
- *
- * Pipeline:
- *   1. Pull today's caption from posted_log.json (or generate fresh story text)
- *   2. Generate a 9:16 story slide (1080x1920) via Puppeteer
- *   3. Upload slide to ImgBB
- *   4. Post to Instagram as a story via Zernio
- *   5. Log result to posted_log.json
  */
 
 require('dotenv').config({ path: require('path').join(__dirname, '../../.env') });
@@ -37,10 +30,6 @@ function writeLog(entry) {
   fs.writeFileSync(LOG_PATH, JSON.stringify(log, null, 2));
 }
 
-/**
- * Get the most recent caption from today's posted_log entries.
- * Falls back to null if nothing found.
- */
 function getTodayCaption() {
   const log = readLog();
   const today = new Date().toISOString().split('T')[0];
@@ -49,17 +38,13 @@ function getTodayCaption() {
   return todayEntries[todayEntries.length - 1].caption;
 }
 
-/**
- * Ask Groq to pick the boldest single line from a caption.
- */
 async function extractBoldLine(caption) {
   if (!process.env.GROQ_API_KEY) {
-    // Fallback: take the first non-empty line
     const lines = caption.split('\n').map(l => l.trim()).filter(Boolean);
     return lines[0] || 'Know before the session starts.';
   }
 
-  const prompt = `From the caption below, extract the single boldest, most punchy line. Return only that line — no quotes, no explanation, no extra text.
+  const prompt = `From the caption below, extract the single boldest, most punchy line suitable for a large Instagram story slide. Return only that line — no quotes, no explanation, no extra text. Capitalise it properly (Title Case or ALL CAPS). Keep it under 8 words.
 
 Caption:
 ${caption}`;
@@ -67,8 +52,8 @@ ${caption}`;
   const body = JSON.stringify({
     model: 'llama-3.3-70b-versatile',
     messages: [{ role: 'user', content: prompt }],
-    max_tokens: 60,
-    temperature: 0.3,
+    max_tokens: 30,
+    temperature: 0.2,
   });
 
   return new Promise((resolve, reject) => {
@@ -102,17 +87,12 @@ ${caption}`;
   });
 }
 
-/**
- * Generate a 9:16 (1080x1920) story slide as PNG.
- * Returns the file path.
- */
 async function generateStorySlide(boldLine) {
   if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
 
   const date = new Date().toISOString().split('T')[0];
   const outFile = path.join(OUT_DIR, `story-${date}.png`);
 
-  // Sanitise text for HTML
   const safeText = boldLine
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -132,24 +112,19 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#04070f;font-fam
   display:flex;align-items:center;justify-content:center;
   background:#04070f;overflow:hidden
 }
-/* Ambient blobs */
 .blob{position:absolute;border-radius:50%;filter:blur(180px);pointer-events:none}
 .blob-cyan{width:900px;height:900px;top:-200px;left:-300px;background:rgba(0,212,240,.09)}
 .blob-amber{width:700px;height:700px;bottom:200px;right:-250px;background:rgba(200,137,42,.07)}
 .blob-purple{width:800px;height:800px;bottom:-300px;left:-100px;background:rgba(139,92,246,.08)}
-/* Dot grid */
 #dotgrid{position:absolute;inset:0;pointer-events:none;
   background-image:radial-gradient(circle,rgba(0,212,240,.045) 1.2px,transparent 1.2px);
   background-size:48px 48px}
-/* Corner brackets */
 .corner{position:absolute;width:40px;height:40px;opacity:.22}
 .corner-tl{top:48px;left:48px;border-top:2px solid #00D4F0;border-left:2px solid #00D4F0}
 .corner-tr{top:48px;right:48px;border-top:2px solid #00D4F0;border-right:2px solid #00D4F0}
 .corner-bl{bottom:48px;left:48px;border-bottom:2px solid #00D4F0;border-left:2px solid #00D4F0}
 .corner-br{bottom:48px;right:48px;border-bottom:2px solid #00D4F0;border-right:2px solid #00D4F0}
-/* Grain */
 #grain{position:absolute;inset:-50%;width:200%;height:200%;pointer-events:none;opacity:.03}
-/* Main text */
 #main-text{
   position:relative;z-index:10;
   width:900px;text-align:center;
@@ -159,7 +134,6 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#04070f;font-fam
   color:#f5f0e8;
   text-shadow:0 0 120px rgba(0,212,240,.2)
 }
-/* Accent line */
 #accent-line{
   position:absolute;
   top:50%;left:50%;
@@ -168,14 +142,12 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#04070f;font-fam
   width:200px;height:2px;
   background:linear-gradient(to right,transparent,#00D4F0,transparent)
 }
-/* Logo bottom right */
 #logo{
   position:absolute;bottom:56px;right:56px;z-index:20;
   font-family:'Bebas Neue',sans-serif;font-size:22px;
   letter-spacing:3.5px;color:#f5f0e8
 }
 #logo span{color:#00D4F0}
-/* URL bottom left */
 #url{
   position:absolute;bottom:60px;left:56px;z-index:20;
   font-size:12px;letter-spacing:2px;text-transform:uppercase;
@@ -203,7 +175,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#04070f;font-fam
   <div id="main-text">${safeText}</div>
   <div id="accent-line"></div>
   <div id="logo">STRIKE<span>PANEL</span><sup style="font-size:9px;color:rgba(0,212,240,.6);vertical-align:super;letter-spacing:.5px;font-family:'DM Mono',monospace">™</sup></div>
-  <div id="url">strikepanel.com</div>
+  <div id="url">strikepanel.vercel.app</div>
 </div>
 </body>
 </html>`;
@@ -239,25 +211,21 @@ async function run() {
   console.log(new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dubai' }), '(Dubai)');
   console.log('');
 
-  // Enforce 3-day cadence (same as post)
   const days = daysSinceLastStory();
-  if (days < 3) {
-    console.log(`Last story was ${days.toFixed(1)} days ago. Skipping — cadence is every 3 days.`);
+  if (days < 2.5) {
+    console.log(`Last story was ${days.toFixed(1)} days ago. Skipping.`);
     return;
   }
 
-  // Step 1: Get today's caption
   console.log('1. Getting today\'s caption...');
   const caption = getTodayCaption();
   if (!caption) {
-    console.warn('  No caption found in posted_log.json for today.');
-    console.warn('  Run run-daily.js first.');
+    console.warn('  No caption found for today. Run run-daily.js first.');
     writeLog({ status: 'story_skipped', reason: 'no_caption_today' });
     return;
   }
   console.log('  Caption found:', caption.split('\n')[0].substring(0, 60) + '...');
 
-  // Step 2: Extract boldest line
   console.log('\n2. Extracting boldest line for story...');
   let boldLine;
   try {
@@ -268,7 +236,6 @@ async function run() {
     boldLine = caption.split('\n').map(l => l.trim()).filter(Boolean)[0] || 'Know before the session starts.';
   }
 
-  // Step 3: Generate story slide
   console.log('\n3. Generating story slide (1080x1920)...');
   let slidePath;
   try {
@@ -279,10 +246,9 @@ async function run() {
     return;
   }
 
-  // Step 4: Upload to ImgBB
   if (!process.env.IMGBB_API_KEY) {
     console.warn('\n4. IMGBB_API_KEY not set — cannot upload story slide');
-    writeLog({ status: 'story_skipped', reason: 'no_imgbb_key', slide: slidePath });
+    writeLog({ status: 'story_skipped', reason: 'no_imgbb_key' });
     return;
   }
 
@@ -293,14 +259,13 @@ async function run() {
     console.log('  Uploaded:', publicUrl);
   } catch (e) {
     console.error('  Upload failed:', e.message);
-    writeLog({ status: 'story_failed', reason: 'upload', error: e.message, slide: slidePath });
+    writeLog({ status: 'story_failed', reason: 'upload', error: e.message });
     return;
   }
 
-  // Step 5: Post as Instagram story via Zernio
   if (!process.env.ZERNIO_API_KEY) {
     console.warn('\n5. ZERNIO_API_KEY not set — skipping story post');
-    writeLog({ status: 'story_skipped', reason: 'no_zernio_key', slide: slidePath, url: publicUrl });
+    writeLog({ status: 'story_skipped', reason: 'no_zernio_key', url: publicUrl });
     return;
   }
 
@@ -315,7 +280,7 @@ async function run() {
       platforms: [{
         platform: 'instagram',
         accountId: INSTAGRAM_ACCOUNT_ID,
-        platformSpecificData: { postType: 'story' },
+        platformSpecificData: { contentType: 'story' },
       }],
       mediaItems: [{ type: 'image', url: publicUrl }],
     };
