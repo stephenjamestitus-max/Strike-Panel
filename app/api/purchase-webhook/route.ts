@@ -4,7 +4,7 @@ import { createHmac } from 'crypto';
 const INTERNAL_SECRET = process.env.INTERNAL_SECRET!;
 const LEMON_SQUEEZY_SECRET = process.env.LEMON_SQUEEZY_WEBHOOK_SECRET!;
 const PAYHIP_SECRET = process.env.PAYHIP_WEBHOOK_SECRET!;
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://strikepanel.com';
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://strikepanel.vercel.app';
 
 async function generateKey(platform: string): Promise<string | null> {
   const res = await fetch(`${APP_URL}/api/generate-key`, {
