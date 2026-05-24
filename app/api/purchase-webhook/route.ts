@@ -82,15 +82,17 @@ async function handleLemonSqueezy(req: NextRequest, body: string) {
 async function handlePayhip(req: NextRequest, body: string) {
   const payload = JSON.parse(body);
 
-  // Payhip signs with a secret in the payload
-  if (PAYHIP_SECRET && payload.security_token !== PAYHIP_SECRET) {
+  // Payhip sends their API key as payhip_key in every webhook POST body
+  if (PAYHIP_SECRET && payload.payhip_key !== PAYHIP_SECRET) {
+    console.error('[payhip] Auth failed — payhip_key mismatch');
     return NextResponse.json({ ok: false }, { status: 401 });
   }
 
-  if (payload.type !== 'order.completed') return NextResponse.json({ ok: true });
-
   const email = payload.buyer_email;
-  if (!email) return NextResponse.json({ ok: false, msg: 'No email' }, { status: 400 });
+  if (!email) {
+    console.error('[payhip] No buyer_email in payload:', JSON.stringify(payload));
+    return NextResponse.json({ ok: false, msg: 'No email' }, { status: 400 });
+  }
 
   const key = await generateKey('payhip');
   if (!key) return NextResponse.json({ ok: false, msg: 'Key generation failed' }, { status: 500 });
