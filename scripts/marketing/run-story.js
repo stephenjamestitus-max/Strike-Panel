@@ -39,21 +39,35 @@ function getTodayCaption() {
 }
 
 async function extractBoldLine(caption) {
+  // Strip hashtags — only use the body text
+  const text = caption.replace(/#\w+/g, '').replace(/\n{3,}/g, '\n\n').trim();
+  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+
   if (!process.env.GROQ_API_KEY) {
-    const lines = caption.split('\n').map(l => l.trim()).filter(Boolean);
     return lines[0] || 'Know before the session starts.';
   }
 
-  const prompt = `From the caption below, extract the single boldest, most punchy line suitable for a large Instagram story slide. Return only that line — no quotes, no explanation, no extra text. Capitalise it properly (Title Case or ALL CAPS). Keep it under 8 words.
+  const prompt = `You are extracting a line from a caption to display large on an Instagram story slide.
 
-Caption:
-${caption}`;
+RULES:
+- Copy one line VERBATIM from the caption. Do not rephrase, paraphrase, or invent new text.
+- Pick the most striking, specific line — not a generic summary.
+- Return only that line. No quotes. No explanation. No hashtags.
+- Keep it under 8 words. Convert to ALL CAPS.
+
+Caption (hashtags removed):
+${text}
+
+Lines available:
+${lines.map((l, i) => `${i + 1}. ${l}`).join('\n')}
+
+Return only the chosen line in ALL CAPS:`;
 
   const body = JSON.stringify({
     model: 'llama-3.3-70b-versatile',
     messages: [{ role: 'user', content: prompt }],
-    max_tokens: 30,
-    temperature: 0.2,
+    max_tokens: 50,
+    temperature: 0.1,
   });
 
   return new Promise((resolve, reject) => {
@@ -74,7 +88,17 @@ ${caption}`;
         res.on('end', () => {
           try {
             const json = JSON.parse(data);
-            resolve(json.choices[0].message.content.trim());
+            const extracted = json.choices[0].message.content.trim();
+            // Reject if Groq invented text not rooted in the caption
+            const normalise = s => s.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim();
+            const words = normalise(extracted).split(/\s+/);
+            const textNorm = normalise(text);
+            const matchCount = words.filter(w => w.length > 3 && textNorm.includes(w)).length;
+            if (matchCount < Math.ceil(words.length * 0.4)) {
+              resolve(lines[0].toUpperCase());
+            } else {
+              resolve(extracted);
+            }
           } catch (e) {
             reject(new Error('Groq parse error: ' + data.slice(0, 200)));
           }
