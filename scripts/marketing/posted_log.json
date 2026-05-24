@@ -24,5 +24,12 @@
     "status": "story_skipped",
     "reason": "no_caption_today",
     "timestamp": "2026-05-23T06:28:27.543Z"
+  },
+  {
+    "seriesType": 1,
+    "caption": "Fighter lost in round 3.\nCoach had no data.\n\nNo readiness score. No load tracking. No warning sign.\n\nJust a gut feeling that turned out to be wrong.\n\nEvery coach has been there. The ones who stay there are the ones who never build the system.\n\n#boxingcoach #mmacoach #combatsportscoach #athletereadiness #fightcamp #strengthandconditioning #bjjcoach #muaythaicoach #combatsports #coachlife #periodization #athletemanagement #performancecoach #fightteam #coachingtools",
+    "status": "failed",
+    "error": "ImgBB parse error: Host not in allowlist",
+    "timestamp": "2026-05-24T13:22:20.956Z"
   }
 ]
