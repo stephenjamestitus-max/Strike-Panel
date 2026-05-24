@@ -107,6 +107,8 @@ async function uploadImage(filePath) {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Content-Length': Buffer.byteLength(body),
+          'Referer': 'https://strikepanel.vercel.app',
+          'Origin': 'https://strikepanel.vercel.app',
         },
       },
       res => {

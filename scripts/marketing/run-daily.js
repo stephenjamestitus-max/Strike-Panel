@@ -258,7 +258,7 @@ async function run() {
   console.log(new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dubai' }), '(Dubai)');
 
   const days = daysSinceLastPost();
-  if (days < 3) {
+  if (days < 2.5) {
     const next = Math.ceil(3 - days);
     console.log(`Last post was ${days.toFixed(1)} days ago. Next post in ${next} day(s). Skipping.`);
     return;
@@ -299,9 +299,21 @@ async function run() {
   console.log('\nUploading & posting via Zernio...');
   try {
     let publicUrls = [];
-    if (imagePaths.length > 0 && process.env.IMGBB_API_KEY) {
-      publicUrls = await zernio.uploadImages(imagePaths);
-      console.log(`  ${publicUrls.length} slides uploaded to CDN`);
+    if (imagePaths.length > 0) {
+      if (process.env.IMGBB_API_KEY) {
+        try {
+          publicUrls = await zernio.uploadImages(imagePaths);
+          console.log(`  ${publicUrls.length} slides uploaded to ImgBB`);
+        } catch (uploadErr) {
+          console.warn('  ImgBB upload failed, falling back to GitHub CDN:', uploadErr.message);
+          publicUrls = imagePaths.map(p => {
+            const branch = process.env.GITHUB_REF_NAME || 'claude/tender-lamport-hGL7A';
+            const rel = path.relative(path.join(__dirname, '../..'), p).replace(/\\/g, '/');
+            return `https://raw.githubusercontent.com/stephenjamestitus-max/Strike-Panel/${branch}/${rel}`;
+          });
+          console.log(`  ${publicUrls.length} slides using GitHub CDN`);
+        }
+      }
     }
     const post = await zernio.createPost({ content: caption, mediaUrls: publicUrls });
     console.log('  Posted:', post?._id || 'success');
