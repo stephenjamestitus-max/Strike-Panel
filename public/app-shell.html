@@ -1060,7 +1060,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
       </svg>
     </div>
     <div class="lg-title">STRIKEPANEL™</div>
-    <div class="lg-sub">Enter your license key to unlock the app.<br>Purchased on Gumroad? Check your confirmation email.</div>
+    <div class="lg-sub">Enter your license key to unlock the app.<br>Purchased on Payhip? Check your confirmation email.</div>
     <div class="field">
       <input class="finput" id="lgKeyInput" type="text"
         placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
@@ -1071,7 +1071,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;margin-top:8px;font-size:13px" onclick="lgActivate()">🔓 Activate License</button>
     <div class="lg-msg" id="lgMsg"></div>
     <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);font-size:11px;color:var(--muted2);line-height:1.7">
-      Don't have a license? <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" style="color:var(--accent);text-decoration:underline">Get StrikePanel — $99 →</a>
+      Don't have a license? <a href="https://payhip.com/Strikepanel" target="_blank" style="color:var(--accent);text-decoration:underline">Get StrikePanel — $99 →</a>
     </div>
   </div>
 </div>
@@ -1085,7 +1085,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   <div class="demo-mode-text">
     You're exploring StrikePanel™ with sample data. Nothing you do here is saved permanently.
   </div>
-  <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" class="demo-buy-btn">Buy to unlock — $99</a>
+  <a href="https://payhip.com/Strikepanel" target="_blank" class="demo-buy-btn">Buy to unlock — $99</a>
   <button class="demo-exit-btn" onclick="demoExit()" title="Exit demo">✕ Exit</button>
 </div>
 
@@ -1097,7 +1097,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px">
     You're exploring with demo data. To save your own athletes, sessions and check-ins — grab your license.
   </div>
-  <a href="https://strikepanel.gumroad.com/l/strikepanel" target="_blank" class="demo-buy-btn" style="width:100%;justify-content:center;padding:13px;font-size:12px">Get StrikePanel — $99</a>
+  <a href="https://payhip.com/Strikepanel" target="_blank" class="demo-buy-btn" style="width:100%;justify-content:center;padding:13px;font-size:12px">Get StrikePanel — $99</a>
   <div style="font-size:11px;color:var(--muted2);margin-top:10px">One-time fee · No subscription · Instant access</div>
   <button class="btn btn-ghost btn-sm" style="margin-top:10px;width:100%;justify-content:center" onclick="demoCloseBlock()">Keep exploring demo</button>
 </div>
@@ -2394,7 +2394,7 @@ create policy "allow_all" on sp_sync
       <div id="ciCopiedMsg" style="display:none;font-size:11px;color:var(--green);text-align:center;margin-top:4px">✓ Copied! Paste it to your coach.</div>
     </div>
     <button class="btn btn-ghost btn-sm" style="margin-top:16px;width:100%;justify-content:center" onclick="ciCloseOrReset()">← Close</button>
-    <div style="margin-top:20px;font-size:11px;color:var(--muted2);letter-spacing:1px">Powered by <a href="https://strikepanel.gumroad.com" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:700">StrikePanel™</a></div>
+    <div style="margin-top:20px;font-size:11px;color:var(--muted2);letter-spacing:1px">Powered by <a href="https://payhip.com/Strikepanel" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:700">StrikePanel™</a></div>
   </div>
 </div>
 
@@ -5596,11 +5596,10 @@ document.getElementById('pdfShareBtn').style.display='inline-flex';
   });
 }
 // ══════════════════════════════════════════════════════════════════════
-// LICENSE GATE — Gumroad live API verification
+// LICENSE GATE — Payhip license verification via /api/validate-key
 // ══════════════════════════════════════════════════════════════════════
 
 var MASTER_KEY_HASH = '9039f4a7d2b4e605bf44c7c32ae0677ce312aa82f96adc3f81d4204f4641c348';
-var GUMROAD_PRODUCT_ID = '9fFA5S9lE_f7gMernpp16Q==';
 
 function lgSetMsg(txt, ok) {
   const el = document.getElementById('lgMsg');
@@ -5622,27 +5621,15 @@ async function lgIsValidKey(key) {
   } catch { return false; }
 }
 
-const SP_MAX_ACTIVATIONS = 3;
-
-async function lgVerifyWithGumroad(key) {
+async function lgVerifyWithPayhip(key) {
   try {
-    const res = await fetch('https://api.gumroad.com/v2/licenses/verify', {
+    const res = await fetch('/api/validate-key', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `product_id=${encodeURIComponent(GUMROAD_PRODUCT_ID)}&license_key=${encodeURIComponent(key)}&increment_uses_count=true`
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key: key.trim().toUpperCase() })
     });
     const data = await res.json();
-    if (data.success === true) {
-      // uses is the count AFTER this increment — so ≤ SP_MAX_ACTIVATIONS means valid
-      if (typeof data.uses === 'number' && data.uses > SP_MAX_ACTIVATIONS) {
-        return {
-          ok: false,
-          msg: `This key has reached its device limit (${SP_MAX_ACTIVATIONS} devices). Email corepanelv1@gmail.com to reset it.`
-        };
-      }
-      return { ok: true };
-    }
-    return { ok: false, msg: data.message || 'Key not recognised by Gumroad.' };
+    return data.ok ? { ok: true } : { ok: false, msg: data.msg || 'Key not recognised. Check your Payhip confirmation email.' };
   } catch (e) {
     console.error('[SP License] Network error:', e);
     return { ok: false, network: true };
@@ -5666,15 +5653,15 @@ async function lgActivate() {
     return;
   }
 
-  const result = await lgVerifyWithGumroad(key);
+  const result = await lgVerifyWithPayhip(key);
 
   if (result.ok) {
     lgActivateSuccess(key, btn);
   } else if (result.network) {
-    lgSetMsg('Could not reach Gumroad — check your connection and try again.', false);
+    lgSetMsg('Could not reach the server — check your connection and try again.', false);
     if (btn) { btn.textContent = '🔓 Activate License'; btn.disabled = false; }
   } else {
-    lgSetMsg(result.msg || 'Invalid key — check the key in your Gumroad email and try again.', false);
+    lgSetMsg(result.msg || 'Invalid key — check the key in your Payhip confirmation email and try again.', false);
     if (btn) { btn.textContent = '🔓 Activate License'; btn.disabled = false; }
     input?.classList.add('err');
     setTimeout(() => input?.classList.remove('err'), 600);
@@ -5700,7 +5687,7 @@ async function lgCheck() {
   if (!stored) return; // no key stored — gate stays visible
   // Master key unlocks immediately without a network call
   if (await lgIsValidKey(stored)) { lgUnlock(); return; }
-  // Previously verified Gumroad key — unlock without re-calling API every load
+  // Previously verified Payhip key — unlock without re-calling API every load
   if (localStorage.getItem('cp_license_activated')) { lgUnlock(); return; }
 }
 
@@ -5839,7 +5826,7 @@ function demoShowWelcome() {
         🚀 Start Exploring
       </button>
       <div style="margin-top:12px">
-        <a href="https://strikepanel.gumroad.com" target="_blank" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00D4F0;text-decoration:none;">🥊 Buy StrikePanel — $149 →</a>
+        <a href="https://payhip.com/Strikepanel" target="_blank" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00D4F0;text-decoration:none;">🥊 Buy StrikePanel — $149 →</a>
       </div>
     </div>`;
   document.body.appendChild(el);

@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q: 'What happens after I purchase?',
-    a: 'You\'ll receive an access key via Gumroad immediately after payment. Open StrikePanel, enter your key, and you\'re live within minutes. No app store, no download — it installs as a PWA directly from your browser.',
+    a: 'You\'ll receive an access key via Payhip immediately after payment. Open StrikePanel, enter your key, and you\'re live within minutes. No app store, no download — it installs as a PWA directly from your browser.',
   },
   {
     q: 'Does it work on mobile and iPad?',
