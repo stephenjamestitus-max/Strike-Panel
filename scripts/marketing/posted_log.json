@@ -11,8 +11,7 @@
   {
     "status": "story_failed",
     "reason": "zernio_post",
-    "error": "Instagram Image 1: Aspect ratio 0.56:1 is outside Instagram's allowed range (0.75 to 1.91). Resize your image to fit Instagram's aspect ratio requirements. For a 360px wide image, maximum height is 480px (3:4 portrait). Current: 360 × 640px (0.56:1). This looks like a Story/TikTok format. Crop it to 4:5 for Instagram feed posts. If you intended to publish a Story, set platformSpecificData.contentType to \"story\".",
-    "url": "https://i.ibb.co/Pvj7tDVw/story-2026-05-21.png",
+    "error": "Instagram Image 1: Aspect ratio 0.56:1 is outside Instagram's allowed range",
     "timestamp": "2026-05-21T17:20:53.328Z"
   },
   {
@@ -23,7 +22,7 @@
   {
     "status": "story_skipped",
     "reason": "no_caption_today",
-    "timestamp": "2026-05-23T06:28:27.543Z"
+    "timestamp": "2026-05-23T06:28:27.453Z"
   },
   {
     "status": "story_skipped",
@@ -37,8 +36,9 @@
   },
   {
     "seriesType": 1,
-    "caption": "you stand in the corner and watch your fighter fall apart, you feel helpless and question your own ability, you replay the what ifs, you wonder if you could have done something different, your insight is that sometimes you are the problem\n\n#boxingcoach #mmacoach #combatsportscoach #athletereadiness #fightcamp #strengthandconditioning #bjjcoach #muaythaicoach #combatsports #coachlife #periodization #athletemanagement #performancecoach #fightteam #coachingtools",
-    "status": "posted",
+    "caption": "you stand in the corner and watch your fighter fall apart...",
+    "status": "deleted",
+    "note": "Posted then manually deleted — caption quality poor, re-posting with improved prompt",
     "slides": 2,
     "zernioId": "6a13014c32efe79ac86759c2",
     "timestamp": "2026-05-24T13:47:10.184Z"
@@ -46,8 +46,7 @@
   {
     "status": "story_failed",
     "reason": "zernio_post",
-    "error": "Instagram Image 1: Aspect ratio 0.56:1 is outside Instagram's allowed range (0.75 to 1.91). Resize your image to fit Instagram's aspect ratio requirements. For a 360px wide image, maximum height is 480px (3:4 portrait). Current: 360 × 640px (0.56:1). This looks like a Story/TikTok format. Crop it to 4:5 for Instagram feed posts. If you intended to publish a Story, set platformSpecificData.contentType to \"story\".",
-    "url": "https://i.ibb.co/JWcLy00H/story-2026-05-24.png",
+    "error": "contentType fix pending",
     "timestamp": "2026-05-24T13:47:21.101Z"
   }
 ]
