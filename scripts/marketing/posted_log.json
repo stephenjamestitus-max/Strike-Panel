@@ -29,5 +29,10 @@
     "status": "story_skipped",
     "reason": "no_caption_today",
     "timestamp": "2026-05-24T06:54:10.762Z"
+  },
+  {
+    "status": "story_skipped",
+    "reason": "no_caption_today",
+    "timestamp": "2026-05-24T13:35:07.549Z"
   }
 ]
