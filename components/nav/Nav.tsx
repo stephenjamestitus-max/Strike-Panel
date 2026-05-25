@@ -76,7 +76,7 @@ export default function Nav() {
                   transition: 'box-shadow .2s', display: 'inline-block',
                 }}
               >
-                GET ACCESS — $99
+                GET ACCESS
               </a>
             </Magnet>
           </div>
@@ -119,7 +119,7 @@ export default function Nav() {
             boxShadow: '0 0 40px rgba(200,137,42,.45)',
           }}
         >
-          GET ACCESS — $99
+          GET ACCESS
         </a>
       </div>
     </>

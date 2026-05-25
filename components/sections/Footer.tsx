@@ -49,7 +49,7 @@ export default function Footer() {
             letterSpacing: 0.5,
           }}
         >
-          Get Instant Access — $99
+          Start Coaching Smarter →
         </a>
         <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 2, color: 'var(--muted2)', marginTop: 14 }}>
           30-DAY REFUND POLICY · INSTANT DELIVERY

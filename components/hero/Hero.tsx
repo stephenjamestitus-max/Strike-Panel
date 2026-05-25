@@ -181,7 +181,7 @@ export default function Hero() {
                   letterSpacing: 0.5,
                   display: 'inline-block',
                 }}>
-                  Get Access — $99
+                  Get Access — $99 →
                 </a>
               </Magnet>
               <Magnet padding={100} strength={4}>
@@ -205,6 +205,7 @@ export default function Hero() {
 
       {/* ── Frosted glass stats bar ── */}
       <div
+        className="sp-stats-bar"
         style={{
           position: 'absolute',
           bottom: 0,
