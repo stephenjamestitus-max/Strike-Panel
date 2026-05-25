@@ -21,9 +21,14 @@ export default function Demo() {
           <p style={{ fontFamily: 'var(--fb)', color: 'var(--muted)', marginBottom: 40, fontSize: 16 }}>No signup required — try the real app</p>
         </FadeIn>
         <FadeIn delay={0.15} y={20}>
-          <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
-            <div style={{ display: 'inline-block', borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,212,240,.15)', boxShadow: '0 0 80px rgba(0,212,240,.08),0 32px 64px rgba(0,0,0,.6)' }}>
-              <iframe src="https://strikepanel.vercel.app/demo" width={820} height={580} style={{ display: 'block', border: 'none', background: '#04070f' }} title="StrikePanel™ Live Demo" loading="lazy" />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
+            <div className="sp-demo-wrapper">
+              <iframe
+                src="https://strikepanel.uk/demo"
+                title="StrikePanel™ Live Demo"
+                loading="lazy"
+                allow="fullscreen"
+              />
             </div>
             <a
               href="/demo"

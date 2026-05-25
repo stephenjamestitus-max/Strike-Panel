@@ -57,7 +57,7 @@ export default function Problem() {
       </FadeIn>
 
       {/* Two-column grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, maxWidth: 1200, margin: '0 auto' }}>
+      <div className="sp-grid-2">
 
         {/* Left: The Problem */}
         <div>

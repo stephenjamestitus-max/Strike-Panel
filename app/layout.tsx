@@ -39,9 +39,37 @@ export const metadata: Metadata = {
   },
 }
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'StrikePanel',
+  applicationCategory: 'SportsApplication',
+  operatingSystem: 'Web',
+  url: 'https://strikepanel.uk',
+  description: 'Cloud coaching platform for combat sports coaches. Morning briefs, athlete check-in links, fight camp timelines, AI session plans, and readiness scores.',
+  offers: {
+    '@type': 'Offer',
+    price: '99',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5',
+    reviewCount: '5',
+    bestRating: '5',
+  },
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   )

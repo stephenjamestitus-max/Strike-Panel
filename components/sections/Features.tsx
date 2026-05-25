@@ -11,7 +11,7 @@ function MorningBrief() {
   return (
     <div className={styles.panel}>
       <div style={{ background: 'linear-gradient(135deg,rgba(0,212,240,.08),rgba(0,212,240,.04))', border: '1px solid rgba(0,212,240,.15)', borderRadius: 12, padding: '20px 24px', marginBottom: 16 }}>
-        <div style={{ fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 3, color: 'var(--muted)', marginBottom: 6 }}>TUESDAY, 20 MAY 2025</div>
+        <div style={{ fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 3, color: 'var(--muted)', marginBottom: 6 }}>SUNDAY, 25 MAY 2026</div>
         <div style={{ fontFamily: 'var(--fh)', fontSize: 28, letterSpacing: 2 }}>3 ATHLETES CHECKED IN · SQUAD AVG <span style={{ color: 'var(--accent)' }}>68</span></div>
         <div style={{ fontFamily: 'var(--fb)', color: 'var(--muted)', marginTop: 8, fontSize: 14 }}>Marcus needs a rest day. Priya is peaking — push hard. Jake trains as normal.</div>
       </div>

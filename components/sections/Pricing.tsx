@@ -123,9 +123,27 @@ export default function Pricing() {
             fontSize: 10,
             letterSpacing: 3,
             color: 'var(--muted)',
-            marginBottom: 36,
+            marginBottom: 20,
           }}>
             EVERYTHING INCLUDED · NO SUBSCRIPTION
+          </div>
+
+          {/* Trust badges */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap', marginBottom: 36 }}>
+            {[
+              { icon: '↩', text: '30-DAY REFUND POLICY' },
+              { icon: '🔒', text: 'SECURE CHECKOUT' },
+              { icon: '⚡', text: 'INSTANT ACCESS' },
+            ].map(({ icon, text }) => (
+              <div key={text} style={{
+                display: 'flex', alignItems: 'center', gap: 6,
+                fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 2,
+                color: 'var(--muted2)',
+              }}>
+                <span style={{ fontSize: 11 }}>{icon}</span>
+                <span>{text}</span>
+              </div>
+            ))}
           </div>
 
           <ul style={{ listStyle: 'none', textAlign: 'left', marginBottom: 40, display: 'flex', flexDirection: 'column', gap: 12 }}>
