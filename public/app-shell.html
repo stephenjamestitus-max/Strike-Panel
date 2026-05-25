@@ -1327,26 +1327,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   <div class="brief-section" style="margin-top:8px">
     <div class="brief-section-title">Athlete Self Check-In</div>
 
-    <!-- STATE A: Not connected — locked with setup CTA -->
-    <div id="ciShareLocked" style="display:none;background:linear-gradient(135deg,rgba(0,212,240,0.06),rgba(139,92,246,0.04));border:1px solid rgba(0,212,240,0.2);border-radius:var(--r);padding:22px 24px;position:relative;overflow:hidden">
-      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),rgba(139,92,246,0.8),transparent)"></div>
-      <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
-        <div style="font-size:32px;flex-shrink:0">☁️</div>
-        <div style="flex:1;min-width:220px">
-          <div style="font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:6px">Cloud Sync — Keep Your Brief Safe Across Devices</div>
-          <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:16px">
-            Connect your free Supabase account to back up and sync your coaching data across all your devices. Athletes still check in via the WhatsApp/import link — <strong style="color:var(--text)">cloud sync keeps your Morning Brief safe and accessible anywhere</strong>.<br><br>
-            Takes <strong style="color:var(--text)">5 minutes</strong>. Free forever. Your data never touches our servers.
-          </div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
-            <button class="btn btn-primary btn-sm" onclick="openModal('ciSetupModal')">☁️ Set Up Cloud Sync</button>
-            <button class="btn btn-ghost btn-sm" onclick="openAthleteCheckin()">👁 Preview Form</button>
-          </div>
-          <div style="font-size:11px;color:var(--muted2);line-height:1.6">
-            ✓ Free Supabase account &nbsp;·&nbsp; ✓ Your data, your control &nbsp;·&nbsp; ✓ Works on any phone &nbsp;·&nbsp; ✓ No monthly cost
-          </div>
-        </div>
-      </div>
+    <!-- STATE A: License not yet activated -->
+    <div id="ciShareLocked" style="display:none;background:rgba(0,212,240,0.04);border:1px solid rgba(0,212,240,0.15);border-radius:var(--r);padding:18px 20px">
+      <div style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:6px">☁️ Activate your license to unlock the athlete check-in link</div>
+      <div style="font-size:12.5px;color:var(--muted);line-height:1.6">Once activated, your personal check-in link is ready instantly — no setup required. Share it with athletes and their scores appear in your Morning Brief automatically.</div>
     </div>
 
     <!-- STATE B: Connected — show the live link -->
@@ -1378,8 +1362,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   </div>
 </section>
 
-<!-- ═══ LIVE CHECK-IN SETUP WIZARD MODAL ═══ -->
-<div class="modal-bg" id="ciSetupModal">
+<!-- ciSetupModal removed — cloud sync is now automatic via license key -->
+<div class="modal-bg" id="ciSetupModal" style="display:none">
   <div class="modal" style="max-width:600px">
     <button class="modal-close" onclick="closeModal('ciSetupModal')">✕</button>
     <div class="modal-title" style="color:var(--accent)">☁️ Cloud Sync Setup Wizard</div>
@@ -2073,86 +2057,19 @@ create policy "allow_all" on sp_sync
 
   </div>
 
-  <!-- ── SUPABASE CLOUD SYNC CARD ── -->
+  <!-- ── CLOUD SYNC CARD ── -->
   <div class="sb-card">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
       <div style="width:36px;height:36px;border-radius:50%;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☁️</div>
       <div>
-        <div style="font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green)">Cloud Sync — Supabase (Optional)</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:1px">Access your data from any device. Your Supabase account — we never see your data.</div>
+        <div style="font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green)">Cloud Sync — Active</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:1px">Your coaching data backs up automatically, tied to your license key. No setup needed.</div>
       </div>
     </div>
-
-    <!-- Wizard CTA -->
-    <div style="background:linear-gradient(135deg,rgba(0,212,240,0.07),rgba(139,92,246,0.05));border:1px solid rgba(0,212,240,0.2);border-radius:var(--r-sm);padding:16px 18px;margin-bottom:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-      <div style="font-size:28px;flex-shrink:0">🪄</div>
-      <div style="flex:1;min-width:180px">
-        <div style="font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:3px">New here? Use the Setup Wizard</div>
-        <div style="font-size:12px;color:var(--muted)">Step-by-step guide — takes 5 minutes, free forever. Walks you through creating your Supabase project, running the schema, and connecting.</div>
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="wizOpenFromSettings()" style="white-space:nowrap;flex-shrink:0">🪄 Open Wizard</button>
-    </div>
-
-    <!-- Already have a project? Collapse to show manual steps -->
-    <details style="margin-bottom:14px">
-      <summary style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);cursor:pointer;padding:8px 0;list-style:none;display:flex;align-items:center;gap:6px">
-        <span>▸</span><span>Already have a Supabase project? Skip to manual setup</span>
-      </summary>
-      <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.05);border-radius:var(--r-xs);padding:14px 16px;margin-top:8px">
-        <div class="sb-step"><span class="sb-step-num">1</span><span>Go to <a href="https://supabase.com" target="_blank" style="color:var(--accent);text-decoration:underline">supabase.com</a> → New Project. Wait for the green <strong style="color:var(--green)">Project is ready</strong> status.</span></div>
-        <div class="sb-step"><span class="sb-step-num">2</span><span>In the SQL Editor, run the schema below (copy → paste → Run). You should see <strong style="color:var(--green)">Success. No rows returned</strong>.</span></div>
-        <div class="sb-step"><span class="sb-step-num">3</span><span>Go to <strong style="color:var(--text)">Project Settings → API keys</strong>. Copy your <strong style="color:var(--text)">Project URL</strong> and <strong style="color:var(--amber)">anon/public key</strong> (not service_role).</span></div>
-        <div class="sb-step"><span class="sb-step-num">4</span><span>Paste both in the fields below and hit <strong style="color:var(--text)">Save &amp; Connect</strong>.</span></div>
-      </div>
-    </details>
-
-    <!-- SQL Schema snippet -->
-    <div style="margin-bottom:16px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-        <div style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2)">SQL Schema — paste into Supabase SQL Editor</div>
-        <button class="btn btn-ghost btn-sm" onclick="sbCopySchema()" style="font-size:10px;padding:3px 10px">Copy SQL</button>
-      </div>
-      <pre id="sbSchemaBlock" style="background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r-xs);padding:12px;font-family:var(--fm);font-size:10.5px;color:var(--muted);line-height:1.7;overflow-x:auto;white-space:pre;max-height:160px;overflow-y:auto">-- StrikePanel™ Cloud Sync Schema
--- Run this once in your Supabase SQL Editor
-
-create table if not exists sp_sync (
-  id         text primary key,
-  key        text not null unique,
-  value      text not null,
-  updated_at timestamptz default now()
-);
-
--- Allow anon read/write (RLS off for single-user setup)
-alter table sp_sync enable row level security;
-create policy "allow_all" on sp_sync
-  for all using (true) with check (true);</pre>
-    </div>
-
-    <!-- Credentials inputs -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
-      <div class="field" style="margin-bottom:0">
-        <div class="flabel">Supabase Project URL</div>
-        <input class="finput" id="sbUrlInput" type="url" placeholder="https://xxxx.supabase.co" style="font-size:12px">
-      </div>
-      <div class="field" style="margin-bottom:0">
-        <div class="flabel">Anon / Public Key</div>
-        <input class="finput" id="sbKeyInput" type="password" placeholder="eyJh..." style="font-size:12px">
-      </div>
-    </div>
-
-    <div class="sb-status-row">
-      <button class="btn btn-primary btn-sm" onclick="sbSaveAndConnect()">☁️ Save &amp; Connect</button>
-      <button class="btn btn-ghost btn-sm" id="sbSyncNowBtn" onclick="sbSyncNow()" style="display:none">🔄 Sync Now</button>
-      <button class="btn btn-ghost btn-sm" id="sbDisconnectBtn" onclick="sbDisconnect()" style="display:none;color:var(--red);border-color:rgba(239,68,68,0.2)">✕ Disconnect</button>
-      <span class="saved-flash" id="sbFlash">Saved ✓</span>
-      <span id="sbStatusMsg" style="font-size:12px;color:var(--muted2)"></span>
-    </div>
-    <div style="margin-top:8px">
-      <button onclick="wizOpenFromSettings()" style="background:none;border:none;color:var(--accent);font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;padding:0;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px">🪄 Need help? Open the step-by-step setup wizard →</button>
-    </div>
-
-    <div style="font-size:11px;color:var(--muted2);margin-top:10px;line-height:1.6">
-      ☁️ Your data syncs to your own Supabase project. Anthropic and StrikePanel never see it. localStorage remains primary — Supabase is background backup. Works offline, syncs when online. <strong style="color:var(--muted)">Last-write-wins</strong> conflict strategy (by timestamp).
+    <div style="background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.18);border-radius:var(--r-sm);padding:12px 16px;font-size:12px;color:var(--muted);line-height:1.65">
+      ✓ <strong style="color:var(--text)">Automatic</strong> — saves every time your data changes, no setup needed<br>
+      ✓ <strong style="color:var(--text)">Multi-device</strong> — sign in with your license key on any device and your data is there<br>
+      ✓ <strong style="color:var(--text)">Athlete check-ins</strong> — share the link in Morning Brief; athletes submit on their phone, scores appear instantly
     </div>
   </div>
 
@@ -5065,69 +4982,16 @@ let _lastCiEntry = null;
 // ── Direct Supabase push from athlete device (no local creds needed) ──────────
 // Athlete opens the check-in share link on their phone. The link contains
 // base64-encoded Supabase URL+key so this device can push directly.
-async function ciDirectPush(entry) {
-  const params = new URLSearchParams(window.location.search);
-  const sbParam = params.get('sb');
-  if (!sbParam) return false;
+async function ciDirectPush(entry, coachToken) {
+  if (!coachToken) return false;
   try {
-    const decoded  = atob(sbParam);
-    const sepIdx   = decoded.indexOf('::');
-    if (sepIdx < 0) return false;
-    const sbUrl    = decoded.slice(0, sepIdx).replace(/\/$/,'');
-    const sbKey    = decoded.slice(sepIdx + 2);
-    if (!sbUrl || !sbKey) return false;
-
-    const hdrs = {
-      'Content-Type':  'application/json',
-      'apikey':        sbKey,
-      'Authorization': 'Bearer ' + sbKey,
-    };
-
-    // 1. Fetch current readiness array
-    const getRes = await fetch(`${sbUrl}/rest/v1/sp_sync?id=eq.readiness&select=value`, { headers: hdrs });
-    let existing = [];
-    if (getRes.ok) {
-      const rows = await getRes.json();
-      if (Array.isArray(rows) && rows.length && rows[0].value) {
-        try { existing = JSON.parse(rows[0].value); } catch {}
-      }
-    }
-    if (!Array.isArray(existing)) existing = [];
-    if (!existing.find(e => e && e.id === entry.id)) existing.unshift(entry);
-
-    // 2. Push merged readiness back
-    const pushRes = await fetch(`${sbUrl}/rest/v1/sp_sync?on_conflict=id`, {
-      method:  'POST',
-      headers: { ...hdrs, 'Prefer': 'resolution=merge-duplicates,return=minimal' },
-      body:    JSON.stringify([{
-        id: 'readiness', key: 'sp_readiness_v1',
-        value: JSON.stringify(existing),
-        updated_at: new Date().toISOString(),
-      }]),
+    const res = await fetch('/api/checkin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ coach: coachToken, ...entry }),
     });
-
-    // 3. Append to timeline in Supabase
-    try {
-      const tlGet  = await fetch(`${sbUrl}/rest/v1/sp_sync?id=eq.timeline&select=value`, { headers: hdrs });
-      let tl = [];
-      if (tlGet.ok) {
-        const tlRows = await tlGet.json();
-        if (Array.isArray(tlRows) && tlRows.length && tlRows[0].value) {
-          try { tl = JSON.parse(tlRows[0].value); } catch {}
-        }
-      }
-      if (!Array.isArray(tl)) tl = [];
-      tl.unshift({ id: uid(), ts: Date.now(), type: 'checkin', athName: entry.athName,
-        text: `Readiness score: ${entry.score}/100 — ${readinessVerdict(entry.score).label}` });
-      await fetch(`${sbUrl}/rest/v1/sp_sync?on_conflict=id`, {
-        method: 'POST',
-        headers: { ...hdrs, 'Prefer': 'resolution=merge-duplicates,return=minimal' },
-        body: JSON.stringify([{ id: 'timeline', key: 'sp_timeline_v1',
-          value: JSON.stringify(tl.slice(0, 200)), updated_at: new Date().toISOString() }]),
-      });
-    } catch(tlErr) { console.warn('[ci tl push]', tlErr); }
-
-    return pushRes.ok;
+    const data = await res.json();
+    return !!data.ok;
   } catch(err) { console.warn('[ciDirectPush]', err); return false; }
 }
 
@@ -5170,24 +5034,22 @@ function ciPageSubmit() {
   // Store entry for import link
   _lastCiEntry = { id: uid(), athId, athName, date: today, sleep, energy, soreness, motivation, nutrition, pain, notes, sleepHrs, rhr, hrv, steps, cals, protein, score, ts: Date.now() };
 
-  const isSharedLink  = window.location.search.includes('checkin=1');
-  const hasSbCreds    = sbGetCreds();
-  const sbParam       = new URLSearchParams(window.location.search).get('sb');
-  const canDirectPush = isSharedLink && !hasSbCreds && !!sbParam;
+  const isSharedLink = window.location.search.includes('checkin=1');
+  const coachToken   = new URLSearchParams(window.location.search).get('coach');
+  const canApiPush   = isSharedLink && !!coachToken;
 
-  if (!isSharedLink || hasSbCreds) {
-    // Coach's device, or athlete device that already has Supabase creds locally
+  if (!isSharedLink) {
+    // Coach's device — save locally and schedule cloud sync
     stripDemoData();
     const all = riGetAll();
     all.push(_lastCiEntry);
     riSaveAll(all);
     tlAdd({ type: 'checkin', athName, text: `Readiness score: ${score}/100 — ${readinessVerdict(score).label}` });
     dbRefresh(); briefRefresh();
-    if (hasSbCreds) sbSchedulePush();
-  } else if (canDirectPush) {
-    // Athlete's own phone — Supabase creds embedded in share URL.
-    // Push check-in directly to Supabase so coach sees it instantly.
-    ciDirectPush(_lastCiEntry).then(ok => {
+    cloudSchedulePush();
+  } else if (canApiPush) {
+    // Athlete's phone — push via /api/checkin
+    ciDirectPush(_lastCiEntry, coachToken).then(ok => {
       const msg = document.getElementById('ciPageDoneMsg');
       if (msg) msg.textContent = ok
         ? `${athName}, your check-in has been synced to your coach. ✓ See you at training.`
@@ -5201,17 +5063,16 @@ function ciPageSubmit() {
   const form = document.getElementById('checkinFormWrap'); if (form) form.style.display = 'none';
   const done = document.getElementById('ciPageDone');       if (done) done.style.display = 'block';
   const doneMsg = document.getElementById('ciPageDoneMsg');
-  if (doneMsg) doneMsg.textContent = canDirectPush
+  if (doneMsg) doneMsg.textContent = canApiPush
     ? `Syncing check-in… See you at training, ${athName}!`
-    : (isSharedLink && !hasSbCreds)
+    : isSharedLink
       ? `Done, ${athName}! Send the link below to your coach.`
       : `${athName}, your check-in has been recorded and synced. See you at training.`;
   const doneScore = document.getElementById('ciPageDoneScore');
   if (doneScore) doneScore.textContent = `${score}/100 — ${readinessVerdict(score).label}`;
 
-  // Show WhatsApp fallback only when there's truly no Supabase path
   const sendSection = document.getElementById('ciSendSection');
-  if (sendSection) sendSection.style.display = (isSharedLink && !hasSbCreds && !sbParam) ? 'block' : 'none';
+  if (sendSection) sendSection.style.display = (isSharedLink && !coachToken) ? 'block' : 'none';
 }
 
 // Build the import link the coach taps to pull in the athlete's data
@@ -5322,11 +5183,8 @@ function getShareLink() {
     ? href.split('?')[0]
     : 'https://strikepanel.vercel.app/';
   const params = new URLSearchParams({ checkin: '1' });
-  // Embed Supabase creds so athlete devices can push check-ins directly
-  sbGetCreds();
-  if (_sbUrl && _sbKey) {
-    try { params.set('sb', btoa(_sbUrl + '::' + _sbKey)); } catch(e) {}
-  }
+  const token = cloudGetToken();
+  if (token) params.set('coach', token);
   return `${base}?${params.toString()}`;
 }
 function copyShareLink() {
@@ -5364,7 +5222,7 @@ function initShareLink() {
     document.querySelectorAll('.hero, .tab-wrap, .tab-bar, .wrap').forEach(el => { el.style.display = 'none'; });
     const _ciGate = document.getElementById('licenseGate'); if (_ciGate) _ciGate.style.display = 'none';
     const _ciPwa  = document.getElementById('pwaBanner');   if (_ciPwa)  _ciPwa.style.display  = 'none';
-    // Show the page with a loading state — sbBoot will call openAthleteCheckin() once athletes are ready
+    // Show the page with a loading state — cloudBoot will call openAthleteCheckin() once athletes are ready
     const _ciPage = document.getElementById('athleteCheckinPage');
     if (_ciPage) _ciPage.classList.add('active');
     const _ciFormWrap = document.getElementById('checkinFormWrap');
@@ -5673,8 +5531,14 @@ function lgActivateSuccess(key, btn) {
   localStorage.setItem('cp_license_activated', new Date().toISOString());
   lgSetMsg('✓ Activated! Welcome to StrikePanel™', true);
   if (btn) { btn.textContent = '✓ Activated!'; btn.disabled = true; }
-  setTimeout(() => {
+  setTimeout(async () => {
     lgUnlock();
+    // Fetch coach token (for share links) and pull any existing cloud data
+    await cloudFetchToken();
+    ciShareRender();
+    const pulled = await cloudPull();
+    if (pulled) { loadState(); setTimeout(() => { if (typeof rehydrate === 'function') rehydrate(); }, 100); }
+    sbSetIndicator('synced', '☁ Cloud');
     if (!localStorage.getItem('cp_onboarded')) {
       setTimeout(() => openModal('onboardModal'), 400);
     }
@@ -5885,21 +5749,10 @@ function demoLateWrap() {
   if (typeof saveAIWorkout !== 'undefined') window.saveAIWorkout = _demoWrap(saveAIWorkout);
 }
 // ══════════════════════════════════════════════════════════════════════
-// Architecture:
-//   - localStorage is PRIMARY (offline-first, instant reads/writes)
-//   - Supabase syncs silently in background when credentials are set
-//   - Every saveState() call triggers a debounced push after 3s
-//   - On boot, pull is attempted to get latest from cloud
-//   - Conflict resolution: last-write-wins by sp_sync_ts timestamp
-//   - If no credentials are set, everything behaves exactly as before
+// CLOUD SYNC — automatic, license-key authenticated via /api/sync
 // ══════════════════════════════════════════════════════════════════════
 
-const SB_URL_KEY  = 'sp_sb_url';
-const SB_KEY_KEY  = 'sp_sb_key';
-const SB_TS_KEY   = 'sp_sb_last_sync';
-
-// The localStorage keys we sync to Supabase
-const SB_SYNC_KEYS = [
+const CLOUD_SYNC_KEYS = [
   { id: 'main',      lsKey: CP_KEY },
   { id: 'readiness', lsKey: RI_KEY },
   { id: 'timeline',  lsKey: TL_KEY },
@@ -5907,454 +5760,37 @@ const SB_SYNC_KEYS = [
   { id: 'wearable',  lsKey: 'sp_wearable_v1' },
 ];
 
-let _sbUrl = '';
-let _sbKey = '';
-let _sbPushTimer = null;
-let _sbSyncing = false;
+let _cloudPushTimer = null;
+let _cloudSyncing = false;
 
-// ── Credential management ─────────────────────────────────────────────
-function sbGetCreds() {
-  _sbUrl = (localStorage.getItem(SB_URL_KEY) || '').replace(/\/rest\/v1\/?.*$/, '').replace(/\/$/, '');
-  _sbKey = localStorage.getItem(SB_KEY_KEY) || '';
-  return _sbUrl && _sbKey;
-}
+function cloudGetKey() { return localStorage.getItem('cp_license_key') || ''; }
+function cloudGetToken() { return localStorage.getItem('cp_coach_token') || ''; }
+function sbGetCreds() { return !!cloudGetKey(); } // kept for share-card compat
 
-function sbSetCreds(url, key) {
-  localStorage.setItem(SB_URL_KEY, url);
-  localStorage.setItem(SB_KEY_KEY, key);
-  _sbUrl = url;
-  _sbKey = key;
-}
+function sbSetCreds() {} // no-op — credentials no longer stored client-side
+function sbClearCreds() {} // no-op
 
-function sbClearCreds() {
-  localStorage.removeItem(SB_URL_KEY);
-  localStorage.removeItem(SB_KEY_KEY);
-  localStorage.removeItem(SB_TS_KEY);
-  _sbUrl = '';
-  _sbKey = '';
-}
-
-// ── UI helpers ────────────────────────────────────────────────────────
+// ── Sync indicator ───────────────────────────────────────────────────
 function sbSetIndicator(state, label) {
   const el = document.getElementById('syncIndicator');
-  const lbl = document.getElementById('syncLabel');
-  if (!el || !lbl) return;
-  el.className = 'sync-indicator ' + (state || '');
-  lbl.textContent = label || 'Offline';
+  if (!el) return;
+  el.className = 'sync-indicator' + (state && state !== 'off' ? ' ' + state : '');
   el.style.display = (state && state !== 'off') ? 'inline-flex' : 'none';
+  const lbl = document.getElementById('syncLabel');
+  if (lbl) lbl.textContent = label || '';
 }
 
-function sbSetStatus(msg, color) {
-  const el = document.getElementById('sbStatusMsg');
-  if (el) { el.textContent = msg; el.style.color = color || 'var(--muted2)'; }
-}
-
-function sbShowButtons(connected) {
-  const syncBtn  = document.getElementById('sbSyncNowBtn');
-  const discBtn  = document.getElementById('sbDisconnectBtn');
-  if (syncBtn) syncBtn.style.display = connected ? 'inline-flex' : 'none';
-  if (discBtn) discBtn.style.display = connected ? 'inline-flex' : 'none';
-}
-
-// ── Core fetch wrapper ────────────────────────────────────────────────
-async function sbFetch(path, method, body) {
-  if (!_sbUrl || !_sbKey) throw new Error('No Supabase credentials');
-  const base = _sbUrl.replace(/\/$/, '');
-  const res = await fetch(`${base}/rest/v1/${path}`, {
-    method: method || 'GET',
-    headers: {
-      'Content-Type':  'application/json',
-      'apikey':        _sbKey,
-      'Authorization': 'Bearer ' + _sbKey,
-      ...(method === 'POST' ? { 'Prefer': 'resolution=merge-duplicates,return=minimal' } : {}),
-    },
-    body: body ? JSON.stringify(body) : undefined,
-  });
-  if (!res.ok) {
-    const txt = await res.text().catch(() => '');
-    throw new Error(`Supabase ${res.status}: ${txt.slice(0, 120)}`);
-  }
-  if (method === 'GET') return res.json();
-  return null;
-}
-
-// ── Push: local → Supabase ────────────────────────────────────────────
-async function sbPush() {
-  if (_sbSyncing || !sbGetCreds()) return;
-  _sbSyncing = true;
-  sbSetIndicator('syncing', 'Syncing…');
-  try {
-    const now = Date.now();
-    const rows = SB_SYNC_KEYS.map(({ id, lsKey }) => ({
-      id,
-      key:        lsKey,
-      value:      localStorage.getItem(lsKey) || 'null',
-      updated_at: new Date(now).toISOString(),
-    }));
-    // Upsert all rows in one call
-    await sbFetch('sp_sync?on_conflict=id', 'POST', rows);
-    localStorage.setItem(SB_TS_KEY, now.toString());
-    sbSetIndicator('synced', '☁ Synced');
-    sbSetStatus('Last sync: ' + new Date(now).toLocaleTimeString(), 'var(--green)');
-    setTimeout(() => sbSetIndicator('synced', '☁ Cloud'), 3000);
-  } catch (err) {
-    console.warn('[SB push]', err.message);
-    sbSetIndicator('error', '⚠ Sync Error');
-    sbSetStatus('Push failed: ' + err.message.slice(0, 60), 'var(--red)');
-    setTimeout(() => sbSetIndicator('error', '☁ Offline'), 5000);
-  } finally {
-    _sbSyncing = false;
-  }
-}
-
-// ── Pull: Supabase → local (boot only, or manual) ─────────────────────
-async function sbPull() {
-  if (!sbGetCreds()) return false;
-  try {
-    const rows = await sbFetch('sp_sync?select=id,key,value,updated_at');
-    if (!Array.isArray(rows) || !rows.length) return false;
-
-    let merged = false;
-    for (const row of rows) {
-      if (!row.value || row.value === 'null') continue;
-      const localVal = localStorage.getItem(row.key);
-
-      // Always merge remote into local — merge logic below protects against data loss
-      if (row.key === CP_KEY) {
-        try {
-          const remote = JSON.parse(row.value);
-          const local  = localVal ? JSON.parse(localVal) : mkS();
-          const merged_state = deepMerge(local, remote);
-          // For arrays, always keep whichever has more items (most data wins)
-          for (const k of ['athletes','sessions']) {
-            if (Array.isArray(remote[k]) && Array.isArray(local[k])) {
-              merged_state[k] = remote[k].length >= local[k].length ? remote[k] : local[k];
-            }
-          }
-          localStorage.setItem(row.key, JSON.stringify(merged_state));
-        } catch { localStorage.setItem(row.key, row.value); }
-      } else {
-        // For readiness, timeline, fightdates, wearable: merge arrays, keep all unique entries
-        try {
-          const remArr = JSON.parse(row.value);
-          const locArr = localVal ? JSON.parse(localVal) : [];
-          if (Array.isArray(remArr) && Array.isArray(locArr)) {
-            // Merge by id — union of both arrays, remote wins on conflict
-            const map = new Map();
-            locArr.forEach(e => e && e.id && map.set(e.id, e));
-            remArr.forEach(e => e && e.id && map.set(e.id, e)); // remote overwrites local on same id
-            const union = Array.from(map.values());
-            localStorage.setItem(row.key, JSON.stringify(
-              union.length >= locArr.length ? union : locArr
-            ));
-          } else {
-            localStorage.setItem(row.key, row.value);
-          }
-        } catch { localStorage.setItem(row.key, row.value); }
-      }
-      merged = true;
-    }
-    return merged;
-  } catch (err) {
-    console.warn('[SB pull]', err.message);
-    return false;
-  }
-}
-
-// ── Debounced push — called after every saveState() ───────────────────
-function sbSchedulePush() {
-  if (!sbGetCreds()) return;
-  clearTimeout(_sbPushTimer);
-  _sbPushTimer = setTimeout(sbPush, 3000); // 3s debounce
-}
-
-// ── Test connection ───────────────────────────────────────────────────
-async function sbTestConnection(url, key) {
-  const base = url.replace(/\/$/, '');
-  const res = await fetch(`${base}/rest/v1/sp_sync?select=id&limit=1`, {
-    headers: {
-      'apikey':        key,
-      'Authorization': 'Bearer ' + key,
-      'Accept':        'application/json',
-    }
-  });
-  // PostgREST always returns JSON — parse regardless of HTTP status
-  let body = null;
-  try { body = await res.json(); } catch(e) {}
-
-  // SUCCESS: body is an Array means the table exists and responded correctly
-  if (Array.isArray(body)) return true;
-
-  // AUTH FAILURE
-  if (res.status === 401 || res.status === 403) {
-    throw new Error('Invalid API key — make sure you copied the anon/public key from Project Settings → API keys, not the service_role key.');
-  }
-
-  // TABLE MISSING: PostgREST returns an object with a code field when table doesn't exist
-  // HTTP status varies (200, 400, 404) but body is always an object with a code property
-  if (body && body.code) {
-    throw new Error('Table "sp_sync" not found — go back to Step 2 and run the SQL schema in the Supabase SQL Editor.');
-  }
-
-  // OTHER: bad URL, network issue, unexpected response
-  throw new Error(`Connection failed (status ${res.status}) — double-check your Project URL.`);
-}
-
-// ── Settings UI: Save & Connect ───────────────────────────────────────
-async function sbSaveAndConnect() {
-  let url = (document.getElementById('sbUrlInput')?.value || '').trim();
-  const key = (document.getElementById('sbKeyInput')?.value || '').trim();
-  // Auto-clean — strip any path the user accidentally included
-  url = url.replace(/\/rest\/v1\/?.*$/, '').replace(/\/$/, '');
-  if (!url || !key) {
-    sbSetStatus('Paste your Project URL and anon key first.', 'var(--red)');
-    return;
-  }
-  if (!url.includes('supabase.co') && !url.includes('supabase.in') && !url.startsWith('http')) {
-    sbSetStatus('URL should look like: https://xxxx.supabase.co (nothing after .co)', 'var(--red)');
-    return;
-  }
-
-  sbSetStatus('Testing connection…', 'var(--accent)');
-  const btn = document.querySelector('.sb-card .btn-primary');
-  if (btn) { btn.textContent = '…Testing'; btn.disabled = true; }
-
-  try {
-    await sbTestConnection(url, key);
-    sbSetCreds(url, key);
-    sbSetStatus('✓ Connected! Pushing your data now…', 'var(--green)');
-    showFlash('sbFlash');
-    sbShowButtons(true);
-    sbSetIndicator('syncing', '☁ Connecting…');
-
-    // Pull first to get any existing remote data, then push local
-    const pulled = await sbPull();
-    if (pulled) { loadState(); rehydrate(); }
-    await sbPush();
-
-    sbSetStatus('✓ Synced — ' + new Date().toLocaleTimeString(), 'var(--green)');
-    ciShareRender(); // update share card state
-    sbStartPolling(); // 30s background poll
-  } catch (err) {
-    sbSetStatus('✗ ' + err.message, 'var(--red)');
-    sbSetIndicator('error', '⚠ Error');
-  } finally {
-    if (btn) { btn.textContent = '☁️ Save & Connect'; btn.disabled = false; }
-  }
-}
-
-// ── Settings UI: Disconnect ───────────────────────────────────────────
-function sbDisconnect() {
-  if (!confirm('Disconnect from Supabase? Your local data stays intact. Sync will stop.')) return;
-  sbClearCreds();
-  sbShowButtons(false);
-  sbSetIndicator('off', '');
-  sbStopPolling();
-  sbSetStatus('Disconnected. Data is local-only again.', 'var(--muted2)');
-  ciShareRender(); // reset share card to locked state
-  const urlEl = document.getElementById('sbUrlInput');
-  const keyEl = document.getElementById('sbKeyInput');
-  if (urlEl) urlEl.value = '';
-  if (keyEl) keyEl.value = '';
-}
-
-// ── Settings UI: Manual sync ──────────────────────────────────────────
-async function sbSyncNow() {
-  sbSetStatus('Syncing…', 'var(--accent)');
-  await sbPush();
-}
-
-// ── Copy schema ───────────────────────────────────────────────────────
-function sbCopySchema() {
-  const el = document.getElementById('sbSchemaBlock');
-  if (!el) return;
-  navigator.clipboard.writeText(el.textContent.trim()).then(() => {
-    const btn = el.previousElementSibling?.querySelector('button');
-    if (btn) { btn.textContent = '✓ Copied!'; setTimeout(() => btn.textContent = 'Copy SQL', 2000); }
-  }).catch(() => {});
-}
-
-// ══════════════════════════════════════════════════════════════════════
-// LIVE CHECK-IN SETUP WIZARD
-// ══════════════════════════════════════════════════════════════════════
-
-// Render the correct share card state based on Supabase connection
-function ciShareRender() {
-  const connected = !!sbGetCreds();
-  const locked   = document.getElementById('ciShareLocked');
-  const unlocked = document.getElementById('ciShareUnlocked');
-  const fallback = document.getElementById('ciShareFallback');
-  if (!locked || !unlocked || !fallback) return;
-  fallback.style.display = 'none';
-  if (connected) {
-    locked.style.display   = 'none';
-    unlocked.style.display = 'block';
-    // Show clean prompt — actual short link is generated on click
-    const box = document.getElementById('shareableLinkBox');
-    if (box && box.textContent.trim() === '') box.textContent = '📋 Click to copy check-in link';
-  } else {
-    locked.style.display   = 'block';
-    unlocked.style.display = 'none';
-  }
-}
-
-// Wizard step navigation
-function wizGoTo(step) {
-  [1,2,3,4,'Done'].forEach(s => {
-    const el = document.getElementById('wizStep' + s);
-    if (el) el.style.display = 'none';
-  });
-  const target = document.getElementById('wizStep' + step);
-  if (target) { target.style.display = 'block'; }
-
-  // Update step indicators
-  const steps = [1,2,3,4];
-  steps.forEach(s => {
-    const ind = document.getElementById('wizStep' + s + 'Ind');
-    if (!ind) return;
-    if (s < step) {
-      ind.style.background = 'rgba(16,185,129,0.1)';
-      ind.style.color = 'var(--green)';
-    } else if (s === step) {
-      ind.style.background = 'rgba(0,212,240,0.12)';
-      ind.style.color = 'var(--accent)';
-    } else {
-      ind.style.background = 'transparent';
-      ind.style.color = 'var(--muted2)';
-    }
-  });
-
-  // Clear error/status message when navigating away from step 4
-  const connMsg = document.getElementById('wizConnMsg');
-  if (connMsg) connMsg.style.display = 'none';
-  const connBtn = document.getElementById('wizConnectBtn');
-  if (connBtn) { connBtn.textContent = '⚡ Test & Connect'; connBtn.disabled = false; }
-
-  // Pre-fill step 4 fields from existing saved creds
-  if (step === 4 && sbGetCreds()) {
-    const urlEl = document.getElementById('wizUrlInput');
-    const keyEl = document.getElementById('wizKeyInput');
-    if (urlEl && _sbUrl) urlEl.value = _sbUrl;
-    if (keyEl && _sbKey) keyEl.value = _sbKey;
-  }
-}
-
-// Copy schema in wizard
-function wizCopySchema(btn) {
-  const el = document.getElementById('wizSchemaBlock');
-  if (!el) return;
-  const text = el.textContent.trim();
-  const copy = () => {
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
-    } else { fallbackCopy(text); }
-    if (btn) { const o = btn.textContent; btn.textContent = '✓ Copied!'; btn.style.color = 'var(--green)'; setTimeout(() => { btn.textContent = o; btn.style.color = ''; }, 2000); }
-  };
-  copy();
-}
-
-// Test connection and save
-async function wizConnect() {
-  // Auto-clean the URL — strip any path the user accidentally included
-  let url = (document.getElementById('wizUrlInput')?.value || '').trim();
-  const key = (document.getElementById('wizKeyInput')?.value || '').trim();
-  const msgEl = document.getElementById('wizConnMsg');
-  const btn   = document.getElementById('wizConnectBtn');
-
-  // Strip common accidental suffixes (/rest/v1, /rest/v1/, trailing slash, etc.)
-  url = url.replace(/\/rest\/v1\/?.*$/, '').replace(/\/$/, '');
-
-  if (!url || !key) {
-    if (msgEl) { msgEl.style.display = 'block'; msgEl.style.background = 'rgba(239,68,68,0.08)'; msgEl.style.border = '1px solid rgba(239,68,68,0.2)'; msgEl.style.color = 'var(--red)'; msgEl.textContent = '⚠ Please paste both your Project URL and anon key.'; }
-    return;
-  }
-  if (!url.startsWith('https://') || !url.includes('supabase')) {
-    if (msgEl) { msgEl.style.display = 'block'; msgEl.style.background = 'rgba(239,68,68,0.08)'; msgEl.style.border = '1px solid rgba(239,68,68,0.2)'; msgEl.style.color = 'var(--red)'; msgEl.textContent = '⚠ URL doesn\'t look right — it should be just https://xxxx.supabase.co with nothing after it.'; }
-    return;
-  }
-
-  if (btn) { btn.textContent = '⏳ Testing…'; btn.disabled = true; }
-  if (msgEl) { msgEl.style.display = 'block'; msgEl.style.background = 'rgba(0,212,240,0.05)'; msgEl.style.border = '1px solid rgba(0,212,240,0.15)'; msgEl.style.color = 'var(--muted)'; msgEl.textContent = 'Testing connection to your Supabase project…'; }
-
-  try {
-    const testUrl = `${url}/rest/v1/sp_sync?select=id&limit=1`;
-    const resp = await fetch(testUrl, {
-      headers: { 'apikey': key, 'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json', 'Accept': 'application/json' }
-    });
-
-    // Parse body regardless of HTTP status — PostgREST always returns JSON
-    let body = null;
-    try { body = await resp.json(); } catch(e) {}
-
-    // ✓ SUCCESS: body is an Array — table exists and is reachable (empty [] or with rows)
-    // ✗ FAILURE: body is an object with a `code` field = PostgREST error (table missing, auth, etc.)
-    const isSuccess = Array.isArray(body);
-    const isAuthFail = resp.status === 401 || resp.status === 403;
-    const isTableMissing = !isSuccess && body && body.code;
-
-    if (isAuthFail) {
-      if (msgEl) { msgEl.style.display = 'block'; msgEl.style.background = 'rgba(239,68,68,0.08)'; msgEl.style.border = '1px solid rgba(239,68,68,0.2)'; msgEl.style.color = 'var(--red)'; msgEl.textContent = '✗ Invalid API key — make sure you copied the anon/public key (not the service_role key) from Project Settings → API keys.'; }
-      if (btn) { btn.textContent = '⚡ Test & Connect'; btn.disabled = false; }
-    } else if (isTableMissing) {
-      if (msgEl) { msgEl.style.display = 'block'; msgEl.style.background = 'rgba(239,68,68,0.08)'; msgEl.style.border = '1px solid rgba(239,68,68,0.2)'; msgEl.style.color = 'var(--red)'; msgEl.textContent = '✗ Table not found — go back to Step 2, copy the SQL, paste it into the Supabase SQL Editor and click Run. Then try again.'; }
-      if (btn) { btn.textContent = '⚡ Test & Connect'; btn.disabled = false; }
-    } else if (isSuccess) {
-      // body is an Array — connection confirmed, table accessible
-      sbSetCreds(url, key);
-      sbSetIndicator('syncing', '☁ Syncing…');
-      sbShowButtons(true);
-
-      // Pull any existing remote data first, then push local state
-      try {
-        const pulled = await sbPull();
-        if (pulled) { loadState(); setTimeout(() => { if (typeof rehydrate === 'function') rehydrate(); }, 80); }
-        await sbPush();
-      } catch(syncErr) { console.warn('[wiz sync]', syncErr); }
-
-      sbSetIndicator('synced', '☁ Cloud');
-      sbStartPolling(); // start 30s background poll
-
-      // Show success step
-      [1,2,3,4].forEach(s => { const el = document.getElementById('wizStep' + s); if (el) el.style.display = 'none'; });
-      [1,2,3,4].forEach(s => { const ind = document.getElementById('wizStep' + s + 'Ind'); if (ind) { ind.style.background = 'rgba(16,185,129,0.1)'; ind.style.color = 'var(--green)'; } });
-      const done = document.getElementById('wizStepDone');
-      if (done) done.style.display = 'block';
-
-      // Show final link
-      const linkEl = document.getElementById('wizFinalLink');
-      if (linkEl) linkEl.textContent = getShareLink();
-
-      // Update share card in brief
-      ciShareRender();
-
-      // Sync settings panel inputs so they reflect connected state immediately
-      const urlEl2 = document.getElementById('sbUrlInput'); if (urlEl2) urlEl2.value = url;
-      const keyEl2 = document.getElementById('sbKeyInput'); if (keyEl2) keyEl2.value = key;
-      sbSetStatus('✓ Connected via setup wizard. Syncing…', 'var(--green)');
-
-    } else {
-      if (msgEl) { msgEl.style.display = 'block'; msgEl.style.background = 'rgba(239,68,68,0.08)'; msgEl.style.border = '1px solid rgba(239,68,68,0.2)'; msgEl.style.color = 'var(--red)'; msgEl.textContent = `✗ Connection failed (status ${resp.status}) — double-check your Project URL and anon key.`; }
-      if (btn) { btn.textContent = '⚡ Test & Connect'; btn.disabled = false; }
-    }
-  } catch (err) {
-    if (msgEl) { msgEl.style.display = 'block'; msgEl.style.background = 'rgba(239,68,68,0.08)'; msgEl.style.border = '1px solid rgba(239,68,68,0.2)'; msgEl.style.color = 'var(--red)'; msgEl.textContent = '✗ Could not reach Supabase — check the Project URL is correct and you have internet.'; }
-    if (btn) { btn.textContent = '⚡ Test & Connect'; btn.disabled = false; }
-  }
-}
-
-// Open wizard from Settings — resets to step 1 with a settings-context note
-function wizOpenFromSettings() {
-  // Reset wizard to step 1
-  wizGoTo(1);
-  // If already connected, jump straight to step 4 (re-configure)
-  if (sbGetCreds()) wizGoTo(4);
-  openModal('ciSetupModal');
-  // Scroll modal to top
-  const modal = document.querySelector('#ciSetupModal .modal');
-  if (modal) modal.scrollTop = 0;
-}
-
-// Copy the final share link on wizard success screen
+// No-ops kept so any HTML onclick= refs don't throw
+function sbSetStatus() {}
+function sbShowButtons() {}
+function sbSaveAndConnect() {}
+function sbSyncNow() {}
+function sbDisconnect() {}
+function sbCopySchema() {}
+function wizOpenFromSettings() {}
+function wizGoTo() {}
+function wizConnect() {}
+function wizCopySchema() {}
 function wizCopyFinalLink(btn) {
   const link = getShareLink();
   if (navigator.clipboard && window.isSecureContext) {
@@ -6363,124 +5799,138 @@ function wizCopyFinalLink(btn) {
   if (btn) { const o = btn.textContent; btn.textContent = '✓ Copied!'; setTimeout(() => btn.textContent = o, 2000); }
 }
 
-// ── Patch saveState to trigger sync after every save ─────────────────
+// ── Cloud sync — push all localStorage keys to /api/sync ─────────────
+async function cloudPush() {
+  const key = cloudGetKey();
+  if (!key || DEMO_MODE || _cloudSyncing) return;
+  _cloudSyncing = true;
+  sbSetIndicator('syncing', '☁ Saving…');
+  try {
+    const state = {};
+    for (const { id, lsKey } of CLOUD_SYNC_KEYS) {
+      try { state[id] = JSON.parse(localStorage.getItem(lsKey) || 'null'); } catch {}
+    }
+    const res = await fetch('/api/sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${key}` },
+      body: JSON.stringify({ state }),
+    });
+    sbSetIndicator(res.ok ? 'synced' : 'error', res.ok ? '☁ Saved' : '☁ Error');
+  } catch(e) {
+    sbSetIndicator('error', '☁ Offline');
+  } finally {
+    _cloudSyncing = false;
+  }
+}
+
+async function cloudPull() {
+  const key = cloudGetKey();
+  if (!key) return false;
+  try {
+    const res = await fetch('/api/sync', { headers: { 'Authorization': `Bearer ${key}` } });
+    if (!res.ok) return false;
+    const { state } = await res.json();
+    if (!state) return false;
+    for (const { id, lsKey } of CLOUD_SYNC_KEYS) {
+      if (state[id] != null) try { localStorage.setItem(lsKey, JSON.stringify(state[id])); } catch {}
+    }
+    return true;
+  } catch(e) { return false; }
+}
+
+function cloudSchedulePush() {
+  clearTimeout(_cloudPushTimer);
+  _cloudPushTimer = setTimeout(cloudPush, 3000);
+}
+
+async function cloudFetchToken() {
+  const key = cloudGetKey();
+  if (!key) return;
+  try {
+    const res = await fetch('/api/sync?action=token', { headers: { 'Authorization': `Bearer ${key}` } });
+    if (res.ok) {
+      const { token } = await res.json();
+      if (token) localStorage.setItem('cp_coach_token', token);
+    }
+  } catch(e) {}
+}
+
+// Legacy stubs — called from old HTML onclick refs
+// ── Patch saveState to trigger cloud sync after every save ───────────
 const _origSaveState = saveState;
 saveState = function() {
   _origSaveState();
-  // Don't schedule Supabase push in demo mode — nothing was actually saved
-  if (!DEMO_MODE) sbSchedulePush();
+  if (!DEMO_MODE) cloudSchedulePush();
 };
 
-// ── Polling: auto-pull every 30s so coach dashboard stays live ──────────
-let _sbPollTimer = null;
-function sbStartPolling() {
-  if (_sbPollTimer) return;
-  _sbPollTimer = setInterval(async () => {
-    if (!sbGetCreds()) { clearInterval(_sbPollTimer); _sbPollTimer = null; return; }
-    try {
-      const pulled = await sbPull();
-      if (pulled) { loadState(); setTimeout(() => { if (typeof rehydrate === 'function') rehydrate(); }, 80); }
-    } catch(e) {}
-  }, 30000);
+// ── Share card — always show link once license active ─────────────────
+function ciShareRender() {
+  const hasKey   = !!cloudGetKey();
+  const locked   = document.getElementById('ciShareLocked');
+  const unlocked = document.getElementById('ciShareUnlocked');
+  const fallback = document.getElementById('ciShareFallback');
+  if (!locked || !unlocked || !fallback) return;
+  fallback.style.display = 'none';
+  if (hasKey) {
+    locked.style.display   = 'none';
+    unlocked.style.display = 'block';
+    const box = document.getElementById('shareableLinkBox');
+    if (box && box.textContent.trim() === '') box.textContent = '\u{1F4CB} Click to copy check-in link';
+  } else {
+    locked.style.display   = 'block';
+    unlocked.style.display = 'none';
+  }
 }
-function sbStopPolling() { clearInterval(_sbPollTimer); _sbPollTimer = null; }
 
-// ── Boot: load credentials, populate fields, pull if connected ────────
-(async function sbBoot() {
+// ── Boot: pull cloud state, fetch coach token, open check-in if needed ─
+(async function cloudBoot() {
   setTimeout(ciShareRender, 150);
 
   const isCheckinPage = window.location.search.includes('checkin=1');
-  const urlParams     = new URLSearchParams(window.location.search);
-  const sbParam       = urlParams.get('sb');
+  const coachParam    = new URLSearchParams(window.location.search).get('coach');
 
-  // ── Athlete device: temporary creds from share URL ────────────────────
-  // Pull athlete roster so they get a proper name dropdown, then clear creds.
-  if (isCheckinPage && sbParam) {
+  // Athlete device: load roster via API then open form
+  if (isCheckinPage && coachParam) {
     try {
-      const decoded = atob(sbParam);
-      const sepIdx  = decoded.indexOf('::');
-      if (sepIdx > 0) {
-        const tmpUrl = decoded.slice(0, sepIdx).replace(/\/$/, '');
-        const tmpKey = decoded.slice(sepIdx + 2);
-        if (tmpUrl && tmpKey) {
-          _sbUrl = tmpUrl; _sbKey = tmpKey; // in-memory only
-          try {
-            const rows = await sbFetch('sp_sync?select=id,key,value');
-            if (Array.isArray(rows)) {
-              for (const row of rows) {
-                if (row.key === CP_KEY && row.value && row.value !== 'null') {
-                  try {
-                    const remote = JSON.parse(row.value);
-                    if (Array.isArray(remote.athletes) && remote.athletes.length) S.athletes = remote.athletes;
-                  } catch {}
-                }
-              }
-            }
-          } catch(e) { console.warn('[SB athlete pull]', e); }
-          sbGetCreds(); // Restore phone's own saved creds
-          const _ciLoadMsg = document.getElementById('ciLoadingMsg');
-          if (_ciLoadMsg) _ciLoadMsg.remove();
-          setTimeout(openAthleteCheckin, 80);
-        } else {
-          // Empty URL/key — open form in free-text mode
-          const _ciLoadMsg = document.getElementById('ciLoadingMsg');
-          if (_ciLoadMsg) _ciLoadMsg.remove();
-          openAthleteCheckin();
-        }
-      } else {
-        // Malformed sb param — open form anyway
-        const _ciLoadMsg = document.getElementById('ciLoadingMsg');
-        if (_ciLoadMsg) _ciLoadMsg.remove();
-        openAthleteCheckin();
+      const res = await fetch('/api/checkin?coach=' + encodeURIComponent(coachParam));
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data.athletes) && data.athletes.length) S.athletes = data.athletes;
       }
-    } catch(e) {
-      console.warn('[SB checkin boot]', e);
-      // Decode failed — still show the form, never leave athlete on a blank page
-      const _ciLoadMsg = document.getElementById('ciLoadingMsg');
-      if (_ciLoadMsg) _ciLoadMsg.remove();
-      openAthleteCheckin();
-    }
+    } catch(e) {}
+    const _ciLoadMsg = document.getElementById('ciLoadingMsg');
+    if (_ciLoadMsg) _ciLoadMsg.remove();
+    openAthleteCheckin();
     sbSetIndicator('off', '');
     return;
   }
 
-  if (!sbGetCreds()) {
-    sbSetIndicator('off', '');
-    // Fallback: if checkin page has no sb param and no creds, still show the form (free-text name mode)
-    if (isCheckinPage) {
-      const _ciLoadMsg = document.getElementById('ciLoadingMsg');
-      if (_ciLoadMsg) _ciLoadMsg.remove();
-      openAthleteCheckin();
-    }
+  // Coach or free-text preview on check-in page
+  if (isCheckinPage) {
+    const _ciLoadMsg = document.getElementById('ciLoadingMsg');
+    if (_ciLoadMsg) _ciLoadMsg.remove();
+    openAthleteCheckin();
     return;
   }
 
-  // ── Coach device: normal boot ─────────────────────────────────────────
-  const urlEl = document.getElementById('sbUrlInput');
-  const keyEl = document.getElementById('sbKeyInput');
-  if (urlEl) urlEl.value = _sbUrl;
-  if (keyEl) keyEl.value = _sbKey;
-  sbShowButtons(true);
-  sbSetIndicator('syncing', '☁ Connecting…');
-  clearTimeout(_sbPushTimer); _sbPushTimer = null;
+  const key = cloudGetKey();
+  if (!key) { sbSetIndicator('off', ''); return; }
+
+  sbSetIndicator('syncing', '\u2601 Loading\u2026');
+
+  // Fetch coach token for share links if we don't have it
+  if (!cloudGetToken()) { await cloudFetchToken(); ciShareRender(); }
 
   try {
-    const pulled = await sbPull();
+    const pulled = await cloudPull();
     if (pulled) {
       loadState();
-      localStorage.setItem(SB_TS_KEY, Date.now().toString());
-      setTimeout(() => { rehydrate(); if (isCheckinPage) openAthleteCheckin(); }, 100);
+      setTimeout(() => { if (typeof rehydrate === 'function') rehydrate(); }, 100);
     }
-    const lastSync = localStorage.getItem(SB_TS_KEY);
-    const timeStr  = lastSync ? new Date(parseInt(lastSync)).toLocaleTimeString() : 'never';
-    sbSetIndicator('synced', '☁ Cloud');
-    sbSetStatus('Last sync: ' + timeStr, 'var(--muted2)');
-    if (!pulled) setTimeout(sbPush, 2000);
-    sbStartPolling(); // 30s background poll keeps coach dashboard live
-  } catch (err) {
-    console.warn('[SB boot]', err.message);
-    sbSetIndicator('error', '☁ Offline');
-    sbSetStatus('Could not reach Supabase. Working offline.', 'var(--amber)');
+    sbSetIndicator('synced', '\u2601 Cloud');
+    if (!pulled) setTimeout(cloudPush, 2000);
+  } catch(err) {
+    sbSetIndicator('error', '\u2601 Offline');
   }
 })();
 function pdfShare(){
