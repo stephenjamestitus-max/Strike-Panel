@@ -1,10 +1,9 @@
 export default function Footer() {
   const links = [
     { label: 'Features', href: '#features' },
-    { label: 'Demo',     href: '#demo' },
+    { label: 'Demo',     href: '/demo' },
     { label: 'Pricing',  href: '#pricing' },
-    { label: 'Privacy',  href: '/privacy' },
-    { label: 'Terms',    href: '/terms' },
+    { label: 'Get Access', href: 'https://payhip.com/Strikepanel' },
   ]
   return (
     <footer style={{ borderTop: '2px solid rgba(200,137,42,.22)', padding: 'clamp(32px,5vw,56px) clamp(20px,5vw,80px)' }}>
@@ -24,7 +23,7 @@ export default function Footer() {
         </nav>
       </div>
       <div style={{ fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 2, color: 'var(--muted2)', textAlign: 'center' }}>
-        © 2025 STRIKEPANEL™ · ALL RIGHTS RESERVED
+        © 2026 STRIKEPANEL™ · ALL RIGHTS RESERVED
       </div>
     </footer>
   )

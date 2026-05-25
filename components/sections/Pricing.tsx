@@ -3,6 +3,7 @@ import FadeIn from '@/components/ui/FadeIn'
 import Magnet from '@/components/ui/Magnet'
 
 const features = [
+  'Cloud-based — works in any browser',
   'All 14 sport categories',
   'Unlimited athletes',
   'Unlimited AI session plans',
@@ -80,7 +81,7 @@ export default function Pricing() {
               color: 'var(--amber)',
               lineHeight: 1,
             }}>$99</span>
-            <span style={{ fontFamily: 'var(--fb)', color: 'var(--muted)', fontSize: 16 }}>/mo</span>
+            <span style={{ fontFamily: 'var(--fb)', color: 'var(--amber)', fontSize: 13, letterSpacing: 2, fontWeight: 700, marginLeft: 4 }}>ONE-TIME</span>
           </div>
 
           <div style={{
@@ -90,7 +91,7 @@ export default function Pricing() {
             color: 'var(--muted)',
             marginBottom: 36,
           }}>
-            EVERYTHING INCLUDED · CANCEL ANYTIME
+            EVERYTHING INCLUDED · NO SUBSCRIPTION
           </div>
 
           <ul style={{ listStyle: 'none', textAlign: 'left', marginBottom: 40, display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -103,7 +104,7 @@ export default function Pricing() {
 
           <Magnet padding={120} strength={3}>
             <a
-              href="https://strikepanel.vercel.app"
+              href="https://payhip.com/Strikepanel"
               style={{
                 display: 'block',
                 background: 'linear-gradient(135deg,#c8892a,#e0a83a)',
@@ -118,7 +119,7 @@ export default function Pricing() {
                 letterSpacing: 0.5,
               }}
             >
-              Start Your Free Trial
+              Get Instant Access — $99
             </a>
           </Magnet>
         </div>

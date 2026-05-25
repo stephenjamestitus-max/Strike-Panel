@@ -33,7 +33,7 @@ export default function Nav() {
 
       <FadeIn delay={0.1} y={-20} duration={0.5}>
         <div style={{ display: 'flex', gap: 32, alignItems: 'center' }}>
-          {[['FEATURES', '#features'], ['DEMO', '#demo'], ['PRICING', '#pricing']].map(([label, href]) => (
+          {[['FEATURES', '#features'], ['DEMO', '/demo'], ['PRICING', '#pricing']].map(([label, href]) => (
             <a
               key={label}
               href={href}
@@ -48,7 +48,9 @@ export default function Nav() {
           ))}
           <Magnet padding={100} strength={4}>
             <a
-              href="#pricing"
+              href="https://payhip.com/Strikepanel"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 background: 'linear-gradient(135deg,#c8892a,#e0a83a)',
                 color: '#000', fontWeight: 700, fontFamily: 'var(--fk)',
@@ -58,7 +60,7 @@ export default function Nav() {
                 display: 'inline-block',
               }}
             >
-              START FREE TRIAL
+              GET ACCESS — $99
             </a>
           </Magnet>
         </div>

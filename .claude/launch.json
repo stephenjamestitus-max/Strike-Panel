@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "strikepanel-preview",
-      "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "7432", "--directory", ".superpowers/brainstorm/1941-1779287130/content"],
-      "port": 7432
+      "name": "strikepanel-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000
     }
   ]
 }

@@ -169,7 +169,7 @@ export default function Hero() {
           <FadeIn delay={0.45} y={20}>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
               <Magnet padding={100} strength={4}>
-                <a href="#pricing" style={{
+                <a href="https://payhip.com/Strikepanel" target="_blank" rel="noopener noreferrer" style={{
                   background: 'linear-gradient(135deg,#c8892a,#e0a83a)',
                   color: '#000',
                   fontWeight: 700,
