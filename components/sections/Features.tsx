@@ -4,7 +4,7 @@ import FadeIn from '@/components/ui/FadeIn'
 import { motion, AnimatePresence } from 'framer-motion'
 import styles from './features.module.css'
 
-const tabs = ['Morning Brief', 'Fight Camp', 'Athletes', 'AI Sessions', 'Progress']
+const tabs = ['Morning Brief', 'Fight Camp', 'Athletes', 'AI Sessions', 'Progress', 'Check-In']
 
 /* ── Morning Brief Panel ── */
 function MorningBrief() {
@@ -245,6 +245,73 @@ function Progress() {
   )
 }
 
+/* ── Check-In Panel ── */
+function CheckIn() {
+  return (
+    <div className={styles.panel}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: 20, alignItems: 'start' }}>
+
+        {/* Left: Coach side */}
+        <div>
+          <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--muted)', marginBottom: 12 }}>COACH — SHARE THIS LINK</div>
+          <div style={{ background: 'rgba(0,212,240,.06)', border: '1px solid rgba(0,212,240,.2)', borderRadius: 10, padding: '14px 16px', marginBottom: 16 }}>
+            <div style={{ fontFamily: 'var(--fm)', fontSize: 11, color: 'var(--accent)', letterSpacing: 1, wordBreak: 'break-all' }}>
+              strikepanel.uk/checkin<br />?coach=a8f3x2k9
+            </div>
+          </div>
+          <div style={{ fontFamily: 'var(--fb)', fontSize: 13, color: 'rgba(245,240,232,.55)', lineHeight: 1.6, marginBottom: 16 }}>
+            Send this link via WhatsApp, text, or email. Athletes open it on any phone — no app, no account.
+          </div>
+          <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--muted)', marginBottom: 10 }}>COACH RECEIVES IN MORNING BRIEF:</div>
+          {[
+            { name: 'Marcus Mendez',  score: 58, color: '#c8892a', note: 'Light session — elevated fatigue' },
+            { name: 'Priya Sharma',   score: 91, color: '#10b981', note: 'Peak — push hard today' },
+            { name: 'Jake Thompson',  score: 74, color: '#00D4F0', note: 'Train as normal' },
+          ].map(a => (
+            <div key={a.name} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,.04)' }}>
+              <div style={{ fontFamily: 'var(--fh)', fontSize: 20, color: a.color, width: 36, flexShrink: 0 }}>{a.score}</div>
+              <div>
+                <div style={{ fontFamily: 'var(--fc)', fontWeight: 600, fontSize: 12 }}>{a.name}</div>
+                <div style={{ fontFamily: 'var(--fm)', fontSize: 9, color: 'var(--muted)', letterSpacing: 1 }}>{a.note}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Arrow */}
+        <div style={{ display: 'flex', alignItems: 'center', paddingTop: 60, color: 'var(--accent)', fontSize: 24, opacity: 0.4 }}>→</div>
+
+        {/* Right: Athlete-facing form */}
+        <div>
+          <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--muted)', marginBottom: 12 }}>ATHLETE SEES THIS — NO LOGIN NEEDED</div>
+          <div style={{ background: 'rgba(255,255,255,.03)', border: '1px solid rgba(255,255,255,.08)', borderRadius: 12, padding: '20px' }}>
+            <div style={{ fontFamily: 'var(--fh)', fontSize: 18, letterSpacing: 2, marginBottom: 4 }}>DAILY CHECK-IN</div>
+            <div style={{ fontFamily: 'var(--fm)', fontSize: 9, color: 'var(--muted)', letterSpacing: 2, marginBottom: 20 }}>MARCUS MENDEZ · 21 DAYS TO FIGHT</div>
+            {[
+              { label: 'Sleep Quality',    value: '6 / 10' },
+              { label: 'Muscle Soreness',  value: '5 / 10' },
+              { label: 'Energy Level',     value: '5 / 10' },
+              { label: 'WHOOP Recovery',   value: '62%' },
+            ].map(row => (
+              <div key={row.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,.05)' }}>
+                <span style={{ fontFamily: 'var(--fb)', fontSize: 13, color: 'rgba(245,240,232,.7)' }}>{row.label}</span>
+                <span style={{ fontFamily: 'var(--fh)', fontSize: 16, color: 'var(--amber)' }}>{row.value}</span>
+              </div>
+            ))}
+            <div style={{ marginTop: 16, background: 'linear-gradient(135deg,#c8892a,#e0a83a)', borderRadius: 8, padding: '12px', textAlign: 'center', fontFamily: 'var(--fc)', fontWeight: 700, fontSize: 14, color: '#000' }}>
+              Submit Check-In →
+            </div>
+            <div style={{ fontFamily: 'var(--fm)', fontSize: 9, color: 'var(--muted)', textAlign: 'center', marginTop: 10, letterSpacing: 2 }}>
+              COACH NOTIFIED INSTANTLY
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
 /* ── Features Shell ── */
 const panels: Record<string, () => ReactElement> = {
   'Morning Brief': MorningBrief,
@@ -252,6 +319,7 @@ const panels: Record<string, () => ReactElement> = {
   'Athletes':      Athletes,
   'AI Sessions':   AISessions,
   'Progress':      Progress,
+  'Check-In':      CheckIn,
 }
 
 export default function Features() {

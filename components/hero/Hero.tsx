@@ -162,7 +162,7 @@ export default function Hero() {
               maxWidth: 480,
               marginBottom: 40,
             }}>
-              Morning briefs, fight camp timelines, AI session plans, and readiness scores — all in one dashboard built for combat sports.
+              Morning briefs, athlete check-in links, fight camp timelines, AI session plans, and readiness scores — all in one cloud dashboard built for combat sports.
             </p>
           </FadeIn>
 

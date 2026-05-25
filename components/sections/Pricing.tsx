@@ -58,6 +58,40 @@ export default function Pricing() {
         </h2>
       </FadeIn>
 
+      <FadeIn delay={0.1} y={20}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap', marginBottom: 40 }}>
+          {[
+            { label: 'TrainingPeaks', price: '$420/yr', note: 'Endurance only' },
+            { label: 'CoachMePlus',   price: '$348/yr', note: 'No combat sports' },
+            { label: 'TeamBuildr',    price: '$588/yr', note: 'No check-in links' },
+          ].map((c) => (
+            <div key={c.label} style={{
+              background: 'rgba(255,255,255,.03)',
+              border: '1px solid rgba(255,255,255,.07)',
+              borderRadius: 10,
+              padding: '10px 18px',
+              textAlign: 'center',
+              opacity: 0.55,
+            }}>
+              <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 2, color: 'var(--muted)', textDecoration: 'line-through' }}>{c.price}</div>
+              <div style={{ fontFamily: 'var(--fc)', fontSize: 12, color: 'var(--muted)', marginTop: 2 }}>{c.label}</div>
+              <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 1, color: 'var(--muted2)', marginTop: 2 }}>{c.note}</div>
+            </div>
+          ))}
+          <div style={{
+            background: 'rgba(200,137,42,.08)',
+            border: '1px solid rgba(200,137,42,.35)',
+            borderRadius: 10,
+            padding: '10px 18px',
+            textAlign: 'center',
+          }}>
+            <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 2, color: 'var(--amber)' }}>$99 ONCE</div>
+            <div style={{ fontFamily: 'var(--fc)', fontSize: 12, color: 'var(--cream)', marginTop: 2 }}>StrikePanel</div>
+            <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 1, color: 'var(--accent)', marginTop: 2 }}>Combat sports · AI · Check-ins</div>
+          </div>
+        </div>
+      </FadeIn>
+
       <FadeIn delay={0.2} y={30}>
         <div style={{
           display: 'inline-block',

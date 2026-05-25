@@ -2,6 +2,7 @@ import Nav from '@/components/nav/Nav'
 import Hero from '@/components/hero/Hero'
 import Ticker from '@/components/sections/Ticker'
 import Problem from '@/components/sections/Problem'
+import HowItWorks from '@/components/sections/HowItWorks'
 import Demo from '@/components/sections/Demo'
 import Features from '@/components/sections/Features'
 import CrossPlatform from '@/components/sections/CrossPlatform'
@@ -17,6 +18,7 @@ export default function Page() {
         <Hero />
         <Ticker />
         <Problem />
+        <HowItWorks />
         <Demo />
         <Features />
         <CrossPlatform />
