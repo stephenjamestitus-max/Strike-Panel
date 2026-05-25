@@ -21,30 +21,24 @@ export default function Demo() {
           <p style={{ fontFamily: 'var(--fb)', color: 'var(--muted)', marginBottom: 40, fontSize: 16 }}>No signup required — try the real app</p>
         </FadeIn>
         <FadeIn delay={0.15} y={20}>
-          <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 40 }}>
-            <div style={{ borderRadius: 24, overflow: 'hidden', border: '1px solid rgba(200,137,42,0.2)', boxShadow: '0 0 80px rgba(200,137,42,0.08),0 32px 64px rgba(0,0,0,.6)', background: '#08090f', padding: '40px 60px' }}>
-              <img
-                src="/iphone-mockup.png"
-                alt="StrikePanel app on iPhone"
-                style={{ width: 260, display: 'block', margin: '0 auto' }}
-              />
+          <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
+            <div style={{ display: 'inline-block', borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,212,240,.15)', boxShadow: '0 0 80px rgba(0,212,240,.08),0 32px 64px rgba(0,0,0,.6)' }}>
+              <iframe src="https://strikepanel.vercel.app/demo" width={820} height={580} style={{ display: 'block', border: 'none', background: '#04070f' }} title="StrikePanel™ Live Demo" loading="lazy" />
             </div>
             <a
-              href="https://strikepanel.uk/app"
+              href="https://strikepanel.vercel.app/demo"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
-                display: 'inline-block',
-                background: 'var(--amber)',
-                color: '#0C0C0C',
-                fontFamily: 'var(--fk)',
-                fontWeight: 700,
-                fontSize: 16,
-                letterSpacing: 1,
-                padding: '16px 40px',
-                borderRadius: 100,
+                fontFamily: 'var(--fm)',
+                fontSize: 11,
+                letterSpacing: 2,
+                color: 'var(--muted)',
+                textTransform: 'uppercase',
                 textDecoration: 'none',
               }}
             >
-              TRY THE APP — FREE
+              Open full screen ↗
             </a>
           </div>
         </FadeIn>
