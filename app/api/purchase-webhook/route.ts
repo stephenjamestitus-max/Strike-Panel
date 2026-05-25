@@ -42,7 +42,7 @@ async function sendKeyEmail(email: string, key: string, platform: string) {
             <div style="font-size:20px;letter-spacing:4px;color:#00D4F0">${key}</div>
           </div>
           <p style="font-size:13px;line-height:1.7;color:#7a85a0">
-            1. Go to <a href="https://strikepanel.uk" style="color:#00D4F0">strikepanel.uk</a><br>
+            1. Go to <a href="https://strikepanel.uk/app" style="color:#00D4F0">strikepanel.uk/app</a><br>
             2. Paste your key in the activation screen<br>
             3. Works on up to 3 devices
           </p>
