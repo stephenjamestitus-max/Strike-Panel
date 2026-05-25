@@ -70,20 +70,6 @@ export default function Pricing() {
           width: '100%',
           boxShadow: '0 0 80px rgba(200,137,42,0.08)',
         }}>
-          {/* Urgency banner */}
-          <div style={{
-            fontFamily: 'var(--fb)',
-            fontSize: 13,
-            color: 'var(--amber)',
-            marginBottom: 20,
-            background: 'rgba(200,137,42,0.1)',
-            border: '1px solid rgba(200,137,42,0.25)',
-            borderRadius: 8,
-            padding: '8px 16px',
-          }}>
-            🔥 Launch Price — Was $149, Now $99. Goes up with Phase 2.
-          </div>
-
           {/* Price row */}
           <div style={{ marginBottom: 8 }}>
             <span style={{ fontFamily: 'var(--fb)', fontSize: 20, color: 'var(--muted)', textDecoration: 'line-through', marginRight: 12 }}>$149</span>
@@ -94,6 +80,7 @@ export default function Pricing() {
               color: 'var(--amber)',
               lineHeight: 1,
             }}>$99</span>
+            <span style={{ fontFamily: 'var(--fb)', color: 'var(--muted)', fontSize: 16 }}>/mo</span>
           </div>
 
           <div style={{
@@ -103,7 +90,7 @@ export default function Pricing() {
             color: 'var(--muted)',
             marginBottom: 36,
           }}>
-            ONE-TIME PAYMENT · LIFETIME ACCESS · 30-DAY GUARANTEE
+            EVERYTHING INCLUDED · CANCEL ANYTIME
           </div>
 
           <ul style={{ listStyle: 'none', textAlign: 'left', marginBottom: 40, display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -116,9 +103,7 @@ export default function Pricing() {
 
           <Magnet padding={120} strength={3}>
             <a
-              href="https://payhip.com/Strikepanel"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="https://strikepanel.vercel.app"
               style={{
                 display: 'block',
                 background: 'linear-gradient(135deg,#c8892a,#e0a83a)',
@@ -133,14 +118,9 @@ export default function Pricing() {
                 letterSpacing: 0.5,
               }}
             >
-              Get Access — $99
+              Start Your Free Trial
             </a>
           </Magnet>
-
-          {/* Money-back guarantee */}
-          <p style={{ fontFamily: 'var(--fb)', fontSize: 12, color: 'var(--muted)', marginTop: 16 }}>
-            🛡️ 30-day money-back guarantee, no questions asked.
-          </p>
         </div>
       </FadeIn>
     </section>

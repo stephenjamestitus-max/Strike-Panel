@@ -1,6 +1,7 @@
 'use client'
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import FadeIn from '@/components/ui/FadeIn'
 import Magnet from '@/components/ui/Magnet'
 
 const stats = [
@@ -30,7 +31,6 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="hero-section"
       style={{
         position: 'relative',
         overflow: 'hidden',
@@ -110,7 +110,6 @@ export default function Hero() {
 
       {/* ── Hero content ── */}
       <div
-        className="hero-content"
         style={{
           position: 'relative',
           zIndex: 10,
@@ -120,12 +119,8 @@ export default function Hero() {
           padding: 'clamp(100px,12vw,140px) clamp(20px,5vw,80px) 110px',
         }}
       >
-        <div className="hero-inner" style={{ maxWidth: 700, marginTop: 'auto' }}>
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-          >
+        <div style={{ maxWidth: 700, marginTop: 'auto' }}>
+          <FadeIn delay={0} y={-20} duration={0.6}>
             <div style={{
               fontFamily: 'var(--fm)',
               fontSize: 11,
@@ -136,13 +131,9 @@ export default function Hero() {
             }}>
               // TRAINING INTELLIGENCE
             </div>
-          </motion.div>
+          </FadeIn>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-          >
+          <FadeIn delay={0.15} y={40} duration={0.8}>
             <h1 style={{
               fontFamily: 'var(--fk)',
               fontWeight: 900,
@@ -160,13 +151,9 @@ export default function Hero() {
               SMARTER.<br />
               WIN MORE.
             </h1>
-          </motion.div>
+          </FadeIn>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-          >
+          <FadeIn delay={0.3} y={20}>
             <p style={{
               fontFamily: 'var(--fb)',
               fontSize: 18,
@@ -177,19 +164,12 @@ export default function Hero() {
             }}>
               Morning briefs, fight camp timelines, AI session plans, and readiness scores — all in one dashboard built for combat sports.
             </p>
-          </motion.div>
+          </FadeIn>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
-          >
+          <FadeIn delay={0.45} y={20}>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
               <Magnet padding={100} strength={4}>
-                <a href="https://payhip.com/Strikepanel"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
+                <a href="#pricing" style={{
                   background: 'linear-gradient(135deg,#c8892a,#e0a83a)',
                   color: '#000',
                   fontWeight: 700,
@@ -219,13 +199,12 @@ export default function Hero() {
                 </a>
               </Magnet>
             </div>
-          </motion.div>
+          </FadeIn>
         </div>
       </div>
 
       {/* ── Frosted glass stats bar ── */}
       <div
-        className="hero-stats"
         style={{
           position: 'absolute',
           bottom: 0,

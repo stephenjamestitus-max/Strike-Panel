@@ -55,7 +55,7 @@ export default function Problem() {
       </FadeIn>
 
       {/* Two-column grid */}
-      <div className="rsp-grid-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, maxWidth: 1200, margin: '0 auto' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, maxWidth: 1200, margin: '0 auto' }}>
 
         {/* Left: The Problem */}
         <div>
