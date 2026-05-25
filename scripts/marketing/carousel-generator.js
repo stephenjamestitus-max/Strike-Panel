@@ -71,7 +71,7 @@ html,body{width:1080px;height:1080px;overflow:hidden;background:${B.bg}}
     </div>
     ${inner}
   </div>
-  <div class="tagline">strikepanel.vercel.app</div>
+  <div class="tagline">strikepanel.uk</div>
   <div class="progress"></div>
 </div>
 </body>
@@ -213,7 +213,7 @@ function ctaSlide(s, i, total, bg) {
       <div style="font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:1;color:${B.text}">${s.headline||'ONE DECISION.'}</div>
       <div style="font-size:15px;line-height:1.7;color:${B.muted};max-width:600px">${s.sub||'$99. One-time. No subscription.'}</div>
       <div style="padding:20px 40px;border:1px solid rgba(0,212,240,.3);background:rgba(0,212,240,.05)">
-        <span style="font-size:13px;letter-spacing:3px;text-transform:uppercase;color:${B.cyan}">LINK IN BIO → strikepanel.vercel.app/landing</span>
+        <span style="font-size:13px;letter-spacing:3px;text-transform:uppercase;color:${B.cyan}">LINK IN BIO → strikepanel.uk/landing</span>
       </div>
     </div>`, i, total);
 }

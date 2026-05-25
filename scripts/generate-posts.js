@@ -332,7 +332,7 @@ function blogPost(day, d) {
     <div class="blog-card">
       <div class="blog-title">${d.blogTitle}</div>
       <div class="blog-excerpt">${d.excerpt}</div>
-      <div class="blog-url">↗ ${d.url || 'strikepanel.vercel.app/blog'}</div>
+      <div class="blog-url">↗ ${d.url || 'strikepanel.uk/blog'}</div>
     </div>
     ${DIVIDER}
     ${bottomRow()}`;
@@ -478,7 +478,7 @@ function pricePost(day, d) {
       ${items}
     </div>
     <div class="price-cta">
-      <div class="price-cta-demo">Demo → strikepanel.vercel.app/demo</div>
+      <div class="price-cta-demo">Demo → strikepanel.uk/demo</div>
       <div class="price-cta-buy">Buy → payhip.com/Strikepanel</div>
     </div>
     ${DIVIDER}
@@ -549,7 +549,7 @@ const POSTS = [
       'Alerts when a fighter is off track, before it becomes a crisis',
       'No spreadsheets. No guesswork. No Friday-before-weigh-ins panic.',
     ],
-    cta: '→ strikepanel.vercel.app/demo',
+    cta: '→ strikepanel.uk/demo',
     price: '$99 once. No subscription. No renewal.',
   }},
 
@@ -569,7 +569,7 @@ const POSTS = [
     kicker: ['StrikePanel™', 'Blog', 'SYS.LIVE'],
     blogTitle: 'HOW TO PLAN A FIGHT CAMP — WEEK BY WEEK',
     excerpt: 'Phases, load management, weight cut timing, sparring intensity. Written for combat sports coaches — not generic fitness trainers. Bookmark it.',
-    url: 'strikepanel.vercel.app/blog',
+    url: 'strikepanel.uk/blog',
   }},
 
   // DAY 8 — Widget: Squad View 7:14am
@@ -607,7 +607,7 @@ const POSTS = [
       'Powered by Gemini, calibrated for combat sports coaches',
       'Readiness-aware — adapts to your squad\'s morning scores',
     ],
-    cta: '→ Free demo: strikepanel.vercel.app/demo',
+    cta: '→ Free demo: strikepanel.uk/demo',
   }},
 
   // DAY 11 — Statement: Spreadsheet Failure
@@ -648,7 +648,7 @@ const POSTS = [
     kicker: ['StrikePanel™', 'Blog', 'SYS.LIVE'],
     blogTitle: '5 SIGNS YOUR FIGHTER IS OVERTRAINED BEFORE FIGHT NIGHT',
     excerpt: 'You trained them hard. That\'s the job. But how do you know when hard became too hard? What each sign looks like in practice — and what to do before it costs you a performance.',
-    url: 'strikepanel.vercel.app/blog',
+    url: 'strikepanel.uk/blog',
   }},
 
   // DAY 15 — Feature: Check-In Links
@@ -662,7 +662,7 @@ const POSTS = [
       'Readiness score generated automatically, no manual calculation',
       'No app download. No account creation. Zero friction.',
     ],
-    cta: '→ strikepanel.vercel.app/demo',
+    cta: '→ strikepanel.uk/demo',
     price: '$99 once. No subscription.',
   }},
 
@@ -721,7 +721,7 @@ const POSTS = [
       'You didn\'t know which one. So everyone got the same session.',
       'That\'s an information failure — not a coaching failure.',
     ],
-    cta: '→ strikepanel.vercel.app/demo',
+    cta: '→ strikepanel.uk/demo',
   }},
 
   // DAY 21 — Blog: Replacing WhatsApp
@@ -729,7 +729,7 @@ const POSTS = [
     kicker: ['StrikePanel™', 'Blog', 'SYS.LIVE'],
     blogTitle: 'HOW COMBAT SPORTS COACHES ARE REPLACING WHATSAPP WITH DATA',
     excerpt: 'WhatsApp was never a coaching tool. It\'s a messaging app we retrofitted into one. What actually replacing it looks like — and what changes on the other side.',
-    url: 'strikepanel.vercel.app/blog',
+    url: 'strikepanel.uk/blog',
   }},
 
   // DAY 22 — Tip: How Readiness Scoring Works
@@ -803,7 +803,7 @@ const POSTS = [
     kicker: ['StrikePanel™', 'Blog', 'SYS.LIVE'],
     blogTitle: 'HOW TO MANAGE A WEIGHT CUT WITHOUT A SPREADSHEET',
     excerpt: 'The weight cut is the part of fight prep that breaks first. Not because coaches don\'t know what to do — because the tracking tools aren\'t built for it.',
-    url: 'strikepanel.vercel.app/blog',
+    url: 'strikepanel.uk/blog',
   }},
 
   // DAY 29 — Statement: No System
@@ -828,7 +828,7 @@ const POSTS = [
       'Weight Cut — daily weigh-ins, cut timeline, alerts',
       'AI Sessions — tell it your goal, get a full plan instantly',
     ],
-    cta: '→ Try free: strikepanel.vercel.app/demo',
+    cta: '→ Try free: strikepanel.uk/demo',
     price: '500+ coaches. $99 once. Price increases with Phase 2.',
   }},
 ];
