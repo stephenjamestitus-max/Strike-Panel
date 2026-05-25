@@ -76,7 +76,7 @@ export default function Social() {
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
           }}>
-            COACHES WHO SWITCHED
+            WHAT COACHES SAY
           </h2>
         </div>
       </FadeIn>

@@ -77,6 +77,8 @@ export default function Footer() {
             <a
               key={l.label}
               href={l.href}
+              target={l.href.startsWith('http') ? '_blank' : undefined}
+              rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
               style={{
                 fontFamily: 'var(--fk)', fontWeight: 400, fontSize: 10,
                 letterSpacing: 2, color: 'var(--muted2)', textTransform: 'uppercase',

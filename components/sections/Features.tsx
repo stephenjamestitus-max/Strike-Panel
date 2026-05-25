@@ -53,7 +53,7 @@ function MorningBrief() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '8px', marginTop: '16px' }}>
         {[
           { label: 'AVG READINESS', value: '68', color: 'var(--amber)' },
-          { label: 'CHECKED IN', value: '2/3', color: 'var(--green)' },
+          { label: 'CHECKED IN', value: '3/3', color: 'var(--green)' },
           { label: 'ON ALERT', value: '1', color: 'var(--red)' },
           { label: 'SESSIONS TODAY', value: '4', color: 'var(--accent)' },
         ].map(s => (
@@ -249,7 +249,7 @@ function Progress() {
 function CheckIn() {
   return (
     <div className={styles.panel}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: 20, alignItems: 'start' }}>
+      <div className="sp-checkin">
 
         {/* Left: Coach side */}
         <div>
@@ -278,8 +278,8 @@ function CheckIn() {
           ))}
         </div>
 
-        {/* Arrow */}
-        <div style={{ display: 'flex', alignItems: 'center', paddingTop: 60, color: 'var(--accent)', fontSize: 24, opacity: 0.4 }}>→</div>
+        {/* Arrow — hidden on mobile via sp-checkin-arrow class */}
+        <div className="sp-checkin-arrow" style={{ display: 'flex', alignItems: 'center', paddingTop: 60, color: 'var(--accent)', fontSize: 24, opacity: 0.4 }}>→</div>
 
         {/* Right: Athlete-facing form */}
         <div>
