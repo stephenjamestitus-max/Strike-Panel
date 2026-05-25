@@ -185,7 +185,7 @@ export default function Hero() {
                 </a>
               </Magnet>
               <Magnet padding={100} strength={4}>
-                <a href="#demo" style={{
+                <a href="/demo" style={{
                   border: '1px solid rgba(255,255,255,.18)',
                   color: 'var(--cream)',
                   borderRadius: 100,

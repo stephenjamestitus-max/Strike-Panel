@@ -26,9 +26,7 @@ export default function Demo() {
               <iframe src="https://strikepanel.vercel.app/demo" width={820} height={580} style={{ display: 'block', border: 'none', background: '#04070f' }} title="StrikePanel™ Live Demo" loading="lazy" />
             </div>
             <a
-              href="https://strikepanel.vercel.app/demo"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/demo"
               style={{
                 fontFamily: 'var(--fm)',
                 fontSize: 11,
