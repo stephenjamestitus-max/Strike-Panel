@@ -12,7 +12,7 @@ async function test() {
   // 2. Test scheduling a post (saves as draft if no publishNow)
   console.log('\nCreating draft post...');
   const draft = await zernio.createDraft({
-    content: 'Test draft from strikepanel automation. Ignore this.',
+    content: 'Test draft from strikepane automation. Ignore this.',
   });
   console.log('Draft created:', draft?._id || JSON.stringify(draft));
 

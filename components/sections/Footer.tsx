@@ -24,7 +24,7 @@ export default function Footer() {
         </nav>
       </div>
       <div style={{ fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 2, color: 'var(--muted2)', textAlign: 'center' }}>
-        © 2025 STRIKEPANEL™ · ALL RIGHTS RESERVED
+        © 2025 STRIKEPANE™ · ALL RIGHTS RESERVED
       </div>
     </footer>
   )

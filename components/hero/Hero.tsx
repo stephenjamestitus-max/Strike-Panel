@@ -169,7 +169,7 @@ export default function Hero() {
           <FadeIn delay={0.45} y={20}>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
               <Magnet padding={100} strength={4}>
-                <a href="https://strikepanel.gumroad.com/l/strikepanel"
+                <a href="https://strikepane.gumroad.com/l/strikepane"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{

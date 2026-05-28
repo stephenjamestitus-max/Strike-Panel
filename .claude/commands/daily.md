@@ -12,7 +12,7 @@ Runs the full daily pipeline:
 1. Fetch today's trending topics from combat sports Reddit
 2. Generate today's caption using Claude (pillar rotates Mon-Sun)
 3. Build carousel slides (HTML → PNG via Puppeteer, 1080x1080 @2x)
-4. Post carousel + caption to @strikepanel via Zernio
+4. Post carousel + caption to @strikepane via Zernio
 5. Log to scripts/marketing/posted_log.json
 
 ## Instructions

@@ -48,7 +48,7 @@ export default function Nav() {
           ))}
           <Magnet padding={100} strength={4}>
             <a
-              href="https://strikepanel.gumroad.com/l/strikepanel"
+              href="https://strikepane.gumroad.com/l/strikepane"
               target="_blank"
               rel="noopener noreferrer"
               style={{

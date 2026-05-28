@@ -82,7 +82,7 @@ function wrap(day, extraCSS, innerContent, script = '') {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1080">
-<title>strikepanel™ — Instagram Post ${day}</title>
+<title>strikepane™ — Instagram Post ${day}</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 ${BASE_CSS}
@@ -159,7 +159,7 @@ function widgetPost(day, d) {
   const hl2Class = (d.headlineColors && d.headlineColors[1] === 'white') ? 'hl-white' : (d.headlineColors && d.headlineColors[1] === 'cyan') ? 'hl-cyan' : 'hl-amber';
 
   const inner = `
-    ${kickerHTML(d.kicker || ['strikepanel™', 'Morning Brief', 'SYS.LIVE'])}
+    ${kickerHTML(d.kicker || ['strikepane™', 'Morning Brief', 'SYS.LIVE'])}
     <div class="widget">
       <div class="w-head">
         <div class="w-title">${d.widgetTitle || 'Morning Brief · Today'}</div>
@@ -201,7 +201,7 @@ ${WIDGET_CSS}
 
 function scoreDropPost(day, d) {
   const inner = `
-    ${kickerHTML(['strikepanel™', 'Morning Brief', 'SYS.LIVE'])}
+    ${kickerHTML(['strikepane™', 'Morning Brief', 'SYS.LIVE'])}
     <div class="drop-card">
       <div class="drop-head">
         <div class="w-title">Morning Brief · Today</div>
@@ -262,7 +262,7 @@ function statementPost(day, d) {
   const ctaHTML = d.cta ? `<div class="st-cta">${d.cta}</div>` : '';
 
   const inner = `
-    ${kickerHTML(d.kicker || ['strikepanel™', 'Reality Check', 'SYS.LIVE'])}
+    ${kickerHTML(d.kicker || ['strikepane™', 'Reality Check', 'SYS.LIVE'])}
     <div class="st-headline">
       ${lines}
     </div>
@@ -301,7 +301,7 @@ function tipPost(day, d) {
         </div>`).join('\n        ');
 
   const inner = `
-    ${kickerHTML(d.kicker || ['strikepanel™', 'Coach Intel', 'SYS.LIVE'])}
+    ${kickerHTML(d.kicker || ['strikepane™', 'Coach Intel', 'SYS.LIVE'])}
     <div class="tip-headline">
       <span class="${hl1}">${d.headline[0]}</span>
       <span class="${hl2}">${d.headline[1]}</span>
@@ -327,12 +327,12 @@ const BLOG_CSS = `
 
 function blogPost(day, d) {
   const inner = `
-    ${kickerHTML(d.kicker || ['strikepanel™', 'New on the Blog', 'SYS.LIVE'])}
+    ${kickerHTML(d.kicker || ['strikepane™', 'New on the Blog', 'SYS.LIVE'])}
     <div class="blog-tag">📖 New Post</div>
     <div class="blog-card">
       <div class="blog-title">${d.blogTitle}</div>
       <div class="blog-excerpt">${d.excerpt}</div>
-      <div class="blog-url">↗ ${d.url || 'strikepanel.vercel.app/blog'}</div>
+      <div class="blog-url">↗ ${d.url || 'strikepane.vercel.app/blog'}</div>
     </div>
     ${DIVIDER}
     ${bottomRow()}`;
@@ -351,7 +351,7 @@ const QUOTE_CSS = `
 
 function quotePost(day, d) {
   const inner = `
-    ${kickerHTML(d.kicker || ['strikepanel™', 'Coach Story', 'SYS.LIVE'])}
+    ${kickerHTML(d.kicker || ['strikepane™', 'Coach Story', 'SYS.LIVE'])}
     <div class="quote-mark">"</div>
     <div class="quote-card">
       <div class="quote-text">${d.quoteText}</div>
@@ -388,14 +388,14 @@ function beforeAfterPost(day, d) {
   const afterItems = d.after.map(a => `<div class="ba-item"><span class="ba-tag ba-tag-green">✓</span>${a}</div>`).join('\n          ');
 
   const inner = `
-    ${kickerHTML(['strikepanel™', 'Coach Story', 'SYS.LIVE'])}
+    ${kickerHTML(['strikepane™', 'Coach Story', 'SYS.LIVE'])}
     <div class="ba-wrap">
       <div class="ba-col ba-before">
-        <div class="ba-label ba-label-red">Before strikepanel</div>
+        <div class="ba-label ba-label-red">Before strikepane</div>
         ${beforeItems}
       </div>
       <div class="ba-col ba-after">
-        <div class="ba-label ba-label-green">After strikepanel</div>
+        <div class="ba-label ba-label-green">After strikepane</div>
         ${afterItems}
       </div>
     </div>
@@ -433,7 +433,7 @@ function featurePost(day, d) {
   const priceHTML = d.price ? `<div class="feat-price">${d.price}</div>` : '';
 
   const inner = `
-    ${kickerHTML(d.kicker || ['strikepanel™', 'Feature', 'SYS.LIVE'])}
+    ${kickerHTML(d.kicker || ['strikepane™', 'Feature', 'SYS.LIVE'])}
     <div class="feat-headline">
       <span class="${hl1cls}">${d.headline[0]}</span>
       <span class="${hl2cls}">${d.headline[1]}</span>
@@ -468,7 +468,7 @@ function pricePost(day, d) {
   const items = d.features.map(f => `<div class="price-feature"><div class="price-check">✓</div><div class="price-feat-text">${f}</div></div>`).join('\n        ');
 
   const inner = `
-    ${kickerHTML(['strikepanel™', 'Pricing', 'SYS.LIVE'])}
+    ${kickerHTML(['strikepane™', 'Pricing', 'SYS.LIVE'])}
     <div class="price-hero">
       <div class="price-big">$99</div>
       <span class="price-once">ONCE</span>
@@ -478,8 +478,8 @@ function pricePost(day, d) {
       ${items}
     </div>
     <div class="price-cta">
-      <div class="price-cta-demo">Demo → strikepanel.vercel.app/demo</div>
-      <div class="price-cta-buy">Buy → gumroad.com/l/strikepanel</div>
+      <div class="price-cta-demo">Demo → strikepane.vercel.app/demo</div>
+      <div class="price-cta-buy">Buy → gumroad.com/l/strikepane</div>
     </div>
     ${DIVIDER}
     ${bottomRow()}`;
@@ -504,7 +504,7 @@ const POSTS = [
 
   // DAY 2 — Statement: WhatsApp Chaos
   { day: 2, fn: statementPost, data: {
-    kicker: ['strikepanel™', 'Reality Check', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Reality Check', 'SYS.LIVE'],
     headlineLines: ['DID EVERYONE', 'CHECK IN?'],
     lineColors: ['white', 'amber'],
     subLines: [
@@ -528,7 +528,7 @@ const POSTS = [
 
   // DAY 4 — Tip: Fight Camp Phases
   { day: 4, fn: tipPost, data: {
-    kicker: ['strikepanel™', 'Fight Camp', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Fight Camp', 'SYS.LIVE'],
     headline: ['FIGHT CAMP HAS', '3 PHASES.'],
     headlineColors: ['white', 'amber'],
     tips: [
@@ -540,7 +540,7 @@ const POSTS = [
 
   // DAY 5 — Feature: Weight Cut Planner
   { day: 5, fn: featurePost, data: {
-    kicker: ['strikepanel™', 'Feature', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Feature', 'SYS.LIVE'],
     headline: ['WEIGHT CUT.', 'AUTOMATED.'],
     headlineColors: ['white', 'amber'],
     features: [
@@ -549,13 +549,13 @@ const POSTS = [
       'Alerts when a fighter is off track, before it becomes a crisis',
       'No spreadsheets. No guesswork. No Friday-before-weigh-ins panic.',
     ],
-    cta: '→ strikepanel.vercel.app/demo',
+    cta: '→ strikepane.vercel.app/demo',
     price: '$99 once. No subscription. No renewal.',
   }},
 
   // DAY 6 — Statement: Guessing Readiness
   { day: 6, fn: statementPost, data: {
-    kicker: ['strikepanel™', 'Reality Check', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Reality Check', 'SYS.LIVE'],
     headlineLines: ['YOU PUSHED HIM.', 'HE WASN\'T', 'READY.'],
     lineColors: ['white', 'amber', 'amber'],
     subLines: [
@@ -566,10 +566,10 @@ const POSTS = [
 
   // DAY 7 — Blog: Fight Camp Guide
   { day: 7, fn: blogPost, data: {
-    kicker: ['strikepanel™', 'Blog', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Blog', 'SYS.LIVE'],
     blogTitle: 'HOW TO PLAN A FIGHT CAMP — WEEK BY WEEK',
     excerpt: 'Phases, load management, weight cut timing, sparring intensity. Written for combat sports coaches — not generic fitness trainers. Bookmark it.',
-    url: 'strikepanel.vercel.app/blog',
+    url: 'strikepane.vercel.app/blog',
   }},
 
   // DAY 8 — Widget: Squad View 7:14am
@@ -586,7 +586,7 @@ const POSTS = [
 
   // DAY 9 — Tip: Weight Cut Timing
   { day: 9, fn: tipPost, data: {
-    kicker: ['strikepanel™', 'Weight Cut', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Weight Cut', 'SYS.LIVE'],
     headline: ['THE CUT THAT FAILS', 'ON THURSDAY —'],
     headlineColors: ['white', 'amber'],
     tips: [
@@ -598,7 +598,7 @@ const POSTS = [
 
   // DAY 10 — Feature: AI Session Builder
   { day: 10, fn: featurePost, data: {
-    kicker: ['strikepanel™', 'Feature', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Feature', 'SYS.LIVE'],
     headline: ['TELL IT YOUR GOAL.', 'GET A SESSION.'],
     headlineColors: ['white', 'cyan'],
     features: [
@@ -607,12 +607,12 @@ const POSTS = [
       'Powered by Gemini, calibrated for combat sports coaches',
       'Readiness-aware — adapts to your squad\'s morning scores',
     ],
-    cta: '→ Free demo: strikepanel.vercel.app/demo',
+    cta: '→ Free demo: strikepane.vercel.app/demo',
   }},
 
   // DAY 11 — Statement: Spreadsheet Failure
   { day: 11, fn: statementPost, data: {
-    kicker: ['strikepanel™', 'Reality Check', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Reality Check', 'SYS.LIVE'],
     headlineLines: ['THE SPREADSHEET', 'BROKE. AGAIN.'],
     lineColors: ['white', 'red'],
     subLines: [
@@ -624,14 +624,14 @@ const POSTS = [
 
   // DAY 12 — Quote: Game Changer Testimonial
   { day: 12, fn: quotePost, data: {
-    kicker: ['strikepanel™', 'Coach Story', 'SYS.LIVE'],
-    quoteText: '"I used to track everything in a notes app and a WhatsApp group. Now I open strikepanel every morning, see who\'s ready, who\'s not, and exactly what to do."',
+    kicker: ['strikepane™', 'Coach Story', 'SYS.LIVE'],
+    quoteText: '"I used to track everything in a notes app and a WhatsApp group. Now I open strikepane every morning, see who\'s ready, who\'s not, and exactly what to do."',
     attribution: '— Combat Sports Coach, UK',
   }},
 
   // DAY 13 — Tip: Overtraining Signs
   { day: 13, fn: tipPost, data: {
-    kicker: ['strikepanel™', 'Coach Intel', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Coach Intel', 'SYS.LIVE'],
     headline: ['5 SIGNS YOUR FIGHTER', 'IS OVERTRAINED.'],
     headlineColors: ['white', 'amber'],
     tips: [
@@ -645,15 +645,15 @@ const POSTS = [
 
   // DAY 14 — Blog: Overtraining Signs
   { day: 14, fn: blogPost, data: {
-    kicker: ['strikepanel™', 'Blog', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Blog', 'SYS.LIVE'],
     blogTitle: '5 SIGNS YOUR FIGHTER IS OVERTRAINED BEFORE FIGHT NIGHT',
     excerpt: 'You trained them hard. That\'s the job. But how do you know when hard became too hard? What each sign looks like in practice — and what to do before it costs you a performance.',
-    url: 'strikepanel.vercel.app/blog',
+    url: 'strikepane.vercel.app/blog',
   }},
 
   // DAY 15 — Feature: Check-In Links
   { day: 15, fn: featurePost, data: {
-    kicker: ['strikepanel™', 'Feature', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Feature', 'SYS.LIVE'],
     headline: ['60 SECONDS.', 'EVERY MORNING.'],
     headlineColors: ['white', 'cyan'],
     features: [
@@ -662,13 +662,13 @@ const POSTS = [
       'Readiness score generated automatically, no manual calculation',
       'No app download. No account creation. Zero friction.',
     ],
-    cta: '→ strikepanel.vercel.app/demo',
+    cta: '→ strikepane.vercel.app/demo',
     price: '$99 once. No subscription.',
   }},
 
   // DAY 16 — Statement: Fight Week Chaos
   { day: 16, fn: statementPost, data: {
-    kicker: ['strikepanel™', 'Reality Check', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Reality Check', 'SYS.LIVE'],
     headlineLines: ['FIGHT WEEK', 'SHOULD BE', 'CALM.'],
     lineColors: ['white', 'white', 'amber'],
     subLines: [
@@ -687,7 +687,7 @@ const POSTS = [
 
   // DAY 18 — Tip: Sparring Load
   { day: 18, fn: tipPost, data: {
-    kicker: ['strikepanel™', 'Fight Camp', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Fight Camp', 'SYS.LIVE'],
     headline: ['THE LAST 2 WEEKS', 'ARE THE RISKIEST.'],
     headlineColors: ['white', 'red'],
     tips: [
@@ -699,7 +699,7 @@ const POSTS = [
 
   // DAY 19 — Feature: Multi-Device / Cloud Sync
   { day: 19, fn: featurePost, data: {
-    kicker: ['strikepanel™', 'Feature', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Feature', 'SYS.LIVE'],
     headline: ['ONE TOOL.', 'EVERY DEVICE.'],
     headlineColors: ['white', 'cyan'],
     features: [
@@ -713,7 +713,7 @@ const POSTS = [
 
   // DAY 20 — Statement: Same Session for Everyone + Demo CTA
   { day: 20, fn: statementPost, data: {
-    kicker: ['strikepanel™', 'Reality Check', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Reality Check', 'SYS.LIVE'],
     headlineLines: ['SAME SESSION', 'FOR EVERYONE.'],
     lineColors: ['white', 'amber'],
     subLines: [
@@ -721,20 +721,20 @@ const POSTS = [
       'You didn\'t know which one. So everyone got the same session.',
       'That\'s an information failure — not a coaching failure.',
     ],
-    cta: '→ strikepanel.vercel.app/demo',
+    cta: '→ strikepane.vercel.app/demo',
   }},
 
   // DAY 21 — Blog: Replacing WhatsApp
   { day: 21, fn: blogPost, data: {
-    kicker: ['strikepanel™', 'Blog', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Blog', 'SYS.LIVE'],
     blogTitle: 'HOW COMBAT SPORTS COACHES ARE REPLACING WHATSAPP WITH DATA',
     excerpt: 'WhatsApp was never a coaching tool. It\'s a messaging app we retrofitted into one. What actually replacing it looks like — and what changes on the other side.',
-    url: 'strikepanel.vercel.app/blog',
+    url: 'strikepane.vercel.app/blog',
   }},
 
   // DAY 22 — Tip: How Readiness Scoring Works
   { day: 22, fn: tipPost, data: {
-    kicker: ['strikepanel™', 'How It Works', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'How It Works', 'SYS.LIVE'],
     headline: ['READINESS SCORING', 'ISN\'T MAGIC.'],
     headlineColors: ['white', 'cyan'],
     tips: [
@@ -753,7 +753,7 @@ const POSTS = [
 
   // DAY 24 — Statement: Tired Fighter
   { day: 24, fn: statementPost, data: {
-    kicker: ['strikepanel™', 'Reality Check', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Reality Check', 'SYS.LIVE'],
     headlineLines: ['YOU SHOULD HAVE', 'KNOWN THREE', 'DAYS AGO.'],
     lineColors: ['white', 'amber', 'amber'],
     subLines: [
@@ -788,7 +788,7 @@ const POSTS = [
 
   // DAY 27 — Tip: Managing Multiple Fighters
   { day: 27, fn: tipPost, data: {
-    kicker: ['strikepanel™', 'Coach Intel', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Coach Intel', 'SYS.LIVE'],
     headline: ['MANAGING 8 FIGHTERS', 'IS DIFFERENT.'],
     headlineColors: ['white', 'amber'],
     tips: [
@@ -800,15 +800,15 @@ const POSTS = [
 
   // DAY 28 — Blog: Weight Cut Guide
   { day: 28, fn: blogPost, data: {
-    kicker: ['strikepanel™', 'Blog', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Blog', 'SYS.LIVE'],
     blogTitle: 'HOW TO MANAGE A WEIGHT CUT WITHOUT A SPREADSHEET',
     excerpt: 'The weight cut is the part of fight prep that breaks first. Not because coaches don\'t know what to do — because the tracking tools aren\'t built for it.',
-    url: 'strikepanel.vercel.app/blog',
+    url: 'strikepane.vercel.app/blog',
   }},
 
   // DAY 29 — Statement: No System
   { day: 29, fn: statementPost, data: {
-    kicker: ['strikepanel™', 'Reality Check', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Reality Check', 'SYS.LIVE'],
     headlineLines: ['MOST COACHES', 'DON\'T HAVE', 'A SYSTEM.'],
     lineColors: ['white', 'amber', 'white'],
     subLines: [
@@ -819,7 +819,7 @@ const POSTS = [
 
   // DAY 30 — Feature: Full Picture + Demo
   { day: 30, fn: featurePost, data: {
-    kicker: ['strikepanel™', 'Full Platform', 'SYS.LIVE'],
+    kicker: ['strikepane™', 'Full Platform', 'SYS.LIVE'],
     headline: ['EVERYTHING.', 'ONE PLACE.'],
     headlineColors: ['white', 'amber'],
     features: [
@@ -828,7 +828,7 @@ const POSTS = [
       'Weight Cut — daily weigh-ins, cut timeline, alerts',
       'AI Sessions — tell it your goal, get a full plan instantly',
     ],
-    cta: '→ Try free: strikepanel.vercel.app/demo',
+    cta: '→ Try free: strikepane.vercel.app/demo',
     price: '500+ coaches. $99 once. Price increases with Phase 2.',
   }},
 ];

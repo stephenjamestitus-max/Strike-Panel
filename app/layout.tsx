@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'strikepanel™ — Training Intelligence for Combat Sports',
+  title: 'strikepane™ — Training Intelligence for Combat Sports',
   description: 'The coaching platform built for combat sports. Morning briefs, fight camp timelines, AI session plans, and readiness scores — all in one dashboard.',
   openGraph: {
-    title: 'strikepanel™',
+    title: 'strikepane™',
     description: 'Training intelligence for combat sports coaches.',
     type: 'website',
   },

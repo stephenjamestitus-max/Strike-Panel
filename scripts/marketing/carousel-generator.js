@@ -136,7 +136,7 @@ function shell(inner, counter, total, bgImagePath) {
     <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
     <div class="corner corner-bl"></div><div class="corner corner-br"></div>
     <div class="counter">${counter} / ${total}</div>
-    <div class="tagline">strikepanel.com</div>
+    <div class="tagline">strikepane.com</div>
     <div class="logo-wrap">
       <span class="logo-text">STRIKE<span>PANEL</span><sup class="logo-tm">™</sup></span>
     </div>
@@ -147,7 +147,7 @@ function shell(inner, counter, total, bgImagePath) {
 // ── Slide templates ───────────────────────────────────────────────
 
 function coverSlide(s, i, total, bg) {
-  const { headline, headlineCyan, sub, kicker = 'STRIKEPANEL™ · COACHING INTEL' } = s;
+  const { headline, headlineCyan, sub, kicker = 'STRIKEPANE™ · COACHING INTEL' } = s;
   return shell(`
     <div style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;gap:24px;width:800px;text-align:center">
       <div class="kicker"><span class="kdot"></span>${kicker}</div>
@@ -251,7 +251,7 @@ function ctaSlide(s, i, total, bg) {
       <div class="divider"></div>
       ${body ? `<p style="font-size:20px;color:${B.muted};line-height:1.6;max-width:660px">${body}</p>` : ''}
       <div style="background:rgba(0,212,240,.08);border:1px solid rgba(0,212,240,.25);border-radius:12px;padding:14px 40px">
-        <span style="font-size:13px;letter-spacing:3px;text-transform:uppercase;color:${B.cyan}">LINK IN BIO → strikepanel.com</span>
+        <span style="font-size:13px;letter-spacing:3px;text-transform:uppercase;color:${B.cyan}">LINK IN BIO → strikepane.com</span>
       </div>
     </div>`, i + 1, total, bg);
 }
@@ -307,7 +307,7 @@ if (require.main === module) {
   const example = [
     {
       type: 'cover',
-      kicker: 'STRIKEPANEL™ · READINESS',
+      kicker: 'STRIKEPANE™ · READINESS',
       headline: 'STOP GUESSING',
       headlineCyan: 'WHO\'S READY.',
       sub: 'Every morning. One number per athlete. Coach to the data.',
@@ -344,7 +344,7 @@ if (require.main === module) {
     {
       type: 'quote',
       quote: 'I\'m basically guessing who\'s ready every single day. That\'s not coaching — that\'s gambling.',
-      attribution: 'HOW COACHES DESCRIBED IT BEFORE STRIKEPANEL',
+      attribution: 'HOW COACHES DESCRIBED IT BEFORE STRIKEPANE',
     },
     {
       type: 'cta',

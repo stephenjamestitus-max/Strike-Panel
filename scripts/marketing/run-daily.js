@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * strikepanel Daily Automation
+ * strikepane Daily Automation
  * Run: node scripts/marketing/run-daily.js
  * Or via cron / Task Scheduler
  *
@@ -32,7 +32,7 @@ const PILLARS = [
   'Weight Cut — daily tracking, safe cuts, fight night performance',
   'AI Sessions — building sessions based on readiness data',
   'Problem/Frustration — coaches guessing, spreadsheet chaos, WhatsApp overload',
-  'Social Proof — what coaches actually get from strikepanel',
+  'Social Proof — what coaches actually get from strikepane',
   'Direct Offer — $99 one-time, no subscription, link in bio',
 ];
 
@@ -82,12 +82,12 @@ const CAPTION_POOL = {
     `You trained for years to coach at this level.\nYou did not train to manage seventeen WhatsApp threads and a spreadsheet that is three days out of date.\nThe admin is not the job. The coaching is the job.\nEvery hour you spend guessing readiness and chasing check-ins is an hour you are not coaching. That is the real cost.`,
   ],
   'Social Proof': [
-    `Coaches using strikepanel stopped guessing.\nThey know which athlete needs a light day before the athlete does.\nThey walk into the gym with a session already built to each athlete score.\nThey arrive at fight week with athletes who are sharp, not empty.\nThat is not a feature. That is an outcome.\nBetter decisions win fights.`,
+    `Coaches using strikepane stopped guessing.\nThey know which athlete needs a light day before the athlete does.\nThey walk into the gym with a session already built to each athlete score.\nThey arrive at fight week with athletes who are sharp, not empty.\nThat is not a feature. That is an outcome.\nBetter decisions win fights.`,
     `The coaches who perform consistently are not more talented.\nThey are more informed.\nThey walk into every session knowing which athletes are ready to be pushed and which need protecting. They do not find out mid-session when something breaks.\nInformation is the advantage. The coaches who have it make better calls.`,
   ],
   'Direct Offer': [
-    `One payment. No subscription. No monthly bill sitting on your account.\nstrikepanel is $99.\nYou get readiness scoring for up to 20 athletes. Fight camp countdowns. Weight cut tracking. AI session generation.\nEverything a serious coach needs to run a serious programme.\nNinety-nine dollars. You own it.\nLink in bio.`,
-    `Independent coaches should not be paying SaaS prices for tools they use every day.\nstrikepanel is $99 one-time. No subscription. No renewal. No bill in six months.\nReadiness scoring, fight camps, weight cuts, AI sessions for up to 20 athletes.\nOne purchase. Yours permanently.\nLink in bio.`,
+    `One payment. No subscription. No monthly bill sitting on your account.\nstrikepane is $99.\nYou get readiness scoring for up to 20 athletes. Fight camp countdowns. Weight cut tracking. AI session generation.\nEverything a serious coach needs to run a serious programme.\nNinety-nine dollars. You own it.\nLink in bio.`,
+    `Independent coaches should not be paying SaaS prices for tools they use every day.\nstrikepane is $99 one-time. No subscription. No renewal. No bill in six months.\nReadiness scoring, fight camps, weight cuts, AI sessions for up to 20 athletes.\nOne purchase. Yours permanently.\nLink in bio.`,
   ],
 };
 
@@ -125,7 +125,7 @@ async function generateCaption(pillar, trends) {
   const secondaryKey = SECONDARY_MAP[pillarKey] || 'Readiness';
   const secondaryExample = CAPTION_POOL[secondaryKey][0];
 
-  const prompt = `You write Instagram captions for strikepanel — a coaching dashboard for independent combat sports coaches (boxing, MMA, Muay Thai, BJJ).
+  const prompt = `You write Instagram captions for strikepane — a coaching dashboard for independent combat sports coaches (boxing, MMA, Muay Thai, BJJ).
 
 Here are two GOOD captions. Study the voice, rhythm, and structure exactly.
 
@@ -210,7 +210,7 @@ async function buildCarouselSlides(pillar, caption) {
   const slides = [
     {
       type: 'cover',
-      kicker: `STRIKEPANEL™ · ${pillarName.toUpperCase()}`,
+      kicker: `STRIKEPANE™ · ${pillarName.toUpperCase()}`,
       headline: sentences[0]?.length > 50
         ? sentences[0].substring(0, 47).toUpperCase() + '...'
         : (sentences[0] || pillarName).toUpperCase(),
@@ -223,7 +223,7 @@ async function buildCarouselSlides(pillar, caption) {
     slides.push({
       type: 'quote',
       quote: sentences[i],
-      attribution: 'STRIKEPANEL™',
+      attribution: 'STRIKEPANE™',
     });
   }
 
@@ -251,7 +251,7 @@ function daysSinceLastPost() {
 }
 
 async function run() {
-  console.log('\n=== strikepanel Post & Story ===');
+  console.log('\n=== strikepane Post & Story ===');
   console.log(new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dubai' }), '(Dubai)');
   console.log('');
 

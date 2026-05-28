@@ -1,14 +1,14 @@
-# strikepanel — Claude Code Project Context
+# strikepane — Claude Code Project Context
 
 ## What This Product Is
-strikepanel is a coaching dashboard PWA for combat sports coaches. It scores athlete
+strikepane is a coaching dashboard PWA for combat sports coaches. It scores athlete
 readiness daily, manages fight camps and weight cuts, generates AI training sessions,
 and replaces spreadsheets and WhatsApp chaos with one unified system.
 
 - Price: $99 one-time, no subscription
 - Stack: Vanilla JS PWA, Gumroad licensing, Vercel hosting
-- Live: strikepanel.com
-- Instagram: @strikepanel
+- Live: strikepane.com
+- Instagram: @strikepane
 
 ## Target Audience
 Independent and gym-based coaches (boxing, MMA, Muay Thai, BJJ, kickboxing) managing
@@ -26,7 +26,7 @@ No hyphens. Tone: gym aesthetics — raw, purposeful, results-focused.
 3. Weight Cut — safe cuts, daily tracking, fight night
 4. AI Sessions — session generation based on readiness data
 5. Problem/Frustration — coaches guessing, spreadsheet chaos, WhatsApp mess
-6. Social Proof — what coaches get from using strikepanel
+6. Social Proof — what coaches get from using strikepane
 7. Direct Offer — the tool, $99 one-time, no subscription
 
 ## Key Customer Language
@@ -34,9 +34,9 @@ No hyphens. Tone: gym aesthetics — raw, purposeful, results-focused.
 - "It just tells me what I need to know."
 
 ## Social Media Goals
-- Platform: Instagram @strikepanel (primary)
+- Platform: Instagram @strikepane (primary)
 - Goal: Follow 20+ combat sports coaching accounts per week
-- Engage: Comment on 10+ relevant posts per week (never mention strikepanel)
+- Engage: Comment on 10+ relevant posts per week (never mention strikepane)
 - Post: 1 per day, 7 days per week
 - Format mix: single image, carousel (3-7 slides), reels caption
 

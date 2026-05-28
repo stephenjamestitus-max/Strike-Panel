@@ -56,7 +56,7 @@ same hook patterns repeating, low save/share ratio.
 5. Output:
 
 ```
-STRIKEPANEL ACCOUNT HEALTH — [date]
+STRIKEPANE ACCOUNT HEALTH — [date]
 ════════════════════════════════════
 HEALTH SCORE: XX/100   [🟢 STRONG / 🟡 WATCH / 🔴 ACT NOW]
 
