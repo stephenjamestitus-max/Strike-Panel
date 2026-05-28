@@ -306,8 +306,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
   <!-- MORNING BRIEF -->
   <div class="panel on" id="p-brief">
     <div class="brief-date" id="briefDate"></div>
-    <div class="brief-hl"><span class="r">1</span> NEEDS REST · <span class="g">2</span> READY TO PUSH</div>
-    <div class="brief-avg">Squad avg <strong style="color:var(--text)">68/100</strong> · Marcus flagged — reduce sparring load today</div>
+    <div class="brief-hl"><span class="r">2</span> NEED ATTENTION · <span class="g">6</span> READY TO TRAIN</div>
+    <div class="brief-avg">Squad avg <strong style="color:var(--text)">74/100</strong> · Marcus: rest day · Danny: light session only</div>
     <div class="r-grid">
       <div class="rc g">
         <div class="rc-name">Priya Sharma 🔥</div>
@@ -329,6 +329,40 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
         <div class="rc-bar"><div class="rc-fill" style="width:42%"></div></div>
         <span class="rc-badge">REST TODAY</span>
         <div class="rc-trend">↓ −19 · knee pain</div>
+      </div>      <div class="rc c">
+        <div class="rc-name">Tyler Okafor ✅</div>
+        <div class="rc-score">88</div>
+        <div class="rc-bar"><div class="rc-fill" style="width:88%"></div></div>
+        <span class="rc-badge">PUSH HARD</span>
+        <div class="rc-trend">↑ +12 vs yesterday</div>
+      </div>
+      <div class="rc c">
+        <div class="rc-name">Rosa Chen ✅</div>
+        <div class="rc-score">76</div>
+        <div class="rc-bar"><div class="rc-fill" style="width:76%"></div></div>
+        <span class="rc-badge">TRAIN NORMAL</span>
+        <div class="rc-trend">→ steady</div>
+      </div>
+      <div class="rc a">
+        <div class="rc-name">Danny Walsh ⚠️</div>
+        <div class="rc-score">54</div>
+        <div class="rc-bar"><div class="rc-fill" style="width:54%"></div></div>
+        <span class="rc-badge">TRAIN LIGHT</span>
+        <div class="rc-trend">↓ −8 · high soreness</div>
+      </div>
+      <div class="rc g">
+        <div class="rc-name">Luis Vega 🔥</div>
+        <div class="rc-score">91</div>
+        <div class="rc-bar"><div class="rc-fill" style="width:91%"></div></div>
+        <span class="rc-badge">PUSH HARD</span>
+        <div class="rc-trend">↑ +6 · peaking</div>
+      </div>
+      <div class="rc c">
+        <div class="rc-name">Sarah Mack ✅</div>
+        <div class="rc-score">69</div>
+        <div class="rc-bar"><div class="rc-fill" style="width:69%"></div></div>
+        <span class="rc-badge">TRAIN NORMAL</span>
+        <div class="rc-trend">↑ +3 vs yesterday</div>
       </div>
     </div>
     <div class="alerts">
@@ -352,6 +386,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
         <button class="ath-btn on" onclick="pickAth(this)">Priya Sharma</button>
         <button class="ath-btn" onclick="pickAth(this)">Jake Torres</button>
         <button class="ath-btn" onclick="pickAth(this)">Marcus Reyes</button>
+        <button class="ath-btn" onclick="pickAth(this)">Tyler Okafor</button>
+        <button class="ath-btn" onclick="pickAth(this)">Rosa Chen</button>
+        <button class="ath-btn" onclick="pickAth(this)">Danny Walsh</button>
+        <button class="ath-btn" onclick="pickAth(this)">Luis Vega</button>
+        <button class="ath-btn" onclick="pickAth(this)">Sarah Mack</button>
       </div>
       <div class="sl-row"><div class="sl-head"><span class="sl-lbl">😴 Sleep Quality</span><span class="sl-val" id="s0">8</span></div><input type="range" min="1" max="10" value="8" oninput="sv(0,this.value)"></div>
       <div class="sl-row"><div class="sl-head"><span class="sl-lbl">⚡ Energy Level</span><span class="sl-val" id="s1">9</span></div><input type="range" min="1" max="10" value="9" oninput="sv(1,this.value)"></div>
@@ -404,6 +443,32 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
           <div class="wc-lbl">⚖️ Weight Cut — 59.5kg → 57kg</div>
           <div class="wc-bar"><div class="wc-fill"></div></div>
           <div class="wc-stat">8 wks out · <strong>0.3 kg/wk</strong> · −300 kcal/day</div>
+        </div>
+      </div>
+      <div class="fc" style="border-color:rgba(139,92,246,0.3);background:linear-gradient(135deg,rgba(139,92,246,0.06),rgba(139,92,246,0.02))">
+        <div class="fc-ath">Tyler Okafor</div>
+        <div class="fc-vs">vs "The Hammer" Bryce Collins</div>
+        <div class="fc-meta">Cage Warriors · Middleweight (84kg)</div>
+        <div class="fc-days">14</div>
+        <div class="fc-lbl">days until fight</div>
+        <span class="fc-phase">🔴 Peak Week — Taper Active</span>
+        <div class="wc">
+          <div class="wc-lbl">⚖️ Weight Cut — 87.5kg → 84kg</div>
+          <div class="wc-bar"><div class="wc-fill" style="width:78%"></div></div>
+          <div class="wc-stat">2 wks out · <strong>1.75 kg/wk</strong> · −1,200 kcal/day</div>
+        </div>
+      </div>
+      <div class="fc" style="border-color:rgba(16,185,129,0.3);background:linear-gradient(135deg,rgba(16,185,129,0.06),rgba(16,185,129,0.02))">
+        <div class="fc-ath">Luis Vega</div>
+        <div class="fc-vs">Regional Boxing Title — Super Featherweight</div>
+        <div class="fc-meta">York Hall London · Super Featherweight (59kg)</div>
+        <div class="fc-days">35</div>
+        <div class="fc-lbl">days until fight</div>
+        <span class="fc-phase">🟡 Build Phase — Intensity Rising</span>
+        <div class="wc">
+          <div class="wc-lbl">⚖️ Weight Cut — 61kg → 59kg</div>
+          <div class="wc-bar"><div class="wc-fill" style="width:40%"></div></div>
+          <div class="wc-stat">5 wks out · <strong>0.4 kg/wk</strong> · −500 kcal/day</div>
         </div>
       </div>
     </div>
