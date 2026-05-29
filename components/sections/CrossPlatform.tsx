@@ -2,10 +2,10 @@ import FadeIn from '@/components/ui/FadeIn'
 import DeviceParallax from './DeviceParallax'
 
 const bullets = [
-  'WORKS OFFLINE',
+  'CLOUD SYNC — ANY DEVICE',
   'ONE LICENSE',
   'HOME SCREEN INSTALL',
-  'YOUR DATA, NEVER OURS',
+  'ATHLETE CHECK-IN LINKS',
 ]
 
 export default function CrossPlatform() {
@@ -13,9 +13,9 @@ export default function CrossPlatform() {
     <section style={{ background: 'var(--bg)', padding: 'clamp(80px,10vw,130px) clamp(20px,5vw,64px) 0', overflow: 'hidden' }}>
       <div style={{ maxWidth: 1400, margin: '0 auto' }}>
         <FadeIn delay={0} y={40}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', marginBottom: 64 }}>
+          <div className="sp-cp-grid">
             <div>
-              <div style={{ fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 4, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>// CROSS-PLATFORM</div>
+              <div style={{ fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 4, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>// CLOUD-BASED · CROSS-PLATFORM</div>
               <h2 style={{
                 fontFamily: 'var(--fk)',
                 fontWeight: 900,
@@ -32,7 +32,7 @@ export default function CrossPlatform() {
             </div>
             <div>
               <p style={{ fontFamily: 'var(--fb)', fontSize: 16, color: 'rgba(245,240,232,.65)', lineHeight: 1.7, marginBottom: 28 }}>
-                Phone, tablet, laptop. Install from your browser — no app store, no update prompts, works offline. One license covers every device you own.
+                Phone, tablet, laptop. Fully cloud-based — your dashboard and every athlete check-in sync across all your devices automatically. Install from your browser, no app store needed. One license, every device you own.
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                 {bullets.map((b) => (

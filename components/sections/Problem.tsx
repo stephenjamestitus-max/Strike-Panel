@@ -5,12 +5,14 @@ const problems = [
   'No fight camp timeline tools',
   'Guessing readiness and recovery',
   'Losing athlete history between camps',
+  'Chasing fighters every morning for their check-in data',
 ]
 const fixes = [
-  'One dashboard for every athlete',
+  'One cloud dashboard for every athlete',
   'Full fight camp timelines with phase tracking',
   'Daily readiness scores backed by real data',
-  'Complete athlete history, always accessible',
+  'Complete athlete history, synced and always accessible',
+  'Athletes check in via a shared link — brief builds itself',
 ]
 
 export default function Problem() {
@@ -55,7 +57,7 @@ export default function Problem() {
       </FadeIn>
 
       {/* Two-column grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, maxWidth: 1200, margin: '0 auto' }}>
+      <div className="sp-grid-2">
 
         {/* Left: The Problem */}
         <div>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>4 Metrics Every Combat Sports Coach Should Track (But Doesn't) — StrikePanel</title>
+<meta name="description" content="Morning readiness score, training load ratio, weight trend, sparring quality — four simple metrics that changed one coach's injury rate and how you can start tracking them today."/>
+<link rel="canonical" href="https://strikepanel.uk/blog/data-driven-coaching"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="4 Metrics Every Combat Sports Coach Should Track (But Doesn't)"/>
+<meta property="og:description" content="Four metrics — morning readiness score, training load ratio, weight trend, sparring quality — and how they changed one coach's team completely."/>
+<meta property="og:url" content="https://strikepanel.uk/blog/data-driven-coaching"/>
+<meta property="og:image" content="https://strikepanel.uk/og-blog.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="4 Metrics Every Combat Sports Coach Should Track (But Doesn't)"/>
+<meta name="twitter:description" content="Four data points that will change how you coach. None require expensive equipment."/>
+<meta name="twitter:image" content="https://strikepanel.uk/og-blog.png"/>
+<meta name="robots" content="index,follow"/>
+<meta name="theme-color" content="#04070f"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='ng' cx='38%25' cy='32%25' r='62%25'%3E%3Cstop offset='0%25' stop-color='%231e2540'/%3E%3Cstop offset='55%25' stop-color='%230f1220'/%3E%3Cstop offset='100%25' stop-color='%230b0d14'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='45' cy='45' r='43' fill='url(%23ng)' stroke='%2300D4F0' stroke-width='1.5' stroke-opacity='0.6'/%3E%3Ccircle cx='45' cy='45' r='29' fill='none' stroke='%2300D4F0' stroke-width='0.9' stroke-opacity='0.2'/%3E%3Cline x1='45' y1='2' x2='45' y2='26' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='45' y1='64' x2='45' y2='88' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='26' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='64' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='11' fill='%2300D4F0'/%3E%3C/svg%3E"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04070f;--bg2:#070c18;--surface:#0b1120;--card:#0f1828;--card2:#131e30;
+  --accent:#00D4F0;--accent2:#00a8c4;--green:#10b981;--red:#ef4444;
+  --amber:#f59e0b;--purple:#8b5cf6;--text:#eef0f8;--muted:#7a85a0;
+  --muted2:#3d4560;--muted3:#1e2840;
+  --fh:'Bebas Neue',sans-serif;--fc:'Barlow Condensed',sans-serif;
+  --fb:'Barlow',sans-serif;--fm:'DM Mono',monospace;
+  --grid-color:rgba(0,212,240,0.035);--scan:rgba(0,212,240,0.012);--radius:6px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:16px;line-height:1.7;overflow-x:hidden}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--grid-color) 1px,transparent 1px),linear-gradient(90deg,var(--grid-color) 1px,transparent 1px);
+  background-size:52px 52px}
+body::after{
+  content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,var(--scan) 2px,var(--scan) 4px);
+  animation:scan-drift 8s linear infinite}
+@keyframes scan-drift{from{background-position:0 0}to{background-position:0 100px}}
+.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(140px)}
+.blob-1{width:700px;height:500px;top:-10%;left:-8%;background:var(--purple);opacity:.05}
+.blob-2{width:500px;height:400px;bottom:-10%;right:-5%;background:var(--green);opacity:.04}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(0,212,240,0.2)}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:rgba(0,212,240,0.25);border-radius:99px}
+
+#rp{position:fixed;top:0;left:0;z-index:10000;height:2px;width:0%;
+  background:linear-gradient(90deg,var(--purple),var(--accent));pointer-events:none;transition:width .1s linear}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(4,7,15,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(0,212,240,0.07);
+  padding:0 clamp(16px,4vw,48px);
+  display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),rgba(0,212,240,0.25),transparent)}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo{width:26px;height:26px;filter:drop-shadow(0 0 8px rgba(0,212,240,0.55))}
+.nav-name{font-family:var(--fh);font-size:18px;letter-spacing:2px;color:var(--text)}
+.nav-name span{color:var(--accent)}
+.nav-back{
+  font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);padding:7px 14px;border:1px solid rgba(255,255,255,0.06);border-radius:3px;
+  transition:all .2s;display:flex;align-items:center;gap:6px}
+.nav-back:hover{color:var(--accent);border-color:rgba(0,212,240,0.28);background:rgba(0,212,240,0.04)}
+
+/* ARTICLE */
+.article-wrap{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:56px clamp(20px,5vw,40px) 80px}
+.art-category{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--fm);font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--purple);background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.22);
+  border-radius:3px;padding:5px 12px;margin-bottom:20px}
+.art-category-dot{width:5px;height:5px;border-radius:50%;background:var(--purple);box-shadow:0 0 7px var(--purple);flex-shrink:0}
+.art-title{
+  font-family:var(--fh);font-size:clamp(38px,6vw,60px);line-height:.92;letter-spacing:1.5px;
+  color:var(--text);margin-bottom:18px}
+.art-title span{color:var(--purple);text-shadow:0 0 40px rgba(139,92,246,0.35)}
+.art-meta{
+  display:flex;align-items:center;gap:16px;
+  font-family:var(--fm);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted2);margin-bottom:36px;flex-wrap:wrap}
+.art-meta-sep{width:3px;height:3px;border-radius:50%;background:var(--muted2)}
+.art-divider{height:1px;background:linear-gradient(90deg,rgba(139,92,246,0.4),rgba(139,92,246,0.08),transparent);margin-bottom:40px}
+
+/* BODY */
+.art-body p{font-size:16px;line-height:1.78;color:rgba(238,240,248,0.88);margin-bottom:22px}
+.art-body p:first-child::first-letter{
+  font-family:var(--fh);font-size:56px;line-height:.85;float:left;
+  color:var(--purple);text-shadow:0 0 30px rgba(139,92,246,0.4);
+  margin:4px 10px 0 0;padding-bottom:4px}
+.art-body h2{
+  font-family:var(--fh);font-size:28px;letter-spacing:2px;color:var(--text);
+  margin:44px 0 14px;padding-top:4px}
+.art-body h3{
+  font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin:30px 0 10px}
+.art-body strong{color:var(--text);font-weight:600}
+
+/* METRIC CARDS */
+.metric-number{
+  font-family:var(--fh);font-size:120px;line-height:1;
+  color:rgba(139,92,246,0.08);letter-spacing:-4px;
+  position:absolute;top:-8px;right:16px;pointer-events:none;user-select:none}
+.metric-card{
+  position:relative;background:var(--card);border:1px solid rgba(255,255,255,0.05);
+  border-radius:var(--radius);padding:28px 28px 24px;margin:32px 0;overflow:hidden;
+  transition:border-color .25s}
+.metric-card:hover{border-color:rgba(139,92,246,0.18)}
+.metric-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px}
+.metric-card.mc-green::before{background:linear-gradient(to bottom,var(--green),transparent)}
+.metric-card.mc-amber::before{background:linear-gradient(to bottom,var(--amber),transparent)}
+.metric-card.mc-purple::before{background:linear-gradient(to bottom,var(--purple),transparent)}
+.metric-card.mc-accent::before{background:linear-gradient(to bottom,var(--accent),transparent)}
+.metric-card-label{
+  font-family:var(--fm);font-size:8px;letter-spacing:3px;text-transform:uppercase;
+  margin-bottom:8px}
+.mc-green .metric-card-label{color:var(--green)}
+.mc-amber .metric-card-label{color:var(--amber)}
+.mc-purple .metric-card-label{color:var(--purple)}
+.mc-accent .metric-card-label{color:var(--accent)}
+.metric-card-title{
+  font-family:var(--fc);font-size:20px;font-weight:700;letter-spacing:1px;
+  color:var(--text);margin-bottom:14px}
+.metric-why{margin-bottom:14px}
+.metric-why h4{
+  font-family:var(--fm);font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted2);margin-bottom:6px}
+.metric-why p{font-size:14px;line-height:1.65;color:rgba(238,240,248,0.78);margin:0}
+.metric-how{background:rgba(0,0,0,0.2);border-radius:4px;padding:12px 14px;margin-top:12px}
+.metric-how h4{
+  font-family:var(--fm);font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted2);margin-bottom:6px}
+.metric-how p{font-size:13px;line-height:1.6;color:rgba(238,240,248,0.65);margin:0}
+
+/* RANGE BAR */
+.range-wrap{margin:14px 0 0}
+.range-label{
+  display:flex;justify-content:space-between;
+  font-family:var(--fm);font-size:9px;letter-spacing:1px;color:var(--muted2);margin-bottom:6px}
+.range-track{height:5px;background:rgba(255,255,255,0.05);border-radius:3px;position:relative;overflow:visible}
+.range-fill{height:100%;border-radius:3px;position:relative}
+.range-zone{
+  position:absolute;top:-2px;height:9px;border-radius:2px;
+  background:rgba(16,185,129,0.18);border:1px solid rgba(16,185,129,0.3)}
+.range-marker{
+  position:absolute;top:-4px;width:13px;height:13px;border-radius:50%;transform:translateX(-50%);
+  border:2px solid var(--bg)}
+
+/* RATIO GAUGE */
+.ratio-row{display:flex;gap:8px;align-items:center;margin:14px 0}
+.ratio-segment{
+  height:8px;flex:1;border-radius:2px;position:relative}
+.ratio-segment-label{
+  font-family:var(--fm);font-size:8px;letter-spacing:1px;text-transform:uppercase;
+  position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  white-space:nowrap;color:var(--muted2)}
+.rs-under{background:rgba(239,68,68,0.35);border:1px solid rgba(239,68,68,0.3)}
+.rs-sweet{background:rgba(16,185,129,0.35);border:1px solid rgba(16,185,129,0.3);flex:1.5}
+.rs-over{background:rgba(245,158,11,0.35);border:1px solid rgba(245,158,11,0.3)}
+
+/* SPARRING RUBRIC */
+.rubric{display:flex;flex-direction:column;gap:6px;margin:14px 0}
+.rubric-row{
+  display:flex;align-items:center;gap:10px;
+  font-size:13px;color:rgba(238,240,248,0.7)}
+.rubric-score{
+  font-family:var(--fh);font-size:20px;letter-spacing:1px;min-width:36px;
+  text-align:right;line-height:1}
+.rubric-score.rs-high{color:var(--green)}
+.rubric-score.rs-mid{color:var(--amber)}
+.rubric-score.rs-low{color:var(--red)}
+
+/* CASE STUDY */
+.case-study{
+  background:rgba(0,212,240,0.03);border:1px solid rgba(0,212,240,0.1);
+  border-radius:var(--radius);padding:28px;margin:36px 0;position:relative;overflow:hidden}
+.case-study::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.cs-label{font-family:var(--fm);font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.cs-title{font-family:var(--fc);font-size:17px;font-weight:700;letter-spacing:1px;color:var(--text);margin-bottom:16px}
+.cs-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.cs-stat{text-align:center;padding:12px;background:rgba(0,0,0,0.2);border-radius:4px}
+.cs-stat-num{font-family:var(--fh);font-size:32px;letter-spacing:1px;line-height:1}
+.cs-stat-lbl{font-family:var(--fm);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-top:3px}
+.cs-body{font-size:14px;line-height:1.65;color:rgba(238,240,248,0.78)}
+@media(max-width:480px){.cs-stats{grid-template-columns:1fr 1fr}}
+
+/* CALLOUT */
+.callout{
+  background:rgba(139,92,246,0.06);border-left:2px solid var(--purple);
+  border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin:24px 0}
+.callout p{font-size:14px;line-height:1.65;color:rgba(238,240,248,0.85);margin:0}
+.callout strong{color:#c4b5fd}
+
+/* CTA */
+.cta-block{
+  position:relative;background:var(--card);border:1px solid rgba(0,212,240,0.15);
+  border-radius:var(--radius);padding:36px;margin:56px 0 32px;text-align:center;overflow:hidden}
+.cta-block::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.cta-block::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(0,212,240,0.04),transparent);pointer-events:none}
+.cta-label{font-family:var(--fm);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.cta-title{font-family:var(--fh);font-size:clamp(26px,4vw,36px);letter-spacing:2px;color:var(--text);margin-bottom:10px;line-height:1.1}
+.cta-sub{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.65}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--fc);font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:#04070f;background:var(--accent);padding:14px 32px;border-radius:3px;
+  box-shadow:0 0 32px rgba(0,212,240,0.3);transition:all .22s;position:relative;z-index:1}
+.cta-btn:hover{background:#00eeff;box-shadow:0 0 48px rgba(0,212,240,0.5);transform:translateY(-1px)}
+.cta-price{font-family:var(--fm);font-size:11px;letter-spacing:1px;margin-top:14px;color:var(--muted2)}
+.back-link{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);transition:color .2s;margin-top:8px}
+.back-link:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="ambient"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
+<div id="rp"></div>
+
+<nav class="nav">
+  <a href="/" class="nav-brand">
+    <svg class="nav-logo" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+      <defs><radialGradient id="ng" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="55%" stop-color="#0f1220"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs>
+      <circle cx="45" cy="45" r="43" fill="url(#ng)" stroke="#00D4F0" stroke-width="1.5" stroke-opacity="0.6"/>
+      <circle cx="45" cy="45" r="29" fill="none" stroke="#00D4F0" stroke-width="0.9" stroke-opacity="0.2"/>
+      <line x1="45" y1="2" x2="45" y2="26" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="45" y1="64" x2="45" y2="88" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="2" y1="45" x2="26" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="64" y1="45" x2="88" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="45" cy="45" r="11" fill="#00D4F0"/>
+    </svg>
+    <span class="nav-name">STRIKE<span>PANEL</span>&#8482;</span>
+  </a>
+  <a href="/blog" class="nav-back">&#8592; Blog</a>
+</nav>
+
+<main class="article-wrap">
+
+  <div class="art-category"><span class="art-category-dot"></span>Coaching</div>
+  <h1 class="art-title"><span>4 Metrics</span> Every Combat Sports Coach Should Track (But Doesn't)</h1>
+  <div class="art-meta">
+    <span>May 28, 2026</span>
+    <span class="art-meta-sep"></span>
+    <span>9 min read</span>
+    <span class="art-meta-sep"></span>
+    <span>Data-Driven Coaching</span>
+  </div>
+  <div class="art-divider"></div>
+
+  <article class="art-body">
+
+    <p>Most combat sports coaches are excellent observers. They can read body language, spot technical deterioration mid-round, and sense when an athlete is burning too hot. The problem is that observation has limits — it doesn't scale across a 12-person squad, it doesn't catch slow-burn overtraining, and it can't tell you whether the problem you're seeing on Thursday was seeded on Monday. Four metrics can fill that gap. None require expensive equipment. All can be collected in under two minutes per athlete per day.</p>
+
+    <p>Here is what they are, why they matter, and what the numbers actually mean.</p>
+
+    <!-- METRIC 1 -->
+    <div class="metric-card mc-green">
+      <div class="metric-number">01</div>
+      <div class="metric-card-label">Metric One</div>
+      <div class="metric-card-title">Morning Readiness Score (0–100)</div>
+      <div class="metric-why">
+        <h4>Why It Matters</h4>
+        <p>A single number that represents an athlete's physiological and psychological state before training begins. It is the single most actionable data point in an athlete's day because it directly informs whether to load, maintain, or back off — before you have committed to a session plan you will be reluctant to change once the group is warmed up.</p>
+      </div>
+      <div class="metric-why" style="margin-top:12px">
+        <h4>How to Measure It</h4>
+        <p>A composite of four sub-scores, each rated 1–10 by the athlete at the same time every morning: <strong>sleep quality</strong> (how rested they feel), <strong>muscle soreness</strong> (1 = none, 10 = severe — invert this in the composite), <strong>mood</strong> (1 = very low, 10 = excellent), and <strong>energy</strong> (1 = exhausted, 10 = fully energised). The composite formula: <span style="font-family:var(--fm);font-size:12px;color:var(--green)">(Sleep + Mood + Energy + (11 - Soreness)) / 4 × 10</span>. This produces a score out of 100.</p>
+      </div>
+      <div class="metric-how">
+        <h4>What the Numbers Mean</h4>
+        <p><strong style="color:var(--green)">85–100:</strong> Full training, push the session. Athlete is primed.<br>
+        <strong style="color:var(--amber)">70–84:</strong> Normal session, monitor intensity in second half. Watch for early drift.<br>
+        <strong style="color:var(--amber)">55–69:</strong> Reduce volume 25–30%. Skip high-intensity sparring or heavy conditioning.<br>
+        <strong style="color:var(--red)">Below 55:</strong> Technical work only or active recovery. Flag for follow-up. Check for illness, personal stress, sleep environment issues.</p>
+      </div>
+    </div>
+
+    <!-- METRIC 2 -->
+    <div class="metric-card mc-amber">
+      <div class="metric-number">02</div>
+      <div class="metric-card-label">Metric Two</div>
+      <div class="metric-card-title">Training Load vs. Recovery Ratio (Acute:Chronic Workload)</div>
+      <div class="metric-why">
+        <h4>Why It Matters</h4>
+        <p>Overtraining injuries in combat sports are rarely caused by a single brutal session. They are caused by a ratio problem — too much load in the recent window (acute) relative to what the athlete has been conditioned to absorb over time (chronic). The acute:chronic workload ratio (ACWR) is the most validated injury-prediction metric in elite sport, and almost no combat sports coaches are using it.</p>
+      </div>
+      <div class="metric-why" style="margin-top:12px">
+        <h4>How to Measure It</h4>
+        <p>Express each training session as a load unit: multiply session RPE (1–10) by duration in minutes. A hard 90-minute session at RPE 8 = 720 units. Track a 7-day rolling average (acute) and a 28-day rolling average (chronic). Divide acute by chronic to get the ratio. A spreadsheet updated after each session is all you need. Total time investment: 2 minutes per athlete per week.</p>
+      </div>
+      <div class="range-wrap">
+        <div class="range-label"><span style="color:var(--red)">Undertraining</span><span style="color:var(--green)">Sweet Spot</span><span style="color:var(--amber)">Danger Zone</span></div>
+        <div style="display:flex;gap:0;height:8px;border-radius:4px;overflow:hidden;margin-bottom:24px">
+          <div style="flex:0.8;background:rgba(0,212,240,0.12);border-right:1px solid rgba(255,255,255,0.05)"></div>
+          <div style="flex:0.5;background:rgba(239,68,68,0.25);border-right:1px solid rgba(255,255,255,0.05)"></div>
+          <div style="flex:0.5;background:rgba(16,185,129,0.35);border-right:1px solid rgba(255,255,255,0.05)"></div>
+          <div style="flex:0.5;background:rgba(245,158,11,0.35);border-right:1px solid rgba(255,255,255,0.05)"></div>
+          <div style="flex:0.8;background:rgba(239,68,68,0.35)"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-family:var(--fm);font-size:9px;color:var(--muted2);letter-spacing:1px;margin-top:-16px">
+          <span>0.5</span><span>0.8</span><span style="color:var(--green);font-size:10px">1.3 &#9650;</span><span>1.5</span><span>2.0+</span>
+        </div>
+      </div>
+      <div class="metric-how">
+        <h4>What the Numbers Mean</h4>
+        <p><strong style="color:var(--red)">Below 0.8:</strong> Athlete is underloaded. Fitness will decline. Not enough stimulus to maintain or improve.<br>
+        <strong style="color:var(--green)">0.8–1.3:</strong> Sweet spot. This is the range to target through all phases of camp.<br>
+        <strong style="color:var(--amber)">1.3–1.5:</strong> Elevated risk. Acceptable for short blocks during peak camp weeks, but monitor closely.<br>
+        <strong style="color:var(--red)">Above 1.5:</strong> High injury risk. Back off. This is almost always caused by a spike week where the coach added too much too fast.</p>
+      </div>
+    </div>
+
+    <!-- METRIC 3 -->
+    <div class="metric-card mc-purple">
+      <div class="metric-number">03</div>
+      <div class="metric-card-label">Metric Three</div>
+      <div class="metric-card-title">Weight Trend vs. Camp Timeline</div>
+      <div class="metric-why">
+        <h4>Why It Matters</h4>
+        <p>Daily weigh-ins are common in combat sports but rarely visualised as a trend. A fighter who weighs in daily but never plots the data against their camp timeline is flying blind. Weight trend tells you whether the water cut plan is on track, whether the athlete is losing muscle mass (a sign of under-fuelling during camp), and whether you have time to correct course before weigh-ins.</p>
+      </div>
+      <div class="metric-why" style="margin-top:12px">
+        <h4>How to Measure It</h4>
+        <p>Weigh in every morning immediately after waking, before eating or drinking, in minimal clothing. Log the number. Plot it against three reference lines: <strong>current weight</strong>, <strong>fight weight</strong>, and a <strong>projected cut line</strong> that shows what weight they need to be at on each day of camp to reach fight weight through a safe, manageable reduction rather than a crash cut in fight week.</p>
+      </div>
+      <div class="metric-how">
+        <h4>What the Numbers Mean</h4>
+        <p><strong>On track:</strong> Within 2% of the projected cut line at any given point in camp. No action needed beyond maintaining current nutrition and training protocol.<br>
+        <strong>Running light:</strong> More than 3% below projected line suggests over-restriction or excessive training load relative to caloric intake. Risk of muscle loss and immune suppression.<br>
+        <strong>Running heavy:</strong> More than 3% above projected line requires a structured correction. A crash cut is never the answer — adjust nutrition and training density across the remaining camp days.</p>
+      </div>
+    </div>
+
+    <!-- METRIC 4 -->
+    <div class="metric-card mc-accent">
+      <div class="metric-number">04</div>
+      <div class="metric-card-label">Metric Four</div>
+      <div class="metric-card-title">Sparring Quality Score (Subjective but Consistent)</div>
+      <div class="metric-why">
+        <h4>Why It Matters</h4>
+        <p>Sparring quality is the most important and least tracked metric in combat sports. Coaches remember stand-out sessions — the round where everything clicked, or the session where the fighter looked dead on their feet. But they rarely track the slow decline, the sessions that were "fine" three weeks running before the performance fell off a cliff. A simple quality score creates a paper trail that the memory cannot.</p>
+      </div>
+      <div class="metric-why" style="margin-top:12px">
+        <h4>How to Measure It</h4>
+        <p>After every sparring session, rate four elements on a 1–5 scale: <strong>output sharpness</strong> (combination speed and accuracy), <strong>defensive quality</strong> (head movement, blocking, footwork), <strong>tactical application</strong> (game plan execution), and <strong>gas tank</strong> (conditioning in rounds 3+). Average the four scores. Plot the weekly average over the full camp. The trend is what matters — a fighter consistently at 3.8 is better positioned than one who swings between 2.0 and 4.5.</p>
+      </div>
+      <div class="rubric">
+        <div class="rubric-row"><span class="rubric-score rs-high">4–5</span><span>Excellent. Fighter is absorbing load and expressing it well. Camp is working.</span></div>
+        <div class="rubric-row"><span class="rubric-score rs-mid">3–4</span><span>Solid. Normal range for mid-camp. Consistent here is the goal.</span></div>
+        <div class="rubric-row"><span class="rubric-score rs-mid">2–3</span><span>Acceptable, but monitor trend. Two consecutive sessions here warrants a load reduction.</span></div>
+        <div class="rubric-row"><span class="rubric-score rs-low">&lt; 2</span><span>Below standard. Reduce training load immediately. Investigate readiness data.</span></div>
+      </div>
+    </div>
+
+    <h2>A Real-World Example: How Tracking Changed One Coach's Camp</h2>
+
+    <div class="case-study">
+      <div class="cs-label">Case Study — StrikePanel User</div>
+      <div class="cs-title">12-Athlete Muay Thai and MMA Squad, Regional Promotions Level</div>
+      <div class="cs-body" style="margin-bottom:16px">A coach managing 12 athletes across three weight classes implemented all four metrics over the course of one full camp cycle (10 weeks). Prior to tracking, they were running sessions based on feel and a rough periodisation calendar. Their previous camp had produced two pulled muscles, one stress fracture (foot), and a fighter who looked overtrained at their biggest fight of the year.</div>
+      <div class="cs-stats">
+        <div class="cs-stat">
+          <div class="cs-stat-num" style="color:var(--green)">0</div>
+          <div class="cs-stat-lbl">Significant injuries<br>in tracked camp</div>
+        </div>
+        <div class="cs-stat">
+          <div class="cs-stat-num" style="color:var(--accent)">4.1</div>
+          <div class="cs-stat-lbl">Avg sparring quality<br>final 3 weeks</div>
+        </div>
+        <div class="cs-stat">
+          <div class="cs-stat-num" style="color:var(--purple)">87</div>
+          <div class="cs-stat-lbl">Avg readiness score<br>on fight mornings</div>
+        </div>
+      </div>
+      <div class="cs-body">The most significant change was not in the numbers themselves — it was in the coaching decisions the numbers prompted. Three times during the camp, readiness data flagged athletes running below 60 before planned high-intensity days. In the previous camp, those athletes would have trained through it. With the data visible, the coach reduced their load. Two of those three athletes identified that they had been struggling with sleep due to a shift in work hours — something they hadn't volunteered in the group setting. The data created permission for the conversation.</div>
+    </div>
+
+    <h2>Starting Small: You Don't Need All Four at Once</h2>
+
+    <p>If you are new to systematic tracking, start with metric one — the morning readiness score. It costs nothing, takes 30 seconds per athlete, and provides an immediate decision framework for every session. Once that habit is established, layer in the workload ratio. The sparring quality score can be folded into your existing post-session notes. Weight tracking is only essential when a significant water cut is planned.</p>
+
+    <div class="callout">
+      <p><strong>The goal is not to become a data scientist.</strong> It is to replace "I think they're okay" with "their readiness is 82 and their ACWR is 1.1, so we're good to push today." The data doesn't coach for you. It just stops you making decisions based on incomplete information in an environment where the cost of getting it wrong is a fighter who underperforms or gets hurt.</p>
+    </div>
+
+    <p>Combat sports has a long tradition of intuitive coaching, and much of that intuition is genuinely valuable. The best coaches are not replacing their instincts with spreadsheets — they are using a small amount of structured data to sharpen and validate what their instincts are already sensing. When the numbers and the gut feeling agree, you coach with complete confidence. When they diverge, you have a conversation worth having.</p>
+
+    <p>That conversation alone is worth more than any tracking system.</p>
+
+  </article>
+
+  <div class="cta-block">
+    <div class="cta-label">StrikePanel&#8482;</div>
+    <div class="cta-title">Track readiness automatically with StrikePanel</div>
+    <div class="cta-sub">Collect all four metrics from your entire squad in one place. Morning check-ins, readiness scores, weight trends, and workload ratios — automatically calculated and displayed on your coach dashboard.</div>
+    <a href="https://payhip.com/Strikepanel" class="cta-btn">Get StrikePanel — $99 one-time &#8594;</a>
+    <div class="cta-price">One-time payment &nbsp;&#183;&nbsp; Lifetime access &nbsp;&#183;&nbsp; Instant setup</div>
+  </div>
+
+  <a href="/blog" class="back-link">&#8592; Back to all articles</a>
+
+</main>
+
+<script>
+(function(){
+  var bar=document.getElementById('rp');
+  function update(){
+    var s=document.documentElement,scrolled=s.scrollTop||document.body.scrollTop,
+        total=(s.scrollHeight||document.body.scrollHeight)-s.clientHeight;
+    bar.style.width=(total>0?(scrolled/total*100):0)+'%';
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  update();
+})();
+</script>
+</body>
+</html>

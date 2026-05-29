@@ -162,17 +162,14 @@ export default function Hero() {
               maxWidth: 480,
               marginBottom: 40,
             }}>
-              Morning briefs, fight camp timelines, AI session plans, and readiness scores — all in one dashboard built for combat sports.
+              Morning briefs, athlete check-in links, fight camp timelines, AI session plans, and readiness scores — all in one cloud dashboard built for combat sports.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.45} y={20}>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
               <Magnet padding={100} strength={4}>
-                <a href="https://strikepane.gumroad.com/l/strikepane"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
+                <a href="https://payhip.com/Strikepanel" target="_blank" rel="noopener noreferrer" style={{
                   background: 'linear-gradient(135deg,#c8892a,#e0a83a)',
                   color: '#000',
                   fontWeight: 700,
@@ -184,11 +181,11 @@ export default function Hero() {
                   letterSpacing: 0.5,
                   display: 'inline-block',
                 }}>
-                  Get Access — $99
+                  Get Access — $99 →
                 </a>
               </Magnet>
               <Magnet padding={100} strength={4}>
-                <a href="#demo" style={{
+                <a href="/demo" style={{
                   border: '1px solid rgba(255,255,255,.18)',
                   color: 'var(--cream)',
                   borderRadius: 100,
@@ -208,6 +205,7 @@ export default function Hero() {
 
       {/* ── Frosted glass stats bar ── */}
       <div
+        className="sp-stats-bar"
         style={{
           position: 'absolute',
           bottom: 0,

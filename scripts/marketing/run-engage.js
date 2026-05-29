@@ -19,6 +19,7 @@ const https = require('https');
 
 const ENGAGE_LOG_PATH = path.join(__dirname, 'engage_log.json');
 const ENGAGE_QUEUE_PATH = path.join(__dirname, 'engage_queue.json');
+const ENGAGE_TXT_PATH = path.join(__dirname, 'engage_today.txt');
 
 // Master list — US/UK coaching-focused accounts with 5k+ followers
 const MASTER_ACCOUNTS = [
@@ -71,15 +72,15 @@ function pickAccounts() {
   const log = readEngageLog();
   const today = new Date().toISOString().split('T')[0];
 
-  // Build set of handles used yesterday
-  const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-  const usedYesterday = new Set(
+  // 7-day cooldown — never comment on the same account twice within 7 days
+  const cutoff = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+  const usedRecently = new Set(
     log
-      .filter(e => e.date === yesterday)
+      .filter(e => e.date >= cutoff)
       .map(e => e.account)
   );
 
-  const available = MASTER_ACCOUNTS.filter(a => !usedYesterday.has(a.handle));
+  const available = MASTER_ACCOUNTS.filter(a => !usedRecently.has(a.handle));
   const pool = available.length >= 15 ? available : MASTER_ACCOUNTS;
 
   // Shuffle deterministically using today's date as seed (simple rotation)
@@ -207,7 +208,21 @@ async function run() {
     console.log('');
   });
 
-  console.log(`Saved to: ${ENGAGE_QUEUE_PATH}`);
+  // Save plain txt for easy mobile reading
+  const dubaiDate = new Date().toLocaleDateString('en-GB', { timeZone: 'Asia/Dubai', weekday: 'long', day: 'numeric', month: 'long' });
+  const txtLines = [
+    `STRIKEPANEL — COMMENTS FOR TODAY`,
+    `${dubaiDate}`,
+    ``,
+    ...results.map((item, idx) =>
+      `${idx + 1}. ${item.account}\n   ${item.comment}`
+    ),
+    ``,
+    `Go to each account on Instagram, find a recent post, and paste the comment.`,
+    `Never mention StrikePanel.`,
+  ];
+  fs.writeFileSync(ENGAGE_TXT_PATH, txtLines.join('\n'));
+  console.log(`Saved plain text: ${ENGAGE_TXT_PATH}`);
   console.log('\n=== Done ===\n');
 }
 

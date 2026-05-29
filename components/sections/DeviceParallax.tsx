@@ -12,9 +12,9 @@ export default function DeviceParallax() {
   const ipadY = useTransform(scrollYProgress, [0, 1], [20, -20])
 
   return (
-    <div ref={ref} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center', gap: '40px', position: 'relative' }}>
-      {/* iPhone */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, flexShrink: 0 }}>
+    <div ref={ref} className="sp-devices">
+      {/* iPhone — hidden on mobile via CSS */}
+      <div className="sp-device-side">
         <motion.div style={{ y: iphoneY }}>
           <IPhone />
         </motion.div>
@@ -24,8 +24,8 @@ export default function DeviceParallax() {
         </div>
       </div>
 
-      {/* MacBook */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, flex: '0 0 auto', maxWidth: 580, width: '100%' }}>
+      {/* MacBook — always visible, shrinks on mobile */}
+      <div className="sp-device-center">
         <MacBook />
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--muted)', textTransform: 'uppercase' }}>DESKTOP</div>
@@ -33,8 +33,8 @@ export default function DeviceParallax() {
         </div>
       </div>
 
-      {/* iPad */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, flexShrink: 0 }}>
+      {/* iPad — hidden on mobile via CSS */}
+      <div className="sp-device-side">
         <motion.div style={{ y: ipadY }}>
           <IPad />
         </motion.div>

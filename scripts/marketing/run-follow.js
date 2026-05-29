@@ -16,6 +16,7 @@ const fs = require('fs');
 const path = require('path');
 
 const FOLLOW_LOG_PATH = path.join(__dirname, 'follow_log.json');
+const FOLLOW_TXT_PATH = path.join(__dirname, 'follow_today.txt');
 
 // Master list — US/UK coaching-focused accounts, 5k+ followers
 const MASTER_LIST = [
@@ -123,7 +124,18 @@ async function run() {
     console.log(`${idx + 1}. ${account.handle} — ${account.description}`);
   });
 
-  console.log(`\nLogged to: ${FOLLOW_LOG_PATH}`);
+  // Save plain txt for easy mobile reading
+  const dubaiDate = new Date().toLocaleDateString('en-GB', { timeZone: 'Asia/Dubai', weekday: 'long', day: 'numeric', month: 'long' });
+  const txtLines = [
+    `STRIKEPANEL — FOLLOW LIST`,
+    `${dubaiDate}`,
+    ``,
+    ...selected.map((a, i) => `${i + 1}. ${a.handle}\n   ${a.description}`),
+    ``,
+    `Search each handle on Instagram and hit Follow.`,
+  ];
+  fs.writeFileSync(FOLLOW_TXT_PATH, txtLines.join('\n'));
+  console.log(`Saved plain text: ${FOLLOW_TXT_PATH}`);
 
   const total = readFollowLog().length;
   const remaining = MASTER_LIST.length - total;
