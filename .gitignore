@@ -42,3 +42,4 @@ next-env.d.ts
 
 # superpowers tooling artifacts
 .superpowers/
+__pycache__/
