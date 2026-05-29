@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>The Morning Brief Method: How Elite Coaches Track Athlete Readiness Every Day — StrikePanel</title>
+<meta name="description" content="Most coaches run every athlete through the same session. The best coaches don't. Here's the system that tells you in under two minutes who to push, who to hold back, and who needs a rest day."/>
+<meta property="og:title" content="The Morning Brief Method: How Elite Coaches Track Athlete Readiness Every Day"/>
+<meta property="og:description" content="Most coaches run every athlete through the same session. The best coaches don't. Here's the system that tells you in under two minutes who to push, who to hold back, and who needs a rest day."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://strikepanel.uk/blog/morning-brief-method"/>
+<meta property="og:image" content="https://strikepanel.uk/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:site_name" content="StrikePanel"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="The Morning Brief Method: How Elite Coaches Track Athlete Readiness Every Day"/>
+<meta name="twitter:description" content="Most coaches run every athlete through the same session. The best coaches don't. Here's the system that tells you in under two minutes who to push, who to hold back, and who needs a rest day."/>
+<meta name="twitter:image" content="https://strikepanel.uk/og-image.png"/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://strikepanel.uk/blog/morning-brief-method"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='ng' cx='38%25' cy='32%25' r='62%25'%3E%3Cstop offset='0%25' stop-color='%231e2540'/%3E%3Cstop offset='55%25' stop-color='%230f1220'/%3E%3Cstop offset='100%25' stop-color='%230b0d14'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='45' cy='45' r='43' fill='url(%23ng)' stroke='%2300D4F0' stroke-width='1.5' stroke-opacity='0.6'/%3E%3Ccircle cx='45' cy='45' r='29' fill='none' stroke='%2300D4F0' stroke-width='0.9' stroke-opacity='0.2'/%3E%3Cline x1='45' y1='2' x2='45' y2='26' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='45' y1='64' x2='45' y2='88' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='26' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='64' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='11' fill='%2300D4F0'/%3E%3C/svg%3E"/>
+<meta name="theme-color" content="#04070f"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04070f;--bg2:#070c18;--surface:#0b1120;--card:#0f1828;--card2:#131e30;
+  --accent:#00D4F0;--accent2:#00a8c4;--green:#10b981;--red:#ef4444;
+  --amber:#f59e0b;--purple:#8b5cf6;--impact:#ff3366;
+  --text:#eef0f8;--muted:#7a85a0;--muted2:#3d4560;--muted3:#1e2840;
+  --fh:'Bebas Neue',sans-serif;--fc:'Barlow Condensed',sans-serif;
+  --fb:'Barlow',sans-serif;--fm:'DM Mono',monospace;
+  --grid-color:rgba(0,212,240,0.035);
+  --scan:rgba(0,212,240,0.012);
+  --radius:6px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:16px;line-height:1.7;overflow-x:hidden}
+
+/* Grid overlay */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--grid-color) 1px,transparent 1px),linear-gradient(90deg,var(--grid-color) 1px,transparent 1px);
+  background-size:52px 52px}
+/* Scanlines */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,var(--scan) 2px,var(--scan) 4px);
+  animation:scan-drift 8s linear infinite}
+@keyframes scan-drift{from{background-position:0 0}to{background-position:0 100px}}
+
+/* Ambient blobs */
+.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(140px)}
+.blob-1{width:700px;height:500px;top:-15%;left:-10%;background:var(--accent);opacity:.05}
+.blob-2{width:500px;height:400px;bottom:-10%;right:-8%;background:var(--purple);opacity:.04}
+
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(0,212,240,0.2)}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:rgba(0,212,240,0.25);border-radius:99px}
+
+/* Reading progress */
+#readProgress{
+  position:fixed;top:0;left:0;z-index:10000;height:2px;width:0%;
+  background:linear-gradient(90deg,var(--accent),var(--impact),var(--accent));
+  background-size:200% 100%;
+  animation:progress-shimmer 2s linear infinite;
+  transition:width .1s linear;pointer-events:none}
+@keyframes progress-shimmer{0%{background-position:0% 0}100%{background-position:200% 0}}
+
+/* Nav */
+.nav{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(4,7,15,0.9);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(0,212,240,0.07);
+  padding:0 clamp(16px,4vw,48px);
+  display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),rgba(0,212,240,0.25),transparent)}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{width:28px;height:28px;filter:drop-shadow(0 0 8px rgba(0,212,240,0.55))}
+.nav-name{font-family:var(--fh);font-size:18px;letter-spacing:2px}
+.nav-name span{color:var(--accent)}
+.nav-back{
+  font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);padding:8px 14px;border:1px solid rgba(255,255,255,0.06);
+  border-radius:3px;transition:all .2s;display:flex;align-items:center;gap:6px}
+.nav-back:hover{color:var(--accent);border-color:rgba(0,212,240,0.28);background:rgba(0,212,240,0.04)}
+
+/* Article layout */
+.article-wrap{
+  position:relative;z-index:1;
+  max-width:720px;margin:0 auto;
+  padding:60px clamp(20px,5vw,40px) 80px}
+
+/* Article header */
+.article-header{margin-bottom:48px}
+.article-cat{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--fm);font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  padding:5px 12px;border-radius:3px;margin-bottom:20px;
+  color:var(--accent);background:rgba(0,212,240,0.07);border:1px solid rgba(0,212,240,0.2)}
+.article-cat-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent);animation:kdot 2s ease-in-out infinite}
+@keyframes kdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.55)}}
+.article-title{
+  font-family:var(--fh);font-size:clamp(38px,6vw,62px);
+  letter-spacing:2px;line-height:0.95;margin-bottom:20px;color:var(--text)}
+.article-title span{color:var(--accent)}
+.article-meta{
+  display:flex;align-items:center;gap:0;flex-wrap:wrap;
+  font-family:var(--fm);font-size:10px;color:var(--muted2);letter-spacing:1px}
+.article-meta-item{padding-right:14px}
+.article-meta-item+.article-meta-item{padding-left:14px;border-left:1px solid rgba(255,255,255,0.08)}
+.article-divider{
+  height:1px;margin:32px 0;
+  background:linear-gradient(90deg,var(--accent),rgba(0,212,240,0.1),transparent)}
+
+/* Article body */
+.article-body{font-family:var(--fb);font-size:16px;line-height:1.8;color:rgba(238,240,248,0.88)}
+.article-body p{margin-bottom:22px}
+.article-body h2{
+  font-family:var(--fh);font-size:clamp(26px,3.5vw,36px);letter-spacing:2px;
+  color:var(--text);margin:44px 0 16px;line-height:1}
+.article-body h3{
+  font-family:var(--fh);font-size:clamp(20px,2.5vw,26px);letter-spacing:1.5px;
+  color:var(--accent);margin:32px 0 12px;line-height:1}
+.article-body strong{color:var(--text);font-weight:600}
+.article-body em{color:var(--muted);font-style:normal}
+
+/* Data callout boxes */
+.data-box{
+  margin:32px 0;padding:24px 28px;
+  background:rgba(0,212,240,0.04);border:1px solid rgba(0,212,240,0.14);
+  border-radius:var(--radius);border-left:3px solid var(--accent);
+  position:relative}
+.data-box-label{
+  font-family:var(--fm);font-size:8px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.data-box-label::before{content:'//';opacity:.5}
+.data-box p{margin-bottom:0;font-size:15px}
+
+.score-row{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:12px;margin:28px 0}
+.score-card{
+  padding:18px 16px;border-radius:var(--radius);
+  background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);
+  text-align:center}
+.score-card.green{border-color:rgba(16,185,129,0.2);background:rgba(16,185,129,0.04)}
+.score-card.amber{border-color:rgba(245,158,11,0.2);background:rgba(245,158,11,0.04)}
+.score-card.red{border-color:rgba(239,68,68,0.2);background:rgba(239,68,68,0.04)}
+.score-num{font-family:var(--fh);font-size:42px;line-height:1;letter-spacing:2px}
+.score-card.green .score-num{color:var(--green);text-shadow:0 0 20px rgba(16,185,129,0.4)}
+.score-card.amber .score-num{color:var(--amber);text-shadow:0 0 20px rgba(245,158,11,0.4)}
+.score-card.red .score-num{color:var(--red);text-shadow:0 0 20px rgba(239,68,68,0.4)}
+.score-name{font-family:var(--fm);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-top:4px}
+.score-action{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1px;margin-top:6px}
+.score-card.green .score-action{color:var(--green)}
+.score-card.amber .score-action{color:var(--amber)}
+.score-card.red .score-action{color:var(--red)}
+
+.metric-list{
+  margin:24px 0;display:flex;flex-direction:column;gap:10px}
+.metric-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);
+  border-radius:4px}
+.metric-label{font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)}
+.metric-weight{font-family:var(--fm);font-size:10px;color:var(--accent)}
+.metric-desc{font-family:var(--fm);font-size:10px;color:var(--muted2);text-align:right;max-width:200px}
+
+.threshold-table{
+  width:100%;margin:24px 0;border-collapse:collapse;
+  font-family:var(--fm);font-size:11px;letter-spacing:.5px}
+.threshold-table th{
+  padding:10px 14px;text-align:left;
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted2);border-bottom:1px solid rgba(255,255,255,0.06)}
+.threshold-table td{
+  padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.04);
+  color:var(--text)}
+.threshold-table tr:last-child td{border-bottom:none}
+.badge{
+  display:inline-block;padding:3px 10px;border-radius:3px;
+  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.badge-green{color:var(--green);background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)}
+.badge-amber{color:var(--amber);background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2)}
+.badge-red{color:var(--red);background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2)}
+
+/* Pull quote */
+.pull-quote{
+  margin:36px 0;padding:28px 32px;
+  border-left:3px solid var(--accent);
+  background:rgba(0,212,240,0.03)}
+.pull-quote p{
+  font-family:var(--fc);font-size:clamp(18px,2.5vw,22px);font-weight:600;
+  letter-spacing:1px;line-height:1.4;color:var(--text);margin-bottom:0;font-style:italic}
+
+/* CTA block */
+.article-cta{
+  margin-top:60px;padding:40px 36px;
+  background:var(--card);border:1px solid rgba(0,212,240,0.18);
+  border-radius:var(--radius);text-align:center;position:relative;overflow:hidden}
+.article-cta::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),rgba(0,212,240,0.3),transparent)}
+.article-cta-eyebrow{
+  font-family:var(--fm);font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:14px}
+.article-cta h2{
+  font-family:var(--fh);font-size:clamp(28px,4vw,42px);letter-spacing:3px;
+  color:var(--text);margin-bottom:12px;line-height:1}
+.article-cta p{
+  font-size:15px;color:var(--muted);line-height:1.7;max-width:480px;
+  margin:0 auto 28px}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--fc);font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  padding:14px 32px;border-radius:3px;color:var(--accent);
+  border:1px solid var(--accent);
+  box-shadow:0 0 20px rgba(0,212,240,0.18),inset 0 0 20px rgba(0,212,240,0.03);
+  transition:all .25s}
+.cta-btn:hover{background:rgba(0,212,240,0.09);box-shadow:0 0 44px rgba(0,212,240,0.45);transform:translateY(-2px)}
+.cta-price{
+  margin-top:14px;font-family:var(--fm);font-size:10px;
+  color:var(--muted2);letter-spacing:1px}
+
+/* Back link */
+.back-link{
+  display:inline-flex;align-items:center;gap:8px;margin-top:40px;
+  font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);transition:color .2s}
+.back-link:hover{color:var(--accent)}
+.back-link svg{transition:transform .2s}
+.back-link:hover svg{transform:translateX(-3px)}
+
+/* Footer */
+.footer{
+  position:relative;z-index:1;
+  padding:36px clamp(16px,4vw,48px) 28px;
+  border-top:1px solid rgba(0,212,240,0.07)}
+.footer-inner{
+  max-width:720px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-brand{font-family:var(--fh);font-size:16px;letter-spacing:2px}
+.footer-brand span{color:var(--accent)}
+.footer-copy{font-family:var(--fm);font-size:10px;color:var(--muted2)}
+</style>
+</head>
+<body>
+
+<div id="readProgress"></div>
+
+<div class="ambient" aria-hidden="true">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-brand">
+    <svg class="nav-logo" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+      <defs><radialGradient id="ng" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="55%" stop-color="#0f1220"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs>
+      <circle cx="45" cy="45" r="43" fill="url(#ng)" stroke="#00D4F0" stroke-width="1.5" stroke-opacity="0.6"/>
+      <circle cx="45" cy="45" r="29" fill="none" stroke="#00D4F0" stroke-width="0.9" stroke-opacity="0.2"/>
+      <line x1="45" y1="2" x2="45" y2="26" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="45" y1="64" x2="45" y2="88" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="2" y1="45" x2="26" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="64" y1="45" x2="88" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="45" cy="45" r="11" fill="#00D4F0"/>
+    </svg>
+    <div class="nav-name">Strike<span>Panel</span>™</div>
+  </a>
+  <a href="/blog" class="nav-back">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10 6H2M6 2L2 6l4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Blog
+  </a>
+</nav>
+
+<!-- ARTICLE -->
+<main class="article-wrap">
+
+  <!-- Header -->
+  <header class="article-header">
+    <div class="article-cat">
+      <span class="article-cat-dot"></span>
+      Readiness
+    </div>
+    <h1 class="article-title">The Morning Brief Method:<br>How Elite Coaches Track<br><span>Athlete Readiness</span> Every Day</h1>
+    <div class="article-meta">
+      <span class="article-meta-item">May 2026</span>
+      <span class="article-meta-item">8 min read</span>
+      <span class="article-meta-item">Readiness Coaching</span>
+    </div>
+    <div class="article-divider"></div>
+  </header>
+
+  <!-- Body -->
+  <article class="article-body">
+
+    <p>Walk into most gyms on a Tuesday morning and you'll see every athlete doing the same session. Same warm-up, same drills, same sparring rounds. One athlete slept eight hours and is rested and fresh. Another slept five, is nursing a shoulder niggle and had a bad weigh-in. They're both running the same three-round pad session at full intensity.</p>
+
+    <p>That's not coaching. That's guessing with a schedule.</p>
+
+    <p>The coaches getting the best results aren't working harder or knowing more techniques. They're making better decisions at the start of every training day. They know, before a single punch is thrown, who can be pushed, who should be managed and who needs to stay off the mat entirely. That intelligence comes from one simple habit: the morning brief check-in.</p>
+
+    <h2>WHAT THE MORNING BRIEF IS</h2>
+
+    <p>The morning brief is a 60-90 second check-in that every athlete completes before the session starts. It captures four inputs that, when combined, give you an accurate picture of where that athlete is physically and mentally today — not where they were last week, not what your training plan says they should be.</p>
+
+    <p>The four inputs are: <strong>sleep quality, muscle soreness, mood and motivation, and resting heart rate or HRV</strong>. Each is scored on a simple scale and combined into a single readiness score from 0 to 100. That number tells you what kind of session this athlete should be doing right now.</p>
+
+    <div class="data-box">
+      <div class="data-box-label">Why four inputs and not one?</div>
+      <p>HRV alone misses mental fatigue. Soreness alone misses cardiovascular readiness. Sleep alone misses inflammatory response to yesterday's hard session. Using all four inputs creates a composite picture that's far more predictive of actual performance and injury risk than any single metric.</p>
+    </div>
+
+    <h2>HOW TO SCORE EACH INPUT</h2>
+
+    <h3>Sleep Quality (0–25 points)</h3>
+    <p>Ask the athlete to rate sleep quality from 1 to 5 — not duration alone, but quality. Five hours of deep, uninterrupted sleep scores higher than seven hours of broken, restless sleep. Multiply their answer by 5. This gives you 0–25 points. A score of 4 or 5 is normal during fight camp. A score of 1 or 2 two nights in a row is a significant flag.</p>
+
+    <h3>Muscle Soreness (0–25 points)</h3>
+    <p>Rate body soreness on a 1 to 5 scale, where 1 is severe aching and 5 is completely fresh. Again multiply by 5. You're specifically looking for systemic soreness — the all-over heaviness that indicates incomplete recovery — rather than localised DOMS from a specific exercise. A fighter who says "my legs are sore from yesterday's conditioning but I feel otherwise fine" scores higher than one who reports soreness everywhere.</p>
+
+    <h3>Mood and Motivation (0–25 points)</h3>
+    <p>This is the one most coaches skip. Don't. Psychological readiness is directly linked to physical output and injury risk. An athlete who's mentally disengaged, irritable or dreading the session will have slower reactions, reduced decision-making and higher likelihood of absorbing shots they should slip. Rate 1 to 5, multiply by 5. Consistent low mood scores (below 12) across several days are a stronger indicator of overreaching than physical soreness alone.</p>
+
+    <h3>Heart Rate / HRV (0–25 points)</h3>
+    <p>If your athletes have a wearable or take a resting heart rate reading upon waking, this is the most objective of the four inputs. Compare today's resting HR against their 7-day rolling average. If today's HR is more than 5–7 bpm above their baseline, award 0–10 points. If it's at baseline, award 20–25 points. If you don't have HRV data, substitute a simple energy level rating (1–5, multiply by 5). It's less precise but still valuable.</p>
+
+    <div class="article-divider"></div>
+
+    <h2>THE SCORING SYSTEM: 0–100</h2>
+
+    <p>Add the four inputs together. You have a score between 0 and 100. Here's how to use it:</p>
+
+    <table class="threshold-table">
+      <thead>
+        <tr>
+          <th>Score</th>
+          <th>Status</th>
+          <th>Session Guidance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-family:var(--fh);font-size:18px;color:var(--green)">80–100</td>
+          <td><span class="badge badge-green">Green — Push</span></td>
+          <td>Full intensity. This athlete can handle high-load work, hard sparring, and new technical challenges.</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--fh);font-size:18px;color:var(--amber)">55–79</td>
+          <td><span class="badge badge-amber">Amber — Manage</span></td>
+          <td>Moderate session. Technique work, light pad rounds, conditioning at 70–80%. No full-contact sparring.</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--fh);font-size:18px;color:var(--red)">Below 55</td>
+          <td><span class="badge badge-red">Red — Rest</span></td>
+          <td>Active recovery only. Mobility, light movement, mental review. No intensity above 50%.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>These thresholds aren't arbitrary. They're calibrated to match how recovered the athlete's nervous system, connective tissue and immune function actually are at each level. Pushing a 40-score athlete through a hard session doesn't build fitness — it degrades it, and raises injury risk significantly.</p>
+
+    <h2>A REAL EXAMPLE: THREE ATHLETES, ONE SESSION</h2>
+
+    <p>It's 7 weeks out from a regional card. You have three fighters on the mat: Priya, Jake and Marcus. Here's what their morning briefs look like:</p>
+
+    <div class="score-row">
+      <div class="score-card green">
+        <div class="score-num">91</div>
+        <div class="score-name">Priya</div>
+        <div class="score-action">Full Push</div>
+      </div>
+      <div class="score-card amber">
+        <div class="score-num">74</div>
+        <div class="score-name">Jake</div>
+        <div class="score-action">Manage</div>
+      </div>
+      <div class="score-card red">
+        <div class="score-num">38</div>
+        <div class="score-name">Marcus</div>
+        <div class="score-action">Rest Day</div>
+      </div>
+    </div>
+
+    <p><strong>Priya scored 91.</strong> Sleep: 5/5. Soreness: 4/5. Mood: 5/5. HR at baseline. She's fresh, motivated and physically recovered. Today is the day to push her — new combinations, hard sparring, high-volume conditioning.</p>
+
+    <p><strong>Jake scored 74.</strong> Sleep: 3/5. Soreness: 4/5. Mood: 4/5. HR 4 bpm above baseline. He's fine but not optimal. Put him on technical work and light pads. Two rounds of controlled sparring at 60–70%, then conditioning at moderate pace. Don't waste his session — but don't drive him into the ground either.</p>
+
+    <p><strong>Marcus scored 38.</strong> Sleep: 2/5. Soreness: 2/5. Mood: 1/5. HR 11 bpm above baseline. Something is wrong. This could be the onset of illness, accumulated fatigue from two hard weeks, or a personal issue affecting his mental state. Either way, full training today will make things worse, not better. Marcus does active recovery — 20 minutes of mobility work, shadow boxing at 30%, and a conversation about what's going on.</p>
+
+    <div class="pull-quote">
+      <p>"The hardest thing I ever did as a coach was tell a fighter to go home and sleep. The second hardest was watching a different coach run the same fighter into the ground the next week and wonder why he was flat on fight night."</p>
+    </div>
+
+    <p>Without the morning brief, you'd probably run all three through the same session. Priya would be under-stimulated. Jake would manage. Marcus would make it through — barely — and spend the next three days further in the hole.</p>
+
+    <h2>HOW TO IMPLEMENT IT IN UNDER TWO MINUTES</h2>
+
+    <p>The reason most coaches don't run readiness checks is friction. If it takes five minutes per athlete and you have eight fighters, that's 40 minutes gone before training starts. The morning brief is designed to take 90 seconds or less.</p>
+
+    <p>There are two implementation approaches that work:</p>
+
+    <h3>Option 1: Digital Pre-Session Form</h3>
+    <p>Athletes submit a four-question form before they arrive at the gym — on their phone, during the drive or before breakfast. You open your coaching dashboard and see every score before the warm-up starts. Total time in the gym: zero. Total decision quality: maximum. This is how StrikePanel handles it — athletes log in, answer four questions, and you see a ranked list of readiness scores the moment you walk in.</p>
+
+    <h3>Option 2: Verbal Check-In Circuit</h3>
+    <p>If you prefer face-to-face contact, set up a brief circuit at the start of every session. Athletes rotate through you in the first five minutes while the rest are doing warm-up. You ask the four questions, record the answers on a notepad or phone, and make your session adjustments. It takes roughly 60–90 seconds per athlete once everyone is practiced with the system.</p>
+
+    <div class="data-box">
+      <div class="data-box-label">Making it stick</div>
+      <p>Athletes need to understand <em>why</em> this matters. Take five minutes to explain the system the first week — show them that a 38 score means active recovery, not laziness. Once they understand that the score protects them and helps them peak correctly, compliance goes up dramatically. In our experience, gyms using StrikePanel see 95%+ daily check-in compliance within two weeks.</p>
+    </div>
+
+    <h2>ADJUSTING THE SESSION IN REAL TIME</h2>
+
+    <p>The morning brief doesn't just tell you who to push. It changes the structure of your entire session plan. Here's how to translate the scores into practical decisions:</p>
+
+    <div class="metric-list">
+      <div class="metric-row">
+        <span class="metric-label">Squad Average 75+</span>
+        <span class="metric-desc">Run the planned session at full intensity. This is a green day for the group.</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Squad Average 55–74</span>
+        <span class="metric-desc">Reduce sparring intensity by one level. Extend technical work. Cut conditioning volume by 20%.</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Squad Average Below 55</span>
+        <span class="metric-desc">Recovery session. Mobility, flow drills, mental review. No competitive sparring under any circumstances.</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Any single score below 40</span>
+        <span class="metric-desc">That athlete is off the mat. No exceptions. Make the call early — don't wait to see how they "warm up".</span>
+      </div>
+    </div>
+
+    <p>The last point is critical. Coaches routinely let athletes "warm into it" when they've reported being low. Sometimes this works. More often, the athlete masks the fatigue for two rounds and then something gives — a pulled muscle, a bad reaction to a punch, an ugly sparring session that undermines their confidence three weeks before a fight. The score said 38. Trust the score.</p>
+
+    <h2>TRACKING TRENDS, NOT JUST DAILY SCORES</h2>
+
+    <p>Daily scores are useful. Weekly trends are where the real coaching intelligence lives. A fighter who scores 72, 68, 63, 59 across four consecutive days is in trouble — even though none of those individual scores triggered the red threshold. That downward trend tells you the athlete is accumulating fatigue faster than they're recovering. Without a system to track daily scores, you can't see that trend until it's already a problem.</p>
+
+    <p>What you're looking for in fight camp is a pattern that looks like this: high variability in the base phase (scores fluctuating as the body adapts to increased load), stabilising scores in the build phase (recovery mechanisms catching up), and high, consistent scores in peak week (the athlete arriving at the fight fresh and sharp). When the trend line doesn't follow that shape, you adjust the camp structure — not at fight week, but weeks earlier when you still have time to course-correct.</p>
+
+    <h2>THE TWO-MINUTE HABIT THAT CHANGES EVERYTHING</h2>
+
+    <p>The morning brief isn't complicated. It's four numbers, 90 seconds, and one decision: push, manage or rest. The hard part isn't the system — it's the discipline to follow it when an athlete looks fine on the outside, or when you're behind on the training plan and feel like you can't afford a recovery day.</p>
+
+    <p>You can always afford a recovery day. What you can't afford is a flat, overtrained fighter on fight night — or worse, one who picked up an injury in week five because you ran a 38-score session at full gas.</p>
+
+    <p>Start this week. Pick a simple format, introduce it to your squad, and run it every single training day for a month. By the time your next fight rolls around, you'll wonder how you ever coached without it.</p>
+
+  </article>
+
+  <!-- CTA -->
+  <div class="article-cta">
+    <div class="article-cta-eyebrow">StrikePanel™</div>
+    <h2>TRACK READINESS<br>AUTOMATICALLY</h2>
+    <p>Morning brief scores, trend tracking and session planning — built into one coaching dashboard. Every athlete scored every day, automatically.</p>
+    <a href="https://payhip.com/Strikepanel" target="_blank" rel="noopener" class="cta-btn">
+      Get StrikePanel — $99 One-Time
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <div class="cta-price">One-time payment. No subscriptions. No monthly fees.</div>
+  </div>
+
+  <!-- Back link -->
+  <a href="/blog" class="back-link">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10 6H2M6 2L2 6l4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back to Blog
+  </a>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">Strike<span>Panel</span>™</div>
+    <div class="footer-copy">© 2026 StrikePanel. Combat sports coaching intelligence.</div>
+  </div>
+</footer>
+
+<script>
+// Reading progress
+(function(){
+  var bar = document.getElementById('readProgress');
+  function update(){
+    var h = document.documentElement;
+    var pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  }
+  window.addEventListener('scroll', update, {passive: true});
+})();
+</script>
+
+</body>
+</html>

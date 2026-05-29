@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>How to Structure a Fight Camp: Base, Build, Peak and Fight Week — StrikePanel</title>
+<meta name="description" content="The four phases of a fight camp and exactly what your athletes should be doing — and feeling — in each one."/>
+<meta property="og:title" content="How to Structure a Fight Camp: Base, Build, Peak and Fight Week"/>
+<meta property="og:description" content="The four phases of a fight camp and exactly what your athletes should be doing — and feeling — in each one."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://strikepanel.uk/blog/fight-camp-planning"/>
+<meta property="og:image" content="https://strikepanel.uk/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:site_name" content="StrikePanel"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="How to Structure a Fight Camp: Base, Build, Peak and Fight Week"/>
+<meta name="twitter:description" content="The four phases of a fight camp and exactly what your athletes should be doing — and feeling — in each one."/>
+<meta name="twitter:image" content="https://strikepanel.uk/og-image.png"/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://strikepanel.uk/blog/fight-camp-planning"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='ng' cx='38%25' cy='32%25' r='62%25'%3E%3Cstop offset='0%25' stop-color='%231e2540'/%3E%3Cstop offset='55%25' stop-color='%230f1220'/%3E%3Cstop offset='100%25' stop-color='%230b0d14'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='45' cy='45' r='43' fill='url(%23ng)' stroke='%2300D4F0' stroke-width='1.5' stroke-opacity='0.6'/%3E%3Ccircle cx='45' cy='45' r='29' fill='none' stroke='%2300D4F0' stroke-width='0.9' stroke-opacity='0.2'/%3E%3Cline x1='45' y1='2' x2='45' y2='26' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='45' y1='64' x2='45' y2='88' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='26' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='64' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='11' fill='%2300D4F0'/%3E%3C/svg%3E"/>
+<meta name="theme-color" content="#04070f"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04070f;--bg2:#070c18;--surface:#0b1120;--card:#0f1828;--card2:#131e30;
+  --accent:#00D4F0;--accent2:#00a8c4;--green:#10b981;--red:#ef4444;
+  --amber:#f59e0b;--purple:#8b5cf6;--impact:#ff3366;
+  --text:#eef0f8;--muted:#7a85a0;--muted2:#3d4560;--muted3:#1e2840;
+  --fh:'Bebas Neue',sans-serif;--fc:'Barlow Condensed',sans-serif;
+  --fb:'Barlow',sans-serif;--fm:'DM Mono',monospace;
+  --grid-color:rgba(0,212,240,0.035);
+  --scan:rgba(0,212,240,0.012);
+  --radius:6px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:16px;line-height:1.7;overflow-x:hidden}
+
+/* Grid overlay */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--grid-color) 1px,transparent 1px),linear-gradient(90deg,var(--grid-color) 1px,transparent 1px);
+  background-size:52px 52px}
+/* Scanlines */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,var(--scan) 2px,var(--scan) 4px);
+  animation:scan-drift 8s linear infinite}
+@keyframes scan-drift{from{background-position:0 0}to{background-position:0 100px}}
+
+/* Ambient blobs */
+.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(140px)}
+.blob-1{width:700px;height:500px;top:-15%;left:-10%;background:var(--accent);opacity:.05}
+.blob-2{width:500px;height:400px;bottom:-10%;right:-8%;background:var(--purple);opacity:.04}
+
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(0,212,240,0.2)}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:rgba(0,212,240,0.25);border-radius:99px}
+
+/* Reading progress */
+#readProgress{
+  position:fixed;top:0;left:0;z-index:10000;height:2px;width:0%;
+  background:linear-gradient(90deg,var(--accent),var(--impact),var(--accent));
+  background-size:200% 100%;
+  animation:progress-shimmer 2s linear infinite;
+  transition:width .1s linear;pointer-events:none}
+@keyframes progress-shimmer{0%{background-position:0% 0}100%{background-position:200% 0}}
+
+/* Nav */
+.nav{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(4,7,15,0.9);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(0,212,240,0.07);
+  padding:0 clamp(16px,4vw,48px);
+  display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),rgba(0,212,240,0.25),transparent)}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{width:28px;height:28px;filter:drop-shadow(0 0 8px rgba(0,212,240,0.55))}
+.nav-name{font-family:var(--fh);font-size:18px;letter-spacing:2px}
+.nav-name span{color:var(--accent)}
+.nav-back{
+  font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);padding:8px 14px;border:1px solid rgba(255,255,255,0.06);
+  border-radius:3px;transition:all .2s;display:flex;align-items:center;gap:6px}
+.nav-back:hover{color:var(--accent);border-color:rgba(0,212,240,0.28);background:rgba(0,212,240,0.04)}
+
+/* Article layout */
+.article-wrap{
+  position:relative;z-index:1;
+  max-width:720px;margin:0 auto;
+  padding:60px clamp(20px,5vw,40px) 80px}
+
+/* Article header */
+.article-header{margin-bottom:48px}
+.article-cat{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--fm);font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  padding:5px 12px;border-radius:3px;margin-bottom:20px;
+  color:var(--accent);background:rgba(0,212,240,0.07);border:1px solid rgba(0,212,240,0.2)}
+.article-cat-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent);animation:kdot 2s ease-in-out infinite}
+@keyframes kdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.55)}}
+.article-title{
+  font-family:var(--fh);font-size:clamp(38px,6vw,62px);
+  letter-spacing:2px;line-height:0.95;margin-bottom:20px;color:var(--text)}
+.article-title span{color:var(--accent)}
+.article-meta{
+  display:flex;align-items:center;gap:0;flex-wrap:wrap;
+  font-family:var(--fm);font-size:10px;color:var(--muted2);letter-spacing:1px}
+.article-meta-item{padding-right:14px}
+.article-meta-item+.article-meta-item{padding-left:14px;border-left:1px solid rgba(255,255,255,0.08)}
+.article-divider{
+  height:1px;margin:32px 0;
+  background:linear-gradient(90deg,var(--accent),rgba(0,212,240,0.1),transparent)}
+
+/* Article body */
+.article-body{font-family:var(--fb);font-size:16px;line-height:1.8;color:rgba(238,240,248,0.88)}
+.article-body p{margin-bottom:22px}
+.article-body h2{
+  font-family:var(--fh);font-size:clamp(26px,3.5vw,36px);letter-spacing:2px;
+  color:var(--text);margin:44px 0 16px;line-height:1}
+.article-body h3{
+  font-family:var(--fh);font-size:clamp(20px,2.5vw,26px);letter-spacing:1.5px;
+  color:var(--accent);margin:32px 0 12px;line-height:1}
+.article-body strong{color:var(--text);font-weight:600}
+.article-body em{color:var(--muted);font-style:normal}
+
+/* Phase header cards */
+.phase-card{
+  margin:36px 0;border-radius:var(--radius);overflow:hidden;
+  border:1px solid rgba(255,255,255,0.06)}
+.phase-header{
+  padding:18px 24px;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,0.06)}
+.phase-header.green-phase{background:rgba(16,185,129,0.07);border-bottom-color:rgba(16,185,129,0.12)}
+.phase-header.amber-phase{background:rgba(245,158,11,0.07);border-bottom-color:rgba(245,158,11,0.12)}
+.phase-header.red-phase{background:rgba(239,68,68,0.07);border-bottom-color:rgba(239,68,68,0.12)}
+.phase-header.purple-phase{background:rgba(139,92,246,0.07);border-bottom-color:rgba(139,92,246,0.12)}
+.phase-name{font-family:var(--fh);font-size:clamp(20px,2.5vw,28px);letter-spacing:2px}
+.phase-header.green-phase .phase-name{color:var(--green)}
+.phase-header.amber-phase .phase-name{color:var(--amber)}
+.phase-header.red-phase .phase-name{color:var(--red)}
+.phase-header.purple-phase .phase-name{color:#a78bfa}
+.phase-timing{
+  font-family:var(--fm);font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  padding:5px 12px;border-radius:3px}
+.phase-header.green-phase .phase-timing{color:var(--green);background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)}
+.phase-header.amber-phase .phase-timing{color:var(--amber);background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2)}
+.phase-header.red-phase .phase-timing{color:var(--red);background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2)}
+.phase-header.purple-phase .phase-timing{color:#a78bfa;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2)}
+.phase-body{padding:20px 24px;background:var(--card)}
+.phase-stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:10px;margin-bottom:18px}
+.phase-stat{
+  padding:12px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:4px;
+  text-align:center}
+.phase-stat-num{font-family:var(--fh);font-size:24px;letter-spacing:1px;line-height:1}
+.phase-header.green-phase~.phase-body .phase-stat-num{color:var(--green)}
+.phase-header.amber-phase~.phase-body .phase-stat-num{color:var(--amber)}
+.phase-header.red-phase~.phase-body .phase-stat-num{color:var(--red)}
+.phase-header.purple-phase~.phase-body .phase-stat-num{color:#a78bfa}
+.phase-stat-lbl{font-family:var(--fm);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-top:3px}
+.phase-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.phase-list li{
+  font-family:var(--fm);font-size:11px;letter-spacing:.5px;color:var(--muted);
+  padding-left:16px;position:relative}
+.phase-list li::before{content:'—';position:absolute;left:0;color:var(--muted3)}
+
+/* Weekly breakdown table */
+.week-table{
+  width:100%;margin:28px 0;border-collapse:collapse;
+  font-family:var(--fm);font-size:11px}
+.week-table th{
+  padding:10px 12px;text-align:left;
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted2);border-bottom:1px solid rgba(255,255,255,0.06)}
+.week-table td{
+  padding:11px 12px;border-bottom:1px solid rgba(255,255,255,0.04);
+  vertical-align:top}
+.week-table tr:last-child td{border-bottom:none}
+.week-table td:first-child{font-family:var(--fh);font-size:16px;letter-spacing:1px;white-space:nowrap}
+.week-num-green{color:var(--green)}
+.week-num-amber{color:var(--amber)}
+.week-num-red{color:var(--red)}
+.week-num-purple{color:#a78bfa}
+.week-tag{
+  display:inline-block;padding:2px 8px;border-radius:2px;
+  font-size:8px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;white-space:nowrap}
+.tag-green{color:var(--green);background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.18)}
+.tag-amber{color:var(--amber);background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.18)}
+.tag-red{color:var(--red);background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.18)}
+.tag-purple{color:#a78bfa;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.18)}
+
+/* Data callout boxes */
+.data-box{
+  margin:32px 0;padding:24px 28px;
+  background:rgba(0,212,240,0.04);border:1px solid rgba(0,212,240,0.14);
+  border-radius:var(--radius);border-left:3px solid var(--accent)}
+.data-box-label{
+  font-family:var(--fm);font-size:8px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.data-box-label::before{content:'//';opacity:.5}
+.data-box p{margin-bottom:0;font-size:15px}
+
+/* Readiness thresholds bar */
+.readiness-bar-wrap{margin:28px 0}
+.readiness-bar-row{
+  display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.readiness-bar-label{
+  font-family:var(--fm);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted);width:80px;flex-shrink:0}
+.readiness-bar-track{
+  flex:1;height:6px;background:rgba(255,255,255,0.04);border-radius:0;overflow:hidden;position:relative}
+.readiness-bar-fill{height:100%;border-radius:0}
+.readiness-bar-value{
+  font-family:var(--fh);font-size:16px;letter-spacing:1px;
+  width:40px;text-align:right;flex-shrink:0}
+
+/* Pull quote */
+.pull-quote{
+  margin:36px 0;padding:28px 32px;
+  border-left:3px solid var(--accent);
+  background:rgba(0,212,240,0.03)}
+.pull-quote p{
+  font-family:var(--fc);font-size:clamp(18px,2.5vw,22px);font-weight:600;
+  letter-spacing:1px;line-height:1.4;color:var(--text);margin-bottom:0;font-style:italic}
+
+/* Camp overview visual */
+.camp-timeline{
+  margin:32px 0;padding:22px;
+  background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius)}
+.camp-timeline-label{
+  font-family:var(--fm);font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--muted2);margin-bottom:18px}
+.camp-phases-visual{display:grid;grid-template-columns:2fr 1.5fr 1fr 0.75fr;gap:4px}
+.camp-phase-block{
+  padding:12px 10px;border-radius:3px;text-align:center}
+.camp-phase-block.green-block{background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.18)}
+.camp-phase-block.amber-block{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.18)}
+.camp-phase-block.red-block{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.18)}
+.camp-phase-block.purple-block{background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.18)}
+.camp-phase-block-name{font-family:var(--fh);font-size:13px;letter-spacing:1px;margin-bottom:2px}
+.green-block .camp-phase-block-name{color:var(--green)}
+.amber-block .camp-phase-block-name{color:var(--amber)}
+.red-block .camp-phase-block-name{color:var(--red)}
+.purple-block .camp-phase-block-name{color:#a78bfa}
+.camp-phase-block-weeks{font-family:var(--fm);font-size:8px;letter-spacing:1px;color:var(--muted2)}
+@media(max-width:480px){.camp-phases-visual{grid-template-columns:1fr 1fr;gap:6px}}
+
+/* CTA block */
+.article-cta{
+  margin-top:60px;padding:40px 36px;
+  background:var(--card);border:1px solid rgba(0,212,240,0.18);
+  border-radius:var(--radius);text-align:center;position:relative;overflow:hidden}
+.article-cta::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),rgba(0,212,240,0.3),transparent)}
+.article-cta-eyebrow{
+  font-family:var(--fm);font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:14px}
+.article-cta h2{
+  font-family:var(--fh);font-size:clamp(28px,4vw,42px);letter-spacing:3px;
+  color:var(--text);margin-bottom:12px;line-height:1}
+.article-cta p{
+  font-size:15px;color:var(--muted);line-height:1.7;max-width:480px;
+  margin:0 auto 28px}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--fc);font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  padding:14px 32px;border-radius:3px;color:var(--accent);
+  border:1px solid var(--accent);
+  box-shadow:0 0 20px rgba(0,212,240,0.18),inset 0 0 20px rgba(0,212,240,0.03);
+  transition:all .25s}
+.cta-btn:hover{background:rgba(0,212,240,0.09);box-shadow:0 0 44px rgba(0,212,240,0.45);transform:translateY(-2px)}
+.cta-price{
+  margin-top:14px;font-family:var(--fm);font-size:10px;
+  color:var(--muted2);letter-spacing:1px}
+
+/* Back link */
+.back-link{
+  display:inline-flex;align-items:center;gap:8px;margin-top:40px;
+  font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);transition:color .2s}
+.back-link:hover{color:var(--accent)}
+.back-link svg{transition:transform .2s}
+.back-link:hover svg{transform:translateX(-3px)}
+
+/* Footer */
+.footer{
+  position:relative;z-index:1;
+  padding:36px clamp(16px,4vw,48px) 28px;
+  border-top:1px solid rgba(0,212,240,0.07)}
+.footer-inner{
+  max-width:720px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-brand{font-family:var(--fh);font-size:16px;letter-spacing:2px}
+.footer-brand span{color:var(--accent)}
+.footer-copy{font-family:var(--fm);font-size:10px;color:var(--muted2)}
+</style>
+</head>
+<body>
+
+<div id="readProgress"></div>
+
+<div class="ambient" aria-hidden="true">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-brand">
+    <svg class="nav-logo" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+      <defs><radialGradient id="ng" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="55%" stop-color="#0f1220"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs>
+      <circle cx="45" cy="45" r="43" fill="url(#ng)" stroke="#00D4F0" stroke-width="1.5" stroke-opacity="0.6"/>
+      <circle cx="45" cy="45" r="29" fill="none" stroke="#00D4F0" stroke-width="0.9" stroke-opacity="0.2"/>
+      <line x1="45" y1="2" x2="45" y2="26" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="45" y1="64" x2="45" y2="88" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="2" y1="45" x2="26" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="64" y1="45" x2="88" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="45" cy="45" r="11" fill="#00D4F0"/>
+    </svg>
+    <div class="nav-name">Strike<span>Panel</span>™</div>
+  </a>
+  <a href="/blog" class="nav-back">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10 6H2M6 2L2 6l4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Blog
+  </a>
+</nav>
+
+<!-- ARTICLE -->
+<main class="article-wrap">
+
+  <!-- Header -->
+  <header class="article-header">
+    <div class="article-cat">
+      <span class="article-cat-dot"></span>
+      Fight Camp
+    </div>
+    <h1 class="article-title">How to Structure<br>a Fight Camp:<br><span>Base, Build, Peak</span><br>and Fight Week</h1>
+    <div class="article-meta">
+      <span class="article-meta-item">May 2026</span>
+      <span class="article-meta-item">9 min read</span>
+      <span class="article-meta-item">Fight Camp Planning</span>
+    </div>
+    <div class="article-divider"></div>
+  </header>
+
+  <!-- Body -->
+  <article class="article-body">
+
+    <p>A fight camp is not just a block of training before a fight. It's a precisely sequenced physiological process — building a base, layering intensity, sharpening skills, and then arriving at fight night with every system at its absolute peak. Get the sequence wrong and you end up with a fighter who's either underprepared, overtrained, or flat.</p>
+
+    <p>Most coaches plan a camp by counting backwards from fight night and filling in sessions. That's not periodisation — that's scheduling. Real fight camp structure is built on understanding what the body needs at each stage and designing every training week to produce a specific physiological response.</p>
+
+    <p>Here's how to build a camp that actually works.</p>
+
+    <!-- Camp overview visual -->
+    <div class="camp-timeline">
+      <div class="camp-timeline-label">// 10-Week Camp Structure — Relative Load Allocation</div>
+      <div class="camp-phases-visual">
+        <div class="camp-phase-block green-block">
+          <div class="camp-phase-block-name">BASE</div>
+          <div class="camp-phase-block-weeks">Weeks 8–10</div>
+        </div>
+        <div class="camp-phase-block amber-block">
+          <div class="camp-phase-block-name">BUILD</div>
+          <div class="camp-phase-block-weeks">Weeks 4–7</div>
+        </div>
+        <div class="camp-phase-block red-block">
+          <div class="camp-phase-block-name">PEAK</div>
+          <div class="camp-phase-block-weeks">Weeks 2–3</div>
+        </div>
+        <div class="camp-phase-block purple-block">
+          <div class="camp-phase-block-name">FIGHT</div>
+          <div class="camp-phase-block-weeks">Week 1</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>PHASE ONE: THE BASE (8+ WEEKS OUT)</h2>
+
+    <div class="phase-card">
+      <div class="phase-header green-phase">
+        <span class="phase-name">Base Phase</span>
+        <span class="phase-timing">8–10+ weeks out</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-stats">
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:var(--green)">5–6</div>
+            <div class="phase-stat-lbl">Sessions/week</div>
+          </div>
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:var(--green)">60–70%</div>
+            <div class="phase-stat-lbl">Max Intensity</div>
+          </div>
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:var(--green)">65+</div>
+            <div class="phase-stat-lbl">Min Readiness</div>
+          </div>
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:var(--green)">High</div>
+            <div class="phase-stat-lbl">Volume Target</div>
+          </div>
+        </div>
+        <ul class="phase-list">
+          <li>Aerobic conditioning: 3–4 runs/bike sessions per week, Zone 2 focus (130–145 bpm), 30–50 minutes per session</li>
+          <li>Technical drilling: high repetition, low resistance — building automation of core skills</li>
+          <li>Bag work at 50–60%: volume over intensity, 8–12 rounds of 2–3 minutes</li>
+          <li>No hard sparring. Light flow sparring only, emphasis on touch and technique</li>
+          <li>Strength and conditioning: 2 sessions per week, compound movements, moderate load (70–75% 1RM)</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>The base phase is about construction. You're laying the aerobic infrastructure that every other element of fight camp sits on top of. An athlete with a poor aerobic base runs out of gas in round three regardless of how sharp their technique is — and a fighter gasping for air is a fighter making bad decisions.</p>
+
+    <p>During this phase, you want high volume and low to moderate intensity. The goal is adaptation, not performance. Your athletes will feel tired — genuinely, persistently tired — and that's correct. This is where the body remodels itself: increased mitochondrial density, improved capillarisation, stronger tendons and ligaments, improved lactic acid buffering capacity.</p>
+
+    <h3>Readiness in the Base Phase</h3>
+
+    <p>Expect morning brief scores to be variable — often in the 55–75 range — because the training load is intentionally high relative to recovery. This is normal. What you're watching for is a score that drops below 45 for more than two consecutive days, or a consistent downward trend across a full week. Either pattern indicates that load is outpacing recovery and you need to insert a deload day.</p>
+
+    <p>A genuine deload in the base phase is not failure — it's periodisation working correctly. One lighter day every 10–14 days allows the body to absorb the adaptations you've been driving. Skip the deloads and you accumulate fatigue that compounds into the build phase and costs you dearly in weeks four through six.</p>
+
+    <h2>PHASE TWO: THE BUILD (4–7 WEEKS OUT)</h2>
+
+    <div class="phase-card">
+      <div class="phase-header amber-phase">
+        <span class="phase-name">Build Phase</span>
+        <span class="phase-timing">4–7 weeks out</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-stats">
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:var(--amber)">4–5</div>
+            <div class="phase-stat-lbl">Sessions/week</div>
+          </div>
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:var(--amber)">75–85%</div>
+            <div class="phase-stat-lbl">Max Intensity</div>
+          </div>
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:var(--amber)">60+</div>
+            <div class="phase-stat-lbl">Min Readiness</div>
+          </div>
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:var(--amber)">Rising</div>
+            <div class="phase-stat-lbl">Intensity Target</div>
+          </div>
+        </div>
+        <ul class="phase-list">
+          <li>Sparring introduced at week 7 out: 2–3 rounds, controlled, specific objectives (e.g. "jab entry only")</li>
+          <li>Sparring volume increases weekly: 4 rounds at week 6, 6 rounds at week 5, 8 rounds at week 4</li>
+          <li>Interval conditioning replaces steady-state: 400m repeats, bike intervals, 30:30s, 10-second sprint clusters</li>
+          <li>Pad work intensity climbs to 75–80%: combination development, specific game plan drilling</li>
+          <li>Volume begins to reduce as intensity rises — total session time drops by 15–20% from base phase</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>The build phase is where the real craft of fight camp coaching lives. You're transitioning from building the engine to tuning it — and the balance between volume and intensity is the variable you're constantly managing.</p>
+
+    <p>Sparring is the critical element. The first sparring session of fight camp should feel almost too easy — short, purposeful, technically focused. You're not trying to win sparring in week seven. You're getting the athlete comfortable with contact again after the base phase, re-sharpening their timing, and building the specific adaptations (pain tolerance, contact response, adrenaline management) that technical drilling alone cannot produce.</p>
+
+    <div class="pull-quote">
+      <p>"The biggest mistake in the build phase isn't going too hard in sparring. It's going too hard too early — before the athlete's timing, conditioning and mental state are ready to absorb it."</p>
+    </div>
+
+    <p>A sample week at five weeks out looks like this: Monday — conditioning intervals and technical drilling. Tuesday — pads and sparring (5 rounds). Wednesday — strength and conditioning, mobility. Thursday — pads and technical, game plan drilling. Friday — light sparring (3 rounds, flow). Saturday — long run or aerobic session. Sunday — complete rest.</p>
+
+    <h3>Managing Load in the Build Phase</h3>
+
+    <p>As intensity increases, recovery demand increases with it. An athlete who scored 72 average across the base phase needs 7–8 hours of sleep, adequate protein (2.0–2.2g/kg body weight), and two complete rest days per week to maintain adaptation in the build phase. If those inputs aren't in place, readiness scores will trend downward — and a fighter training hard on a 48 score is digging a hole, not building fitness.</p>
+
+    <p>The weekly schedule table below shows how to structure a 10-week camp from start to fight night:</p>
+
+    <table class="week-table">
+      <thead>
+        <tr>
+          <th>Week</th>
+          <th>Phase</th>
+          <th>Sessions</th>
+          <th>Sparring Rounds</th>
+          <th>Target Readiness</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="week-num-green">W10</td>
+          <td><span class="week-tag tag-green">Base</span></td>
+          <td>5–6</td>
+          <td>None</td>
+          <td style="color:var(--green)">65+</td>
+        </tr>
+        <tr>
+          <td class="week-num-green">W9</td>
+          <td><span class="week-tag tag-green">Base</span></td>
+          <td>5–6</td>
+          <td>None</td>
+          <td style="color:var(--green)">65+</td>
+        </tr>
+        <tr>
+          <td class="week-num-green">W8</td>
+          <td><span class="week-tag tag-green">Base</span></td>
+          <td>5–6</td>
+          <td>None / Flow only</td>
+          <td style="color:var(--green)">60+</td>
+        </tr>
+        <tr>
+          <td class="week-num-amber">W7</td>
+          <td><span class="week-tag tag-amber">Build</span></td>
+          <td>5</td>
+          <td>2–3 rounds</td>
+          <td style="color:var(--amber)">62+</td>
+        </tr>
+        <tr>
+          <td class="week-num-amber">W6</td>
+          <td><span class="week-tag tag-amber">Build</span></td>
+          <td>5</td>
+          <td>4–5 rounds</td>
+          <td style="color:var(--amber)">62+</td>
+        </tr>
+        <tr>
+          <td class="week-num-amber">W5</td>
+          <td><span class="week-tag tag-amber">Build</span></td>
+          <td>4–5</td>
+          <td>6 rounds</td>
+          <td style="color:var(--amber)">60+</td>
+        </tr>
+        <tr>
+          <td class="week-num-amber">W4</td>
+          <td><span class="week-tag tag-amber">Build Peak</span></td>
+          <td>4–5</td>
+          <td>8 rounds</td>
+          <td style="color:var(--amber)">60+</td>
+        </tr>
+        <tr>
+          <td class="week-num-red">W3</td>
+          <td><span class="week-tag tag-red">Peak</span></td>
+          <td>4</td>
+          <td>6 rounds</td>
+          <td style="color:var(--red)">65+</td>
+        </tr>
+        <tr>
+          <td class="week-num-red">W2</td>
+          <td><span class="week-tag tag-red">Peak</span></td>
+          <td>3–4</td>
+          <td>3–4 rounds</td>
+          <td style="color:var(--red)">70+</td>
+        </tr>
+        <tr>
+          <td class="week-num-purple">W1</td>
+          <td><span class="week-tag tag-purple">Fight Week</span></td>
+          <td>2–3</td>
+          <td>1–2 rounds (light)</td>
+          <td style="color:#a78bfa">80+</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>PHASE THREE: THE PEAK (2–3 WEEKS OUT)</h2>
+
+    <div class="phase-card">
+      <div class="phase-header red-phase">
+        <span class="phase-name">Peak Phase</span>
+        <span class="phase-timing">2–3 weeks out</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-stats">
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:var(--red)">3–4</div>
+            <div class="phase-stat-lbl">Sessions/week</div>
+          </div>
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:var(--red)">85–95%</div>
+            <div class="phase-stat-lbl">Max Intensity</div>
+          </div>
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:var(--red)">65+</div>
+            <div class="phase-stat-lbl">Min Readiness</div>
+          </div>
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:var(--red)">Sharp</div>
+            <div class="phase-stat-lbl">Quality Focus</div>
+          </div>
+        </div>
+        <ul class="phase-list">
+          <li>Volume drops sharply — 30–40% below build phase peak</li>
+          <li>Sparring reduces to 3–4 quality rounds, no more: controlled, purposeful, specific game plan work</li>
+          <li>Speed and reaction work takes priority: mitts, focus pads, partner drills at high tempo</li>
+          <li>No new techniques introduced — this is refinement and rehearsal only</li>
+          <li>Conditioning becomes maintenance only: 1–2 short interval sessions per week to hold sharpness</li>
+          <li>Last hard sparring session no later than 14 days before fight night</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>The peak phase is where coaches most often make mistakes. The training load coming out of the build phase feels very high, and the instinct is to keep pushing — to get as much as possible into the last few weeks before the fight.</p>
+
+    <p>Resist it. The adaptations from the build phase are already in the bank. What you're doing in the peak phase is removing fatigue while preserving sharpness. Volume comes down aggressively. Intensity of individual sessions stays high but the sessions themselves are shorter. By the end of week two out, your fighter should be feeling fast, light, and dangerous — not ground down.</p>
+
+    <h3>The 14-Day Rule</h3>
+    <p>No hard sparring inside the final 14 days. This is non-negotiable. The risks of the last two weeks — a cut above the eye, a jammed finger, a sprained ankle from an ugly angle in the cage — are entirely out of proportion to any conceivable training benefit. The fitness is already there. The sharpness can be maintained with pads, mitts and light technical sparring. There is nothing you can build in the last 14 days of a fight camp that justifies putting your fighter at risk of a late withdrawal.</p>
+
+    <div class="data-box">
+      <div class="data-box-label">Readiness targets for the peak phase</div>
+      <p>By week three out, daily readiness scores should be climbing back above 65 as accumulated fatigue from the build phase clears. If scores are still below 60 entering week three, extend your deload protocol — reduce conditioning volume by a further 20% and pull sparring entirely for three days before reintroducing. A fighter who arrives at fight week with a readiness average below 70 is undertapered.</p>
+    </div>
+
+    <h2>PHASE FOUR: FIGHT WEEK (7 DAYS OUT)</h2>
+
+    <div class="phase-card">
+      <div class="phase-header purple-phase">
+        <span class="phase-name">Fight Week</span>
+        <span class="phase-timing">Fight day –7 to –1</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-stats">
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:#a78bfa">2–3</div>
+            <div class="phase-stat-lbl">Sessions total</div>
+          </div>
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:#a78bfa">40–50%</div>
+            <div class="phase-stat-lbl">Max Intensity</div>
+          </div>
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:#a78bfa">80+</div>
+            <div class="phase-stat-lbl">Target Readiness</div>
+          </div>
+          <div class="phase-stat">
+            <div class="phase-stat-num" style="color:#a78bfa">Rest</div>
+            <div class="phase-stat-lbl">Primary Goal</div>
+          </div>
+        </div>
+        <ul class="phase-list">
+          <li>Day 7: Light technical session — 45 minutes max, focus pads at 50%, shadow boxing, mental review</li>
+          <li>Day 5: Activation session — short, sharp, high-quality. 20 minutes of fast hands, footwork, 1–2 rounds light touch sparring</li>
+          <li>Day 3: Movement and feel session — shadow boxing, light bag, visualisation work</li>
+          <li>Day 2: Full rest. No training, no heavy physical activity</li>
+          <li>Day 1 (fight day): Activation only — 10–15 minutes of shadow and light movement, 90 minutes before walk-out</li>
+          <li>Weight management: no aggressive dehydration. Athlete should arrive at weigh-in already at or within 2kg of fight weight</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>Fight week is not training week. The work is done. Your job in the seven days before a fight is to protect what you've built, keep your athlete mentally sharp and physically fresh, and deliver them to the cage or ring in the best possible condition.</p>
+
+    <p>The readiness target for fight week is 80 or above. If your athlete is scoring below 70 entering fight week, something went wrong in the taper — either the peak phase was too long, volume wasn't reduced enough, or there's a stress or sleep issue that needs addressing urgently. In that scenario, cut all remaining training to activation-only and focus entirely on sleep, nutrition and mental state.</p>
+
+    <h3>The Activation Session</h3>
+    <p>Two days out, most athletes benefit from a single short activation session — 20–25 minutes of fast, sharp movement designed to prime the nervous system without generating fatigue. Think fast combinations on the bag at 50%, explosive footwork drills, and a few minutes of light partner work. The goal is to walk out of the session feeling switched on and confident — not tired. If your fighter leaves the activation session feeling flat or drained, you went too hard.</p>
+
+    <h2>PUTTING IT ALL TOGETHER</h2>
+
+    <p>The reason fight camp structure matters so much is that the body has a specific timeline for adaptation and recovery. You cannot compress a 10-week camp into six weeks by training harder. You cannot skip the base phase because your fighter "is already fit." And you cannot skip the taper because you feel like there's more work to do.</p>
+
+    <p>Every phase serves a purpose. The base builds the engine. The build phases load it progressively and introduces the specific demands of combat. The peak sharpens without fatiguing. Fight week delivers the athlete to the moment in the best possible condition.</p>
+
+    <p>Track readiness scores throughout. The numbers will tell you things the athlete won't — when fatigue is accumulating faster than expected, when the taper is working, and when to push and when to pull back. A camp planned with this structure, managed with daily readiness data, produces athletes who peak on the right day — not three weeks before the fight, and not six months after.</p>
+
+    <p>That's the system. Run it consistently, adjust it to your athlete, and trust the process.</p>
+
+  </article>
+
+  <!-- CTA -->
+  <div class="article-cta">
+    <div class="article-cta-eyebrow">StrikePanel™</div>
+    <h2>TRACK READINESS<br>AUTOMATICALLY</h2>
+    <p>Fight camp phase tracking, daily readiness scores and session planning — built into one coaching dashboard. Every athlete managed through every phase of camp.</p>
+    <a href="https://payhip.com/Strikepanel" target="_blank" rel="noopener" class="cta-btn">
+      Get StrikePanel — $99 One-Time
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <div class="cta-price">One-time payment. No subscriptions. No monthly fees.</div>
+  </div>
+
+  <!-- Back link -->
+  <a href="/blog" class="back-link">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10 6H2M6 2L2 6l4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back to Blog
+  </a>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">Strike<span>Panel</span>™</div>
+    <div class="footer-copy">© 2026 StrikePanel. Combat sports coaching intelligence.</div>
+  </div>
+</footer>
+
+<script>
+// Reading progress
+(function(){
+  var bar = document.getElementById('readProgress');
+  function update(){
+    var h = document.documentElement;
+    var pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  }
+  window.addEventListener('scroll', update, {passive: true});
+})();
+</script>
+
+</body>
+</html>
