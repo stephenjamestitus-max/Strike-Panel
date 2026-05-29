@@ -1,11 +1,11 @@
 import { Composition } from 'remotion';
-import { StrikePanelPromo } from './Video';
+import { strikepanePromo } from './Video';
 
 export const RemotionRoot = () => {
   return (
     <Composition
-      id="StrikePanelPromo"
-      component={StrikePanelPromo}
+      id="strikepanePromo"
+      component={strikepanePromo}
       durationInFrames={1800}
       fps={30}
       width={1270}

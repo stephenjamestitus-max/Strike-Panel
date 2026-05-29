@@ -1,4 +1,4 @@
-# Terminal Setup — StrikePanel Automation
+# Terminal Setup — strikepane Automation
 
 ## Step 1 — Install Claude Code (one time)
 
@@ -50,7 +50,7 @@ claude
 ```
 
 That's it. Claude Code reads CLAUDE.md automatically and knows everything
-about StrikePanel, your brand voice, content pillars, and available skills.
+about strikepane, your brand voice, content pillars, and available skills.
 
 ---
 
@@ -66,7 +66,7 @@ This runs the full pipeline:
 → fetches today's trends
 → generates caption (rotates through 7 content pillars)
 → builds carousel (6 slides, branded)
-→ posts to @strikepanel via Zernio
+→ posts to @strikepane via Zernio
 
 ---
 
@@ -80,7 +80,7 @@ This adds a cron job that runs `/daily` automatically at 8am Dubai time, every d
 
 ### Windows alternative (Task Scheduler):
 1. Open Task Scheduler
-2. Create Basic Task → "StrikePanel Daily"
+2. Create Basic Task → "strikepane Daily"
 3. Trigger: Daily at 8:00 AM
 4. Action: Start a program
 5. Program: `node`
@@ -99,7 +99,7 @@ This adds a cron job that runs `/daily` automatically at 8am Dubai time, every d
 | `/schedule` | Generate and schedule full week of content |
 | `/engage instagram 10` | Comment on 10 combat sports coaching posts |
 | `/follow instagram 20` | Follow 20 coaching accounts |
-| `/analytics` | Pull @strikepanel performance data |
+| `/analytics` | Pull @strikepane performance data |
 | `/report` | Weekly performance summary |
 | `/spy` | Scrape competitor Meta ads |
 

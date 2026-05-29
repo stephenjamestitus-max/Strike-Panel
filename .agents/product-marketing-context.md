@@ -4,7 +4,7 @@
 
 ## Product Overview
 **One-liner:** Daily readiness intelligence for combat sports coaches — every athlete scored, every morning, before you get to the gym.
-**What it does:** StrikePanel is a coaching dashboard for combat sports coaches. It scores athlete readiness each morning, manages fight camp countdowns and weight cuts, builds AI-powered training sessions, and collects athlete check-ins — replacing spreadsheets, WhatsApp, and guesswork with one clean system. Coaches pay once and own it forever.
+**What it does:** strikepane is a coaching dashboard for combat sports coaches. It scores athlete readiness each morning, manages fight camp countdowns and weight cuts, builds AI-powered training sessions, and collects athlete check-ins — replacing spreadsheets, WhatsApp, and guesswork with one clean system. Coaches pay once and own it forever.
 **Product category:** Coaching management software / athlete readiness platform
 **Product type:** Progressive web app (PWA) — installs from the browser, no app store required
 **Business model:** $99 one-time payment. No subscription, no renewal, no monthly fee. Ever.
@@ -18,7 +18,7 @@
 - "Manage my athlete's weight cut so nothing breaks the week of the fight"
 - "Get out of WhatsApp and into a system that actually works"
 **Use cases:**
-- Morning check: Coach opens StrikePanel before leaving for the gym, sees all athletes scored
+- Morning check: Coach opens strikepane before leaving for the gym, sees all athletes scored
 - Fight camp: Tracks fighter's cut timeline, phase progress, and countdown to fight night
 - Session planning: Inputs goal, gets a full session plan instantly via AI
 - Check-in link: Shares a link, athletes submit readiness in <60 seconds from any device
@@ -63,12 +63,12 @@
 - AI session builder powered by Gemini, readiness-data-aware
 **How we do it differently:** Readiness scoring + fight camp management + weight cut tracking in one system built exclusively for combat sports. Competitors either don't exist (combat-specific) or require ongoing subscriptions for tools that don't fit.
 **Why that's better:** Coaches stop guessing, stop chasing, stop managing chaos — and start coaching with data.
-**Why customers choose us:** "I open StrikePanel every morning, see who's ready, who's not, and exactly what to do." One tool, one payment, combat-specific.
+**Why customers choose us:** "I open strikepane every morning, see who's ready, who's not, and exactly what to do." One tool, one payment, combat-specific.
 
 ## Objections
 | Objection | Response |
 |-----------|----------|
-| "I already use spreadsheets and it works fine" | Until it doesn't — the week of a fight is the worst time to find out your system broke. StrikePanel automates what you're doing manually, so nothing slips. |
+| "I already use spreadsheets and it works fine" | Until it doesn't — the week of a fight is the worst time to find out your system broke. strikepane automates what you're doing manually, so nothing slips. |
 | "I don't want another monthly subscription" | There isn't one. $99, one time. You own it forever. No renewal, no cancel risk. |
 | "My athletes won't use a new app" | It's a link. Athletes open it in their browser in under 60 seconds. No download, no account, no friction. |
 | "Is it worth $99 if I only have a small team?" | One avoided injury — or one fight-night weight cut crisis prevented — is worth far more than $99. |
@@ -108,10 +108,10 @@
 **Personality:** Disciplined, sharp, combat-sports-native, anti-corporate. "Old school grit, new school data."
 
 ## Proof Points
-**Metrics:** 500+ coaches using StrikePanel
+**Metrics:** 500+ coaches using strikepane
 **Customers:** Combat sports coaches across Boxing, MMA, Muay Thai, BJJ, Kickboxing — UK and international
 **Testimonials:**
-> "I used to track everything in a notes app and WhatsApp group. Now I open StrikePanel every morning, see who's ready, who's not, and exactly what to do. Game changer." — Combat Sports Coach, UK
+> "I used to track everything in a notes app and WhatsApp group. Now I open strikepane every morning, see who's ready, who's not, and exactly what to do. Game changer." — Combat Sports Coach, UK
 **Value themes:**
 | Theme | Proof |
 |-------|-------|
@@ -122,10 +122,10 @@
 
 ## Goals
 **Business goal:** Convert coaches visiting the landing page into $99 one-time purchases via Gumroad
-**Conversion action:** Click "Get StrikePanel — $99" → Gumroad checkout
+**Conversion action:** Click "Get strikepane — $99" → Gumroad checkout
 **Current metrics:** 500+ coaches; launch pricing $99 (was $149), price increases with Phase 2
 **Key URLs:**
-- Landing: https://strikepanel.vercel.app/landing
-- Demo: https://strikepanel.vercel.app/demo
-- Blog: https://strikepanel.vercel.app/blog
-- Buy: https://strikepanel.gumroad.com/l/strikepanel
+- Landing: https://strikepane.vercel.app/landing
+- Demo: https://strikepane.vercel.app/demo
+- Blog: https://strikepane.vercel.app/blog
+- Buy: https://strikepane.gumroad.com/l/strikepane

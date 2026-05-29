@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * StrikePanel Daily Automation — 5-Pillar Rotation
+ * strikepane Daily Automation — 5-Pillar Rotation
  *
  * Every post = 3 slides: Problem → Solution → CTA
  *
@@ -113,7 +113,7 @@ const PAIN_FALLBACK = {
 };
 
 async function buildPillar1() {
-  const prompt = `You write Instagram posts for StrikePanel — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate a PAIN post. One brutal truth a combat sports coach lives with when they have no data system.\n\nOutput format (exact labels, nothing else):\nLINE: [brutal truth, ALL CAPS, max 10 words, can split into 2 lines with \\n]\nSUB: [quiet follow-up, sentence case, max 12 words]\nSOL_HEADLINE: [solution concept, 3-5 words, ALL CAPS]\nSOL_CYAN: [complementary phrase, 2-4 words, ALL CAPS]\nSOL_1: [first benefit point, 12-16 words, specific]\nSOL_2: [second benefit point, 12-16 words, specific]\nSOL_3: [third benefit point, 12-16 words, specific]\nCAPTION: [4-6 short sentences in 2-3 paragraphs, 60-80 words. Specific combat sports moment. Ends with quiet insight.]\n\nExample LINE: FIGHTER LOST IN ROUND 3.\\nCOACH HAD NO DATA.\nExample CAPTION paragraph: Fighter lost in round 3. Coach had no data.\n\nNo readiness score. No load tracking. No warning sign. Just a gut feeling that turned out to be wrong.`;
+  const prompt = `You write Instagram posts for strikepane — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate a PAIN post. One brutal truth a combat sports coach lives with when they have no data system.\n\nOutput format (exact labels, nothing else):\nLINE: [brutal truth, ALL CAPS, max 10 words, can split into 2 lines with \\n]\nSUB: [quiet follow-up, sentence case, max 12 words]\nSOL_HEADLINE: [solution concept, 3-5 words, ALL CAPS]\nSOL_CYAN: [complementary phrase, 2-4 words, ALL CAPS]\nSOL_1: [first benefit point, 12-16 words, specific]\nSOL_2: [second benefit point, 12-16 words, specific]\nSOL_3: [third benefit point, 12-16 words, specific]\nCAPTION: [4-6 short sentences in 2-3 paragraphs, 60-80 words. Specific combat sports moment. Ends with quiet insight.]\n\nExample LINE: FIGHTER LOST IN ROUND 3.\\nCOACH HAD NO DATA.\nExample CAPTION paragraph: Fighter lost in round 3. Coach had no data.\n\nNo readiness score. No load tracking. No warning sign. Just a gut feeling that turned out to be wrong.`;
 
   try {
     const raw = await groq(prompt, 420);
@@ -157,7 +157,7 @@ const EDU_TOPICS = [
 
 async function buildPost2() {
   const topic = EDU_TOPICS[new Date().getDate() % EDU_TOPICS.length];
-  const prompt = `You write Instagram posts for StrikePanel — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate an EDUCATION post teaching coaches about: "${topic.topic}"\n\nOutput format (exact labels, nothing else):\nHOOK: [striking opener, ALL CAPS, max 10 words, can split 2 lines with \\n — use: ${topic.hook}]\nSOL_HEADLINE: [what the lesson covers, 3-5 words, ALL CAPS]\nSOL_CYAN: [complementary phrase, 2-4 words, ALL CAPS]\nSOL_1: [first teaching point, 12-16 words]\nSOL_2: [second teaching point, 12-16 words]\nSOL_3: [third teaching point, 12-16 words]\nCAPTION: [5-7 sentences in 3 paragraphs, 70-90 words. Teach the concept clearly. Coach-to-coach. No product mention until the final line which can say StrikePanel tracks this.]`;
+  const prompt = `You write Instagram posts for strikepane — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate an EDUCATION post teaching coaches about: "${topic.topic}"\n\nOutput format (exact labels, nothing else):\nHOOK: [striking opener, ALL CAPS, max 10 words, can split 2 lines with \\n — use: ${topic.hook}]\nSOL_HEADLINE: [what the lesson covers, 3-5 words, ALL CAPS]\nSOL_CYAN: [complementary phrase, 2-4 words, ALL CAPS]\nSOL_1: [first teaching point, 12-16 words]\nSOL_2: [second teaching point, 12-16 words]\nSOL_3: [third teaching point, 12-16 words]\nCAPTION: [5-7 sentences in 3 paragraphs, 70-90 words. Teach the concept clearly. Coach-to-coach. No product mention until the final line which can say strikepane tracks this.]`;
 
   try {
     const raw = await groq(prompt, 450);
@@ -175,7 +175,7 @@ async function buildPost2() {
     const slides = [
       { type: 'blackcard', line: hook, sub: `Understanding ${topic.topic}.` },
       { type: 'solution', headline: solHeadline, headlineCyan: solCyan, points: [sol1, sol2, sol3].filter(Boolean) },
-      { type: 'cta', stat: '$99', headline: 'ONE PAYMENT.', headlineCyan: 'NO SUBSCRIPTION.', body: 'StrikePanel tracks readiness, fight camps, weight cuts, and generates AI sessions. You own it forever.' },
+      { type: 'cta', stat: '$99', headline: 'ONE PAYMENT.', headlineCyan: 'NO SUBSCRIPTION.', body: 'strikepane tracks readiness, fight camps, weight cuts, and generates AI sessions. You own it forever.' },
     ];
     const imagePaths = await generateCarousel(slides, `post2-${date}`);
     return { imagePaths, caption: caption + `\n\n${HASHTAGS}`, pillarNum: 2, pillarName: 'Education' };
@@ -190,7 +190,7 @@ async function buildPost3() {
   const athletes = [
     { name: 'REYES', score: 91 }, { name: 'LAKE', score: 67 }, { name: 'MARCUS', score: 34 },
   ];
-  const caption = `This is the morning brief.\n\nThree athletes. Three completely different days.\n\nReyes gets a hard sparring session. Lake gets technical work at 70 percent. Marcus gets active recovery and a conversation.\n\nOne screen. Thirty seconds. Every coach in your gym knows what today looks like before anyone walks through the door.\n\nThis is not guesswork. This is StrikePanel.\n\n${HASHTAGS}`;
+  const caption = `This is the morning brief.\n\nThree athletes. Three completely different days.\n\nReyes gets a hard sparring session. Lake gets technical work at 70 percent. Marcus gets active recovery and a conversation.\n\nOne screen. Thirty seconds. Every coach in your gym knows what today looks like before anyone walks through the door.\n\nThis is not guesswork. This is strikepane.\n\n${HASHTAGS}`;
   const date = new Date().toISOString().split('T')[0];
   const slides = [
     { type: 'widget', athletes, headline: 'THIS IS YOUR', headlineAmber: 'MORNING BRIEF.' },
@@ -222,7 +222,7 @@ const IDENTITY_FALLBACK = {
 };
 
 async function buildPost4() {
-  const prompt = `You write Instagram posts for StrikePanel — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate an IDENTITY post. The theme is: elite combat sports coaches use data. Non-elite coaches guess.\n\nOutput format (exact labels, nothing else):\nCHAOS: [coaching chaos, 12-18 words, vivid — napkins, WhatsApp, guesswork, whiteboards]\nCLARITY: [coaching clarity, 12-18 words, specific — what the elite coach already knows before the session]\nLABEL: [banner contrast, ALL CAPS, max 6 words]\nSOL_HEADLINE: [identity statement, 2-4 words, ALL CAPS]\nSOL_CYAN: [complementary phrase, 2-4 words, ALL CAPS]\nSOL_1: [identity point 1, 12-16 words, what elite coaches do differently]\nSOL_2: [identity point 2, 12-16 words]\nSOL_3: [identity point 3, 12-16 words]\nCAPTION: [5-7 sentences in 3 paragraphs, 65-85 words. Coach-to-coach. Ends with quiet insight about professional identity.]`;
+  const prompt = `You write Instagram posts for strikepane — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate an IDENTITY post. The theme is: elite combat sports coaches use data. Non-elite coaches guess.\n\nOutput format (exact labels, nothing else):\nCHAOS: [coaching chaos, 12-18 words, vivid — napkins, WhatsApp, guesswork, whiteboards]\nCLARITY: [coaching clarity, 12-18 words, specific — what the elite coach already knows before the session]\nLABEL: [banner contrast, ALL CAPS, max 6 words]\nSOL_HEADLINE: [identity statement, 2-4 words, ALL CAPS]\nSOL_CYAN: [complementary phrase, 2-4 words, ALL CAPS]\nSOL_1: [identity point 1, 12-16 words, what elite coaches do differently]\nSOL_2: [identity point 2, 12-16 words]\nSOL_3: [identity point 3, 12-16 words]\nCAPTION: [5-7 sentences in 3 paragraphs, 65-85 words. Coach-to-coach. Ends with quiet insight about professional identity.]`;
 
   try {
     const raw = await groq(prompt, 480);
@@ -277,7 +277,7 @@ const STORY_FALLBACK = {
 };
 
 async function buildPost5() {
-  const prompt = `You write Instagram posts for StrikePanel — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate a STORY post. A cinematic moment where a coach discovers too late that their fighter was already broken — because they had no readiness data.\n\nOutput format (exact labels, nothing else):\nSCENE: [2-3 short sentences, present tense, cinematic. Corner or gym. No product mention.]\nTRUTH: [ALL CAPS, max 8 words. What the missing data cost.]\nKICKER: [ALL CAPS, exactly: FIGHT CAMP · [MOMENT NAME], max 5 words after dot]\nSOL_HEADLINE: [what the data would have done, 3-5 words, ALL CAPS]\nSOL_CYAN: [completion phrase, 3-5 words, ALL CAPS]\nSOL_1: [what data would have shown, 12-16 words]\nSOL_2: [what decision would have changed, 12-16 words]\nSOL_3: [the outcome that would have been different, 12-16 words]\nCAPTION: [6-8 sentences in 4 paragraphs, 85-110 words. Full story. Real details. Ends with the lesson.]`;
+  const prompt = `You write Instagram posts for strikepane — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate a STORY post. A cinematic moment where a coach discovers too late that their fighter was already broken — because they had no readiness data.\n\nOutput format (exact labels, nothing else):\nSCENE: [2-3 short sentences, present tense, cinematic. Corner or gym. No product mention.]\nTRUTH: [ALL CAPS, max 8 words. What the missing data cost.]\nKICKER: [ALL CAPS, exactly: FIGHT CAMP · [MOMENT NAME], max 5 words after dot]\nSOL_HEADLINE: [what the data would have done, 3-5 words, ALL CAPS]\nSOL_CYAN: [completion phrase, 3-5 words, ALL CAPS]\nSOL_1: [what data would have shown, 12-16 words]\nSOL_2: [what decision would have changed, 12-16 words]\nSOL_3: [the outcome that would have been different, 12-16 words]\nCAPTION: [6-8 sentences in 4 paragraphs, 85-110 words. Full story. Real details. Ends with the lesson.]`;
 
   try {
     const raw = await groq(prompt, 500);
@@ -319,7 +319,7 @@ async function buildPost5() {
 // ── Main ──────────────────────────────────────────────────────────
 
 async function run() {
-  console.log('\n=== StrikePanel Post ===');
+  console.log('\n=== strikepane Post ===');
   console.log(new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dubai' }), '(Dubai)');
 
   const days = daysSinceLastPost();

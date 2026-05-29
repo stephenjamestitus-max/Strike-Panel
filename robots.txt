@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow:
 
-Sitemap: https://strikepanel.uk/sitemap.xml
+Sitemap: https://strikepane.uk/sitemap.xml

@@ -2,11 +2,11 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'StrikePanel™ — Training Intelligence for Combat Sports',
+  title: 'strikepane™ — Training Intelligence for Combat Sports',
   description: 'The cloud coaching platform built for combat sports. Morning briefs, fight camp timelines, AI session plans, and readiness scores — all in one dashboard. One-time $99.',
-  metadataBase: new URL('https://strikepanel.uk'),
+  metadataBase: new URL('https://strikepane.uk'),
   alternates: {
-    canonical: 'https://strikepanel.uk',
+    canonical: 'https://strikepane.uk',
   },
   manifest: '/site.webmanifest',
   icons: {
@@ -18,22 +18,22 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: 'StrikePanel™ — Training Intelligence for Combat Sports',
+    title: 'strikepane™ — Training Intelligence for Combat Sports',
     description: 'Morning briefs, fight camp timelines, AI session plans & readiness scores. Built for combat sports coaches. Cloud-based. One-time $99.',
     type: 'website',
-    url: 'https://strikepanel.uk',
+    url: 'https://strikepane.uk',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'StrikePanel — Training Intelligence for Combat Sports',
+        alt: 'strikepane — Training Intelligence for Combat Sports',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'StrikePanel™ — Training Intelligence for Combat Sports',
+    title: 'strikepane™ — Training Intelligence for Combat Sports',
     description: 'Morning briefs, fight camp timelines, AI session plans & readiness scores. Built for combat sports coaches.',
     images: ['/og-image.png'],
   },
@@ -42,10 +42,10 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: 'StrikePanel',
+  name: 'strikepane',
   applicationCategory: 'SportsApplication',
   operatingSystem: 'Web',
-  url: 'https://strikepanel.uk',
+  url: 'https://strikepane.uk',
   description: 'Cloud coaching platform for combat sports coaches. Morning briefs, athlete check-in links, fight camp timelines, AI session plans, and readiness scores.',
   offers: {
     '@type': 'Offer',

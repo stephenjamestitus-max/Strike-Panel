@@ -85,7 +85,7 @@ const TitleScene: React.FC<{ startFrame: number }> = ({ startFrame }) => {
           fontSize: 72, letterSpacing: 6, color: '#ffffff',
           textShadow: `0 0 40px rgba(0,212,240,0.3)`,
         }}>
-          STRIKEPANEL<span style={{ fontSize: 28, verticalAlign: 'super', color: CYAN, opacity: 0.8 }}>™</span>
+          STRIKEPANE<span style={{ fontSize: 28, verticalAlign: 'super', color: CYAN, opacity: 0.8 }}>™</span>
         </div>
         <div style={{
           fontFamily: 'Courier New, monospace', fontWeight: 700,
@@ -208,7 +208,7 @@ const ClosingScene: React.FC<{ startFrame: number }> = ({ startFrame }) => {
           fontFamily: 'Arial Black, sans-serif', fontWeight: 900,
           fontSize: 64, letterSpacing: 4, color: '#ffffff',
         }}>
-          STRIKEPANEL<span style={{ fontSize: 24, verticalAlign: 'super', color: CYAN, opacity: 0.8 }}>™</span>
+          STRIKEPANE<span style={{ fontSize: 24, verticalAlign: 'super', color: CYAN, opacity: 0.8 }}>™</span>
         </div>
       </div>
 
@@ -246,7 +246,7 @@ const ClosingScene: React.FC<{ startFrame: number }> = ({ startFrame }) => {
         fontFamily: 'Courier New, monospace', fontSize: 15,
         color: '#3d4560', letterSpacing: 4,
       }}>
-        STRIKEPANEL.VERCEL.APP/DEMO
+        STRIKEPANE.VERCEL.APP/DEMO
       </div>
 
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 2.5, background: CYAN, opacity: 0.3 }} />
@@ -264,7 +264,7 @@ const ClosingScene: React.FC<{ startFrame: number }> = ({ startFrame }) => {
 // 1170–1440 Workouts           (9s)
 // 1440–1800 Closing card       (12s)
 
-export const StrikePanelPromo: React.FC = () => {
+export const strikepanePromo: React.FC = () => {
   const frame = useCurrentFrame();
 
   const scenes = [

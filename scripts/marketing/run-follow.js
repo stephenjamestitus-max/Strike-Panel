@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * StrikePanel Follow — Daily Account Identification
+ * strikepane Follow — Daily Account Identification
  * Run: node scripts/marketing/run-follow.js
  *
  * Identifies 5 combat sports coaching accounts to follow today.
@@ -98,7 +98,7 @@ function pickAccounts() {
 }
 
 async function run() {
-  console.log('\n=== StrikePanel Follow — Daily Account Targets ===');
+  console.log('\n=== strikepane Follow — Daily Account Targets ===');
   console.log(new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dubai' }), '(Dubai)');
   console.log('');
 
