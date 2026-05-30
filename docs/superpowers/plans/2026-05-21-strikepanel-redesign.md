@@ -926,7 +926,7 @@ export default function Demo() {
         </FadeIn>
         <FadeIn delay={0.15} y={20}>
           <div style={{ display: 'inline-block', borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,212,240,.15)', boxShadow: '0 0 80px rgba(0,212,240,.08),0 32px 64px rgba(0,0,0,.6)' }}>
-            <iframe src="https://strikepanel.vercel.app/demo" width={820} height={580} style={{ display: 'block', border: 'none', background: '#04070f' }} title="StrikePanel™ Live Demo" loading="lazy" />
+            <iframe src="https://strikepane.uk/demo" width={820} height={580} style={{ display: 'block', border: 'none', background: '#04070f' }} title="StrikePanel™ Live Demo" loading="lazy" />
           </div>
         </FadeIn>
       </div>
@@ -1274,7 +1274,7 @@ export default function Pricing() {
 
           <Magnet padding={120} strength={3}>
             <a
-              href="https://strikepanel.vercel.app"
+              href="https://strikepane.uk"
               style={{
                 display: 'block',
                 background: 'linear-gradient(135deg,#c8892a,#e0a83a)',
