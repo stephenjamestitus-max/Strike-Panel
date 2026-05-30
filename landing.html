@@ -455,6 +455,21 @@ footer{
   display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:28px;margin-bottom:36px
 }
 .foot-logo{font-family:var(--fc);font-weight:700;font-size:15px;letter-spacing:2px;text-transform:uppercase;color:var(--cream)}
+/* ── Email Capture ── */
+.ec-sec{padding:80px 24px;background:linear-gradient(180deg,#04070f 0%,#060d1a 100%);border-top:1px solid rgba(0,212,240,0.1);border-bottom:1px solid rgba(0,212,240,0.1);text-align:center}
+.ec-inner{max-width:540px;margin:0 auto}
+.ec-eye{font-size:10px;letter-spacing:4px;color:var(--accent);text-transform:uppercase;margin-bottom:16px}
+.ec-hl{font-family:var(--fc);font-size:clamp(28px,5vw,42px);font-weight:700;line-height:1.1;letter-spacing:-1px;color:var(--cream);margin-bottom:12px}
+.ec-sub{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:32px}
+.ec-form{display:flex;gap:10px;max-width:420px;margin:0 auto}
+.ec-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(0,212,240,0.2);border-radius:6px;padding:14px 16px;font-size:14px;color:var(--cream);outline:none;transition:border .2s}
+.ec-input::placeholder{color:#4a5568}
+.ec-input:focus{border-color:rgba(0,212,240,0.5)}
+.ec-btn{background:var(--accent);color:#04070f;border:none;border-radius:6px;padding:14px 22px;font-size:13px;font-weight:700;letter-spacing:1px;cursor:pointer;white-space:nowrap;transition:opacity .2s}
+.ec-btn:hover{opacity:.85}
+.ec-note{font-size:11px;color:#4a5568;margin-top:12px}
+.ec-success{display:none;color:var(--accent);font-size:14px;font-weight:600;letter-spacing:1px;margin-top:16px}
+@media(max-width:480px){.ec-form{flex-direction:column}.ec-btn{width:100%}}
 .foot-logo span{color:var(--accent)}
 .foot-tag{font-family:var(--fm);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:4px}
 .foot-links{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
@@ -1064,12 +1079,29 @@ footer{
   </div>
 </section>
 
+     EMAIL CAPTURE
+══════════════════════════════════════════════════ -->
+<section class="ec-sec">
+  <div class="ec-inner">
+    <div class="ec-eye">// Free coaching resources</div>
+    <h2 class="ec-hl">Get the fight camp<br>planning guide. Free.</h2>
+    <p class="ec-sub">Weekly training intel for combat sports coaches — fight camp templates, weight cut protocols, and readiness scoring breakdowns. No spam. Unsubscribe any time.</p>
+    <form class="ec-form" id="ecForm">
+      <input class="ec-input" type="email" id="ecEmail" placeholder="your@email.com" required autocomplete="email">
+      <button class="ec-btn" type="submit">SEND IT</button>
+    </form>
+    <div class="ec-note">Joining 200+ coaches already on the list.</div>
+    <div class="ec-success" id="ecSuccess">You're in. Check your inbox.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
      FOOTER
 ══════════════════════════════════════════════════ -->
 <footer>
   <div class="foot-top">
     <div>
-      <div class="foot-logo">STRIKE<span>PANEL</span>™</div>
+      <div class="foot-logo">STRIKE<span>PANE</span>™</div>
       <div class="foot-tag">Training Intelligence for Combat Sports</div>
     </div>
     <div class="foot-links">
@@ -1173,6 +1205,34 @@ const revealIO = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.14 });
 document.querySelectorAll('.ru').forEach(el => revealIO.observe(el));
+
+// Email capture
+document.getElementById('ecForm')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = e.target.querySelector('.ec-btn');
+  const email = document.getElementById('ecEmail').value.trim();
+  btn.textContent = '...';
+  btn.disabled = true;
+  try {
+    const res = await fetch('/api/email-signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      document.getElementById('ecForm').style.display = 'none';
+      document.getElementById('ecSuccess').style.display = 'block';
+    } else {
+      btn.textContent = 'SEND IT';
+      btn.disabled = false;
+      alert(data.msg || 'Something went wrong — try again.');
+    }
+  } catch {
+    btn.textContent = 'SEND IT';
+    btn.disabled = false;
+  }
+});
 
 /* ── B) Pain cards stagger ────────────────────────────────── */
 const painIO = new IntersectionObserver((entries) => {
