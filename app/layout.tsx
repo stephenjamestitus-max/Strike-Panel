@@ -4,9 +4,9 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'strikepane™ — Training Intelligence for Combat Sports',
   description: 'The cloud coaching platform built for combat sports. Morning briefs, fight camp timelines, AI session plans, and readiness scores — all in one dashboard. One-time $99.',
-  metadataBase: new URL('https://strikepane.uk'),
+  metadataBase: new URL('https://strikepanel.uk'),
   alternates: {
-    canonical: 'https://strikepane.uk',
+    canonical: 'https://strikepanel.uk',
   },
   manifest: '/site.webmanifest',
   icons: {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: 'strikepane™ — Training Intelligence for Combat Sports',
     description: 'Morning briefs, fight camp timelines, AI session plans & readiness scores. Built for combat sports coaches. Cloud-based. One-time $99.',
     type: 'website',
-    url: 'https://strikepane.uk',
+    url: 'https://strikepanel.uk',
     images: [
       {
         url: '/og-image.png',
@@ -45,7 +45,7 @@ const jsonLd = {
   name: 'strikepane',
   applicationCategory: 'SportsApplication',
   operatingSystem: 'Web',
-  url: 'https://strikepane.uk',
+  url: 'https://strikepanel.uk',
   description: 'Cloud coaching platform for combat sports coaches. Morning briefs, athlete check-in links, fight camp timelines, AI session plans, and readiness scores.',
   offers: {
     '@type': 'Offer',

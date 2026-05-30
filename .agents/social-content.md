@@ -125,7 +125,7 @@ strikepane's weight cut planner gives you:
 
 No more spreadsheets that break. No more "he'll be fine" conversations you shouldn't be having at this stage.
 
-Try the free demo → strikepane.uk/demo
+Try the free demo → strikepanel.uk/demo
 
 $99 once. No subscription. No renewal.
 
@@ -167,7 +167,7 @@ This week on the blog: a full week-by-week fight camp planning guide. Phases, lo
 
 Written for combat sports coaches — not generic fitness trainers.
 
-Link in bio → strikepane.uk/blog
+Link in bio → strikepanel.uk/blog
 
 Bookmark it. Share it with a coach who's winging their next camp.
 
@@ -229,7 +229,7 @@ Done. Full session plan — rounds, rest, drills, focus areas — built around y
 
 Powered by Gemini. Built for combat sports coaches who don't have a sports science team on staff.
 
-Try it free → strikepane.uk/demo
+Try it free → strikepanel.uk/demo
 
 **Hashtags:**
 #strikepane #aisessionbuilder #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #sessionplanning #trainingplan #coachingtools #fightcamp #ai #smartcoaching #athleteperformance #coachlife
@@ -306,7 +306,7 @@ But how do you know when hard became too hard?
 
 New post on the blog — 5 signs of overtraining in fighters, what each one looks like in practice, and what to do about it before it costs you a performance.
 
-Link in bio → strikepane.uk/blog
+Link in bio → strikepanel.uk/blog
 
 Save this one. You'll need it mid-camp.
 
@@ -329,7 +329,7 @@ No app store. No account creation. No friction.
 
 Just clean data every morning before you coach them.
 
-Free demo → strikepane.uk/demo
+Free demo → strikepanel.uk/demo
 
 **Hashtags:**
 #strikepane #athletecheckin #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #readinessscoring #athletedata #coachingtools #fightcamp #coachlife #athletemanagement #trainingsmart #smartcoaching
@@ -427,7 +427,7 @@ That's not a failure of coaching — it's a failure of information.
 
 Readiness data gives you the information. You make the call.
 
-Try the demo free → strikepane.uk/demo
+Try the demo free → strikepanel.uk/demo
 
 $99 once. No subscription.
 
@@ -446,7 +446,7 @@ It's a messaging app we retrofitted into one. And it shows — missed check-ins,
 
 New post on the blog: how coaches are moving from WhatsApp chaos to morning readiness data, and what that actually looks like in practice.
 
-Link in bio → strikepane.uk/blog
+Link in bio → strikepanel.uk/blog
 
 **Hashtags:**
 #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #athletemanagement #coachingtools #strikepane #fightcamp #athletereadiness #trainingintelligence #coachlife #sportsblog #replacingwhatsapp #smartcoaching
@@ -553,7 +553,7 @@ Most coaching software costs $30–80/month. You'd spend that in 2 months and st
 
 Pay once. Own it forever.
 
-Demo first → strikepane.uk/demo
+Demo first → strikepanel.uk/demo
 Buy → gumroad.com/l/strikepane
 
 **Hashtags:**
@@ -612,7 +612,7 @@ Not because coaches don't know what they're doing — because the tracking tools
 
 New on the blog: how to run a weight cut from start to fight-night without spreadsheets, without WhatsApp threads, and without the Friday-before-weigh-ins panic.
 
-Link in bio → strikepane.uk/blog
+Link in bio → strikepanel.uk/blog
 
 **Hashtags:**
 #weightcut #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fighterweight #fightprep #coachlife #strikepane #sportsblog #coachingresources #weighin #weightmanagement
@@ -653,7 +653,7 @@ One tool. Built for combat sports coaches. $99 once.
 
 500+ coaches already using it.
 
-Try it free first → strikepane.uk/demo
+Try it free first → strikepanel.uk/demo
 
 The price goes up with Phase 2. It's $99 now.
 
@@ -698,7 +698,7 @@ By the time they tell you they're tired, it's been a week.
 ---
 
 **DAY 5**
-Stop guessing. Morning Brief readiness scores for every athlete, every day. Free demo → strikepane.uk/demo — $99 once, no subscription.
+Stop guessing. Morning Brief readiness scores for every athlete, every day. Free demo → strikepanel.uk/demo — $99 once, no subscription.
 
 ---
 
@@ -729,7 +729,7 @@ $99. One time. No subscription. No renewal. No price increase (yet — it's goin
 ---
 
 **DAY 10**
-Your athletes check in from a link. 60 seconds. Sleep, energy, soreness, mood. Their readiness score builds automatically. Free demo: strikepane.uk/demo
+Your athletes check in from a link. 60 seconds. Sleep, energy, soreness, mood. Their readiness score builds automatically. Free demo: strikepanel.uk/demo
 
 ---
 
@@ -754,7 +754,7 @@ Hot take: WhatsApp groups for athlete check-ins aren't free. They cost you misse
 ---
 
 **DAY 15**
-Morning Brief. Fight camp countdown. Weight cut planner. AI sessions. Athlete check-in links. Cloud sync. All of it. $99 once. Demo: strikepane.uk/demo
+Morning Brief. Fight camp countdown. Weight cut planner. AI sessions. Athlete check-in links. Cloud sync. All of it. $99 once. Demo: strikepanel.uk/demo
 
 ---
 
@@ -783,7 +783,7 @@ You can't individualise training if you don't have individual data. 8 fighters, 
 ---
 
 **DAY 20**
-Most coaching apps are built for personal trainers. strikepane is built for combat sports coaches who manage fight camps, weight cuts, and athlete readiness. Demo: strikepane.uk/demo
+Most coaching apps are built for personal trainers. strikepane is built for combat sports coaches who manage fight camps, weight cuts, and athlete readiness. Demo: strikepanel.uk/demo
 
 ---
 
@@ -808,7 +808,7 @@ I built strikepane because I watched coaches manage fight camps on WhatsApp and 
 ---
 
 **DAY 25**
-Your athletes don't need to download anything. Share a link once. They open it on their phone. 60 seconds. Done. Readiness score updates automatically. Demo: strikepane.uk/demo
+Your athletes don't need to download anything. Share a link once. They open it on their phone. 60 seconds. Done. Readiness score updates automatically. Demo: strikepanel.uk/demo
 
 ---
 
@@ -838,7 +838,7 @@ The coaches who win aren't always the best tacticians. They're the ones who keep
 ---
 
 **DAY 30**
-500+ combat sports coaches use strikepane. $99 once. Morning Brief, fight camp, weight cut, AI sessions, check-ins. Everything in one place. Demo: strikepane.uk/demo
+500+ combat sports coaches use strikepane. $99 once. Morning Brief, fight camp, weight cut, AI sessions, check-ins. Everything in one place. Demo: strikepanel.uk/demo
 
 ---
 
@@ -865,7 +865,7 @@ What I've found works better is a structured daily check-in system where athlete
 
 Curious what the group is doing. Are you tracking readiness formally or still working on feel? And if you've tried tools — what worked and what didn't?
 
-*(For what it's worth — I built strikepane for exactly this problem. Free demo at strikepane.uk/demo if you want to see how we handle it.)*
+*(For what it's worth — I built strikepane for exactly this problem. Free demo at strikepanel.uk/demo if you want to see how we handle it.)*
 
 ---
 
@@ -886,7 +886,7 @@ Simple framework but it requires tracking the load to know where you are. If you
 
 How are you all periodising your camps? Do you have a formal structure or is it more reactive to how the athlete is feeling week by week?
 
-*(I track this in strikepane — fight camp phases automated with countdown to fight night. If anyone wants to see the system, demo is at strikepane.uk/demo.)*
+*(I track this in strikepane — fight camp phases automated with countdown to fight night. If anyone wants to see the system, demo is at strikepanel.uk/demo.)*
 
 ---
 
@@ -910,7 +910,7 @@ Not complicated. But it requires a system that makes daily tracking friction-fre
 
 What systems are you using? Anyone found something that actually works without being a headache to maintain?
 
-*(I built a weight cut planner into strikepane specifically for this — daily weigh-in tracking, cut timeline, automated alerts. Happy to share if useful: strikepane.uk/demo)*
+*(I built a weight cut planner into strikepane specifically for this — daily weigh-in tracking, cut timeline, automated alerts. Happy to share if useful: strikepanel.uk/demo)*
 
 ---
 
@@ -930,7 +930,7 @@ The goal should be to get that number as close to zero as possible, so you can s
 
 Has anyone successfully systemised their admin? What's worked for you? And what have you tried that sounded good but didn't stick?
 
-*(I built strikepane to solve this — morning readiness, fight camp, weight cuts, AI sessions, all in one tool for combat sports coaches. $99 once, demo at strikepane.uk/demo. Happy to answer questions about how it works.)*
+*(I built strikepane to solve this — morning readiness, fight camp, weight cuts, AI sessions, all in one tool for combat sports coaches. $99 once, demo at strikepanel.uk/demo. Happy to answer questions about how it works.)*
 
 ---
 
@@ -946,7 +946,7 @@ The coaches I most respect are the ones who've hacked together their own systems
 
 What's the most effective low-tech system you've seen or used for tracking athlete readiness? I'm genuinely curious what's working in the trenches before the "proper" tools existed.
 
-*(Full disclosure — I built strikepane to be the "proper" tool for this level of coaching. Purpose-built for combat sports, $99 once, free demo: strikepane.uk/demo. Not a plug — genuinely interested in the conversation first.)*
+*(Full disclosure — I built strikepane to be the "proper" tool for this level of coaching. Purpose-built for combat sports, $99 once, free demo: strikepanel.uk/demo. Not a plug — genuinely interested in the conversation first.)*
 
 ---
 

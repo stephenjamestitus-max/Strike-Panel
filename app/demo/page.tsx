@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'StrikePanel™ — Live Demo',
     description: 'Try every feature free — Morning Brief, fight countdowns, AI workouts, boxing timer. No sign-up. Buy once for $99.',
-    url: 'https://strikepane.uk/demo',
-    images: [{ url: 'https://strikepane.uk/og-demo.png', width: 1200, height: 630 }],
+    url: 'https://strikepanel.uk/demo',
+    images: [{ url: 'https://strikepanel.uk/og-demo.png', width: 1200, height: 630 }],
   },
 }
 

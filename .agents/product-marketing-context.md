@@ -125,7 +125,7 @@
 **Conversion action:** Click "Get strikepane — $99" → Gumroad checkout
 **Current metrics:** 500+ coaches; launch pricing $99 (was $149), price increases with Phase 2
 **Key URLs:**
-- Landing: https://strikepane.uk/landing
-- Demo: https://strikepane.uk/demo
-- Blog: https://strikepane.uk/blog
+- Landing: https://strikepanel.uk/landing
+- Demo: https://strikepanel.uk/demo
+- Blog: https://strikepanel.uk/blog
 - Buy: https://strikepane.gumroad.com/l/strikepane

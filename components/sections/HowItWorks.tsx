@@ -12,7 +12,7 @@ const steps = [
     num: '02',
     title: 'Share Their Check-In Link',
     body: 'Each athlete gets a unique URL. They open it on any phone the morning of training — no app download, no account, no friction. They input sleep, fatigue, soreness, and optional WHOOP data, then hit submit.',
-    tag: '// strikepane.uk/checkin?coach=TOKEN',
+    tag: '// strikepanel.uk/checkin?coach=TOKEN',
     accent: 'var(--amber)',
     highlight: true,
   },

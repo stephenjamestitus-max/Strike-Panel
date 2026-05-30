@@ -184,7 +184,7 @@ Hey [Name] — I've been following your content for a while, love how you approa
 
 I built a tool specifically for combat sports coaches — it scores each athlete's readiness every morning so you know who to push and who to protect before training. Fight camp management, weight cut tracking, AI session builder. $99 one-time, no subscription.
 
-Demo here if you want to poke around: https://strikepane.uk/demo
+Demo here if you want to poke around: https://strikepanel.uk/demo
 
 No pressure — just thought it might be relevant given the size of your team.
 ```
@@ -272,7 +272,7 @@ Happy to talk about:
 
 No pitch needed — just solid coaching content. My tool would come up naturally if it fits.
 
-Demo at https://strikepane.uk/demo if you want to see what I've built.
+Demo at https://strikepanel.uk/demo if you want to see what I've built.
 
 Stephen
 ```
@@ -342,7 +342,7 @@ Hey [Name] — just following up from a couple weeks ago re: strikepane.
 
 A few coaches have started using it and I've got some case study feedback now if that's useful. Still happy to give you a walkthrough over DM if you want.
 
-Demo: https://strikepane.uk/demo
+Demo: https://strikepanel.uk/demo
 ```
 
 ---

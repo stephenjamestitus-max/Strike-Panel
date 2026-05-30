@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/app'],
     },
-    sitemap: 'https://strikepane.uk/sitemap.xml',
+    sitemap: 'https://strikepanel.uk/sitemap.xml',
   }
 }
