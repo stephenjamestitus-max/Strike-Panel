@@ -47,7 +47,7 @@ components/
     Ticker.tsx          ← infinite CSS marquee
     Stats.tsx           ← 4-stat bar (500+, $0, 14, ∞)
     Problem.tsx         ← dark photo bg, problem/fix two-column
-    Demo.tsx            ← iframe embed of strikepanel.vercel.app/demo
+    Demo.tsx            ← iframe embed of strikepanel.uk/demo
     Features.tsx        ← 5-tab feature showcase with app UI mockups
     CrossPlatform.tsx   ← real Vercel marketing images
     Social.tsx          ← quote testimonial
@@ -100,7 +100,7 @@ All sections are React Server Components by default. Client components (`'use cl
 - Fix points: one dashboard, fight camp timelines, readiness scores, AI session plans
 
 ### 3.6 Demo Section
-- `<iframe src="https://strikepanel.vercel.app/demo" />` — 820×580px, dark border, rounded corners
+- `<iframe src="https://strikepanel.uk/demo" />` — 820×580px, dark border, rounded corners
 - Label above: "LIVE DEMO — No signup required"
 - Subtle ambient glow behind iframe
 

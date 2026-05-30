@@ -11,14 +11,14 @@
 <meta property="og:type"        content="website"/>
 <meta property="og:title"       content="Daily Check-In — strikepane™"/>
 <meta property="og:description" content="Your coach wants your daily readiness check-in. Takes 30 seconds."/>
-<meta property="og:image"       content="https://strikepane.uk/og.png" id="metaOgImage"/>
+<meta property="og:image"       content="https://strikepanel.uk/og.png" id="metaOgImage"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height"content="630"/>
-<meta property="og:url"         content="https://strikepane.uk/" id="metaOgUrl"/>
+<meta property="og:url"         content="https://strikepanel.uk/" id="metaOgUrl"/>
 <meta name="twitter:card"       content="summary_large_image"/>
 <meta name="twitter:title"      content="Daily Check-In — strikepane™"/>
 <meta name="twitter:description"content="Your coach wants your daily readiness check-in. Takes 30 seconds."/>
-<meta name="twitter:image"      content="https://strikepane.uk/og.png"/>
+<meta name="twitter:image"      content="https://strikepanel.uk/og.png"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -5088,7 +5088,7 @@ function ciImportLink() {
   if (!_lastCiEntry) return '';
   const base = window.location.href.startsWith('http')
     ? window.location.href.split('?')[0]
-    : 'https://strikepane.uk/';
+    : 'https://strikepanel.uk/';
   const p = new URLSearchParams({
     import: '1',
     d: btoa(JSON.stringify(_lastCiEntry))
@@ -5189,7 +5189,7 @@ function getShareLink() {
   const href = window.location.href;
   const base = href.startsWith('http')
     ? href.split('?')[0]
-    : 'https://strikepane.uk/';
+    : 'https://strikepanel.uk/';
   const params = new URLSearchParams({ checkin: '1' });
   const token = cloudGetToken();
   if (token) params.set('coach', token);

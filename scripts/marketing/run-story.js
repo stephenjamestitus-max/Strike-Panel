@@ -199,7 +199,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#04070f;font-fam
   <div id="main-text">${safeText}</div>
   <div id="accent-line"></div>
   <div id="logo">STRIKE<span>PANEL</span><sup style="font-size:9px;color:rgba(0,212,240,.6);vertical-align:super;letter-spacing:.5px;font-family:'DM Mono',monospace">™</sup></div>
-  <div id="url">strikepane.uk</div>
+  <div id="url">strikepanel.uk</div>
 </div>
 </body>
 </html>`;

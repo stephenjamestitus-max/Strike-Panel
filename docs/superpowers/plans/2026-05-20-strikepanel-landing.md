@@ -1129,7 +1129,7 @@ export default function Demo() {
 
         <div style={{ display: 'inline-block', borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(0,212,240,.15)', boxShadow: '0 0 80px rgba(0,212,240,.08),0 32px 64px rgba(0,0,0,.6)' }}>
           <iframe
-            src="https://strikepanel.vercel.app/demo"
+            src="https://strikepanel.uk/demo"
             width={820}
             height={580}
             style={{ display: 'block', border: 'none', background: '#04070f' }}
@@ -2035,7 +2035,7 @@ export default function Pricing() {
           ))}
         </ul>
 
-        <a href="https://strikepanel.vercel.app" style={{
+        <a href="https://strikepanel.uk" style={{
           display: 'block', background: 'linear-gradient(135deg,#c8892a,#e0a83a)',
           color: '#000', fontWeight: 700, borderRadius: 100, padding: '16px 32px',
           fontSize: 16, boxShadow: '0 0 40px rgba(200,137,42,.45)', textAlign: 'center',

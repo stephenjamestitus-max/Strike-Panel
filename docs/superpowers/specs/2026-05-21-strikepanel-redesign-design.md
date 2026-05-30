@@ -311,7 +311,7 @@ Dark section returning after white Problem. Rounded top transitions back to dark
                 ✓ icon: color var(--green)
 
               CTA: <Magnet padding={120} strength={3}>
-                    <a href="https://strikepanel.vercel.app">
+                    <a href="https://strikepanel.uk">
                       background: linear-gradient(135deg,#c8892a,#e0a83a)
                       color #000, fontWeight 700, fontFamily var(--fk)
                       borderRadius 100px, padding 16px 32px, fontSize 16
