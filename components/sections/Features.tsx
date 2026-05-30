@@ -256,7 +256,7 @@ function CheckIn() {
           <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 3, color: 'var(--muted)', marginBottom: 12 }}>COACH — SHARE THIS LINK</div>
           <div style={{ background: 'rgba(0,212,240,.06)', border: '1px solid rgba(0,212,240,.2)', borderRadius: 10, padding: '14px 16px', marginBottom: 16 }}>
             <div style={{ fontFamily: 'var(--fm)', fontSize: 11, color: 'var(--accent)', letterSpacing: 1, wordBreak: 'break-all' }}>
-              strikepanel.uk/checkin<br />?coach=a8f3x2k9
+              strikepane.uk/checkin<br />?coach=a8f3x2k9
             </div>
           </div>
           <div style={{ fontFamily: 'var(--fb)', fontSize: 13, color: 'rgba(245,240,232,.55)', lineHeight: 1.6, marginBottom: 16 }}>
