@@ -47,7 +47,7 @@ async function sendKeyEmail(email: string, key: string, platform: string) {
             3. Works on up to 3 devices
           </p>
           <p style="font-size:11px;color:#4a5568;margin-top:24px">
-            Need help? Email support@strikepanel.com
+            Need help? Email corepanelv1@gmail.com
           </p>
         </div>
       `,
