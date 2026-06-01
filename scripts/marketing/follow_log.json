@@ -118,5 +118,35 @@
     "description": "Boxing skill development and coaching methodology, US",
     "date": "2026-05-24",
     "status": "queued"
+  },
+  {
+    "handle": "@striking_science",
+    "description": "Sports science applied to combat striking, UK",
+    "date": "2026-06-01",
+    "status": "queued"
+  },
+  {
+    "handle": "@thegravedigger_",
+    "description": "Combat sports coaching, fight team management, US",
+    "date": "2026-06-01",
+    "status": "queued"
+  },
+  {
+    "handle": "@boxingcoachusa",
+    "description": "US boxing coaching community, technique focus",
+    "date": "2026-06-01",
+    "status": "queued"
+  },
+  {
+    "handle": "@strengthboxing",
+    "description": "Strength training for boxers, US-based coach",
+    "date": "2026-06-01",
+    "status": "queued"
+  },
+  {
+    "handle": "@bjjstrengthandconditioning",
+    "description": "BJJ-specific S&C programming, US",
+    "date": "2026-06-01",
+    "status": "queued"
   }
 ]
