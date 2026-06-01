@@ -271,8 +271,7 @@ async function buildPost4() {
 
 const STORY_FALLBACK = {
   scene: 'Between rounds. His fighter is on the stool. Breathing wrong. Eyes glazed. The coach is calling combinations and the fighter is nodding but nothing is going in.',
-  truth: 'HE KNEW IN ROUND 2.
-HE HAD NOTHING LEFT.',
+  truth: 'HE KNEW IN ROUND 2.\nHE HAD NOTHING LEFT.',
   kicker: 'FIGHT CAMP · DAY 23',
   solHeadline: 'THE SCORE', solCyan: 'WOULD HAVE SHOWN IT.',
   solPoints: [
