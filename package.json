@@ -1,5 +1,5 @@
 {
-  "name": "strikepane",
+  "name": "strikepanel",
   "version": "2.0.0",
   "private": true,
   "scripts": {
@@ -20,7 +20,8 @@
     "react-dom": "19.2.4",
     "three": "^0.184.0",
     "puppeteer": "^25.0.0",
-    "@zernio/node": "^1.0.0"
+    "dotenv": "^16.0.0",
+    "@zernio/node": "^0.2.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
