@@ -34,9 +34,14 @@ const VOICE = `BRAND VOICE (follow exactly):
 - Short declarative sentences. One idea per sentence. No comma-separated clauses.
 - Active voice. Direct. Second person (you/your) where natural.
 - No emojis. No hyphens. No exclamation marks. No questions.
-- Tone: a respected senior coach speaking to a peer. Confident, not salesy.
+- Tone: confrontational but not cruel. Call coaches out on their actual habits. Make them wince and nod at the same time. Specific details make it hit. Vague platitudes kill it.
+- PURPOSE: Make coaches stop scrolling because they see themselves. Make them feel slightly called out. Then show them a way out. Funny is good when it lands on a real truth. Absurdist comparisons work well ("You are managing elite athletes the same way you manage a supermarket loyalty card.").
 - BAD: "you feel helpless and wonder if things could be different"
-- GOOD: "You had no number. No score. No system. Just a gut feeling that cost you the fight."`;
+- BAD: "data is important for coaches" — too vague, too safe, ignored
+- GOOD: "You had no number. No score. No system. Just a gut feeling that cost you the fight."
+- GOOD: "You texted twelve athletes the same session plan. Three of them were running on empty. You will never know which three."
+- GOOD: "The WhatsApp group is not a coaching system. The napkin is not a fight camp."
+- GOOD: "Your fighter stepped on the scale at 162. You had 24 hours. You had no plan. You had vibes."`;
 
 function readLog() {
   if (!fs.existsSync(LOG_PATH)) return [];
@@ -101,19 +106,19 @@ async function groq(prompt, maxTokens = 300) {
 // ── Pillar 1: PAIN ──────────────────────────────────────────────────
 
 const PAIN_FALLBACK = {
-  line: 'FIGHTER LOST IN ROUND 3.\nCOACH HAD NO DATA.',
-  sub: 'That is not bad luck. That is a missing system.',
-  solHeadline: 'ONE NUMBER.', solCyan: 'EVERYTHING CHANGES.',
+  line: 'YOU SENT 12 ATHLETES\nTHE SAME SESSION TODAY.',
+  sub: 'Three of them were running on empty. You will never know which three.',
+  solHeadline: 'ONE SCORE.', solCyan: 'DIFFERENT DAYS.',
   solPoints: [
-    'Readiness score per athlete. Every morning. Before the session starts.',
-    'Know who to push hard and who to protect. No more gut calls.',
-    'Fight camps, weight cuts, and load tracked in a single dashboard.',
+    'Readiness score per athlete every morning. Push Reyes. Protect Marcus. Simple.',
+    'No more same-session-for-everyone. No more guessing who is already broken.',
+    'Fight camp load, weight cuts, and AI sessions — all in one place for ninety-nine dollars.',
   ],
-  caption: `Fighter lost in round 3. Coach had no data.\n\nNo readiness score. No load tracking. No warning sign.\n\nJust a gut feeling that turned out to be wrong.\n\nEvery coach has been there. The ones who stay there are the ones who never build the system.`,
+  caption: `You sent twelve athletes the same session plan today.\n\nThree of them were running on empty. One was fighting a cold you did not know about. Two had not slept properly in four days.\n\nYou will never know which three. Because you had no system.\n\nThe coach down the road did. He scored every athlete this morning before he even touched the whiteboard. He already knew who needed protecting today.\n\nThat gap is not talent. It is a tool you have not bought yet.`,
 };
 
 async function buildPillar1() {
-  const prompt = `You write Instagram posts for strikepanel — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate a PAIN post. One brutal truth a combat sports coach lives with when they have no data system.\n\nOutput format (exact labels, nothing else):\nLINE: [brutal truth, ALL CAPS, max 10 words, can split into 2 lines with \\n]\nSUB: [quiet follow-up, sentence case, max 12 words]\nSOL_HEADLINE: [solution concept, 3-5 words, ALL CAPS]\nSOL_CYAN: [complementary phrase, 2-4 words, ALL CAPS]\nSOL_1: [first benefit point, 12-16 words, specific]\nSOL_2: [second benefit point, 12-16 words, specific]\nSOL_3: [third benefit point, 12-16 words, specific]\nCAPTION: [4-6 short sentences in 2-3 paragraphs, 60-80 words. Specific combat sports moment. Ends with quiet insight.]\n\nExample LINE: FIGHTER LOST IN ROUND 3.\\nCOACH HAD NO DATA.\nExample CAPTION paragraph: Fighter lost in round 3. Coach had no data.\n\nNo readiness score. No load tracking. No warning sign. Just a gut feeling that turned out to be wrong.`;
+  const prompt = `You write Instagram posts for strikepanel — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate a PAIN post. Call out a specific, embarrassing habit combat sports coaches have when they have no data system. Something they recognise immediately because they did it this week. Specific objects: napkin, WhatsApp, same session for everyone, gut feeling.\n\nOutput format (exact labels, nothing else):\nLINE: [brutal truth, ALL CAPS, max 10 words, can split into 2 lines with \\n]\nSUB: [quiet follow-up, sentence case, max 12 words]\nSOL_HEADLINE: [solution concept, 3-5 words, ALL CAPS]\nSOL_CYAN: [complementary phrase, 2-4 words, ALL CAPS]\nSOL_1: [first benefit point, 12-16 words, specific]\nSOL_2: [second benefit point, 12-16 words, specific]\nSOL_3: [third benefit point, 12-16 words, specific]\nCAPTION: [5-7 sentences in 2-3 paragraphs, 70-90 words. Open with the specific embarrassing moment. Show the real cost. End with: what the coach who has a system already knew before walking in.]\n\nExample LINE: YOU TEXTED 12 ATHLETES\\nTHE SAME PLAN TODAY.\nExample SUB: Three were running on empty. You will never know which three.`;
 
   try {
     const raw = await groq(prompt, 420);
@@ -149,15 +154,16 @@ async function buildPost1() {
 // ── Pillar 2: EDUCATION ───────────────────────────────────────────
 
 const EDU_TOPICS = [
-  { topic: 'the 3 phases of fight camp', hook: 'MOST COACHES TREAT\nCAMP AS ONE PHASE.' },
+  { topic: 'the 3 phases of fight camp', hook: 'YOU HAVE BEEN RUNNING\nONE LONG GRIND.' },
   { topic: 'how to read a readiness score', hook: 'A NUMBER BELOW 40\nIS NOT LAZINESS.' },
-  { topic: 'why weight cuts fail in the last 48 hours', hook: 'THE SCALE SAYS READY.\nTHE BODY DOES NOT.' },
+  { topic: 'why weight cuts fail in the last 48 hours', hook: 'THE SCALE SAID READY.\nHIS BODY SAID OTHERWISE.' },
   { topic: 'what load management actually means for combat sports', hook: 'VOLUME IS NOT THE PROBLEM.\nTIMING IS.' },
+  { topic: 'how overtraining shows up before the coach notices', hook: 'HE TOLD YOU HE WAS FINE.\nHIS BODY DID NOT AGREE.' },
 ];
 
 async function buildPost2() {
   const topic = EDU_TOPICS[new Date().getDate() % EDU_TOPICS.length];
-  const prompt = `You write Instagram posts for strikepanel — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate an EDUCATION post teaching coaches about: "${topic.topic}"\n\nOutput format (exact labels, nothing else):\nHOOK: [striking opener, ALL CAPS, max 10 words, can split 2 lines with \\n — use: ${topic.hook}]\nSOL_HEADLINE: [what the lesson covers, 3-5 words, ALL CAPS]\nSOL_CYAN: [complementary phrase, 2-4 words, ALL CAPS]\nSOL_1: [first teaching point, 12-16 words]\nSOL_2: [second teaching point, 12-16 words]\nSOL_3: [third teaching point, 12-16 words]\nCAPTION: [5-7 sentences in 3 paragraphs, 70-90 words. Teach the concept clearly. Coach-to-coach. No product mention until the final line which can say strikepanel tracks this.]`;
+  const prompt = `You write Instagram posts for strikepanel — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate an EDUCATION post teaching coaches about: "${topic.topic}"\n\nOutput format (exact labels, nothing else):\nHOOK: [striking opener, ALL CAPS, max 10 words, can split 2 lines with \\n — call out the wrong assumption coaches have, then use: ${topic.hook}]\nSOL_HEADLINE: [what the lesson covers, 3-5 words, ALL CAPS]\nSOL_CYAN: [complementary phrase, 2-4 words, ALL CAPS]\nSOL_1: [first teaching point, 12-16 words]\nSOL_2: [second teaching point, 12-16 words]\nSOL_3: [third teaching point, 12-16 words]\nCAPTION: [5-7 sentences in 3 paragraphs, 70-90 words. Teach the concept clearly. Coach-to-coach. Start with the common mistake. Teach the real concept. Final line: strikepanel tracks this automatically.]`;
 
   try {
     const raw = await groq(prompt, 450);
@@ -190,7 +196,7 @@ async function buildPost3() {
   const athletes = [
     { name: 'REYES', score: 91 }, { name: 'LAKE', score: 67 }, { name: 'MARCUS', score: 34 },
   ];
-  const caption = `This is the morning brief.\n\nThree athletes. Three completely different days.\n\nReyes gets a hard sparring session. Lake gets technical work at 70 percent. Marcus gets active recovery and a conversation.\n\nOne screen. Thirty seconds. Every coach in your gym knows what today looks like before anyone walks through the door.\n\nThis is not guesswork. This is strikepanel.\n\n${HASHTAGS}`;
+  const caption = `Most coaches walk in and treat it like a uniform.\n\nEvery athlete gets the same session. Same load. Same intensity. Different bodies, same plan.\n\nReyes is at 91 today. He gets pushed hard. Lake is at 67. Technical work at 70 percent. Marcus is at 34. Active recovery and a quiet conversation.\n\nThirty seconds on one screen. Every decision made before anyone walks through the door.\n\nThe coaches doing this are not smarter. They just have the right tool.\n\n${HASHTAGS}`;
   const date = new Date().toISOString().split('T')[0];
   const slides = [
     { type: 'widget', athletes, headline: 'THIS IS YOUR', headlineAmber: 'MORNING BRIEF.' },
@@ -209,20 +215,20 @@ async function buildPost3() {
 // ── Pillar 4: IDENTITY ────────────────────────────────────────────
 
 const IDENTITY_FALLBACK = {
-  chaos: 'Napkin from last Tuesday. WhatsApp voice note at 11pm. Gut feeling walking in.',
-  clarity: 'Eight scores on one screen. Who to push. Who to protect. Decided before breakfast.',
-  label: 'SAME COACH. DIFFERENT TOOLS.',
-  solHeadline: 'DATA-DRIVEN', solCyan: 'COACHING.',
+  chaos: 'WhatsApp group. Napkin notes. A hunch. Same plan for everyone. Eyes open, flying blind.',
+  clarity: 'Eight scores before 8am. Reyes pushed hard. Marcus protected. Zero guessing. Zero apologies.',
+  label: 'SAME COACH. DIFFERENT SYSTEM.',
+  solHeadline: 'STOP GUESSING.', solCyan: 'START COACHING.',
   solPoints: [
-    'Elite coaches do not guess. They score. Every athlete. Every morning.',
-    'The gap between good and great is not talent. It is information.',
-    'Your system is what separates you when your gut is wrong.',
+    'Every athlete scored every morning. You know who to push before they arrive.',
+    'Stop sending the same plan to twelve different bodies in twelve different states.',
+    'The coaches who protect careers are the ones who had the number before the session.',
   ],
-  caption: `Same coach. Different tools.\n\nLeft side is where most combat sports coaches still are. Not because they are bad coaches. Because nobody built them the right system.\n\nRight side is what changes when you stop guessing and start scoring.\n\nThe decisions do not get easier. They get faster. And faster decisions protect athletes.`,
+  caption: `Same coach. Different system.\n\nLeft side is where most combat sports coaches still are. Not because they are bad. Because nobody told them the gut feeling has a three percent failure rate that shows up in round four.\n\nRight side is what changes when every athlete has a score before you write the session plan.\n\nThe decisions do not get easier. They get faster. And in combat sports, faster protects careers.`,
 };
 
 async function buildPost4() {
-  const prompt = `You write Instagram posts for strikepanel — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate an IDENTITY post. The theme is: elite combat sports coaches use data. Non-elite coaches guess.\n\nOutput format (exact labels, nothing else):\nCHAOS: [coaching chaos, 12-18 words, vivid — napkins, WhatsApp, guesswork, whiteboards]\nCLARITY: [coaching clarity, 12-18 words, specific — what the elite coach already knows before the session]\nLABEL: [banner contrast, ALL CAPS, max 6 words]\nSOL_HEADLINE: [identity statement, 2-4 words, ALL CAPS]\nSOL_CYAN: [complementary phrase, 2-4 words, ALL CAPS]\nSOL_1: [identity point 1, 12-16 words, what elite coaches do differently]\nSOL_2: [identity point 2, 12-16 words]\nSOL_3: [identity point 3, 12-16 words]\nCAPTION: [5-7 sentences in 3 paragraphs, 65-85 words. Coach-to-coach. Ends with quiet insight about professional identity.]`;
+  const prompt = `You write Instagram posts for strikepanel — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate an IDENTITY post. The theme is: coaches who use data vs coaches who guess. Make the left side (chaos) uncomfortably recognisable — specific details coaches will wince at. Make the right side (clarity) aspirational but grounded.\n\nOutput format (exact labels, nothing else):\nCHAOS: [the chaos, 12-18 words, brutally specific — name the actual objects: napkin, WhatsApp voice note, same plan for everyone, gut feeling, whiteboard rubbed out three times]\nCLARITY: [the clarity, 12-18 words, specific — what the data-driven coach already knows before walking in]\nLABEL: [the contrast label, ALL CAPS, max 6 words — punchy]\nSOL_HEADLINE: [identity statement, 2-4 words, ALL CAPS]\nSOL_CYAN: [complementary phrase, 2-4 words, ALL CAPS]\nSOL_1: [identity point 1, 12-16 words, specific behaviour elite coaches have]\nSOL_2: [identity point 2, 12-16 words]\nSOL_3: [identity point 3, 12-16 words — ends with real consequence]\nCAPTION: [5-7 sentences in 3 paragraphs, 70-90 words. Start by naming the chaos coaches recognise. Middle: what changes. End: one quiet line about what the system does when the gut is wrong.]`;
 
   try {
     const raw = await groq(prompt, 480);
@@ -264,20 +270,21 @@ async function buildPost4() {
 // ── Pillar 5: STORY ──────────────────────────────────────────────
 
 const STORY_FALLBACK = {
-  scene: 'Between rounds. His fighter is on the stool. Breathing wrong. Eyes glazed. The coach is talking tactics but the fighter stopped hearing him two rounds ago.',
-  truth: 'HE FOUND OUT TOO LATE.',
-  kicker: 'FIGHT CAMP · CORNER MOMENT',
-  solHeadline: 'THE DATA', solCyan: 'WOULD HAVE SHOWN IT.',
+  scene: 'Between rounds. His fighter is on the stool. Breathing wrong. Eyes glazed. The coach is calling combinations and the fighter is nodding but nothing is going in.',
+  truth: 'HE KNEW IN ROUND 2.
+HE HAD NOTHING LEFT.',
+  kicker: 'FIGHT CAMP · DAY 23',
+  solHeadline: 'THE SCORE', solCyan: 'WOULD HAVE SHOWN IT.',
   solPoints: [
-    'Readiness score on Monday. Trend down three days in a row.',
-    'Tuesday session adjusted. Wednesday load protected.',
-    'Fighter arrives at fight night sharp. Not empty.',
+    'Readiness score on Monday: 31. Trend down four days running. Red flag on paper.',
+    'One adjusted session Tuesday. Load reduced Wednesday. Fighter protected going in.',
+    'He arrives at fight night at 89. Sharp. Not empty. Not nodding at combinations he cannot hear.',
   ],
-  caption: `Between rounds. His fighter is on the stool.\n\nBreathing wrong. Eyes glazed. The coach is still calling combinations but the fighter stopped hearing him two rounds ago.\n\nHe was running on empty. Had been for three days.\n\nThe readiness score would have shown it on Monday. One adjusted session on Tuesday. The fighter would have arrived at fight night sharp.\n\nInstead he found out in round 4.`,
+  caption: `Between rounds. His fighter is on the stool.\n\nBreathing wrong. Eyes glazed. The coach is calling combinations he practiced a hundred times in camp but the fighter stopped hearing him in round two.\n\nHe had been running on empty since Monday. The coach knew something felt off. He pushed anyway because camp was camp and there was no number to point at.\n\nA readiness score of 31 on Monday would have changed Tuesday. Tuesday would have changed fight night.\n\nInstead he found out in round two. In front of everyone.`,
 };
 
 async function buildPost5() {
-  const prompt = `You write Instagram posts for strikepanel — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate a STORY post. A cinematic moment where a coach discovers too late that their fighter was already broken — because they had no readiness data.\n\nOutput format (exact labels, nothing else):\nSCENE: [2-3 short sentences, present tense, cinematic. Corner or gym. No product mention.]\nTRUTH: [ALL CAPS, max 8 words. What the missing data cost.]\nKICKER: [ALL CAPS, exactly: FIGHT CAMP · [MOMENT NAME], max 5 words after dot]\nSOL_HEADLINE: [what the data would have done, 3-5 words, ALL CAPS]\nSOL_CYAN: [completion phrase, 3-5 words, ALL CAPS]\nSOL_1: [what data would have shown, 12-16 words]\nSOL_2: [what decision would have changed, 12-16 words]\nSOL_3: [the outcome that would have been different, 12-16 words]\nCAPTION: [6-8 sentences in 4 paragraphs, 85-110 words. Full story. Real details. Ends with the lesson.]`;
+  const prompt = `You write Instagram posts for strikepanel — a $99 coaching dashboard for combat sports coaches.\n\n${VOICE}\n\nGenerate a STORY post. A specific, cinematic moment where a coach finds out too late — because they had no readiness data. Make it real. Make it embarrassing. Name the exact moment the coach realises they missed something.\n\nOutput format (exact labels, nothing else):\nSCENE: [2-3 short present-tense sentences. Hyper specific — name the round, the corner, the look on the fighter's face. No product mention.]\nTRUTH: [ALL CAPS, max 8 words, 1-2 lines with \\\\n — the exact moment of realisation, blunt]\nKICKER: [ALL CAPS, exactly: FIGHT CAMP · [MOMENT], max 5 words after dot]\nSOL_HEADLINE: [what the score would have done, 3-5 words, ALL CAPS]\nSOL_CYAN: [completion phrase, 3-5 words, ALL CAPS]\nSOL_1: [what the score would have shown, 12-16 words, specific number]\nSOL_2: [what decision would have been different, 12-16 words]\nSOL_3: [what fight night would have looked like instead, 12-16 words]\nCAPTION: [6-8 sentences in 4 paragraphs, 90-115 words. Full story. Real fight camp details. Show the exact cost of not having the data. End with one quiet lesson — not a sales pitch.]`;
 
   try {
     const raw = await groq(prompt, 500);

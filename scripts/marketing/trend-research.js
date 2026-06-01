@@ -36,7 +36,7 @@ const SOURCES = [
 function fetchJson(url) {
   return new Promise((resolve, reject) => {
     const req = https.get(url, {
-      headers: { 'User-Agent': 'strikepanel-TrendBot/1.0' },
+      headers: { 'User-Agent': 'strikepane-TrendBot/1.0' },
     }, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);

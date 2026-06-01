@@ -22,7 +22,7 @@ Check posted_log.json — do not post if last post was less than 2 days ago.
 3. Weight Cut — safe cuts, daily tracking, fight night
 4. AI Sessions — session generation based on readiness data
 5. Problem/Frustration — coaches guessing, spreadsheet chaos, WhatsApp mess
-6. Social Proof — what coaches get from using strikepanel
+6. Social Proof — what coaches get from using strikepane
 7. Direct Offer — $99 one-time, no subscription
 
 ## Instructions
@@ -48,7 +48,7 @@ Check posted_log.json — do not post if last post was less than 2 days ago.
 4. If --carousel flag or pillar suits multi-slide: run /carousel to generate
    6-slide PNG carousel, then attach to post.
 
-5. Post via Zernio MCP to Instagram @strikepanel.
+5. Post via Zernio MCP to Instagram @strikepane.
 
 6. Log entry: {timestamp, platform, pillar, caption_preview, format, status}
 

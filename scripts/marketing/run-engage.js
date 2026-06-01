@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * strikepanel Engage — Daily Comment Generator
+ * strikepane Engage — Daily Comment Generator
  * Run: node scripts/marketing/run-engage.js
  *
  * Generates 15 specific, brand-building comments for Instagram.
@@ -110,7 +110,7 @@ Requirements:
 - Shows genuine domain knowledge — only a serious combat sports coach would know this
 - Sounds like a knowledgeable peer, not a fan or marketer
 - Makes people curious about who left the comment (builds intrigue)
-- NEVER mentions strikepanel or any product
+- NEVER mentions strikepane or any product
 - NEVER promotes anything
 - No hashtags, no emojis
 - Direct, professional, coach-to-coach tone
@@ -157,7 +157,7 @@ Output only the comment.`;
 }
 
 async function run() {
-  console.log('\n=== strikepanel Engage — Daily Comment Generator ===');
+  console.log('\n=== strikepane Engage — Daily Comment Generator ===');
   console.log(new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dubai' }), '(Dubai)');
   console.log('');
 

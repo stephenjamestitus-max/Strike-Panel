@@ -18,7 +18,7 @@ Weekly marketing performance summary with actionable recommendations.
 3. Generate a full weekly report:
 
    ═══════════════════════════════════
-   strikepanel WEEKLY REPORT
+   STRIKEPANE WEEKLY REPORT
    [date range]
    ═══════════════════════════════════
 

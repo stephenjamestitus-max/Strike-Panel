@@ -65,7 +65,7 @@
     <circle cx="55.5" cy="55.5" r="4.5" fill="white" fill-opacity="0.25"/>
     <text x="60" y="64.5" font-family="Arial Black,sans-serif" font-weight="900" font-size="10" fill="#07111e" text-anchor="middle" letter-spacing="0.8">SP</text>
   </g>
-  <text x="154" y="96" font-family="Arial Black,sans-serif" font-weight="900" font-size="22" fill="#ffffff" fill-opacity="0.7" letter-spacing="2">strikepanel™</text>
+  <text x="154" y="96" font-family="Arial Black,sans-serif" font-weight="900" font-size="22" fill="#ffffff" fill-opacity="0.7" letter-spacing="2">STRIKEPANE™</text>
 
   <!-- LIVE DEMO pill -->
   <rect x="72" y="180" width="150" height="32" rx="16" fill="rgba(16,185,129,0.15)" stroke="#10b981" stroke-opacity="0.4" stroke-width="1"/>
@@ -101,6 +101,6 @@
     <text x="22" y="38" font-family="Arial,sans-serif" font-size="18" fill="#ffffff">✦  AI Session Builder</text>
   </g>
 
-  <text x="600" y="588" font-family="Courier New,Courier,monospace" font-size="14" fill="#3d4560" text-anchor="middle" letter-spacing="3">strikepanel.VERCEL.APP/DEMO</text>
+  <text x="600" y="588" font-family="Courier New,Courier,monospace" font-size="14" fill="#3d4560" text-anchor="middle" letter-spacing="3">STRIKEPANE.VERCEL.APP/DEMO</text>
   <rect y="627.5" width="1200" height="2.5" fill="#10b981" fill-opacity="0.3"/>
 </svg>

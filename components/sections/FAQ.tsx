@@ -5,11 +5,11 @@ import FadeIn from '@/components/ui/FadeIn'
 const faqs = [
   {
     q: 'Is there a subscription or monthly fee?',
-    a: 'No. strikepanel is a one-time payment of $99. You get lifetime access including all future updates. No renewals, no surprises.',
+    a: 'No. strikepane is a one-time payment of $99. You get lifetime access including all future updates. No renewals, no surprises.',
   },
   {
     q: 'Does it work offline?',
-    a: 'Yes. strikepanel is a Progressive Web App (PWA). Once installed, the core dashboard works completely offline — perfect for gyms with patchy Wi-Fi.',
+    a: 'Yes. strikepane is a Progressive Web App (PWA). Once installed, the core dashboard works completely offline — perfect for gyms with patchy Wi-Fi.',
   },
   {
     q: 'How many athletes can I track?',
@@ -21,15 +21,15 @@ const faqs = [
   },
   {
     q: 'What happens after I purchase?',
-    a: 'You\'ll receive an access key via Payhip immediately after payment. Open strikepanel, enter your key, and you\'re live within minutes. No app store, no download — it installs as a PWA directly from your browser.',
+    a: 'You\'ll receive an access key via Payhip immediately after payment. Open strikepane, enter your key, and you\'re live within minutes. No app store, no download — it installs as a PWA directly from your browser.',
   },
   {
     q: 'Does it work on mobile and iPad?',
-    a: 'Yes. strikepanel is built to work on any device — desktop, tablet, or phone. It\'s optimised for the iPad dashboard view coaches use courtside.',
+    a: 'Yes. strikepane is built to work on any device — desktop, tablet, or phone. It\'s optimised for the iPad dashboard view coaches use courtside.',
   },
   {
     q: 'What if it\'s not right for me?',
-    a: 'You\'re covered by a 30-day money-back guarantee. If strikepanel isn\'t the right fit, email us and we\'ll refund you immediately — no questions asked.',
+    a: 'You\'re covered by a 30-day money-back guarantee. If strikepane isn\'t the right fit, email us and we\'ll refund you immediately — no questions asked.',
   },
 ]
 
