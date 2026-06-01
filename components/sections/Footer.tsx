@@ -91,7 +91,7 @@ export default function Footer() {
         </nav>
 
         <div style={{ fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 2, color: 'var(--muted2)' }}>
-          © 2026 STRIKEPANE™
+          © 2026 strikepanel™
         </div>
       </div>
     </footer>

@@ -3,26 +3,26 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
-<title>strikepane™ — Training Intelligence</title>
+<title>strikepanel™ — Training Intelligence</title>
 <meta name="description" content="Daily readiness intelligence for combat sports coaches. Know who to push and who to protect — every morning."/>
 <meta name="robots" content="noindex,nofollow"/>
 <meta name="theme-color" content="#0b0d14"/>
 <!-- Open Graph — WhatsApp / iMessage link preview -->
 <meta property="og:type"        content="website"/>
-<meta property="og:title"       content="Daily Check-In — strikepane™"/>
+<meta property="og:title"       content="Daily Check-In — strikepanel™"/>
 <meta property="og:description" content="Your coach wants your daily readiness check-in. Takes 30 seconds."/>
 <meta property="og:image"       content="https://strikepanel.uk/og.png" id="metaOgImage"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height"content="630"/>
 <meta property="og:url"         content="https://strikepanel.uk/" id="metaOgUrl"/>
 <meta name="twitter:card"       content="summary_large_image"/>
-<meta name="twitter:title"      content="Daily Check-In — strikepane™"/>
+<meta name="twitter:title"      content="Daily Check-In — strikepanel™"/>
 <meta name="twitter:description"content="Your coach wants your daily readiness check-in. Takes 30 seconds."/>
 <meta name="twitter:image"      content="https://strikepanel.uk/og.png"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-<meta name="apple-mobile-web-app-title" content="strikepane"/>
+<meta name="apple-mobile-web-app-title" content="strikepanel"/>
 <link rel="manifest" id="pwaManifest"/>
 <link rel="apple-touch-icon" id="pwaIcon"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1067,7 +1067,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
         <text x="45" y="49" font-family="'Oswald','Bebas Neue','Arial Black',sans-serif" font-weight="700" font-size="8" fill="#0b0d14" text-anchor="middle" letter-spacing="0.5">SP</text>
       </svg>
     </div>
-    <div class="lg-title">STRIKEPANE™</div>
+    <div class="lg-title">strikepanel™</div>
     <div class="lg-sub">Enter your license key to unlock the app.<br>Purchased on Payhip? Check your confirmation email.</div>
     <div class="field">
       <input class="finput" id="lgKeyInput" type="text"
@@ -1079,7 +1079,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;margin-top:8px;font-size:13px" onclick="lgActivate()">🔓 Activate License</button>
     <div class="lg-msg" id="lgMsg"></div>
     <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);font-size:11px;color:var(--muted2);line-height:1.7">
-      Don't have a license? <a href="https://payhip.com/Strikepanel" target="_blank" style="color:var(--accent);text-decoration:underline">Get strikepane — $99 →</a>
+      Don't have a license? <a href="https://payhip.com/Strikepanel" target="_blank" style="color:var(--accent);text-decoration:underline">Get strikepanel — $99 →</a>
     </div>
   </div>
 </div>
@@ -1091,7 +1091,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     Demo Mode
   </div>
   <div class="demo-mode-text">
-    You're exploring strikepane™ with sample data. Nothing you do here is saved permanently.
+    You're exploring strikepanel™ with sample data. Nothing you do here is saved permanently.
   </div>
   <a href="https://payhip.com/Strikepanel" target="_blank" class="demo-buy-btn">Buy to unlock — $99</a>
   <button class="demo-exit-btn" onclick="demoExit()" title="Exit demo">✕ Exit</button>
@@ -1105,7 +1105,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px">
     You're exploring with demo data. To save your own athletes, sessions and check-ins — grab your license.
   </div>
-  <a href="https://payhip.com/Strikepanel" target="_blank" class="demo-buy-btn" style="width:100%;justify-content:center;padding:13px;font-size:12px">Get strikepane — $99</a>
+  <a href="https://payhip.com/Strikepanel" target="_blank" class="demo-buy-btn" style="width:100%;justify-content:center;padding:13px;font-size:12px">Get strikepanel — $99</a>
   <div style="font-size:11px;color:var(--muted2);margin-top:10px">One-time fee · No subscription · Instant access</div>
   <button class="btn btn-ghost btn-sm" style="margin-top:10px;width:100%;justify-content:center" onclick="demoCloseBlock()">Keep exploring demo</button>
 </div>
@@ -1115,7 +1115,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 
     <!-- STEP 1: Mode selection -->
     <div id="obStep1">
-      <div style="font-family:var(--fh);font-size:26px;letter-spacing:3px;margin-bottom:6px">WELCOME TO STRIKEPANE™</div>
+      <div style="font-family:var(--fh);font-size:26px;letter-spacing:3px;margin-bottom:6px">WELCOME TO strikepanel™</div>
       <div style="font-size:12.5px;color:var(--muted);margin-bottom:24px;line-height:1.7">What are you using this for?</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px">
         <div onclick="obSetMode('combat')" style="cursor:pointer;background:rgba(0,212,240,0.06);border:1px solid rgba(0,212,240,0.2);border-radius:var(--r);padding:24px 16px;transition:background .18s var(--ease),border-color .18s var(--ease)" onmouseover="this.style.background='rgba(0,212,240,0.12)'" onmouseout="this.style.background='rgba(0,212,240,0.06)'">
@@ -1232,7 +1232,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   <!-- Daily Brief Hero -->
   <div class="brief-hero" id="dbBriefHero">
     <div class="brief-date" id="dbBriefDate">—</div>
-    <div class="brief-headline" id="dbBriefHeadline">WELCOME TO <span>STRIKEPANE™</span></div>
+    <div class="brief-headline" id="dbBriefHeadline">WELCOME TO <span>strikepanel™</span></div>
     <div class="brief-sub" id="dbBriefSub">Add your athletes and log their first check-in — your morning brief will be ready tomorrow.</div>
     <div class="brief-actions">
       <button class="btn btn-primary btn-sm" onclick="switchTab('brief')">⚡ Full Brief</button>
@@ -1395,7 +1395,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
         <ol style="display:flex;flex-direction:column;gap:10px;padding-left:0;list-style:none">
           <li style="display:flex;gap:12px;font-size:13px;color:var(--muted)"><span style="font-family:var(--fh);font-size:18px;color:var(--accent);min-width:24px;line-height:1.3">1</span><span>Go to <a href="https://supabase.com" target="_blank" style="color:var(--accent);text-decoration:underline;font-weight:600">supabase.com</a> and click <strong style="color:var(--text)">Sign Up</strong> — it's free.</span></li>
           <li style="display:flex;gap:12px;font-size:13px;color:var(--muted)"><span style="font-family:var(--fh);font-size:18px;color:var(--accent);min-width:24px;line-height:1.3">2</span><span>Sign in with GitHub or email — takes 30 seconds.</span></li>
-          <li style="display:flex;gap:12px;font-size:13px;color:var(--muted)"><span style="font-family:var(--fh);font-size:18px;color:var(--accent);min-width:24px;line-height:1.3">3</span><span>Click <strong style="color:var(--text)">"New Project"</strong>, name it anything (e.g. <em style="color:var(--text)">strikepane</em>), set a database password (save it somewhere, you won't need it again), choose your region, and click <strong style="color:var(--text)">Create new project</strong>.</span></li>
+          <li style="display:flex;gap:12px;font-size:13px;color:var(--muted)"><span style="font-family:var(--fh);font-size:18px;color:var(--accent);min-width:24px;line-height:1.3">3</span><span>Click <strong style="color:var(--text)">"New Project"</strong>, name it anything (e.g. <em style="color:var(--text)">strikepanel</em>), set a database password (save it somewhere, you won't need it again), choose your region, and click <strong style="color:var(--text)">Create new project</strong>.</span></li>
           <li style="display:flex;gap:12px;font-size:13px;color:var(--muted)"><span style="font-family:var(--fh);font-size:18px;color:var(--accent);min-width:24px;line-height:1.3">4</span><span>Wait for the green <strong style="color:var(--green)">Project is ready</strong> status — takes about 60 seconds. Don't proceed until it's fully provisioned or the SQL Editor won't work.</span></li>
         </ol>
         <div style="margin-top:14px;padding:10px 14px;background:rgba(0,212,240,0.05);border:1px solid rgba(0,212,240,0.15);border-radius:var(--r-xs);font-size:11.5px;color:var(--muted)">
@@ -1412,7 +1412,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
       <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r-sm);padding:18px;margin-bottom:16px">
         <div style="font-family:var(--fh);font-size:18px;letter-spacing:2px;margin-bottom:8px">RUN THE DATABASE SCHEMA</div>
         <div style="font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:14px">
-          This creates the table strikepane uses to store your data. Copy the code below and run it once — takes 10 seconds.
+          This creates the table strikepanel uses to store your data. Copy the code below and run it once — takes 10 seconds.
         </div>
         <ol style="display:flex;flex-direction:column;gap:10px;padding-left:0;list-style:none;margin-bottom:14px">
           <li style="display:flex;gap:12px;font-size:13px;color:var(--muted)"><span style="font-family:var(--fh);font-size:18px;color:var(--accent);min-width:24px;line-height:1.3">1</span><span>In your Supabase project, click <strong style="color:var(--text)">SQL Editor</strong> in the left sidebar.</span></li>
@@ -1423,7 +1423,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
           <div style="font-family:var(--fc);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2)">SQL Schema — Copy &amp; Paste This</div>
           <button onclick="wizCopySchema(this)" style="background:rgba(0,212,240,0.08);border:1px solid rgba(0,212,240,0.2);border-radius:6px;color:var(--accent);font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;cursor:pointer;transition:background .15s,border-color .15s">Copy SQL</button>
         </div>
-        <pre id="wizSchemaBlock" style="background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r-xs);padding:14px;font-family:var(--fm);font-size:11px;color:var(--text);overflow-x:auto;line-height:1.6;white-space:pre">-- strikepane™ Cloud Sync Schema
+        <pre id="wizSchemaBlock" style="background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r-xs);padding:14px;font-family:var(--fm);font-size:11px;color:var(--text);overflow-x:auto;line-height:1.6;white-space:pre">-- strikepanel™ Cloud Sync Schema
 -- Run this once in your Supabase SQL Editor
 
 create table if not exists sp_sync (
@@ -1454,7 +1454,7 @@ create policy "allow_all" on sp_sync
       <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r-sm);padding:18px;margin-bottom:16px">
         <div style="font-family:var(--fh);font-size:18px;letter-spacing:2px;margin-bottom:8px">COPY YOUR API KEYS</div>
         <div style="font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:14px">
-          These two strings are how strikepane talks to your database. They're safe to use in the app — the anon key only allows what you've permitted.
+          These two strings are how strikepanel talks to your database. They're safe to use in the app — the anon key only allows what you've permitted.
         </div>
         <ol style="display:flex;flex-direction:column;gap:10px;padding-left:0;list-style:none;margin-bottom:14px">
           <li style="display:flex;gap:12px;font-size:13px;color:var(--muted)"><span style="font-family:var(--fh);font-size:18px;color:var(--accent);min-width:24px;line-height:1.3">1</span><span>In Supabase, click <strong style="color:var(--text)">Project Settings</strong> (gear icon, bottom-left sidebar).</span></li>
@@ -1475,7 +1475,7 @@ create policy "allow_all" on sp_sync
     <!-- STEP 4 -->
     <div id="wizStep4" style="display:none;animation:fadeUp .2s ease">
       <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r-sm);padding:18px;margin-bottom:16px">
-        <div style="font-family:var(--fh);font-size:18px;letter-spacing:2px;margin-bottom:8px">CONNECT STRIKEPANE</div>
+        <div style="font-family:var(--fh);font-size:18px;letter-spacing:2px;margin-bottom:8px">CONNECT strikepanel</div>
         <div style="font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:16px">
           Paste your keys below and hit Connect. We'll test the connection before locking it in.
         </div>
@@ -1638,14 +1638,14 @@ create policy "allow_all" on sp_sync
 </div>
 
 <!-- ═══ PWA INSTALL SHEET ═══ -->
-<div class="pwa-banner" id="pwaBanner" role="dialog" aria-label="Install strikepane">
+<div class="pwa-banner" id="pwaBanner" role="dialog" aria-label="Install strikepanel">
   <div class="pwa-drag"></div>
   <div class="pwa-body">
     <div class="pwa-app-icon">
       <div class="pwa-app-icon-glow"></div>
       <span class="pwa-app-icon-letters">SP</span>
     </div>
-    <div class="pwa-title">strikepane™</div>
+    <div class="pwa-title">strikepanel™</div>
     <div class="pwa-sub">Add to your home screen for instant access — no App Store, no browser bar.</div>
     <div class="pwa-pills">
       <span class="pwa-pill">⚡ Instant access</span>
@@ -2084,14 +2084,14 @@ create policy "allow_all" on sp_sync
   <div class="lic-banner">
     <div class="lic-icon">🔥</div>
     <div>
-      <div class="lic-title">strikepane™ — Up to 10 Athletes · One-Time Fee</div>
+      <div class="lic-title">strikepanel™ — Up to 10 Athletes · One-Time Fee</div>
       <div class="lic-text">Built exclusively for combat sports coaches. Track up to 10 athletes, generate daily readiness briefs, manage fight camp countdowns and weight cuts — all from one app. Add your free Gemini key in Settings to unlock AI features. No subscription. Ever.</div>
       <div class="lic-pills">
         <span class="lic-pill">🥊 Combat Sports</span><span class="lic-pill">👥 Up to 10 athletes</span><span class="lic-pill">⚡ Morning Brief</span><span class="lic-pill">✦ Gemini AI</span><span class="lic-pill">🚫 No tracking</span><span class="lic-pill">📱 PWA installable</span>
       </div>
       <div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
         <span style="font-size:12px;color:var(--muted)">Running a bigger squad or multi-gym setup?</span>
-        <a href="mailto:corepanelv1@gmail.com?subject=Team%20Plan%20Enquiry&body=Hi%2C%20I%27m%20interested%20in%20a%20team%20plan%20for%20strikepane%E2%84%A2.%0A%0ACoach%20name%3A%0ANumber%20of%20athletes%3A%0AGym%20%2F%20organisation%3A" style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(0,212,240,0.35);padding-bottom:1px;transition:color .2s,border-color .2s" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(0,212,240,0.7)'" onmouseout="this.style.color='var(--accent)';this.style.borderColor='rgba(0,212,240,0.35)'">→ Email us for a team plan</a>
+        <a href="mailto:corepanelv1@gmail.com?subject=Team%20Plan%20Enquiry&body=Hi%2C%20I%27m%20interested%20in%20a%20team%20plan%20for%20strikepanel%E2%84%A2.%0A%0ACoach%20name%3A%0ANumber%20of%20athletes%3A%0AGym%20%2F%20organisation%3A" style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(0,212,240,0.35);padding-bottom:1px;transition:color .2s,border-color .2s" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(0,212,240,0.7)'" onmouseout="this.style.color='var(--accent)';this.style.borderColor='rgba(0,212,240,0.35)'">→ Email us for a team plan</a>
       </div>
     </div>
   </div>
@@ -2135,8 +2135,8 @@ create policy "allow_all" on sp_sync
       <div style="background:rgba(0,212,240,0.04);border:1px solid rgba(0,212,240,0.15);border-radius:var(--r-sm);padding:16px;text-align:center">
         <div style="font-size:28px;margin-bottom:10px">🏷️</div>
         <div style="font-family:var(--fh);font-size:15px;letter-spacing:2px;margin-bottom:8px">PUT YOUR GYM'S NAME ON IT</div>
-        <div style="font-size:12.5px;color:var(--muted);line-height:1.7;margin-bottom:14px">Replace strikepane™ with your gym name, set your own colours, and hand athletes a fully branded experience. Perfect for PT studios and gym chains.</div>
-        <a href="mailto:corepanelv1@gmail.com?subject=Studio%20Edition%20Enquiry&body=Hi%2C%20I%27m%20interested%20in%20the%20Studio%20Edition%20white-label%20version%20of%20strikepane%E2%84%A2.%0A%0AGym%20name%3A%0ANumber%20of%20coaches%3A%0ANumber%20of%20athletes%3A" class="btn btn-primary btn-sm" style="text-decoration:none;justify-content:center">→ Enquire About Studio Edition</a>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.7;margin-bottom:14px">Replace strikepanel™ with your gym name, set your own colours, and hand athletes a fully branded experience. Perfect for PT studios and gym chains.</div>
+        <a href="mailto:corepanelv1@gmail.com?subject=Studio%20Edition%20Enquiry&body=Hi%2C%20I%27m%20interested%20in%20the%20Studio%20Edition%20white-label%20version%20of%20strikepanel%E2%84%A2.%0A%0AGym%20name%3A%0ANumber%20of%20coaches%3A%0ANumber%20of%20athletes%3A" class="btn btn-primary btn-sm" style="text-decoration:none;justify-content:center">→ Enquire About Studio Edition</a>
       </div>
     </div>
 
@@ -2245,7 +2245,7 @@ create policy "allow_all" on sp_sync
   <div class="checkin-hero">
     <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px">
       <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" style="width:40px;height:40px;flex-shrink:0"><defs><radialGradient id="ci-orb" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="55%" stop-color="#0f1220"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs><circle cx="45" cy="45" r="43" fill="url(#ci-orb)" stroke="#00D4F0" stroke-width="1.5" stroke-opacity="0.6"/><circle cx="45" cy="45" r="29" fill="none" stroke="#00D4F0" stroke-width="1" stroke-opacity="0.25"/><line x1="45" y1="2" x2="45" y2="27" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><line x1="45" y1="63" x2="45" y2="88" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><line x1="2" y1="45" x2="27" y2="45" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><line x1="63" y1="45" x2="88" y2="45" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/><circle cx="45" cy="45" r="10" fill="#00D4F0"/><text x="45" y="49" font-family="Arial Black,sans-serif" font-weight="700" font-size="8" fill="#0b0d14" text-anchor="middle">SP</text></svg>
-      <span style="font-family:var(--fh);font-size:18px;letter-spacing:3px;color:var(--text)">STRIKEPANE™</span>
+      <span style="font-family:var(--fh);font-size:18px;letter-spacing:3px;color:var(--text)">strikepanel™</span>
     </div>
     <div class="checkin-hero-title">DAILY CHECK-IN</div>
     <div class="checkin-hero-sub" id="ciPageSub">How are you feeling today?</div>
@@ -2319,7 +2319,7 @@ create policy "allow_all" on sp_sync
       <div id="ciCopiedMsg" style="display:none;font-size:11px;color:var(--green);text-align:center;margin-top:4px">✓ Copied! Paste it to your coach.</div>
     </div>
     <button class="btn btn-ghost btn-sm" style="margin-top:16px;width:100%;justify-content:center" onclick="ciCloseOrReset()">← Close</button>
-    <div style="margin-top:20px;font-size:11px;color:var(--muted2);letter-spacing:1px">Powered by <a href="https://payhip.com/Strikepanel" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:700">strikepane™</a></div>
+    <div style="margin-top:20px;font-size:11px;color:var(--muted2);letter-spacing:1px">Powered by <a href="https://payhip.com/Strikepanel" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:700">strikepanel™</a></div>
   </div>
 </div>
 
@@ -2430,11 +2430,11 @@ create policy "allow_all" on sp_sync
 
 <script>
 // ═══════════════════════════════════════════════════════════════════════
-// STRIKEPANE™ Solo — GEMINI AI · LOCAL-FIRST · OFFLINE
+// strikepanel™ Solo — GEMINI AI · LOCAL-FIRST · OFFLINE
 // One state object. One localStorage key. No cloud. No accounts.
 // ═══════════════════════════════════════════════════════════════════════
 
-const CP_KEY = 'strikepane_v11';
+const CP_KEY = 'strikepanel_v11';
 
 // ── STATE ─────────────────────────────────────────────────────────────
 function mkS() {
@@ -2464,7 +2464,7 @@ function loadState() {
 }
 function saveState() {
   try { localStorage.setItem(CP_KEY, JSON.stringify(S)); }
-  catch(e) { console.warn('[strikepane] saveState err', e); }
+  catch(e) { console.warn('[strikepanel] saveState err', e); }
 }
 function deepMerge(d,s){
   if(!s||typeof s!=='object'||Array.isArray(s))return s!==undefined?s:d;
@@ -2556,8 +2556,8 @@ function p2EmailSubmit(){
   const already = interests.find(i=>i.email===email&&i.feature===feature);
   if(!already) { interests.push(entry); localStorage.setItem('cp_p2_interest', JSON.stringify(interests)); }
   const subject = wlChecked
-    ? '⭐ strikepane™ — Studio Edition Enquiry + Phase 2: ' + feature
-    : 'strikepane™ — Phase 2 Interest: ' + feature;
+    ? '⭐ strikepanel™ — Studio Edition Enquiry + Phase 2: ' + feature
+    : 'strikepanel™ — Phase 2 Interest: ' + feature;
   if(CONFIG.W3F_ENABLED) {
     if(btn){btn.textContent='Sending...';btn.disabled=true;}
     fetch('https://api.web3forms.com/submit', {
@@ -2567,7 +2567,7 @@ function p2EmailSubmit(){
         access_key: CONFIG.W3F_ACCESS_KEY,
         to_email: 'corepanelv1@gmail.com',
         subject,
-        from_name: 'strikepane™',
+        from_name: 'strikepanel™',
         email, feature, whitelabel,
         date: new Date().toLocaleString()
       })
@@ -2669,7 +2669,7 @@ function dbRefresh(){
   const briefSubEl  = document.getElementById('dbBriefSub');
   if (briefHeadEl && briefSubEl) {
     if (!S.athletes.length) {
-      briefHeadEl.innerHTML = 'WELCOME TO <span>STRIKEPANE™</span>';
+      briefHeadEl.innerHTML = 'WELCOME TO <span>strikepanel™</span>';
       briefSubEl.textContent = 'Add your athletes and log their first check-in — your morning brief will be ready.';
     } else if (!allRI.length) {
       briefHeadEl.innerHTML = `YOUR SQUAD — <span>${S.athletes.length}</span> ATHLETE${S.athletes.length > 1 ? 'S' : ''}`;
@@ -3722,7 +3722,7 @@ function selTMode(el,mode){document.querySelectorAll('.tmode').forEach(c=>{if(!c
 
 // ── SETTINGS ──────────────────────────────────────────────────────────
 function wlPrev(){
-  const n=document.getElementById('wlName')?.value.trim()||'strikepane™';
+  const n=document.getElementById('wlName')?.value.trim()||'strikepanel™';
   const t=document.getElementById('wlTagline')?.value.trim()||'Training Intelligence';
   const e1=document.getElementById('wlPrevN'),e2=document.getElementById('wlPrevS');
   if(e1)e1.textContent=n;if(e2)e2.textContent=t;
@@ -3742,7 +3742,7 @@ function wlSave(){
   saveState();wlApplyDOM();showFlash('wlFlash');
 }
 function wlApplyDOM(){
-  const n=S.branding.name||'strikepane™';const t=S.branding.tagline||'Training Intelligence';
+  const n=S.branding.name||'strikepanel™';const t=S.branding.tagline||'Training Intelligence';
   const wm=document.querySelector('.wordmark');if(wm){const ws=n.split(' ');wm.innerHTML=ws.length>1?ws.slice(0,-1).join(' ')+' <span>'+ws[ws.length-1]+'</span>':'<span>'+n+'</span>';}
   const sub=document.getElementById('heroSub');if(sub)sub.textContent=t;
   document.title=n+' — Dashboard';
@@ -3757,7 +3757,7 @@ function scpMeter(){
 function scpExport(){
   const blob=new Blob([JSON.stringify({version:'11',exportedAt:new Date().toISOString(),state:S},null,2)],{type:'application/json'});
   const url=URL.createObjectURL(blob);
-  Object.assign(document.createElement('a'),{href:url,download:'strikepane_Backup_'+new Date().toISOString().slice(0,10)+'.json'}).click();
+  Object.assign(document.createElement('a'),{href:url,download:'strikepanel_Backup_'+new Date().toISOString().slice(0,10)+'.json'}).click();
   URL.revokeObjectURL(url);S.meta.lastExport=new Date().toISOString();saveState();scpMeter();
 }
 function scpImport(e){
@@ -3782,11 +3782,11 @@ function exportCSV(type) {
   if (type === 'athletes') {
     rows = [['Name','Age','Sex','Sport','Weight (kg)','Target Weight','Height (cm)','Goals','Injuries','Notes','Record','Start Date']];
     S.athletes.forEach(a => rows.push([a.name,a.age,a.sex,a.sport,a.weight,a.targetWeight,a.height,a.goals,a.injuries,a.notes,a.record,a.start]));
-    dl(rows, 'strikepane_Members_' + new Date().toISOString().slice(0,10) + '.csv');
+    dl(rows, 'strikepanel_Members_' + new Date().toISOString().slice(0,10) + '.csv');
   } else if (type === 'checkins') {
     rows = [['Date','Athlete','Readiness Score','Sleep Quality','Energy','Soreness','Motivation','Nutrition','Pain','Sleep Hours','RHR','HRV','Steps','Calories','Protein (g)','Notes']];
     riGetAll().sort((a,b)=>b.ts-a.ts).forEach(r => rows.push([r.date,r.athName,r.score,r.sleep,r.energy,r.soreness,r.motivation,r.nutrition,r.pain,r.sleepHrs,r.rhr,r.hrv,r.steps,r.cals,r.protein,r.notes]));
-    dl(rows, 'strikepane_Checkins_' + new Date().toISOString().slice(0,10) + '.csv');
+    dl(rows, 'strikepanel_Checkins_' + new Date().toISOString().slice(0,10) + '.csv');
   } else if (type === 'sessions') {
     rows = [['Date','Athlete','Session Title','Type','Notes','Exercises']];
     S.sessions.forEach(s => {
@@ -3794,7 +3794,7 @@ function exportCSV(type) {
       const exStr = (s.exercises||[]).map(e=>`${e.name} ${e.sets}x${e.reps}`).join(' | ');
       rows.push([s.date, ath?.name||s.athId, s.title, s.goalType||s.sessionType, s.notes, exStr]);
     });
-    dl(rows, 'strikepane_Sessions_' + new Date().toISOString().slice(0,10) + '.csv');
+    dl(rows, 'strikepanel_Sessions_' + new Date().toISOString().slice(0,10) + '.csv');
   } else if (type === 'biometrics') {
     rows = [['Athlete','Weight (kg)','Height (cm)','Age','Sex','Activity Level','Body Fat %','BMI','TDEE','Date']];
     Object.entries(S.biometrics).forEach(([athId, b]) => {
@@ -3802,7 +3802,7 @@ function exportCSV(type) {
       const bmi = b.weight && b.height ? (b.weight / Math.pow(b.height/100, 2)).toFixed(1) : '';
       rows.push([ath?.name||athId, b.weight, b.height, b.age, b.sex, b.activity, b.bodyFat, bmi, b.tdee||'', b.date]);
     });
-    dl(rows, 'strikepane_Biometrics_' + new Date().toISOString().slice(0,10) + '.csv');
+    dl(rows, 'strikepanel_Biometrics_' + new Date().toISOString().slice(0,10) + '.csv');
   }
 }
 
@@ -4066,7 +4066,7 @@ function p2ExportLeads() {
   const csv = 'Email,Feature,Date\n' + leads.map(l => `"${l.email}","${l.feature||''}","${l.date||''}"`).join('\n');
   const blob = new Blob([csv], {type:'text/csv'});
   const url = URL.createObjectURL(blob);
-  Object.assign(document.createElement('a'), {href:url, download:'strikepane_P2_Leads.csv'}).click();
+  Object.assign(document.createElement('a'), {href:url, download:'strikepanel_P2_Leads.csv'}).click();
   URL.revokeObjectURL(url);
 }
 
@@ -4101,9 +4101,9 @@ async function w3fTest() {
       headers:{'Content-Type':'application/json','Accept':'application/json'},
       body: JSON.stringify({
         access_key: key,
-        subject: 'strikepane™ — Web3Forms Test',
-        from_name: 'strikepane™',
-        email: 'test@strikepane-test.com',
+        subject: 'strikepanel™ — Web3Forms Test',
+        from_name: 'strikepanel™',
+        email: 'test@strikepanel-test.com',
         feature: 'Test — Web3Forms is working!',
         date: new Date().toLocaleString()
       })
@@ -4597,8 +4597,8 @@ function setEl(id, html) {
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}"><rect width="${size}" height="${size}" fill="#0b0d14" rx="${size*0.167}"/><circle cx="${size/2}" cy="${size/2}" r="${size*0.38}" fill="none" stroke="#00D4F0" stroke-width="${size*0.022}" opacity="0.4"/><circle cx="${size/2}" cy="${size/2}" r="${size*0.27}" fill="#00D4F0"/><line x1="${size/2}" y1="${size*0.06}" x2="${size/2}" y2="${size*0.3}" stroke="#00D4F0" stroke-width="${size*0.04}" stroke-linecap="round"/><line x1="${size/2}" y1="${size*0.7}" x2="${size/2}" y2="${size*0.94}" stroke="#00D4F0" stroke-width="${size*0.04}" stroke-linecap="round"/><line x1="${size*0.06}" y1="${size/2}" x2="${size*0.3}" y2="${size/2}" stroke="#00D4F0" stroke-width="${size*0.04}" stroke-linecap="round"/><line x1="${size*0.7}" y1="${size/2}" x2="${size*0.94}" y2="${size/2}" stroke="#00D4F0" stroke-width="${size*0.04}" stroke-linecap="round"/><text x="${size/2}" y="${size*0.565}" font-family="Arial Black,sans-serif" font-weight="900" font-size="${size*0.115}" fill="#050810" text-anchor="middle">SP</text></svg>`
   );
   const manifest = {
-    name: 'strikepane™',
-    short_name: 'strikepane',
+    name: 'strikepanel™',
+    short_name: 'strikepanel',
     description: 'Training Intelligence — daily readiness for combat sports coaches',
     start_url: base,
     display: 'standalone',
@@ -5101,7 +5101,7 @@ function ciSendWhatsApp() {
   if (!link) return;
   const entry = _lastCiEntry;
   const msg = encodeURIComponent(
-    `*strikepane Check-In* \u2014 ${entry.athName}\n` +
+    `*strikepanel Check-In* \u2014 ${entry.athName}\n` +
     `Score: ${entry.score}/100\n` +
     `Sleep: ${entry.sleep}/10  Energy: ${entry.energy}/10  Soreness: ${entry.soreness}/10\n` +
     (entry.notes ? `Notes: ${entry.notes}\n` : '') +
@@ -5115,7 +5115,7 @@ function ciCopyImportLink() {
   if (!link) return;
   const entry = _lastCiEntry;
   const text =
-    `strikepane Check-In \u2014 ${entry.athName}\n` +
+    `strikepanel Check-In \u2014 ${entry.athName}\n` +
     `Score: ${entry.score}/100  Sleep: ${entry.sleep}  Energy: ${entry.energy}  Soreness: ${entry.soreness}\n` +
     (entry.notes ? `Notes: ${entry.notes}\n` : '') +
     `Import link: ${link}`;
@@ -5390,7 +5390,7 @@ function pdfPreview() {
     </div>` : ''}
 
     <div style="margin-top:20px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);font-size:10px;color:var(--muted2);display:flex;justify-content:space-between">
-      <span>Generated by strikepane™ — Training Intelligence</span>
+      <span>Generated by strikepanel™ — Training Intelligence</span>
       <span>${nowStr}</span>
     </div>`;
 
@@ -5447,7 +5447,7 @@ function pdfExport() {
     // Get athlete name for filename
     const athSel = document.getElementById('pdfAthlete');
     const athName = athSel?.options[athSel.selectedIndex]?.text || 'Athlete';
-    pdf.save(`strikepane_${athName.replace(/\s+/g,'_')}_Report.pdf`);
+    pdf.save(`strikepanel_${athName.replace(/\s+/g,'_')}_Report.pdf`);
 document.getElementById('pdfShareBtn').style.display='inline-flex';
 
     // Restore
@@ -5462,7 +5462,7 @@ document.getElementById('pdfShareBtn').style.display='inline-flex';
   });
 }
 // ══════════════════════════════════════════════════════════════════════
-// LICENSE GATE — strikepane own key system (Supabase)
+// LICENSE GATE — strikepanel own key system (Supabase)
 // ══════════════════════════════════════════════════════════════════════
 
 var MASTER_KEY_HASH = '9039f4a7d2b4e605bf44c7c32ae0677ce312aa82f96adc3f81d4204f4641c348';
@@ -5538,7 +5538,7 @@ async function lgActivate() {
 function lgActivateSuccess(key, btn) {
   localStorage.setItem('cp_license_key', key.toUpperCase());
   localStorage.setItem('cp_license_activated', new Date().toISOString());
-  lgSetMsg('✓ Activated! Welcome to strikepane™', true);
+  lgSetMsg('✓ Activated! Welcome to strikepanel™', true);
   if (btn) { btn.textContent = '✓ Activated!'; btn.disabled = true; }
   setTimeout(async () => {
     lgUnlock();
@@ -5684,7 +5684,7 @@ function demoShowWelcome() {
       <div style="font-size:42px;margin-bottom:14px">👁</div>
       <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;margin-bottom:8px;color:#eef0f8">LIVE DEMO</div>
       <div style="font-size:13px;color:#7a85a0;margin-bottom:20px;line-height:1.75">
-        You're exploring strikepane™ with <strong style="color:#eef0f8">3 real demo athletes</strong> — Marcus, Priya, and Tyler.<br><br>
+        You're exploring strikepanel™ with <strong style="color:#eef0f8">3 real demo athletes</strong> — Marcus, Priya, and Tyler.<br><br>
         Click through every tab. Everything works. Your Morning Brief is already generated.
         <strong style="color:#eef0f8"> Nothing you do here is saved.</strong>
       </div>
@@ -5699,7 +5699,7 @@ function demoShowWelcome() {
         🚀 Start Exploring
       </button>
       <div style="margin-top:12px">
-        <a href="https://payhip.com/Strikepanel" target="_blank" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00D4F0;text-decoration:none;">🥊 Buy strikepane — $149 →</a>
+        <a href="https://payhip.com/Strikepanel" target="_blank" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00D4F0;text-decoration:none;">🥊 Buy strikepanel — $149 →</a>
       </div>
     </div>`;
   document.body.appendChild(el);
@@ -5951,13 +5951,13 @@ function pdfShare(){
   html2canvas(content,{scale:2,useCORS:true,backgroundColor:'#0b1120',logging:false}).then(canvas=>{
     canvas.toBlob(blob=>{
       try{
-        const file=new File([blob],`strikepane_${athName.replace(/\s+/g,'_')}_Report.png`,{type:'image/png'});
+        const file=new File([blob],`strikepanel_${athName.replace(/\s+/g,'_')}_Report.png`,{type:'image/png'});
         if(navigator.canShare&&navigator.canShare({files:[file]})){
-          navigator.share({title:`${athName} — strikepane Report`,files:[file]})
+          navigator.share({title:`${athName} — strikepanel Report`,files:[file]})
             .catch(()=>{
               // User cancelled share or share failed — fallback to download
               const url=URL.createObjectURL(blob);
-              const a=document.createElement('a');a.href=url;a.download=`strikepane_${athName.replace(/\s+/g,'_')}_Report.png`;a.click();
+              const a=document.createElement('a');a.href=url;a.download=`strikepanel_${athName.replace(/\s+/g,'_')}_Report.png`;a.click();
               setTimeout(()=>URL.revokeObjectURL(url),5000);
             });
         } else {

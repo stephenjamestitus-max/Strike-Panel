@@ -22,7 +22,7 @@ Generate and schedule a full week of content across platforms.
    4. Contrarian take on how coaches operate
    5. Coaching insight or tip
    6. Question to spark replies
-   7. Soft sell with CTA → https://strikepane.gumroad.com/l/strikepane
+   7. Soft sell with CTA → https://strikepanel.gumroad.com/l/strikepanel
 
 3. Best posting times (UTC):
    - X: 8am, 12pm, 6pm

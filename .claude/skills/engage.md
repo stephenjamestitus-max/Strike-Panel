@@ -38,7 +38,7 @@ Every comment must be:
 - Sound like a coach who knows this space (peer to peer, not fan)
 - Add a real insight, a sharp observation, or a genuine question
 - No emojis. No hyphens. No "great post" or "love this"
-- Never mention strikepane. Never drop any link. Never promotional.
+- Never mention strikepanel. Never drop any link. Never promotional.
 
 ## Comment Examples by Post Type
 

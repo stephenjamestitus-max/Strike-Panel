@@ -1,5 +1,5 @@
 /**
- * Free media fetcher for strikepane carousel visuals.
+ * Free media fetcher for strikepanel carousel visuals.
  * Sources (in priority order):
  *   1. Pollinations.ai — AI-generated combat sports imagery (FREE, no key, Flux model)
  *   2. Pexels          — real sport photos (PEXELS_API_KEY in .env, free at pexels.com/api)
@@ -106,7 +106,7 @@ function httpGet(url, headers = {}) {
     const opts = {
       hostname: parsed.hostname,
       path: parsed.pathname + parsed.search,
-      headers: { 'User-Agent': 'strikepane/1.0', ...headers },
+      headers: { 'User-Agent': 'strikepanel/1.0', ...headers },
       timeout: 15000,
     };
     https.get(opts, res => {

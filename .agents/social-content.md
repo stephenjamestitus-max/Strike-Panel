@@ -1,5 +1,5 @@
-# strikepane™ — 30-Day Social Media Content
-*Generated: 2026-05-13 | @strikepane | No paid ads. No corporate fluff.*
+# strikepanel™ — 30-Day Social Media Content
+*Generated: 2026-05-13 | @strikepanel | No paid ads. No corporate fluff.*
 
 ---
 
@@ -38,15 +38,15 @@ That's the Morning Brief. Every athlete on your roster, scored every morning, be
 
 No WhatsApp. No guessing. No regrets on fight week.
 
-This is strikepane™.
+This is strikepanel™.
 
 **Hashtags:**
-#strikepane #morningbrief #combatsportscoach #athletereadiness #fightcamp #mmacoach #boxingcoach #bjjcoach #muaythaicoach #coachingtools #fightertraining #athleteperformance #coachlife #trainingintelligence #readinessscoring
+#strikepanel #morningbrief #combatsportscoach #athletereadiness #fightcamp #mmacoach #boxingcoach #bjjcoach #muaythaicoach #coachingtools #fightertraining #athleteperformance #coachlife #trainingintelligence #readinessscoring
 
 ---
 
 ### DAY 2 — Pain Point: WhatsApp Chaos
-**Visual:** Split screen — left side: a cluttered WhatsApp group chat with check-ins buried under memes and missed messages. Right side: clean strikepane Morning Brief. No branding needed on the messy side. Real recognition is the point.
+**Visual:** Split screen — left side: a cluttered WhatsApp group chat with check-ins buried under memes and missed messages. Right side: clean strikepanel Morning Brief. No branding needed on the messy side. Real recognition is the point.
 
 **Caption:**
 "Did everyone check in?"
@@ -62,7 +62,7 @@ This is the system most coaches are running on. Not because they don't care — 
 Until now.
 
 **Hashtags:**
-#combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fightcamp #athletemanagement #coachproblems #coachlife #fighterprep #strikepane #trainingintelligence #athletereadiness #gymcoach #readinessscoring
+#combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fightcamp #athletemanagement #coachproblems #coachlife #fighterprep #strikepanel #trainingintelligence #athletereadiness #gymcoach #readinessscoring
 
 ---
 
@@ -78,17 +78,17 @@ The red one's been nursing a rib for 4 days and barely slept. Rest day. Non-nego
 
 You didn't text any of them. They submitted their check-ins in 60 seconds from a link you shared once.
 
-strikepane built the scores automatically.
+strikepanel built the scores automatically.
 
 You just coached better.
 
 **Hashtags:**
-#strikepane #athletereadiness #morningbrief #fightcamp #combatsports #mmacoach #boxingcoach #bjjcoach #muaythai #coachlife #fighterprep #trainingdata #smartcoaching #athleteperformance #coachingtools
+#strikepanel #athletereadiness #morningbrief #fightcamp #combatsports #mmacoach #boxingcoach #bjjcoach #muaythai #coachlife #fighterprep #trainingdata #smartcoaching #athleteperformance #coachingtools
 
 ---
 
 ### DAY 4 — Fight Camp Tip
-**Visual:** Bold graphic. Text: "FIGHT CAMP HAS 3 PHASES. MOST COACHES TREAT IT LIKE ONE." Dark background, amber text. strikepane logo watermark bottom right.
+**Visual:** Bold graphic. Text: "FIGHT CAMP HAS 3 PHASES. MOST COACHES TREAT IT LIKE ONE." Dark background, amber text. strikepanel logo watermark bottom right.
 
 **Caption:**
 Fight camp isn't just "training hard until fight night."
@@ -103,10 +103,10 @@ Know which phase you're in. Adjust the load accordingly. Track it.
 
 Your fighter's whole camp is one long decision — make it a deliberate one.
 
-(strikepane tracks fight camp phases automatically — countdown to fight night, phase shifts, weight cut all in one place.)
+(strikepanel tracks fight camp phases automatically — countdown to fight night, phase shifts, weight cut all in one place.)
 
 **Hashtags:**
-#fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fighterprep #fightcampplanning #athleteperformance #coachlife #periodisation #smartcoaching #strikepane #combatsports #trainingsmart
+#fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fighterprep #fightcampplanning #athleteperformance #coachlife #periodisation #smartcoaching #strikepanel #combatsports #trainingsmart
 
 ---
 
@@ -118,7 +118,7 @@ Weight cuts don't fail on fight week.
 
 They fail 3 weeks out when no one was tracking properly.
 
-strikepane's weight cut planner gives you:
+strikepanel's weight cut planner gives you:
 → Daily weigh-in tracking for every fighter
 → Cut timeline from current weight to fight weight
 → Automated alerts when someone's off track
@@ -130,7 +130,7 @@ Try the free demo → strikepanel.uk/demo
 $99 once. No subscription. No renewal.
 
 **Hashtags:**
-#weightcut #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fighterweight #weighin #weightmanagement #strikepane #coachingtools #fighterprep #fightnight #athleteperformance
+#weightcut #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fighterweight #weighin #weightmanagement #strikepanel #coachingtools #fighterprep #fightnight #athleteperformance
 
 ---
 
@@ -153,12 +153,12 @@ Readiness data doesn't replace your coaching instinct. It confirms it. Or it war
 That's the difference.
 
 **Hashtags:**
-#combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #athletereadiness #fightcamp #coachlife #fighterprep #overtraining #coachingdecisions #strikepane #trainingintelligence #smartcoaching #athleteperformance
+#combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #athletereadiness #fightcamp #coachlife #fighterprep #overtraining #coachingdecisions #strikepanel #trainingintelligence #smartcoaching #athleteperformance
 
 ---
 
 ### DAY 7 — Blog Promo: Fight Camp Guide
-**Visual:** Blog article hero image or a bold text graphic: "HOW TO PLAN A FIGHT CAMP — WEEK BY WEEK." Clean layout, strikepane branding, link in bio call-out.
+**Visual:** Blog article hero image or a bold text graphic: "HOW TO PLAN A FIGHT CAMP — WEEK BY WEEK." Clean layout, strikepanel branding, link in bio call-out.
 
 **Caption:**
 Every coach knows fight camp matters. Not every coach has a system for it.
@@ -172,7 +172,7 @@ Link in bio → strikepanel.uk/blog
 Bookmark it. Share it with a coach who's winging their next camp.
 
 **Hashtags:**
-#fightcamp #fightcampplanning #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fighterprep #trainingguide #coachlife #combatsports #strikepane #sportsblog #coachingresources #athleteperformance
+#fightcamp #fightcampplanning #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fighterprep #trainingguide #coachlife #combatsports #strikepanel #sportsblog #coachingresources #athleteperformance
 
 ---
 
@@ -193,7 +193,7 @@ Three different coaching decisions. Made before you poured your second coffee.
 This is the morning brief.
 
 **Hashtags:**
-#morningbrief #strikepane #combatsportscoach #athletereadiness #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fightcamp #smartcoaching #coachlife #trainingdata #readinessscoring #fighterprep #coachingtools
+#morningbrief #strikepanel #combatsportscoach #athletereadiness #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fightcamp #smartcoaching #coachlife #trainingdata #readinessscoring #fighterprep #coachingtools
 
 ---
 
@@ -212,7 +212,7 @@ Track every weigh-in.
 Act on the trend, not the single number.
 
 **Hashtags:**
-#weightcut #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fighterweight #weighin #fightprep #strikepane #coachlife #combatsports #weightmanagement #fightnight
+#weightcut #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fighterweight #weighin #fightprep #strikepanel #coachlife #combatsports #weightmanagement #fightnight
 
 ---
 
@@ -222,7 +222,7 @@ Act on the trend, not the single number.
 **Caption:**
 You've got 15 minutes before training and no plan.
 
-Open strikepane. Go to AI Session Builder.
+Open strikepanel. Go to AI Session Builder.
 Type: "Heavy sparring + conditioning for 8 fighters, 90 min session, fight in 3 weeks."
 
 Done. Full session plan — rounds, rest, drills, focus areas — built around your readiness data.
@@ -232,7 +232,7 @@ Powered by Gemini. Built for combat sports coaches who don't have a sports scien
 Try it free → strikepanel.uk/demo
 
 **Hashtags:**
-#strikepane #aisessionbuilder #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #sessionplanning #trainingplan #coachingtools #fightcamp #ai #smartcoaching #athleteperformance #coachlife
+#strikepanel #aisessionbuilder #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #sessionplanning #trainingplan #coachingtools #fightcamp #ai #smartcoaching #athleteperformance #coachlife
 
 ---
 
@@ -252,15 +252,15 @@ It's not a spreadsheet problem. It's a system problem.
 Combat sports coaches need a tool built for this specific job. Not a repurposed Excel sheet held together with hope.
 
 **Hashtags:**
-#combatsportscoach #fightcamp #weightcut #mmacoach #boxingcoach #bjjcoach #muaythaicoach #coachlife #fighterprep #spreadsheets #coachingtools #strikepane #trainingsmart #athletemanagement #fightnight
+#combatsportscoach #fightcamp #weightcut #mmacoach #boxingcoach #bjjcoach #muaythaicoach #coachlife #fighterprep #spreadsheets #coachingtools #strikepanel #trainingsmart #athletemanagement #fightnight
 
 ---
 
 ### DAY 12 — Testimonial Style
-**Visual:** Dark card with quote text in large type. Quote on left, subtle gym background blur. strikepane logo bottom right. Amber accent line on the left edge.
+**Visual:** Dark card with quote text in large type. Quote on left, subtle gym background blur. strikepanel logo bottom right. Amber accent line on the left edge.
 
 **Caption:**
-"I used to track everything in a notes app and a WhatsApp group. Now I open strikepane every morning, see who's ready, who's not, and exactly what to do. Game changer."
+"I used to track everything in a notes app and a WhatsApp group. Now I open strikepanel every morning, see who's ready, who's not, and exactly what to do. Game changer."
 
 — Combat Sports Coach, UK
 
@@ -269,7 +269,7 @@ This is the message we get. Not from tech people. From coaches who've been doing
 The tool exists. It's $99. You own it forever.
 
 **Hashtags:**
-#strikepane #combatsportscoach #coachtestimonial #mmacoach #boxingcoach #bjjcoach #muaythaicoach #coachlife #athletereadiness #fightcamp #trainingintelligence #smartcoaching #coachingtools #fighterprep #combatsports
+#strikepanel #combatsportscoach #coachtestimonial #mmacoach #boxingcoach #bjjcoach #muaythaicoach #coachlife #athletereadiness #fightcamp #trainingintelligence #smartcoaching #coachingtools #fighterprep #combatsports
 
 ---
 
@@ -292,7 +292,7 @@ None of these require a sports scientist. They require a check-in system and a c
 Track them. Act early. Protect the performance.
 
 **Hashtags:**
-#overtraining #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #athleterecovery #athleteperformance #coachlife #fighterprep #restday #readinessscoring #strikepane #trainingsmart
+#overtraining #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #athleterecovery #athleteperformance #coachlife #fighterprep #restday #readinessscoring #strikepanel #trainingsmart
 
 ---
 
@@ -311,7 +311,7 @@ Link in bio → strikepanel.uk/blog
 Save this one. You'll need it mid-camp.
 
 **Hashtags:**
-#overtraining #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #athleterecovery #coachlife #fighterprep #strikepane #sportsblog #coachingresources #athleteperformance #trainingsmart
+#overtraining #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #athleterecovery #coachlife #fighterprep #strikepanel #sportsblog #coachingresources #athleteperformance #trainingsmart
 
 ---
 
@@ -332,7 +332,7 @@ Just clean data every morning before you coach them.
 Free demo → strikepanel.uk/demo
 
 **Hashtags:**
-#strikepane #athletecheckin #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #readinessscoring #athletedata #coachingtools #fightcamp #coachlife #athletemanagement #trainingsmart #smartcoaching
+#strikepanel #athletecheckin #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #readinessscoring #athletedata #coachingtools #fightcamp #coachlife #athletemanagement #trainingsmart #smartcoaching
 
 ---
 
@@ -351,7 +351,7 @@ Fight week chaos is built in training. If the system is broken during camp, it d
 Fix the system. Own fight week.
 
 **Hashtags:**
-#fightweek #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #weighin #weightcut #coachlife #fighterprep #strikepane #coachingtools #athletemanagement #trainingsmart
+#fightweek #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #weighin #weightcut #coachlife #fighterprep #strikepanel #coachingtools #athletemanagement #trainingsmart
 
 ---
 
@@ -371,12 +371,12 @@ You'll find out when you see them. But you won't walk in blind. You won't push t
 This is what readiness data does. It doesn't replace the conversation — it starts it before the damage is done.
 
 **Hashtags:**
-#athletereadiness #morningbrief #strikepane #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fightcamp #readinessscoring #coachlife #smartcoaching #athletedata #coachingtools #fighterprep
+#athletereadiness #morningbrief #strikepanel #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fightcamp #readinessscoring #coachlife #smartcoaching #athletedata #coachingtools #fighterprep
 
 ---
 
 ### DAY 18 — Fight Camp Tip: Sparring Load
-**Visual:** Bold stat graphic: "MOST FIGHTERS GET THEIR WORST SPARRING INJURY IN THE LAST 2 WEEKS OF CAMP." Dark background, red accent. strikepane watermark.
+**Visual:** Bold stat graphic: "MOST FIGHTERS GET THEIR WORST SPARRING INJURY IN THE LAST 2 WEEKS OF CAMP." Dark background, red accent. strikepanel watermark.
 
 **Caption:**
 The last 2 weeks of camp are the most dangerous for injuries.
@@ -390,26 +390,26 @@ Taper the load. Peak the performance. Arrive healthy.
 The fighter who walks into the arena feeling 100% beats the fighter who "trained the hardest."
 
 **Hashtags:**
-#sparring #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fighterprep #taper #periodisation #coachlife #injuryprevention #strikepane #smartcoaching #athleteperformance
+#sparring #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fighterprep #taper #periodisation #coachlife #injuryprevention #strikepanel #smartcoaching #athleteperformance
 
 ---
 
 ### DAY 19 — Feature: Cloud Sync + Multi-Device
-**Visual:** Three devices side by side — iPhone, iPad, MacBook — all showing strikepane. Morning Brief on phone, fight camp view on tablet, progress charts on laptop. Overlay: "ONE TOOL. EVERY DEVICE."
+**Visual:** Three devices side by side — iPhone, iPad, MacBook — all showing strikepanel. Morning Brief on phone, fight camp view on tablet, progress charts on laptop. Overlay: "ONE TOOL. EVERY DEVICE."
 
 **Caption:**
 At the gym — phone.
 At home building the plan — laptop.
 In camp with the team — tablet.
 
-strikepane syncs across everything automatically. Offline ready. Install from your browser. No app store. No updates. No subscription.
+strikepanel syncs across everything automatically. Offline ready. Install from your browser. No app store. No updates. No subscription.
 
 One tool. Every device. $99 once.
 
 This is how modern coaches run modern gyms.
 
 **Hashtags:**
-#strikepane #pwa #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #coachingtools #multidevice #cloudsync #gymcoach #coachlife #athletemanagement #fightcamp #trainingsmart
+#strikepanel #pwa #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #coachingtools #multidevice #cloudsync #gymcoach #coachlife #athletemanagement #fightcamp #trainingsmart
 
 ---
 
@@ -432,7 +432,7 @@ Try the demo free → strikepanel.uk/demo
 $99 once. No subscription.
 
 **Hashtags:**
-#combatsportscoach #athletereadiness #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fightcamp #strikepane #readinessscoring #smartcoaching #coachlife #athleteperformance #individualisation #trainingsmart #coachingtools
+#combatsportscoach #athletereadiness #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fightcamp #strikepanel #readinessscoring #smartcoaching #coachlife #athleteperformance #individualisation #trainingsmart #coachingtools
 
 ---
 
@@ -449,7 +449,7 @@ New post on the blog: how coaches are moving from WhatsApp chaos to morning read
 Link in bio → strikepanel.uk/blog
 
 **Hashtags:**
-#combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #athletemanagement #coachingtools #strikepane #fightcamp #athletereadiness #trainingintelligence #coachlife #sportsblog #replacingwhatsapp #smartcoaching
+#combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #athletemanagement #coachingtools #strikepanel #fightcamp #athletereadiness #trainingintelligence #coachlife #sportsblog #replacingwhatsapp #smartcoaching
 
 ---
 
@@ -465,7 +465,7 @@ Every morning, athletes submit 4 things:
 → Physical soreness
 → Mood
 
-strikepane weights these inputs and generates a single score from 0–100.
+strikepanel weights these inputs and generates a single score from 0–100.
 
 90+ = push hard
 60–89 = train normal
@@ -476,22 +476,22 @@ Simple. Fast. Actionable.
 Your coaching instinct + data = better decisions every day.
 
 **Hashtags:**
-#readinessscoring #athletereadiness #morningbrief #strikepane #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #athleteperformance #trainingscience #coachlife #smartcoaching #coachingtools #fightcamp
+#readinessscoring #athletereadiness #morningbrief #strikepanel #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #athleteperformance #trainingscience #coachlife #smartcoaching #coachingtools #fightcamp
 
 ---
 
 ### DAY 23 — Testimonial Style: The "Game Changer" Story
-**Visual:** Dark quote card. Large quote text. Amber quotation mark graphic. Coach silhouette or gym atmosphere background. strikepane logo.
+**Visual:** Dark quote card. Large quote text. Amber quotation mark graphic. Coach silhouette or gym atmosphere background. strikepanel logo.
 
 **Caption:**
-Before strikepane:
+Before strikepanel:
 
 Notes app for weight data.
 WhatsApp group for check-ins.
 Memory for fight camp phases.
 Gut feeling for readiness.
 
-After strikepane:
+After strikepanel:
 
 Morning Brief open before leaving the house.
 Weight cut on track.
@@ -503,7 +503,7 @@ Same coach. Better information. Better outcomes.
 "Game changer." — Combat Sports Coach, UK
 
 **Hashtags:**
-#strikepane #combatsportscoach #coachtestimonial #mmacoach #boxingcoach #bjjcoach #muaythaicoach #beforeandafter #coachlife #athletemanagement #smartcoaching #trainingintelligence #coachingtools #athleteperformance #fightcamp
+#strikepanel #combatsportscoach #coachtestimonial #mmacoach #boxingcoach #bjjcoach #muaythaicoach #beforeandafter #coachlife #athletemanagement #smartcoaching #trainingintelligence #coachingtools #athleteperformance #fightcamp
 
 ---
 
@@ -524,17 +524,17 @@ With data, you'd have seen the trend. You'd have modified the week. You'd have a
 That's the cost of coaching without information.
 
 **Hashtags:**
-#combatsportscoach #overtraining #athletereadiness #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fightcamp #coachlife #sparring #readinessscoring #strikepane #athleteperformance #injuryprevention #smartcoaching
+#combatsportscoach #overtraining #athletereadiness #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fightcamp #coachlife #sparring #readinessscoring #strikepanel #athleteperformance #injuryprevention #smartcoaching
 
 ---
 
 ### DAY 25 — Product: The $99 Pitch + DEMO LINK
-**Visual:** Clean product value graphic. "$99. ONCE. YOURS FOREVER." with key features listed below. Dark background, amber price number, strikepane branding.
+**Visual:** Clean product value graphic. "$99. ONCE. YOURS FOREVER." with key features listed below. Dark background, amber price number, strikepanel branding.
 
 **Caption:**
 Let's be direct.
 
-strikepane is $99.
+strikepanel is $99.
 One time.
 No subscription.
 No renewal.
@@ -554,10 +554,10 @@ Most coaching software costs $30–80/month. You'd spend that in 2 months and st
 Pay once. Own it forever.
 
 Demo first → strikepanel.uk/demo
-Buy → gumroad.com/l/strikepane
+Buy → gumroad.com/l/strikepanel
 
 **Hashtags:**
-#strikepane #coachingtools #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #coachlife #fightcamp #athletemanagement #nosubscription #payonce #trainingintelligence #smartcoaching #gymowner
+#strikepanel #coachingtools #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #coachlife #fightcamp #athletemanagement #nosubscription #payonce #trainingintelligence #smartcoaching #gymowner
 
 ---
 
@@ -576,7 +576,7 @@ Those days feel different. You walk into the gym with a completely different ene
 Build the system. Trust the data. Coach with confidence.
 
 **Hashtags:**
-#morningbrief #strikepane #athletereadiness #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fightcamp #readinessscoring #coachlife #teamwork #athleteperformance #smartcoaching #goodday
+#morningbrief #strikepanel #athletereadiness #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fightcamp #readinessscoring #coachlife #teamwork #athleteperformance #smartcoaching #goodday
 
 ---
 
@@ -598,7 +598,7 @@ You need:
 One tool. Every fighter. Everything tracked.
 
 **Hashtags:**
-#combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fightcamp #athletemanagement #coachlife #fightcampplanning #multiplefiighters #strikepane #coachingtools #trainingsmart #gymcoach #athleteperformance
+#combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fightcamp #athletemanagement #coachlife #fightcampplanning #multiplefiighters #strikepanel #coachingtools #trainingsmart #gymcoach #athleteperformance
 
 ---
 
@@ -615,12 +615,12 @@ New on the blog: how to run a weight cut from start to fight-night without sprea
 Link in bio → strikepanel.uk/blog
 
 **Hashtags:**
-#weightcut #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fighterweight #fightprep #coachlife #strikepane #sportsblog #coachingresources #weighin #weightmanagement
+#weightcut #fightcamp #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #fighterweight #fightprep #coachlife #strikepanel #sportsblog #coachingresources #weighin #weightmanagement
 
 ---
 
 ### DAY 29 — Pain Point: No System At All
-**Visual:** Stark graphic. White text on black: "MOST COACHES DON'T HAVE A SYSTEM. THEY HAVE A HABIT OF COPING." strikepane small watermark bottom right.
+**Visual:** Stark graphic. White text on black: "MOST COACHES DON'T HAVE A SYSTEM. THEY HAVE A HABIT OF COPING." strikepanel small watermark bottom right.
 
 **Caption:**
 There's a difference between a system and a habit of coping.
@@ -634,7 +634,7 @@ Most coaches running combat sports teams are coping, not systemising. Not becaus
 Build the system. Stop coping.
 
 **Hashtags:**
-#combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #coachlife #fightcamp #athletemanagement #systems #strikepane #coachingtools #trainingsmart #gymcoach #fighterprep #smartcoaching
+#combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #coachlife #fightcamp #athletemanagement #systems #strikepanel #coachingtools #trainingsmart #gymcoach #fighterprep #smartcoaching
 
 ---
 
@@ -642,7 +642,7 @@ Build the system. Stop coping.
 **Visual:** Four-panel grid — Morning Brief widget, fight camp countdown, weight cut tracker, AI session output. Each panel clean and polished. Overlay: "EVERYTHING. ONE PLACE."
 
 **Caption:**
-This is strikepane.
+This is strikepanel.
 
 Morning Brief — every athlete scored, every morning.
 Fight Camp — countdown, phases, milestones, automated.
@@ -658,7 +658,7 @@ Try it free first → strikepanel.uk/demo
 The price goes up with Phase 2. It's $99 now.
 
 **Hashtags:**
-#strikepane #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #coachingtools #fightcamp #athletereadiness #trainingintelligence #morningbrief #weightcut #aisessionbuilder #coachlife #gymcoach
+#strikepanel #combatsportscoach #mmacoach #boxingcoach #bjjcoach #muaythaicoach #coachingtools #fightcamp #athletereadiness #trainingintelligence #morningbrief #weightcut #aisessionbuilder #coachlife #gymcoach
 
 ---
 
@@ -671,7 +671,7 @@ The price goes up with Phase 2. It's $99 now.
 ---
 
 **DAY 1**
-Most combat sports coaches start their morning guessing who's ready to train. strikepane ends the guessing. Every athlete scored before you leave the house.
+Most combat sports coaches start their morning guessing who's ready to train. strikepanel ends the guessing. Every athlete scored before you leave the house.
 
 ---
 
@@ -739,7 +739,7 @@ Fight camp isn't one long "train hard." It's 3 phases. Base → Peak → Taper. 
 ---
 
 **DAY 12**
-"I open strikepane every morning, see who's ready, who's not, and exactly what to do. Game changer." — Combat Sports Coach, UK
+"I open strikepanel every morning, see who's ready, who's not, and exactly what to do. Game changer." — Combat Sports Coach, UK
 
 ---
 
@@ -783,7 +783,7 @@ You can't individualise training if you don't have individual data. 8 fighters, 
 ---
 
 **DAY 20**
-Most coaching apps are built for personal trainers. strikepane is built for combat sports coaches who manage fight camps, weight cuts, and athlete readiness. Demo: strikepanel.uk/demo
+Most coaching apps are built for personal trainers. strikepanel is built for combat sports coaches who manage fight camps, weight cuts, and athlete readiness. Demo: strikepanel.uk/demo
 
 ---
 
@@ -803,7 +803,7 @@ Fight camp truth: the last 2 weeks are the highest injury risk. Everyone's sharp
 ---
 
 **DAY 24**
-I built strikepane because I watched coaches manage fight camps on WhatsApp and spreadsheets that break. Combat sports coaches deserve purpose-built tools.
+I built strikepanel because I watched coaches manage fight camps on WhatsApp and spreadsheets that break. Combat sports coaches deserve purpose-built tools.
 
 ---
 
@@ -838,7 +838,7 @@ The coaches who win aren't always the best tacticians. They're the ones who keep
 ---
 
 **DAY 30**
-500+ combat sports coaches use strikepane. $99 once. Morning Brief, fight camp, weight cut, AI sessions, check-ins. Everything in one place. Demo: strikepanel.uk/demo
+500+ combat sports coaches use strikepanel. $99 once. Morning Brief, fight camp, weight cut, AI sessions, check-ins. Everything in one place. Demo: strikepanel.uk/demo
 
 ---
 
@@ -847,7 +847,7 @@ The coaches who win aren't always the best tacticians. They're the ones who keep
 # FACEBOOK GROUP POSTS
 
 *For: "MMA Coaches Network", "Boxing Coaches & Trainers", "BJJ Gym Owners", "Muay Thai Coaches", "Combat Sports Coaching"*
-*Rules: value-first, question at end, strikepane mention natural and last*
+*Rules: value-first, question at end, strikepanel mention natural and last*
 
 ---
 
@@ -865,7 +865,7 @@ What I've found works better is a structured daily check-in system where athlete
 
 Curious what the group is doing. Are you tracking readiness formally or still working on feel? And if you've tried tools — what worked and what didn't?
 
-*(For what it's worth — I built strikepane for exactly this problem. Free demo at strikepanel.uk/demo if you want to see how we handle it.)*
+*(For what it's worth — I built strikepanel for exactly this problem. Free demo at strikepanel.uk/demo if you want to see how we handle it.)*
 
 ---
 
@@ -886,7 +886,7 @@ Simple framework but it requires tracking the load to know where you are. If you
 
 How are you all periodising your camps? Do you have a formal structure or is it more reactive to how the athlete is feeling week by week?
 
-*(I track this in strikepane — fight camp phases automated with countdown to fight night. If anyone wants to see the system, demo is at strikepanel.uk/demo.)*
+*(I track this in strikepanel — fight camp phases automated with countdown to fight night. If anyone wants to see the system, demo is at strikepanel.uk/demo.)*
 
 ---
 
@@ -910,7 +910,7 @@ Not complicated. But it requires a system that makes daily tracking friction-fre
 
 What systems are you using? Anyone found something that actually works without being a headache to maintain?
 
-*(I built a weight cut planner into strikepane specifically for this — daily weigh-in tracking, cut timeline, automated alerts. Happy to share if useful: strikepanel.uk/demo)*
+*(I built a weight cut planner into strikepanel specifically for this — daily weigh-in tracking, cut timeline, automated alerts. Happy to share if useful: strikepanel.uk/demo)*
 
 ---
 
@@ -930,7 +930,7 @@ The goal should be to get that number as close to zero as possible, so you can s
 
 Has anyone successfully systemised their admin? What's worked for you? And what have you tried that sounded good but didn't stick?
 
-*(I built strikepane to solve this — morning readiness, fight camp, weight cuts, AI sessions, all in one tool for combat sports coaches. $99 once, demo at strikepanel.uk/demo. Happy to answer questions about how it works.)*
+*(I built strikepanel to solve this — morning readiness, fight camp, weight cuts, AI sessions, all in one tool for combat sports coaches. $99 once, demo at strikepanel.uk/demo. Happy to answer questions about how it works.)*
 
 ---
 
@@ -946,7 +946,7 @@ The coaches I most respect are the ones who've hacked together their own systems
 
 What's the most effective low-tech system you've seen or used for tracking athlete readiness? I'm genuinely curious what's working in the trenches before the "proper" tools existed.
 
-*(Full disclosure — I built strikepane to be the "proper" tool for this level of coaching. Purpose-built for combat sports, $99 once, free demo: strikepanel.uk/demo. Not a plug — genuinely interested in the conversation first.)*
+*(Full disclosure — I built strikepanel to be the "proper" tool for this level of coaching. Purpose-built for combat sports, $99 once, free demo: strikepanel.uk/demo. Not a plug — genuinely interested in the conversation first.)*
 
 ---
 
@@ -1052,7 +1052,7 @@ What's the most effective low-tech system you've seen or used for tracking athle
 #martialarts
 #gymcoach
 #trainingintelligence
-#strikepane
+#strikepanel
 #coachlife
 #fighterprep
 #athletemanagement

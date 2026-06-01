@@ -25,7 +25,7 @@ Pull performance data across all connected platforms and report insights.
 
 3. Output a clean report:
 
-   STRIKEPANE ANALYTICS — [date range]
+   strikepanel ANALYTICS — [date range]
    ─────────────────────────────────────
    INSTAGRAM
    Reach: X | Engagement: X% | Followers: +X

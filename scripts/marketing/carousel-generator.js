@@ -172,7 +172,7 @@ function splitscreenSlide(s, i, total, bg) {
           ${(s.leftItems||[]).map(item => `<div style="font-size:13px;line-height:1.5;color:rgba(245,240,232,.6)">${item}</div>`).join('')}
         </div>
         <div style="flex:1;padding:28px;background:rgba(0,212,240,.04);border:1px solid rgba(0,212,240,.12);display:flex;flex-direction:column;gap:12px">
-          <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:${B.cyan}">${s.rightLabel||'WITH STRIKEPANE'}</div>
+          <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:${B.cyan}">${s.rightLabel||'WITH strikepanel'}</div>
           ${(s.rightItems||[]).map(item => `<div style="font-size:13px;line-height:1.5;color:${B.text}">${item}</div>`).join('')}
         </div>
       </div>

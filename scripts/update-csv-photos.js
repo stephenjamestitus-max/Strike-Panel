@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const CSV_PATH = path.join(__dirname, '..', '.agents', 'strikepane-buffer.csv');
+const CSV_PATH = path.join(__dirname, '..', '.agents', 'strikepanel-buffer.csv');
 const content = fs.readFileSync(CSV_PATH, 'utf8');
 
 function parseCSV(text) {

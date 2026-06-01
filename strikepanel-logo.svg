@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 460 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="strikepane logo">
-  <title>strikepane™</title>
+<svg viewBox="0 0 460 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="strikepanel logo">
+  <title>strikepanel™</title>
   <defs>
 
     <!-- Orb gradient: deep navy → midnight -->
@@ -85,11 +85,11 @@
   ══════════════════════════════════════ -->
   <g transform="translate(138, 0)">
 
-    <!-- STRIKEPANE -->
+    <!-- strikepanel -->
     <text y="72"
           font-family="'Arial Black','Helvetica Neue',Arial,sans-serif"
           font-weight="900" font-size="52" letter-spacing="1"
-          fill="url(#text-grad)">STRIKEPANE</text>
+          fill="url(#text-grad)">strikepanel</text>
 
     <!-- TM superscript -->
     <text x="308" y="30"

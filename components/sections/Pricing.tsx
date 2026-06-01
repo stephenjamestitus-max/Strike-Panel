@@ -86,7 +86,7 @@ export default function Pricing() {
             textAlign: 'center',
           }}>
             <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 2, color: 'var(--amber)' }}>$99 ONCE</div>
-            <div style={{ fontFamily: 'var(--fc)', fontSize: 12, color: 'var(--cream)', marginTop: 2 }}>strikepane</div>
+            <div style={{ fontFamily: 'var(--fc)', fontSize: 12, color: 'var(--cream)', marginTop: 2 }}>strikepanel</div>
             <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 1, color: 'var(--accent)', marginTop: 2 }}>Combat sports · AI · Check-ins</div>
           </div>
         </div>
