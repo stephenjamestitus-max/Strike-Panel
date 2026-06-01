@@ -31,7 +31,7 @@ async function sendKeyEmail(email: string, key: string, platform: string) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'StrikePanel <onboarding@resend.dev>',
+      from: 'strikepane <noreply@strikepanel.uk>',
       to: email,
       subject: 'Your StrikePanel License Key',
       html: `
