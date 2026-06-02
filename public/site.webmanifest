@@ -1,11 +1,12 @@
 {
-  "name": "StrikePanel™",
-  "short_name": "StrikePanel",
+  "name": "strikepanel",
+  "short_name": "strikepanel",
   "description": "Training intelligence for combat sports coaches.",
-  "start_url": "/",
+  "start_url": "/app",
   "display": "standalone",
-  "background_color": "#0d1528",
-  "theme_color": "#0d1528",
+  "background_color": "#04070f",
+  "theme_color": "#04070f",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/favicon-32.png",

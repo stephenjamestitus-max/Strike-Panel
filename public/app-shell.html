@@ -3,28 +3,38 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
-<title>strikepane™ — Training Intelligence</title>
+<title>strikepanel — Training Intelligence</title>
 <meta name="description" content="Daily readiness intelligence for combat sports coaches. Know who to push and who to protect — every morning."/>
 <meta name="robots" content="noindex,nofollow"/>
-<meta name="theme-color" content="#0b0d14"/>
+<meta name="theme-color" content="#04070f"/>
 <!-- Open Graph — WhatsApp / iMessage link preview -->
 <meta property="og:type"        content="website"/>
-<meta property="og:title"       content="Daily Check-In — strikepane™"/>
+<meta property="og:title"       content="Daily Check-In — strikepanel"/>
 <meta property="og:description" content="Your coach wants your daily readiness check-in. Takes 30 seconds."/>
 <meta property="og:image"       content="https://strikepanel.uk/og.png" id="metaOgImage"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height"content="630"/>
 <meta property="og:url"         content="https://strikepanel.uk/" id="metaOgUrl"/>
 <meta name="twitter:card"       content="summary_large_image"/>
-<meta name="twitter:title"      content="Daily Check-In — strikepane™"/>
+<meta name="twitter:title"      content="Daily Check-In — strikepanel"/>
 <meta name="twitter:description"content="Your coach wants your daily readiness check-in. Takes 30 seconds."/>
 <meta name="twitter:image"      content="https://strikepanel.uk/og.png"/>
+<!-- PWA / Add to Home Screen -->
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-<meta name="apple-mobile-web-app-title" content="strikepane"/>
+<meta name="apple-mobile-web-app-title" content="strikepanel"/>
+<!-- Apple touch icons (Safari uses these for the home screen icon) -->
+<link rel="apple-touch-icon" sizes="180x180" href="/icon-512.png"/>
+<link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png"/>
+<!-- Splash screens for iPhone (prevents white flash on launch) -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<style>
+  /* Prevents white flash before app JS loads on iOS */
+  html, body { background-color: #04070f; }
+</style>
 <link rel="manifest" id="pwaManifest"/>
-<link rel="apple-touch-icon" id="pwaIcon"/>
+<link rel="apple-touch-icon" id="pwaIcon" href="/icon-512.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Oswald:wght@700&display=swap" rel="stylesheet">
@@ -4589,17 +4599,18 @@ function setEl(id, html) {
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}"><rect width="${size}" height="${size}" fill="#0b0d14" rx="${size*0.167}"/><circle cx="${size/2}" cy="${size/2}" r="${size*0.38}" fill="none" stroke="#00D4F0" stroke-width="${size*0.022}" opacity="0.4"/><circle cx="${size/2}" cy="${size/2}" r="${size*0.27}" fill="#00D4F0"/><line x1="${size/2}" y1="${size*0.06}" x2="${size/2}" y2="${size*0.3}" stroke="#00D4F0" stroke-width="${size*0.04}" stroke-linecap="round"/><line x1="${size/2}" y1="${size*0.7}" x2="${size/2}" y2="${size*0.94}" stroke="#00D4F0" stroke-width="${size*0.04}" stroke-linecap="round"/><line x1="${size*0.06}" y1="${size/2}" x2="${size*0.3}" y2="${size/2}" stroke="#00D4F0" stroke-width="${size*0.04}" stroke-linecap="round"/><line x1="${size*0.7}" y1="${size/2}" x2="${size*0.94}" y2="${size/2}" stroke="#00D4F0" stroke-width="${size*0.04}" stroke-linecap="round"/><text x="${size/2}" y="${size*0.565}" font-family="Arial Black,sans-serif" font-weight="900" font-size="${size*0.115}" fill="#050810" text-anchor="middle">SP</text></svg>`
   );
   const manifest = {
-    name: 'strikepane™',
-    short_name: 'strikepane',
+    name: 'strikepanel',
+    short_name: 'strikepanel',
     description: 'Training Intelligence — daily readiness for combat sports coaches',
     start_url: base,
     display: 'standalone',
-    background_color: '#0b0d14',
-    theme_color: '#0b0d14',
+    background_color: '#04070f',
+    theme_color: '#04070f',
     orientation: 'portrait-primary',
     icons: [
-      { src: appIcon(192), sizes: '192x192', type: 'image/svg+xml', purpose: 'any maskable' },
-      { src: appIcon(512), sizes: '512x512', type: 'image/svg+xml', purpose: 'any maskable' }
+      { src: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { src: '/icon-512.png', sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
+      { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
     ],
     shortcuts: [
       {
