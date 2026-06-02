@@ -148,5 +148,35 @@
     "description": "BJJ-specific S&C programming, US",
     "date": "2026-06-01",
     "status": "queued"
+  },
+  {
+    "handle": "@mmastrengthcoach",
+    "description": "MMA strength coach, fight camp programming, US",
+    "date": "2026-06-02",
+    "status": "queued"
+  },
+  {
+    "handle": "@muaythaicoach",
+    "description": "Muay Thai coaching, technique and conditioning, US",
+    "date": "2026-06-02",
+    "status": "queued"
+  },
+  {
+    "handle": "@kickboxingcoach",
+    "description": "Kickboxing coaching and athlete development, US",
+    "date": "2026-06-02",
+    "status": "queued"
+  },
+  {
+    "handle": "@wrestlingstrengthcoach",
+    "description": "Wrestling-specific strength and conditioning, US",
+    "date": "2026-06-02",
+    "status": "queued"
+  },
+  {
+    "handle": "@sanda_coach",
+    "description": "Sanda/Chinese kickboxing coaching, technique focus",
+    "date": "2026-06-02",
+    "status": "queued"
   }
 ]
