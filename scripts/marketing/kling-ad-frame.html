@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px; overflow: hidden;
+    background: #04070f;
+    font-family: 'SF Mono', 'Fira Mono', 'Courier New', monospace;
+    color: #f5f0e8;
+    position: relative;
+  }
+
+  /* Ambient glow */
+  .glow-top {
+    position: absolute;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 600px;
+    background: radial-gradient(ellipse, rgba(0,212,240,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .glow-mid {
+    position: absolute;
+    top: 900px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(ellipse, rgba(0,212,240,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Top bar */
+  .topbar {
+    padding: 80px 60px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .logo {
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: #7a85a0;
+    text-transform: uppercase;
+  }
+  .logo span { color: #00D4F0; }
+  .date {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #3a4460;
+    text-transform: uppercase;
+  }
+
+  /* Hero headline */
+  .hero {
+    padding: 100px 60px 0;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(0,212,240,0.08);
+    border: 1px solid rgba(0,212,240,0.25);
+    color: #00D4F0;
+    font-size: 10px;
+    letter-spacing: 3px;
+    padding: 6px 16px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-size: 72px;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    font-weight: 700;
+    color: #f5f0e8;
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: #00D4F0;
+  }
+  .hero p {
+    font-size: 16px;
+    color: #7a85a0;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    max-width: 480px;
+  }
+
+  /* Morning brief card */
+  .brief-card {
+    margin: 80px 60px 0;
+    background: #060d1a;
+    border: 1px solid rgba(0,212,240,0.12);
+    border-radius: 16px;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .brief-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,212,240,0.4), transparent);
+  }
+  .brief-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #4a5568;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brief-label .day { color: #3a4460; }
+
+  .athlete-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  .athlete-row.push { background: rgba(0,212,240,0.06); border-left: 2px solid #00D4F0; }
+  .athlete-row.protect { background: rgba(255,60,60,0.06); border-left: 2px solid #FF3C3C; }
+  .athlete-row.normal { background: rgba(255,255,255,0.03); border-left: 2px solid #2a3450; }
+
+  .athlete-name { font-size: 15px; font-weight: 600; flex: 1; letter-spacing: 0.5px; }
+  .bar-wrap { flex: 2; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 2px; }
+  .bar-cyan { background: linear-gradient(90deg, #00D4F0, rgba(0,212,240,0.6)); }
+  .bar-red { background: linear-gradient(90deg, #FF3C3C, rgba(255,60,60,0.6)); }
+  .bar-mid { background: rgba(245,240,232,0.35); }
+
+  .score { font-size: 22px; font-weight: 700; min-width: 52px; text-align: right; letter-spacing: -1px; }
+  .score.high { color: #00D4F0; }
+  .score.low { color: #FF3C3C; }
+  .score.mid { color: #f5f0e8; }
+
+  .tag {
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    min-width: 80px;
+    text-align: center;
+  }
+  .tag-push { background: rgba(0,212,240,0.12); color: #00D4F0; }
+  .tag-protect { background: rgba(255,60,60,0.12); color: #FF3C3C; }
+  .tag-ready { background: rgba(80,255,140,0.1); color: #50FF8C; }
+
+  /* Divider */
+  .divider { height: 1px; background: rgba(255,255,255,0.05); margin: 8px 0; }
+
+  /* Bottom stats */
+  .stats-grid {
+    margin: 40px 60px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .stat-card {
+    background: #060d1a;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .stat-label { font-size: 9px; letter-spacing: 3px; color: #4a5568; margin-bottom: 10px; text-transform: uppercase; }
+  .stat-value { font-size: 36px; font-weight: 700; color: #00D4F0; letter-spacing: -1px; }
+  .stat-sub { font-size: 11px; color: #4a5568; margin-top: 4px; letter-spacing: 1px; }
+
+  /* Bottom CTA */
+  .cta {
+    margin: 60px 60px 0;
+    padding: 40px;
+    background: rgba(0,212,240,0.06);
+    border: 1px solid rgba(0,212,240,0.2);
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cta-left {}
+  .cta-price { font-size: 48px; font-weight: 700; color: #f5f0e8; letter-spacing: -2px; }
+  .cta-label { font-size: 11px; letter-spacing: 2px; color: #4a5568; text-transform: uppercase; margin-top: 4px; }
+  .cta-right { text-align: right; }
+  .cta-url { font-size: 14px; letter-spacing: 3px; color: #00D4F0; text-transform: uppercase; }
+  .cta-tagline { font-size: 11px; color: #4a5568; letter-spacing: 1px; margin-top: 4px; }
+
+  /* Scan line effect */
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<div class="scanlines"></div>
+<div class="glow-top"></div>
+<div class="glow-mid"></div>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="logo">STRIKE<span>PANEL</span></div>
+  <div class="date">FIGHT CAMP · DAY 18</div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-tag">Combat Sports Coaching</div>
+  <h1>Stop<br>guessing.<br><em>Start<br>coaching.</em></h1>
+  <p>Daily readiness scores. Fight camp tracking. AI sessions. One dashboard.</p>
+</div>
+
+<!-- Morning Brief -->
+<div class="brief-card">
+  <div class="brief-label">
+    <span>MORNING BRIEF — TODAY'S ROSTER</span>
+    <span class="day">5 ATHLETES</span>
+  </div>
+
+  <div class="athlete-row push">
+    <div class="athlete-name">Marcus Webb</div>
+    <div class="bar-wrap"><div class="bar-fill bar-cyan" style="width:91%"></div></div>
+    <div class="score high">91</div>
+    <div class="tag tag-push">Push Hard</div>
+  </div>
+
+  <div class="athlete-row push">
+    <div class="athlete-name">D. Santos</div>
+    <div class="bar-wrap"><div class="bar-fill bar-cyan" style="width:84%"></div></div>
+    <div class="score high">84</div>
+    <div class="tag tag-ready">Ready</div>
+  </div>
+
+  <div class="athlete-row normal">
+    <div class="athlete-name">Lee Park</div>
+    <div class="bar-wrap"><div class="bar-fill bar-mid" style="width:67%"></div></div>
+    <div class="score mid">67</div>
+    <div class="tag tag-ready">Ready</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="athlete-row protect">
+    <div class="athlete-name">J. Okafor</div>
+    <div class="bar-wrap"><div class="bar-fill bar-red" style="width:38%"></div></div>
+    <div class="score low">38</div>
+    <div class="tag tag-protect">Protect</div>
+  </div>
+
+  <div class="athlete-row protect">
+    <div class="athlete-name">Ryan Cho</div>
+    <div class="bar-wrap"><div class="bar-fill bar-red" style="width:29%"></div></div>
+    <div class="score low">29</div>
+    <div class="tag tag-protect">Protect</div>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-label">Fight Camp</div>
+    <div class="stat-value">14</div>
+    <div class="stat-sub">DAYS TO FIGHT NIGHT</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Weight Cut</div>
+    <div class="stat-value">3.4<span style="font-size:18px">lbs</span></div>
+    <div class="stat-sub">WEBB — ON TRACK</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+  <div class="cta-left">
+    <div class="cta-price">$99</div>
+    <div class="cta-label">One payment · No subscription</div>
+  </div>
+  <div class="cta-right">
+    <div class="cta-url">strikepanel.uk</div>
+    <div class="cta-tagline">Up to 20 athletes · You own it forever</div>
+  </div>
+</div>
+
+</body>
+</html>
