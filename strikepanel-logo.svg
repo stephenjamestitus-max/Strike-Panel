@@ -89,7 +89,7 @@
     <text y="72"
           font-family="'Arial Black','Helvetica Neue',Arial,sans-serif"
           font-weight="900" font-size="52" letter-spacing="1"
-          fill="url(#text-grad)">STRIKEPANEL</text>
+          fill="url(#text-grad)">StrikePanel</text>
 
     <!-- TM superscript -->
     <text x="338" y="30"
