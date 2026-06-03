@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px;
+    background: #04070f;
+    font-family: 'SF Mono', 'Fira Mono', 'Courier New', monospace;
+    color: #f5f0e8;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── ambient glows ── */
+  .g1 { position:absolute; top:-100px; left:50%; transform:translateX(-50%); width:900px; height:600px; background:radial-gradient(ellipse, rgba(0,212,240,0.05) 0%, transparent 65%); pointer-events:none; }
+  .g2 { position:absolute; top:600px; left:-100px; width:500px; height:400px; background:radial-gradient(ellipse, rgba(139,92,246,0.04) 0%, transparent 65%); pointer-events:none; }
+  .g3 { position:absolute; bottom:200px; right:-80px; width:400px; height:400px; background:radial-gradient(ellipse, rgba(0,212,240,0.04) 0%, transparent 65%); pointer-events:none; }
+
+  /* ── SCENE DIVIDERS ── */
+  .scene { position:relative; z-index:2; }
+  .sdiv { height:1px; background:linear-gradient(90deg, transparent, rgba(0,212,240,0.15), transparent); margin:0 60px; }
+
+  /* ════════════════════════════════
+     SCENE 1 — HOOK (WhatsApp chaos)
+  ════════════════════════════════ */
+  .s1 { padding: 60px 60px 40px; }
+  .s1-label { font-size:10px; letter-spacing:4px; color:#3a4460; text-transform:uppercase; margin-bottom:20px; }
+
+  /* Compact WhatsApp card */
+  .wa-card {
+    background:#111318;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,0.07);
+    overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,0.7);
+  }
+  .wa-head {
+    background:#075E54;
+    padding:16px 20px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .wa-av { width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#ff6b35,#f7c59f);display:flex;align-items:center;justify-content:center;font-family:Arial;font-size:14px;font-weight:700;color:#fff; }
+  .wa-info-name { font-family:Arial;font-size:15px;font-weight:600;color:#fff; }
+  .wa-info-sub { font-family:Arial;font-size:11px;color:rgba(255,255,255,0.6); }
+  .wa-badge { margin-left:auto;background:#25D366;color:#fff;font-family:Arial;font-size:11px;font-weight:700;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center; }
+  .wa-body { background:#0b141a;padding:14px 14px 8px; }
+  .msg { display:flex;margin-bottom:5px; }
+  .msg.t{justify-content:flex-start;} .msg.m{justify-content:flex-end;}
+  .bub { border-radius:8px;padding:7px 10px 16px;position:relative;font-family:Arial;font-size:13px;line-height:1.4;max-width:260px; }
+  .msg.t .bub{background:#202c33;color:#e9edef;border-top-left-radius:2px;}
+  .msg.m .bub{background:#005c4b;color:#e9edef;border-top-right-radius:2px;}
+  .sndr{font-size:11px;font-weight:600;color:#53bdeb;margin-bottom:2px;}
+  .tm{position:absolute;bottom:3px;right:8px;font-size:9px;color:rgba(255,255,255,0.4);}
+
+  .s1-caption { margin-top:18px; }
+  .s1-caption-main { font-size:38px;font-weight:700;letter-spacing:-1px;line-height:1.1;text-transform:uppercase;margin-bottom:8px; }
+  .s1-caption-sub { font-size:15px;color:#7a85a0;letter-spacing:1px; }
+
+  /* ════════════════════════════════
+     SCENE 2 — THE NAPKIN
+  ════════════════════════════════ */
+  .s2 { padding:32px 60px 40px; }
+  .napkin {
+    background:#f5f0e2;
+    border-radius:4px;
+    padding:28px 32px;
+    box-shadow:0 16px 50px rgba(0,0,0,0.6);
+    transform:rotate(-0.8deg);
+    position:relative;
+    overflow:hidden;
+  }
+  .napkin::before { content:'';position:absolute;top:16px;right:24px;width:60px;height:60px;border-radius:50%;border:2px solid rgba(120,80,30,0.18);box-shadow:inset 0 0 16px rgba(120,80,30,0.08); }
+  .n-title { font-family:'Courier New';font-size:11px;font-weight:700;color:#2a2a2a;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;border-bottom:1px solid rgba(0,0,0,0.1);padding-bottom:8px; }
+  .n-row { display:flex;align-items:center;gap:10px;margin-bottom:9px;font-family:'Courier New';font-size:13px;color:#1a1a1a;position:relative; }
+  .n-row.x::after{content:'';position:absolute;left:0;right:0;top:50%;height:1.5px;background:rgba(180,30,30,0.55);transform:rotate(-0.5deg);}
+  .n-nm{width:110px;font-weight:600;}
+  .n-sc{width:64px;font-size:15px;font-weight:700;}
+  .n-nt{font-size:10px;color:#666;font-style:italic;}
+  .n-foot{font-family:'Courier New';font-size:9px;color:#888;font-style:italic;margin-top:10px;border-top:1px dashed rgba(0,0,0,0.1);padding-top:8px;}
+
+  .s2-caption { margin-top:16px; }
+  .s2-caption-main { font-size:34px;font-weight:700;letter-spacing:-0.5px;line-height:1.1;text-transform:uppercase;margin-bottom:6px; }
+  .s2-caption-main em{font-style:normal;color:#FF9500;}
+  .s2-caption-sub{font-size:14px;color:#7a85a0;letter-spacing:0.5px;}
+
+  /* ════════════════════════════════
+     SCENE 3 — DASHBOARD REVEAL
+  ════════════════════════════════ */
+  .s3 { padding:32px 60px 40px; }
+  .dash-card {
+    background:#060d1a;
+    border:1px solid rgba(0,212,240,0.15);
+    border-radius:14px;
+    padding:28px 28px 20px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,212,240,0.04);
+  }
+  .dash-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,240,0.5),transparent);}
+  .d-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+  .d-hl{font-size:9px;letter-spacing:3px;color:#4a5568;text-transform:uppercase;}
+  .d-hr{font-size:9px;letter-spacing:2px;color:#00D4F0;}
+  .ath{display:flex;align-items:center;gap:14px;padding:11px 14px;border-radius:8px;margin-bottom:7px;}
+  .ath.p{background:rgba(0,212,240,0.07);border-left:2px solid #00D4F0;}
+  .ath.r{background:rgba(255,60,60,0.07);border-left:2px solid #FF3C3C;}
+  .ath.n{background:rgba(255,255,255,0.03);border-left:2px solid #2a3450;}
+  .a-nm{font-size:14px;font-weight:600;flex:1;}
+  .bw{flex:2;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;}
+  .bf{height:100%;border-radius:2px;}
+  .bc{background:linear-gradient(90deg,#00D4F0,rgba(0,212,240,0.5));}
+  .br2{background:linear-gradient(90deg,#FF3C3C,rgba(255,60,60,0.5));}
+  .bm{background:rgba(245,240,232,0.3);}
+  .sc{font-size:20px;font-weight:700;min-width:46px;text-align:right;}
+  .sc.h{color:#00D4F0;} .sc.l{color:#FF3C3C;} .sc.m{color:#f5f0e8;}
+  .tg{font-size:8px;letter-spacing:2px;padding:3px 8px;border-radius:2px;text-transform:uppercase;min-width:70px;text-align:center;}
+  .tg-p{background:rgba(0,212,240,0.12);color:#00D4F0;}
+  .tg-r{background:rgba(255,60,60,0.12);color:#FF3C3C;}
+  .tg-g{background:rgba(80,255,140,0.1);color:#50FF8C;}
+  .ddiv{height:1px;background:rgba(255,255,255,0.04);margin:4px 0;}
+
+  .s3-caption{margin-top:16px;}
+  .s3-caption-main{font-size:36px;font-weight:700;letter-spacing:-0.5px;line-height:1.1;text-transform:uppercase;margin-bottom:6px;}
+  .s3-caption-main em{font-style:normal;color:#00D4F0;}
+  .s3-caption-sub{font-size:14px;color:#7a85a0;letter-spacing:0.5px;}
+
+  /* ════════════════════════════════
+     SCENE 4 — THE TRUTH
+  ════════════════════════════════ */
+  .s4{padding:32px 60px 40px;text-align:center;}
+  .truth-quote{font-size:52px;font-weight:700;letter-spacing:-2px;line-height:1.05;text-transform:uppercase;margin-bottom:20px;}
+  .truth-quote em{font-style:normal;color:#00D4F0;display:block;}
+  .truth-quote .red{color:#FF3C3C;}
+  .truth-divline{width:80px;height:2px;background:linear-gradient(90deg,transparent,#00D4F0,transparent);margin:0 auto 20px;}
+  .truth-sub{font-size:17px;color:#7a85a0;letter-spacing:0.5px;line-height:1.7;}
+  .truth-sub strong{color:#f5f0e8;}
+  .pills{display:flex;gap:12px;justify-content:center;margin-top:20px;}
+  .pill{padding:10px 24px;border-radius:4px;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:600;}
+  .pill-b{background:rgba(255,60,60,0.08);border:1px solid rgba(255,60,60,0.25);color:#FF3C3C;}
+  .pill-a{background:rgba(0,212,240,0.08);border:1px solid rgba(0,212,240,0.3);color:#00D4F0;}
+  .pill-arr{color:#4a5568;display:flex;align-items:center;font-size:18px;}
+
+  /* ════════════════════════════════
+     SCENE 5 — LOGO CLOSE
+  ════════════════════════════════ */
+  .s5{
+    flex:1;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    padding:20px 60px 60px;
+    position:relative;
+  }
+  .s5-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(0,212,240,0.1) 0%,transparent 65%);pointer-events:none;}
+
+  /* Crosshair emblem */
+  .emblem{width:130px;height:130px;border-radius:26px;background:linear-gradient(135deg,#060d1a,#0a1830);border:1px solid rgba(0,212,240,0.3);box-shadow:0 0 50px rgba(0,212,240,0.15),0 0 100px rgba(0,212,240,0.06);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;position:relative;overflow:hidden;}
+  .emblem-svg{width:90px;height:90px;}
+
+  .wordmark-lg{font-size:52px;font-weight:700;letter-spacing:8px;color:#f5f0e8;text-transform:uppercase;margin-bottom:10px;}
+  .wordmark-lg span{color:#00D4F0;}
+  .tagline-lg{font-size:11px;letter-spacing:5px;color:#4a5568;text-transform:uppercase;margin-bottom:28px;}
+  .sep-lg{width:160px;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,240,0.4),transparent);margin:0 auto 28px;}
+  .url-lg{font-size:22px;letter-spacing:6px;color:#00D4F0;text-transform:uppercase;margin-bottom:14px;}
+  .price-lg{font-size:40px;font-weight:700;color:#f5f0e8;letter-spacing:-1px;margin-bottom:6px;}
+  .price-detail-lg{font-size:11px;letter-spacing:2px;color:#4a5568;text-transform:uppercase;}
+  .corner{position:absolute;width:30px;height:30px;}
+  .c-tl{top:16px;left:16px;border-top:2px solid rgba(0,212,240,0.3);border-left:2px solid rgba(0,212,240,0.3);}
+  .c-tr{top:16px;right:16px;border-top:2px solid rgba(0,212,240,0.3);border-right:2px solid rgba(0,212,240,0.3);}
+  .c-bl{bottom:16px;left:16px;border-bottom:2px solid rgba(0,212,240,0.3);border-left:2px solid rgba(0,212,240,0.3);}
+  .c-br{bottom:16px;right:16px;border-bottom:2px solid rgba(0,212,240,0.3);border-right:2px solid rgba(0,212,240,0.3);}
+</style>
+</head>
+<body>
+
+<div class="g1"></div><div class="g2"></div><div class="g3"></div>
+
+<!-- ═══ SCENE 1: HOOK ═══ -->
+<div class="scene s1">
+  <div class="s1-label">YOUR COACHING SYSTEM. PROBABLY.</div>
+  <div class="wa-card">
+    <div class="wa-head">
+      <div class="wa-av">FT</div>
+      <div><div class="wa-info-name">Fight Team 🥊</div><div class="wa-info-sub">Marcus, Danny, Lee, Okafor +6</div></div>
+      <div class="wa-badge">47</div>
+    </div>
+    <div class="wa-body">
+      <div class="msg t"><div class="bub"><div class="sndr">Marcus</div>feeling good coach 💪<div class="tm">06:14</div></div></div>
+      <div class="msg t"><div class="bub"><div class="sndr">Ryan Cho</div>yeah im good coach<div class="tm">06:45</div></div></div>
+      <div class="msg m"><div class="bub">everyone 9am. full session.<div class="tm">07:02 ✓✓</div></div></div>
+      <div class="msg t"><div class="bub"><div class="sndr">J. Okafor</div>coach can we talk... nvm im fine<div class="tm">07:45</div></div></div>
+    </div>
+  </div>
+  <div class="s1-caption">
+    <div class="s1-caption-main">47 unread.<br>Zero data.</div>
+    <div class="s1-caption-sub">This is not a system.</div>
+  </div>
+</div>
+
+<div class="sdiv"></div>
+
+<!-- ═══ SCENE 2: NAPKIN ═══ -->
+<div class="scene s2">
+  <div class="napkin">
+    <div class="n-title">FIGHT TEAM — TODAY</div>
+    <div class="n-row"><div class="n-nm">Marcus</div><div class="n-sc" style="color:#1a7a1a">??</div><div class="n-nt">seemed ok yday</div></div>
+    <div class="n-row x"><div class="n-nm">D. Santos</div><div class="n-sc" style="color:#1a7a1a">PUSH</div><div class="n-nt">or maybe rest?</div></div>
+    <div class="n-row"><div class="n-nm">J. Okafor</div><div class="n-sc" style="color:#7a1a1a">REST</div><div class="n-nt">said he's fine tho</div></div>
+    <div class="n-row"><div class="n-nm">Ryan Cho</div><div class="n-sc" style="color:#1a7a1a">HARD</div><div class="n-nt">gut feeling</div></div>
+    <div class="n-foot">* trust the vibes &nbsp;&nbsp; ** ask again at 9am</div>
+  </div>
+  <div class="s2-caption">
+    <div class="s2-caption-main">The <em>data.</em><br>Probably.</div>
+    <div class="s2-caption-sub">Five athletes. Zero numbers. Pure instinct.</div>
+  </div>
+</div>
+
+<div class="sdiv"></div>
+
+<!-- ═══ SCENE 3: DASHBOARD ═══ -->
+<div class="scene s3">
+  <div class="dash-card">
+    <div class="d-header"><div class="d-hl">MORNING BRIEF — TODAY'S ROSTER</div><div class="d-hr">DAY 18 OF CAMP</div></div>
+    <div class="ath p"><div class="a-nm">Marcus Webb</div><div class="bw"><div class="bf bc" style="width:91%"></div></div><div class="sc h">91</div><div class="tg tg-p">Push Hard</div></div>
+    <div class="ath p"><div class="a-nm">D. Santos</div><div class="bw"><div class="bf bc" style="width:84%"></div></div><div class="sc h">84</div><div class="tg tg-g">Ready</div></div>
+    <div class="ath n"><div class="a-nm">Lee Park</div><div class="bw"><div class="bf bm" style="width:67%"></div></div><div class="sc m">67</div><div class="tg tg-g">Ready</div></div>
+    <div class="ddiv"></div>
+    <div class="ath r"><div class="a-nm">J. Okafor</div><div class="bw"><div class="bf br2" style="width:38%"></div></div><div class="sc l">38</div><div class="tg tg-r">Protect</div></div>
+    <div class="ath r"><div class="a-nm">Ryan Cho</div><div class="bw"><div class="bf br2" style="width:29%"></div></div><div class="sc l">29</div><div class="tg tg-r">Protect</div></div>
+  </div>
+  <div class="s3-caption">
+    <div class="s3-caption-main">Every athlete.<br><em>Every morning.</em></div>
+    <div class="s3-caption-sub">30 seconds. 5 decisions. No napkin.</div>
+  </div>
+</div>
+
+<div class="sdiv"></div>
+
+<!-- ═══ SCENE 4: TRUTH ═══ -->
+<div class="scene s4">
+  <div class="truth-quote">You asked.<br>They said<br><em>fine.</em><span class="red">They weren't.</span></div>
+  <div class="truth-divline"></div>
+  <div class="truth-sub">The coaches who stay there are the ones who<br><strong>never built the system.</strong></div>
+  <div class="pills">
+    <div class="pill pill-b">Gut feeling</div>
+    <div class="pill-arr">→</div>
+    <div class="pill pill-a">Readiness score</div>
+  </div>
+</div>
+
+<div class="sdiv"></div>
+
+<!-- ═══ SCENE 5: LOGO CLOSE ═══ -->
+<div class="scene s5">
+  <div class="s5-glow"></div>
+  <div class="corner c-tl"></div><div class="corner c-tr"></div>
+  <div class="corner c-bl"></div><div class="corner c-br"></div>
+
+  <div class="emblem">
+    <!-- Inline crosshair SVG -->
+    <svg class="emblem-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="og" cx="38%" cy="32%" r="65%">
+          <stop offset="0%" stop-color="#1e2844"/>
+          <stop offset="55%" stop-color="#0f1428"/>
+          <stop offset="100%" stop-color="#080c18"/>
+        </radialGradient>
+        <filter id="gl"><feGaussianBlur in="SourceGraphic" stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <circle cx="60" cy="60" r="54" fill="url(#og)" stroke="#00D4F0" stroke-width="1.6" stroke-opacity="0.6"/>
+      <circle cx="60" cy="60" r="36" fill="none" stroke="#00D4F0" stroke-width="1" stroke-opacity="0.2"/>
+      <g filter="url(#gl)" stroke="#00D4F0" stroke-linecap="round">
+        <line x1="60" y1="6"  x2="60" y2="33"  stroke-width="3"/>
+        <line x1="60" y1="87" x2="60" y2="114" stroke-width="3"/>
+        <line x1="6"  y1="60" x2="33" y2="60"  stroke-width="3"/>
+        <line x1="87" y1="60" x2="114" y2="60" stroke-width="3"/>
+      </g>
+      <g stroke="#00D4F0" stroke-linecap="round" stroke-opacity="0.4">
+        <line x1="19" y1="19" x2="27" y2="27" stroke-width="1.8"/>
+        <line x1="101" y1="101" x2="93" y2="93" stroke-width="1.8"/>
+        <line x1="101" y1="19" x2="93" y2="27" stroke-width="1.8"/>
+        <line x1="19" y1="101" x2="27" y2="93" stroke-width="1.8"/>
+      </g>
+      <circle cx="60" cy="60" r="13" fill="#00D4F0" filter="url(#gl)"/>
+      <circle cx="55.5" cy="55.5" r="4.5" fill="white" fill-opacity="0.22"/>
+      <text x="60" y="64.5" font-family="Arial Black,sans-serif" font-weight="900" font-size="10" fill="#07111e" text-anchor="middle" letter-spacing="0.8">SP</text>
+    </svg>
+  </div>
+
+  <div class="wordmark-lg">STRIKE<span>PANEL</span></div>
+  <div class="tagline-lg">Training Intelligence</div>
+  <div class="sep-lg"></div>
+  <div class="url-lg">strikepanel.uk</div>
+  <div class="price-lg">$99</div>
+  <div class="price-detail-lg">One payment · No subscription · You own it forever</div>
+</div>
+
+</body>
+</html>
