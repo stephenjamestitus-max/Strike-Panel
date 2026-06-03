@@ -178,5 +178,35 @@
     "description": "Sanda/Chinese kickboxing coaching, technique focus",
     "date": "2026-06-02",
     "status": "queued"
+  },
+  {
+    "handle": "@combatsportsnutrition",
+    "description": "Nutrition coaching for combat athletes, UK/US",
+    "date": "2026-06-03",
+    "status": "queued"
+  },
+  {
+    "handle": "@fightcampcoach",
+    "description": "Fight camp management and coaching methodology",
+    "date": "2026-06-03",
+    "status": "queued"
+  },
+  {
+    "handle": "@eliteboxingcoach",
+    "description": "Elite boxing coaching, pro and amateur levels, UK",
+    "date": "2026-06-03",
+    "status": "queued"
+  },
+  {
+    "handle": "@ukboxingcoaches",
+    "description": "UK boxing coaching community, development focus",
+    "date": "2026-06-03",
+    "status": "queued"
+  },
+  {
+    "handle": "@britishboxingcouncil",
+    "description": "British boxing governing body, coach development, UK",
+    "date": "2026-06-03",
+    "status": "queued"
   }
 ]
