@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px;
+    background: #0a0c12;
+    font-family: 'SF Mono', 'Courier New', monospace;
+    color: #f5f0e8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Gym background simulation */
+  .gym-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 120% 60% at 50% 100%, rgba(20,15,5,0.95) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 40% at 30% 20%, rgba(255,160,40,0.04) 0%, transparent 50%),
+      linear-gradient(180deg, #080a0f 0%, #0d0f18 40%, #0a0c10 100%);
+  }
+  /* Subtle brick texture via CSS */
+  .gym-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.01) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(255,255,255,0.01) 80px);
+  }
+
+  /* Hanging bag silhouette */
+  .bag {
+    position: absolute;
+    top: 60px;
+    right: 180px;
+    width: 80px;
+    height: 360px;
+    background: linear-gradient(180deg, #1a1a1a, #0f0f0f);
+    border-radius: 40px 40px 50px 50px;
+    box-shadow: inset -8px 0 20px rgba(0,0,0,0.6), 0 0 40px rgba(0,0,0,0.8);
+  }
+  .bag-chain {
+    position: absolute;
+    top: 0; right: 218px;
+    width: 4px; height: 60px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  /* Phone mockup */
+  .phone {
+    position: relative;
+    width: 420px;
+    background: #111318;
+    border-radius: 40px;
+    border: 2px solid rgba(255,255,255,0.08);
+    box-shadow: 0 40px 120px rgba(0,0,0,0.8), 0 0 60px rgba(0,0,0,0.6);
+    overflow: hidden;
+    margin-top: -100px;
+  }
+  .phone-notch {
+    width: 120px; height: 28px;
+    background: #0a0a0a;
+    border-radius: 0 0 20px 20px;
+    margin: 0 auto;
+  }
+  .phone-screen {
+    background: #075E54;
+    padding: 0;
+    min-height: 800px;
+  }
+
+  /* WhatsApp UI */
+  .wa-header {
+    background: #075E54;
+    padding: 20px 24px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .wa-back { color: #fff; font-size: 22px; opacity: 0.9; }
+  .wa-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b35, #f7c59f);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 700; color: #fff;
+    font-family: Arial, sans-serif;
+  }
+  .wa-info { flex: 1; }
+  .wa-name { font-family: Arial, sans-serif; font-size: 17px; font-weight: 600; color: #fff; }
+  .wa-status { font-family: Arial, sans-serif; font-size: 13px; color: rgba(255,255,255,0.7); }
+  .wa-badge {
+    background: #25D366;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 50%;
+    width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .wa-body {
+    background: #0b141a;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0 L40 20 L20 40 L0 20 Z' fill='none' stroke='rgba(255,255,255,0.02)' stroke-width='0.5'/%3E%3C/svg%3E");
+    padding: 16px 12px;
+    min-height: 680px;
+  }
+
+  .wa-day {
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .wa-day span {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.5);
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 8px;
+  }
+
+  .msg { display: flex; margin-bottom: 6px; }
+  .msg.them { justify-content: flex-start; }
+  .msg.me { justify-content: flex-end; }
+
+  .bubble {
+    max-width: 300px;
+    border-radius: 8px;
+    padding: 8px 12px 20px;
+    position: relative;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .msg.them .bubble { background: #202c33; color: #e9edef; border-top-left-radius: 2px; }
+  .msg.me .bubble { background: #005c4b; color: #e9edef; border-top-right-radius: 2px; }
+  .bubble .time {
+    position: absolute; bottom: 4px; right: 8px;
+    font-size: 10px; color: rgba(255,255,255,0.45);
+  }
+  .msg.me .bubble .time { color: rgba(134,215,189,0.7); }
+
+  .sender { font-size: 12px; font-weight: 600; color: #53bdeb; margin-bottom: 2px; }
+
+  /* Unread counter overlay */
+  .unread-banner {
+    position: absolute;
+    top: 320px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(37,211,102,0.15);
+    border: 1px solid rgba(37,211,102,0.4);
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #25D366;
+    white-space: nowrap;
+  }
+
+  /* Caption text below phone */
+  .caption {
+    position: absolute;
+    bottom: 200px;
+    left: 0; right: 0;
+    text-align: center;
+    padding: 0 80px;
+  }
+  .caption-main {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #f5f0e8;
+    line-height: 1.2;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .caption-sub {
+    font-size: 16px;
+    color: #7a85a0;
+    letter-spacing: 1px;
+  }
+
+  /* Top label */
+  .scene-label {
+    position: absolute;
+    top: 80px;
+    left: 60px;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #3a4460;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="gym-bg"></div>
+<div class="bag-chain"></div>
+<div class="bag"></div>
+
+<div class="scene-label">SCENE 01 — THE SYSTEM</div>
+
+<div class="phone">
+  <div class="phone-notch"></div>
+  <div class="phone-screen">
+    <div class="wa-header">
+      <div class="wa-back">‹</div>
+      <div class="wa-avatar">FT</div>
+      <div class="wa-info">
+        <div class="wa-name">Fight Team 🥊</div>
+        <div class="wa-status">Marcus, Danny, Lee, Okafor +6</div>
+      </div>
+      <div class="wa-badge">47</div>
+    </div>
+
+    <div class="wa-body">
+      <div class="wa-day"><span>TODAY</span></div>
+
+      <div class="msg them">
+        <div class="bubble">
+          <div class="sender">Marcus</div>
+          feeling good coach 💪<div class="time">06:14</div>
+        </div>
+      </div>
+
+      <div class="msg them">
+        <div class="bubble">
+          <div class="sender">D. Santos</div>
+          ready to go hard today<div class="time">06:31</div>
+        </div>
+      </div>
+
+      <div class="msg them">
+        <div class="bubble">
+          <div class="sender">Ryan Cho</div>
+          yeah im good coach<div class="time">06:45</div>
+        </div>
+      </div>
+
+      <div class="msg me">
+        <div class="bubble">
+          everyone 9am. full session.<div class="time">07:02 ✓✓</div>
+        </div>
+      </div>
+
+      <div class="msg them">
+        <div class="bubble">
+          <div class="sender">Lee Park</div>
+          ok<div class="time">07:08</div>
+        </div>
+      </div>
+
+      <div class="msg them">
+        <div class="bubble">
+          <div class="sender">J. Okafor</div>
+          coach can we talk<div class="time">07:44</div>
+        </div>
+      </div>
+
+      <div class="msg them">
+        <div class="bubble">
+          <div class="sender">J. Okafor</div>
+          actually nvm im fine<div class="time">07:45</div>
+        </div>
+      </div>
+
+      <div class="msg me">
+        <div class="bubble">
+          see you all at 9 💪<div class="time">07:51 ✓✓</div>
+        </div>
+      </div>
+
+      <div class="unread-banner">47 unread messages</div>
+    </div>
+  </div>
+</div>
+
+<div class="caption">
+  <div class="caption-main">Your coaching<br>system.</div>
+  <div class="caption-sub">Probably.</div>
+</div>
+
+</body>
+</html>

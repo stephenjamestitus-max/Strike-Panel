@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px;
+    background: #04070f;
+    font-family: 'SF Mono', 'Fira Mono', 'Courier New', monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Deep glow from center */
+  .glow-core {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px; height: 700px;
+    background: radial-gradient(ellipse, rgba(0,212,240,0.07) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Grid lines background */
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,240,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,240,0.025) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  /* Horizontal scan line animation feel */
+  .scan {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,212,240,0.8), transparent);
+    top: 40%;
+  }
+
+  /* Big quote text */
+  .quote-wrap {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 0 80px;
+    margin-top: -160px;
+  }
+
+  .quote-mark {
+    font-size: 180px;
+    line-height: 0.6;
+    color: rgba(0,212,240,0.08);
+    font-family: Georgia, serif;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .quote-text {
+    font-size: 68px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    line-height: 1.05;
+    color: #f5f0e8;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+  .quote-text em {
+    font-style: normal;
+    color: #00D4F0;
+    display: block;
+  }
+  .quote-text .red { color: #FF3C3C; }
+
+  /* Divider line */
+  .divline {
+    width: 120px; height: 2px;
+    background: linear-gradient(90deg, transparent, #00D4F0, transparent);
+    margin: 0 auto 48px;
+  }
+
+  /* Sub copy */
+  .sub {
+    font-size: 20px;
+    color: #7a85a0;
+    letter-spacing: 1px;
+    line-height: 1.7;
+    text-align: center;
+    padding: 0 60px;
+  }
+  .sub strong { color: #f5f0e8; }
+
+  /* Contrast pills */
+  .pills {
+    display: flex;
+    gap: 16px;
+    margin-top: 60px;
+    justify-content: center;
+  }
+  .pill {
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .pill-before {
+    background: rgba(255,60,60,0.08);
+    border: 1px solid rgba(255,60,60,0.25);
+    color: #FF3C3C;
+  }
+  .pill-after {
+    background: rgba(0,212,240,0.08);
+    border: 1px solid rgba(0,212,240,0.3);
+    color: #00D4F0;
+  }
+  .pill-arrow {
+    color: #4a5568;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+  }
+
+  /* Bottom counter */
+  .counter-row {
+    position: absolute;
+    bottom: 220px;
+    left: 0; right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+  }
+  .counter {
+    text-align: center;
+  }
+  .counter-val {
+    font-size: 56px;
+    font-weight: 700;
+    color: #00D4F0;
+    letter-spacing: -2px;
+    line-height: 1;
+  }
+  .counter-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #4a5568;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  .scene-label {
+    position: absolute;
+    top: 80px; left: 60px;
+    font-size: 11px; letter-spacing: 4px;
+    color: #3a4460; text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="glow-core"></div>
+<div class="grid"></div>
+<div class="scan"></div>
+<div class="scene-label">SCENE 04 — THE TRUTH</div>
+
+<div class="quote-wrap">
+  <span class="quote-mark">"</span>
+  <div class="quote-text">
+    You asked.<br>
+    They said<br>
+    <em>fine.</em>
+    <span class="red">They weren't.</span>
+  </div>
+  <div class="divline"></div>
+  <div class="sub">
+    Every coach has been there.<br>
+    The ones who stay there<br>
+    are the ones who never<br>
+    <strong>built the system.</strong>
+  </div>
+
+  <div class="pills">
+    <div class="pill pill-before">Gut feeling</div>
+    <div class="pill-arrow">→</div>
+    <div class="pill pill-after">Readiness score</div>
+  </div>
+</div>
+
+<div class="counter-row">
+  <div class="counter">
+    <div class="counter-val">20</div>
+    <div class="counter-label">Athletes max</div>
+  </div>
+  <div class="counter">
+    <div class="counter-val">$99</div>
+    <div class="counter-label">One payment</div>
+  </div>
+  <div class="counter">
+    <div class="counter-val">∞</div>
+    <div class="counter-label">You own it</div>
+  </div>
+</div>
+
+</body>
+</html>

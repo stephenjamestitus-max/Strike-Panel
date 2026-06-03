@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px;
+    background: #04070f;
+    font-family: 'SF Mono', 'Fira Mono', 'Courier New', monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Deep radial glow — the hero shot */
+  .glow-hero {
+    position: absolute;
+    top: 40%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1100px; height: 900px;
+    background: radial-gradient(ellipse, rgba(0,212,240,0.12) 0%, rgba(0,212,240,0.04) 35%, transparent 65%);
+    pointer-events: none;
+  }
+  .glow-bottom {
+    position: absolute;
+    bottom: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 400px;
+    background: radial-gradient(ellipse, rgba(139,92,246,0.06) 0%, transparent 65%);
+  }
+
+  /* Horizontal lines — signal/data feel */
+  .lines {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 59px,
+      rgba(0,212,240,0.02) 60px
+    );
+    pointer-events: none;
+  }
+
+  /* Corner marks */
+  .corner { position: absolute; width: 40px; height: 40px; }
+  .corner.tl { top: 60px; left: 60px; border-top: 2px solid rgba(0,212,240,0.3); border-left: 2px solid rgba(0,212,240,0.3); }
+  .corner.tr { top: 60px; right: 60px; border-top: 2px solid rgba(0,212,240,0.3); border-right: 2px solid rgba(0,212,240,0.3); }
+  .corner.bl { bottom: 60px; left: 60px; border-bottom: 2px solid rgba(0,212,240,0.3); border-left: 2px solid rgba(0,212,240,0.3); }
+  .corner.br { bottom: 60px; right: 60px; border-bottom: 2px solid rgba(0,212,240,0.3); border-right: 2px solid rgba(0,212,240,0.3); }
+
+  /* Central logo block */
+  .logo-block {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    margin-top: -200px;
+  }
+
+  /* The SP emblem */
+  .emblem {
+    width: 180px; height: 180px;
+    border-radius: 36px;
+    background: linear-gradient(135deg, #060d1a, #0a1830);
+    border: 1px solid rgba(0,212,240,0.25);
+    box-shadow:
+      0 0 60px rgba(0,212,240,0.12),
+      0 0 120px rgba(0,212,240,0.06),
+      inset 0 1px 0 rgba(0,212,240,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .emblem::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(0,212,240,0.08) 60deg, transparent 120deg);
+    animation: none;
+  }
+  .emblem-text {
+    font-size: 52px;
+    font-weight: 900;
+    color: #00D4F0;
+    letter-spacing: -2px;
+    font-family: Arial Black, sans-serif;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Logo wordmark */
+  .wordmark {
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: 12px;
+    color: #f5f0e8;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .wordmark span { color: #00D4F0; }
+
+  .tagline {
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: #4a5568;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+  }
+
+  /* Separator */
+  .sep {
+    width: 200px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,212,240,0.4), transparent);
+    margin: 0 auto 60px;
+  }
+
+  /* URL and price */
+  .url {
+    font-size: 28px;
+    letter-spacing: 6px;
+    color: #00D4F0;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .price-line {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 48px;
+  }
+  .price-tag {
+    font-size: 48px;
+    font-weight: 700;
+    color: #f5f0e8;
+    letter-spacing: -1px;
+  }
+  .price-detail {
+    text-align: left;
+  }
+  .price-detail-top {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #4a5568;
+    text-transform: uppercase;
+  }
+  .price-detail-bottom {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #4a5568;
+    text-transform: uppercase;
+  }
+
+  /* Feature dots */
+  .features {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+  }
+  .feat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #7a85a0;
+  }
+  .feat-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #00D4F0;
+    opacity: 0.6;
+  }
+
+  /* Bottom watermark */
+  .bottom-text {
+    position: absolute;
+    bottom: 100px; left: 0; right: 0;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #2a3450;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="glow-hero"></div>
+<div class="glow-bottom"></div>
+<div class="lines"></div>
+
+<div class="corner tl"></div>
+<div class="corner tr"></div>
+<div class="corner bl"></div>
+<div class="corner br"></div>
+
+<div class="logo-block">
+  <div class="emblem">
+    <div class="emblem-text">SP</div>
+  </div>
+
+  <div class="wordmark">STRIKE<span>PANEL</span></div>
+  <div class="tagline">Training Intelligence for Combat Sports</div>
+
+  <div class="sep"></div>
+
+  <div class="url">strikepanel.uk</div>
+
+  <div class="price-line">
+    <div class="price-tag">$99</div>
+    <div class="price-detail">
+      <div class="price-detail-top">One payment</div>
+      <div class="price-detail-bottom">No subscription</div>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feat"><div class="feat-dot"></div>Readiness Scores</div>
+    <div class="feat"><div class="feat-dot"></div>Fight Camps</div>
+    <div class="feat"><div class="feat-dot"></div>AI Sessions</div>
+  </div>
+</div>
+
+<div class="bottom-text">Up to 20 athletes · You own it forever</div>
+
+</body>
+</html>
