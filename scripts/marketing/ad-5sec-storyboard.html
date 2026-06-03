@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px;
+    background: #04070f;
+    font-family: 'SF Mono', 'Fira Mono', 'Courier New', monospace;
+    position: relative;
+    overflow: hidden;
+    color: #f5f0e8;
+  }
+
+  /* Global grid */
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,240,0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,240,0.018) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 30%, transparent 100%);
+    pointer-events: none;
+  }
+
+  /* Corner marks */
+  .corner { position: absolute; width: 36px; height: 36px; }
+  .corner.tl { top: 48px; left: 48px; border-top: 2px solid rgba(0,212,240,0.35); border-left: 2px solid rgba(0,212,240,0.35); }
+  .corner.tr { top: 48px; right: 48px; border-top: 2px solid rgba(0,212,240,0.35); border-right: 2px solid rgba(0,212,240,0.35); }
+  .corner.bl { bottom: 48px; left: 48px; border-bottom: 2px solid rgba(0,212,240,0.35); border-left: 2px solid rgba(0,212,240,0.35); }
+  .corner.br { bottom: 48px; right: 48px; border-bottom: 2px solid rgba(0,212,240,0.35); border-right: 2px solid rgba(0,212,240,0.35); }
+
+  /* Header */
+  .header {
+    position: absolute;
+    top: 52px; left: 0; right: 0;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: #3a4460;
+    text-transform: uppercase;
+  }
+  .header span { color: #00D4F0; }
+
+  /* Three act panels stacked */
+  .acts {
+    position: absolute;
+    top: 110px; left: 60px; right: 60px; bottom: 110px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* ── ACT 1: CHAOS ── */
+  .act1 {
+    flex: 1.2;
+    background: #060d1a;
+    border: 1px solid rgba(0,212,240,0.12);
+    border-bottom: none;
+    border-radius: 16px 16px 0 0;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+  }
+  .act1::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 30%, rgba(255,60,60,0.06) 0%, transparent 65%);
+  }
+  .act1-timer {
+    position: absolute;
+    top: 20px; left: 24px;
+    font-size: 9px; letter-spacing: 4px; color: #FF3C3C; text-transform: uppercase;
+  }
+  /* WhatsApp UI mock */
+  .wa-header {
+    width: 100%;
+    background: #1a2535;
+    border-radius: 10px 10px 0 0;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .wa-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, #2a3a55, #1a2535);
+    border: 1px solid rgba(0,212,240,0.2);
+    flex-shrink: 0;
+  }
+  .wa-title { font-size: 13px; font-weight: 600; letter-spacing: 0.5px; }
+  .wa-sub { font-size: 10px; color: #4a5568; letter-spacing: 1px; }
+  .wa-badge {
+    margin-left: auto;
+    background: #25D366;
+    color: #000;
+    font-size: 10px; font-weight: 700;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .wa-msgs {
+    width: 100%;
+    background: #0d1520;
+    border-radius: 0 0 10px 10px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .msg {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 12px; border-radius: 6px;
+    background: #121e30;
+  }
+  .msg-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .msg-text { font-size: 11px; color: #7a85a0; flex: 1; letter-spacing: 0.3px; }
+  .msg-time { font-size: 9px; color: #3a4460; }
+  .msg-unread { font-size: 9px; font-weight: 700; color: #25D366; }
+
+  .act1-caption {
+    margin-top: 24px;
+    text-align: center;
+  }
+  .act1-caption .big {
+    font-size: 38px; font-weight: 700; letter-spacing: -1px;
+    color: #FF3C3C; line-height: 1;
+  }
+  .act1-caption .small {
+    font-size: 13px; letter-spacing: 2px; color: #4a5568;
+    text-transform: uppercase; margin-top: 6px;
+  }
+
+  /* Divider with timing */
+  .divider {
+    height: 32px;
+    background: #060d1a;
+    border-left: 1px solid rgba(0,212,240,0.12);
+    border-right: 1px solid rgba(0,212,240,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .divider::before {
+    content: '';
+    position: absolute; left: 0; right: 0;
+    top: 50%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,212,240,0.25), transparent);
+  }
+  .divider-label {
+    background: #04070f;
+    padding: 0 16px;
+    font-size: 8px; letter-spacing: 4px; color: #3a4460;
+    text-transform: uppercase; position: relative; z-index: 1;
+  }
+  .divider-label span { color: #00D4F0; }
+
+  /* ── ACT 2: DATA ── */
+  .act2 {
+    flex: 1.4;
+    background: #060d1a;
+    border: 1px solid rgba(0,212,240,0.12);
+    border-top: none;
+    border-bottom: none;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 36px 48px;
+  }
+  .act2::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(0,212,240,0.05) 0%, transparent 65%);
+  }
+  .act2-timer {
+    position: absolute;
+    top: 20px; left: 24px;
+    font-size: 9px; letter-spacing: 4px; color: #00D4F0; text-transform: uppercase;
+  }
+  .card-label {
+    font-size: 9px; letter-spacing: 4px; color: #4a5568;
+    text-transform: uppercase; margin-bottom: 20px;
+    display: flex; justify-content: space-between;
+  }
+  .card-label span { color: #00D4F0; }
+
+  .athlete {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 14px; border-radius: 8px; margin-bottom: 8px;
+  }
+  .athlete.push { background: rgba(0,212,240,0.07); border-left: 2px solid #00D4F0; }
+  .athlete.protect { background: rgba(255,60,60,0.07); border-left: 2px solid #FF3C3C; }
+  .a-name { font-size: 13px; font-weight: 600; flex: 1; }
+  .bar-wrap { flex: 2; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+  .bar { height: 100%; border-radius: 2px; }
+  .bar-c { background: linear-gradient(90deg, #00D4F0, rgba(0,212,240,0.4)); }
+  .bar-r { background: linear-gradient(90deg, #FF3C3C, rgba(255,60,60,0.4)); }
+  .score { font-size: 20px; font-weight: 700; min-width: 44px; text-align: right; letter-spacing: -1px; }
+  .score.h { color: #00D4F0; }
+  .score.l { color: #FF3C3C; }
+  .badge {
+    font-size: 8px; letter-spacing: 1.5px;
+    padding: 4px 10px; border-radius: 3px;
+    text-transform: uppercase; min-width: 72px; text-align: center;
+  }
+  .badge-push { background: rgba(0,212,240,0.12); color: #00D4F0; }
+  .badge-protect { background: rgba(255,60,60,0.12); color: #FF3C3C; }
+
+  .act2-caption {
+    margin-top: 20px; text-align: center;
+    font-size: 28px; font-weight: 700; letter-spacing: -0.5px;
+    color: #f5f0e8; line-height: 1.2;
+    text-transform: uppercase;
+  }
+  .act2-caption em { font-style: normal; color: #00D4F0; }
+
+  /* ── ACT 3: LOGO ── */
+  .act3 {
+    flex: 1.3;
+    background: #04070f;
+    border: 1px solid rgba(0,212,240,0.15);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+  .act3::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 45%, rgba(0,212,240,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .act3-timer {
+    position: absolute;
+    top: 20px; left: 24px;
+    font-size: 9px; letter-spacing: 4px; color: #00D4F0; text-transform: uppercase;
+  }
+
+  /* Crosshair emblem */
+  .crosshair { position: relative; width: 140px; height: 140px; margin-bottom: 28px; }
+  .crosshair svg { width: 140px; height: 140px; }
+
+  .logo-wordmark {
+    font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 900;
+    font-size: 52px;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #ffffff, #c8f8ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+  }
+  .logo-wordmark .panel { color: #00D4F0; -webkit-text-fill-color: #00D4F0; }
+
+  .logo-tag {
+    font-size: 10px; letter-spacing: 5px; color: #00D4F0;
+    opacity: 0.6; text-transform: uppercase; margin-bottom: 28px;
+  }
+
+  .cta-row {
+    display: flex; gap: 24px; align-items: center;
+  }
+  .cta-url {
+    font-size: 18px; letter-spacing: 4px; color: #00D4F0; text-transform: uppercase;
+  }
+  .cta-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(0,212,240,0.4); }
+  .cta-price {
+    font-size: 24px; font-weight: 700; color: #f5f0e8; letter-spacing: -0.5px;
+  }
+  .cta-sub {
+    font-size: 9px; letter-spacing: 2px; color: #4a5568;
+    text-transform: uppercase; text-align: center; margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<div class="grid"></div>
+<div class="corner tl"></div>
+<div class="corner tr"></div>
+<div class="corner bl"></div>
+<div class="corner br"></div>
+
+<div class="header">STRIKEPANEL · 5-SECOND AD · <span>KLING STORYBOARD</span></div>
+
+<div class="acts">
+
+  <!-- ACT 1: CHAOS -->
+  <div class="act1">
+    <div class="act1-timer">0:00 – 0:01 · CHAOS</div>
+    <div style="width:100%;position:relative;z-index:1;">
+      <div class="wa-header">
+        <div class="wa-avatar"></div>
+        <div>
+          <div class="wa-title">Fight Team Group</div>
+          <div class="wa-sub">47 unread messages</div>
+        </div>
+        <div class="wa-badge">47</div>
+      </div>
+      <div class="wa-msgs">
+        <div class="msg"><div class="msg-dot" style="background:#FF3C3C"></div><div class="msg-text">Coach is Okafor okay? he looked bad today</div><div class="msg-time">07:14</div><div class="msg-unread">3</div></div>
+        <div class="msg"><div class="msg-dot" style="background:#FF8C00"></div><div class="msg-text">Ryan said his knee is sore again</div><div class="msg-time">07:22</div><div class="msg-unread">8</div></div>
+        <div class="msg"><div class="msg-dot" style="background:#4a5568"></div><div class="msg-text">Marcus wants extra sparring Saturday</div><div class="msg-time">07:31</div></div>
+        <div class="msg"><div class="msg-dot" style="background:#4a5568"></div><div class="msg-text">Weight check — who's on cut this week?</div><div class="msg-time">07:44</div></div>
+      </div>
+    </div>
+    <div class="act1-caption" style="position:relative;z-index:1;">
+      <div class="big">47 UNREAD.</div>
+      <div class="small">zero data.</div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-label">CUT TO <span>DATA</span></div></div>
+
+  <!-- ACT 2: DASHBOARD -->
+  <div class="act2">
+    <div class="act2-timer">0:01 – 0:03 · REVEAL</div>
+    <div style="position:relative;z-index:1;width:100%;">
+      <div class="card-label">MORNING BRIEF — TODAY'S ROSTER <span>DAY 18</span></div>
+
+      <div class="athlete push">
+        <div class="a-name">Marcus Webb</div>
+        <div class="bar-wrap"><div class="bar bar-c" style="width:91%"></div></div>
+        <div class="score h">91</div>
+        <div class="badge badge-push">Push Hard</div>
+      </div>
+      <div class="athlete push">
+        <div class="a-name">D. Santos</div>
+        <div class="bar-wrap"><div class="bar bar-c" style="width:84%"></div></div>
+        <div class="score h">84</div>
+        <div class="badge badge-push">Push Hard</div>
+      </div>
+      <div class="athlete protect">
+        <div class="a-name">J. Okafor</div>
+        <div class="bar-wrap"><div class="bar bar-r" style="width:38%"></div></div>
+        <div class="score l">38</div>
+        <div class="badge badge-protect">Protect</div>
+      </div>
+      <div class="athlete protect">
+        <div class="a-name">Ryan Cho</div>
+        <div class="bar-wrap"><div class="bar bar-r" style="width:29%"></div></div>
+        <div class="score l">29</div>
+        <div class="badge badge-protect">Protect</div>
+      </div>
+
+      <div class="act2-caption">Every athlete.<br><em>Every morning.</em><br>No guessing.</div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-label">CUT TO <span>LOGO</span></div></div>
+
+  <!-- ACT 3: LOGO CLOSE -->
+  <div class="act3">
+    <div class="act3-timer">0:03 – 0:05 · CLOSE</div>
+
+    <div class="crosshair" style="position:relative;z-index:1;">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="orb2" cx="38%" cy="32%" r="65%" gradientUnits="objectBoundingBox">
+            <stop offset="0%"   stop-color="#1e2844"/>
+            <stop offset="50%"  stop-color="#0f1428"/>
+            <stop offset="100%" stop-color="#080c18"/>
+          </radialGradient>
+          <filter id="glow2" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="shadow2" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#00D4F0" flood-opacity="0.4"/>
+          </filter>
+        </defs>
+        <circle cx="60" cy="60" r="54" fill="url(#orb2)" stroke="#00D4F0" stroke-width="1.6" stroke-opacity="0.6" filter="url(#shadow2)"/>
+        <circle cx="60" cy="60" r="36" fill="none" stroke="#00D4F0" stroke-width="1" stroke-opacity="0.2"/>
+        <g filter="url(#glow2)" stroke="#00D4F0" stroke-linecap="round">
+          <line x1="60" y1="6"   x2="60" y2="33"  stroke-width="3.5"/>
+          <line x1="60" y1="87"  x2="60" y2="114" stroke-width="3.5"/>
+          <line x1="6"  y1="60"  x2="33" y2="60"  stroke-width="3.5"/>
+          <line x1="87" y1="60"  x2="114" y2="60" stroke-width="3.5"/>
+        </g>
+        <g stroke="#00D4F0" stroke-linecap="round" stroke-opacity="0.5">
+          <line x1="19" y1="19"   x2="27" y2="27"   stroke-width="2"/>
+          <line x1="101" y1="101" x2="93" y2="93"   stroke-width="2"/>
+          <line x1="101" y1="19"  x2="93" y2="27"   stroke-width="2"/>
+          <line x1="19"  y1="101" x2="27" y2="93"   stroke-width="2"/>
+        </g>
+        <circle cx="60" cy="60" r="14" fill="#00D4F0" filter="url(#glow2)"/>
+        <circle cx="55" cy="55" r="5" fill="white" fill-opacity="0.2"/>
+        <text x="60" y="64.5" font-family="'Arial Black',Arial,sans-serif"
+              font-weight="900" font-size="10" fill="#07111e"
+              text-anchor="middle" letter-spacing="0.8">SP</text>
+      </svg>
+    </div>
+
+    <div class="logo-wordmark" style="position:relative;z-index:1;">Strike<span class="panel">Panel</span></div>
+    <div class="logo-tag" style="position:relative;z-index:1;">Training Intelligence</div>
+
+    <div class="cta-row" style="position:relative;z-index:1;">
+      <div class="cta-url">strikepanel.uk</div>
+      <div class="cta-dot"></div>
+      <div class="cta-price">$99</div>
+    </div>
+    <div class="cta-sub" style="position:relative;z-index:1;">One payment · No subscription</div>
+  </div>
+
+</div>
+
+</body>
+</html>
