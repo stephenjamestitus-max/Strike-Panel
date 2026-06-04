@@ -208,5 +208,35 @@
     "description": "British boxing governing body, coach development, UK",
     "date": "2026-06-03",
     "status": "queued"
+  },
+  {
+    "handle": "@boxingscotland",
+    "description": "Scottish boxing federation, coaching and athlete dev, UK",
+    "date": "2026-06-04",
+    "status": "queued"
+  },
+  {
+    "handle": "@walesboxing",
+    "description": "Welsh boxing federation, coaching programmes, UK",
+    "date": "2026-06-04",
+    "status": "queued"
+  },
+  {
+    "handle": "@irishboxing",
+    "description": "Irish boxing coaching and athlete development, UK/Ireland",
+    "date": "2026-06-04",
+    "status": "queued"
+  },
+  {
+    "handle": "@englandboxing",
+    "description": "England Boxing national governing body, UK",
+    "date": "2026-06-04",
+    "status": "queued"
+  },
+  {
+    "handle": "@ababoxing",
+    "description": "Amateur Boxing Association, coaching development, UK",
+    "date": "2026-06-04",
+    "status": "queued"
   }
 ]
