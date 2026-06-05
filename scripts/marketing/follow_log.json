@@ -238,5 +238,35 @@
     "description": "Amateur Boxing Association, coaching development, UK",
     "date": "2026-06-04",
     "status": "queued"
+  },
+  {
+    "handle": "@usamuaythai",
+    "description": "USA Muay Thai national federation, coach network, US",
+    "date": "2026-06-05",
+    "status": "queued"
+  },
+  {
+    "handle": "@usaboxing",
+    "description": "USA Boxing national federation, coaching programmes, US",
+    "date": "2026-06-05",
+    "status": "queued"
+  },
+  {
+    "handle": "@usbjj",
+    "description": "US BJJ community, competition coaching focus",
+    "date": "2026-06-05",
+    "status": "queued"
+  },
+  {
+    "handle": "@adccsubmission",
+    "description": "ADCC submission wrestling, elite grappling coaching",
+    "date": "2026-06-05",
+    "status": "queued"
+  },
+  {
+    "handle": "@grappling_industries",
+    "description": "Grappling competition circuit, coaching community",
+    "date": "2026-06-05",
+    "status": "queued"
   }
 ]
