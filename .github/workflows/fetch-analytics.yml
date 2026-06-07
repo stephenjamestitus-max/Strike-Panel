@@ -1,0 +1,30 @@
+name: Fetch Instagram Analytics
+
+on:
+  workflow_dispatch:
+
+jobs:
+  analytics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch analytics
+        env:
+          ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
+        run: node scripts/marketing/fetch-analytics.js
+
+      - name: Commit results
+        run: |
+          git config user.email noreply@anthropic.com
+          git config user.name Claude
+          git add analytics-report.json
+          git diff --cached --quiet || git commit -m "chore: update analytics report [skip ci]"
+          git push
