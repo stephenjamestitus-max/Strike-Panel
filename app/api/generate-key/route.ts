@@ -28,7 +28,7 @@ function generateKey(): string {
 export async function POST(req: NextRequest) {
   try {
     // Require internal secret so only your webhook handler can call this
-    const { secret, platform } = await req.json();
+    const { secret, platform, trial_expires_at, email } = await req.json();
     if (secret !== INTERNAL_SECRET) {
       return NextResponse.json({ ok: false }, { status: 401 });
     }
@@ -37,12 +37,15 @@ export async function POST(req: NextRequest) {
 
     const res = await supabase('licenses', {
       method: 'POST',
+      headers: { Prefer: 'return=minimal' },
       body: JSON.stringify({
         license_key: key,
         activations: 0,
         max_activations: 3,
         status: 'active',
         platform: platform || 'manual',
+        ...(trial_expires_at ? { trial_expires_at } : {}),
+        ...(email ? { email } : {}),
       }),
     });
 

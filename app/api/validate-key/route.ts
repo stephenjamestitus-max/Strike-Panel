@@ -40,12 +40,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, msg: 'This key has been revoked. Email corepanelv1@gmail.com.' });
     }
 
-    // Trial expiry: trial keys expire 14 days after created_at
-    const isTrialKey = license.platform === 'trial';
-    const trialExpiry = isTrialKey && license.created_at
-      ? new Date(new Date(license.created_at).getTime() + 14 * 24 * 60 * 60 * 1000)
-      : (license.trial_expires_at ? new Date(license.trial_expires_at) : null);
-    if (trialExpiry && trialExpiry < new Date()) {
+    if (license.trial_expires_at && new Date(license.trial_expires_at) < new Date()) {
       return NextResponse.json({
         ok: false,
         trial_expired: true,

@@ -192,11 +192,19 @@ export async function POST(req: NextRequest) {
 
     const normalized = email.trim().toLowerCase();
 
-    // Step 1: create the key via the proven generate-key route
+    const now = new Date();
+    const trialExpiresAt = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000).toISOString();
+    const expiresLabel = trialEnd(now);
+
     const genRes = await fetch(`${APP_URL}/api/generate-key`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ secret: INTERNAL_SECRET, platform: 'trial' }),
+      body: JSON.stringify({
+        secret: INTERNAL_SECRET,
+        platform: 'trial',
+        trial_expires_at: trialExpiresAt,
+        email: normalized,
+      }),
     });
     const genData = await genRes.json();
     if (!genData.ok || !genData.key) {
@@ -204,10 +212,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, msg: 'Could not create trial — try again.' }, { status: 500 });
     }
     const key = genData.key;
-
-    // Expiry is derived server-side from created_at + 14 days — no extra column needed
-    const now = new Date();
-    const expiresLabel = trialEnd(now);
 
     // Fire-and-forget: schedule all 5 emails via Resend scheduled_at
     void Promise.allSettled([
