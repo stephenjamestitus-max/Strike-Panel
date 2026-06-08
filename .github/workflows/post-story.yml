@@ -55,6 +55,7 @@ jobs:
           ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
           IMGBB_API_KEY: ${{ secrets.IMGBB_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node scripts/marketing/run-daily.js
 
       - name: Run story script
@@ -63,6 +64,7 @@ jobs:
           ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
           IMGBB_API_KEY: ${{ secrets.IMGBB_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node scripts/marketing/run-story.js
 
       - name: Commit updated logs

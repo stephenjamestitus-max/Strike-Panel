@@ -1,7 +1,7 @@
 /**
- * Free media fetcher for strikepane carousel visuals.
+ * Free media fetcher for strikepanel carousel visuals.
  * Sources (in priority order):
- *   1. Pollinations.ai — AI-generated combat sports imagery (FREE, no key, Flux model)
+ *   1. Gemini 2.0 Flash — AI-generated combat sports imagery (FREE, GEMINI_API_KEY, high quality)
  *   2. Pexels          — real sport photos (PEXELS_API_KEY in .env, free at pexels.com/api)
  *   3. Pixabay         — real sport photos (PIXABAY_API_KEY in .env, free at pixabay.com/api/docs)
  *   4. Mixkit          — curated combat-sports video clips (no key, always works)
@@ -17,7 +17,7 @@ const path = require('path');
 const CACHE_DIR = path.join(__dirname, '../../marketing/media-cache');
 if (!fs.existsSync(CACHE_DIR)) fs.mkdirSync(CACHE_DIR, { recursive: true });
 
-// ── Per-pillar AI image prompts (Pollinations / Flux) ─────────────
+// ── Per-pillar AI image prompts (Gemini image generation) ────────
 // Style: cinematic, dark, moody, dramatic sports photography — matches brand
 const BASE_STYLE = 'cinematic sports photography, dramatic moody lighting, dark atmosphere, high contrast, professional, no text, no watermarks';
 
@@ -120,38 +120,58 @@ function httpGet(url, headers = {}) {
   });
 }
 
-// ── Pollinations.ai — free AI image generation ────────────────────
+// ── Gemini 2.0 Flash — free AI image generation ───────────────────
 
-async function fetchPollinationsImage(pillar) {
+async function fetchGeminiImage(pillar) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) { console.warn('  GEMINI_API_KEY not set — skipping Gemini image'); return null; }
+
   const key = pillarKey(pillar);
   const prompt = PILLAR_AI_PROMPTS[key];
+  if (!prompt) return null;
 
-  // Use day-of-month as seed so same day always gets same image, but varies daily
-  const seed = new Date().getDate() + new Date().getMonth() * 31;
-  const encodedPrompt = encodeURIComponent(prompt);
-  const url = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1080&height=1080&seed=${seed}&model=flux&nologo=true&enhance=true`;
+  // Cache key rotates daily so we don't regenerate the same image twice
+  const dateKey = new Date().toISOString().slice(0, 10);
+  const slug = `gemini-${key.replace(/\W+/g, '_')}-${dateKey}`;
+  const dest = path.join(CACHE_DIR, `${slug}.png`);
+  if (fs.existsSync(dest)) { console.log(`  Gemini cache hit: ${path.basename(dest)}`); return dest; }
 
-  const slug = `pollinations-${key.replace(/\W+/g, '_')}-${seed}`;
-  const dest = path.join(CACHE_DIR, `${slug}.jpg`);
+  console.log(`  Generating Gemini image for: ${key}`);
+  try {
+    const body = JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: { responseModalities: ['IMAGE'], responseMimeType: 'image/png' },
+    });
+    const raw = await new Promise((resolve, reject) => {
+      const req = require('https').request({
+        hostname: 'generativelanguage.googleapis.com',
+        path: `/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent?key=${apiKey}`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) },
+      }, res => {
+        let data = '';
+        res.on('data', c => data += c);
+        res.on('end', () => resolve(data));
+      });
+      req.on('error', reject);
+      req.write(body);
+      req.end();
+    });
 
-  console.log(`  Generating AI image for: ${key}`);
-  for (let attempt = 1; attempt <= 3; attempt++) {
-    const s = seed + (attempt - 1) * 7;
-    const attemptUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1080&height=1080&seed=${s}&model=flux&nologo=true&enhance=true`;
-    const attemptDest = path.join(CACHE_DIR, `pollinations-${key.replace(/\W+/g, '_')}-${s}.jpg`);
-    try {
-      return await downloadFile(attemptUrl, attemptDest);
-    } catch (e) {
-      if (fs.existsSync(attemptDest)) fs.unlinkSync(attemptDest);
-      if (attempt < 3) {
-        console.warn(`  Pollinations attempt ${attempt} failed, retrying...`);
-        await new Promise(r => setTimeout(r, 2000 * attempt));
-      } else {
-        console.warn('  Pollinations failed — falling back to Pexels');
-      }
+    const json = JSON.parse(raw);
+    const parts = json?.candidates?.[0]?.content?.parts || [];
+    const imgPart = parts.find(p => p.inlineData?.mimeType?.startsWith('image/'));
+    if (!imgPart) {
+      console.warn('  Gemini returned no image:', JSON.stringify(json).slice(0, 200));
+      return null;
     }
+    fs.writeFileSync(dest, Buffer.from(imgPart.inlineData.data, 'base64'));
+    console.log(`  Gemini image saved: ${path.basename(dest)}`);
+    return dest;
+  } catch (e) {
+    console.warn('  Gemini image failed:', e.message);
+    return null;
   }
-  return null;
 }
 
 // ── Pexels ────────────────────────────────────────────────────────
@@ -265,11 +285,11 @@ async function fetchMixkitVideo(pillar) {
 
 /**
  * Returns a local path to a background photo for carousel slides.
- * Priority: Pollinations AI (on-brand generated) → Pexels → Pixabay
+ * Priority: Gemini 2.0 Flash (high quality) → Pexels → Pixabay
  */
 async function getBackgroundPhoto(pillar) {
   const result =
-    await fetchPollinationsImage(pillar) ||
+    await fetchGeminiImage(pillar) ||
     await fetchPexelsPhoto(pillar) ||
     await fetchPixabayPhoto(pillar);
 
