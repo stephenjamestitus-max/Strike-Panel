@@ -18,30 +18,40 @@ const CACHE_DIR = path.join(__dirname, '../../marketing/media-cache');
 if (!fs.existsSync(CACHE_DIR)) fs.mkdirSync(CACHE_DIR, { recursive: true });
 
 // ── Per-pillar AI image prompts (Gemini image generation) ────────
-// Style: cinematic, dark, moody, dramatic sports photography — matches brand
-const BASE_STYLE = 'cinematic sports photography, dramatic moody lighting, dark atmosphere, high contrast, professional, no text, no watermarks';
+// Inspired by: underwater editorial fashion, aerial top-down surreal,
+// diagonal split-world cinematography, gritty boxing zine B&W collage.
+// Key principles: unusual perspective, specific lighting, explicit color palette, no text.
 
 const PILLAR_AI_PROMPTS = {
-  Readiness: `boxing coach studying athlete readiness data early morning gym, coach reviewing clipboard scores, focused determined expression, ${BASE_STYLE}`,
-  'Fight Camp': `two combat sports athletes sparring intensely in boxing ring, fight camp training, sweat, focus, coaches watching, ${BASE_STYLE}`,
-  'Weight Cut': `boxer cutting weight, athlete in sauna suit running with discipline and intensity, shadows, sweat, sacrifice, ${BASE_STYLE}`,
-  'AI Sessions': `combat sports coach using tablet analyzing athlete performance data in a dark professional gym, modern coaching technology, ${BASE_STYLE}`,
-  'Problem': `boxing coach looking frustrated at messy spreadsheets and notes on clipboard, overworked, chaotic training room background, ${BASE_STYLE}`,
-  'Frustration': `boxing coach holding head in hands surrounded by whiteboards and scattered notes, overwhelmed, dark gym, ${BASE_STYLE}`,
-  'Social Proof': `boxing coach and athlete celebrating after a fight victory, proud coach moment, training paid off, raw emotion, ${BASE_STYLE}`,
-  'Direct Offer': `empty professional boxing gym at night, heavy bags hanging, ring in background, dramatic single spotlight, minimalist powerful, ${BASE_STYLE}`,
+
+  Readiness: `aerial top-down view of a lone boxer lying flat on a dark boxing ring canvas, arms spread wide, shot from directly overhead, single shaft of light from above illuminating only the figure, deep black shadows at the edges, teal and black color palette, cinematic editorial sports photography, surreal scale, no text, no watermarks, photorealistic`,
+
+  'Fight Camp': `underwater photograph of a boxer in training shorts floating suspended in deep teal water, light refracting dramatically from the surface above, bubbles rising, arms outstretched, shot from slightly below looking up, deep cyan and black atmosphere, cinematic editorial fashion meets sports, dreamlike surreal, ultra detailed, no text, no watermarks, photorealistic`,
+
+  'Weight Cut': `extreme close-up silhouette of a boxer's face in profile against a single harsh backlight, sweat drops suspended in the air catching the light like crystals, deep black background, high contrast black and white with faint warm rim light, grain texture, cinematic portrait photography, editorial, no text, no watermarks, photorealistic`,
+
+  'AI Sessions': `dark cinematic boxing gym interior at night, lone figure of a coach standing small in the frame, floor-to-ceiling cyan data visualization light projections covering the walls, fog in the air, deep shadows, volumetric light beams, teal and navy blue color palette, architectural editorial photography, dramatic scale, no text, no watermarks, photorealistic`,
+
+  'Problem': `gritty high-contrast black and white close-up of worn leather boxing gloves hanging from a hook in a dark empty gym, single overhead spotlight casting hard shadows, grain texture, scratches, dust particles in light beam, editorial sports photography, film noir atmosphere, no text, no watermarks, photorealistic`,
+
+  'Frustration': `aerial top-down perspective of an empty boxing ring at night seen from directly above, single dramatic spotlight illuminating the canvas, ropes casting sharp diagonal shadows, deep black void at the edges, teal and white, cinematic, architectural, silent and ominous, no text, no watermarks, photorealistic`,
+
+  'Social Proof': `cinematic moment of a boxer's gloved fist raised in victory in a dark arena, golden spotlights from above, crowd completely blurred in background, motion blur on the arm, dramatic shallow depth of field, warm gold and deep shadow, editorial sports photography, peak emotion, no text, no watermarks, photorealistic`,
+
+  'Direct Offer': `fog-filled professional boxing gym at night, empty ring with single dramatic spotlight, rows of heavy bags hanging in deep shadow, teal light bleeding through a distant window, dark atmospheric interior, architectural editorial photography, moody and powerful, no text, no watermarks, photorealistic`,
+
 };
 
-// ── Pexels queries — combat sports specific, no generic sports ────
+// ── Pexels fallback queries — cinematic/editorial mood ────────────
 const PILLAR_PEXELS = {
-  Readiness:      'boxer athlete early morning training focus dark gym',
-  'Fight Camp':   'boxing sparring two fighters ring intense training camp',
-  'Weight Cut':   'boxer cutting weight athlete discipline sweat dedication',
-  'AI Sessions':  'mma coach tablet analytics dark professional gym',
-  'Problem':      'boxing coach clipboard notes frustration training floor',
-  'Frustration':  'boxer exhausted overtraining hitting bag dark gym sweat',
-  'Social Proof': 'boxer champion victory belt celebration crowd',
-  'Direct Offer': 'professional boxing ring dark moody spotlight dramatic',
+  Readiness:      'boxer dark gym moody dramatic shadow overhead light',
+  'Fight Camp':   'boxing ring dark dramatic spotlight cinematic training',
+  'Weight Cut':   'boxer silhouette dark dramatic portrait backlight',
+  'AI Sessions':  'dark gym night fog dramatic light boxing',
+  'Problem':      'boxing gloves dark shadow close up dramatic',
+  'Frustration':  'empty boxing ring night spotlight dark dramatic',
+  'Social Proof': 'boxer victory raised fist arena dramatic light',
+  'Direct Offer': 'boxing gym fog night atmospheric dark moody',
 };
 
 const PILLAR_PIXABAY = {
@@ -121,11 +131,12 @@ function httpGet(url, headers = {}) {
 }
 
 // ── Gemini image generation — free tier (daily quota resets at midnight PT) ──
-// Models tried in order: cheapest free quota first
+// Models tried in order: highest quality first, fallback on 429
 const GEMINI_IMAGE_MODELS = [
-  'gemini-2.5-flash-image',
-  'gemini-3.1-flash-image',
-  'gemini-3.1-flash-image-preview',
+  'nano-banana-pro-preview',   // Nano Banana Pro — best quality, free tier
+  'gemini-3-pro-image',        // Gemini 3 Pro Image — high quality
+  'gemini-3.1-flash-image',    // Gemini 3.1 Flash Image
+  'gemini-2.5-flash-image',    // Gemini 2.5 Flash Image — last resort
 ];
 
 async function callGeminiImage(model, prompt, apiKey) {
