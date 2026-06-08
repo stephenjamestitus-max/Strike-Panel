@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { randomBytes } from 'crypto';
 
 const SUPABASE_URL = process.env.SUPABASE_URL!;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY!;
+const INTERNAL_SECRET = process.env.INTERNAL_SECRET!;
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://strikepanel.uk';
 
-// ── Supabase helper ───────────────────────────────────────────────
+// ── Supabase helper (only used for PATCH trial_expires_at) ────────
 
 async function sb(path: string, options: RequestInit = {}) {
   return fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
@@ -15,17 +15,10 @@ async function sb(path: string, options: RequestInit = {}) {
       apikey: SUPABASE_ANON_KEY,
       Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
       'Content-Type': 'application/json',
-      Prefer: 'return=representation',
+      Prefer: 'return=minimal',
       ...(options.headers ?? {}),
     },
   });
-}
-
-// ── Key generator ─────────────────────────────────────────────────
-
-function makeKey(): string {
-  const h = randomBytes(12).toString('hex').toUpperCase();
-  return `SP-${h.slice(0, 4)}-${h.slice(4, 8)}-${h.slice(8, 12)}`;
 }
 
 // ── Resend email sender ───────────────────────────────────────────
@@ -199,28 +192,32 @@ export async function POST(req: NextRequest) {
 
     const normalized = email.trim().toLowerCase();
 
-    const key = makeKey();
+    // Step 1: create the key via the proven generate-key route
+    const genRes = await fetch(`${APP_URL}/api/generate-key`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: INTERNAL_SECRET, platform: 'trial' }),
+    });
+    const genData = await genRes.json();
+    if (!genData.ok || !genData.key) {
+      console.error('[trial] generate-key failed:', genData);
+      return NextResponse.json({ ok: false, msg: 'Could not create trial — try again.' }, { status: 500 });
+    }
+    const key = genData.key;
+
+    // Step 2: stamp trial_expires_at on the new row
     const now = new Date();
     const trialExpiresAt = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000).toISOString();
     const expiresLabel = trialEnd(now);
 
-    const res = await sb('licenses', {
-      method: 'POST',
-      headers: { Prefer: 'return=minimal' },
-      body: JSON.stringify({
-        license_key: key,
-        activations: 0,
-        max_activations: 3,
-        status: 'active',
-        platform: 'trial',
-        trial_expires_at: trialExpiresAt,
-      }),
+    const patchRes = await sb(`licenses?license_key=eq.${encodeURIComponent(key)}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ trial_expires_at: trialExpiresAt }),
     });
-
-    if (!res.ok) {
-      const err = await res.text();
-      console.error('[trial] Supabase insert failed — status:', res.status, 'body:', err);
-      return NextResponse.json({ ok: false, msg: err, debug: true }, { status: 500 });
+    if (!patchRes.ok) {
+      const err = await patchRes.text();
+      console.error('[trial] PATCH trial_expires_at failed:', err);
+      // Key was created — still send email, trial just won't expire correctly
     }
 
     // Fire-and-forget: schedule all 5 emails via Resend scheduled_at
