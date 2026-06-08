@@ -1,4 +1,5 @@
 'use client'
+import { useState } from 'react'
 import FadeIn from '@/components/ui/FadeIn'
 import Magnet from '@/components/ui/Magnet'
 
@@ -14,7 +15,35 @@ const features = [
   'Progress tracking & charts',
 ]
 
+type TrialState = 'idle' | 'open' | 'loading' | 'success' | 'error'
+
 export default function Pricing() {
+  const [trial, setTrial] = useState<TrialState>('idle')
+  const [email, setEmail] = useState('')
+  const [trialMsg, setTrialMsg] = useState('')
+
+  async function startTrial() {
+    if (!email.trim()) return
+    setTrial('loading')
+    try {
+      const res = await fetch('/api/trial', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim().toLowerCase() }),
+      })
+      const data = await res.json()
+      if (data.ok) {
+        setTrial('success')
+      } else {
+        setTrialMsg(data.msg || 'Something went wrong — try again.')
+        setTrial('error')
+      }
+    } catch {
+      setTrialMsg('Could not reach the server — check your connection.')
+      setTrial('error')
+    }
+  }
+
   return (
     <section
       id="pricing"
@@ -174,6 +203,127 @@ export default function Pricing() {
               Get Instant Access — $99
             </a>
           </Magnet>
+
+          {/* Trial CTA */}
+          <div style={{ marginTop: 20 }}>
+            {trial === 'idle' && (
+              <button
+                onClick={() => setTrial('open')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontFamily: 'var(--fm)',
+                  fontSize: 11,
+                  letterSpacing: 2,
+                  color: 'var(--muted)',
+                  textDecoration: 'underline',
+                  textDecorationColor: 'rgba(255,255,255,0.2)',
+                  padding: 0,
+                  width: '100%',
+                }}
+              >
+                NOT SURE? TRY FREE FOR 14 DAYS →
+              </button>
+            )}
+
+            {trial === 'open' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <div style={{
+                  fontFamily: 'var(--fm)',
+                  fontSize: 10,
+                  letterSpacing: 2,
+                  color: 'var(--muted)',
+                  textAlign: 'center',
+                }}>
+                  ENTER YOUR EMAIL — WE&apos;LL SEND YOUR TRIAL KEY
+                </div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && startTrial()}
+                  placeholder="coach@yourgym.com"
+                  autoFocus
+                  style={{
+                    background: 'rgba(255,255,255,0.04)',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    borderRadius: 8,
+                    padding: '12px 16px',
+                    color: 'var(--cream)',
+                    fontFamily: 'var(--fb)',
+                    fontSize: 14,
+                    outline: 'none',
+                    width: '100%',
+                    boxSizing: 'border-box',
+                  }}
+                />
+                <button
+                  onClick={startTrial}
+                  style={{
+                    background: 'rgba(0,212,240,0.1)',
+                    border: '1px solid rgba(0,212,240,0.35)',
+                    borderRadius: 8,
+                    padding: '12px 16px',
+                    color: 'var(--accent)',
+                    fontFamily: 'var(--fk)',
+                    fontSize: 14,
+                    letterSpacing: 1,
+                    cursor: 'pointer',
+                    width: '100%',
+                  }}
+                >
+                  START FREE TRIAL
+                </button>
+                <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 1.5, color: 'var(--muted2)', textAlign: 'center' }}>
+                  14 DAYS · NO CARD · FULL ACCESS
+                </div>
+              </div>
+            )}
+
+            {trial === 'loading' && (
+              <div style={{ fontFamily: 'var(--fm)', fontSize: 11, letterSpacing: 2, color: 'var(--muted)', textAlign: 'center' }}>
+                SENDING YOUR KEY…
+              </div>
+            )}
+
+            {trial === 'success' && (
+              <div style={{
+                background: 'rgba(0,212,240,0.05)',
+                border: '1px solid rgba(0,212,240,0.2)',
+                borderRadius: 10,
+                padding: '18px 20px',
+                textAlign: 'center',
+              }}>
+                <div style={{ fontFamily: 'var(--fk)', fontSize: 18, letterSpacing: 2, color: 'var(--accent)', marginBottom: 8 }}>
+                  CHECK YOUR EMAIL
+                </div>
+                <div style={{ fontFamily: 'var(--fb)', fontSize: 13, color: 'var(--muted)', lineHeight: 1.6 }}>
+                  Your 14-day trial key is on its way.<br />
+                  Open strikepanel, paste the key, and you&apos;re live.
+                </div>
+              </div>
+            )}
+
+            {trial === 'error' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div style={{ fontFamily: 'var(--fb)', fontSize: 12, color: '#e05a5a', textAlign: 'center' }}>
+                  {trialMsg}
+                </div>
+                <button
+                  onClick={() => setTrial('open')}
+                  style={{
+                    background: 'none', border: 'none', cursor: 'pointer',
+                    fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 2,
+                    color: 'var(--muted)', textDecoration: 'underline',
+                  }}
+                >
+                  TRY AGAIN
+                </button>
+              </div>
+            )}
+          </div>
+
         </div>
       </FadeIn>
     </section>

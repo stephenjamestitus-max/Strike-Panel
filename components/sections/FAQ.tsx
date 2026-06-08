@@ -28,6 +28,10 @@ const faqs = [
     a: 'Yes. strikepane is built to work on any device — desktop, tablet, or phone. It\'s optimised for the iPad dashboard view coaches use courtside.',
   },
   {
+    q: 'Can I try it before paying?',
+    a: 'Yes. Hit "Try free for 14 days" on the pricing section, enter your email, and we\'ll send you a trial key instantly. Full access — no card required. At the end of 14 days you\'ll be prompted to grab the lifetime license for $99.',
+  },
+  {
     q: 'What if it\'s not right for me?',
     a: 'You\'re covered by a 30-day money-back guarantee. If strikepane isn\'t the right fit, email us and we\'ll refund you immediately — no questions asked.',
   },
