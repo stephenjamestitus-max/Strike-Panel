@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
- * strikepane Daily Story
- * Run: node scripts/marketing/run-story.js
+ * strikepanel Daily Story
+ * Full-bleed cinematic image + standalone hook.
+ * No caption extraction — every story works without context.
  */
 
 require('dotenv').config({ path: require('path').join(__dirname, '../../.env') });
@@ -12,12 +13,27 @@ const https = require('https');
 const puppeteer = require('puppeteer');
 
 const zernio = require('./zernio-client');
+const { getBackgroundPhoto } = require('./media-fetcher');
 
 const LOG_PATH = path.join(__dirname, 'posted_log.json');
-const OUT_DIR = path.join(__dirname, '../../marketing/carousels');
-const CHROME = '/root/.cache/puppeteer/chrome/linux-147.0.7727.57/chrome-linux64/chrome';
+const OUT_DIR  = path.join(__dirname, '../../marketing/carousels');
 
 const INSTAGRAM_ACCOUNT_ID = '6a0e0f75520992756d8bcdcf';
+
+// ── Chrome finder (picks latest installed version) ────────────────
+
+function findChrome() {
+  const base = '/root/.cache/puppeteer/chrome';
+  if (!fs.existsSync(base)) return null;
+  const versions = fs.readdirSync(base).sort().reverse();
+  for (const v of versions) {
+    const p = path.join(base, v, 'chrome-linux64', 'chrome');
+    if (fs.existsSync(p)) return p;
+  }
+  return null;
+}
+
+// ── Log helpers ───────────────────────────────────────────────────
 
 function readLog() {
   if (!fs.existsSync(LOG_PATH)) return [];
@@ -30,98 +46,120 @@ function writeLog(entry) {
   fs.writeFileSync(LOG_PATH, JSON.stringify(log, null, 2));
 }
 
-function getTodayCaption() {
+function daysSinceLastStory() {
   const log = readLog();
-  const today = new Date().toISOString().split('T')[0];
-  const todayEntries = log.filter(e => e.timestamp && e.timestamp.startsWith(today) && e.caption);
-  if (todayEntries.length === 0) return null;
-  return todayEntries[todayEntries.length - 1].caption;
+  const last = [...log].reverse().find(e => e.status === 'story_posted');
+  if (!last) return Infinity;
+  return (Date.now() - new Date(last.timestamp).getTime()) / (1000 * 60 * 60 * 24);
 }
 
-async function extractBoldLine(caption) {
-  // Strip hashtags — only use the body text
-  const text = caption.replace(/#\w+/g, '').replace(/\n{3,}/g, '\n\n').trim();
-  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+// Pillar rotates with the post pillar so theme is consistent
+function getNextPillar() {
+  const log = readLog();
+  const last = [...log].reverse().find(e => e.status === 'posted' && e.pillarNum);
+  if (!last) return 1;
+  return last.pillarNum;
+}
 
-  if (!process.env.GROQ_API_KEY) {
-    return lines[0] || 'Know before the session starts.';
-  }
+// ── Standalone hooks — immediately understandable, no context needed ──
+// Rotates so each story day gets a different one
 
-  const prompt = `You are extracting a line from a caption to display large on an Instagram story slide.
+const FALLBACK_HOOKS = [
+  { line: '12 ATHLETES.\nONE SESSION.\nTHREE WERE EMPTY.', pillar: 'Problem' },
+  { line: 'THE GUT FEELING\nHAS A FAILURE RATE.', pillar: 'Fight Camp' },
+  { line: 'HE PEAKED ON\nDAY 23.\nFIGHT NIGHT WAS\nDAY 28.', pillar: 'Fight Camp' },
+  { line: 'KNOW WHO TO\nPROTECT BEFORE\nTHEY WALK IN.', pillar: 'Readiness' },
+  { line: 'THE NAPKIN\nWAS NOT\nA FIGHT CAMP.', pillar: 'Problem' },
+  { line: 'HE TOLD YOU\nHE WAS FINE.\nHIS BODY SAID 29.', pillar: 'Readiness' },
+  { line: 'SAME SESSION.\nDIFFERENT BODIES.\nDIFFERENT COSTS.', pillar: 'AI Sessions' },
+];
 
-RULES:
-- Copy one line VERBATIM from the caption. Do not rephrase, paraphrase, or invent new text.
-- Pick the most striking, specific line — not a generic summary.
-- Return only that line. No quotes. No explanation. No hashtags.
-- Keep it under 8 words. Convert to ALL CAPS.
+async function generateStoryHook() {
+  if (!process.env.GROQ_API_KEY) return null;
 
-Caption (hashtags removed):
-${text}
+  const prompt = `Write ONE powerful line for a boxing/MMA coaching Instagram story.
 
-Lines available:
-${lines.map((l, i) => `${i + 1}. ${l}`).join('\n')}
+RULES — NO EXCEPTIONS:
+- Must make IMMEDIATE sense to a combat sports coach who has NEVER seen your brand before.
+- Must describe something they have personally experienced in the gym this week.
+- Specific objects only: napkin, WhatsApp group, same session for everyone, gut feeling, whiteboard, a fighter who peaked too early, a weight cut that went wrong.
+- ALL CAPS. Under 12 words. Can split into 2-3 short lines with \\n.
+- No product names. No brand names. No questions. No exclamation marks.
+- Think: what would a coach read on a dark billboard and immediately feel in their chest?
 
-Return only the chosen line in ALL CAPS:`;
+GOOD examples:
+HE PEAKED ON DAY 23.\\nFIGHT NIGHT WAS DAY 28.
+12 ATHLETES.\\nONE SESSION.\\nTHREE WERE RUNNING ON EMPTY.
+THE GUT FEELING\\nHAS A FAILURE RATE.
+THE NAPKIN WAS NOT\\nA FIGHT CAMP.
+
+BAD examples (do not write these):
+- "Know your athlete's readiness" (too generic, brand-speak)
+- "Data-driven coaching" (jargon, no emotion)
+- "Are you making this mistake?" (question, weak)
+
+Return ONLY the hook line. Nothing else. No explanation.`;
 
   const body = JSON.stringify({
     model: 'llama-3.3-70b-versatile',
     messages: [{ role: 'user', content: prompt }],
-    max_tokens: 50,
-    temperature: 0.1,
+    max_tokens: 60,
+    temperature: 0.95,
   });
 
-  return new Promise((resolve, reject) => {
-    const req = https.request(
-      {
-        hostname: 'api.groq.com',
-        path: '/openai/v1/chat/completions',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
-          'Content-Length': Buffer.byteLength(body),
-        },
+  return new Promise((resolve) => {
+    const req = https.request({
+      hostname: 'api.groq.com',
+      path: '/openai/v1/chat/completions',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+        'Content-Length': Buffer.byteLength(body),
       },
-      res => {
-        let data = '';
-        res.on('data', chunk => { data += chunk; });
-        res.on('end', () => {
-          try {
-            const json = JSON.parse(data);
-            const extracted = json.choices[0].message.content.trim();
-            // Reject if Groq invented text not rooted in the caption
-            const normalise = s => s.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim();
-            const words = normalise(extracted).split(/\s+/);
-            const textNorm = normalise(text);
-            const matchCount = words.filter(w => w.length > 3 && textNorm.includes(w)).length;
-            if (matchCount < Math.ceil(words.length * 0.4)) {
-              resolve(lines[0].toUpperCase());
-            } else {
-              resolve(extracted);
-            }
-          } catch (e) {
-            reject(new Error('Groq parse error: ' + data.slice(0, 200)));
-          }
-        });
-      }
-    );
-    req.on('error', reject);
+    }, res => {
+      let data = '';
+      res.on('data', c => { data += c; });
+      res.on('end', () => {
+        try {
+          const raw = JSON.parse(data).choices[0].message.content.trim()
+            .replace(/^["']|["']$/g, '').trim();
+          if (raw.length > 5 && raw.length < 120) resolve(raw.replace(/\\n/g, '\n'));
+          else resolve(null);
+        } catch { resolve(null); }
+      });
+    });
+    req.on('error', () => resolve(null));
     req.write(body);
     req.end();
   });
 }
 
-async function generateStorySlide(boldLine) {
+// ── Story slide generator ─────────────────────────────────────────
+
+async function generateStorySlide(hookLine, bgImagePath) {
   if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
 
-  const date = new Date().toISOString().split('T')[0];
+  const date  = new Date().toISOString().split('T')[0];
   const outFile = path.join(OUT_DIR, `story-${date}.png`);
 
-  const safeText = boldLine
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  // Encode background image as base64 so Puppeteer loads it reliably
+  let bgCSS = 'background:#04070f';
+  if (bgImagePath && fs.existsSync(bgImagePath)) {
+    const ext  = path.extname(bgImagePath).replace('.', '') || 'jpeg';
+    const mime = ext === 'png' ? 'image/png' : 'image/jpeg';
+    const b64  = fs.readFileSync(bgImagePath).toString('base64');
+    bgCSS = `background-image:url('data:${mime};base64,${b64}');background-size:cover;background-position:center top`;
+  }
+
+  // Split into lines for sizing — shorter lines get bigger font
+  const lines = hookLine.split('\n').map(l => l.trim()).filter(Boolean);
+  const maxLen = Math.max(...lines.map(l => l.length));
+  const fontSize = maxLen <= 12 ? 128 : maxLen <= 18 ? 108 : 88;
+
+  const linesHtml = lines.map(l =>
+    `<div style="display:block">${l.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`
+  ).join('');
 
   const html = `<!DOCTYPE html>
 <html>
@@ -130,39 +168,72 @@ async function generateStorySlide(boldLine) {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{width:1080px;height:1920px;overflow:hidden;background:#04070f;font-family:'DM Mono',monospace}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#04070f}
+
 #canvas{
-  position:relative;width:1080px;height:1920px;
-  display:flex;align-items:center;justify-content:center;
-  background:#04070f;overflow:hidden
+  position:relative;width:1080px;height:1920px;overflow:hidden;
+  ${bgCSS}
 }
-.blob{position:absolute;border-radius:50%;filter:blur(180px);pointer-events:none}
-.blob-cyan{width:900px;height:900px;top:-200px;left:-300px;background:rgba(0,212,240,.09)}
-.blob-amber{width:700px;height:700px;bottom:200px;right:-250px;background:rgba(200,137,42,.07)}
-.blob-purple{width:800px;height:800px;bottom:-300px;left:-100px;background:rgba(139,92,246,.08)}
-#dotgrid{position:absolute;inset:0;pointer-events:none;
-  background-image:radial-gradient(circle,rgba(0,212,240,.045) 1.2px,transparent 1.2px);
-  background-size:48px 48px}
-#grain{position:absolute;inset:-50%;width:200%;height:200%;pointer-events:none;opacity:.03}
-#main-text{
-  position:relative;z-index:10;
-  width:900px;text-align:center;
+
+/* Cinematic dark gradient — transparent top, heavy dark bottom */
+#overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(4,7,15,0.08) 0%,
+    rgba(4,7,15,0.15) 35%,
+    rgba(4,7,15,0.60) 58%,
+    rgba(4,7,15,0.88) 72%,
+    rgba(4,7,15,0.97) 100%
+  );
+  z-index:1
+}
+
+/* Colour grade: darken + cool slightly */
+#grade{
+  position:absolute;inset:0;
+  background:rgba(4,7,30,0.18);
+  mix-blend-mode:multiply;
+  z-index:2
+}
+
+/* Grain texture */
+#grain{position:absolute;inset:-50%;width:200%;height:200%;pointer-events:none;opacity:.04;z-index:3}
+
+/* Cyan accent bar above text */
+#bar{
+  position:absolute;
+  bottom:340px;left:64px;
+  width:64px;height:3px;
+  background:#00D4F0;
+  z-index:10
+}
+
+/* Main hook text */
+#hook{
+  position:absolute;
+  bottom:160px;left:64px;right:64px;
+  z-index:10;
   font-family:'Bebas Neue',sans-serif;
-  font-size:112px;line-height:1.05;
-  letter-spacing:3px;
+  font-size:${fontSize}px;
+  line-height:1.0;
+  letter-spacing:2px;
   color:#f5f0e8;
-  text-shadow:0 0 120px rgba(0,212,240,.2)
+  text-shadow:0 4px 40px rgba(0,0,0,0.6)
 }
-#logo{
-  position:absolute;bottom:56px;right:56px;z-index:20;
-  font-family:'Bebas Neue',sans-serif;font-size:22px;
-  letter-spacing:3.5px;color:#f5f0e8
+
+/* Brand bottom */
+#brand{
+  position:absolute;bottom:56px;right:56px;z-index:10;
+  font-family:'Bebas Neue',sans-serif;font-size:20px;
+  letter-spacing:3px;color:rgba(245,240,232,0.8)
 }
-#logo span{color:#00D4F0}
+#brand span{color:#00D4F0}
+
 #url{
-  position:absolute;bottom:60px;left:56px;z-index:20;
-  font-size:12px;letter-spacing:2px;text-transform:uppercase;
-  color:rgba(122,133,160,.5)
+  position:absolute;bottom:60px;left:56px;z-index:10;
+  font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(122,133,160,0.45)
 }
 </style>
 </head>
@@ -170,27 +241,27 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#04070f;font-fam
 <div id="canvas">
   <svg id="grain" xmlns="http://www.w3.org/2000/svg">
     <filter id="noise">
-      <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="3" stitchTiles="stitch"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
       <feColorMatrix type="saturate" values="0"/>
     </filter>
     <rect width="100%" height="100%" filter="url(#noise)"/>
   </svg>
-  <div id="dotgrid"></div>
-  <div class="blob blob-cyan"></div>
-  <div class="blob blob-amber"></div>
-  <div class="blob blob-purple"></div>
-  <div id="main-text">${safeText}</div>
-  <div id="logo">STRIKE<span>PANEL</span><sup style="font-size:9px;color:rgba(0,212,240,.6);vertical-align:super;letter-spacing:.5px;font-family:'DM Mono',monospace">™</sup></div>
+  <div id="overlay"></div>
+  <div id="grade"></div>
+  <div id="bar"></div>
+  <div id="hook">${linesHtml}</div>
+  <div id="brand">STRIKE<span>PANEL</span><sup style="font-size:8px;color:rgba(0,212,240,0.55);vertical-align:super;letter-spacing:.5px;font-family:'DM Mono',monospace">™</sup></div>
   <div id="url">strikepanel.uk</div>
 </div>
 </body>
 </html>`;
 
+  const chrome = findChrome();
   const launchOpts = {
     headless: 'new',
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
   };
-  if (fs.existsSync(CHROME)) launchOpts.executablePath = CHROME;
+  if (chrome) launchOpts.executablePath = chrome;
 
   const browser = await puppeteer.launch(launchOpts);
   const page = await browser.newPage();
@@ -205,17 +276,11 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#04070f;font-fam
   return outFile;
 }
 
-function daysSinceLastStory() {
-  const log = readLog();
-  const last = [...log].reverse().find(e => e.status === 'story_posted');
-  if (!last) return Infinity;
-  return (Date.now() - new Date(last.timestamp).getTime()) / (1000 * 60 * 60 * 24);
-}
+// ── Main ──────────────────────────────────────────────────────────
 
 async function run() {
-  console.log('\n=== strikepane Story ===');
+  console.log('\n=== strikepanel Story ===');
   console.log(new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dubai' }), '(Dubai)');
-  console.log('');
 
   const days = daysSinceLastStory();
   if (days < 1.5) {
@@ -223,42 +288,50 @@ async function run() {
     return;
   }
 
-  console.log('1. Getting today\'s caption...');
-  const caption = getTodayCaption();
-  if (!caption) {
-    console.warn('  No caption found for today. Run run-daily.js first.');
-    writeLog({ status: 'story_skipped', reason: 'no_caption_today' });
-    return;
-  }
-  console.log('  Caption found:', caption.split('\n')[0].substring(0, 60) + '...');
-
-  console.log('\n2. Extracting boldest line for story...');
-  let boldLine;
+  // 1. Get standalone hook
+  console.log('\n1. Generating story hook...');
+  let hookLine;
   try {
-    boldLine = await extractBoldLine(caption);
-    console.log('  Bold line:', boldLine.substring(0, 80));
-  } catch (e) {
-    console.warn('  Bold line extraction failed:', e.message, '— using first line');
-    boldLine = caption.split('\n').map(l => l.trim()).filter(Boolean)[0] || 'Know before the session starts.';
+    hookLine = await generateStoryHook();
+    if (hookLine) {
+      console.log('  Groq hook:', hookLine.replace(/\n/g, ' / '));
+    } else {
+      throw new Error('empty');
+    }
+  } catch {
+    const fallback = FALLBACK_HOOKS[new Date().getDate() % FALLBACK_HOOKS.length];
+    hookLine = fallback.line;
+    console.log('  Using fallback hook:', hookLine.replace(/\n/g, ' / '));
   }
 
-  console.log('\n3. Generating story slide (1080x1920)...');
+  // 2. Get background image
+  console.log('\n2. Fetching background image...');
+  const pillar = getNextPillar();
+  const pillarThemes = { 1: 'Problem', 2: 'Fight Camp', 3: 'Social Proof', 4: 'Frustration', 5: 'Fight Camp' };
+  const theme = pillarThemes[pillar] || 'Fight Camp';
+  const bgImage = await getBackgroundPhoto(theme).catch(() => null);
+  if (bgImage) console.log('  Background:', path.basename(bgImage));
+  else console.log('  No background image — using dark gradient only');
+
+  // 3. Generate story slide
+  console.log('\n3. Rendering story slide (1080×1920)...');
   let slidePath;
   try {
-    slidePath = await generateStorySlide(boldLine);
+    slidePath = await generateStorySlide(hookLine, bgImage);
   } catch (e) {
-    console.error('  Story slide generation failed:', e.message);
+    console.error('  Slide generation failed:', e.message);
     writeLog({ status: 'story_failed', reason: 'slide_generation', error: e.message });
     return;
   }
 
   if (!process.env.IMGBB_API_KEY) {
-    console.warn('\n4. IMGBB_API_KEY not set — cannot upload story slide');
-    writeLog({ status: 'story_skipped', reason: 'no_imgbb_key' });
+    console.warn('\n4. IMGBB_API_KEY not set — cannot upload');
+    writeLog({ status: 'story_skipped', reason: 'no_imgbb_key', hook: hookLine });
     return;
   }
 
-  console.log('\n4. Uploading story slide to CDN...');
+  // 4. Upload
+  console.log('\n4. Uploading to CDN...');
   let publicUrl;
   try {
     publicUrl = await zernio.uploadImage(slidePath);
@@ -270,33 +343,34 @@ async function run() {
   }
 
   if (!process.env.ZERNIO_API_KEY) {
-    console.warn('\n5. ZERNIO_API_KEY not set — skipping story post');
+    console.warn('\n5. ZERNIO_API_KEY not set — skipping post');
     writeLog({ status: 'story_skipped', reason: 'no_zernio_key', url: publicUrl });
     return;
   }
 
+  // 5. Post to Instagram
   console.log('\n5. Posting story to Instagram via Zernio...');
   try {
     const { Zernio } = require('@zernio/node');
     const zClient = new Zernio({ apiKey: process.env.ZERNIO_API_KEY });
 
-    const body = {
-      content: ' ',
-      publishNow: true,
-      platforms: [{
-        platform: 'instagram',
-        accountId: INSTAGRAM_ACCOUNT_ID,
-        platformSpecificData: { contentType: 'story' },
-      }],
-      mediaItems: [{ type: 'image', url: publicUrl }],
-    };
-
-    const res = await zClient.posts.createPost({ body });
+    const res = await zClient.posts.createPost({
+      body: {
+        content: ' ',
+        publishNow: true,
+        platforms: [{
+          platform: 'instagram',
+          accountId: INSTAGRAM_ACCOUNT_ID,
+          platformSpecificData: { contentType: 'story' },
+        }],
+        mediaItems: [{ type: 'image', url: publicUrl }],
+      },
+    });
     const result = res.data?.post || res.data;
     console.log('  Story posted:', result?._id || 'success');
     writeLog({
       status: 'story_posted',
-      boldLine,
+      hook: hookLine,
       slide: path.basename(slidePath),
       url: publicUrl,
       zernioId: result?._id,
