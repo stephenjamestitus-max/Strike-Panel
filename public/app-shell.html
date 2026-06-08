@@ -3027,8 +3027,12 @@ function sessRender(){
         </div>
         <div class="field"><div class="flabel">Session Notes</div><textarea class="fta" rows="2" placeholder="How did it go? Any PRs, struggles, observations..." oninput="sessField('${s.id}','notes',this.value)">${escH(s.notes||'')}</textarea></div>
         <div class="field" style="margin-top:10px"><div class="flabel">Session RPE — Rate of Perceived Exertion (1–10)</div><div style="display:flex;align-items:center;gap:10px"><input type="range" min="1" max="10" value="${s.rpe||7}" style="flex:1;accent-color:var(--accent);cursor:pointer" oninput="sessField('${s.id}','rpe',parseInt(this.value));this.nextElementSibling.textContent=this.value" /><span style="font-family:var(--fh);font-size:22px;color:var(--accent);min-width:28px">${s.rpe||7}</span><span style="font-size:11px;color:var(--muted2)">${parseInt(s.rpe)>=9?'🔥 Max effort':parseInt(s.rpe)>=7?'⚡ Hard':parseInt(s.rpe)>=5?'✅ Moderate':'😌 Light'}</span></div></div>
-        <div style="display:flex;align-items:center;gap:10px;margin-top:10px">
+        <div style="display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap">
           <button class="btn btn-primary btn-sm" onclick="sessSave('${s.id}',this)">✓ Save Session</button>
+          <button class="btn btn-ghost btn-sm" onclick="shareSessionWhatsApp('${s.id}')" style="display:flex;align-items:center;gap:6px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.528 5.845L.057 23.882l6.2-1.448A11.932 11.932 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.85 0-3.59-.504-5.088-1.382l-.362-.215-3.684.861.877-3.59-.236-.374A9.962 9.962 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Share to WhatsApp
+          </button>
           <span style="font-family:var(--fc);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);opacity:0;transition:opacity .3s;text-shadow:0 0 12px rgba(16,185,129,0.4)" id="sFlash_${s.id}">Saved ✓</span>
         </div>
       </div>
@@ -3043,6 +3047,37 @@ function sessSave(id,btn){
   if(fl){fl.style.opacity='1';setTimeout(()=>fl.style.opacity='0',2000);}
   if(btn){const o=btn.textContent;btn.textContent='✓ Saved!';setTimeout(()=>btn.textContent=o,1500);}
   dbRefresh();
+}
+function shareSessionWhatsApp(id){
+  const s=S.sessions.find(x=>x.id===id);if(!s)return;
+  const ath=S.athletes.find(a=>a.id===s.athId);
+  const date=s.date||new Date().toISOString().slice(0,10);
+  let msg='🥊 *StrikePanel — Session Summary*\n';
+  msg+=`📅 ${date}\n`;
+  if(ath)msg+=`👤 ${ath.name}\n`;
+  msg+=`📋 *${s.title||'Session'}*\n`;
+  if(s.goalType)msg+=`🎯 ${s.goalType}\n`;
+  msg+='\n';
+  const exs=(s.exercises||[]).filter(e=>e.name);
+  if(exs.length){
+    msg+='*Exercises:*\n';
+    exs.forEach(e=>{
+      let line=`• ${e.name}`;
+      if(e.sets&&e.reps)line+=` — ${e.sets}×${e.reps}`;
+      if(e.weight)line+=` @ ${e.weight}`;
+      msg+=line+'\n';
+    });
+    msg+='\n';
+  }
+  if(s.aiRoutine){
+    // Strip HTML tags from AI routine for clean WhatsApp text
+    const plain=s.aiRoutine.replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').trim().slice(0,600);
+    if(plain){msg+='*AI Plan:*\n'+plain+(plain.length===600?'…':'')+'\n\n';}
+  }
+  if(s.rpe)msg+=`⚡ RPE: ${s.rpe}/10\n`;
+  if(s.notes)msg+=`📝 ${s.notes}\n`;
+  msg+='\n_Tracked with StrikePanel · strikepanel.uk_';
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
 }
 
 // ── CHECK-INS ─────────────────────────────────────────────────────────

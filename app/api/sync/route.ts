@@ -21,11 +21,17 @@ async function sb(path: string, options: RequestInit = {}) {
   });
 }
 
-async function verifyLicense(key: string): Promise<boolean> {
-  const res = await sb(`licenses?license_key=eq.${encodeURIComponent(key)}&select=status`);
-  if (!res.ok) return false;
+async function verifyLicense(key: string): Promise<{ valid: boolean; trialExpired?: boolean }> {
+  const res = await sb(`licenses?license_key=eq.${encodeURIComponent(key)}&select=status,trial_expires_at`);
+  if (!res.ok) return { valid: false };
   const rows = await res.json();
-  return Array.isArray(rows) && rows.length > 0 && rows[0].status === 'active';
+  if (!Array.isArray(rows) || rows.length === 0) return { valid: false };
+  const row = rows[0];
+  if (row.status !== 'active') return { valid: false };
+  if (row.trial_expires_at && new Date(row.trial_expires_at) < new Date()) {
+    return { valid: false, trialExpired: true };
+  }
+  return { valid: true };
 }
 
 function getAuthKey(req: NextRequest): string | null {
@@ -38,8 +44,8 @@ export async function GET(req: NextRequest) {
   const key = getAuthKey(req);
   if (!key) return NextResponse.json({ ok: false }, { status: 401 });
 
-  const valid = await verifyLicense(key);
-  if (!valid) return NextResponse.json({ ok: false }, { status: 401 });
+  const { valid, trialExpired } = await verifyLicense(key);
+  if (!valid) return NextResponse.json({ ok: false, trial_expired: trialExpired ?? false }, { status: 401 });
 
   // ?action=token → derive and return coach token for share links
   if (req.nextUrl.searchParams.get('action') === 'token') {
@@ -57,8 +63,8 @@ export async function POST(req: NextRequest) {
   const key = getAuthKey(req);
   if (!key) return NextResponse.json({ ok: false }, { status: 401 });
 
-  const valid = await verifyLicense(key);
-  if (!valid) return NextResponse.json({ ok: false }, { status: 401 });
+  const { valid, trialExpired } = await verifyLicense(key);
+  if (!valid) return NextResponse.json({ ok: false, trial_expired: trialExpired ?? false }, { status: 401 });
 
   const body = await req.json();
   const { state } = body;

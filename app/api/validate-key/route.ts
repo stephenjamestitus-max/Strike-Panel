@@ -40,6 +40,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, msg: 'This key has been revoked. Email corepanelv1@gmail.com.' });
     }
 
+    if (license.trial_expires_at && new Date(license.trial_expires_at) < new Date()) {
+      return NextResponse.json({
+        ok: false,
+        trial_expired: true,
+        msg: 'Your 14-day trial has ended. Get lifetime access at strikepanel.uk for $99 — one payment, no subscription.',
+      });
+    }
+
     if (license.activations >= MAX_ACTIVATIONS) {
       return NextResponse.json({
         ok: false,
