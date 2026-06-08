@@ -199,34 +199,16 @@ export async function POST(req: NextRequest) {
 
     const normalized = email.trim().toLowerCase();
 
-    // One trial per email — re-send key if already active
-    const existing = await sb(
-      `licenses?email=eq.${encodeURIComponent(normalized)}&platform=eq.trial&status=eq.active&select=license_key,trial_expires_at`
-    );
-    const rows = await existing.json();
-    if (Array.isArray(rows) && rows.length > 0) {
-      const row = rows[0];
-      if (row.trial_expires_at && new Date(row.trial_expires_at) > new Date()) {
-        // Re-send the existing key, don't create a new one
-        const expiresLabel = new Date(row.trial_expires_at)
-          .toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-        await send(normalized, 'Your StrikePanel trial key', emailDay0(row.license_key, expiresLabel));
-        return NextResponse.json({ ok: true });
-      }
-    }
-
     const key = makeKey();
     const now = new Date();
     const trialExpiresAt = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000).toISOString();
     const expiresLabel = trialEnd(now);
 
-    // Use return=minimal so RLS SELECT policy isn't required — just confirm the insert succeeded
     const res = await sb('licenses', {
       method: 'POST',
       headers: { Prefer: 'return=minimal' },
       body: JSON.stringify({
         license_key: key,
-        email: normalized,
         activations: 0,
         max_activations: 3,
         status: 'active',
