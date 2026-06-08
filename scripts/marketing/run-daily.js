@@ -199,12 +199,13 @@ Example CAPTION opening: He sits on the stool between rounds. Breathing wrong. E
 async function buildPost1() {
   const d = await buildPillar1();
   const date = new Date().toISOString().split('T')[0];
+  const bgImage = await getBackgroundPhoto('Frustration').catch(() => null);
   const slides = [
     { type: 'blackcard', line: d.line, sub: d.sub },
     { type: 'solution', headline: d.solHeadline, headlineCyan: d.solCyan, points: d.solPoints },
     { type: 'cta', stat: '$99', headline: 'ONE PAYMENT.', headlineCyan: 'NO SUBSCRIPTION.', body: 'Readiness scoring, fight camps, weight cuts, AI sessions. Up to 20 athletes. You own it forever.' },
   ];
-  const imagePaths = await generateCarousel(slides, `post1-${date}`);
+  const imagePaths = await generateCarousel(slides, `post1-${date}`, bgImage);
   return { imagePaths, caption: d.caption + `\n\n${HASHTAGS}`, pillarNum: 1, pillarName: 'Pain' };
 }
 
@@ -256,12 +257,13 @@ Example SOL_1: Most coaches run full load through week three of a six-week camp.
     const caption = raw.match(/CAPTION:\s*([\s\S]+?)$/)?.[1]?.trim();
     if (!caption || !sol1) throw new Error('parse failed');
     const date = new Date().toISOString().split('T')[0];
+    const bgImage = await getBackgroundPhoto('Fight Camp').catch(() => null);
     const slides = [
       { type: 'blackcard', line: hook, sub: `Understanding ${topic.topic}.` },
       { type: 'solution', headline: solHeadline, headlineCyan: solCyan, points: [sol1, sol2, sol3].filter(Boolean) },
       { type: 'cta', stat: '$99', headline: 'ONE PAYMENT.', headlineCyan: 'NO SUBSCRIPTION.', body: 'strikepanel tracks readiness, fight camps, weight cuts, and generates AI sessions. You own it forever.' },
     ];
-    const imagePaths = await generateCarousel(slides, `post2-${date}`);
+    const imagePaths = await generateCarousel(slides, `post2-${date}`, bgImage);
     return { imagePaths, caption: caption + `\n\n${HASHTAGS}`, pillarNum: 2, pillarName: 'Education' };
   } catch {
     return buildPost1().then(r => ({ ...r, pillarNum: 2, pillarName: 'Education (fallback)' }));
@@ -286,7 +288,8 @@ async function buildPost3() {
       ] },
     { type: 'cta', stat: '$99', headline: 'ONE PAYMENT.', headlineCyan: 'NO SUBSCRIPTION.', body: 'Up to 20 athletes. Readiness scored daily. Fight camps and weight cuts built in.' },
   ];
-  const imagePaths = await generateCarousel(slides, `post3-${date}`);
+  const bgImage = await getBackgroundPhoto('Social Proof').catch(() => null);
+  const imagePaths = await generateCarousel(slides, `post3-${date}`, bgImage);
   return { imagePaths, caption, pillarNum: 3, pillarName: 'Proof' };
 }
 
