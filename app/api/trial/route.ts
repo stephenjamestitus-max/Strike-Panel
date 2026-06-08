@@ -220,7 +220,7 @@ export async function POST(req: NextRequest) {
     if (!res.ok) {
       const err = await res.text();
       console.error('[trial] Supabase insert failed — status:', res.status, 'body:', err);
-      return NextResponse.json({ ok: false, msg: 'Could not create trial — try again.' }, { status: 500 });
+      return NextResponse.json({ ok: false, msg: err, debug: true }, { status: 500 });
     }
 
     // Fire-and-forget: schedule all 5 emails via Resend scheduled_at
