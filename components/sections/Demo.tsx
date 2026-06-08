@@ -1,3 +1,5 @@
+'use client'
+import { useState } from 'react'
 import FadeIn from '@/components/ui/FadeIn'
 
 const athletes = [
@@ -6,7 +8,36 @@ const athletes = [
   { name: 'MARCUS MENDEZ',  score: 34, color: '#ef4444', status: 'REST',    rec: 'LIGHT WORK — FLAG FOR REVIEW' },
 ]
 
+type State = 'idle' | 'loading' | 'success' | 'error'
+
 export default function Demo() {
+  const [email, setEmail]   = useState('')
+  const [state, setState]   = useState<State>('idle')
+  const [errMsg, setErrMsg] = useState('')
+
+  async function submit() {
+    const val = email.trim()
+    if (!val || !val.includes('@')) return
+    setState('loading')
+    try {
+      const res  = await fetch('/api/trial', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: val.toLowerCase() }),
+      })
+      const data = await res.json()
+      if (data.ok) {
+        setState('success')
+      } else {
+        setErrMsg(data.msg || 'Something went wrong — try again.')
+        setState('error')
+      }
+    } catch {
+      setErrMsg('Could not reach the server. Check your connection.')
+      setState('error')
+    }
+  }
+
   return (
     <section
       id="demo"
@@ -28,7 +59,7 @@ export default function Demo() {
       <div style={{ position: 'relative', zIndex: 1 }}>
         <FadeIn delay={0} y={40}>
           <div style={{ fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 4, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>
-            // LIVE DEMO
+            // FREE TRIAL
           </div>
           <h2 style={{
             fontFamily: 'var(--fk)', fontWeight: 900,
@@ -37,15 +68,15 @@ export default function Demo() {
             background: 'linear-gradient(180deg, #646973 0%, #BBCCD7 100%)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
           }}>
-            SEE IT IN ACTION
+            14 DAYS.<br />YOUR ATHLETES.<br />FULL ACCESS.
           </h2>
           <p style={{ fontFamily: 'var(--fb)', color: 'var(--muted)', marginBottom: 40, fontSize: 16 }}>
-            No signup required — explore the real app
+            Add your real fighters. Run real check-ins. No card required.
           </p>
         </FadeIn>
 
         <FadeIn delay={0.15} y={20}>
-          {/* Preview card */}
+          {/* App preview card */}
           <div style={{
             width: '100%', maxWidth: 740, margin: '0 auto',
             borderRadius: 16, overflow: 'hidden',
@@ -83,7 +114,6 @@ export default function Demo() {
                 display: 'flex', alignItems: 'center', gap: 16,
                 background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,.01)',
               }}>
-                {/* Score circle */}
                 <div style={{
                   width: 52, height: 52, borderRadius: '50%', flexShrink: 0,
                   border: `2px solid ${a.color}`,
@@ -94,8 +124,6 @@ export default function Demo() {
                     {a.score}
                   </span>
                 </div>
-
-                {/* Name + recommendation */}
                 <div style={{ flex: 1, textAlign: 'left' }}>
                   <div style={{ fontFamily: 'var(--fk)', fontWeight: 700, fontSize: 14, color: 'var(--cream)', letterSpacing: 1 }}>
                     {a.name}
@@ -104,8 +132,6 @@ export default function Demo() {
                     {a.rec}
                   </div>
                 </div>
-
-                {/* Status badge */}
                 <div style={{
                   fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 2,
                   color: a.color, border: `1px solid ${a.color}40`,
@@ -117,33 +143,108 @@ export default function Demo() {
               </div>
             ))}
 
-            {/* Gradient overlay + CTA */}
+            {/* Gradient fade + trial form */}
             <div style={{
               position: 'absolute', inset: 0,
-              background: 'linear-gradient(to top, rgba(4,7,15,.97) 0%, rgba(4,7,15,.5) 45%, transparent 75%)',
-              display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
-              paddingBottom: 36,
+              background: 'linear-gradient(to top, rgba(4,7,15,1) 0%, rgba(4,7,15,.92) 38%, rgba(4,7,15,.4) 62%, transparent 80%)',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end',
+              paddingBottom: 36, paddingLeft: 24, paddingRight: 24,
             }}>
-              <a
-                href="/demo"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 10,
-                  background: 'rgba(0,212,240,.08)',
-                  border: '1px solid rgba(0,212,240,.35)',
-                  borderRadius: 100,
-                  padding: '14px 32px',
-                  fontFamily: 'var(--fk)', fontWeight: 700, fontSize: 15,
-                  color: 'var(--accent)', letterSpacing: 1,
+
+              {state === 'idle' && (
+                <div style={{ width: '100%', maxWidth: 400 }}>
+                  <div style={{ display: 'flex', gap: 8 }}>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      onKeyDown={e => e.key === 'Enter' && submit()}
+                      placeholder="coach@yourgym.com"
+                      style={{
+                        flex: 1,
+                        background: 'rgba(8,14,30,0.9)',
+                        border: '1px solid rgba(0,212,240,0.3)',
+                        borderRadius: 8,
+                        padding: '12px 16px',
+                        color: 'var(--cream)',
+                        fontFamily: 'var(--fb)',
+                        fontSize: 13,
+                        outline: 'none',
+                        backdropFilter: 'blur(12px)',
+                        WebkitBackdropFilter: 'blur(12px)',
+                      }}
+                    />
+                    <button
+                      onClick={submit}
+                      style={{
+                        background: 'rgba(0,212,240,0.1)',
+                        border: '1px solid rgba(0,212,240,0.4)',
+                        borderRadius: 8,
+                        padding: '12px 20px',
+                        color: 'var(--accent)',
+                        fontFamily: 'var(--fk)',
+                        fontSize: 13,
+                        letterSpacing: 1,
+                        cursor: 'pointer',
+                        whiteSpace: 'nowrap',
+                        backdropFilter: 'blur(12px)',
+                        WebkitBackdropFilter: 'blur(12px)',
+                      }}
+                    >
+                      START FREE TRIAL
+                    </button>
+                  </div>
+                  <div style={{
+                    fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 2,
+                    color: 'rgba(122,133,160,0.5)', marginTop: 10, textAlign: 'center',
+                  }}>
+                    14 DAYS · NO CARD · FULL ACCESS · UP TO 20 ATHLETES
+                  </div>
+                </div>
+              )}
+
+              {state === 'loading' && (
+                <div style={{ fontFamily: 'var(--fm)', fontSize: 11, letterSpacing: 2, color: 'var(--muted)' }}>
+                  SENDING YOUR KEY…
+                </div>
+              )}
+
+              {state === 'success' && (
+                <div style={{
+                  background: 'rgba(0,212,240,0.06)',
+                  border: '1px solid rgba(0,212,240,0.2)',
+                  borderRadius: 10,
+                  padding: '20px 28px',
+                  textAlign: 'center',
                   backdropFilter: 'blur(12px)',
                   WebkitBackdropFilter: 'blur(12px)',
-                  transition: 'background .2s, border-color .2s',
-                }}
-              >
-                <span style={{ fontSize: 18 }}>▶</span>
-                Open Live Demo — No Signup
-              </a>
+                  width: '100%', maxWidth: 400,
+                }}>
+                  <div style={{ fontFamily: 'var(--fk)', fontSize: 20, letterSpacing: 2, color: 'var(--accent)', marginBottom: 8 }}>
+                    CHECK YOUR EMAIL
+                  </div>
+                  <div style={{ fontFamily: 'var(--fb)', fontSize: 13, color: 'var(--muted)', lineHeight: 1.65 }}>
+                    Your 14-day trial key is on its way.<br />
+                    Open strikepanel, paste the key, and you&apos;re live.
+                  </div>
+                </div>
+              )}
+
+              {state === 'error' && (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, width: '100%', maxWidth: 400 }}>
+                  <div style={{ fontFamily: 'var(--fb)', fontSize: 12, color: '#e05a5a' }}>{errMsg}</div>
+                  <button
+                    onClick={() => setState('idle')}
+                    style={{
+                      background: 'none', border: 'none', cursor: 'pointer',
+                      fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 2,
+                      color: 'var(--muted)', textDecoration: 'underline',
+                    }}
+                  >
+                    TRY AGAIN
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </FadeIn>
