@@ -220,10 +220,10 @@ export async function POST(req: NextRequest) {
     const trialExpiresAt = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000).toISOString();
     const expiresLabel = trialEnd(now);
 
-    // Store key — NOTE: the licenses table needs an `email` column (text, nullable).
-    // Add it via Supabase dashboard: ALTER TABLE licenses ADD COLUMN email text;
+    // Use return=minimal so RLS SELECT policy isn't required — just confirm the insert succeeded
     const res = await sb('licenses', {
       method: 'POST',
+      headers: { Prefer: 'return=minimal' },
       body: JSON.stringify({
         license_key: key,
         email: normalized,
@@ -237,7 +237,7 @@ export async function POST(req: NextRequest) {
 
     if (!res.ok) {
       const err = await res.text();
-      console.error('[trial] Supabase error:', err);
+      console.error('[trial] Supabase insert failed — status:', res.status, 'body:', err);
       return NextResponse.json({ ok: false, msg: 'Could not create trial — try again.' }, { status: 500 });
     }
 
