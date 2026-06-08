@@ -1,0 +1,1406 @@
+{
+  "generatedAt": "2026-06-08T09:21:50.741Z",
+  "accounts": {
+    "accounts": [
+      {
+        "_id": "6a0e0f75520992756d8bcdcf",
+        "platform": "instagram",
+        "profileId": {
+          "_id": "6a0dd67d3c136d00b69d9b7e",
+          "name": "Default"
+        },
+        "__v": 0,
+        "analyticsLastEnqueuedAt": "2026-06-08T07:55:29.623Z",
+        "analyticsLastRequestedAt": "2026-05-20T19:46:02.414Z",
+        "analyticsLastSyncError": null,
+        "analyticsLastSyncedAt": "2026-06-08T07:55:53.429Z",
+        "analyticsSyncFailureCount": 0,
+        "byokCredentials": {
+          "isActive": false
+        },
+        "createdAt": "2026-05-20T19:45:57.205Z",
+        "displayName": "StrikePanel",
+        "enabled": true,
+        "externalPostCount": 2,
+        "followersCount": 18,
+        "followersLastUpdated": "2026-06-08T04:17:01.985Z",
+        "intentionalDisconnectAt": null,
+        "isActive": true,
+        "lastSyncDurationMs": 1666,
+        "metadata": {
+          "scope": null,
+          "expires_in": 5184000,
+          "profileData": {
+            "id": "35590729463903594",
+            "username": "strikepanel",
+            "displayName": "StrikePanel",
+            "profilePicture": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/704032362_18133219132504655_1652172919381336702_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy42NTYuQzMifQ%3D%3D&_nc_ohc=baq6n9rjh4cQ7kNvwGhjHIL&_nc_oc=Adot__YfT3bxXlFZ1TPEEwQ2PkHlm8_6l-IabxtthvrCKWF5KEL4MojlzGcFE_JSII8&_nc_zt=24&_nc_ht=scontent-lhr6-1.cdninstagram.com&edm=AP4hL3IEAAAA&_nc_gid=7MNZezL-DZrqzRHCa6BbUQ&_nc_tpa=Q5bMBQHiCpTzhuPmnzFr1iuV4x8aDFy8KpgnLxiHrSOnhPPWp0PEFikA_2YWZNPWQOpnkbJRT6S64-6aHQ&oh=00_Af9tZY1VzBfxcAebei2m-6EGXnHGYpn9eGGbXEkU-McxfA&oe=6A2C230E",
+            "profileUrl": "https://instagram.com/strikepanel",
+            "followersCount": 18,
+            "bio": "⚡ Daily readiness scores for every athlete\n🥊 Fight camp · Weight cut · AI sessions\n📲 Know who to push. Know who to protect.\n🔗 Try the free demo ↓",
+            "extraData": {
+              "followsCount": 107,
+              "mediaCount": 12,
+              "accountType": "BUSINESS",
+              "instagramScopedId": "17841415139624541"
+            }
+          },
+          "connectedAt": "2026-05-20T19:45:57.170Z",
+          "instagramScopedId": "17841415139624541"
+        },
+        "parentAccountId": null,
+        "permissions": [
+          "instagram_business_basic",
+          "instagram_business_content_publish",
+          "instagram_business_manage_insights",
+          "instagram_business_manage_comments",
+          "instagram_business_manage_messages"
+        ],
+        "platformStatus": "active",
+        "platformStatusAt": null,
+        "platformStatusReason": null,
+        "platformUserId": "35590729463903594",
+        "profilePicture": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/704032362_18133219132504655_1652172919381336702_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy42NTYuQzMifQ%3D%3D&_nc_ohc=baq6n9rjh4cQ7kNvwGhjHIL&_nc_oc=Adot__YfT3bxXlFZ1TPEEwQ2PkHlm8_6l-IabxtthvrCKWF5KEL4MojlzGcFE_JSII8&_nc_zt=24&_nc_ht=scontent-lhr6-1.cdninstagram.com&edm=AP4hL3IEAAAA&_nc_gid=7MNZezL-DZrqzRHCa6BbUQ&_nc_tpa=Q5bMBQHiCpTzhuPmnzFr1iuV4x8aDFy8KpgnLxiHrSOnhPPWp0PEFikA_2YWZNPWQOpnkbJRT6S64-6aHQ&oh=00_Af9tZY1VzBfxcAebei2m-6EGXnHGYpn9eGGbXEkU-McxfA&oe=6A2C230E",
+        "profileUrl": "https://instagram.com/strikepanel",
+        "rateLimitCount": 0,
+        "tokenExpiresAt": "2026-07-19T19:45:57.169Z",
+        "updatedAt": "2026-06-08T07:55:53.429Z",
+        "userId": "6a0dd67c3c136d00b69d9b79",
+        "username": "strikepanel",
+        "xCapabilities": {
+          "analytics": false,
+          "inbox": false
+        },
+        "xCapabilitiesAutoDisabled": {
+          "analytics": false,
+          "inbox": false
+        },
+        "youtubeCanUploadThumbnails": null,
+        "youtubeThumbnailCapCheckedAt": null,
+        "adsStatus": "connected"
+      }
+    ],
+    "hasAnalyticsAccess": true
+  },
+  "followerStats": {
+    "accounts": [
+      {
+        "_id": "6a0e0f75520992756d8bcdcf",
+        "platform": "instagram",
+        "username": "strikepanel",
+        "displayName": "StrikePanel",
+        "profilePicture": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/704032362_18133219132504655_1652172919381336702_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy42NTYuQzMifQ%3D%3D&_nc_ohc=baq6n9rjh4cQ7kNvwGhjHIL&_nc_oc=Adot__YfT3bxXlFZ1TPEEwQ2PkHlm8_6l-IabxtthvrCKWF5KEL4MojlzGcFE_JSII8&_nc_zt=24&_nc_ht=scontent-lhr6-1.cdninstagram.com&edm=AP4hL3IEAAAA&_nc_gid=7MNZezL-DZrqzRHCa6BbUQ&_nc_tpa=Q5bMBQHiCpTzhuPmnzFr1iuV4x8aDFy8KpgnLxiHrSOnhPPWp0PEFikA_2YWZNPWQOpnkbJRT6S64-6aHQ&oh=00_Af9tZY1VzBfxcAebei2m-6EGXnHGYpn9eGGbXEkU-McxfA&oe=6A2C230E",
+        "currentFollowers": 18,
+        "lastUpdated": "2026-06-08T04:17:01.985Z",
+        "growth": 10,
+        "growthPercentage": 125,
+        "dataPoints": 19,
+        "accountStats": {
+          "followsCount": 107,
+          "mediaCount": 12,
+          "accountType": "BUSINESS",
+          "instagramScopedId": "17841415139624541"
+        }
+      }
+    ],
+    "stats": {
+      "6a0e0f75520992756d8bcdcf": [
+        {
+          "date": "2026-05-21",
+          "followers": 8
+        },
+        {
+          "date": "2026-05-22",
+          "followers": 8
+        },
+        {
+          "date": "2026-05-23",
+          "followers": 9
+        },
+        {
+          "date": "2026-05-24",
+          "followers": 10
+        },
+        {
+          "date": "2026-05-25",
+          "followers": 11
+        },
+        {
+          "date": "2026-05-26",
+          "followers": 12
+        },
+        {
+          "date": "2026-05-27",
+          "followers": 16
+        },
+        {
+          "date": "2026-05-28",
+          "followers": 17
+        },
+        {
+          "date": "2026-05-29",
+          "followers": 18
+        },
+        {
+          "date": "2026-05-30",
+          "followers": 19
+        },
+        {
+          "date": "2026-05-31",
+          "followers": 18
+        },
+        {
+          "date": "2026-06-01",
+          "followers": 18
+        },
+        {
+          "date": "2026-06-02",
+          "followers": 17
+        },
+        {
+          "date": "2026-06-03",
+          "followers": 18
+        },
+        {
+          "date": "2026-06-04",
+          "followers": 18
+        },
+        {
+          "date": "2026-06-05",
+          "followers": 18
+        },
+        {
+          "date": "2026-06-06",
+          "followers": 18
+        },
+        {
+          "date": "2026-06-07",
+          "followers": 18
+        },
+        {
+          "date": "2026-06-08",
+          "followers": 18
+        }
+      ]
+    },
+    "dateRange": {
+      "from": "2025-01-01T00:00:00.000Z",
+      "to": "2026-06-08T23:59:59.999Z"
+    },
+    "granularity": "daily"
+  },
+  "insights": {
+    "success": true,
+    "accountId": "6a0e0f75520992756d8bcdcf",
+    "platform": "instagram",
+    "dateRange": {
+      "since": "2026-05-09",
+      "until": "2026-06-08"
+    },
+    "metricType": "total_value",
+    "metrics": {
+      "reach": {
+        "total": 279
+      },
+      "views": {
+        "total": 605
+      },
+      "accounts_engaged": {
+        "total": 6
+      },
+      "total_interactions": {
+        "total": 29
+      }
+    },
+    "dataDelay": "Data may be delayed up to 48 hours"
+  },
+  "followerHistory": {
+    "success": true,
+    "accountId": "6a0e0f75520992756d8bcdcf",
+    "platform": "instagram",
+    "dateRange": {
+      "since": "2026-05-09",
+      "until": "2026-06-08"
+    },
+    "metricType": "total_value",
+    "metrics": {
+      "follower_count": {
+        "total": 18
+      },
+      "followers_gained": {
+        "total": 12
+      },
+      "followers_lost": {
+        "total": 2
+      }
+    },
+    "dataDelay": "Data is captured by Zernio's daily snapshotter. Up to 24 hours old."
+  },
+  "demographics": {
+    "success": true,
+    "accountId": "6a0e0f75520992756d8bcdcf",
+    "platform": "instagram",
+    "metric": "follower_demographics",
+    "timeframe": "this_month",
+    "demographics": {
+      "age": [],
+      "city": [],
+      "country": [],
+      "gender": []
+    },
+    "note": "Demographics show top 45 entries per dimension. Requires 100+ followers."
+  },
+  "posts": {
+    "posts": [
+      {
+        "_id": "6a2522fafefca32f40bb959b",
+        "userId": {
+          "_id": "6a0dd67c3c136d00b69d9b79",
+          "name": "CorePanel",
+          "email": "corepanelv1@gmail.com",
+          "image": "https://lh3.googleusercontent.com/a/ACg8ocKW8QQmLLjjmBb9S0yq0l9TYtXseyH0upobEtCuA3ChWbUEHA=s96-c"
+        },
+        "title": "",
+        "content": " ",
+        "mediaItems": [
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/ns8HyQQK/story-2026-06-07.png",
+            "_id": "6a2522fafefca32f40bb959c"
+          }
+        ],
+        "platforms": [
+          {
+            "platform": "instagram",
+            "accountId": {
+              "_id": "6a0e0f75520992756d8bcdcf",
+              "platform": "instagram",
+              "profileId": "6a0dd67d3c136d00b69d9b7e",
+              "displayName": "StrikePanel",
+              "isActive": true,
+              "profilePicture": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/704032362_18133219132504655_1652172919381336702_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy42NTYuQzMifQ%3D%3D&_nc_ohc=baq6n9rjh4cQ7kNvwGhjHIL&_nc_oc=Adot__YfT3bxXlFZ1TPEEwQ2PkHlm8_6l-IabxtthvrCKWF5KEL4MojlzGcFE_JSII8&_nc_zt=24&_nc_ht=scontent-lhr6-1.cdninstagram.com&edm=AP4hL3IEAAAA&_nc_gid=7MNZezL-DZrqzRHCa6BbUQ&_nc_tpa=Q5bMBQHiCpTzhuPmnzFr1iuV4x8aDFy8KpgnLxiHrSOnhPPWp0PEFikA_2YWZNPWQOpnkbJRT6S64-6aHQ&oh=00_Af9tZY1VzBfxcAebei2m-6EGXnHGYpn9eGGbXEkU-McxfA&oe=6A2C230E",
+              "username": "strikepanel"
+            },
+            "profileId": "6a0dd67d3c136d00b69d9b7e",
+            "customMedia": [],
+            "scheduledFor": "2026-06-07T07:51:22.254Z",
+            "platformSpecificData": {
+              "contentType": "story",
+              "__platformUserIdSnapshot": "35590729463903594",
+              "__usernameSnapshot": "strikepanel",
+              "publishingStarted": null,
+              "lastPublishStage": "awaiting-finalize",
+              "pendingContainerId": null
+            },
+            "status": "published",
+            "publishAttempts": 0,
+            "contentHash": "0831bfee407d86078012a55896074268",
+            "_id": "6a2522fafefca32f40bb959d",
+            "platformPostId": "18020938223843941",
+            "platformPostUrl": "https://www.instagram.com/stories/strikepanel/3914113296718420675",
+            "publishedAt": "2026-06-07T07:51:40.202Z"
+          }
+        ],
+        "scheduledFor": "2026-06-07T07:51:22.254Z",
+        "timezone": "UTC",
+        "status": "published",
+        "tags": [],
+        "hashtags": [],
+        "mentions": [],
+        "visibility": "public",
+        "crosspostingEnabled": true,
+        "metadata": {
+          "usageCounted": true
+        },
+        "publishAttempts": 0,
+        "contentHash": "0831bfee407d86078012a55896074268",
+        "recycling": {
+          "enabled": false,
+          "gapFreq": "month",
+          "recycleCount": 0,
+          "contentVariations": [],
+          "contentVariationIndex": 0
+        },
+        "createdAt": "2026-06-07T07:51:22.500Z",
+        "updatedAt": "2026-06-07T07:51:40.324Z",
+        "__v": 0,
+        "publishingClaimedAt": "2026-06-07T07:51:22.590Z",
+        "origin": "zernio"
+      },
+      {
+        "_id": "6a2522306fb0688a1efe38b3",
+        "userId": {
+          "_id": "6a0dd67c3c136d00b69d9b79",
+          "name": "CorePanel",
+          "email": "corepanelv1@gmail.com",
+          "image": "https://lh3.googleusercontent.com/a/ACg8ocKW8QQmLLjjmBb9S0yq0l9TYtXseyH0upobEtCuA3ChWbUEHA=s96-c"
+        },
+        "title": "",
+        "content": "You are the coach who uses a rubbed out whiteboard. \nYou switch to a system that tracks every detail. \nThe system corrects your gut when it is wrong.\n\n#boxingcoach #mmacoach #combatsportscoach #athletereadiness #fightcamp #strengthandconditioning #bjjcoach #muaythaicoach #combatsports #coachlife #periodization #athletemanagement #performancecoach #fightteam #coachingtools",
+        "mediaItems": [
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/SDYWv0C4/slide-1.png",
+            "_id": "6a2522306fb0688a1efe38b4"
+          },
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/zhXgB6rx/slide-2.png",
+            "_id": "6a2522306fb0688a1efe38b5"
+          },
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/RTMZDyXc/slide-3.png",
+            "_id": "6a2522306fb0688a1efe38b6"
+          }
+        ],
+        "platforms": [
+          {
+            "platform": "instagram",
+            "accountId": {
+              "_id": "6a0e0f75520992756d8bcdcf",
+              "platform": "instagram",
+              "profileId": "6a0dd67d3c136d00b69d9b7e",
+              "displayName": "StrikePanel",
+              "isActive": true,
+              "profilePicture": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/704032362_18133219132504655_1652172919381336702_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy42NTYuQzMifQ%3D%3D&_nc_ohc=baq6n9rjh4cQ7kNvwGhjHIL&_nc_oc=Adot__YfT3bxXlFZ1TPEEwQ2PkHlm8_6l-IabxtthvrCKWF5KEL4MojlzGcFE_JSII8&_nc_zt=24&_nc_ht=scontent-lhr6-1.cdninstagram.com&edm=AP4hL3IEAAAA&_nc_gid=7MNZezL-DZrqzRHCa6BbUQ&_nc_tpa=Q5bMBQHiCpTzhuPmnzFr1iuV4x8aDFy8KpgnLxiHrSOnhPPWp0PEFikA_2YWZNPWQOpnkbJRT6S64-6aHQ&oh=00_Af9tZY1VzBfxcAebei2m-6EGXnHGYpn9eGGbXEkU-McxfA&oe=6A2C230E",
+              "username": "strikepanel"
+            },
+            "profileId": "6a0dd67d3c136d00b69d9b7e",
+            "customMedia": [],
+            "scheduledFor": "2026-06-07T07:48:00.114Z",
+            "platformSpecificData": {
+              "__platformUserIdSnapshot": "35590729463903594",
+              "__usernameSnapshot": "strikepanel",
+              "publishingStarted": null,
+              "lastPublishStage": "awaiting-finalize",
+              "pendingContainerId": null
+            },
+            "status": "published",
+            "publishAttempts": 0,
+            "contentHash": "78fe5a8e831ca2b64b5dbc46efec0549",
+            "_id": "6a2522306fb0688a1efe38b7",
+            "platformPostId": "18149984392435401",
+            "platformPostUrl": "https://www.instagram.com/p/DZRuAimChBj/",
+            "publishedAt": "2026-06-07T07:49:05.474Z"
+          }
+        ],
+        "scheduledFor": "2026-06-07T07:48:00.114Z",
+        "timezone": "UTC",
+        "status": "published",
+        "tags": [],
+        "hashtags": [],
+        "mentions": [],
+        "visibility": "public",
+        "crosspostingEnabled": true,
+        "metadata": {
+          "usageCounted": true
+        },
+        "publishAttempts": 0,
+        "contentHash": "78fe5a8e831ca2b64b5dbc46efec0549",
+        "recycling": {
+          "enabled": false,
+          "gapFreq": "month",
+          "recycleCount": 0,
+          "contentVariations": [],
+          "contentVariationIndex": 0
+        },
+        "createdAt": "2026-06-07T07:48:00.817Z",
+        "updatedAt": "2026-06-07T07:49:05.610Z",
+        "__v": 0,
+        "publishingClaimedAt": "2026-06-07T07:48:00.919Z",
+        "origin": "zernio"
+      },
+      {
+        "_id": "6a2133c15d43b806e8fd56db",
+        "userId": {
+          "_id": "6a0dd67c3c136d00b69d9b79",
+          "name": "CorePanel",
+          "email": "corepanelv1@gmail.com",
+          "image": "https://lh3.googleusercontent.com/a/ACg8ocKW8QQmLLjjmBb9S0yq0l9TYtXseyH0upobEtCuA3ChWbUEHA=s96-c"
+        },
+        "title": "",
+        "content": " ",
+        "mediaItems": [
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/fdyBVDkk/story-2026-06-04.png",
+            "_id": "6a2133c15d43b806e8fd56dc"
+          }
+        ],
+        "platforms": [
+          {
+            "platform": "instagram",
+            "accountId": {
+              "_id": "6a0e0f75520992756d8bcdcf",
+              "platform": "instagram",
+              "profileId": "6a0dd67d3c136d00b69d9b7e",
+              "displayName": "StrikePanel",
+              "isActive": true,
+              "profilePicture": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/704032362_18133219132504655_1652172919381336702_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy42NTYuQzMifQ%3D%3D&_nc_ohc=baq6n9rjh4cQ7kNvwGhjHIL&_nc_oc=Adot__YfT3bxXlFZ1TPEEwQ2PkHlm8_6l-IabxtthvrCKWF5KEL4MojlzGcFE_JSII8&_nc_zt=24&_nc_ht=scontent-lhr6-1.cdninstagram.com&edm=AP4hL3IEAAAA&_nc_gid=7MNZezL-DZrqzRHCa6BbUQ&_nc_tpa=Q5bMBQHiCpTzhuPmnzFr1iuV4x8aDFy8KpgnLxiHrSOnhPPWp0PEFikA_2YWZNPWQOpnkbJRT6S64-6aHQ&oh=00_Af9tZY1VzBfxcAebei2m-6EGXnHGYpn9eGGbXEkU-McxfA&oe=6A2C230E",
+              "username": "strikepanel"
+            },
+            "profileId": "6a0dd67d3c136d00b69d9b7e",
+            "customMedia": [],
+            "scheduledFor": "2026-06-04T08:13:53.137Z",
+            "platformSpecificData": {
+              "contentType": "story",
+              "__platformUserIdSnapshot": "35590729463903594",
+              "__usernameSnapshot": "strikepanel",
+              "publishingStarted": null,
+              "lastPublishStage": "awaiting-finalize",
+              "pendingContainerId": null
+            },
+            "status": "published",
+            "publishAttempts": 0,
+            "contentHash": "f071cbf081d7a655efc19fef86db33b8",
+            "_id": "6a2133c15d43b806e8fd56dd",
+            "platformPostId": "18072020915324470",
+            "platformPostUrl": "https://www.instagram.com/stories/strikepanel/3911950315955951289",
+            "publishedAt": "2026-06-04T08:14:17.594Z"
+          }
+        ],
+        "scheduledFor": "2026-06-04T08:13:53.137Z",
+        "timezone": "UTC",
+        "status": "published",
+        "tags": [],
+        "hashtags": [],
+        "mentions": [],
+        "visibility": "public",
+        "crosspostingEnabled": true,
+        "metadata": {
+          "usageCounted": true
+        },
+        "publishAttempts": 0,
+        "contentHash": "f071cbf081d7a655efc19fef86db33b8",
+        "recycling": {
+          "enabled": false,
+          "gapFreq": "month",
+          "recycleCount": 0,
+          "contentVariations": [],
+          "contentVariationIndex": 0
+        },
+        "createdAt": "2026-06-04T08:13:53.324Z",
+        "updatedAt": "2026-06-04T08:14:17.757Z",
+        "__v": 0,
+        "publishingClaimedAt": "2026-06-04T08:13:53.407Z",
+        "origin": "zernio"
+      },
+      {
+        "_id": "6a21339be5f70a2a68a3b6a7",
+        "userId": {
+          "_id": "6a0dd67c3c136d00b69d9b79",
+          "name": "CorePanel",
+          "email": "corepanelv1@gmail.com",
+          "image": "https://lh3.googleusercontent.com/a/ACg8ocKW8QQmLLjjmBb9S0yq0l9TYtXseyH0upobEtCuA3ChWbUEHA=s96-c"
+        },
+        "title": "",
+        "content": "Most coaches walk in and treat it like a uniform.\n\nEvery athlete gets the same session. Same load. Same intensity. Different bodies, same plan.\n\nReyes is at 91 today. He gets pushed hard. Lake is at 67. Technical work at 70 percent. Marcus is at 34. Active recovery and a quiet conversation.\n\nThirty seconds on one screen. Every decision made before anyone walks through the door.\n\nThe coaches doing this are not smarter. They just have the right tool.\n\n#boxingcoach #mmacoach #combatsportscoach #athletereadiness #fightcamp #strengthandconditioning #bjjcoach #muaythaicoach #combatsports #coachlife #periodization #athletemanagement #performancecoach #fightteam #coachingtools",
+        "mediaItems": [
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/hJGnRw1F/slide-1.png",
+            "_id": "6a21339be5f70a2a68a3b6a8"
+          },
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/mrX5BrnG/slide-2.png",
+            "_id": "6a21339be5f70a2a68a3b6a9"
+          },
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/r29VDBJP/slide-3.png",
+            "_id": "6a21339be5f70a2a68a3b6aa"
+          }
+        ],
+        "platforms": [
+          {
+            "platform": "instagram",
+            "accountId": {
+              "_id": "6a0e0f75520992756d8bcdcf",
+              "platform": "instagram",
+              "profileId": "6a0dd67d3c136d00b69d9b7e",
+              "displayName": "StrikePanel",
+              "isActive": true,
+              "profilePicture": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/704032362_18133219132504655_1652172919381336702_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy42NTYuQzMifQ%3D%3D&_nc_ohc=baq6n9rjh4cQ7kNvwGhjHIL&_nc_oc=Adot__YfT3bxXlFZ1TPEEwQ2PkHlm8_6l-IabxtthvrCKWF5KEL4MojlzGcFE_JSII8&_nc_zt=24&_nc_ht=scontent-lhr6-1.cdninstagram.com&edm=AP4hL3IEAAAA&_nc_gid=7MNZezL-DZrqzRHCa6BbUQ&_nc_tpa=Q5bMBQHiCpTzhuPmnzFr1iuV4x8aDFy8KpgnLxiHrSOnhPPWp0PEFikA_2YWZNPWQOpnkbJRT6S64-6aHQ&oh=00_Af9tZY1VzBfxcAebei2m-6EGXnHGYpn9eGGbXEkU-McxfA&oe=6A2C230E",
+              "username": "strikepanel"
+            },
+            "profileId": "6a0dd67d3c136d00b69d9b7e",
+            "customMedia": [],
+            "scheduledFor": "2026-06-04T08:13:14.799Z",
+            "platformSpecificData": {
+              "__platformUserIdSnapshot": "35590729463903594",
+              "__usernameSnapshot": "strikepanel",
+              "publishingStarted": null,
+              "lastPublishStage": "awaiting-finalize",
+              "pendingContainerId": null
+            },
+            "status": "published",
+            "publishAttempts": 0,
+            "contentHash": "7116ab31d61adf6224d9723345f66ccf",
+            "_id": "6a21339be5f70a2a68a3b6ab",
+            "platformPostId": "18205720048356529",
+            "platformPostUrl": "https://www.instagram.com/p/DZKCfAtjsi4/",
+            "publishedAt": "2026-06-04T08:13:53.502Z"
+          }
+        ],
+        "scheduledFor": "2026-06-04T08:13:14.799Z",
+        "timezone": "UTC",
+        "status": "published",
+        "tags": [],
+        "hashtags": [],
+        "mentions": [],
+        "visibility": "public",
+        "crosspostingEnabled": true,
+        "metadata": {
+          "usageCounted": true
+        },
+        "publishAttempts": 0,
+        "contentHash": "7116ab31d61adf6224d9723345f66ccf",
+        "recycling": {
+          "enabled": false,
+          "gapFreq": "month",
+          "recycleCount": 0,
+          "contentVariations": [],
+          "contentVariationIndex": 0
+        },
+        "createdAt": "2026-06-04T08:13:15.195Z",
+        "updatedAt": "2026-06-04T08:13:53.649Z",
+        "__v": 0,
+        "publishingClaimedAt": "2026-06-04T08:13:15.256Z",
+        "origin": "zernio"
+      },
+      {
+        "_id": "6a1d703ee7d7bd32df2e3d4c",
+        "userId": {
+          "_id": "6a0dd67c3c136d00b69d9b79",
+          "name": "CorePanel",
+          "email": "corepanelv1@gmail.com",
+          "image": "https://lh3.googleusercontent.com/a/ACg8ocKW8QQmLLjjmBb9S0yq0l9TYtXseyH0upobEtCuA3ChWbUEHA=s96-c"
+        },
+        "title": "",
+        "content": " ",
+        "mediaItems": [
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/bg0HHLCP/story-2026-06-01.png",
+            "_id": "6a1d703ee7d7bd32df2e3d4d"
+          }
+        ],
+        "platforms": [
+          {
+            "platform": "instagram",
+            "accountId": {
+              "_id": "6a0e0f75520992756d8bcdcf",
+              "platform": "instagram",
+              "profileId": "6a0dd67d3c136d00b69d9b7e",
+              "displayName": "StrikePanel",
+              "isActive": true,
+              "profilePicture": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/704032362_18133219132504655_1652172919381336702_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy42NTYuQzMifQ%3D%3D&_nc_ohc=baq6n9rjh4cQ7kNvwGhjHIL&_nc_oc=Adot__YfT3bxXlFZ1TPEEwQ2PkHlm8_6l-IabxtthvrCKWF5KEL4MojlzGcFE_JSII8&_nc_zt=24&_nc_ht=scontent-lhr6-1.cdninstagram.com&edm=AP4hL3IEAAAA&_nc_gid=7MNZezL-DZrqzRHCa6BbUQ&_nc_tpa=Q5bMBQHiCpTzhuPmnzFr1iuV4x8aDFy8KpgnLxiHrSOnhPPWp0PEFikA_2YWZNPWQOpnkbJRT6S64-6aHQ&oh=00_Af9tZY1VzBfxcAebei2m-6EGXnHGYpn9eGGbXEkU-McxfA&oe=6A2C230E",
+              "username": "strikepanel"
+            },
+            "profileId": "6a0dd67d3c136d00b69d9b7e",
+            "customMedia": [],
+            "scheduledFor": "2026-06-01T11:42:54.340Z",
+            "platformSpecificData": {
+              "contentType": "story",
+              "__platformUserIdSnapshot": "35590729463903594",
+              "__usernameSnapshot": "strikepanel",
+              "publishingStarted": null,
+              "lastPublishStage": "awaiting-finalize",
+              "pendingContainerId": null
+            },
+            "status": "published",
+            "publishAttempts": 0,
+            "contentHash": "a0c147d5bb32b6d6cefd6959e59fa659",
+            "_id": "6a1d703ee7d7bd32df2e3d4e",
+            "platformPostId": "18153976033474003",
+            "platformPostUrl": "https://www.instagram.com/stories/strikepanel/3909881164710194188",
+            "publishedAt": "2026-06-01T11:43:14.069Z"
+          }
+        ],
+        "scheduledFor": "2026-06-01T11:42:54.340Z",
+        "timezone": "UTC",
+        "status": "published",
+        "tags": [],
+        "hashtags": [],
+        "mentions": [],
+        "visibility": "public",
+        "crosspostingEnabled": true,
+        "metadata": {
+          "usageCounted": true
+        },
+        "publishAttempts": 0,
+        "contentHash": "a0c147d5bb32b6d6cefd6959e59fa659",
+        "recycling": {
+          "enabled": false,
+          "gapFreq": "month",
+          "recycleCount": 0,
+          "contentVariations": [],
+          "contentVariationIndex": 0
+        },
+        "createdAt": "2026-06-01T11:42:54.495Z",
+        "updatedAt": "2026-06-01T11:43:14.266Z",
+        "__v": 0,
+        "publishingClaimedAt": "2026-06-01T11:42:54.557Z",
+        "origin": "zernio"
+      },
+      {
+        "_id": "6a1d7019947f41ccbf20c37e",
+        "userId": {
+          "_id": "6a0dd67c3c136d00b69d9b79",
+          "name": "CorePanel",
+          "email": "corepanelv1@gmail.com",
+          "image": "https://lh3.googleusercontent.com/a/ACg8ocKW8QQmLLjjmBb9S0yq0l9TYtXseyH0upobEtCuA3ChWbUEHA=s96-c"
+        },
+        "title": "",
+        "content": "You were standing at the gym and wrote notes on a napkin. \nThose notes are gone now. \nYou had no system to store them. \nThe coach who has a system already knew before walking in.\n\n#boxingcoach #mmacoach #combatsportscoach #athletereadiness #fightcamp #strengthandconditioning #bjjcoach #muaythaicoach #combatsports #coachlife #periodization #athletemanagement #performancecoach #fightteam #coachingtools",
+        "mediaItems": [
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/bgW6tJcL/slide-1.png",
+            "_id": "6a1d7019947f41ccbf20c37f"
+          },
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/ymVspNLp/slide-2.png",
+            "_id": "6a1d7019947f41ccbf20c380"
+          },
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/KcCv3nXy/slide-3.png",
+            "_id": "6a1d7019947f41ccbf20c381"
+          }
+        ],
+        "platforms": [
+          {
+            "platform": "instagram",
+            "accountId": {
+              "_id": "6a0e0f75520992756d8bcdcf",
+              "platform": "instagram",
+              "profileId": "6a0dd67d3c136d00b69d9b7e",
+              "displayName": "StrikePanel",
+              "isActive": true,
+              "profilePicture": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/704032362_18133219132504655_1652172919381336702_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy42NTYuQzMifQ%3D%3D&_nc_ohc=baq6n9rjh4cQ7kNvwGhjHIL&_nc_oc=Adot__YfT3bxXlFZ1TPEEwQ2PkHlm8_6l-IabxtthvrCKWF5KEL4MojlzGcFE_JSII8&_nc_zt=24&_nc_ht=scontent-lhr6-1.cdninstagram.com&edm=AP4hL3IEAAAA&_nc_gid=7MNZezL-DZrqzRHCa6BbUQ&_nc_tpa=Q5bMBQHiCpTzhuPmnzFr1iuV4x8aDFy8KpgnLxiHrSOnhPPWp0PEFikA_2YWZNPWQOpnkbJRT6S64-6aHQ&oh=00_Af9tZY1VzBfxcAebei2m-6EGXnHGYpn9eGGbXEkU-McxfA&oe=6A2C230E",
+              "username": "strikepanel"
+            },
+            "profileId": "6a0dd67d3c136d00b69d9b7e",
+            "customMedia": [],
+            "scheduledFor": "2026-06-01T11:42:16.843Z",
+            "platformSpecificData": {
+              "__platformUserIdSnapshot": "35590729463903594",
+              "__usernameSnapshot": "strikepanel",
+              "publishingStarted": null,
+              "lastPublishStage": "awaiting-finalize",
+              "pendingContainerId": null
+            },
+            "status": "published",
+            "publishAttempts": 0,
+            "contentHash": "2cd51338efb148b50821fd27b74e5548",
+            "_id": "6a1d7019947f41ccbf20c382",
+            "platformPostId": "18179161645395293",
+            "platformPostUrl": "https://www.instagram.com/p/DZCsBOJAGBt/",
+            "publishedAt": "2026-06-01T11:42:57.722Z"
+          }
+        ],
+        "scheduledFor": "2026-06-01T11:42:16.843Z",
+        "timezone": "UTC",
+        "status": "published",
+        "tags": [],
+        "hashtags": [],
+        "mentions": [],
+        "visibility": "public",
+        "crosspostingEnabled": true,
+        "metadata": {
+          "usageCounted": true
+        },
+        "publishAttempts": 0,
+        "contentHash": "2cd51338efb148b50821fd27b74e5548",
+        "recycling": {
+          "enabled": false,
+          "gapFreq": "month",
+          "recycleCount": 0,
+          "contentVariations": [],
+          "contentVariationIndex": 0
+        },
+        "createdAt": "2026-06-01T11:42:18.275Z",
+        "updatedAt": "2026-06-01T11:42:57.988Z",
+        "__v": 0,
+        "publishingClaimedAt": "2026-06-01T11:42:18.354Z",
+        "origin": "zernio"
+      },
+      {
+        "_id": "6a1307b0fa8b477a299ce22b",
+        "userId": {
+          "_id": "6a0dd67c3c136d00b69d9b79",
+          "name": "CorePanel",
+          "email": "corepanelv1@gmail.com",
+          "image": "https://lh3.googleusercontent.com/a/ACg8ocKW8QQmLLjjmBb9S0yq0l9TYtXseyH0upobEtCuA3ChWbUEHA=s96-c"
+        },
+        "title": "",
+        "content": " ",
+        "mediaItems": [
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/84Rh1wR0/story-2026-05-24.png",
+            "_id": "6a1307b0fa8b477a299ce22c"
+          }
+        ],
+        "platforms": [
+          {
+            "platform": "instagram",
+            "accountId": {
+              "_id": "6a0e0f75520992756d8bcdcf",
+              "platform": "instagram",
+              "profileId": "6a0dd67d3c136d00b69d9b7e",
+              "displayName": "StrikePanel",
+              "isActive": true,
+              "profilePicture": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/704032362_18133219132504655_1652172919381336702_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy42NTYuQzMifQ%3D%3D&_nc_ohc=baq6n9rjh4cQ7kNvwGhjHIL&_nc_oc=Adot__YfT3bxXlFZ1TPEEwQ2PkHlm8_6l-IabxtthvrCKWF5KEL4MojlzGcFE_JSII8&_nc_zt=24&_nc_ht=scontent-lhr6-1.cdninstagram.com&edm=AP4hL3IEAAAA&_nc_gid=7MNZezL-DZrqzRHCa6BbUQ&_nc_tpa=Q5bMBQHiCpTzhuPmnzFr1iuV4x8aDFy8KpgnLxiHrSOnhPPWp0PEFikA_2YWZNPWQOpnkbJRT6S64-6aHQ&oh=00_Af9tZY1VzBfxcAebei2m-6EGXnHGYpn9eGGbXEkU-McxfA&oe=6A2C230E",
+              "username": "strikepanel"
+            },
+            "profileId": "6a0dd67d3c136d00b69d9b7e",
+            "customMedia": [],
+            "scheduledFor": "2026-05-24T14:14:08.403Z",
+            "platformSpecificData": {
+              "contentType": "story",
+              "__platformUserIdSnapshot": "35590729463903594",
+              "__usernameSnapshot": "strikepanel",
+              "publishingStarted": null,
+              "lastPublishStage": "awaiting-finalize",
+              "pendingContainerId": null
+            },
+            "status": "published",
+            "publishAttempts": 0,
+            "contentHash": "e4c0df8ad1c90bfddda6e4942481ee35",
+            "_id": "6a1307b0fa8b477a299ce22d",
+            "platformPostId": "18012992633895424",
+            "platformPostUrl": "https://www.instagram.com/stories/strikepanel/3904159078498964175",
+            "publishedAt": "2026-05-24T14:14:21.814Z"
+          }
+        ],
+        "scheduledFor": "2026-05-24T14:14:08.403Z",
+        "timezone": "UTC",
+        "status": "published",
+        "tags": [],
+        "hashtags": [],
+        "mentions": [],
+        "visibility": "public",
+        "crosspostingEnabled": true,
+        "metadata": {
+          "usageCounted": true
+        },
+        "publishAttempts": 0,
+        "contentHash": "e4c0df8ad1c90bfddda6e4942481ee35",
+        "recycling": {
+          "enabled": false,
+          "gapFreq": "month",
+          "recycleCount": 0,
+          "contentVariations": [],
+          "contentVariationIndex": 0
+        },
+        "createdAt": "2026-05-24T14:14:08.614Z",
+        "updatedAt": "2026-05-24T14:14:21.915Z",
+        "__v": 0,
+        "publishingClaimedAt": "2026-05-24T14:14:08.679Z",
+        "origin": "zernio"
+      },
+      {
+        "_id": "6a13078ba77b1f6a5b9221ed",
+        "userId": {
+          "_id": "6a0dd67c3c136d00b69d9b79",
+          "name": "CorePanel",
+          "email": "corepanelv1@gmail.com",
+          "image": "https://lh3.googleusercontent.com/a/ACg8ocKW8QQmLLjjmBb9S0yq0l9TYtXseyH0upobEtCuA3ChWbUEHA=s96-c"
+        },
+        "title": "",
+        "content": "Fighter got injured in training. \nCoach had no warning signs. \nNo load tracking was in place. \nJust a preventable injury that changed the season. \nCoach realized the need for control. \nFighter safety is the top priority.\n\n#boxingcoach #mmacoach #combatsportscoach #athletereadiness #fightcamp #strengthandconditioning #bjjcoach #muaythaicoach #combatsports #coachlife #periodization #athletemanagement #performancecoach #fightteam #coachingtools",
+        "mediaItems": [
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/20y7Sjkw/post1-2026-05-24-01.png",
+            "_id": "6a13078ba77b1f6a5b9221ee"
+          },
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/Y7tKSpxy/post1-2026-05-24-02.png",
+            "_id": "6a13078ba77b1f6a5b9221ef"
+          },
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/20W30njW/post1-2026-05-24-03.png",
+            "_id": "6a13078ba77b1f6a5b9221f0"
+          }
+        ],
+        "platforms": [
+          {
+            "platform": "instagram",
+            "accountId": {
+              "_id": "6a0e0f75520992756d8bcdcf",
+              "platform": "instagram",
+              "profileId": "6a0dd67d3c136d00b69d9b7e",
+              "displayName": "StrikePanel",
+              "isActive": true,
+              "profilePicture": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/704032362_18133219132504655_1652172919381336702_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy42NTYuQzMifQ%3D%3D&_nc_ohc=baq6n9rjh4cQ7kNvwGhjHIL&_nc_oc=Adot__YfT3bxXlFZ1TPEEwQ2PkHlm8_6l-IabxtthvrCKWF5KEL4MojlzGcFE_JSII8&_nc_zt=24&_nc_ht=scontent-lhr6-1.cdninstagram.com&edm=AP4hL3IEAAAA&_nc_gid=7MNZezL-DZrqzRHCa6BbUQ&_nc_tpa=Q5bMBQHiCpTzhuPmnzFr1iuV4x8aDFy8KpgnLxiHrSOnhPPWp0PEFikA_2YWZNPWQOpnkbJRT6S64-6aHQ&oh=00_Af9tZY1VzBfxcAebei2m-6EGXnHGYpn9eGGbXEkU-McxfA&oe=6A2C230E",
+              "username": "strikepanel"
+            },
+            "profileId": "6a0dd67d3c136d00b69d9b7e",
+            "customMedia": [],
+            "scheduledFor": "2026-05-24T14:13:30.060Z",
+            "platformSpecificData": {
+              "__platformUserIdSnapshot": "35590729463903594",
+              "__usernameSnapshot": "strikepanel",
+              "publishingStarted": null,
+              "lastPublishStage": "awaiting-finalize",
+              "pendingContainerId": null
+            },
+            "status": "published",
+            "publishAttempts": 0,
+            "contentHash": "614b8b1f4f299d03aadf2aa4696107bb",
+            "_id": "6a13078ba77b1f6a5b9221f1",
+            "platformPostId": "17940840651228374",
+            "platformPostUrl": "https://www.instagram.com/p/DYuW-B7jUJn/",
+            "publishedAt": "2026-05-24T14:14:07.475Z"
+          }
+        ],
+        "scheduledFor": "2026-05-24T14:13:30.060Z",
+        "timezone": "UTC",
+        "status": "published",
+        "tags": [],
+        "hashtags": [],
+        "mentions": [],
+        "visibility": "public",
+        "crosspostingEnabled": true,
+        "metadata": {
+          "usageCounted": true
+        },
+        "publishAttempts": 0,
+        "contentHash": "614b8b1f4f299d03aadf2aa4696107bb",
+        "recycling": {
+          "enabled": false,
+          "gapFreq": "month",
+          "recycleCount": 0,
+          "contentVariations": [],
+          "contentVariationIndex": 0
+        },
+        "createdAt": "2026-05-24T14:13:31.078Z",
+        "updatedAt": "2026-05-24T14:14:07.575Z",
+        "__v": 0,
+        "publishingClaimedAt": "2026-05-24T14:13:31.238Z",
+        "origin": "zernio"
+      },
+      {
+        "_id": "6a13014c32efe79ac86759c2",
+        "userId": {
+          "_id": "6a0dd67c3c136d00b69d9b79",
+          "name": "CorePanel",
+          "email": "corepanelv1@gmail.com",
+          "image": "https://lh3.googleusercontent.com/a/ACg8ocKW8QQmLLjjmBb9S0yq0l9TYtXseyH0upobEtCuA3ChWbUEHA=s96-c"
+        },
+        "title": "",
+        "content": "you stand in the corner and watch your fighter fall apart, you feel helpless and question your own ability, you replay the what ifs, you wonder if you could have done something different, your insight is that sometimes you are the problem\n\n#boxingcoach #mmacoach #combatsportscoach #athletereadiness #fightcamp #strengthandconditioning #bjjcoach #muaythaicoach #combatsports #coachlife #periodization #athletemanagement #performancecoach #fightteam #coachingtools",
+        "mediaItems": [
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/JJxCwqJ/post1-2026-05-24-01.png",
+            "_id": "6a13014c32efe79ac86759c3"
+          },
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/1fnVSTjv/post1-2026-05-24-02.png",
+            "_id": "6a13014c32efe79ac86759c4"
+          }
+        ],
+        "platforms": [
+          {
+            "platform": "instagram",
+            "accountId": {
+              "_id": "6a0e0f75520992756d8bcdcf",
+              "platform": "instagram",
+              "profileId": "6a0dd67d3c136d00b69d9b7e",
+              "displayName": "StrikePanel",
+              "isActive": true,
+              "profilePicture": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/704032362_18133219132504655_1652172919381336702_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy42NTYuQzMifQ%3D%3D&_nc_ohc=baq6n9rjh4cQ7kNvwGhjHIL&_nc_oc=Adot__YfT3bxXlFZ1TPEEwQ2PkHlm8_6l-IabxtthvrCKWF5KEL4MojlzGcFE_JSII8&_nc_zt=24&_nc_ht=scontent-lhr6-1.cdninstagram.com&edm=AP4hL3IEAAAA&_nc_gid=7MNZezL-DZrqzRHCa6BbUQ&_nc_tpa=Q5bMBQHiCpTzhuPmnzFr1iuV4x8aDFy8KpgnLxiHrSOnhPPWp0PEFikA_2YWZNPWQOpnkbJRT6S64-6aHQ&oh=00_Af9tZY1VzBfxcAebei2m-6EGXnHGYpn9eGGbXEkU-McxfA&oe=6A2C230E",
+              "username": "strikepanel"
+            },
+            "profileId": "6a0dd67d3c136d00b69d9b7e",
+            "customMedia": [],
+            "scheduledFor": "2026-05-24T13:46:50.991Z",
+            "platformSpecificData": {
+              "__platformUserIdSnapshot": "35590729463903594",
+              "__usernameSnapshot": "strikepanel",
+              "publishingStarted": null,
+              "lastPublishStage": "awaiting-finalize",
+              "pendingContainerId": null
+            },
+            "status": "published",
+            "publishAttempts": 0,
+            "contentHash": "18306bc4fb07aed2b165780a59bc16a9",
+            "_id": "6a13014c32efe79ac86759c5",
+            "platformPostId": "17939158776226736",
+            "platformPostUrl": "https://www.instagram.com/p/DYuT5leDLsO/",
+            "publishedAt": "2026-05-24T13:47:22.871Z"
+          }
+        ],
+        "scheduledFor": "2026-05-24T13:46:50.991Z",
+        "timezone": "UTC",
+        "status": "published",
+        "tags": [],
+        "hashtags": [],
+        "mentions": [],
+        "visibility": "public",
+        "crosspostingEnabled": true,
+        "metadata": {
+          "usageCounted": true
+        },
+        "publishAttempts": 0,
+        "contentHash": "18306bc4fb07aed2b165780a59bc16a9",
+        "recycling": {
+          "enabled": false,
+          "gapFreq": "month",
+          "recycleCount": 0,
+          "contentVariations": [],
+          "contentVariationIndex": 0
+        },
+        "createdAt": "2026-05-24T13:46:52.244Z",
+        "updatedAt": "2026-05-24T13:47:22.992Z",
+        "__v": 0,
+        "publishingClaimedAt": "2026-05-24T13:46:52.364Z",
+        "origin": "zernio"
+      },
+      {
+        "_id": "6a0f3e42eb17dc9f4735d284",
+        "userId": {
+          "_id": "6a0dd67c3c136d00b69d9b79",
+          "name": "CorePanel",
+          "email": "corepanelv1@gmail.com",
+          "image": "https://lh3.googleusercontent.com/a/ACg8ocKW8QQmLLjjmBb9S0yq0l9TYtXseyH0upobEtCuA3ChWbUEHA=s96-c"
+        },
+        "title": "",
+        "content": "You are managing fighters on spreadsheets and WhatsApp. \nThat is not a system. \nYou have athletes with different needs, different goals, different recovery times. \nOne size fits all does not apply. \nYour fighters are entering camp, cutting weight, and sessions are piling up. \nOther coaches are still guessing. \nSome will wreck an athlete two weeks before the fight because they did not see the signs. \nYou cannot afford to guess.\n\n#boxingcoach #mmacoach #combatsportscoach #athletereadiness #fightcamp #strengthandconditioning #bjjcoach #muaythaicoach #combatsports #coachlife #periodization #athletemanagement #performancecoach #fightteam #coachingtools #highperformancecoaching #sportsscience #trainingload #elitecoaching #independentcoach",
+        "mediaItems": [
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/jZkxFrdF/daily-2026-05-21-01.png",
+            "_id": "6a0f3e42eb17dc9f4735d285"
+          },
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/Qymc4vZ/daily-2026-05-21-02.png",
+            "_id": "6a0f3e42eb17dc9f4735d286"
+          },
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/99fR3XxM/daily-2026-05-21-03.png",
+            "_id": "6a0f3e42eb17dc9f4735d287"
+          },
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/HLcPpyYG/daily-2026-05-21-04.png",
+            "_id": "6a0f3e42eb17dc9f4735d288"
+          },
+          {
+            "type": "image",
+            "url": "https://i.ibb.co/MDLcg4Pr/daily-2026-05-21-05.png",
+            "_id": "6a0f3e42eb17dc9f4735d289"
+          }
+        ],
+        "platforms": [
+          {
+            "platform": "instagram",
+            "accountId": {
+              "_id": "6a0e0f75520992756d8bcdcf",
+              "platform": "instagram",
+              "profileId": "6a0dd67d3c136d00b69d9b7e",
+              "displayName": "StrikePanel",
+              "isActive": true,
+              "profilePicture": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/704032362_18133219132504655_1652172919381336702_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy42NTYuQzMifQ%3D%3D&_nc_ohc=baq6n9rjh4cQ7kNvwGhjHIL&_nc_oc=Adot__YfT3bxXlFZ1TPEEwQ2PkHlm8_6l-IabxtthvrCKWF5KEL4MojlzGcFE_JSII8&_nc_zt=24&_nc_ht=scontent-lhr6-1.cdninstagram.com&edm=AP4hL3IEAAAA&_nc_gid=7MNZezL-DZrqzRHCa6BbUQ&_nc_tpa=Q5bMBQHiCpTzhuPmnzFr1iuV4x8aDFy8KpgnLxiHrSOnhPPWp0PEFikA_2YWZNPWQOpnkbJRT6S64-6aHQ&oh=00_Af9tZY1VzBfxcAebei2m-6EGXnHGYpn9eGGbXEkU-McxfA&oe=6A2C230E",
+              "username": "strikepanel"
+            },
+            "profileId": "6a0dd67d3c136d00b69d9b7e",
+            "customMedia": [],
+            "scheduledFor": "2026-05-21T17:17:50.959Z",
+            "platformSpecificData": {
+              "__platformUserIdSnapshot": "35590729463903594",
+              "__usernameSnapshot": "strikepanel",
+              "publishingStarted": null,
+              "lastPublishStage": "awaiting-finalize",
+              "pendingContainerId": null
+            },
+            "status": "published",
+            "publishAttempts": 0,
+            "contentHash": "8a50af4830417f76ec9d099f7ebfcbd2",
+            "_id": "6a0f3e42eb17dc9f4735d28a",
+            "platformPostId": "18196211932366097",
+            "platformPostUrl": "https://www.instagram.com/p/DYm9ul3EVlr/",
+            "publishedAt": "2026-05-21T17:18:59.480Z"
+          }
+        ],
+        "scheduledFor": "2026-05-21T17:17:50.959Z",
+        "timezone": "UTC",
+        "status": "published",
+        "tags": [],
+        "hashtags": [],
+        "mentions": [],
+        "visibility": "public",
+        "crosspostingEnabled": true,
+        "metadata": {
+          "usageCounted": true
+        },
+        "publishAttempts": 0,
+        "contentHash": "8a50af4830417f76ec9d099f7ebfcbd2",
+        "recycling": {
+          "enabled": false,
+          "gapFreq": "month",
+          "recycleCount": 0,
+          "contentVariations": [],
+          "contentVariationIndex": 0
+        },
+        "createdAt": "2026-05-21T17:17:54.357Z",
+        "updatedAt": "2026-05-21T17:18:59.590Z",
+        "__v": 0,
+        "publishingClaimedAt": "2026-05-21T17:17:54.676Z",
+        "origin": "zernio"
+      }
+    ],
+    "pagination": {
+      "page": 1,
+      "limit": 10,
+      "total": 13,
+      "pages": 2
+    }
+  },
+  "bestTime": {
+    "slots": [
+      {
+        "day_of_week": 4,
+        "hour": 14,
+        "avg_engagement": 5,
+        "post_count": 1
+      },
+      {
+        "day_of_week": 5,
+        "hour": 10,
+        "avg_engagement": 3.3333333333333335,
+        "post_count": 3
+      },
+      {
+        "day_of_week": 5,
+        "hour": 11,
+        "avg_engagement": 2.6666666666666665,
+        "post_count": 3
+      },
+      {
+        "day_of_week": 3,
+        "hour": 8,
+        "avg_engagement": 2,
+        "post_count": 1
+      },
+      {
+        "day_of_week": 0,
+        "hour": 11,
+        "avg_engagement": 1,
+        "post_count": 1
+      },
+      {
+        "day_of_week": 0,
+        "hour": 23,
+        "avg_engagement": 1,
+        "post_count": 1
+      },
+      {
+        "day_of_week": 3,
+        "hour": 16,
+        "avg_engagement": 0,
+        "post_count": 1
+      },
+      {
+        "day_of_week": 6,
+        "hour": 13,
+        "avg_engagement": 0,
+        "post_count": 1
+      },
+      {
+        "day_of_week": 3,
+        "hour": 17,
+        "avg_engagement": 0,
+        "post_count": 1
+      },
+      {
+        "day_of_week": 3,
+        "hour": 15,
+        "avg_engagement": 0,
+        "post_count": 1
+      },
+      {
+        "day_of_week": 6,
+        "hour": 7,
+        "avg_engagement": 0,
+        "post_count": 1
+      },
+      {
+        "day_of_week": 6,
+        "hour": 14,
+        "avg_engagement": 0,
+        "post_count": 1
+      }
+    ]
+  },
+  "dailyMetrics": {
+    "dailyData": [
+      {
+        "date": "2026-05-15",
+        "postCount": 1,
+        "platforms": {
+          "instagram": 1
+        },
+        "platformMetrics": {
+          "instagram": {
+            "impressions": 177,
+            "reach": 156,
+            "likes": 4,
+            "comments": 1,
+            "shares": 0,
+            "saves": 0,
+            "clicks": 0,
+            "views": 177,
+            "postCount": 1
+          }
+        },
+        "metrics": {
+          "impressions": 177,
+          "reach": 156,
+          "likes": 4,
+          "comments": 1,
+          "shares": 0,
+          "saves": 0,
+          "clicks": 0,
+          "views": 177
+        }
+      },
+      {
+        "date": "2026-05-16",
+        "postCount": 6,
+        "platforms": {
+          "instagram": 6
+        },
+        "platformMetrics": {
+          "instagram": {
+            "impressions": 159,
+            "reach": 71,
+            "likes": 9,
+            "comments": 9,
+            "shares": 0,
+            "saves": 0,
+            "clicks": 0,
+            "views": 159,
+            "postCount": 6
+          }
+        },
+        "metrics": {
+          "impressions": 159,
+          "reach": 71,
+          "likes": 9,
+          "comments": 9,
+          "shares": 0,
+          "saves": 0,
+          "clicks": 0,
+          "views": 159
+        }
+      },
+      {
+        "date": "2026-05-21",
+        "postCount": 3,
+        "platforms": {
+          "instagram": 3
+        },
+        "platformMetrics": {
+          "instagram": {
+            "impressions": 35,
+            "reach": 11,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0,
+            "saves": 0,
+            "clicks": 0,
+            "views": 35,
+            "postCount": 3
+          }
+        },
+        "metrics": {
+          "impressions": 35,
+          "reach": 11,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "saves": 0,
+          "clicks": 0,
+          "views": 35
+        }
+      },
+      {
+        "date": "2026-05-24",
+        "postCount": 2,
+        "platforms": {
+          "instagram": 2
+        },
+        "platformMetrics": {
+          "instagram": {
+            "impressions": 23,
+            "reach": 8,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0,
+            "saves": 0,
+            "clicks": 0,
+            "views": 23,
+            "postCount": 2
+          }
+        },
+        "metrics": {
+          "impressions": 23,
+          "reach": 8,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "saves": 0,
+          "clicks": 0,
+          "views": 23
+        }
+      },
+      {
+        "date": "2026-05-25",
+        "postCount": 1,
+        "platforms": {
+          "instagram": 1
+        },
+        "platformMetrics": {
+          "instagram": {
+            "impressions": 149,
+            "reach": 129,
+            "likes": 1,
+            "comments": 0,
+            "shares": 0,
+            "saves": 0,
+            "clicks": 0,
+            "views": 149,
+            "postCount": 1
+          }
+        },
+        "metrics": {
+          "impressions": 149,
+          "reach": 129,
+          "likes": 1,
+          "comments": 0,
+          "shares": 0,
+          "saves": 0,
+          "clicks": 0,
+          "views": 149
+        }
+      },
+      {
+        "date": "2026-06-01",
+        "postCount": 1,
+        "platforms": {
+          "instagram": 1
+        },
+        "platformMetrics": {
+          "instagram": {
+            "impressions": 10,
+            "reach": 6,
+            "likes": 1,
+            "comments": 0,
+            "shares": 0,
+            "saves": 0,
+            "clicks": 0,
+            "views": 10,
+            "postCount": 1
+          }
+        },
+        "metrics": {
+          "impressions": 10,
+          "reach": 6,
+          "likes": 1,
+          "comments": 0,
+          "shares": 0,
+          "saves": 0,
+          "clicks": 0,
+          "views": 10
+        }
+      },
+      {
+        "date": "2026-06-04",
+        "postCount": 1,
+        "platforms": {
+          "instagram": 1
+        },
+        "platformMetrics": {
+          "instagram": {
+            "impressions": 19,
+            "reach": 5,
+            "likes": 2,
+            "comments": 0,
+            "shares": 0,
+            "saves": 0,
+            "clicks": 0,
+            "views": 19,
+            "postCount": 1
+          }
+        },
+        "metrics": {
+          "impressions": 19,
+          "reach": 5,
+          "likes": 2,
+          "comments": 0,
+          "shares": 0,
+          "saves": 0,
+          "clicks": 0,
+          "views": 19
+        }
+      },
+      {
+        "date": "2026-06-07",
+        "postCount": 1,
+        "platforms": {
+          "instagram": 1
+        },
+        "platformMetrics": {
+          "instagram": {
+            "impressions": 3,
+            "reach": 2,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0,
+            "saves": 0,
+            "clicks": 0,
+            "views": 3,
+            "postCount": 1
+          }
+        },
+        "metrics": {
+          "impressions": 3,
+          "reach": 2,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "saves": 0,
+          "clicks": 0,
+          "views": 3
+        }
+      }
+    ],
+    "platformBreakdown": [
+      {
+        "platform": "instagram",
+        "postCount": 16,
+        "impressions": 575,
+        "reach": 388,
+        "likes": 17,
+        "comments": 10,
+        "shares": 0,
+        "saves": 0,
+        "clicks": 0,
+        "views": 575
+      }
+    ]
+  }
+}
