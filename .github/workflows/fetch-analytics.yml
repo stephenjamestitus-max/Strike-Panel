@@ -3,6 +3,9 @@ name: Fetch Instagram Analytics
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   analytics:
     runs-on: ubuntu-latest
