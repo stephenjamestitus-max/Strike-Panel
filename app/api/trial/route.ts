@@ -205,20 +205,9 @@ export async function POST(req: NextRequest) {
     }
     const key = genData.key;
 
-    // Step 2: stamp trial_expires_at on the new row
+    // Expiry is derived server-side from created_at + 14 days — no extra column needed
     const now = new Date();
-    const trialExpiresAt = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000).toISOString();
     const expiresLabel = trialEnd(now);
-
-    const patchRes = await sb(`licenses?license_key=eq.${encodeURIComponent(key)}`, {
-      method: 'PATCH',
-      body: JSON.stringify({ trial_expires_at: trialExpiresAt }),
-    });
-    if (!patchRes.ok) {
-      const err = await patchRes.text();
-      console.error('[trial] PATCH trial_expires_at failed:', err);
-      // Key was created — still send email, trial just won't expire correctly
-    }
 
     // Fire-and-forget: schedule all 5 emails via Resend scheduled_at
     void Promise.allSettled([

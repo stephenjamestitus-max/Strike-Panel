@@ -22,13 +22,16 @@ async function sb(path: string, options: RequestInit = {}) {
 }
 
 async function verifyLicense(key: string): Promise<{ valid: boolean; trialExpired?: boolean }> {
-  const res = await sb(`licenses?license_key=eq.${encodeURIComponent(key)}&select=status,trial_expires_at`);
+  const res = await sb(`licenses?license_key=eq.${encodeURIComponent(key)}&select=status,platform,created_at,trial_expires_at`);
   if (!res.ok) return { valid: false };
   const rows = await res.json();
   if (!Array.isArray(rows) || rows.length === 0) return { valid: false };
   const row = rows[0];
   if (row.status !== 'active') return { valid: false };
-  if (row.trial_expires_at && new Date(row.trial_expires_at) < new Date()) {
+  const trialExpiry = row.platform === 'trial' && row.created_at
+    ? new Date(new Date(row.created_at).getTime() + 14 * 24 * 60 * 60 * 1000)
+    : (row.trial_expires_at ? new Date(row.trial_expires_at) : null);
+  if (trialExpiry && trialExpiry < new Date()) {
     return { valid: false, trialExpired: true };
   }
   return { valid: true };
