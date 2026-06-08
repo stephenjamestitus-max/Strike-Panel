@@ -143,11 +143,6 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#04070f;font-fam
 #dotgrid{position:absolute;inset:0;pointer-events:none;
   background-image:radial-gradient(circle,rgba(0,212,240,.045) 1.2px,transparent 1.2px);
   background-size:48px 48px}
-.corner{position:absolute;width:40px;height:40px;opacity:.22}
-.corner-tl{top:48px;left:48px;border-top:2px solid #00D4F0;border-left:2px solid #00D4F0}
-.corner-tr{top:48px;right:48px;border-top:2px solid #00D4F0;border-right:2px solid #00D4F0}
-.corner-bl{bottom:48px;left:48px;border-bottom:2px solid #00D4F0;border-left:2px solid #00D4F0}
-.corner-br{bottom:48px;right:48px;border-bottom:2px solid #00D4F0;border-right:2px solid #00D4F0}
 #grain{position:absolute;inset:-50%;width:200%;height:200%;pointer-events:none;opacity:.03}
 #main-text{
   position:relative;z-index:10;
@@ -157,14 +152,6 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#04070f;font-fam
   letter-spacing:3px;
   color:#f5f0e8;
   text-shadow:0 0 120px rgba(0,212,240,.2)
-}
-#accent-line{
-  position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%) translateY(200px);
-  z-index:10;
-  width:200px;height:2px;
-  background:linear-gradient(to right,transparent,#00D4F0,transparent)
 }
 #logo{
   position:absolute;bottom:56px;right:56px;z-index:20;
@@ -192,12 +179,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#04070f;font-fam
   <div class="blob blob-cyan"></div>
   <div class="blob blob-amber"></div>
   <div class="blob blob-purple"></div>
-  <div class="corner corner-tl"></div>
-  <div class="corner corner-tr"></div>
-  <div class="corner corner-bl"></div>
-  <div class="corner corner-br"></div>
   <div id="main-text">${safeText}</div>
-  <div id="accent-line"></div>
   <div id="logo">STRIKE<span>PANEL</span><sup style="font-size:9px;color:rgba(0,212,240,.6);vertical-align:super;letter-spacing:.5px;font-family:'DM Mono',monospace">™</sup></div>
   <div id="url">strikepanel.uk</div>
 </div>
@@ -236,7 +218,7 @@ async function run() {
   console.log('');
 
   const days = daysSinceLastStory();
-  if (days < 2.5) {
+  if (days < 1.5) {
     console.log(`Last story was ${days.toFixed(1)} days ago. Skipping.`);
     return;
   }

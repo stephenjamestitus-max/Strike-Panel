@@ -464,8 +464,8 @@ async function run() {
   console.log(new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dubai' }), '(Dubai)');
 
   const days = daysSinceLastPost();
-  if (days < 2.5) {
-    const next = Math.ceil(3 - days);
+  if (days < 1.5) {
+    const next = Math.ceil(2 - days);
     console.log(`Last post was ${days.toFixed(1)} days ago. Next post in ${next} day(s). Skipping.`);
     return;
   }

@@ -1,8 +1,8 @@
-name: Post & Story (every 3 days)
+name: Post & Story (every 2 days)
 
 on:
   schedule:
-    - cron: '0 4 * * *'   # 08:00 Dubai (UTC+4) daily — script self-enforces 3-day gap
+    - cron: '0 4 * * *'   # 08:00 Dubai (UTC+4) daily — script self-enforces 2-day gap
   workflow_dispatch:        # Manual trigger from GitHub Actions tab
 
 jobs:
