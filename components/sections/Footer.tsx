@@ -1,7 +1,7 @@
 export default function Footer() {
   const links = [
     { label: 'Features', href: '#features' },
-    { label: 'Demo',     href: '/demo' },
+    { label: 'Free Trial', href: '#demo' },
     { label: 'Pricing',  href: '#pricing' },
     { label: 'Get Access', href: 'https://payhip.com/Strikepanel' },
   ]

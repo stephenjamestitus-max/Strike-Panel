@@ -8,6 +8,7 @@ import Features from '@/components/sections/Features'
 import CrossPlatform from '@/components/sections/CrossPlatform'
 import Social from '@/components/sections/Social'
 import Pricing from '@/components/sections/Pricing'
+import FAQ from '@/components/sections/FAQ'
 import Footer from '@/components/sections/Footer'
 
 export default function Page() {
@@ -24,6 +25,7 @@ export default function Page() {
         <CrossPlatform />
         <Social />
         <Pricing />
+        <FAQ />
       </main>
       <Footer />
     </>

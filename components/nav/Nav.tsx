@@ -5,7 +5,7 @@ import Magnet from '@/components/ui/Magnet'
 
 const NAV_LINKS = [
   ['FEATURES', '#features'],
-  ['DEMO', '/demo'],
+  ['TRIAL', '#demo'],
   ['PRICING', '#pricing'],
 ] as const
 

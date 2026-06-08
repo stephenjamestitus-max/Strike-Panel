@@ -1051,38 +1051,67 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 <!-- ══ LICENSE GATE ══════════════════════════════════════════════ -->
 <div id="licenseGate">
   <div class="lg-box">
-    <div class="lg-logo">
-      <svg viewBox="0 0 90 90" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-        <defs><radialGradient id="lg-orb" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="55%" stop-color="#0f1220"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs>
-        <circle cx="45" cy="45" r="43" fill="url(#lg-orb)" stroke="#00D4F0" stroke-width="1.2" stroke-opacity="0.4"/>
-        <circle cx="45" cy="45" r="29" fill="none" stroke="#00D4F0" stroke-width="0.9" stroke-opacity="0.2"/>
-        <line x1="45" y1="2" x2="45" y2="27" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/>
-        <line x1="45" y1="63" x2="45" y2="88" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/>
-        <line x1="2" y1="45" x2="27" y2="45" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/>
-        <line x1="63" y1="45" x2="88" y2="45" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/>
-        <line x1="15" y1="15" x2="21" y2="21" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.5"/>
-        <line x1="75" y1="75" x2="69" y2="69" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.5"/>
-        <line x1="75" y1="15" x2="69" y2="21" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.5"/>
-        <line x1="15" y1="75" x2="21" y2="69" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.5"/>
-        <circle cx="45" cy="45" r="10" fill="#00D4F0"/>
-        <circle cx="41" cy="41" r="3.5" fill="white" fill-opacity="0.22"/>
-        <text x="45" y="49" font-family="'Oswald','Bebas Neue','Arial Black',sans-serif" font-weight="700" font-size="8" fill="#0b0d14" text-anchor="middle" letter-spacing="0.5">SP</text>
-      </svg>
+
+    <!-- ── Normal activation form ── -->
+    <div id="lgMainContent">
+      <div class="lg-logo">
+        <svg viewBox="0 0 90 90" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs><radialGradient id="lg-orb" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="55%" stop-color="#0f1220"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs>
+          <circle cx="45" cy="45" r="43" fill="url(#lg-orb)" stroke="#00D4F0" stroke-width="1.2" stroke-opacity="0.4"/>
+          <circle cx="45" cy="45" r="29" fill="none" stroke="#00D4F0" stroke-width="0.9" stroke-opacity="0.2"/>
+          <line x1="45" y1="2" x2="45" y2="27" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/>
+          <line x1="45" y1="63" x2="45" y2="88" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/>
+          <line x1="2" y1="45" x2="27" y2="45" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/>
+          <line x1="63" y1="45" x2="88" y2="45" stroke="#00D4F0" stroke-width="2.4" stroke-linecap="round"/>
+          <line x1="15" y1="15" x2="21" y2="21" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.5"/>
+          <line x1="75" y1="75" x2="69" y2="69" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.5"/>
+          <line x1="75" y1="15" x2="69" y2="21" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.5"/>
+          <line x1="15" y1="75" x2="21" y2="69" stroke="#00D4F0" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.5"/>
+          <circle cx="45" cy="45" r="10" fill="#00D4F0"/>
+          <circle cx="41" cy="41" r="3.5" fill="white" fill-opacity="0.22"/>
+          <text x="45" y="49" font-family="'Oswald','Bebas Neue','Arial Black',sans-serif" font-weight="700" font-size="8" fill="#0b0d14" text-anchor="middle" letter-spacing="0.5">SP</text>
+        </svg>
+      </div>
+      <div class="lg-title">STRIKEPANE™</div>
+      <div class="lg-sub">Enter your license key to unlock the app.<br>Purchased on Payhip? Check your confirmation email.</div>
+      <div class="field">
+        <input class="finput" id="lgKeyInput" type="text"
+          placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+          style="text-align:center;letter-spacing:1px;font-family:var(--fm);font-size:13px;text-transform:uppercase"
+          oninput="this.value=this.value.toUpperCase()"
+          onkeydown="if(event.key==='Enter')lgActivate()">
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;margin-top:8px;font-size:13px" onclick="lgActivate()">🔓 Activate License</button>
+      <div class="lg-msg" id="lgMsg"></div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);font-size:11px;color:var(--muted2);line-height:1.7">
+        Don't have a license? <a href="https://payhip.com/Strikepanel" target="_blank" style="color:var(--accent);text-decoration:underline">Get strikepane — $99 →</a>
+      </div>
     </div>
-    <div class="lg-title">STRIKEPANE™</div>
-    <div class="lg-sub">Enter your license key to unlock the app.<br>Purchased on Payhip? Check your confirmation email.</div>
-    <div class="field">
-      <input class="finput" id="lgKeyInput" type="text"
-        placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-        style="text-align:center;letter-spacing:1px;font-family:var(--fm);font-size:13px;text-transform:uppercase"
-        oninput="this.value=this.value.toUpperCase()"
-        onkeydown="if(event.key==='Enter')lgActivate()">
+
+    <!-- ── Trial expired — upgrade screen ── -->
+    <div id="lgTrialExpiredState" style="display:none;text-align:center;padding:8px 0">
+      <div style="font-family:var(--fh);font-size:42px;letter-spacing:3px;line-height:1.05;margin-bottom:16px;color:#f5f0e8">
+        YOUR 14<br>DAYS ARE UP.
+      </div>
+      <div style="width:48px;height:2px;background:#00D4F0;margin:0 auto 20px"></div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:28px">
+        You built something real here.<br>
+        Your athletes are in the system.<br>
+        Don't lose it now.
+      </div>
+      <a href="https://payhip.com/Strikepanel" target="_blank"
+        style="display:block;background:#00D4F0;color:#04070f;font-family:var(--fh);font-size:15px;letter-spacing:2px;padding:14px 20px;border-radius:var(--r);text-decoration:none;margin-bottom:10px;transition:opacity .15s"
+        onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        GET LIFETIME ACCESS — $99 →
+      </a>
+      <div style="font-size:11px;color:var(--muted2);margin-bottom:20px">
+        One payment · No subscription · All future updates
+      </div>
+      <div style="padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);font-size:11px;color:var(--muted2)">
+        Already purchased? <span onclick="lgShowKeyInput()" style="cursor:pointer;color:var(--accent);text-decoration:underline">Enter your key →</span>
+      </div>
     </div>
-    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;margin-top:8px;font-size:13px" onclick="lgActivate()">🔓 Activate License</button>
-    <div class="lg-msg" id="lgMsg"></div>
-    <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);font-size:11px;color:var(--muted2);line-height:1.7">
-      Don't have a license? <a href="https://payhip.com/Strikepanel" target="_blank" style="color:var(--accent);text-decoration:underline">Get strikepane — $99 →</a>
-    </div>
+
   </div>
 </div>
 
@@ -5533,7 +5562,9 @@ async function lgVerifyWithPayhip(key) {
       body: JSON.stringify({ key: key.trim().toUpperCase() })
     });
     const data = await res.json();
-    return data.ok ? { ok: true } : { ok: false, msg: data.msg || 'Key not recognised. Check your Payhip confirmation email.' };
+    if (data.ok) return { ok: true, trial: !!data.trial };
+    if (data.trial_expired) return { ok: false, trial_expired: true, msg: data.msg };
+    return { ok: false, msg: data.msg || 'Key not recognised. Check your Payhip confirmation email.' };
   } catch (e) {
     console.error('[SP License] Network error:', e);
     return { ok: false, network: true };
@@ -5560,7 +5591,10 @@ async function lgActivate() {
   const result = await lgVerifyWithPayhip(key);
 
   if (result.ok) {
-    lgActivateSuccess(key, btn);
+    lgActivateSuccess(key, btn, result.trial);
+  } else if (result.trial_expired) {
+    lgShowTrialExpired();
+    if (btn) { btn.textContent = '🔓 Activate License'; btn.disabled = false; }
   } else if (result.network) {
     lgSetMsg('Could not reach the server — check your connection and try again.', false);
     if (btn) { btn.textContent = '🔓 Activate License'; btn.disabled = false; }
@@ -5572,9 +5606,22 @@ async function lgActivate() {
   }
 }
 
-function lgActivateSuccess(key, btn) {
+function lgShowTrialExpired() {
+  document.getElementById('lgMainContent').style.display = 'none';
+  document.getElementById('lgTrialExpiredState').style.display = 'block';
+}
+
+function lgShowKeyInput() {
+  document.getElementById('lgMainContent').style.display = '';
+  document.getElementById('lgTrialExpiredState').style.display = 'none';
+  setTimeout(() => document.getElementById('lgKeyInput')?.focus(), 50);
+}
+
+function lgActivateSuccess(key, btn, isTrial = false) {
   localStorage.setItem('cp_license_key', key.toUpperCase());
   localStorage.setItem('cp_license_activated', new Date().toISOString());
+  if (isTrial) localStorage.setItem('cp_license_type', 'trial');
+  else localStorage.removeItem('cp_license_type');
   lgSetMsg('✓ Activated! Welcome to strikepane™', true);
   if (btn) { btn.textContent = '✓ Activated!'; btn.disabled = true; }
   setTimeout(async () => {
@@ -5597,7 +5644,15 @@ async function lgCheck() {
   if (!stored) return; // no key stored — gate stays visible
   // Master key unlocks immediately without a network call
   if (await lgIsValidKey(stored)) { lgUnlock(); return; }
-  // Previously verified Payhip key — unlock without re-calling API every load
+  // Trial keys always re-verify — they expire after 14 days
+  if (localStorage.getItem('cp_license_type') === 'trial') {
+    const result = await lgVerifyWithPayhip(stored);
+    if (result.ok) { lgUnlock(); return; }
+    if (result.trial_expired) { lgShowTrialExpired(); return; }
+    if (result.network) { lgUnlock(); return; } // lenient on transient network errors
+    return; // key genuinely invalid — gate stays visible
+  }
+  // Previously verified full license — unlock without re-calling API every load
   if (localStorage.getItem('cp_license_activated')) { lgUnlock(); return; }
 }
 

@@ -15,20 +15,33 @@ const features = [
   'Progress tracking & charts',
 ]
 
+type TrialState = 'idle' | 'open' | 'loading' | 'success' | 'error'
+
 export default function Pricing() {
-  const [trialEmail, setTrialEmail] = useState('')
-  const [trialState, setTrialState] = useState<'idle'|'loading'|'done'|'error'>('idle')
+  const [trial, setTrial] = useState<TrialState>('idle')
+  const [email, setEmail] = useState('')
   const [trialMsg, setTrialMsg] = useState('')
-  const [showTrial, setShowTrial] = useState(false)
 
   async function startTrial() {
-    if (!trialEmail.includes('@')) { setTrialMsg('Enter a valid email.'); setTrialState('error'); return; }
-    setTrialState('loading')
+    if (!email.trim()) return
+    setTrial('loading')
     try {
-      const res = await fetch('/api/trial', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: trialEmail }) })
+      const res = await fetch('/api/trial', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim().toLowerCase() }),
+      })
       const data = await res.json()
-      if (data.ok) { setTrialState('done') } else { setTrialMsg(data.msg || 'Something went wrong.'); setTrialState('error') }
-    } catch { setTrialMsg('Network error — try again.'); setTrialState('error') }
+      if (data.ok) {
+        setTrial('success')
+      } else {
+        setTrialMsg(data.msg || 'Something went wrong — try again.')
+        setTrial('error')
+      }
+    } catch {
+      setTrialMsg('Could not reach the server — check your connection.')
+      setTrial('error')
+    }
   }
 
   return (
@@ -102,7 +115,7 @@ export default function Pricing() {
             textAlign: 'center',
           }}>
             <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 2, color: 'var(--amber)' }}>$99 ONCE</div>
-            <div style={{ fontFamily: 'var(--fc)', fontSize: 12, color: 'var(--cream)', marginTop: 2 }}>strikepanel</div>
+            <div style={{ fontFamily: 'var(--fc)', fontSize: 12, color: 'var(--cream)', marginTop: 2 }}>strikepane</div>
             <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 1, color: 'var(--accent)', marginTop: 2 }}>Combat sports · AI · Check-ins</div>
           </div>
         </div>
@@ -192,48 +205,125 @@ export default function Pricing() {
           </Magnet>
 
           {/* Trial CTA */}
-          {!showTrial && trialState !== 'done' && (
-            <div style={{ marginTop: 20, textAlign: 'center' }}>
+          <div style={{ marginTop: 20 }}>
+            {trial === 'idle' && (
               <button
-                onClick={() => setShowTrial(true)}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--fb)', fontSize: 13, color: 'var(--muted)', textDecoration: 'underline', textDecorationColor: 'rgba(255,255,255,0.2)' }}
+                onClick={() => setTrial('open')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontFamily: 'var(--fm)',
+                  fontSize: 11,
+                  letterSpacing: 2,
+                  color: 'var(--muted)',
+                  textDecoration: 'underline',
+                  textDecorationColor: 'rgba(255,255,255,0.2)',
+                  padding: 0,
+                  width: '100%',
+                }}
               >
-                Not sure? Try free for 14 days →
+                NOT SURE? TRY FREE FOR 14 DAYS →
               </button>
-            </div>
-          )}
+            )}
 
-          {showTrial && trialState !== 'done' && (
-            <div style={{ marginTop: 20, padding: '18px 20px', background: 'rgba(0,212,240,0.04)', border: '1px solid rgba(0,212,240,0.15)', borderRadius: 14 }}>
-              <div style={{ fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 10 }}>14-Day Free Trial</div>
-              <div style={{ fontFamily: 'var(--fb)', fontSize: 13, color: 'var(--muted)', marginBottom: 14, lineHeight: 1.5 }}>Full access. No credit card. Key sent to your inbox instantly.</div>
-              <div style={{ display: 'flex', gap: 8 }}>
+            {trial === 'open' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <div style={{
+                  fontFamily: 'var(--fm)',
+                  fontSize: 10,
+                  letterSpacing: 2,
+                  color: 'var(--muted)',
+                  textAlign: 'center',
+                }}>
+                  ENTER YOUR EMAIL — WE&apos;LL SEND YOUR TRIAL KEY
+                </div>
                 <input
                   type="email"
-                  value={trialEmail}
-                  onChange={e => { setTrialEmail(e.target.value); setTrialState('idle'); }}
-                  placeholder="your@email.com"
-                  style={{ flex: 1, background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, padding: '10px 14px', color: '#f5f0e8', fontFamily: 'var(--fb)', fontSize: 14, outline: 'none' }}
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && startTrial()}
+                  placeholder="coach@yourgym.com"
+                  autoFocus
+                  style={{
+                    background: 'rgba(255,255,255,0.04)',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    borderRadius: 8,
+                    padding: '12px 16px',
+                    color: 'var(--cream)',
+                    fontFamily: 'var(--fb)',
+                    fontSize: 14,
+                    outline: 'none',
+                    width: '100%',
+                    boxSizing: 'border-box',
+                  }}
                 />
                 <button
                   onClick={startTrial}
-                  disabled={trialState === 'loading'}
-                  style={{ background: 'rgba(0,212,240,0.12)', border: '1px solid rgba(0,212,240,0.3)', color: '#00D4F0', fontFamily: 'var(--fm)', fontSize: 11, letterSpacing: 2, padding: '10px 18px', borderRadius: 8, cursor: 'pointer', whiteSpace: 'nowrap', textTransform: 'uppercase' }}
+                  style={{
+                    background: 'rgba(0,212,240,0.1)',
+                    border: '1px solid rgba(0,212,240,0.35)',
+                    borderRadius: 8,
+                    padding: '12px 16px',
+                    color: 'var(--accent)',
+                    fontFamily: 'var(--fk)',
+                    fontSize: 14,
+                    letterSpacing: 1,
+                    cursor: 'pointer',
+                    width: '100%',
+                  }}
                 >
-                  {trialState === 'loading' ? '...' : 'Start Trial'}
+                  START FREE TRIAL
+                </button>
+                <div style={{ fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 1.5, color: 'var(--muted2)', textAlign: 'center' }}>
+                  14 DAYS · NO CARD · FULL ACCESS
+                </div>
+              </div>
+            )}
+
+            {trial === 'loading' && (
+              <div style={{ fontFamily: 'var(--fm)', fontSize: 11, letterSpacing: 2, color: 'var(--muted)', textAlign: 'center' }}>
+                SENDING YOUR KEY…
+              </div>
+            )}
+
+            {trial === 'success' && (
+              <div style={{
+                background: 'rgba(0,212,240,0.05)',
+                border: '1px solid rgba(0,212,240,0.2)',
+                borderRadius: 10,
+                padding: '18px 20px',
+                textAlign: 'center',
+              }}>
+                <div style={{ fontFamily: 'var(--fk)', fontSize: 18, letterSpacing: 2, color: 'var(--accent)', marginBottom: 8 }}>
+                  CHECK YOUR EMAIL
+                </div>
+                <div style={{ fontFamily: 'var(--fb)', fontSize: 13, color: 'var(--muted)', lineHeight: 1.6 }}>
+                  Your 14-day trial key is on its way.<br />
+                  Open strikepanel, paste the key, and you&apos;re live.
+                </div>
+              </div>
+            )}
+
+            {trial === 'error' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div style={{ fontFamily: 'var(--fb)', fontSize: 12, color: '#e05a5a', textAlign: 'center' }}>
+                  {trialMsg}
+                </div>
+                <button
+                  onClick={() => setTrial('open')}
+                  style={{
+                    background: 'none', border: 'none', cursor: 'pointer',
+                    fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 2,
+                    color: 'var(--muted)', textDecoration: 'underline',
+                  }}
+                >
+                  TRY AGAIN
                 </button>
               </div>
-              {trialState === 'error' && <div style={{ fontFamily: 'var(--fb)', fontSize: 12, color: '#FF3C3C', marginTop: 8 }}>{trialMsg}</div>}
-            </div>
-          )}
+            )}
+          </div>
 
-          {trialState === 'done' && (
-            <div style={{ marginTop: 20, padding: '18px 20px', background: 'rgba(16,185,129,0.06)', border: '1px solid rgba(16,185,129,0.25)', borderRadius: 14, textAlign: 'center' }}>
-              <div style={{ fontSize: 20, marginBottom: 8 }}>✓</div>
-              <div style={{ fontFamily: 'var(--fb)', fontSize: 14, color: 'var(--green)', fontWeight: 600 }}>Trial key sent — check your inbox.</div>
-              <div style={{ fontFamily: 'var(--fb)', fontSize: 12, color: 'var(--muted)', marginTop: 6 }}>14 days full access. Upgrade to lifetime at any time.</div>
-            </div>
-          )}
         </div>
       </FadeIn>
     </section>

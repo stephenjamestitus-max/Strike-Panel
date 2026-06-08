@@ -61,7 +61,9 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify({ activations: license.activations + 1 }),
     });
 
-    return NextResponse.json({ ok: true });
+    // Let the client know if this is a trial key so it can tag it for future re-verification
+    const isTrial = !!license.trial_expires_at;
+    return NextResponse.json({ ok: true, ...(isTrial && { trial: true }) });
   } catch (e) {
     console.error('[validate-key]', e);
     return NextResponse.json({ ok: false, msg: 'Server error — try again.' }, { status: 500 });
