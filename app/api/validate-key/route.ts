@@ -40,6 +40,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, msg: 'This key has been revoked. Email support@strikepanel.com.' });
     }
 
+    if (license.trial_expires_at && new Date(license.trial_expires_at) < new Date()) {
+      return NextResponse.json({
+        ok: false,
+        trial_expired: true,
+        msg: 'Your 14-day trial has ended. Get lifetime access at strikepanel.uk for $99 — one payment, no subscription.',
+      });
+    }
+
     if (license.activations >= MAX_ACTIVATIONS) {
       return NextResponse.json({
         ok: false,
@@ -53,7 +61,9 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify({ activations: license.activations + 1 }),
     });
 
-    return NextResponse.json({ ok: true });
+    // Let the client know if this is a trial key so it can tag it for future re-verification
+    const isTrial = !!license.trial_expires_at;
+    return NextResponse.json({ ok: true, ...(isTrial && { trial: true }) });
   } catch (e) {
     console.error('[validate-key]', e);
     return NextResponse.json({ ok: false, msg: 'Server error — try again.' }, { status: 500 });
