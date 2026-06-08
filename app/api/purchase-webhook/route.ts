@@ -16,8 +16,71 @@ async function generateKey(platform: string): Promise<string | null> {
   return data.ok ? data.key : null;
 }
 
+function purchaseEmail(key: string): string {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+</head>
+<body style="margin:0;padding:0;background:#04070f">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#04070f;padding:40px 0">
+  <tr><td align="center">
+  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;background:#080e1a;border:1px solid rgba(255,255,255,0.07);border-radius:16px;overflow:hidden">
+
+    <tr><td style="padding:28px 40px 24px;border-bottom:1px solid rgba(255,255,255,0.05)">
+      <span style="font-family:'Courier New',monospace;font-size:15px;font-weight:700;letter-spacing:4px;color:#f5f0e8">STRIKE</span><span style="font-family:'Courier New',monospace;font-size:15px;font-weight:700;letter-spacing:4px;color:#00D4F0">PANEL</span><span style="font-family:'Courier New',monospace;font-size:8px;color:rgba(0,212,240,0.45);vertical-align:super;letter-spacing:1px">™</span>
+    </td></tr>
+
+    <tr><td style="padding:36px 40px 40px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">
+      <h1 style="font-family:'Courier New',monospace;font-size:26px;font-weight:700;letter-spacing:2px;color:#f5f0e8;line-height:1.15;margin:0 0 20px">YOU'RE IN.<br>LIFETIME ACCESS.</h1>
+      <div style="width:40px;height:2px;background:#00D4F0;margin:0 0 24px"></div>
+      <p style="font-size:14px;line-height:1.75;color:#7a85a0;margin:0 0 16px">One payment. Every feature. All future updates — yours permanently. Here's your key.</p>
+
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin:28px 0">
+        <tr><td style="background:#04070f;border:1px solid rgba(0,212,240,0.3);border-radius:10px;padding:24px;text-align:center">
+          <div style="font-family:'Courier New',monospace;font-size:10px;letter-spacing:3px;color:rgba(122,133,160,0.55);margin-bottom:12px">YOUR LICENSE KEY</div>
+          <div style="font-family:'Courier New',monospace;font-size:22px;font-weight:700;letter-spacing:5px;color:#00D4F0">${key}</div>
+          <div style="font-family:'Courier New',monospace;font-size:9px;letter-spacing:2px;color:rgba(122,133,160,0.35);margin-top:10px">COPY &amp; PASTE INTO THE APP</div>
+        </td></tr>
+      </table>
+
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px">
+        <tr>
+          <td style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:2px;color:#f5f0e8;padding-bottom:12px">HOW TO ACTIVATE</td>
+        </tr>
+        <tr><td style="font-size:13px;line-height:2;color:#7a85a0">
+          1. Open <a href="${APP_URL}/app" style="color:#00D4F0;text-decoration:none">${APP_URL}/app</a><br>
+          2. Paste your key on the activation screen<br>
+          3. Add your first athlete &amp; send them a check-in link<br>
+          4. Works on up to 3 devices
+        </td></tr>
+      </table>
+
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0">
+        <tr><td align="center">
+          <a href="${APP_URL}/app" style="display:inline-block;background:#00D4F0;color:#04070f;font-family:'Courier New',monospace;font-weight:700;font-size:12px;letter-spacing:3px;text-decoration:none;padding:14px 32px;border-radius:8px">OPEN STRIKEPANEL →</a>
+        </td></tr>
+      </table>
+
+      <p style="font-family:'Courier New',monospace;font-size:10px;letter-spacing:1.5px;color:rgba(122,133,160,0.4);margin:16px 0 0;line-height:1.8">WORKS ON UP TO 3 DEVICES &nbsp;·&nbsp; NO SUBSCRIPTION &nbsp;·&nbsp; ALL FUTURE UPDATES INCLUDED</p>
+    </td></tr>
+
+    <tr><td style="padding:20px 40px 28px;border-top:1px solid rgba(255,255,255,0.05)">
+      <p style="margin:0;font-family:'Courier New',monospace;font-size:10px;letter-spacing:1.5px;color:rgba(122,133,160,0.4);line-height:1.8">
+        STRIKEPANEL.UK &nbsp;·&nbsp; REPLY TO THIS EMAIL FOR SUPPORT
+      </p>
+    </td></tr>
+
+  </table>
+  </td></tr>
+</table>
+</body>
+</html>`;
+}
+
 async function sendKeyEmail(email: string, key: string, platform: string) {
-  // Uses Resend if configured, otherwise logs to console
   const resendKey = process.env.RESEND_API_KEY;
   if (!resendKey) {
     console.log(`[purchase-webhook] KEY FOR ${email}: ${key}`);
@@ -31,26 +94,11 @@ async function sendKeyEmail(email: string, key: string, platform: string) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'strikepanel <noreply@strikepanel.uk>',
+      from: 'StrikePanel <onboarding@resend.dev>',
+      reply_to: 'corepanelv1@gmail.com',
       to: email,
-      subject: 'Your StrikePanel License Key',
-      html: `
-        <div style="font-family:monospace;background:#04070f;color:#f5f0e8;padding:40px;max-width:500px;margin:0 auto">
-          <div style="font-size:22px;letter-spacing:3px;margin-bottom:8px">STRIKE<span style="color:#00D4F0">PANEL</span></div>
-          <div style="color:#7a85a0;font-size:12px;letter-spacing:2px;margin-bottom:32px">YOUR LICENSE KEY</div>
-          <div style="background:#0a1222;border:1px solid rgba(0,212,240,0.2);border-radius:8px;padding:20px;margin-bottom:24px;text-align:center">
-            <div style="font-size:20px;letter-spacing:4px;color:#00D4F0">${key}</div>
-          </div>
-          <p style="font-size:13px;line-height:1.7;color:#7a85a0">
-            1. Go to <a href="https://strikepanel.uk/app" style="color:#00D4F0">strikepanel.uk/app</a><br>
-            2. Paste your key in the activation screen<br>
-            3. Works on up to 3 devices
-          </p>
-          <p style="font-size:11px;color:#4a5568;margin-top:24px">
-            Need help? Email corepanelv1@gmail.com
-          </p>
-        </div>
-      `,
+      subject: "You're in — here's your StrikePanel license key",
+      html: purchaseEmail(key),
     }),
   });
 }

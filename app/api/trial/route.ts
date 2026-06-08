@@ -34,6 +34,7 @@ async function send(to: string, subject: string, html: string, scheduledAt?: str
       },
       body: JSON.stringify({
         from: 'StrikePanel <onboarding@resend.dev>',
+        reply_to: 'corepanelv1@gmail.com',
         to,
         subject,
         html,
@@ -60,124 +61,140 @@ function trialEnd(from: Date): string {
 
 // ── Email HTML templates ──────────────────────────────────────────
 
-const SHELL = (content: string) => `
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#04070f;font-family:monospace">
-<div style="max-width:520px;margin:0 auto;padding:48px 32px">
-  <div style="margin-bottom:32px">
-    <span style="font-size:18px;letter-spacing:3px;color:#f5f0e8">STRIKE</span><span style="font-size:18px;letter-spacing:3px;color:#00D4F0">PANEL</span><sup style="font-size:8px;color:rgba(0,212,240,0.5);letter-spacing:.5px">™</sup>
-  </div>
-  ${content}
-  <div style="margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.05);font-size:10px;letter-spacing:1.5px;color:rgba(122,133,160,0.45)">
-    strikepanel.uk &nbsp;·&nbsp; support@strikepanel.com &nbsp;·&nbsp; You received this because you started a trial.
-  </div>
-</div>
+const SHELL = (content: string) => `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+</head>
+<body style="margin:0;padding:0;background:#04070f">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#04070f;padding:40px 0">
+  <tr><td align="center">
+  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;background:#080e1a;border:1px solid rgba(255,255,255,0.07);border-radius:16px;overflow:hidden">
+
+    <!-- Header bar -->
+    <tr><td style="padding:28px 40px 24px;border-bottom:1px solid rgba(255,255,255,0.05)">
+      <span style="font-family:'Courier New',monospace;font-size:15px;font-weight:700;letter-spacing:4px;color:#f5f0e8">STRIKE</span><span style="font-family:'Courier New',monospace;font-size:15px;font-weight:700;letter-spacing:4px;color:#00D4F0">PANEL</span><span style="font-family:'Courier New',monospace;font-size:8px;color:rgba(0,212,240,0.45);vertical-align:super;letter-spacing:1px">™</span>
+    </td></tr>
+
+    <!-- Body -->
+    <tr><td style="padding:36px 40px 40px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">
+      ${content}
+    </td></tr>
+
+    <!-- Footer -->
+    <tr><td style="padding:20px 40px 28px;border-top:1px solid rgba(255,255,255,0.05)">
+      <p style="margin:0;font-family:'Courier New',monospace;font-size:10px;letter-spacing:1.5px;color:rgba(122,133,160,0.4);line-height:1.8">
+        STRIKEPANEL.UK &nbsp;·&nbsp; REPLY TO THIS EMAIL FOR SUPPORT<br>
+        You received this because you started a free trial.
+      </p>
+    </td></tr>
+
+  </table>
+  </td></tr>
+</table>
 </body>
 </html>`;
 
 const KEY_BOX = (key: string) => `
-<div style="background:#0a1222;border:1px solid rgba(0,212,240,0.25);border-radius:8px;padding:20px 24px;margin:24px 0;text-align:center">
-  <div style="font-size:11px;letter-spacing:2px;color:rgba(122,133,160,0.6);margin-bottom:10px">YOUR TRIAL KEY</div>
-  <div style="font-size:18px;letter-spacing:4px;color:#00D4F0">${key}</div>
-</div>`;
+<table width="100%" cellpadding="0" cellspacing="0" style="margin:28px 0">
+  <tr><td style="background:#04070f;border:1px solid rgba(0,212,240,0.3);border-radius:10px;padding:24px;text-align:center">
+    <div style="font-family:'Courier New',monospace;font-size:10px;letter-spacing:3px;color:rgba(122,133,160,0.55);margin-bottom:12px">YOUR TRIAL KEY</div>
+    <div style="font-family:'Courier New',monospace;font-size:22px;font-weight:700;letter-spacing:5px;color:#00D4F0">${key}</div>
+    <div style="font-family:'Courier New',monospace;font-size:9px;letter-spacing:2px;color:rgba(122,133,160,0.35);margin-top:10px">COPY &amp; PASTE INTO THE APP</div>
+  </td></tr>
+</table>`;
+
+const OPEN_BTN = `
+<table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0">
+  <tr><td align="center">
+    <a href="${APP_URL}/app" style="display:inline-block;background:#00D4F0;color:#04070f;font-family:'Courier New',monospace;font-weight:700;font-size:12px;letter-spacing:3px;text-decoration:none;padding:14px 32px;border-radius:8px">OPEN STRIKEPANEL →</a>
+  </td></tr>
+</table>`;
 
 const BUY_BTN = `
-<a href="https://payhip.com/Strikepanel" style="display:block;background:linear-gradient(135deg,#c8892a,#e0a83a);color:#000;font-weight:700;border-radius:8px;padding:14px 24px;font-size:13px;letter-spacing:2px;text-align:center;text-decoration:none;margin:24px 0">
-  GET LIFETIME ACCESS — $99 →
-</a>
-<div style="font-size:10px;letter-spacing:1.5px;color:rgba(122,133,160,0.5);text-align:center;margin-bottom:8px">ONE PAYMENT · NO SUBSCRIPTION · ALL FUTURE UPDATES</div>`;
+<table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0">
+  <tr><td align="center">
+    <a href="https://payhip.com/Strikepanel" style="display:inline-block;background:linear-gradient(135deg,#c8892a,#e0a83a);color:#000;font-family:'Courier New',monospace;font-weight:700;font-size:12px;letter-spacing:3px;text-decoration:none;padding:14px 32px;border-radius:8px">GET LIFETIME ACCESS — $99 →</a>
+  </td></tr>
+  <tr><td align="center" style="padding-top:10px">
+    <span style="font-family:'Courier New',monospace;font-size:9px;letter-spacing:2px;color:rgba(122,133,160,0.45)">ONE PAYMENT · NO SUBSCRIPTION · ALL FUTURE UPDATES</span>
+  </td></tr>
+</table>`;
+
+const H = (text: string) => `<h1 style="font-family:'Courier New',monospace;font-size:26px;font-weight:700;letter-spacing:2px;color:#f5f0e8;line-height:1.15;margin:0 0 20px">${text}</h1>`;
+const RULE = `<div style="width:40px;height:2px;background:#00D4F0;margin:0 0 24px"></div>`;
+const P = (text: string) => `<p style="font-size:14px;line-height:1.75;color:#7a85a0;margin:0 0 16px">${text}</p>`;
+const SMALL = (text: string) => `<p style="font-family:'Courier New',monospace;font-size:10px;letter-spacing:1.5px;color:rgba(122,133,160,0.4);margin:16px 0 0;line-height:1.8">${text}</p>`;
 
 function emailDay0(key: string, expiresLabel: string): string {
   return SHELL(`
-    <div style="font-size:28px;letter-spacing:2px;color:#f5f0e8;line-height:1.1;margin-bottom:8px">YOUR TRIAL<br>HAS STARTED.</div>
-    <div style="width:40px;height:2px;background:#00D4F0;margin:16px 0"></div>
-    <p style="font-size:13px;line-height:1.75;color:#7a85a0;margin:0 0 4px">
-      You've got 14 days of full access. Here's your key — paste it into the app and you're live in under a minute.
-    </p>
+    ${H('YOUR 14-DAY<br>TRIAL IS LIVE.')}
+    ${RULE}
+    ${P('Full access. No credit card. Here\'s your key — paste it into the app and you\'re live in under a minute.')}
     ${KEY_BOX(key)}
-    <div style="font-size:12px;line-height:1.9;color:#7a85a0">
-      <strong style="color:#f5f0e8;letter-spacing:1px">HOW TO ACTIVATE</strong><br>
-      1. Go to <a href="${APP_URL}/app" style="color:#00D4F0">${APP_URL}/app</a><br>
-      2. Paste your key in the activation screen<br>
-      3. Add your first athlete and run a check-in
-    </div>
-    <div style="margin-top:20px;font-size:11px;letter-spacing:1.5px;color:rgba(122,133,160,0.5)">
-      TRIAL EXPIRES: ${expiresLabel} &nbsp;·&nbsp; WORKS ON 3 DEVICES
-    </div>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px">
+      <tr>
+        <td style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:2px;color:#f5f0e8;padding-bottom:12px">HOW TO ACTIVATE</td>
+      </tr>
+      <tr><td style="font-size:13px;line-height:2;color:#7a85a0">
+        1. Open <a href="${APP_URL}/app" style="color:#00D4F0;text-decoration:none">${APP_URL}/app</a><br>
+        2. Paste your key on the activation screen<br>
+        3. Add your first athlete &amp; send them a check-in link<br>
+        4. See their readiness score before your next session
+      </td></tr>
+    </table>
+    ${OPEN_BTN}
+    ${SMALL(`TRIAL EXPIRES: ${expiresLabel.toUpperCase()} &nbsp;·&nbsp; WORKS ON UP TO 3 DEVICES`)}
   `);
 }
 
 function emailDay3(key: string): string {
   return SHELL(`
-    <div style="font-size:26px;letter-spacing:2px;color:#f5f0e8;line-height:1.1;margin-bottom:8px">HAVE YOU ADDED<br>YOUR FIRST FIGHTER?</div>
-    <div style="width:40px;height:2px;background:#00D4F0;margin:16px 0"></div>
-    <p style="font-size:13px;line-height:1.75;color:#7a85a0">
-      You're 3 days in. If you haven't activated yet, here's your key again — it takes 60 seconds.
-    </p>
+    ${H('HAVE YOU ADDED<br>YOUR FIRST FIGHTER?')}
+    ${RULE}
+    ${P('Three days in. If you haven\'t activated yet — here\'s your key again. It takes 60 seconds.')}
     ${KEY_BOX(key)}
-    <p style="font-size:13px;line-height:1.75;color:#7a85a0">
-      Once you've added an athlete: send them their check-in link. You'll see their readiness score before your next session. That's the moment most coaches realise what they've been missing.
-    </p>
-    <div style="font-size:12px;line-height:1.9;color:#7a85a0;margin-top:4px">
-      → <a href="${APP_URL}/app" style="color:#00D4F0">Open StrikePanel →</a>
-    </div>
+    ${P('Once you\'ve added an athlete, send them their check-in link. You\'ll see their readiness score before your next session starts.')}
+    ${P('That\'s the moment most coaches realise what they\'ve been missing.')}
+    ${OPEN_BTN}
   `);
 }
 
 function emailDay7(): string {
   return SHELL(`
-    <div style="font-size:26px;letter-spacing:2px;color:#f5f0e8;line-height:1.1;margin-bottom:8px">7 DAYS IN.<br>7 DAYS LEFT.</div>
-    <div style="width:40px;height:2px;background:#00D4F0;margin:16px 0"></div>
-    <p style="font-size:13px;line-height:1.75;color:#7a85a0">
-      By now you should have athletes in the system, check-in data coming in, and at least one AI session plan generated.
-    </p>
-    <p style="font-size:13px;line-height:1.75;color:#7a85a0">
-      If that's you — you already know. If not, you've still got a week to see what changes when you know your athletes' readiness before they walk in.
-    </p>
-    <p style="font-size:13px;line-height:1.75;color:#7a85a0">
-      Either way — the data you've built over these 7 days stays with your account. When your trial ends, you get to decide if it's worth $99 to keep it.
-    </p>
-    <p style="font-size:11px;letter-spacing:1.5px;color:rgba(122,133,160,0.5)">One payment. No subscription. All future updates.</p>
+    ${H('7 DAYS IN.<br>7 DAYS LEFT.')}
+    ${RULE}
+    ${P('By now you should have athletes in the system, check-in data coming in, and at least one AI session plan generated.')}
+    ${P('If that\'s you — you already know what this is worth. If not, you\'ve still got a week to see what changes when you walk into a session already knowing who\'s ready to be pushed and who needs a light day.')}
+    ${P('The data you\'ve built stays with your account. When your trial ends, $99 keeps it permanently — no monthly fee, ever.')}
     ${BUY_BTN}
+    ${SMALL('30-DAY MONEY-BACK GUARANTEE — NO QUESTIONS ASKED')}
   `);
 }
 
 function emailDay12(): string {
   return SHELL(`
-    <div style="font-size:26px;letter-spacing:2px;color:#f5f0e8;line-height:1.1;margin-bottom:8px">YOUR TRIAL ENDS<br>IN 2 DAYS.</div>
-    <div style="width:40px;height:2px;background:#00D4F0;margin:16px 0"></div>
-    <p style="font-size:13px;line-height:1.75;color:#7a85a0">
-      Your athletes are in the system. Your check-in history is there. Your session logs are saved.
-    </p>
-    <p style="font-size:13px;line-height:1.75;color:#7a85a0">
-      In 2 days, the app locks. Everything you built stays — but you won't be able to access it until you grab the lifetime license.
-    </p>
-    <p style="font-size:13px;line-height:1.75;color:#7a85a0">
-      $99. One time. You never pay again — not next month, not next year.
-    </p>
+    ${H('YOUR TRIAL ENDS<br>IN 2 DAYS.')}
+    ${RULE}
+    ${P('Your athletes are in the system. Your check-in history is there. Your session logs are saved.')}
+    ${P('In 2 days the app locks. Everything you built stays — but you won\'t be able to access it until you grab the lifetime license.')}
+    ${P('<strong style="color:#f5f0e8">$99. One time. You never pay again</strong> — not next month, not next year, not ever.')}
     ${BUY_BTN}
-    <p style="font-size:11px;letter-spacing:1.5px;color:rgba(122,133,160,0.5)">
-      You're also covered by a 30-day money-back guarantee. Buy today and you still have another 16 days to decide risk-free.
-    </p>
+    ${SMALL('BUY TODAY AND YOU\'RE STILL COVERED BY A 30-DAY REFUND — THAT\'S 16 MORE DAYS TO DECIDE, RISK-FREE.')}
   `);
 }
 
 function emailDay14(): string {
   return SHELL(`
-    <div style="font-size:26px;letter-spacing:2px;color:#f5f0e8;line-height:1.1;margin-bottom:8px">YOUR 14 DAYS<br>ARE UP.</div>
-    <div style="width:40px;height:2px;background:#00D4F0;margin:16px 0"></div>
-    <p style="font-size:13px;line-height:1.75;color:#7a85a0">
-      Your trial has ended. Everything you built — your athletes, check-in data, session history — is saved and waiting.
-    </p>
-    <p style="font-size:13px;line-height:1.75;color:#7a85a0">
-      If you saw what it can do for your coaching, you already know what to do. If life got in the way and you didn't get a proper look — the $99 lifetime license comes with a 30-day refund. No questions.
-    </p>
+    ${H('YOUR 14 DAYS<br>ARE UP.')}
+    ${RULE}
+    ${P('Your trial has ended. Everything you built — your athletes, your check-in data, your session history — is saved and waiting.')}
+    ${P('If you saw what it does for your coaching, you already know what to do.')}
+    ${P('If life got in the way and you didn\'t get a proper look: the lifetime license is $99 and comes with a 30-day refund. No questions asked.')}
     ${BUY_BTN}
-    <p style="font-size:11px;letter-spacing:1.5px;color:rgba(122,133,160,0.5)">
-      Questions? Reply to this email or reach us at support@strikepanel.com.
-    </p>
+    ${SMALL('REPLY TO THIS EMAIL IF YOU HAVE ANY QUESTIONS.')}
   `);
 }
 
