@@ -34,14 +34,14 @@ const PILLAR_AI_PROMPTS = {
 
 // ── Pexels queries — combat sports specific, no generic sports ────
 const PILLAR_PEXELS = {
-  Readiness:      'boxing athlete training warm up gym',
-  'Fight Camp':   'boxing sparring fighters ring training',
-  'Weight Cut':   'boxer running weight training discipline',
-  'AI Sessions':  'boxing coach trainer athlete gym professional',
-  'Problem':      'boxing coach training team frustrated',
-  'Frustration':  'boxer training exhausted overworked gym',
-  'Social Proof': 'boxing victory fighter champion celebration',
-  'Direct Offer': 'professional boxing gym ring equipment dark',
+  Readiness:      'boxer athlete early morning training focus dark gym',
+  'Fight Camp':   'boxing sparring two fighters ring intense training camp',
+  'Weight Cut':   'boxer cutting weight athlete discipline sweat dedication',
+  'AI Sessions':  'mma coach tablet analytics dark professional gym',
+  'Problem':      'boxing coach clipboard notes frustration training floor',
+  'Frustration':  'boxer exhausted overtraining hitting bag dark gym sweat',
+  'Social Proof': 'boxer champion victory belt celebration crowd',
+  'Direct Offer': 'professional boxing ring dark moody spotlight dramatic',
 };
 
 const PILLAR_PIXABAY = {
@@ -120,17 +120,16 @@ function httpGet(url, headers = {}) {
   });
 }
 
-// ── Gemini 2.0 Flash — free AI image generation ───────────────────
+// ── Gemini 2.0 Flash — AI image generation (requires billing on AI Studio) ────
 
 async function fetchGeminiImage(pillar) {
   const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) { console.warn('  GEMINI_API_KEY not set — skipping Gemini image'); return null; }
+  if (!apiKey) return null;
 
   const key = pillarKey(pillar);
   const prompt = PILLAR_AI_PROMPTS[key];
   if (!prompt) return null;
 
-  // Cache key rotates daily so we don't regenerate the same image twice
   const dateKey = new Date().toISOString().slice(0, 10);
   const slug = `gemini-${key.replace(/\W+/g, '_')}-${dateKey}`;
   const dest = path.join(CACHE_DIR, `${slug}.png`);
@@ -140,12 +139,12 @@ async function fetchGeminiImage(pillar) {
   try {
     const body = JSON.stringify({
       contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: { responseModalities: ['IMAGE'], responseMimeType: 'image/png' },
+      generationConfig: { responseModalities: ['IMAGE', 'TEXT'] },
     });
     const raw = await new Promise((resolve, reject) => {
       const req = require('https').request({
         hostname: 'generativelanguage.googleapis.com',
-        path: `/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent?key=${apiKey}`,
+        path: `/v1beta/models/gemini-2.5-flash-image:generateContent?key=${apiKey}`,
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) },
       }, res => {
@@ -159,12 +158,10 @@ async function fetchGeminiImage(pillar) {
     });
 
     const json = JSON.parse(raw);
+    if (json?.error?.code === 429) { console.warn('  Gemini quota exceeded — falling back to Pexels'); return null; }
     const parts = json?.candidates?.[0]?.content?.parts || [];
     const imgPart = parts.find(p => p.inlineData?.mimeType?.startsWith('image/'));
-    if (!imgPart) {
-      console.warn('  Gemini returned no image:', JSON.stringify(json).slice(0, 200));
-      return null;
-    }
+    if (!imgPart) { console.warn('  Gemini returned no image'); return null; }
     fs.writeFileSync(dest, Buffer.from(imgPart.inlineData.data, 'base64'));
     console.log(`  Gemini image saved: ${path.basename(dest)}`);
     return dest;
@@ -285,13 +282,13 @@ async function fetchMixkitVideo(pillar) {
 
 /**
  * Returns a local path to a background photo for carousel slides.
- * Priority: Gemini 2.0 Flash (high quality) → Pexels → Pixabay
+ * Priority: Pexels (real cinematic photos) → Pixabay → Gemini (if billing enabled)
  */
 async function getBackgroundPhoto(pillar) {
   const result =
-    await fetchGeminiImage(pillar) ||
     await fetchPexelsPhoto(pillar) ||
-    await fetchPixabayPhoto(pillar);
+    await fetchPixabayPhoto(pillar) ||
+    await fetchGeminiImage(pillar);
 
   if (result) console.log(`  Photo ready: ${path.basename(result)}`);
   else console.warn('  No photo available — using brand bg');
