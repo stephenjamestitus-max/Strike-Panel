@@ -1,11 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      { source: '/demo', destination: '/', permanent: true },
+      { source: '/landing', destination: '/', permanent: true },
+    ];
+  },
   async rewrites() {
     return {
       afterFiles: [
         { source: '/app', destination: '/app-shell.html' },
-        { source: '/demo', destination: '/demo.html' },
         { source: '/blog', destination: '/blog.html' },
         { source: '/blog/morning-brief-method', destination: '/blog/morning-brief-method.html' },
         { source: '/blog/fight-camp-planning', destination: '/blog/fight-camp-planning.html' },

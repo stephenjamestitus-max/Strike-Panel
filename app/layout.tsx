@@ -5,10 +5,7 @@ export const metadata: Metadata = {
   title: 'strikepane™ — Training Intelligence for Combat Sports',
   description: 'The cloud coaching platform built for combat sports. Morning briefs, fight camp timelines, AI session plans, and readiness scores — all in one dashboard. One-time $99.',
   metadataBase: new URL('https://strikepanel.uk'),
-  alternates: {
-    canonical: 'https://strikepanel.uk',
-  },
-  manifest: '/site.webmanifest',
+manifest: '/site.webmanifest',
   icons: {
     icon: [
       { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
