@@ -11,9 +11,11 @@ const athletes = [
 type State = 'idle' | 'loading' | 'success' | 'error'
 
 export default function Demo() {
-  const [email, setEmail]   = useState('')
-  const [state, setState]   = useState<State>('idle')
-  const [errMsg, setErrMsg] = useState('')
+  const [email, setEmail]         = useState('')
+  const [state, setState]         = useState<State>('idle')
+  const [errMsg, setErrMsg]       = useState('')
+  const [checkEmail, setCheckEmail] = useState('')
+  const [checkState, setCheckState] = useState<'idle' | 'loading' | 'done'>('idle')
 
   async function submit() {
     const val = email.trim()
@@ -36,6 +38,20 @@ export default function Demo() {
       setErrMsg('Could not reach the server. Check your connection.')
       setState('error')
     }
+  }
+
+  async function submitChecklist() {
+    const val = checkEmail.trim()
+    if (!val || !val.includes('@')) return
+    setCheckState('loading')
+    try {
+      await fetch('/api/email-signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: val.toLowerCase(), source: 'checklist' }),
+      })
+    } catch { /* silent */ }
+    setCheckState('done')
   }
 
   return (
@@ -246,6 +262,66 @@ export default function Demo() {
                 </div>
               )}
             </div>
+          </div>
+        </FadeIn>
+
+        {/* Checklist email capture */}
+        <FadeIn delay={0.25} y={20}>
+          <div style={{ marginTop: 32, maxWidth: 420, margin: '32px auto 0' }}>
+            <div style={{
+              fontFamily: 'var(--fm)', fontSize: 9, letterSpacing: 2,
+              color: 'rgba(122,133,160,0.4)', textAlign: 'center', marginBottom: 12,
+            }}>
+              NOT READY TO START? GET THE FREE CHECKLIST FIRST
+            </div>
+            {checkState === 'done' ? (
+              <div style={{
+                fontFamily: 'var(--fm)', fontSize: 10, letterSpacing: 2,
+                color: 'var(--accent)', textAlign: 'center',
+              }}>
+                CHECKLIST ON ITS WAY — CHECK YOUR INBOX
+              </div>
+            ) : (
+              <div style={{ display: 'flex', gap: 8 }}>
+                <input
+                  type="email"
+                  value={checkEmail}
+                  onChange={e => setCheckEmail(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && submitChecklist()}
+                  placeholder="coach@yourgym.com"
+                  disabled={checkState === 'loading'}
+                  style={{
+                    flex: 1,
+                    background: 'rgba(8,14,30,0.6)',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    borderRadius: 8,
+                    padding: '10px 14px',
+                    color: 'var(--cream)',
+                    fontFamily: 'var(--fb)',
+                    fontSize: 12,
+                    outline: 'none',
+                  }}
+                />
+                <button
+                  onClick={submitChecklist}
+                  disabled={checkState === 'loading'}
+                  style={{
+                    background: 'rgba(255,255,255,0.05)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    borderRadius: 8,
+                    padding: '10px 16px',
+                    color: 'rgba(122,133,160,0.7)',
+                    fontFamily: 'var(--fk)',
+                    fontSize: 10,
+                    letterSpacing: 1,
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  SEND CHECKLIST
+                </button>
+              </div>
+            )}
           </div>
         </FadeIn>
       </div>

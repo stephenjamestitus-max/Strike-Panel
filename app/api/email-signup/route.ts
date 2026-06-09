@@ -18,14 +18,14 @@ async function supabase(path: string, options: RequestInit = {}) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { email } = await req.json();
+    const { email, source } = await req.json();
     if (!email || typeof email !== 'string' || !email.includes('@')) {
       return NextResponse.json({ ok: false, msg: 'Valid email required.' }, { status: 400 });
     }
 
     const res = await supabase('email_signups', {
       method: 'POST',
-      body: JSON.stringify({ email: email.toLowerCase().trim(), source: 'landing' }),
+      body: JSON.stringify({ email: email.toLowerCase().trim(), source: source || 'landing' }),
     });
 
     if (!res.ok) {
