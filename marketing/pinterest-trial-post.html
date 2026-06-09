@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1000">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1000px;
+    height: 1500px;
+    overflow: hidden;
+    background: #04070f;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .root {
+    width: 1000px;
+    height: 1500px;
+    position: relative;
+    background: #04070f;
+    overflow: hidden;
+  }
+
+  /* ── Background noise / texture ── */
+  .bg-grain {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      radial-gradient(ellipse 120% 60% at 50% 0%, rgba(0,212,240,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 80% at 80% 80%, rgba(200,137,42,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 10% 90%, rgba(0,212,240,0.04) 0%, transparent 60%);
+  }
+
+  /* ── Subtle grid lines ── */
+  .bg-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(0,212,240,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,240,0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* ── Top bar ── */
+  .topbar {
+    position: absolute; top: 52px; left: 60px; right: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    z-index: 10;
+  }
+
+  .logo {
+    font-size: 13px; font-weight: 700; letter-spacing: 5px;
+  }
+  .logo-strike { color: #f5f0e8; }
+  .logo-panel  { color: #00D4F0; }
+  .logo-tm     { font-size: 7px; color: rgba(0,212,240,0.45); vertical-align: super; }
+
+  .trial-pill {
+    background: rgba(0,212,240,0.08);
+    border: 1px solid rgba(0,212,240,0.25);
+    border-radius: 100px;
+    padding: 7px 18px;
+    font-size: 9px; letter-spacing: 3px; color: #00D4F0;
+  }
+
+  /* ── Hero headline ── */
+  .headline-block {
+    position: absolute;
+    top: 148px; left: 60px; right: 60px;
+    z-index: 10;
+  }
+
+  .pre-label {
+    font-size: 9px; letter-spacing: 4px; color: rgba(0,212,240,0.6);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .pre-line {
+    width: 28px; height: 1px; background: rgba(0,212,240,0.4);
+    display: inline-block;
+  }
+
+  .headline {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 84px;
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -1px;
+    color: #f5f0e8;
+    margin-bottom: 0;
+  }
+  .headline em {
+    font-style: italic;
+    background: linear-gradient(135deg, #00D4F0 0%, #7ae8f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .headline .accent {
+    background: linear-gradient(135deg, #c8892a 0%, #e0a83a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subline {
+    margin-top: 28px;
+    font-size: 13px; letter-spacing: 2px;
+    color: rgba(122,133,160,0.7);
+    line-height: 1.8;
+    font-family: 'Courier New', monospace;
+    max-width: 560px;
+  }
+
+  /* ── Dashboard mock ── */
+  .dashboard {
+    position: absolute;
+    top: 520px; left: 60px; right: 60px;
+    background: rgba(8,14,30,0.95);
+    border: 1px solid rgba(0,212,240,0.12);
+    border-radius: 16px;
+    overflow: hidden;
+    z-index: 10;
+    box-shadow:
+      0 0 0 1px rgba(0,212,240,0.06),
+      0 40px 80px rgba(0,0,0,0.7),
+      0 0 120px rgba(0,212,240,0.06);
+  }
+
+  .dash-header {
+    padding: 20px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(4,7,15,0.6);
+  }
+  .dash-header-left {
+    font-size: 8px; letter-spacing: 3px; color: #00D4F0;
+  }
+  .dash-header-title {
+    font-size: 14px; font-weight: 700; letter-spacing: 2px;
+    color: #f5f0e8; margin-top: 5px;
+  }
+  .dash-header-right {
+    text-align: right;
+  }
+  .dash-avg-label {
+    font-size: 8px; letter-spacing: 2px; color: rgba(122,133,160,0.5);
+  }
+  .dash-avg-score {
+    font-size: 32px; font-weight: 700; color: #10b981;
+    line-height: 1; margin-top: 4px;
+  }
+  .dash-avg-sub {
+    font-size: 7px; letter-spacing: 2px; color: rgba(122,133,160,0.4);
+    margin-top: 3px;
+  }
+
+  .athlete-row {
+    padding: 18px 28px;
+    display: flex; align-items: center; gap: 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .athlete-row:last-of-type { border-bottom: none; }
+
+  .score-ring {
+    width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .score-num {
+    font-size: 20px; font-weight: 700;
+  }
+
+  .athlete-info { flex: 1; }
+  .athlete-name {
+    font-size: 13px; font-weight: 700; letter-spacing: 1px; color: #f5f0e8;
+  }
+  .athlete-rec {
+    font-size: 8px; letter-spacing: 2px; color: rgba(122,133,160,0.5);
+    margin-top: 5px;
+  }
+
+  .status-badge {
+    font-size: 8px; letter-spacing: 2px;
+    border-radius: 4px; padding: 5px 12px;
+    font-weight: 700;
+  }
+
+  /* ── Trial CTA block ── */
+  .cta-block {
+    position: absolute;
+    top: 1085px; left: 60px; right: 60px;
+    z-index: 10;
+  }
+
+  .cta-divider {
+    width: 36px; height: 2px; background: #00D4F0;
+    margin-bottom: 28px;
+  }
+
+  .cta-heading {
+    font-family: 'Georgia', serif;
+    font-size: 46px; font-weight: 700;
+    color: #f5f0e8; line-height: 1.05;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+  .cta-heading em {
+    font-style: italic;
+    background: linear-gradient(135deg, #c8892a, #e0a83a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .cta-desc {
+    font-size: 11px; letter-spacing: 1.5px;
+    color: rgba(122,133,160,0.6);
+    line-height: 1.9; margin-bottom: 32px;
+    max-width: 600px;
+  }
+
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 14px;
+    background: #00D4F0;
+    color: #04070f;
+    font-size: 11px; font-weight: 700; letter-spacing: 3px;
+    padding: 17px 32px;
+    border-radius: 8px;
+    margin-right: 16px;
+  }
+
+  .cta-ghost {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.45);
+    font-size: 10px; letter-spacing: 2px;
+    padding: 16px 24px;
+    border-radius: 8px;
+  }
+
+  .cta-meta {
+    margin-top: 24px;
+    font-size: 8px; letter-spacing: 2px;
+    color: rgba(122,133,160,0.3);
+    display: flex; gap: 20px;
+  }
+  .cta-meta-dot {
+    color: rgba(0,212,240,0.3);
+  }
+
+  /* ── Bottom URL ── */
+  .bottom-url {
+    position: absolute;
+    bottom: 44px; left: 60px; right: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    z-index: 10;
+  }
+  .bottom-url-text {
+    font-size: 9px; letter-spacing: 3px; color: rgba(122,133,160,0.25);
+  }
+  .bottom-hash {
+    font-size: 8px; letter-spacing: 1px; color: rgba(0,212,240,0.2);
+  }
+
+  /* ── Decorative glow orbs ── */
+  .orb-1 {
+    position: absolute; z-index: 1;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,240,0.05) 0%, transparent 70%);
+    top: -100px; right: -150px;
+    pointer-events: none;
+  }
+  .orb-2 {
+    position: absolute; z-index: 1;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,137,42,0.04) 0%, transparent 70%);
+    bottom: 200px; left: -150px;
+    pointer-events: none;
+  }
+
+</style>
+</head>
+<body>
+<div class="root">
+
+  <div class="bg-grain"></div>
+  <div class="bg-grid"></div>
+  <div class="orb-1"></div>
+  <div class="orb-2"></div>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="logo">
+      <span class="logo-strike">STRIKE</span><span class="logo-panel">PANEL</span><span class="logo-tm">™</span>
+    </div>
+    <div class="trial-pill">14-DAY FREE TRIAL</div>
+  </div>
+
+  <!-- Hero headline -->
+  <div class="headline-block">
+    <div class="pre-label">
+      <span class="pre-line"></span>
+      FREE FOR 14 DAYS
+    </div>
+    <div class="headline">
+      KNOW<br>
+      WHO TO<br>
+      <em>PUSH.</em><br>
+      WHO TO<br>
+      <span class="accent">PROTECT.</span>
+    </div>
+    <div class="subline">
+      Daily readiness scores for every athlete.<br>
+      Weight cut timelines. AI session plans.<br>
+      Built for combat sports coaches.
+    </div>
+  </div>
+
+  <!-- Dashboard mockup -->
+  <div class="dashboard">
+    <div class="dash-header">
+      <div class="dash-header-left">
+        // MORNING BRIEF
+        <div class="dash-header-title">MONDAY 9 JUNE 2026</div>
+      </div>
+      <div class="dash-header-right">
+        <div class="dash-avg-label">SQUAD AVG</div>
+        <div class="dash-avg-score">71</div>
+        <div class="dash-avg-sub">4/4 CHECKED IN</div>
+      </div>
+    </div>
+
+    <!-- Athlete 1 — Ready -->
+    <div class="athlete-row">
+      <div class="score-ring" style="border: 2px solid #10b981; background: rgba(16,185,129,0.08);">
+        <span class="score-num" style="color: #10b981;">92</span>
+      </div>
+      <div class="athlete-info">
+        <div class="athlete-name">PRIYA SHARMA</div>
+        <div class="athlete-rec">PEAK LOAD — PUSH TODAY · FIGHT CAMP D-18</div>
+      </div>
+      <div class="status-badge" style="color: #10b981; border: 1px solid rgba(16,185,129,0.3); background: rgba(16,185,129,0.06);">READY</div>
+    </div>
+
+    <!-- Athlete 2 — Caution -->
+    <div class="athlete-row">
+      <div class="score-ring" style="border: 2px solid #c8892a; background: rgba(200,137,42,0.08);">
+        <span class="score-num" style="color: #c8892a;">67</span>
+      </div>
+      <div class="athlete-info">
+        <div class="athlete-name">JAKE THOMPSON</div>
+        <div class="athlete-rec">MODERATE INTENSITY ONLY · WEIGHT CUT -4.2KG</div>
+      </div>
+      <div class="status-badge" style="color: #c8892a; border: 1px solid rgba(200,137,42,0.3); background: rgba(200,137,42,0.06);">CAUTION</div>
+    </div>
+
+    <!-- Athlete 3 — Rest -->
+    <div class="athlete-row">
+      <div class="score-ring" style="border: 2px solid #ef4444; background: rgba(239,68,68,0.08);">
+        <span class="score-num" style="color: #ef4444;">34</span>
+      </div>
+      <div class="athlete-info">
+        <div class="athlete-name">MARCUS MENDEZ</div>
+        <div class="athlete-rec">PROTECT — LIGHT WORK ONLY · 2 RED FLAGS</div>
+      </div>
+      <div class="status-badge" style="color: #ef4444; border: 1px solid rgba(239,68,68,0.3); background: rgba(239,68,68,0.06);">REST</div>
+    </div>
+
+    <!-- Athlete 4 — Ready -->
+    <div class="athlete-row">
+      <div class="score-ring" style="border: 2px solid #10b981; background: rgba(16,185,129,0.08);">
+        <span class="score-num" style="color: #10b981;">88</span>
+      </div>
+      <div class="athlete-info">
+        <div class="athlete-name">LISA FERREIRA</div>
+        <div class="athlete-rec">SPARRING APPROVED · FIGHT CAMP D-31</div>
+      </div>
+      <div class="status-badge" style="color: #10b981; border: 1px solid rgba(16,185,129,0.3); background: rgba(16,185,129,0.06);">READY</div>
+    </div>
+  </div>
+
+  <!-- CTA block -->
+  <div class="cta-block">
+    <div class="cta-divider"></div>
+    <div class="cta-heading">
+      14 days.<br><em>Free.</em> No card.
+    </div>
+    <div class="cta-desc">
+      ADD YOUR REAL ATHLETES. RUN REAL CHECK-INS.<br>
+      SEE THEIR READINESS BEFORE YOU WALK IN.
+    </div>
+    <div>
+      <div class="cta-btn">START FREE TRIAL →</div>
+      <div class="cta-ghost">strikepanel.uk</div>
+    </div>
+    <div class="cta-meta">
+      <span>NO SUBSCRIPTION <span class="cta-meta-dot">·</span></span>
+      <span>$99 LIFETIME AFTER TRIAL <span class="cta-meta-dot">·</span></span>
+      <span>3 DEVICES</span>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="bottom-url">
+    <div class="bottom-url-text">STRIKEPANEL.UK</div>
+    <div class="bottom-hash">#boxingcoach #fightcamp #mmacoach #combatsports</div>
+  </div>
+
+</div>
+</body>
+</html>
