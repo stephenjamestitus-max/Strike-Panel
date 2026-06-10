@@ -103,6 +103,38 @@ a{color:inherit;text-decoration:none}
   "image": "https://strikepanel.uk/og-blog.png"
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a good HRV for a fighter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is no universal number \u2014 HRV is highly individual. A 25-year-old fighter might baseline at 60ms or 110ms and both can be healthy. What matters is each athlete's trend against their own baseline; a sustained drop of 10%+ for several days is the actionable signal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do fighters need a wearable to track HRV?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Helpful but not required. A chest strap and a free app for a 2-minute morning reading works. And if budget or compliance is an issue, subjective markers \u2014 sleep, soreness, mood, resting heart rate \u2014 capture most of the same readiness signal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should training change based on one bad HRV reading?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Single readings are noisy \u2014 disrupted by a late meal, alcohol, or a poor night's sleep. Change training when the multi-day trend moves, or when a low reading coincides with bad subjective scores."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <div id="readProgress"></div>
@@ -125,6 +157,8 @@ a{color:inherit;text-decoration:none}
   </header>
 
   <div class="article-body">
+    <p style="border-left:3px solid var(--accent);background:rgba(0,212,240,0.05);padding:18px 22px;border-radius:0 6px 6px 0;color:var(--text)"><strong>The short answer:</strong> Heart rate variability (HRV) is the variation in time between heartbeats, and it reflects how recovered a fighter's autonomic nervous system is. A falling HRV trend over 3+ days signals accumulating stress — from training, weight cutting, or poor sleep — before the fighter feels it. Coaches should act on the athlete's own 7-day trend versus their baseline, never on single readings or comparisons between athletes.</p>
+
     <p>Heart Rate Variability gets talked about constantly in elite sport and almost never explained properly. Coaches hear about it, athletes buy wearables that measure it, and then nobody quite knows what to do with the number. This is a plain-English explanation — what HRV actually is, what it tells you about your fighters, and how to use it to make better daily training decisions.</p>
 
     <h2>What HRV Actually Measures</h2>
@@ -222,7 +256,16 @@ a{color:inherit;text-decoration:none}
   </div>
 
   <a href="/blog" class="back-link">← Back to Blog</a>
-</article>
+
+    <h2>Frequently Asked Questions</h2>
+    <h3>What is a good HRV for a fighter?</h3>
+    <p>There is no universal number — HRV is highly individual. A 25-year-old fighter might baseline at 60ms or 110ms and both can be healthy. What matters is each athlete's trend against their own baseline; a sustained drop of 10%+ for several days is the actionable signal.</p>
+    <h3>Do fighters need a wearable to track HRV?</h3>
+    <p>Helpful but not required. A chest strap and a free app for a 2-minute morning reading works. And if budget or compliance is an issue, subjective markers — sleep, soreness, mood, resting heart rate — capture most of the same readiness signal.</p>
+    <h3>Should training change based on one bad HRV reading?</h3>
+    <p>No. Single readings are noisy — disrupted by a late meal, alcohol, or a poor night's sleep. Change training when the multi-day trend moves, or when a low reading coincides with bad subjective scores.</p>
+
+  </article>
 
 <script>
 const bar = document.getElementById('readProgress');

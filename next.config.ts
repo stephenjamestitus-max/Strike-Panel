@@ -19,6 +19,9 @@ const nextConfig: NextConfig = {
         { source: '/blog/peak-week-protocol', destination: '/blog/peak-week-protocol.html' },
         { source: '/blog/data-driven-coaching', destination: '/blog/data-driven-coaching.html' },
         { source: '/blog/hrv-readiness', destination: '/blog/hrv-readiness.html' },
+        { source: '/blog/best-apps-for-boxing-coaches', destination: '/blog/best-apps-for-boxing-coaches.html' },
+        { source: '/blog/what-is-a-fighter-readiness-score', destination: '/blog/what-is-a-fighter-readiness-score.html' },
+        { source: '/blog/spreadsheet-vs-app-fight-camp', destination: '/blog/spreadsheet-vs-app-fight-camp.html' },
       ],
     };
   },

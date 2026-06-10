@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>What Is a Fighter Readiness Score? (And How to Calculate One) — StrikePanel</title>
+<meta name="description" content="A fighter readiness score is a single 0–100 number that tells a coach how recovered and ready an athlete is to train hard today. Here's exactly what goes into one and how to calculate it with pen and paper."/>
+<link rel="canonical" href="https://strikepanel.uk/blog/what-is-a-fighter-readiness-score"/>
+<meta property="og:title" content="What Is a Fighter Readiness Score? (And How to Calculate One)"/>
+<meta property="og:description" content="A fighter readiness score is a single 0–100 number that tells a coach how recovered an athlete is. Here's what goes into one and how to calculate it by hand."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://strikepanel.uk/blog/what-is-a-fighter-readiness-score"/>
+<meta property="og:image" content="https://strikepanel.uk/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://strikepanel.uk/og-image.png"/>
+<meta name="robots" content="index,follow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='ng' cx='38%25' cy='32%25' r='62%25'%3E%3Cstop offset='0%25' stop-color='%231e2540'/%3E%3Cstop offset='55%25' stop-color='%230f1220'/%3E%3Cstop offset='100%25' stop-color='%230b0d14'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='45' cy='45' r='43' fill='url(%23ng)' stroke='%2300D4F0' stroke-width='1.5' stroke-opacity='0.6'/%3E%3Ccircle cx='45' cy='45' r='29' fill='none' stroke='%2300D4F0' stroke-width='0.9' stroke-opacity='0.2'/%3E%3Cline x1='45' y1='2' x2='45' y2='26' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='45' y1='64' x2='45' y2='88' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='26' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='64' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='11' fill='%2300D4F0'/%3E%3C/svg%3E"/>
+<meta name="theme-color" content="#04070f"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04070f;--bg2:#070c18;--surface:#0b1120;--card:#0f1828;--card2:#131e30;
+  --accent:#00D4F0;--accent2:#00a8c4;--green:#10b981;--red:#ef4444;
+  --amber:#f59e0b;--purple:#8b5cf6;
+  --text:#eef0f8;--muted:#7a85a0;--muted2:#3d4560;--muted3:#1e2840;
+  --fh:'Bebas Neue',sans-serif;--fc:'Barlow Condensed',sans-serif;
+  --fb:'Barlow',sans-serif;--fm:'DM Mono',monospace;
+  --grid-color:rgba(0,212,240,0.035);
+  --scan:rgba(0,212,240,0.012);
+  --radius:6px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:16px;line-height:1.7;overflow-x:hidden}
+
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--grid-color) 1px,transparent 1px),linear-gradient(90deg,var(--grid-color) 1px,transparent 1px);
+  background-size:52px 52px}
+body::after{
+  content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,var(--scan) 2px,var(--scan) 4px);
+  animation:scan-drift 8s linear infinite}
+@keyframes scan-drift{from{background-position:0 0}to{background-position:0 100px}}
+
+.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(140px)}
+.blob-1{width:700px;height:600px;top:-15%;left:-10%;background:var(--green);opacity:.04}
+.blob-2{width:500px;height:500px;bottom:-10%;right:-8%;background:var(--accent);opacity:.04}
+
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(0,212,240,0.2)}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:rgba(0,212,240,0.25);border-radius:99px}
+
+#readProgress{
+  position:fixed;top:0;left:0;z-index:10000;height:2px;width:0%;
+  background:linear-gradient(90deg,var(--green),var(--accent),var(--green));
+  background-size:200% 100%;
+  animation:progress-shimmer 2s linear infinite;
+  transition:width .1s linear;pointer-events:none}
+@keyframes progress-shimmer{0%{background-position:0% 0}100%{background-position:200% 0}}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(4,7,15,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(0,212,240,0.07);
+  padding:0 clamp(16px,4vw,48px);
+  display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),rgba(0,212,240,0.25),transparent)}
+.nav-brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nav-logo{width:26px;height:26px;filter:drop-shadow(0 0 8px rgba(0,212,240,0.55))}
+.nav-name{font-family:var(--fh);font-size:18px;letter-spacing:2px}
+.nav-name span{color:var(--accent)}
+.nav-back{
+  font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);padding:7px 14px;border:1px solid rgba(255,255,255,0.06);border-radius:3px;
+  transition:all .2s;display:flex;align-items:center;gap:6px}
+.nav-back:hover{color:var(--accent);border-color:rgba(0,212,240,0.28);background:rgba(0,212,240,0.04)}
+.nav-back-arrow{font-size:13px;line-height:1}
+
+/* ARTICLE LAYOUT */
+.article-wrap{
+  position:relative;z-index:1;
+  max-width:720px;margin:0 auto;
+  padding:56px clamp(20px,5vw,48px) 96px}
+
+/* ARTICLE HEADER */
+.article-cat{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--fm);font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--green);background:rgba(16,185,129,0.08);
+  border:1px solid rgba(16,185,129,0.22);border-radius:3px;
+  padding:5px 12px;margin-bottom:24px}
+.cat-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 7px var(--green);animation:cat-pulse 2s ease-in-out infinite;flex-shrink:0}
+@keyframes cat-pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.article-title{
+  font-family:var(--fh);font-size:clamp(36px,6vw,56px);line-height:.92;
+  letter-spacing:2px;margin-bottom:24px;color:var(--text)}
+
+.article-meta{
+  display:flex;align-items:center;gap:20px;
+  font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:40px;flex-wrap:wrap}
+.meta-sep{width:3px;height:3px;border-radius:50%;background:var(--muted2)}
+
+.article-divider{
+  height:1px;background:linear-gradient(90deg,var(--green),rgba(16,185,129,0.1),transparent);
+  margin-bottom:40px;opacity:.35}
+
+/* ARTICLE BODY */
+.article-body p{
+  color:rgba(238,240,248,0.82);font-size:16px;line-height:1.8;
+  margin-bottom:22px;font-weight:400}
+.article-body p:last-child{margin-bottom:0}
+
+.article-body h2{
+  font-family:var(--fh);font-size:clamp(26px,4vw,34px);letter-spacing:2px;
+  color:var(--text);margin-top:52px;margin-bottom:16px;line-height:1}
+
+.article-body strong{color:var(--text);font-weight:600}
+
+/* Sign block */
+.sign-block{
+  background:var(--card);border:1px solid rgba(255,255,255,0.07);
+  border-radius:var(--radius);margin:32px 0;overflow:hidden;
+  position:relative}
+.sign-block::before{
+  content:'';position:absolute;top:0;left:0;bottom:0;width:2px;
+  background:var(--green)}
+.sign-header{
+  display:flex;align-items:center;gap:16px;
+  padding:18px 22px 14px 24px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.sign-num{
+  font-family:var(--fh);font-size:36px;letter-spacing:2px;line-height:1;
+  color:var(--green);text-shadow:0 0 20px rgba(16,185,129,0.35);flex-shrink:0;width:32px}
+.sign-title{
+  font-family:var(--fh);font-size:clamp(20px,3vw,24px);letter-spacing:2px;color:var(--text);line-height:1}
+.sign-body{padding:18px 22px 18px 24px;display:flex;flex-direction:column;gap:14px}
+.sign-section{display:flex;flex-direction:column;gap:6px}
+.sign-section-label{
+  font-family:var(--fm);font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--muted)}
+.sign-section-text{
+  font-family:var(--fb);font-size:14px;line-height:1.7;
+  color:rgba(238,240,248,0.78)}
+
+/* Example scenario box */
+.scenario{
+  background:rgba(0,212,240,0.04);border:1px solid rgba(0,212,240,0.1);
+  border-radius:var(--radius);padding:14px 18px;margin-top:4px}
+.scenario-label{
+  font-family:var(--fm);font-size:8px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:6px}
+.scenario-text{
+  font-family:var(--fb);font-size:13px;line-height:1.65;
+  color:rgba(238,240,248,0.65)}
+
+/* Action strip */
+.action-strip{
+  background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.12);
+  border-radius:var(--radius);padding:14px 18px;margin-top:4px}
+.action-label{
+  font-family:var(--fm);font-size:8px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--green);margin-bottom:6px}
+.action-text{
+  font-family:var(--fb);font-size:13px;line-height:1.65;
+  color:rgba(238,240,248,0.72)}
+
+/* Comparison / weighting table */
+.cmp-table-wrap{margin:32px 0;overflow-x:auto;border:1px solid rgba(255,255,255,0.07);border-radius:var(--radius)}
+.cmp-table{width:100%;border-collapse:collapse;font-family:var(--fb);min-width:480px}
+.cmp-table th{
+  font-family:var(--fm);font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);text-align:left;padding:12px 14px;
+  background:rgba(0,212,240,0.04);border-bottom:1px solid rgba(0,212,240,0.12)}
+.cmp-table td{
+  font-size:13px;line-height:1.55;color:rgba(238,240,248,0.78);
+  padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.05);vertical-align:top}
+.cmp-table tr:last-child td{border-bottom:none}
+.cmp-table td:first-child{color:var(--text);font-weight:600}
+.cmp-table .num{font-family:var(--fm);font-size:12px;color:var(--green)}
+
+/* Callout */
+.callout{
+  background:rgba(245,158,11,0.05);border-left:2px solid var(--amber);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:18px 22px;margin:28px 0;
+  font-family:var(--fm);font-size:13px;line-height:1.65;
+  color:rgba(238,240,248,0.75)}
+.callout strong{color:var(--amber);font-weight:500}
+
+.callout-red{
+  background:rgba(239,68,68,0.05);border-left:2px solid var(--red);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:18px 22px;margin:28px 0;
+  font-family:var(--fm);font-size:13px;line-height:1.65;
+  color:rgba(238,240,248,0.75)}
+.callout-red strong{color:var(--red);font-weight:500}
+
+/* CTA */
+.article-cta{
+  position:relative;margin-top:64px;
+  background:var(--card);
+  border:1px solid rgba(0,212,240,0.18);border-radius:var(--radius);
+  padding:36px 32px;text-align:center;overflow:hidden}
+.article-cta::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),rgba(0,212,240,0.3),transparent)}
+.cta-label{
+  font-family:var(--fm);font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px}
+.cta-title{
+  font-family:var(--fh);font-size:clamp(24px,4vw,32px);letter-spacing:2px;
+  margin-bottom:10px;color:var(--text)}
+.cta-sub{
+  font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.65;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--fc);font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--bg);background:var(--accent);
+  padding:14px 32px;border-radius:3px;
+  box-shadow:0 0 30px rgba(0,212,240,0.35);
+  transition:all .22s}
+.cta-btn:hover{background:#1ae0f5;box-shadow:0 0 50px rgba(0,212,240,0.55);transform:translateY(-1px)}
+.cta-price{
+  font-family:var(--fm);font-size:9px;letter-spacing:2px;
+  color:var(--muted);margin-top:14px}
+
+/* Back link */
+.back-link{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-top:40px;transition:color .2s}
+.back-link:hover{color:var(--accent)}
+
+@media(max-width:600px){
+  .sign-header{flex-direction:column;align-items:flex-start;gap:8px}
+  .article-cta{padding:28px 20px}
+  .sign-num{font-size:28px}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "What Is a Fighter Readiness Score? (And How to Calculate One)",
+  "description": "A fighter readiness score is a single 0–100 number that tells a coach how recovered and ready an athlete is to train hard today. Here's what goes into one and how to calculate it by hand.",
+  "datePublished": "2026-06-10",
+  "dateModified": "2026-06-10",
+  "author": {"@type": "Organization", "name": "StrikePanel", "url": "https://strikepanel.uk"},
+  "publisher": {"@type": "Organization", "name": "StrikePanel", "url": "https://strikepanel.uk", "logo": {"@type": "ImageObject", "url": "https://strikepanel.uk/og-blog.png"}},
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://strikepanel.uk/blog/what-is-a-fighter-readiness-score"},
+  "image": "https://strikepanel.uk/og-blog.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a fighter readiness score?",
+      "acceptedAnswer": {"@type": "Answer", "text": "A fighter readiness score is a single number, usually on a 0–100 scale, that summarises how recovered and prepared an athlete is to train hard on a given day. It combines daily inputs like sleep, muscle soreness, mood, resting heart rate and the previous day's training load into one figure a coach can read at a glance to decide whether to push, hold or rest that fighter."}
+    },
+    {
+      "@type": "Question",
+      "name": "How do you calculate a readiness score by hand?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Score five inputs out of their own range each morning — sleep, soreness, mood, resting heart rate versus baseline, and yesterday's load — then weight them (for example 25% sleep, 20% soreness, 15% mood, 20% resting HR, 20% load) and add them to a single 0–100 figure. It takes under two minutes per fighter with pen and paper once you have each athlete's baseline resting heart rate."}
+    },
+    {
+      "@type": "Question",
+      "name": "What are good red, amber and green readiness thresholds?",
+      "acceptedAnswer": {"@type": "Answer", "text": "A common starting point is green at 75 and above (train as planned), amber between 55 and 74 (proceed but cap intensity or volume), and red below 55 (reduce load hard or rest). Calibrate the cut-offs to each athlete over two to three weeks, because a number that's low for one fighter may be normal for another."}
+    },
+    {
+      "@type": "Question",
+      "name": "What should a coach do after two consecutive red mornings?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Two red mornings in a row is a signal, not noise. Insert a genuine rest or very light day, have a direct conversation with the fighter about sleep, stress and soreness, and review accumulated camp load. If a third red follows despite reduced training, treat it as overreaching and deload for several days rather than pushing through."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div id="readProgress"></div>
+<div class="ambient"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-brand">
+    <svg class="nav-logo" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+      <defs><radialGradient id="ng" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="55%" stop-color="#0f1220"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs>
+      <circle cx="45" cy="45" r="43" fill="url(#ng)" stroke="#00D4F0" stroke-width="1.5" stroke-opacity="0.6"/>
+      <line x1="45" y1="2" x2="45" y2="26" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="45" y1="64" x2="45" y2="88" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="2" y1="45" x2="26" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="64" y1="45" x2="88" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="45" cy="45" r="11" fill="#00D4F0"/>
+    </svg>
+    <span class="nav-name">STRIKE<span>PANEL</span>&#x2122;</span>
+  </a>
+  <a href="/blog" class="nav-back"><span class="nav-back-arrow">&#8592;</span> Blog</a>
+</nav>
+
+<!-- ARTICLE -->
+<main class="article-wrap">
+
+  <!-- HEADER -->
+  <div class="article-cat"><span class="cat-dot"></span>Recovery</div>
+  <h1 class="article-title">What Is a Fighter Readiness Score? (And How to Calculate One)</h1>
+  <div class="article-meta">
+    <span>June 10, 2026</span>
+    <span class="meta-sep"></span>
+    <span>10 min read</span>
+    <span class="meta-sep"></span>
+    <span>Recovery</span>
+  </div>
+  <div class="article-divider"></div>
+
+  <!-- BODY -->
+  <div class="article-body">
+
+    <p>A fighter readiness score is a single number, usually on a 0–100 scale, that summarises how recovered and prepared an athlete is to train hard on a given day. It blends a handful of daily inputs — sleep, muscle soreness, mood, resting heart rate and the previous day's training load — into one figure a coach can read at a glance. The point of the score is decision-making: a high number means push, a middling one means proceed with caution, and a low one means hold back or rest before fatigue turns into injury or a flat performance on fight night.</p>
+
+    <p>That's the definition. The rest of this article is the practical part: what each input actually measures, a simple weighting you can compute with pen and paper, where to set red/amber/green cut-offs, and exactly what to do when a fighter logs two red mornings in a row. None of this requires software — though it gets a lot easier once the arithmetic is automated.</p>
+
+    <h2>Why a Single Number Beats Eyeballing It</h2>
+
+    <p>Every coach already judges readiness informally. You watch how a fighter moves on the bag, how they talk in the warm-up, whether their feet are heavy. The problem with eyeballing it is that the gym actively hides fatigue — adrenaline and competitive pride mask a lot, and by the time it shows in sparring you've lost a week of lead time. A readiness score forces the assessment to happen <strong>before</strong> training, in the calm of the morning, on consistent inputs you can trend over time.</p>
+
+    <p>It also makes the call objective and explainable. "You're at 48 this morning, down from 81 on Friday, so we're doing technical work only" is a conversation a fighter accepts. "You look tired" is one they argue with. The number isn't smarter than you — it just makes your judgement repeatable and harder to override with ego.</p>
+
+    <h2>The Five Inputs</h2>
+
+    <p>A solid readiness score doesn't need a lab. Five inputs, collected in two minutes each morning before training, cover the great majority of what matters.</p>
+
+    <!-- 1 -->
+    <div class="sign-block">
+      <div class="sign-header">
+        <span class="sign-num">01</span>
+        <span class="sign-title">Sleep</span>
+      </div>
+      <div class="sign-body">
+        <div class="sign-section">
+          <div class="sign-section-label">What it captures</div>
+          <div class="sign-section-text">Both duration and quality. Sleep is the single largest driver of recovery, so it carries the most weight. Ask for hours slept and a 1–10 quality rating — "did you wake rested?" — because eight hours of broken sleep is not eight hours of recovery.</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-label">Scoring tip</div>
+          <div class="scenario-text">Score out of 25. Treat 7.5–9 hours of good-quality sleep as full marks, and dock points for short duration or poor quality. A fighter on 5 hours of restless sleep might score 8/25.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="sign-block">
+      <div class="sign-header">
+        <span class="sign-num">02</span>
+        <span class="sign-title">Soreness</span>
+      </div>
+      <div class="sign-body">
+        <div class="sign-section">
+          <div class="sign-section-label">What it captures</div>
+          <div class="sign-section-text">Muscular fatigue and damage from accumulated load. A fighter who is deeply sore everywhere is carrying physical cost that more training will compound. Ask for a 1–10 soreness rating where 1 is fresh and 10 is wrecked, then invert it for the score.</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-label">Scoring tip</div>
+          <div class="scenario-text">Score out of 20. Fresh (soreness 1–2) is near full marks; severe soreness (8–10) is near zero. Localised soreness in one trained area matters less than whole-body heaviness.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="sign-block">
+      <div class="sign-header">
+        <span class="sign-num">03</span>
+        <span class="sign-title">Mood &amp; Motivation</span>
+      </div>
+      <div class="sign-body">
+        <div class="sign-section">
+          <div class="sign-section-label">What it captures</div>
+          <div class="sign-section-text">The psychological side of recovery — and an underrated early-warning signal. Drops in mood, irritability and loss of motivation often precede physical decline by several days. A fighter who's still physically capable but flat-out doesn't want to train is telling you something real.</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-label">Scoring tip</div>
+          <div class="scenario-text">Score out of 15 from a simple 1–10 "how do you feel about training today?" Don't dismiss low mood as weakness — it is a physiological flag worth points.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="sign-block">
+      <div class="sign-header">
+        <span class="sign-num">04</span>
+        <span class="sign-title">Resting Heart Rate</span>
+      </div>
+      <div class="sign-body">
+        <div class="sign-section">
+          <div class="sign-section-label">What it captures</div>
+          <div class="sign-section-text">A morning resting heart rate, taken on waking, compared against the athlete's own baseline. A sustained elevation of 5 or more beats per minute above normal is one of the most reliable, cheap biomarkers of accumulated stress. You need two to three weeks of readings to establish each fighter's baseline first.</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-label">Scoring tip</div>
+          <div class="scenario-text">Score out of 20. At or below baseline is full marks; +5 bpm costs roughly half; +10 bpm or more is near zero. Any phone or cheap chest strap gives a usable number.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="sign-block">
+      <div class="sign-header">
+        <span class="sign-num">05</span>
+        <span class="sign-title">Previous Training Load</span>
+      </div>
+      <div class="sign-body">
+        <div class="sign-section">
+          <div class="sign-section-label">What it captures</div>
+          <div class="sign-section-text">How hard yesterday actually was — duration multiplied by perceived effort (session RPE). A brutal sparring day yesterday lowers today's readiness even if everything else looks fine, because the body hasn't yet paid that bill. This input keeps the score honest about cumulative cost.</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-label">Scoring tip</div>
+          <div class="scenario-text">Score out of 20. A rest or light day yesterday scores high; a maximal session scores low. You're rewarding the recovery the body has had, not the work it did.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>A Pen-and-Paper Weighting You Can Use Today</h2>
+
+    <p>Here's a simple 0–100 model a coach can compute by hand. Each input is scored within its own band and the bands add to 100. You don't need to be precise to the decimal — readiness is a trend tool, not a lab assay.</p>
+
+    <div class="cmp-table-wrap">
+      <table class="cmp-table">
+        <thead>
+          <tr><th>Input</th><th>Weight</th><th>What full marks looks like</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Sleep</td><td class="num">25</td><td>7.5–9 hrs, woke rested</td></tr>
+          <tr><td>Resting HR</td><td class="num">20</td><td>At or below personal baseline</td></tr>
+          <tr><td>Soreness</td><td class="num">20</td><td>Fresh, no whole-body heaviness</td></tr>
+          <tr><td>Previous load</td><td class="num">20</td><td>Rest or light day yesterday</td></tr>
+          <tr><td>Mood</td><td class="num">15</td><td>Keen and motivated to train</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Add the five and you have a number out of 100. Worked example: a fighter logs 6 hours of poor sleep (12/25), resting HR +6 bpm over baseline (8/20), moderate soreness (12/20), a hard session yesterday (9/20) and decent motivation (12/15). That's <strong>53</strong> — amber bordering on red. Eyeballing it, they might have insisted they were fine. The number says cap the intensity today.</p>
+
+    <div class="callout">
+      <strong>On the weights:</strong> these are a sensible default, not gospel. If you coach endurance-heavy MMA athletes you might lift resting HR and load; for a fighter prone to mood dips in camp, raise the mood weight. The discipline that matters is keeping the weights <strong>consistent per athlete</strong> so the trend is comparable day to day.
+    </div>
+
+    <h2>Red, Amber, Green Thresholds</h2>
+
+    <p>A single number is only useful if it maps to an action. The simplest, most usable mapping is a traffic-light system:</p>
+
+    <div class="cmp-table-wrap">
+      <table class="cmp-table">
+        <thead>
+          <tr><th>Band</th><th>Score</th><th>Default action</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Green</td><td class="num">75–100</td><td>Train as planned — push if the plan calls for it</td></tr>
+          <tr><td>Amber</td><td class="num">55–74</td><td>Proceed, but cap intensity or volume; skip max-effort work</td></tr>
+          <tr><td>Red</td><td class="num">0–54</td><td>Cut load hard or rest; technical/movement work only</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Calibrate these to each fighter over two to three weeks. Some athletes simply run lower on the scale and perform fine; a flat 60 for one fighter might be their normal green, while for another it's a genuine warning. The bands are a starting point you tune, not a verdict you obey blindly.</p>
+
+    <h2>What to Do After Two Consecutive Red Mornings</h2>
+
+    <p>One red morning is often noise — a bad night's sleep, a stressful day, a single hard session. Two reds in a row is a pattern, and it's the moment to act rather than hope it passes.</p>
+
+    <div class="callout-red">
+      <strong>The two-red protocol:</strong> Insert a genuine rest or very light technical day — not "active recovery" that's really a workout in disguise. Have a direct, private conversation with the fighter about sleep, life stress and soreness, because the cause is often outside the gym. Review accumulated camp load to date. Then re-score the next morning. If a third red follows despite the reduced training, stop treating it as a blip — that's functional overreaching, and it needs a multi-day deload before any return to intensity. Pushing through it is how a sharp fighter arrives flat on fight night.
+    </div>
+
+    <p>The fighters who peak on the right day aren't the ones who trained hardest in the final fortnight. They're the ones whose coach had a number, watched it trend, and had the discipline to pull back when it dropped — even when the fighter swore they were fine. A readiness score is just the tool that makes that discipline repeatable across a whole roster.</p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <p><strong>What is a fighter readiness score?</strong> A fighter readiness score is a single number, usually on a 0–100 scale, that summarises how recovered and prepared an athlete is to train hard on a given day. It combines daily inputs like sleep, muscle soreness, mood, resting heart rate and the previous day's training load into one figure a coach can read at a glance to decide whether to push, hold or rest that fighter.</p>
+
+    <p><strong>How do you calculate a readiness score by hand?</strong> Score five inputs each morning — sleep, soreness, mood, resting heart rate versus baseline, and yesterday's load — then weight them (for example 25% sleep, 20% resting HR, 20% soreness, 20% load, 15% mood) and add them to a single 0–100 figure. It takes under two minutes per fighter once you have each athlete's baseline resting heart rate.</p>
+
+    <p><strong>What are good red, amber and green readiness thresholds?</strong> A common starting point is green at 75 and above (train as planned), amber between 55 and 74 (proceed but cap intensity or volume), and red below 55 (reduce load hard or rest). Calibrate the cut-offs to each athlete over two to three weeks, because a number that's low for one fighter may be normal for another.</p>
+
+    <p><strong>What should a coach do after two consecutive red mornings?</strong> Two red mornings in a row is a signal, not noise. Insert a genuine rest or very light day, talk to the fighter about sleep, stress and soreness, and review accumulated camp load. If a third red follows despite reduced training, treat it as overreaching and deload for several days rather than pushing through.</p>
+
+  </div><!-- end article body -->
+
+  <!-- CTA -->
+  <div class="article-cta">
+    <div class="cta-label">StrikePanel — Fight Camp Intelligence</div>
+    <div class="cta-title">Let the readiness score calculate itself</div>
+    <div class="cta-sub">Fighters submit a two-minute morning check-in and StrikePanel scores every athlete 0–100 automatically — red, amber, green, on one screen, so you know who to push and who to rest before training starts.</div>
+    <a href="https://payhip.com/Strikepanel" class="cta-btn">Get StrikePanel &mdash; $99 one-time</a>
+    <div class="cta-price">14-day free trial &bull; Lifetime access &bull; No subscription</div>
+  </div>
+
+  <!-- Back link -->
+  <a href="/blog" class="back-link">&#8592; Back to Blog</a>
+
+</main>
+
+<script>
+// Reading progress bar
+(function(){
+  var bar = document.getElementById('readProgress');
+  window.addEventListener('scroll', function(){
+    var doc = document.documentElement;
+    var scrollTop = doc.scrollTop || document.body.scrollTop;
+    var scrollHeight = doc.scrollHeight - doc.clientHeight;
+    var pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    bar.style.width = pct + '%';
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Spreadsheets vs Apps for Fight Camp Tracking: An Honest Comparison — StrikePanel</title>
+<meta name="description" content="An honest comparison of spreadsheets vs apps for fight camp tracking. Spreadsheets genuinely work for 1–3 fighters — here's exactly when to keep yours, and the four points where they break."/>
+<link rel="canonical" href="https://strikepanel.uk/blog/spreadsheet-vs-app-fight-camp"/>
+<meta property="og:title" content="Spreadsheets vs Apps for Fight Camp Tracking: An Honest Comparison"/>
+<meta property="og:description" content="Spreadsheets genuinely work for 1–3 fighters. Here's exactly when to keep yours, where they break, and when an app earns its place."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://strikepanel.uk/blog/spreadsheet-vs-app-fight-camp"/>
+<meta property="og:image" content="https://strikepanel.uk/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://strikepanel.uk/og-image.png"/>
+<meta name="robots" content="index,follow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='ng' cx='38%25' cy='32%25' r='62%25'%3E%3Cstop offset='0%25' stop-color='%231e2540'/%3E%3Cstop offset='55%25' stop-color='%230f1220'/%3E%3Cstop offset='100%25' stop-color='%230b0d14'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='45' cy='45' r='43' fill='url(%23ng)' stroke='%2300D4F0' stroke-width='1.5' stroke-opacity='0.6'/%3E%3Ccircle cx='45' cy='45' r='29' fill='none' stroke='%2300D4F0' stroke-width='0.9' stroke-opacity='0.2'/%3E%3Cline x1='45' y1='2' x2='45' y2='26' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='45' y1='64' x2='45' y2='88' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='2' y1='45' x2='26' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='64' y1='45' x2='88' y2='45' stroke='%2300D4F0' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='45' r='11' fill='%2300D4F0'/%3E%3C/svg%3E"/>
+<meta name="theme-color" content="#04070f"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04070f;--bg2:#070c18;--surface:#0b1120;--card:#0f1828;--card2:#131e30;
+  --accent:#00D4F0;--accent2:#00a8c4;--green:#10b981;--red:#ef4444;
+  --amber:#f59e0b;--purple:#8b5cf6;
+  --text:#eef0f8;--muted:#7a85a0;--muted2:#3d4560;--muted3:#1e2840;
+  --fh:'Bebas Neue',sans-serif;--fc:'Barlow Condensed',sans-serif;
+  --fb:'Barlow',sans-serif;--fm:'DM Mono',monospace;
+  --grid-color:rgba(0,212,240,0.035);
+  --scan:rgba(0,212,240,0.012);
+  --radius:6px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:16px;line-height:1.7;overflow-x:hidden}
+
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--grid-color) 1px,transparent 1px),linear-gradient(90deg,var(--grid-color) 1px,transparent 1px);
+  background-size:52px 52px}
+body::after{
+  content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,var(--scan) 2px,var(--scan) 4px);
+  animation:scan-drift 8s linear infinite}
+@keyframes scan-drift{from{background-position:0 0}to{background-position:0 100px}}
+
+.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(140px)}
+.blob-1{width:700px;height:600px;top:-15%;left:-10%;background:var(--accent);opacity:.04}
+.blob-2{width:500px;height:500px;bottom:-10%;right:-8%;background:var(--purple);opacity:.04}
+
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(0,212,240,0.2)}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:rgba(0,212,240,0.25);border-radius:99px}
+
+#readProgress{
+  position:fixed;top:0;left:0;z-index:10000;height:2px;width:0%;
+  background:linear-gradient(90deg,var(--accent),var(--purple),var(--accent));
+  background-size:200% 100%;
+  animation:progress-shimmer 2s linear infinite;
+  transition:width .1s linear;pointer-events:none}
+@keyframes progress-shimmer{0%{background-position:0% 0}100%{background-position:200% 0}}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(4,7,15,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(0,212,240,0.07);
+  padding:0 clamp(16px,4vw,48px);
+  display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),rgba(0,212,240,0.25),transparent)}
+.nav-brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nav-logo{width:26px;height:26px;filter:drop-shadow(0 0 8px rgba(0,212,240,0.55))}
+.nav-name{font-family:var(--fh);font-size:18px;letter-spacing:2px}
+.nav-name span{color:var(--accent)}
+.nav-back{
+  font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);padding:7px 14px;border:1px solid rgba(255,255,255,0.06);border-radius:3px;
+  transition:all .2s;display:flex;align-items:center;gap:6px}
+.nav-back:hover{color:var(--accent);border-color:rgba(0,212,240,0.28);background:rgba(0,212,240,0.04)}
+.nav-back-arrow{font-size:13px;line-height:1}
+
+/* ARTICLE LAYOUT */
+.article-wrap{
+  position:relative;z-index:1;
+  max-width:720px;margin:0 auto;
+  padding:56px clamp(20px,5vw,48px) 96px}
+
+/* ARTICLE HEADER */
+.article-cat{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--fm);font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);background:rgba(0,212,240,0.08);
+  border:1px solid rgba(0,212,240,0.22);border-radius:3px;
+  padding:5px 12px;margin-bottom:24px}
+.cat-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 7px var(--accent);animation:cat-pulse 2s ease-in-out infinite;flex-shrink:0}
+@keyframes cat-pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.article-title{
+  font-family:var(--fh);font-size:clamp(36px,6vw,56px);line-height:.92;
+  letter-spacing:2px;margin-bottom:24px;color:var(--text)}
+
+.article-meta{
+  display:flex;align-items:center;gap:20px;
+  font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:40px;flex-wrap:wrap}
+.meta-sep{width:3px;height:3px;border-radius:50%;background:var(--muted2)}
+
+.article-divider{
+  height:1px;background:linear-gradient(90deg,var(--accent),rgba(0,212,240,0.1),transparent);
+  margin-bottom:40px;opacity:.35}
+
+/* ARTICLE BODY */
+.article-body p{
+  color:rgba(238,240,248,0.82);font-size:16px;line-height:1.8;
+  margin-bottom:22px;font-weight:400}
+.article-body p:last-child{margin-bottom:0}
+
+.article-body h2{
+  font-family:var(--fh);font-size:clamp(26px,4vw,34px);letter-spacing:2px;
+  color:var(--text);margin-top:52px;margin-bottom:16px;line-height:1}
+
+.article-body strong{color:var(--text);font-weight:600}
+
+/* Sign block */
+.sign-block{
+  background:var(--card);border:1px solid rgba(255,255,255,0.07);
+  border-radius:var(--radius);margin:32px 0;overflow:hidden;
+  position:relative}
+.sign-block::before{
+  content:'';position:absolute;top:0;left:0;bottom:0;width:2px;
+  background:var(--accent)}
+.sign-header{
+  display:flex;align-items:center;gap:16px;
+  padding:18px 22px 14px 24px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.sign-num{
+  font-family:var(--fh);font-size:36px;letter-spacing:2px;line-height:1;
+  color:var(--accent);text-shadow:0 0 20px rgba(0,212,240,0.35);flex-shrink:0;width:32px}
+.sign-title{
+  font-family:var(--fh);font-size:clamp(20px,3vw,24px);letter-spacing:2px;color:var(--text);line-height:1}
+.sign-body{padding:18px 22px 18px 24px;display:flex;flex-direction:column;gap:14px}
+.sign-section{display:flex;flex-direction:column;gap:6px}
+.sign-section-label{
+  font-family:var(--fm);font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--muted)}
+.sign-section-text{
+  font-family:var(--fb);font-size:14px;line-height:1.7;
+  color:rgba(238,240,248,0.78)}
+
+/* Example scenario box */
+.scenario{
+  background:rgba(0,212,240,0.04);border:1px solid rgba(0,212,240,0.1);
+  border-radius:var(--radius);padding:14px 18px;margin-top:4px}
+.scenario-label{
+  font-family:var(--fm);font-size:8px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:6px}
+.scenario-text{
+  font-family:var(--fb);font-size:13px;line-height:1.65;
+  color:rgba(238,240,248,0.65)}
+
+/* Action strip */
+.action-strip{
+  background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.12);
+  border-radius:var(--radius);padding:14px 18px;margin-top:4px}
+.action-label{
+  font-family:var(--fm);font-size:8px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--green);margin-bottom:6px}
+.action-text{
+  font-family:var(--fb);font-size:13px;line-height:1.65;
+  color:rgba(238,240,248,0.72)}
+
+/* Comparison table */
+.cmp-table-wrap{margin:32px 0;overflow-x:auto;border:1px solid rgba(255,255,255,0.07);border-radius:var(--radius)}
+.cmp-table{width:100%;border-collapse:collapse;font-family:var(--fb);min-width:520px}
+.cmp-table th{
+  font-family:var(--fm);font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);text-align:left;padding:12px 14px;
+  background:rgba(0,212,240,0.04);border-bottom:1px solid rgba(0,212,240,0.12)}
+.cmp-table td{
+  font-size:13px;line-height:1.55;color:rgba(238,240,248,0.78);
+  padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.05);vertical-align:top}
+.cmp-table tr:last-child td{border-bottom:none}
+.cmp-table td:first-child{color:var(--text);font-weight:600}
+.cmp-table .yes{color:var(--green);font-family:var(--fm);font-size:12px}
+.cmp-table .no{color:var(--red);font-family:var(--fm);font-size:12px}
+
+/* Callout */
+.callout{
+  background:rgba(245,158,11,0.05);border-left:2px solid var(--amber);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:18px 22px;margin:28px 0;
+  font-family:var(--fm);font-size:13px;line-height:1.65;
+  color:rgba(238,240,248,0.75)}
+.callout strong{color:var(--amber);font-weight:500}
+
+.callout-red{
+  background:rgba(239,68,68,0.05);border-left:2px solid var(--red);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:18px 22px;margin:28px 0;
+  font-family:var(--fm);font-size:13px;line-height:1.65;
+  color:rgba(238,240,248,0.75)}
+.callout-red strong{color:var(--red);font-weight:500}
+
+/* CTA */
+.article-cta{
+  position:relative;margin-top:64px;
+  background:var(--card);
+  border:1px solid rgba(0,212,240,0.18);border-radius:var(--radius);
+  padding:36px 32px;text-align:center;overflow:hidden}
+.article-cta::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),rgba(0,212,240,0.3),transparent)}
+.cta-label{
+  font-family:var(--fm);font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px}
+.cta-title{
+  font-family:var(--fh);font-size:clamp(24px,4vw,32px);letter-spacing:2px;
+  margin-bottom:10px;color:var(--text)}
+.cta-sub{
+  font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.65;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--fc);font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--bg);background:var(--accent);
+  padding:14px 32px;border-radius:3px;
+  box-shadow:0 0 30px rgba(0,212,240,0.35);
+  transition:all .22s}
+.cta-btn:hover{background:#1ae0f5;box-shadow:0 0 50px rgba(0,212,240,0.55);transform:translateY(-1px)}
+.cta-price{
+  font-family:var(--fm);font-size:9px;letter-spacing:2px;
+  color:var(--muted);margin-top:14px}
+
+/* Back link */
+.back-link{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-top:40px;transition:color .2s}
+.back-link:hover{color:var(--accent)}
+
+@media(max-width:600px){
+  .sign-header{flex-direction:column;align-items:flex-start;gap:8px}
+  .article-cta{padding:28px 20px}
+  .sign-num{font-size:28px}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Spreadsheets vs Apps for Fight Camp Tracking: An Honest Comparison",
+  "description": "An honest comparison of spreadsheets vs apps for fight camp tracking — when a spreadsheet genuinely works, where it breaks, and when an app earns its place.",
+  "datePublished": "2026-06-10",
+  "dateModified": "2026-06-10",
+  "author": {"@type": "Organization", "name": "StrikePanel", "url": "https://strikepanel.uk"},
+  "publisher": {"@type": "Organization", "name": "StrikePanel", "url": "https://strikepanel.uk", "logo": {"@type": "ImageObject", "url": "https://strikepanel.uk/og-blog.png"}},
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://strikepanel.uk/blog/spreadsheet-vs-app-fight-camp"},
+  "image": "https://strikepanel.uk/og-blog.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is a spreadsheet good enough for tracking a fight camp?",
+      "acceptedAnswer": {"@type": "Answer", "text": "For one to three fighters, a well-built spreadsheet is genuinely good enough — it is free, fully customisable and adds no learning curve for an organised coach. It stops being good enough once you need athletes to submit their own daily check-ins, want automatic alerts when readiness drops, or have several assistant coaches editing the same file."}
+    },
+    {
+      "@type": "Question",
+      "name": "When should a coach switch from a spreadsheet to an app?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Switch when the manual work starts costing you decisions: your roster has grown past three or four fighters, athletes won't reliably fill in a shared sheet, you're scanning rows by hand instead of getting alerts, or assistant coaches keep overwriting each other's edits. At that point the spreadsheet's free price is being paid in your time and missed signals."}
+    },
+    {
+      "@type": "Question",
+      "name": "What can an app do that a spreadsheet can't for fight camps?",
+      "acceptedAnswer": {"@type": "Answer", "text": "An app can collect athlete check-ins directly from each fighter's phone, score readiness automatically, send alerts when a fighter trends into the red, keep one shared source of truth across multiple coaches, and project weight cuts and camp phases. A spreadsheet can store all the same numbers, but a coach has to do the collecting, scoring and watching by hand."}
+    },
+    {
+      "@type": "Question",
+      "name": "Do professional coaches still use spreadsheets?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes, plenty do, and there's no shame in it — a disciplined coach can run an excellent camp on a spreadsheet for a small number of fighters. The pros who move off them usually do so because of roster size and the need for athlete-submitted data and alerts, not because the spreadsheet was doing the maths wrong."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div id="readProgress"></div>
+<div class="ambient"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-brand">
+    <svg class="nav-logo" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+      <defs><radialGradient id="ng" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="#1e2540"/><stop offset="55%" stop-color="#0f1220"/><stop offset="100%" stop-color="#0b0d14"/></radialGradient></defs>
+      <circle cx="45" cy="45" r="43" fill="url(#ng)" stroke="#00D4F0" stroke-width="1.5" stroke-opacity="0.6"/>
+      <line x1="45" y1="2" x2="45" y2="26" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="45" y1="64" x2="45" y2="88" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="2" y1="45" x2="26" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <line x1="64" y1="45" x2="88" y2="45" stroke="#00D4F0" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="45" cy="45" r="11" fill="#00D4F0"/>
+    </svg>
+    <span class="nav-name">STRIKE<span>PANEL</span>&#x2122;</span>
+  </a>
+  <a href="/blog" class="nav-back"><span class="nav-back-arrow">&#8592;</span> Blog</a>
+</nav>
+
+<!-- ARTICLE -->
+<main class="article-wrap">
+
+  <!-- HEADER -->
+  <div class="article-cat"><span class="cat-dot"></span>Fight Camp</div>
+  <h1 class="article-title">Spreadsheets vs Apps for Fight Camp Tracking: An Honest Comparison</h1>
+  <div class="article-meta">
+    <span>June 10, 2026</span>
+    <span class="meta-sep"></span>
+    <span>9 min read</span>
+    <span class="meta-sep"></span>
+    <span>Fight Camp</span>
+  </div>
+  <div class="article-divider"></div>
+
+  <!-- BODY -->
+  <div class="article-body">
+
+    <p>For one to three fighters, a well-built spreadsheet is genuinely good enough to track a fight camp — it's free, fully customisable, and adds no learning curve for an organised coach. An app earns its place when you need athletes to submit their own daily check-ins, want automatic alerts the moment readiness drops, or have several assistant coaches editing the same data without overwriting each other. The honest answer isn't "apps win" — it's that the right tool depends entirely on your roster size and how much manual work you're willing to keep doing yourself.</p>
+
+    <p>We build a fight-camp app, so weigh that bias. But we'd rather tell a coach with three fighters and a tidy Google Sheet to keep it than sell them software they'll abandon. Below is the honest version: where spreadsheets genuinely shine, the four specific points where they break, a side-by-side table, and a verdict that doesn't pretend the answer is the same for everyone.</p>
+
+    <h2>Where Spreadsheets Genuinely Work</h2>
+
+    <p>Let's start by giving the spreadsheet its due, because most "you need our app" articles skip this part. A spreadsheet is not a primitive choice — for the right coach it's the correct one.</p>
+
+    <div class="sign-block">
+      <div class="sign-header">
+        <span class="sign-num">01</span>
+        <span class="sign-title">Stay With a Spreadsheet If...</span>
+      </div>
+      <div class="sign-body">
+        <div class="sign-section">
+          <div class="sign-section-label">Small roster</div>
+          <div class="sign-section-text">You coach one to three fighters and can hold the whole picture in your head anyway. The spreadsheet is a memory aid, not a management system, and that's all you need it to be.</div>
+        </div>
+        <div class="sign-section">
+          <div class="sign-section-label">You collect the data yourself</div>
+          <div class="sign-section-text">You're in the gym with these athletes daily and can ask the questions and type the answers in yourself. You don't need them filling anything in remotely.</div>
+        </div>
+        <div class="sign-section">
+          <div class="sign-section-label">You're the only editor</div>
+          <div class="sign-section-text">It's your file, you're the only one touching it, and there are no assistant coaches making parallel changes. One author, one source of truth.</div>
+        </div>
+        <div class="sign-section">
+          <div class="sign-section-label">You value total control</div>
+          <div class="sign-section-text">You want to define every column, every formula and every chart yourself, and you'd genuinely rather build than adopt. A spreadsheet bends to exactly your method.</div>
+        </div>
+        <div class="action-strip">
+          <div class="action-label">Honest verdict for this coach</div>
+          <div class="action-text">If that's you, keep the spreadsheet. You'd be paying — in money or in switching cost — for capabilities you don't currently need. Spend the effort on coaching, not on migrating data.</div>
+        </div>
+      </div>
+    </div>
+
+    <p>None of that is a consolation prize. A disciplined coach running three fighters off a clean spreadsheet will out-coach a disorganised one with the best app on the market. The tool is downstream of the discipline. If you've already got columns for date, sleep, soreness, resting heart rate, session load and a readiness formula that rolls them into one number, you've effectively built a small app by hand — and for a handful of athletes that's a perfectly rational thing to have done.</p>
+
+    <p>The reason this matters is that "should I use a spreadsheet or an app" is really two different questions wearing one coat. The first is whether you can <strong>store and reason about</strong> the data — and a spreadsheet does that fine. The second is whether the system can <strong>collect the data, watch it, and react</strong> without you doing every step manually. That second question is where the honest comparison actually lives, and it's the one most coaches don't ask until a camp has already gone sideways.</p>
+
+    <h2>Where Spreadsheets Break</h2>
+
+    <p>The trouble is that the spreadsheet's strengths are tied to a small, single-author, in-person setup. Change any of those conditions and specific, predictable failures appear. Here are the four that bite hardest.</p>
+
+    <div class="sign-block">
+      <div class="sign-header">
+        <span class="sign-num">02</span>
+        <span class="sign-title">No Athlete Check-In Collection</span>
+      </div>
+      <div class="sign-body">
+        <div class="sign-section">
+          <div class="sign-section-label">The problem</div>
+          <div class="sign-section-text">Readiness data is only useful if it's collected every morning, before training. A shared spreadsheet asks fighters to open a file, find their row and type honestly into a grid — and most won't, reliably, for long. Compliance quietly decays, and a readiness system with gaps in it isn't a readiness system.</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-label">How it shows up</div>
+          <div class="scenario-text">Week 1 the sheet is full. By Week 4 half the cells are blank, you're chasing people for numbers, and you've started guessing again — which is exactly what the sheet was meant to stop.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sign-block">
+      <div class="sign-header">
+        <span class="sign-num">03</span>
+        <span class="sign-title">No Alerts When Something's Wrong</span>
+      </div>
+      <div class="sign-body">
+        <div class="sign-section">
+          <div class="sign-section-label">The problem</div>
+          <div class="sign-section-text">A spreadsheet sits there passively. It will happily store three straight mornings of declining readiness and never tell you. You only catch the warning if you remember to scan every row, every day, and correctly read the trend — across a busy gym, with fights to corner and admin to do. The data is present; the attention isn't.</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-label">How it shows up</div>
+          <div class="scenario-text">A fighter's score drifts 81 → 68 → 54 over a week. It's all in the sheet. Nobody flagged it, the hard session went ahead, and the fighter tweaks something a week out from the fight.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sign-block">
+      <div class="sign-header">
+        <span class="sign-num">04</span>
+        <span class="sign-title">Version Chaos Across Assistant Coaches</span>
+      </div>
+      <div class="sign-body">
+        <div class="sign-section">
+          <div class="sign-section-label">The problem</div>
+          <div class="sign-section-text">The moment more than one coach touches the data, you get the classic spreadsheet failure modes: someone works off a downloaded copy, two people edit the same cell, a column gets dragged out of alignment, "final_v3_REAL.xlsx" lands in the group chat. There's no single source of truth, and reconciling versions costs more time than the sheet ever saved.</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-label">How it shows up</div>
+          <div class="scenario-text">Your S&amp;C coach updated load on their copy, you updated readiness on yours, and now neither file is complete. Whose is right? Nobody's sure, so the data gets quietly distrusted and abandoned.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sign-block">
+      <div class="sign-header">
+        <span class="sign-num">05</span>
+        <span class="sign-title">It Scales With Your Effort, Not Your Roster</span>
+      </div>
+      <div class="sign-body">
+        <div class="sign-section">
+          <div class="sign-section-label">The problem</div>
+          <div class="sign-section-text">Three fighters is fine. Twelve is a part-time admin job. Every fighter you add multiplies the rows you collect, the trends you watch and the cells you chase — all manually. The spreadsheet doesn't get harder to use because it's badly built; it gets harder because the work it leaves to you grows linearly with your roster.</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-label">How it shows up</div>
+          <div class="scenario-text">You promise yourself you'll review every athlete's numbers each morning. With twelve fighters and a 6am class, you skim the ones you're worried about and the quiet decline in fighter number nine goes unnoticed.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Side-by-Side Comparison</h2>
+
+    <div class="cmp-table-wrap">
+      <table class="cmp-table">
+        <thead>
+          <tr><th>Capability</th><th>Spreadsheet</th><th>Fight-camp app</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cost</td><td class="yes">Free</td><td>Paid (one-time or subscription)</td></tr>
+          <tr><td>Full customisation</td><td class="yes">Total</td><td>Within the app's model</td></tr>
+          <tr><td>Athletes submit own check-ins</td><td class="no">Manual / unreliable</td><td class="yes">Yes, from their phone</td></tr>
+          <tr><td>Automatic readiness scoring</td><td>You build the formula</td><td class="yes">Built in</td></tr>
+          <tr><td>Alerts on declining readiness</td><td class="no">None</td><td class="yes">Yes</td></tr>
+          <tr><td>One source of truth for many coaches</td><td class="no">Version chaos</td><td class="yes">Shared, live</td></tr>
+          <tr><td>Weight-cut &amp; camp-phase projection</td><td>Hand-built</td><td class="yes">Built in</td></tr>
+          <tr><td>Effort as roster grows</td><td class="no">Grows linearly</td><td class="yes">Roughly flat</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>The Honest Verdict</h2>
+
+    <p>This isn't a case where one tool wins outright. The deciding factors are roster size, whether you need athletes feeding their own data in, and how many coaches share the picture.</p>
+
+    <div class="callout">
+      <strong>Keep the spreadsheet if:</strong> you coach one to three fighters, you collect the data in person, you're the only editor, and you value bending the tool to exactly your method. You'd gain little by switching and you'd spend real effort doing it.
+    </div>
+
+    <div class="callout-red">
+      <strong>Move to an app if:</strong> your roster has grown past three or four fighters, you need athletes submitting check-ins remotely, you want to be alerted instead of scanning rows, or assistant coaches keep overwriting each other. Past that point the spreadsheet's "free" is being paid in your time and in signals you miss.
+    </div>
+
+    <p>The mistake isn't choosing one or the other — it's not noticing when your situation has crossed the line. Coaches outgrow spreadsheets quietly: the roster creeps up, the blanks creep in, the morning review gets skimmed, and one day a fighter goes flat and the warning was sitting in row 14 the whole time. If your spreadsheet still fits the four "keep it" conditions, you're done here. If you read the "move to an app" list and winced, that's your answer.</p>
+
+    <p>One last piece of honesty, because it's the question we get asked most: you don't have to migrate years of history to switch. The data that drives day-to-day decisions is the rolling last few weeks of check-ins, not the archive. Keep the old spreadsheet as a record if you like it, and start fresh wherever you land. The point of any of this — sheet or app — is the same: to turn what your fighters are quietly telling you every morning into a decision you actually act on. The tool only matters to the extent it makes that easier to do consistently, across every athlete, on the mornings you're too busy to think clearly. Pick the one that fits your roster today, and be willing to change your mind when your roster changes.</p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <p><strong>Is a spreadsheet good enough for tracking a fight camp?</strong> For one to three fighters, a well-built spreadsheet is genuinely good enough — it's free, fully customisable and adds no learning curve for an organised coach. It stops being good enough once you need athletes to submit their own daily check-ins, want automatic alerts when readiness drops, or have several assistant coaches editing the same file.</p>
+
+    <p><strong>When should a coach switch from a spreadsheet to an app?</strong> Switch when the manual work starts costing you decisions: your roster has grown past three or four fighters, athletes won't reliably fill in a shared sheet, you're scanning rows by hand instead of getting alerts, or assistant coaches keep overwriting each other's edits. At that point the spreadsheet's free price is being paid in your time and missed signals.</p>
+
+    <p><strong>What can an app do that a spreadsheet can't for fight camps?</strong> An app can collect athlete check-ins directly from each fighter's phone, score readiness automatically, send alerts when a fighter trends into the red, keep one shared source of truth across multiple coaches, and project weight cuts and camp phases. A spreadsheet can store all the same numbers, but a coach has to do the collecting, scoring and watching by hand.</p>
+
+    <p><strong>Do professional coaches still use spreadsheets?</strong> Yes, plenty do, and there's no shame in it — a disciplined coach can run an excellent camp on a spreadsheet for a small number of fighters. The pros who move off them usually do so because of roster size and the need for athlete-submitted data and alerts, not because the spreadsheet was doing the maths wrong.</p>
+
+  </div><!-- end article body -->
+
+  <!-- CTA -->
+  <div class="article-cta">
+    <div class="cta-label">StrikePanel — Fight Camp Intelligence</div>
+    <div class="cta-title">When the spreadsheet stops keeping up</div>
+    <div class="cta-sub">Athletes check in from their phones, readiness scores itself, alerts surface the fighter who's slipping, and every coach sees one shared picture — no version chaos. Try it free for 14 days.</div>
+    <a href="https://payhip.com/Strikepanel" class="cta-btn">Get StrikePanel &mdash; $99 one-time</a>
+    <div class="cta-price">14-day free trial &bull; Lifetime access &bull; No subscription</div>
+  </div>
+
+  <!-- Back link -->
+  <a href="/blog" class="back-link">&#8592; Back to Blog</a>
+
+</main>
+
+<script>
+// Reading progress bar
+(function(){
+  var bar = document.getElementById('readProgress');
+  window.addEventListener('scroll', function(){
+    var doc = document.documentElement;
+    var scrollTop = doc.scrollTop || document.body.scrollTop;
+    var scrollHeight = doc.scrollHeight - doc.clientHeight;
+    var pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    bar.style.width = pct + '%';
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>
