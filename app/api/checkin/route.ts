@@ -19,7 +19,17 @@ async function findByToken(token: string) {
   const res = await sb(`coach_data?coach_token=eq.${encodeURIComponent(token)}&select=license_key,state`);
   if (!res.ok) return null;
   const rows = await res.json();
-  return Array.isArray(rows) && rows.length > 0 ? rows[0] : null;
+  if (!Array.isArray(rows) || rows.length === 0) return null;
+  const row = rows[0];
+  // Validate license is still active and not expired
+  const licRes = await sb(`licenses?license_key=eq.${encodeURIComponent(row.license_key)}&select=status,trial_expires_at`);
+  if (!licRes.ok) return null;
+  const licRows = await licRes.json();
+  if (!Array.isArray(licRows) || licRows.length === 0) return null;
+  const lic = licRows[0];
+  if (lic.status !== 'active') return null;
+  if (lic.trial_expires_at && new Date(lic.trial_expires_at) < new Date()) return null;
+  return row;
 }
 
 // GET /api/checkin?coach=TOKEN → athlete roster for the check-in form

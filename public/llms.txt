@@ -1,0 +1,33 @@
+# StrikePanel
+
+> Combat sports coaching dashboard. $99 one-time payment, no subscription.
+
+StrikePanel is a cloud-based coaching command centre built specifically for combat sports coaches (boxing, MMA, Muay Thai, BJJ, kickboxing). It gives coaches a daily readiness score for every athlete before they walk into the gym.
+
+## Core features
+
+- **Morning Brief**: Daily readiness score (0–100) per athlete based on their check-in data (sleep, soreness, mood, resting HR). Tells the coach who to push, who to protect, and who to rest.
+- **Athlete Check-In**: Coaches send athletes a unique link. Athletes submit a 60-second daily readiness check-in. No app download required.
+- **Fight Camp Timelines**: Visual countdown and periodization planner for each fighter's camp. Tracks sparring load, weight cut progress, and taper phase automatically.
+- **Weight Cut Tracker**: Maps the full weight cut on a timeline from camp start to fight night. Flags crash-cut risk 5+ days early.
+- **AI Session Planner**: Generates sport-specific session plans based on the day's readiness data, camp phase, and the coach's notes. Understands deload weeks, taper phases, and pre-fight protocols.
+- **Cloud Sync**: All data syncs across up to 3 devices via Supabase. Coaches can access from phone, tablet, or laptop.
+
+## Who it's for
+
+Combat sports coaches and small gym owners managing 2–20 fighters. Coaches who currently track readiness, weight cuts, and fight camps using notebooks, WhatsApp, and spreadsheets.
+
+## Pricing
+
+$99 one-time. No monthly fee. All future updates included. 14-day free trial available (no credit card).
+
+## Why coaches use it
+
+The most common coaching mistake is training a fighter who says "I'm fine" when their data says otherwise. StrikePanel's readiness score catches overtraining 2–3 days before it becomes an injury. The fight camp timeline ensures no fighter is doing their hardest training in the final week before a fight.
+
+## Resources
+
+- Homepage: https://strikepanel.uk
+- App: https://strikepanel.uk/app
+- Blog: https://strikepanel.uk/blog
+- Free trial: https://strikepanel.uk/#demo

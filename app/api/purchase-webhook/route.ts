@@ -5,6 +5,37 @@ const INTERNAL_SECRET = process.env.INTERNAL_SECRET!;
 const LEMON_SQUEEZY_SECRET = process.env.LEMON_SQUEEZY_WEBHOOK_SECRET!;
 const PAYHIP_SECRET = process.env.PAYHIP_WEBHOOK_SECRET!;
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://strikepanel.uk';
+const SUPABASE_URL = process.env.SUPABASE_URL!;
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY!;
+
+async function sbFetch(path: string, options: RequestInit = {}) {
+  return fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    ...options,
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json',
+      ...(options.headers ?? {}),
+    },
+  });
+}
+
+// If buyer email matches an existing trial, convert it to paid (preserves all coach data)
+async function convertTrialToPaid(email: string, platform: string): Promise<string | null> {
+  const res = await sbFetch(
+    `licenses?email=eq.${encodeURIComponent(email.toLowerCase())}&platform=eq.trial&status=eq.active&select=license_key`
+  );
+  if (!res.ok) return null;
+  const rows = await res.json();
+  if (!Array.isArray(rows) || rows.length === 0) return null;
+  const trialKey = rows[0].license_key;
+  const patch = await sbFetch(`licenses?license_key=eq.${encodeURIComponent(trialKey)}`, {
+    method: 'PATCH',
+    headers: { Prefer: 'return=minimal' },
+    body: JSON.stringify({ trial_expires_at: null, platform }),
+  });
+  return patch.ok ? trialKey : null;
+}
 
 async function generateKey(platform: string): Promise<string | null> {
   const res = await fetch(`${APP_URL}/api/generate-key`, {
@@ -14,6 +45,10 @@ async function generateKey(platform: string): Promise<string | null> {
   });
   const data = await res.json();
   return data.ok ? data.key : null;
+}
+
+async function resolveKey(email: string, platform: string): Promise<string | null> {
+  return (await convertTrialToPaid(email, platform)) ?? (await generateKey(platform));
 }
 
 function purchaseEmail(key: string): string {
@@ -118,7 +153,7 @@ async function handleLemonSqueezy(req: NextRequest, body: string) {
   const email = payload.data?.attributes?.user_email;
   if (!email) return NextResponse.json({ ok: false, msg: 'No email' }, { status: 400 });
 
-  const key = await generateKey('lemonsqueezy');
+  const key = await resolveKey(email, 'lemonsqueezy');
   if (!key) return NextResponse.json({ ok: false, msg: 'Key generation failed' }, { status: 500 });
 
   await sendKeyEmail(email, key, 'lemonsqueezy');
@@ -142,7 +177,7 @@ async function handlePayhip(req: NextRequest, body: string) {
     return NextResponse.json({ ok: false, msg: 'No email' }, { status: 400 });
   }
 
-  const key = await generateKey('payhip');
+  const key = await resolveKey(email, 'payhip');
   if (!key) return NextResponse.json({ ok: false, msg: 'Key generation failed' }, { status: 500 });
 
   await sendKeyEmail(email, key, 'payhip');

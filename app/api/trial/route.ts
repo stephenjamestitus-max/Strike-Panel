@@ -209,6 +209,27 @@ export async function POST(req: NextRequest) {
 
     const normalized = email.trim().toLowerCase();
 
+    // Dedup: one trial per email address
+    const existingRes = await sb(
+      `licenses?email=eq.${encodeURIComponent(normalized)}&platform=eq.trial&status=eq.active&select=license_key,trial_expires_at`
+    );
+    if (existingRes.ok) {
+      const existing = await existingRes.json();
+      if (Array.isArray(existing) && existing.length > 0) {
+        const row = existing[0];
+        if (row.trial_expires_at && new Date(row.trial_expires_at) < new Date()) {
+          return NextResponse.json({
+            ok: false,
+            msg: 'Your free trial has ended. Get lifetime access at strikepanel.uk for $99 — one payment, no subscription.',
+          });
+        }
+        // Active trial exists — resend the key email silently
+        const exLabel = trialEnd(new Date(row.trial_expires_at));
+        void send(normalized, 'Your StrikePanel trial key (resent)', emailDay0(row.license_key, exLabel));
+        return NextResponse.json({ ok: true });
+      }
+    }
+
     const now = new Date();
     const trialExpiresAt = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000).toISOString();
     const expiresLabel = trialEnd(now);

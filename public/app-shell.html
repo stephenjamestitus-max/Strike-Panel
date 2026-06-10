@@ -1084,7 +1084,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
       <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;margin-top:8px;font-size:13px" onclick="lgActivate()">🔓 Activate License</button>
       <div class="lg-msg" id="lgMsg"></div>
       <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);font-size:11px;color:var(--muted2);line-height:1.7">
-        Don't have a license? <a href="https://payhip.com/Strikepanel" target="_blank" style="color:var(--accent);text-decoration:underline">Get strikepane — $99 →</a>
+        Don't have a license? <a href="https://payhip.com/Strikepanel" target="_blank" style="color:var(--accent);text-decoration:underline">Get strikepanel — $99 →</a>
       </div>
     </div>
 
@@ -1122,7 +1122,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
     Demo Mode
   </div>
   <div class="demo-mode-text">
-    You're exploring strikepane™ with sample data. Nothing you do here is saved permanently.
+    You're exploring strikepanel™ with sample data. Nothing you do here is saved permanently.
   </div>
   <a href="https://payhip.com/Strikepanel" target="_blank" class="demo-buy-btn">Buy to unlock — $99</a>
   <button class="demo-exit-btn" onclick="demoExit()" title="Exit demo">✕ Exit</button>
@@ -1136,7 +1136,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
   <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px">
     You're exploring with demo data. To save your own athletes, sessions and check-ins — grab your license.
   </div>
-  <a href="https://payhip.com/Strikepanel" target="_blank" class="demo-buy-btn" style="width:100%;justify-content:center;padding:13px;font-size:12px">Get strikepane — $99</a>
+  <a href="https://payhip.com/Strikepanel" target="_blank" class="demo-buy-btn" style="width:100%;justify-content:center;padding:13px;font-size:12px">Get strikepanel — $99</a>
   <div style="font-size:11px;color:var(--muted2);margin-top:10px">One-time fee · No subscription · Instant access</div>
   <button class="btn btn-ghost btn-sm" style="margin-top:10px;width:100%;justify-content:center" onclick="demoCloseBlock()">Keep exploring demo</button>
 </div>
@@ -5620,9 +5620,10 @@ function lgShowKeyInput() {
 function lgActivateSuccess(key, btn, isTrial = false) {
   localStorage.setItem('cp_license_key', key.toUpperCase());
   localStorage.setItem('cp_license_activated', new Date().toISOString());
+  localStorage.setItem('cp_license_verified_at', String(Date.now()));
   if (isTrial) localStorage.setItem('cp_license_type', 'trial');
   else localStorage.removeItem('cp_license_type');
-  lgSetMsg('✓ Activated! Welcome to strikepane™', true);
+  lgSetMsg('✓ Activated! Welcome to strikepanel™', true);
   if (btn) { btn.textContent = '✓ Activated!'; btn.disabled = true; }
   setTimeout(async () => {
     lgUnlock();
@@ -5639,21 +5640,34 @@ function lgActivateSuccess(key, btn, isTrial = false) {
 }
 
 async function lgCheck() {
-  if (window.location.search.includes('checkin=1')) return; // athlete check-in — bypass gate
+  if (window.location.search.includes('checkin=1')) return;
   const stored = localStorage.getItem('cp_license_key');
-  if (!stored) return; // no key stored — gate stays visible
-  // Master key unlocks immediately without a network call
+  if (!stored) return;
+  // Master key: verify by hash, no network
   if (await lgIsValidKey(stored)) { lgUnlock(); return; }
-  // Trial keys always re-verify — they expire after 14 days
+  // Trial keys: always re-verify (they expire)
   if (localStorage.getItem('cp_license_type') === 'trial') {
     const result = await lgVerifyWithPayhip(stored);
     if (result.ok) { lgUnlock(); return; }
     if (result.trial_expired) { lgShowTrialExpired(); return; }
-    if (result.network) { lgUnlock(); return; } // lenient on transient network errors
-    return; // key genuinely invalid — gate stays visible
+    if (result.network) { lgUnlock(); return; }
+    return;
   }
-  // Previously verified full license — unlock without re-calling API every load
-  if (localStorage.getItem('cp_license_activated')) { lgUnlock(); return; }
+  // Paid keys: re-verify once per day (prevents stale localStorage bypass)
+  const verifiedAt = Number(localStorage.getItem('cp_license_verified_at') || '0');
+  const oneDayMs = 24 * 60 * 60 * 1000;
+  if (verifiedAt && Date.now() - verifiedAt < oneDayMs) { lgUnlock(); return; }
+  const result = await lgVerifyWithPayhip(stored);
+  if (result.ok) {
+    localStorage.setItem('cp_license_verified_at', String(Date.now()));
+    lgUnlock(); return;
+  }
+  if (result.network) { lgUnlock(); return; }
+  // Key no longer valid — clear stored data and show gate
+  localStorage.removeItem('cp_license_key');
+  localStorage.removeItem('cp_license_activated');
+  localStorage.removeItem('cp_license_verified_at');
+  localStorage.removeItem('cp_license_type');
 }
 
 lgCheck();

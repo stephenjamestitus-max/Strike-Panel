@@ -8,5 +8,7 @@ export default function robots(): MetadataRoute.Robots {
       disallow: ['/api/', '/app'],
     },
     sitemap: 'https://strikepanel.uk/sitemap.xml',
+    // llms.txt for AI crawlers
+    // https://strikepanel.uk/llms.txt
   }
 }
