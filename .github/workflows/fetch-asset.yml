@@ -1,16 +1,11 @@
 name: Fetch external asset
 
 on:
-  workflow_dispatch:
-    inputs:
-      url:
-        description: URL to fetch
-        required: true
-        type: string
-      path:
-        description: Repo path to write the fetched file to
-        required: true
-        type: string
+  push:
+    branches:
+      - claude/beautiful-carson-bem3di
+    paths:
+      - .fetch-request.json
 
 permissions:
   contents: write
@@ -20,17 +15,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch asset
-        env:
-          SRC: ${{ inputs.url }}
-          DEST: ${{ inputs.path }}
+      - name: Fetch asset from request file
         run: |
+          SRC="$(jq -r .url .fetch-request.json)"
+          DEST="$(jq -r .path .fetch-request.json)"
           mkdir -p "$(dirname "$DEST")"
           curl -fsSL -o "$DEST" "$SRC"
           file "$DEST"
-      - name: Commit asset
-        env:
-          DEST: ${{ inputs.path }}
+          echo "DEST=$DEST" >> "$GITHUB_ENV"
+      - name: Commit fetched asset
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
