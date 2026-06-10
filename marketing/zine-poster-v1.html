@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1000px;height:1500px;overflow:hidden;background:#0a0a0a;position:relative;
+  font-family:'Liberation Sans',Arial,sans-serif}
+
+/* paper texture + grain */
+.grain{position:absolute;inset:0;opacity:.5;pointer-events:none;z-index:50;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size:160px 160px;mix-blend-mode:overlay}
+
+.frame{position:absolute;inset:40px;border:2px solid #e8e6e0;padding:34px 38px;
+  display:flex;flex-direction:column}
+
+/* ── masthead ── */
+.masthead{font-weight:900;font-size:122px;letter-spacing:2px;color:#e8e6e0;
+  line-height:.92;transform:scaleY(1.25);transform-origin:top left;
+  text-transform:uppercase;margin-bottom:44px}
+.subline{font-family:'Courier New',monospace;font-size:12.5px;letter-spacing:3.5px;
+  color:#9a978f;margin-top:-18px;margin-bottom:22px;word-spacing:6px}
+
+/* ── row 1: action photo + stamp ── */
+.row1{display:flex;gap:18px;margin-bottom:18px}
+.photo-strip{flex:1;height:210px;border:2px solid #e8e6e0;overflow:hidden;position:relative}
+.photo-strip .img{position:absolute;inset:0;
+  background:url('boxing.jpg') center 18%/cover no-repeat;
+  filter:grayscale(1) contrast(1.5) brightness(.9)}
+.photo-strip .scan{position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(0,0,0,.12) 3px 4px)}
+.stamp{width:240px;border:2px solid #e8e6e0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;padding:16px}
+.stamp .co{font-weight:900;font-size:30px;letter-spacing:2px;color:#e8e6e0}
+.stamp .co b{color:#00D4F0}
+.stamp .yr{font-family:'Courier New',monospace;font-size:16px;letter-spacing:5px;color:#9a978f}
+.stamp .badge{font-family:'Courier New',monospace;font-size:10px;letter-spacing:2px;
+  border:1px solid #9a978f;border-radius:20px;padding:5px 14px;color:#9a978f}
+
+/* ── row 2: left tile + app screenshot ── */
+.row2{display:flex;gap:18px;flex:1;margin-bottom:18px}
+.tile-left{width:300px;display:flex;flex-direction:column;gap:18px}
+.hard{flex:1;border:2px solid #e8e6e0;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center}
+.topo{position:absolute;inset:0;opacity:.55;
+  background:repeating-radial-gradient(circle at 30% 60%, transparent 0 14px, rgba(232,230,224,.35) 14px 15.5px),
+             repeating-radial-gradient(circle at 75% 25%, transparent 0 18px, rgba(232,230,224,.22) 18px 19.5px)}
+.hard .txt{position:relative;font-weight:900;font-size:46px;line-height:1.05;
+  letter-spacing:1px;color:#e8e6e0;text-align:center;transform:scaleY(1.2);
+  text-transform:uppercase;background:#0a0a0a;padding:14px 10px}
+.hard .txt em{font-style:normal;color:#00D4F0}
+.barcode{height:64px;border:2px solid #e8e6e0;display:flex;align-items:stretch;padding:8px 12px;gap:12px}
+.bars{flex:1;background:repeating-linear-gradient(90deg,
+  #e8e6e0 0 2px, transparent 2px 4px, #e8e6e0 4px 9px, transparent 9px 11px,
+  #e8e6e0 11px 12px, transparent 12px 17px, #e8e6e0 17px 21px, transparent 21px 23px)}
+.bar-num{font-family:'Courier New',monospace;font-size:11px;letter-spacing:2px;color:#9a978f;align-self:center}
+
+.shot{flex:1;border:2px solid #e8e6e0;position:relative;overflow:hidden;background:#060a12}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 12%}
+.shot .label{position:absolute;left:0;right:0;bottom:0;background:#0a0a0a;border-top:2px solid #e8e6e0;
+  font-family:'Courier New',monospace;font-size:11px;letter-spacing:3px;color:#e8e6e0;
+  padding:10px 14px;display:flex;justify-content:space-between}
+.shot .label b{color:#00D4F0}
+
+/* ── footer ── */
+.footer{display:flex;justify-content:space-between;align-items:flex-end}
+.foot-left{display:flex;flex-direction:column;gap:10px}
+.cta-big{font-weight:900;font-size:54px;letter-spacing:1px;color:#e8e6e0;line-height:1;
+  transform:scaleY(1.18);transform-origin:bottom left;text-transform:uppercase}
+.cta-big em{font-style:normal;color:#00D4F0}
+.foot-meta{font-family:'Courier New',monospace;font-size:11.5px;letter-spacing:2.5px;color:#9a978f}
+.btn{border:2px solid #00D4F0;color:#00D4F0;font-family:'Courier New',monospace;
+  font-weight:700;font-size:15px;letter-spacing:4px;padding:18px 30px;white-space:nowrap}
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="masthead">Readiness</div>
+    <div class="subline">READINESS IS A NUMBER &nbsp;·&nbsp; YOUR FIGHTER HAS ONE EVERY MORNING &nbsp;·&nbsp; MOST COACHES NEVER SEE IT</div>
+
+    <div class="row1">
+      <div class="photo-strip">
+        <div class="img"></div>
+        <div class="scan"></div>
+      </div>
+      <div class="stamp">
+        <div class="co">STRIKE<b>PANEL</b></div>
+        <div class="yr">2⊘26</div>
+        <div class="badge">FIGHT CAMP INTELLIGENCE</div>
+      </div>
+    </div>
+
+    <div class="row2">
+      <div class="tile-left">
+        <div class="hard">
+          <div class="topo"></div>
+          <div class="txt">KNOW<br>WHO TO<br><em>PUSH</em></div>
+        </div>
+        <div class="barcode">
+          <div class="bars"></div>
+          <div class="bar-num">076</div>
+        </div>
+      </div>
+      <div class="shot">
+        <img src="phone-morning-brief.png" alt="">
+        <div class="label"><span>MORNING BRIEF — <b>LIVE APP</b></span><span>STRIKEPANEL.UK</span></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="foot-left">
+        <div class="cta-big">14 DAYS <em>FREE</em></div>
+        <div class="foot-meta">NO CARD · NO SUBSCRIPTION · FULL APP · STRIKEPANEL.UK</div>
+      </div>
+      <div class="btn">START TRIAL →</div>
+    </div>
+  </div>
+  <div class="grain"></div>
+</body>
+</html>
