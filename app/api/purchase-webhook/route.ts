@@ -47,8 +47,21 @@ async function generateKey(platform: string): Promise<string | null> {
   return data.ok ? data.key : null;
 }
 
+async function findExistingPaidKey(email: string): Promise<string | null> {
+  const res = await sbFetch(
+    `licenses?email=eq.${encodeURIComponent(email.toLowerCase())}&status=eq.active&trial_expires_at=is.null&select=license_key`
+  );
+  if (!res.ok) return null;
+  const rows = await res.json();
+  return Array.isArray(rows) && rows.length > 0 ? rows[0].license_key : null;
+}
+
 async function resolveKey(email: string, platform: string): Promise<string | null> {
-  return (await convertTrialToPaid(email, platform)) ?? (await generateKey(platform));
+  return (
+    (await findExistingPaidKey(email)) ??
+    (await convertTrialToPaid(email, platform)) ??
+    (await generateKey(platform))
+  );
 }
 
 function purchaseEmail(key: string): string {
@@ -140,10 +153,19 @@ async function sendKeyEmail(email: string, key: string, platform: string) {
 
 // ── Lemon Squeezy webhook ─────────────────────────────────────────
 async function handleLemonSqueezy(req: NextRequest, body: string) {
+  if (!LEMON_SQUEEZY_SECRET) {
+    console.error('[lemon-squeezy] LEMON_SQUEEZY_WEBHOOK_SECRET not configured');
+    return NextResponse.json({ ok: false }, { status: 500 });
+  }
   const sig = req.headers.get('x-signature');
-  if (LEMON_SQUEEZY_SECRET && sig) {
-    const expected = createHmac('sha256', LEMON_SQUEEZY_SECRET).update(body).digest('hex');
-    if (sig !== expected) return NextResponse.json({ ok: false }, { status: 401 });
+  if (!sig) {
+    console.error('[lemon-squeezy] Missing x-signature header');
+    return NextResponse.json({ ok: false }, { status: 401 });
+  }
+  const expected = createHmac('sha256', LEMON_SQUEEZY_SECRET).update(body).digest('hex');
+  if (sig !== expected) {
+    console.error('[lemon-squeezy] Signature mismatch');
+    return NextResponse.json({ ok: false }, { status: 401 });
   }
 
   const payload = JSON.parse(body);
@@ -163,10 +185,14 @@ async function handleLemonSqueezy(req: NextRequest, body: string) {
 
 // ── Payhip webhook ────────────────────────────────────────────────
 async function handlePayhip(req: NextRequest, body: string) {
+  if (!PAYHIP_SECRET) {
+    console.error('[payhip] PAYHIP_WEBHOOK_SECRET not configured');
+    return NextResponse.json({ ok: false }, { status: 500 });
+  }
   const payload = JSON.parse(body);
 
   // Payhip sends their API key as payhip_key in every webhook POST body
-  if (PAYHIP_SECRET && payload.payhip_key !== PAYHIP_SECRET) {
+  if (payload.payhip_key !== PAYHIP_SECRET) {
     console.error('[payhip] Auth failed — payhip_key mismatch');
     return NextResponse.json({ ok: false }, { status: 401 });
   }
