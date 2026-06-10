@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:1000px; height:1500px; overflow:hidden; background:#000; }
+
+.root {
+  width:1000px; height:1500px;
+  position:relative; overflow:hidden;
+  font-family:'Courier New', monospace;
+}
+
+/* ── Full-bleed boxing photo ── */
+.bg-photo {
+  position:absolute; inset:0; z-index:0;
+  background: url('boxing.jpg') center 30% / cover no-repeat;
+  filter: grayscale(30%) contrast(1.1);
+}
+
+/* ── Multi-layer overlay: dark top, heavier bottom ── */
+.overlay-top {
+  position:absolute; inset:0; z-index:1;
+  background: linear-gradient(
+    180deg,
+    rgba(4,7,15,0.82) 0%,
+    rgba(4,7,15,0.35) 35%,
+    rgba(4,7,15,0.15) 55%,
+    rgba(4,7,15,0.75) 72%,
+    rgba(4,7,15,0.97) 100%
+  );
+}
+
+/* ── Cyan tone wash on photo (combat feel) ── */
+.overlay-cyan {
+  position:absolute; inset:0; z-index:2;
+  background: radial-gradient(ellipse 80% 50% at 50% 40%, rgba(0,212,240,0.06) 0%, transparent 70%);
+}
+
+/* ── Grain texture ── */
+.grain {
+  position:absolute; inset:0; z-index:3; opacity:0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  mix-blend-mode: overlay;
+}
+
+/* ── All UI lives here ── */
+.ui { position:absolute; inset:0; z-index:10; }
+
+/* ── Top bar ── */
+.topbar {
+  position:absolute; top:0; left:0; right:0;
+  padding:44px 56px 0;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo { display:flex; align-items:baseline; gap:0; }
+.logo-s { font-size:12px; font-weight:700; letter-spacing:5px; color:#f5f0e8; }
+.logo-p { font-size:12px; font-weight:700; letter-spacing:5px; color:#00D4F0; }
+.logo-tm { font-size:7px; color:rgba(0,212,240,0.4); vertical-align:super; margin-left:1px; }
+
+.top-tag {
+  background:rgba(0,212,240,0.1);
+  border:1px solid rgba(0,212,240,0.3);
+  border-radius:100px;
+  padding:6px 16px;
+  font-size:8px; letter-spacing:3px; color:#00D4F0;
+}
+
+/* ── Headline block ── */
+.headline-block {
+  position:absolute; top:100px; left:56px; right:56px;
+}
+.eyebrow {
+  font-size:9px; letter-spacing:4px; color:rgba(0,212,240,0.65);
+  margin-bottom:18px;
+  display:flex; align-items:center; gap:12px;
+}
+.eyebrow-line { width:24px; height:1px; background:rgba(0,212,240,0.4); flex-shrink:0; }
+
+.h1 {
+  font-family:'Georgia', serif;
+  font-size:90px; font-weight:700;
+  line-height:0.9; letter-spacing:-2px;
+  color:#f5f0e8;
+}
+.h1-cyan {
+  font-style:italic;
+  background:linear-gradient(135deg,#00D4F0,#7ae8f6);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.h1-gold {
+  background:linear-gradient(135deg,#c8892a,#f0c060);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.sub {
+  margin-top:22px;
+  font-size:11px; letter-spacing:2.5px; line-height:1.9;
+  color:rgba(122,133,160,0.75);
+  max-width:520px;
+}
+
+/* ── Readiness card ── */
+.card {
+  position:absolute; top:530px; left:56px; right:56px;
+  background:rgba(6,11,22,0.88);
+  border:1px solid rgba(0,212,240,0.13);
+  border-radius:14px; overflow:hidden;
+  backdrop-filter:blur(10px);
+  box-shadow:0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,212,240,0.05);
+}
+
+.card-header {
+  padding:18px 26px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  background:rgba(4,7,15,0.5);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.card-header-left { font-size:7px; letter-spacing:3px; color:#00D4F0; }
+.card-header-title { font-size:13px; font-weight:700; letter-spacing:2px; color:#f5f0e8; margin-top:4px; }
+.card-header-right { text-align:right; }
+.card-avg { font-size:28px; font-weight:700; color:#10b981; line-height:1; }
+.card-avg-sub { font-size:7px; letter-spacing:2px; color:rgba(122,133,160,0.4); margin-top:3px; }
+
+.row {
+  padding:16px 26px;
+  display:flex; align-items:center; gap:16px;
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.row:last-child { border-bottom:none; }
+
+.ring {
+  width:50px; height:50px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+}
+.ring-n { font-size:18px; font-weight:700; }
+
+.row-info { flex:1; }
+.row-name { font-size:12px; font-weight:700; letter-spacing:1px; color:#f5f0e8; }
+.row-rec { font-size:7px; letter-spacing:2px; color:rgba(122,133,160,0.5); margin-top:4px; }
+
+.badge {
+  font-size:7px; letter-spacing:2px; font-weight:700;
+  border-radius:4px; padding:5px 10px; flex-shrink:0;
+}
+
+/* ── CTA block ── */
+.cta {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:0 56px 52px;
+}
+
+.cta-rule { width:32px; height:2px; background:#00D4F0; margin-bottom:24px; }
+
+.cta-h {
+  font-family:'Georgia', serif;
+  font-size:42px; font-weight:700; line-height:1.05;
+  color:#f5f0e8; margin-bottom:14px; letter-spacing:-0.5px;
+}
+.cta-h em {
+  font-style:italic;
+  background:linear-gradient(135deg,#c8892a,#f0c060);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.cta-desc {
+  font-size:9px; letter-spacing:2px; line-height:1.9;
+  color:rgba(122,133,160,0.6); margin-bottom:28px;
+}
+
+.cta-btns { display:flex; align-items:center; gap:14px; margin-bottom:22px; }
+
+.btn-primary {
+  background:#00D4F0; color:#04070f;
+  font-family:'Courier New',monospace;
+  font-size:10px; font-weight:700; letter-spacing:3px;
+  padding:15px 28px; border-radius:7px;
+  white-space:nowrap;
+}
+.btn-ghost {
+  border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.35);
+  font-size:9px; letter-spacing:2px;
+  padding:14px 20px; border-radius:7px;
+  white-space:nowrap;
+}
+
+.cta-meta {
+  font-size:7px; letter-spacing:2px;
+  color:rgba(122,133,160,0.25);
+  display:flex; gap:0;
+}
+.cta-meta span + span::before { content:" · "; color:rgba(0,212,240,0.2); }
+
+/* ── Bottom domain ── */
+.domain {
+  position:absolute; bottom:52px; right:56px;
+  font-size:8px; letter-spacing:3px; color:rgba(122,133,160,0.2);
+}
+</style>
+</head>
+<body>
+<div class="root">
+
+  <div class="bg-photo"></div>
+  <div class="overlay-top"></div>
+  <div class="overlay-cyan"></div>
+  <div class="grain"></div>
+
+  <div class="ui">
+
+    <!-- Top bar -->
+    <div class="topbar">
+      <div class="logo">
+        <span class="logo-s">STRIKE</span>
+        <span class="logo-p">PANEL</span>
+        <span class="logo-tm">™</span>
+      </div>
+      <div class="top-tag">14-DAY FREE TRIAL</div>
+    </div>
+
+    <!-- Headline -->
+    <div class="headline-block">
+      <div class="eyebrow">
+        <span class="eyebrow-line"></span>
+        FREE ACCESS · NO CARD REQUIRED
+      </div>
+      <div class="h1">
+        KNOW<br>
+        WHO TO<br>
+        <span class="h1-cyan">PUSH.</span><br>
+        WHO TO<br>
+        <span class="h1-gold">PROTECT.</span>
+      </div>
+      <div class="sub">
+        DAILY READINESS SCORES FOR EVERY FIGHTER.<br>
+        WEIGHT CUT TIMELINES. AI SESSION PLANS.
+      </div>
+    </div>
+
+    <!-- Dashboard card -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-header-left">// MORNING BRIEF</div>
+          <div class="card-header-title">MONDAY 9 JUNE 2026</div>
+        </div>
+        <div class="card-header-right">
+          <div class="card-avg">71</div>
+          <div class="card-avg-sub">SQUAD AVG · 4/4 IN</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="ring" style="border:2px solid #10b981;background:rgba(16,185,129,0.08)">
+          <span class="ring-n" style="color:#10b981">92</span>
+        </div>
+        <div class="row-info">
+          <div class="row-name">PRIYA SHARMA</div>
+          <div class="row-rec">PEAK LOAD — PUSH TODAY · CAMP D-18</div>
+        </div>
+        <div class="badge" style="color:#10b981;border:1px solid rgba(16,185,129,0.3);background:rgba(16,185,129,0.07)">READY</div>
+      </div>
+
+      <div class="row">
+        <div class="ring" style="border:2px solid #c8892a;background:rgba(200,137,42,0.08)">
+          <span class="ring-n" style="color:#c8892a">67</span>
+        </div>
+        <div class="row-info">
+          <div class="row-name">JAKE THOMPSON</div>
+          <div class="row-rec">MODERATE ONLY · WEIGHT CUT -4.2KG</div>
+        </div>
+        <div class="badge" style="color:#c8892a;border:1px solid rgba(200,137,42,0.3);background:rgba(200,137,42,0.07)">CAUTION</div>
+      </div>
+
+      <div class="row">
+        <div class="ring" style="border:2px solid #ef4444;background:rgba(239,68,68,0.08)">
+          <span class="ring-n" style="color:#ef4444">34</span>
+        </div>
+        <div class="row-info">
+          <div class="row-name">MARCUS MENDEZ</div>
+          <div class="row-rec">PROTECT — LIGHT WORK · 2 RED FLAGS</div>
+        </div>
+        <div class="badge" style="color:#ef4444;border:1px solid rgba(239,68,68,0.3);background:rgba(239,68,68,0.07)">REST</div>
+      </div>
+
+      <div class="row">
+        <div class="ring" style="border:2px solid #10b981;background:rgba(16,185,129,0.08)">
+          <span class="ring-n" style="color:#10b981">88</span>
+        </div>
+        <div class="row-info">
+          <div class="row-name">LISA FERREIRA</div>
+          <div class="row-rec">SPARRING APPROVED · CAMP D-31</div>
+        </div>
+        <div class="badge" style="color:#10b981;border:1px solid rgba(16,185,129,0.3);background:rgba(16,185,129,0.07)">READY</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+      <div class="cta-rule"></div>
+      <div class="cta-h">14 days.<br><em>Free.</em> No card.</div>
+      <div class="cta-desc">
+        ADD YOUR FIGHTERS. RUN REAL CHECK-INS.<br>
+        SEE THEIR READINESS BEFORE YOU WALK IN.
+      </div>
+      <div class="cta-btns">
+        <div class="btn-primary">START FREE TRIAL →</div>
+        <div class="btn-ghost">strikepanel.uk</div>
+      </div>
+      <div class="cta-meta">
+        <span>$99 LIFETIME AFTER TRIAL</span>
+        <span>NO SUBSCRIPTION</span>
+        <span>3 DEVICES</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
