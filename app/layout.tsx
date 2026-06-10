@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'strikepane™ — Training Intelligence for Combat Sports',
+  title: 'strikepanel™ — Training Intelligence for Combat Sports',
   description: 'The cloud coaching platform built for combat sports. Morning briefs, fight camp timelines, AI session plans, and readiness scores — all in one dashboard. One-time $99.',
   metadataBase: new URL('https://strikepanel.uk'),
 manifest: '/site.webmanifest',
@@ -15,7 +16,7 @@ manifest: '/site.webmanifest',
     ],
   },
   openGraph: {
-    title: 'strikepane™ — Training Intelligence for Combat Sports',
+    title: 'strikepanel™ — Training Intelligence for Combat Sports',
     description: 'Morning briefs, fight camp timelines, AI session plans & readiness scores. Built for combat sports coaches. Cloud-based. One-time $99.',
     type: 'website',
     url: 'https://strikepanel.uk',
@@ -24,13 +25,13 @@ manifest: '/site.webmanifest',
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'strikepane — Training Intelligence for Combat Sports',
+        alt: 'strikepanel — Training Intelligence for Combat Sports',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'strikepane™ — Training Intelligence for Combat Sports',
+    title: 'strikepanel™ — Training Intelligence for Combat Sports',
     description: 'Morning briefs, fight camp timelines, AI session plans & readiness scores. Built for combat sports coaches.',
     images: ['/og-image.png'],
   },
@@ -39,7 +40,7 @@ manifest: '/site.webmanifest',
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: 'strikepane',
+  name: 'strikepanel',
   applicationCategory: 'SportsApplication',
   operatingSystem: 'Web',
   url: 'https://strikepanel.uk',
@@ -49,12 +50,6 @@ const jsonLd = {
     price: '99',
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
-  },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5',
-    reviewCount: '5',
-    bestRating: '5',
   },
 }
 
@@ -67,7 +62,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }

@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { track } from '@vercel/analytics'
 import FadeIn from '@/components/ui/FadeIn'
 
 const athletes = [
@@ -29,6 +30,7 @@ export default function Demo() {
       })
       const data = await res.json()
       if (data.ok) {
+        track('trial_signup')
         setState('success')
       } else {
         setErrMsg(data.msg || 'Something went wrong — try again.')
@@ -51,6 +53,7 @@ export default function Demo() {
         body: JSON.stringify({ email: val.toLowerCase(), source: 'checklist' }),
       })
     } catch { /* silent */ }
+    track('checklist_signup')
     setCheckState('done')
   }
 

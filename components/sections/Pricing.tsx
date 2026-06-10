@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { track } from '@vercel/analytics'
 import FadeIn from '@/components/ui/FadeIn'
 import Magnet from '@/components/ui/Magnet'
 
@@ -33,6 +34,7 @@ export default function Pricing() {
       })
       const data = await res.json()
       if (data.ok) {
+        track('trial_signup')
         setTrial('success')
       } else {
         setTrialMsg(data.msg || 'Something went wrong — try again.')
@@ -186,6 +188,7 @@ export default function Pricing() {
           <Magnet padding={120} strength={3}>
             <a
               href="https://payhip.com/Strikepanel"
+              onClick={() => track('buy_click')}
               style={{
                 display: 'block',
                 background: 'linear-gradient(135deg,#c8892a,#e0a83a)',
