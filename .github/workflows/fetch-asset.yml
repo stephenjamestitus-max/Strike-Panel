@@ -1,0 +1,39 @@
+name: Fetch external asset
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: URL to fetch
+        required: true
+        type: string
+      path:
+        description: Repo path to write the fetched file to
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch asset
+        env:
+          SRC: ${{ inputs.url }}
+          DEST: ${{ inputs.path }}
+        run: |
+          mkdir -p "$(dirname "$DEST")"
+          curl -fsSL -o "$DEST" "$SRC"
+          file "$DEST"
+      - name: Commit asset
+        env:
+          DEST: ${{ inputs.path }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$DEST"
+          git commit -m "Add fetched asset: $DEST"
+          git push
