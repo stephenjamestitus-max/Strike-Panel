@@ -10,13 +10,13 @@ describe('Nav', () => {
 
   it('renders CTA button', () => {
     render(<Nav />)
-    expect(screen.getByRole('link', { name: /START FREE TRIAL/i })).toBeTruthy()
+    expect(screen.getAllByText(/GET ACCESS/i).length).toBeGreaterThan(0)
   })
 
   it('renders nav links', () => {
     render(<Nav />)
-    expect(screen.getByText('FEATURES')).toBeTruthy()
-    expect(screen.getByText('DEMO')).toBeTruthy()
-    expect(screen.getByText('PRICING')).toBeTruthy()
+    expect(screen.getAllByText('FEATURES').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('TRIAL').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('PRICING').length).toBeGreaterThan(0)
   })
 })

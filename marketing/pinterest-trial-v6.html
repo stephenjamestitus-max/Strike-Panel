@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1000px;height:1500px;overflow:hidden;background:#02050a;position:relative;font-family:'Courier New',monospace}
+
+/* ── Photo — tight crop on the action ── */
+.photo{position:absolute;inset:0;background:url('boxing.jpg') 62% 8%/cover no-repeat;
+  filter:contrast(1.1) saturate(.7) brightness(.88)}
+/* Full dark base from bottom 55% up */
+.base{position:absolute;inset:0;background:linear-gradient(0deg,
+  #02050a 0%, #02050a 42%, rgba(2,5,10,.92) 52%, rgba(2,5,10,.55) 64%,
+  rgba(2,5,10,.1) 78%, rgba(2,5,10,0) 100%)}
+/* Right side clear, left darker */
+.side{position:absolute;inset:0;background:linear-gradient(90deg,
+  rgba(2,5,10,.65) 0%, rgba(2,5,10,.2) 50%, rgba(2,5,10,0) 100%)}
+.grain{position:absolute;inset:0;opacity:.22;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:128px 128px;mix-blend-mode:soft-light}
+.vig{position:absolute;inset:0;box-shadow:inset 0 0 280px 40px rgba(2,5,10,.65)}
+
+/* ── Score card floating ── */
+.score-card{position:absolute;top:188px;right:64px;width:360px;
+  background:rgba(10,17,32,.95);backdrop-filter:blur(20px);
+  border:1px solid rgba(0,212,240,.35);border-radius:18px;padding:30px;
+  box-shadow:0 40px 120px rgba(2,5,10,.95),0 0 100px rgba(0,212,240,.18),0 0 0 1px rgba(0,212,240,.1)}
+.sc-header{font-size:11px;letter-spacing:5px;color:#00D4F0;margin-bottom:6px}
+.sc-date{font-size:10px;letter-spacing:3px;color:rgba(196,206,228,.5);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.07)}
+.sc-row{display:flex;justify-content:space-between;align-items:center;
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.sc-row:last-child{border-bottom:none}
+.sc-name{font-size:15px;letter-spacing:2px;color:#dce4f0}
+.sc-badge{font-size:9px;letter-spacing:2px;padding:5px 11px;border-radius:4px;font-weight:700}
+.badge-push{background:rgba(16,185,129,.2);color:#34d399;border:1px solid rgba(16,185,129,.4)}
+.badge-rest{background:rgba(239,68,68,.18);color:#f87171;border:1px solid rgba(239,68,68,.4)}
+.badge-caution{background:rgba(245,158,11,.16);color:#fbbf24;border:1px solid rgba(245,158,11,.4)}
+.sc-score{font-size:26px;font-weight:700}
+.score-high{color:#34d399}
+.score-mid{color:#fbbf24}
+.score-low{color:#f87171}
+.sc-label{font-size:9px;letter-spacing:2px;color:rgba(196,206,228,.4);margin-top:16px;text-align:center}
+
+/* ── Bottom panel ── */
+.panel{position:absolute;left:0;right:0;bottom:0;
+  padding:48px 64px 60px;
+  background:linear-gradient(180deg,rgba(2,5,10,0) 0%,rgba(2,5,10,.02) 8%,#02050a 28%)}
+
+.eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.eline{width:32px;height:1px;background:#00D4F0;flex-shrink:0}
+.etxt{font-size:12px;letter-spacing:5px;color:#00D4F0}
+
+h1{font-family:Georgia,serif;font-size:70px;font-weight:700;line-height:1.03;
+  color:#f0f4ff;letter-spacing:-1.5px;margin-bottom:20px;
+  text-shadow:0 4px 40px rgba(2,5,10,1)}
+h1 em{font-style:italic;color:#00D4F0}
+h1 .g{font-style:italic;color:#dfa84a}
+
+.bullets{display:flex;flex-direction:column;gap:10px;margin-bottom:34px}
+.bul{display:flex;align-items:baseline;gap:10px;font-size:15px;color:rgba(180,192,215,.75)}
+.bul::before{content:'—';color:#00D4F0;flex-shrink:0}
+
+.divider{height:1px;background:linear-gradient(90deg,rgba(0,212,240,.45),rgba(0,212,240,.0));margin-bottom:28px}
+.cta-line{display:flex;align-items:center;justify-content:space-between}
+.offer{font-family:Georgia,serif;font-size:46px;font-weight:700;color:#f0f4ff;line-height:1.05}
+.offer em{font-style:italic;color:#dfa84a}
+.btn-col{display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.btn{background:#00D4F0;color:#02050a;font-family:'Courier New',monospace;font-weight:700;
+  font-size:14px;letter-spacing:4px;padding:18px 40px;border-radius:6px;white-space:nowrap;
+  box-shadow:0 0 50px rgba(0,212,240,.5)}
+.url{font-size:12px;letter-spacing:3px;color:rgba(0,212,240,.65);text-align:right}
+
+/* ── Logo strip ── */
+.logo-strip{position:absolute;top:52px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:18px;font-weight:700;letter-spacing:8px;color:rgba(240,244,255,.9)}
+.logo b{color:#00D4F0}
+.logo-tag{font-size:11px;letter-spacing:4px;color:rgba(240,244,255,.38)}
+</style>
+</head>
+<body>
+  <div class="photo"></div>
+  <div class="base"></div>
+  <div class="side"></div>
+  <div class="grain"></div>
+  <div class="vig"></div>
+
+  <div class="logo-strip">
+    <div class="logo">STRIKE<b>PANEL</b>™</div>
+    <div class="logo-tag">FIGHT CAMP INTELLIGENCE</div>
+  </div>
+
+  <!-- Floating score card -->
+  <div class="score-card">
+    <div class="sc-header">⚡ MORNING BRIEF</div>
+    <div class="sc-date">TUESDAY · FIGHT CAMP · WEEK 6</div>
+    <div class="sc-row">
+      <div class="sc-name">PRIYA SHARMA</div>
+      <div class="sc-score score-high">94</div>
+      <div class="sc-badge badge-push">PUSH HARD</div>
+    </div>
+    <div class="sc-row">
+      <div class="sc-name">JAKE TORRES</div>
+      <div class="sc-score score-mid">67</div>
+      <div class="sc-badge badge-caution">MODERATE</div>
+    </div>
+    <div class="sc-row">
+      <div class="sc-name">MARCUS REYES</div>
+      <div class="sc-score score-low">31</div>
+      <div class="sc-badge badge-rest">REST TODAY</div>
+    </div>
+    <div class="sc-label">READINESS SCORES · STRIKEPANEL.UK/APP</div>
+  </div>
+
+  <div class="panel">
+    <div class="eyebrow">
+      <div class="eline"></div>
+      <div class="etxt">COACHING INTELLIGENCE DASHBOARD</div>
+    </div>
+    <h1>Know who's <em>ready</em><br>before they<br>walk <span class="g">in.</span></h1>
+    <div class="bullets">
+      <div class="bul">0–100 readiness score for every fighter, every morning</div>
+      <div class="bul">Crash-cut risk flagged 5 days before it becomes a crisis</div>
+      <div class="bul">Full fight camp timeline — no spreadsheets</div>
+    </div>
+    <div class="divider"></div>
+    <div class="cta-line">
+      <div class="offer">14 days.<br><em>Free.</em> No card.</div>
+      <div class="btn-col">
+        <div class="btn">START FREE TRIAL</div>
+        <div class="url">strikepanel.uk</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

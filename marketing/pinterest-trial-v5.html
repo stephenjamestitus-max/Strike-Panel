@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1000px;height:1500px;overflow:hidden;background:#02050a;position:relative}
+
+/* ── Photo layers ── */
+.photo{position:absolute;inset:0;background:url('boxing.jpg') 55% 15%/cover no-repeat}
+/* Dual-tone colour grade: push shadows to deep teal-navy, mids warm */
+.grade-a{position:absolute;inset:0;background:linear-gradient(180deg,
+  rgba(2,5,10,.0) 0%,
+  rgba(2,5,10,.0) 30%,
+  rgba(2,5,10,.55) 62%,
+  rgba(2,5,10,.88) 78%,
+  #02050a 92%);
+  mix-blend-mode:normal}
+/* Left fade so left panel is legible */
+.grade-b{position:absolute;inset:0;background:linear-gradient(95deg,
+  rgba(2,5,10,.78) 0%,
+  rgba(2,5,10,.32) 38%,
+  rgba(2,5,10,.0) 60%)}
+/* Teal accent wash — fighting the warmth of the photo */
+.teal{position:absolute;inset:0;background:radial-gradient(
+  ellipse 70% 55% at 30% 72%, rgba(0,212,240,.13) 0%, transparent 70%)}
+/* Film grain canvas */
+.grain{position:absolute;inset:0;opacity:.28;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size:128px 128px;mix-blend-mode:overlay}
+/* Vignette */
+.vig{position:absolute;inset:0;box-shadow:inset 0 0 320px 60px rgba(2,5,10,.7)}
+
+/* ── Layout ── */
+.wrap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:52px 64px 64px}
+
+/* Top */
+.top-row{display:flex;justify-content:space-between;align-items:flex-start}
+.logo{font-family:'Courier New',monospace;font-size:20px;font-weight:700;letter-spacing:8px;color:rgba(240,244,255,.9)}
+.logo b{color:#00D4F0}
+.tag{font-family:'Courier New',monospace;font-size:12px;letter-spacing:4px;color:rgba(240,244,255,.4)}
+
+/* Middle — headline block */
+.mid{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:44px}
+.eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.eyebrow-line{height:1px;width:36px;background:#00D4F0;flex-shrink:0}
+.eyebrow-txt{font-family:'Courier New',monospace;font-size:13px;letter-spacing:5px;color:#00D4F0}
+h1{font-family:Georgia,serif;font-weight:700;font-size:88px;line-height:.97;
+  color:#f0f4ff;letter-spacing:-2px;
+  text-shadow:0 6px 60px rgba(2,5,10,.9),0 2px 10px rgba(2,5,10,.8)}
+h1 em{font-style:italic;color:#00D4F0}
+h1 .gold{font-style:italic;color:#dfa84a}
+.deck{margin-top:28px;font-family:Georgia,serif;font-size:22px;line-height:1.55;
+  color:rgba(196,206,228,.82);max-width:540px;
+  text-shadow:0 2px 20px rgba(2,5,10,.9)}
+.deck b{color:#dfa84a}
+
+/* Phone mock — absolutely placed */
+.phone{position:absolute;right:52px;top:320px;width:320px;transform:rotate(4deg);
+  filter:drop-shadow(0 60px 100px rgba(2,5,10,.95)) drop-shadow(0 0 60px rgba(0,212,240,.22))}
+.phone img{width:100%;border-radius:36px;display:block;
+  box-shadow:0 0 0 1.5px rgba(0,212,240,.35),0 0 80px rgba(0,212,240,.12)}
+
+/* Bottom CTA */
+.bottom{display:flex;flex-direction:column;gap:18px}
+.divider{height:1px;background:linear-gradient(90deg,rgba(0,212,240,.5),rgba(0,212,240,.08))}
+.offer-row{display:flex;align-items:baseline;gap:14px}
+.offer{font-family:Georgia,serif;font-weight:700;font-size:52px;line-height:1;color:#f0f4ff}
+.offer em{font-style:italic;color:#dfa84a}
+.sub-txt{font-family:'Courier New',monospace;font-size:13px;letter-spacing:3px;color:rgba(196,206,228,.55);max-width:560px;line-height:1.7}
+.btn-row{display:flex;align-items:center;gap:24px;margin-top:4px}
+.btn{background:#00D4F0;color:#02050a;font-family:'Courier New',monospace;font-weight:700;
+  font-size:16px;letter-spacing:4px;padding:20px 44px;border-radius:6px;
+  box-shadow:0 0 60px rgba(0,212,240,.5),0 0 20px rgba(0,212,240,.3)}
+.url{font-family:'Courier New',monospace;font-size:16px;letter-spacing:3px;color:#00D4F0}
+</style>
+</head>
+<body>
+  <div class="photo"></div>
+  <div class="grade-a"></div>
+  <div class="grade-b"></div>
+  <div class="teal"></div>
+  <div class="grain"></div>
+  <div class="vig"></div>
+
+  <div class="phone">
+    <img src="phone-morning-brief.png" alt="">
+  </div>
+
+  <div class="wrap">
+    <div class="top-row">
+      <div class="logo">STRIKE<b>PANEL</b>™</div>
+      <div class="tag">COMBAT SPORTS COACHING</div>
+    </div>
+
+    <div class="mid">
+      <div class="eyebrow">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow-txt">THE ACTUAL APP — LIVE SCREENSHOT</div>
+      </div>
+      <h1>Every fighter<br>says they're<br><span class="gold">fine.</span><br>The <em>data</em><br>doesn't.</h1>
+      <p class="deck">One morning score per fighter. Know <b>who to push,<br>who to protect</b> — before they walk in.</p>
+    </div>
+
+    <div class="bottom">
+      <div class="divider"></div>
+      <div class="offer">14 days. <em>Free.</em> No card.</div>
+      <div class="sub-txt">FULL APP · YOUR OWN FIGHTERS · NO SUBSCRIPTION — TRIAL JUST ENDS</div>
+      <div class="btn-row">
+        <div class="btn">START FREE TRIAL</div>
+        <div class="url">strikepanel.uk</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
