@@ -15,7 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Check for request file
+        id: check
+        run: echo "present=$([ -f .fetch-request.json ] && echo yes || echo no)" >> "$GITHUB_OUTPUT"
       - name: Fetch asset from request file
+        if: steps.check.outputs.present == 'yes'
         run: |
           SRC="$(jq -r .url .fetch-request.json)"
           DEST="$(jq -r .path .fetch-request.json)"
@@ -24,6 +28,7 @@ jobs:
           file "$DEST"
           echo "DEST=$DEST" >> "$GITHUB_ENV"
       - name: Commit fetched asset
+        if: steps.check.outputs.present == 'yes'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
