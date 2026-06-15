@@ -147,9 +147,9 @@ export default function Hero() {
               backgroundClip: 'text',
               marginBottom: 28,
             }}>
-              COACH<br />
-              SMARTER.<br />
-              WIN MORE.
+              KNOW<br />
+              WHO'S<br />
+              READY.
             </h1>
           </FadeIn>
 
@@ -162,7 +162,7 @@ export default function Hero() {
               maxWidth: 480,
               marginBottom: 40,
             }}>
-              Morning briefs, athlete check-in links, fight camp timelines, AI session plans, and readiness scores — all in one cloud dashboard built for combat sports.
+              A 0–100 readiness score for every fighter, every morning. Know who to push, who to protect, and whose weight cut is off track — before you walk into the gym.
             </p>
           </FadeIn>
 
